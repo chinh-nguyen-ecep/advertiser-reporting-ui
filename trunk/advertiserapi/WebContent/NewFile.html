@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Local Invoice manager</title>
+<link rel="stylesheet" type="text/css"
+	href="/verve-lib/scripts/bootstrap-3.0.0/css/bootstrap.min.css" />
+<link href="/verve-lib/scripts/bootstrap-3.0.0/blugins/font-awesome/css/font-awesome.css" rel="stylesheet" />
+
+<script src="/verve-lib/scripts/jquery-2.0.min.js"></script>
+<script type="text/javascript" src="/verve-lib/scripts/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+<script type="text/javascript"	src="/verve-lib/scripts/bootstrap-3.0.0/blugins/moment.min.js"></script>
+<script type="text/javascript"	src="/verve-lib/scripts/bootstrap-3.0.0/blugins/jquery.validate.bootstrap.popover.min.js"></script>
+<script type="text/javascript"	src="/verve-lib/scripts/bootstrap-3.0.0/blugins/jquery.validate.min.js"></script>
+<script type="text/javascript"	src="/verve-lib/scripts/bootstrap-3.0.0/blugins/bootbox.min.js"></script>
+<script src="/verve-lib/scripts/async-master/lib/async.js"></script>
+
+<script type="text/javascript" src="/verve-lib/scripts/bootstrap-3.0.0/myUtils.js"></script>
+
+<style>
+div.first-tab {
+	margin-top: 80px;
+	margin-bottom: 30px;
+}
+
+#mainDataTable {
+	margin: 0px;
+	border: 0px;
+}
+
+#mainDataTable thead tr th {
+	border-bottom: 0px;
+	border-right: 0px;
+}
+
+#mainDataTable thead tr th a {
+	color: #4572A7;
+}
+
+#mainDataTable thead tr th span {
+	float: right;
+}
+
+#mainDataTable thead tr th.sort,#mainDataTable thead tr th.sort a {
+	background-color: #39b3d7;
+	color: white;
+}
+
+#mainDataTable thead tr:first-child th:first-child {
+	border-left: 0px;
+}
+
+#mainDataTable tbody tr td {
+	border-left: 0px;
+	border-bottom: 0px;
+}
+
+#mainDataTable tbody tr td.right {
+	text-align: right;
+}
+
+.loading{
+background-image: url("http://www.oenovaults.com/images/loading.gif");
+background-repeat: no-repeat;
+background-position: center;
+background-size: 50px 50px;
+}
+</style>
+</head>
+<body>
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"data-target="navbar-ex1-collapse">
+				<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#"><span class="icon-stack">
+					<i class="icon-circle icon-stack-base"></i> <i class="icon-usd icon-light"></i>
+			</span>Local Invoice</a>			
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse navbar-ex1-collapse">
+			<form novalidate="novalidate" id="topForm" class="navbar-form navbar-left" role="search"	style="margin-top: 20px;">
+				<div class="form-group">
+					<select style="width: 100px;" id="listMonth" onchange="loadSummaryReport();loadInvoiceDetail();"	class="form-control input-sm" name="month-year"></select>
+				</div>	
+			</form>
+			<form novalidate="novalidate" id="exportSummary_bt" class="navbar-form navbar-right" role="search"	style="margin-top: 20px;display: none;">
+				<div class="form-group">
+					<div  class="btn-group btn-group-sm " style="float: right;">
+					  <button type="button" class="btn btn-primary">Export</button>
+					  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+					    <span class="caret"></span>
+					  </button>
+					  <ul class="dropdown-menu" role="menu">
+					    <li><a href="#" onclick="exportSummaryReport('xls');"> <i class="fa fa-cog"></i>XLS</a></li>
+					    <li><a href="#" onclick="exportSummaryReport('pdf')"> PDF</a></li>
+					  </ul>
+					</div>
+				</div>	
+			</form>
+			<form novalidate="novalidate" id="topForm" class="navbar-form navbar-right" role="search"	style="margin-top: 20px;">
+				<div class="form-group">
+					<input name="publichToEmail" style="width: 200px;display: none;" class="email form-control input-sm" type="text" placeholder="Email to publish invoice">
+				</div>
+				<div class="form-group">
+					<button type="button" title="publish-report" style="display: none;"
+						class="btn btn-sm btn-primary" onclick="confirmPublishReports();">
+						<i class="icon-external-link"></i> Publish Report
+					</button>
+				</div>		
+			</form>
+
+		</div>
+		<!-- /.navbar-collapse -->
+	</nav>
+	<div class="container first-tab theme-showcase " id="page-tab">
+		<ul class="nav nav-tabs">
+			<li title="summary" class="active"><a href="#"
+				onclick="showSummaryTab();">Summary</a></li>
+			<li title="invoice-detail"><a href="#" onclick="showInvoiceDetail();">Invoice Detail</a></li>
+		</ul>
+	</div>
+
+	<div class="container" id="main-content">
+
+		<div id="summary-content" style="min-height: 200px;">
+
+		<div class="content"></div>		
+		</div>
+		<div id="invoice-detail" style="display: none;"></div>
+	</div>
+<!-- Modal Publishing Status-->
+
+<!-- /.modal -->
+	<script>
+var globalTimeout=null;
+function delay_timeout(second_time,func){
+	if(globalTimeout != null) clearTimeout(globalTimeout); 
+	globalTimeout =setTimeout(function(){func();},second_time);
+}
+		//this function paser param from url
+		function gup(name) {
+			name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+			var regexS = "[\\?&]" + name + "=([^&#]*)";
+			var regex = new RegExp(regexS);
+			var results = regex.exec(window.location.href);
+			if (results == null)
+				return "";
+			else
+				return results[1];
+		}
+
+		var solution = gup('solution');
+		var path = gup('path');
+		var rootPath = 'ViewAction?solution=' + solution + '&path=' + path
+				+ '&action=localInvoiceManager.xaction';
+		var rootSubPath = 'ViewAction?solution=' + solution + '&path=' + path
+				+ '/subscriptionManager';
+
+		// end process start date , end date 
+		$(document).ready(function() {
+			console.log("ready!");
+			console.log("jQuery verion: " + jQuery.fn.jquery);
+			initProcessingPage();
+			loadMonthList();
+		});
+
+		//*******************************
+		// Script code on Processing page
+		//*******************************
+		var initProcessingPage = function() {
+		};
+
+		var loadSummaryReport = function() {
+			var monthYear = $('select[name=month-year]').val();
+			$('#summary-content').addClass('loading');
+			$('#exportSummary_bt').hide();
+			$('#summary-content div.content').load(	rootPath + '&actions=summaryReport&p_month_year='+ monthYear,function(){
+				$('#summary-content').removeClass('loading');
+				$('#exportSummary_bt').show();
+			});
+		}
+		var exportSummaryReport=function(exportType){
+			var monthYear = $('select[name=month-year]').val();
+			var urlExport=rootPath + '&actions=summaryReportExport&exportType='+exportType+'&p_month_year='+ monthYear;
+			window.open(urlExport);
+		}
+		var loadInvoiceDetail = function() {
+			var monthYear = $('select[name=month-year]').val();
+			$('#invoice-detail').load(
+					rootPath + '&actions=template2&p_month_year=' + monthYear)
+		}
+
+		//for tab select
+		var showSummaryTab = function() {
+			$('#summary-content').show();
+			$('#invoice-detail').hide();
+			$('input[name=publichToEmail]').hide();
+			$('#page-tab ul li').removeClass('active');
+			$('#page-tab ul li[title=summary]').addClass('active');
+			$('button[title=publish-report]').hide();
+			$('#exportSummary_bt').show();
+		}
+		var showInvoiceDetail = function() {
+			$('#summary-content').hide();
+			$('#invoice-detail').show();
+			$('input[name=publichToEmail]').show();
+			$('#page-tab ul li').removeClass('active');
+			$('#page-tab ul li[title=invoice-detail]').addClass('active');
+			$('button[title=publish-report]').show();
+			$('#exportSummary_bt').hide();
+		}
+		
+		//load list month value
+		function loadMonthList(){
+			console.log('Load list of month');
+			var urlLoad=rootPath+'&action=localInvoiceManager.xaction&actions=listMonth&data=json';
+			var data=[];
+			$.ajax({
+				url : urlLoad,
+				dataType : 'json',
+				success : function(json) {
+					data = json;
+					var rows=[];
+					for(var i=0;i<data.length;i++){
+						var value=data[i].value;
+						var name=data[i].name;
+						var row='<option value="'+value+'">'+name+'</option>';
+						rows.push(row);
+					}
+					$('#listMonth').empty();
+					$('#listMonth').append(rows.join(""));
+					// Load summary report 
+					loadSummaryReport();
+					// Load invoice list
+					loadInvoiceDetail();
+				}
+			});
+		}
+
+	</script>
+</body>
+</html>

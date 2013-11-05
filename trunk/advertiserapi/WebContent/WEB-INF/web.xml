@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>API</display-name>
+  <filter>
+    <filter-name>CAS Authentication Filter</filter-name>
+    <filter-class>org.jasig.cas.client.authentication.AuthenticationFilter</filter-class>
+    <init-param>
+      <param-name>casServerLoginUrl</param-name>
+      <param-value>https://sso.vervemobile.com/sign_in</param-value>
+    </init-param>
+    <init-param>
+      <param-name>serverName</param-name>
+      <param-value>http://localhost:8080</param-value>
+    </init-param>
+    <init-param>
+      <param-name>renew</param-name>
+      <param-value>false</param-value>
+    </init-param>
+    <init-param>
+      <param-name>gateway</param-name>
+      <param-value>false</param-value>
+    </init-param>
+  </filter>
+  <filter>
+    <filter-name>CAS Validation Filter</filter-name>
+    <filter-class>org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter</filter-class>
+    <init-param>
+      <param-name>casServerUrlPrefix</param-name>
+      <param-value>https://sso.vervemobile.com</param-value>
+    </init-param>
+    <init-param>
+      <param-name>serverName</param-name>
+      <param-value>http://localhost:8080</param-value>
+    </init-param>
+  </filter>
+  <filter>
+    <filter-name>CAS HttpServletRequest Wrapper Filter</filter-name>
+    <filter-class>org.jasig.cas.client.util.HttpServletRequestWrapperFilter</filter-class>
+  </filter>
+  <filter>
+    <filter-name>CAS Assertion Thread Local Filter</filter-name>
+    <filter-class>org.jasig.cas.client.util.AssertionThreadLocalFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>CAS Authentication Filter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>CAS Validation Filter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>CAS HttpServletRequest Wrapper Filter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>CAS Assertion Thread Local Filter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <listener>
+    <listener-class>org.jasig.cas.client.session.SingleSignOutHttpSessionListener</listener-class>
+  </listener>
+  <welcome-file-list>
+    <welcome-file>ApiOverview.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description>API Overview</description>
+    <display-name>ApiOverview</display-name>
+    <servlet-name>ApiOverview</servlet-name>
+    <jsp-file>/ApiOverview.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ApiOverview</servlet-name>
+    <url-pattern>/ApiOverview</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>API Overview Detail</description>
+    <display-name>ApiOverviewDetail</display-name>
+    <servlet-name>ApiOverviewDetail</servlet-name>
+    <jsp-file>/ApiOverviewDetail.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ApiOverviewDetail</servlet-name>
+    <url-pattern>/ApiOverviewDetail</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>Adcel API</description>
+    <display-name>AdCelApi</display-name>
+    <servlet-name>AdCelApi</servlet-name>
+    <servlet-class>org.ecepvn.api.servlet.ApiAdcel</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdCelApi</servlet-name>
+    <url-pattern>/AdCel</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ApiAdvertiserByHour</display-name>
+    <servlet-name>ApiAdvertiserByHour</servlet-name>
+    <servlet-class>org.ecepvn.api.servlet.ApiAdvertiserByHour</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ApiAdvertiserByHour</servlet-name>
+    <url-pattern>/AdvertiserByHour</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ApiAdvertiserByDistance</display-name>
+    <servlet-name>ApiAdvertiserByDistance</servlet-name>
+    <servlet-class>org.ecepvn.api.servlet.ApiAdvertiserByDistance</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ApiAdvertiserByDistance</servlet-name>
+    <url-pattern>/AdvertiserByDistance</url-pattern>
+  </servlet-mapping>
+</web-app>
