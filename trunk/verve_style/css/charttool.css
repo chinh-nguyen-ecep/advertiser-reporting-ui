@@ -1,0 +1,58 @@
+#toolbar{
+   width: 100%;
+   height: 9%;
+   position: absolute;
+   top: 0px;
+   left: -17px;
+   background-image: url('/verve_style/images/menu_tool.jpg');
+   background-repeat: repeat-x;
+   padding-top:10px;
+}
+
+#toolbar .leftGroup img,#toolbar2 .leftGroup img,
+#toolbar .rightGroup img{
+	cursor: pointer;
+	border: 0px;
+}
+
+#toolbar .leftGroup,#toolbar2 .leftGroup{
+	float: left;
+	margin-left: 20px;
+}
+#toolbar .rightGroup,#toolbar2 .rightGroup{
+	float: right;
+	margin-right: 10px;
+	margin-left:10px;
+}
+
+#compareScreen{
+	overflow:scroll;
+	height: 100%;
+	width: 100%
+}
+
+#compareScreen .mainGround{
+	width: 100%;
+	height:421px;
+	padding-top: 10px;
+	background-image: url('/verve_style/images/main_chart.jpg');
+	background-repeat: repeat-x;
+	margin-top: 75px;
+}
+#compareScreen .mainGround .chartItem{
+	border-bottom: 1px dashed gray;
+	border-left: 2px dashed gray;
+	background-color: transparent;
+	width: 48%;
+	height: 375px;
+	float: left;
+}
+#compareScreen .mainGround img{
+	cursor: pointer;
+	margin-left: 10px;
+}
+
+#toolbar2{
+	position: absolute;
+	top: 0px;
+}

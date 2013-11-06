@@ -1,0 +1,16 @@
+@import url("datepicker1.css");
+@import url("../tableInForm.css");
+.datepicker1{
+	width: 500px;
+	height: 420px;
+	border: 2px solid #848484;
+}
+
+/* body
+********************************************************/
+.datepicker1 .body {
+	width: 500px;
+	height: 390px;
+	background-color: #ECECEC;
+}
+
