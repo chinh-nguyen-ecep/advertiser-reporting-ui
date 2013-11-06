@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Revenue by Publisher-Property WIP</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>chinhnguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type>report</result-type>  
+    <icon>chart_1(2).png|chart_1(2).png</icon> 
+  </documentation>
+
+  <inputs> 
+    <output_type type="string"> 
+      <sources> 
+        <request>output_type</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </output_type>  
+    <output_type_list type="string-list"> 
+      <default-value type="string-list"> 
+        <list-item>html</list-item>  
+        <list-item>pdf</list-item>  
+        <list-item>xls</list-item>  
+        <list-item>xml</list-item>  
+        <list-item>csv</list-item> 
+      </default-value> 
+    </output_type_list>  
+    <p_start_date type="string"> 
+      <sources> 
+        <request>p_start_date</request> 
+      </sources>  
+      <default-value/> 
+    </p_start_date>  
+    <p_end_date type="string"> 
+      <sources> 
+        <request>p_end_date</request> 
+      </sources>  
+      <default-value/> 
+    </p_end_date>  
+    <p_date_mode type="string"> 
+      <sources> 
+        <request>p_date_mode</request> 
+      </sources>  
+      <default-value><![CDATA[date]]></default-value> 
+    </p_date_mode>  
+    <List_date_mode type="result-set"> 
+      <default-value type="result-set"> 
+        <row> 
+          <New_Column>date</New_Column> 
+        </row>  
+        <row> 
+          <New_Column>month</New_Column> 
+        </row> 
+      </default-value>  
+      <columns> 
+        <New_Column type="string"/> 
+      </columns> 
+    </List_date_mode>  
+    <p_start_month type="string"> 
+      <sources> 
+        <request>p_start_month</request> 
+      </sources>  
+      <default-value><![CDATA[0]]></default-value> 
+    </p_start_month>  
+    <p_end_month type="string"> 
+      <sources> 
+        <request>p_end_month</request> 
+      </sources>  
+      <default-value><![CDATA[0]]></default-value> 
+    </p_end_month>  
+    <v_max_date type="string"> 
+      <sources> 
+        <request>v_max_date</request> 
+      </sources>  
+      <default-value/> 
+    </v_max_date>  
+    <v_min_date type="string"> 
+      <sources> 
+        <request>v_min_date</request> 
+      </sources>  
+      <default-value/> 
+    </v_min_date>  
+    <q_date_list type="result-set"> 
+      <default-value/> 
+    </q_date_list>  
+    <v_chart_sub_title type="string"> 
+      <sources> 
+        <request>v_chart_sub_title</request> 
+      </sources>  
+      <default-value/> 
+    </v_chart_sub_title>  
+    <p_publisher_id type="string"> 
+      <sources> 
+        <request>p_publisher_id</request> 
+      </sources>  
+      <default-value><![CDATA[14]]></default-value> 
+    </p_publisher_id>  
+    <queryOLAP type="string"> 
+      <sources> 
+        <request>queryOLAP</request> 
+      </sources>  
+      <default-value/> 
+    </queryOLAP>  
+    <p_website_name type="string"> 
+      <sources> 
+        <request>p_website_name</request> 
+      </sources>  
+      <default-value><![CDATA[-1000]]></default-value> 
+    </p_website_name>  
+    <p_network_id type="string"> 
+      <sources> 
+        <request>p_network_id</request> 
+      </sources>  
+      <default-value><![CDATA[all]]></default-value> 
+    </p_network_id>  
+    <List_network type="result-set"> 
+      <sources> 
+        <request>List_network</request> 
+      </sources>  
+      <default-value type="result-set"> 
+        <row> 
+          <value>1</value>  
+          <name>Local</name> 
+        </row>  
+        <row> 
+          <value>2,4</value>  
+          <name>National</name> 
+        </row>  
+        <row> 
+          <value>3</value>  
+          <name>Remant</name> 
+        </row>  
+        <row> 
+          <value>0</value>  
+          <name>All</name> 
+        </row> 
+      </default-value>  
+      <columns> 
+        <value type="string"/>  
+        <name type="string"/> 
+      </columns> 
+    </List_network> 
+  </inputs>
+
+  <outputs/>
+
+  <resources> 
+    <pageTemplate> 
+      <solution-file> 
+        <location>revenue_report_by_publisher_property/revenue_report_by_publisher_property_template.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </pageTemplate>  
+    <report-definition> 
+      <solution-file> 
+        <location>revenue_report_by_publisher_property/revenue_by_publisher_property.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition>  
+    <report-definition1> 
+      <solution-file> 
+        <location>no_remnant_revenue_report_by_publisher_property/revenue_by_publisher_property.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition1> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get list publisher id</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="q_list_publisher_id"/>  
+        <value type="string"/>  
+        <name type="string"/>  
+        <row_order type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[verveReportConnection]]></jndi>  
+        <live><![CDATA[false]]></live>  
+        <query><![CDATA[SELECT a.*
+FROM (
+	SELECT publisher_id as "value"
+	,(case when company_name_current is null then 'N/A' else company_name_current end ) as "name"
+	,(case when publisher_id=-100 then 2 else 1 end) as row_order
+	FROM refer.adm_publisher_dim 
+	WHERE dt_expire='9999-12-31'
+	) a
+ORDER BY row_order,"name";]]></query>
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get max min date data</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="q_max_min_date"/>  
+        <max_full_date type="string"/>  
+        <min_full_date type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[verveReportConnection]]></jndi>  
+        <live><![CDATA[false]]></live>  
+        <query><![CDATA[SELECT b.min_full_date, b.max_full_date
+FROM refer.date_dim a,
+(SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM adm.daily_agg_network_performance WHERE is_active=true) b
+WHERE a.full_date = b.min_full_date OR a.full_date = b.max_full_date;]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get list of year-month</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="q_calendar_year_month"/>  
+        <row_count type="integer"/>  
+        <calendar_year_month type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[verveReportConnection]]></jndi>  
+        <live><![CDATA[false]]></live>  
+        <query><![CDATA[SELECT (month_since_2005 - max_month_since_2005)*-1 AS row_count,calendar_year_month
+  FROM adm.daily_agg_network_performance  a
+  ,(SELect max (month_since_2005) as max_month_since_2005 from adm.daily_agg_network_performance  WHERE is_active=true ) b
+WHERE is_active=true GROUP BY a.month_since_2005, a.calendar_year_month, b.max_month_since_2005 ORDER BY a.month_since_2005 desc;]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Prompt/Secure Filter</action-type>
+      <action-inputs> 
+        <output_type type="string"/>  
+        <output_type_list type="string-list"/>  
+        <p_date_mode type="string"/>  
+        <List_date_mode type="result-set"/>  
+        <p_start_date type="string"/>  
+        <p_end_date type="string"/>  
+        <v_max_date type="string"/>  
+        <q_max_min_date type="result-set"/>  
+        <v_min_date type="string"/>  
+        <p_start_month type="string"/>  
+        <q_calendar_year_month type="result-set"/>  
+        <p_end_month type="string"/>  
+        <p_publisher_id type="string"/>  
+        <q_list_publisher_id type="result-set"/>  
+        <p_network_id type="string"/>  
+        <List_network type="result-set"/> 
+      </action-inputs>
+      <action-resources> 
+        <pageTemplate type="resource"/> 
+      </action-resources>
+      <component-definition> 
+        <selections> 
+          <output_type style="select"> 
+            <filter>output_type_list</filter> 
+          </output_type>  
+          <p_date_mode style="radio"> 
+            <filter value-col-name="New_Column" display-col-name="New_Column">List_date_mode</filter> 
+          </p_date_mode>  
+          <p_start_date filter="none" style="text-box"/>  
+          <p_end_date filter="none" style="text-box"/>  
+          <v_max_date style="select"> 
+            <filter value-col-name="max_full_date" display-col-name="max_full_date">q_max_min_date</filter> 
+          </v_max_date>  
+          <v_min_date style="select"> 
+            <filter value-col-name="min_full_date" display-col-name="min_full_date">q_max_min_date</filter> 
+          </v_min_date>  
+          <p_start_month style="select"> 
+            <filter value-col-name="row_count" display-col-name="calendar_year_month">q_calendar_year_month</filter> 
+          </p_start_month>  
+          <p_end_month style="select"> 
+            <filter value-col-name="row_count" display-col-name="calendar_year_month">q_calendar_year_month</filter> 
+          </p_end_month>  
+          <p_publisher_id style="select"> 
+            <filter value-col-name="value" display-col-name="name">q_list_publisher_id</filter> 
+          </p_publisher_id>  
+          <p_network_id style="select"> 
+            <filter value-col-name="value" display-col-name="name">List_network</filter> 
+          </p_network_id> 
+        </selections>  
+        <xsl><![CDATA[pageTemplate]]></xsl> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>JavaScript</action-type>
+      <action-inputs> 
+        <p_website_name type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <website_names_string type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var website_names_string;
+website_names_string='';
+//convert measures
+if(p_website_name!= ''){
+	if(p_website_name instanceof Array){
+		for(var i=0;i<p_website_name.length;i++){
+			if(i>0){
+			website_names_string+=';';
+			};
+			website_names_string+=p_website_name[i];
+		};
+	}else{
+		website_names_string=p_website_name;
+	};
+}]]></script> 
+      </component-definition> 
+    </action-definition>
+  
+    <actions> 
+      <condition><![CDATA[p_publisher_id!="-1000"]]></condition>  
+      <actions> 
+        <condition><![CDATA[p_network_id=='0']]></condition>  
+        <action-definition> 
+          <component-name>JasperReportsComponent</component-name>
+          <action-type>Jasper</action-type>
+          <action-inputs> 
+            <website_names_string type="string"/>  
+            <p_start_date type="string"/>  
+            <p_end_date type="string"/>  
+            <p_network_id type="string"/>  
+            <p_publisher_id type="string"/>  
+            <output-type type="string" mapping="output_type"/> 
+          </action-inputs>
+          <action-resources> 
+            <report-definition/> 
+          </action-resources>
+          <action-outputs/>
+          <component-definition> 
+            <jndi><![CDATA[verveReportConnection]]></jndi> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+  
+      <actions> 
+        <condition><![CDATA[p_network_id=='3']]></condition>  
+        <action-definition> 
+          <component-name>JasperReportsComponent</component-name>
+          <action-type>Jasper</action-type>
+          <action-inputs> 
+            <p_start_date type="string"/>  
+            <p_end_date type="string"/>  
+            <website_names_string type="string"/>  
+            <p_network_id type="string"/>  
+            <p_publisher_id type="string"/>  
+            <output-type type="string" mapping="output_type"/> 
+          </action-inputs>
+          <action-resources> 
+            <report-definition/> 
+          </action-resources>
+          <action-outputs/>
+          <component-definition> 
+            <jndi><![CDATA[verveReportConnection]]></jndi> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+  
+      <actions> 
+        <condition><![CDATA[p_network_id=='1']]></condition>  
+        <action-definition> 
+          <component-name>JasperReportsComponent</component-name>
+          <action-type>Jasper</action-type>
+          <action-inputs> 
+            <p_start_date type="string"/>  
+            <p_end_date type="string"/>  
+            <p_network_id type="string"/>  
+            <p_publisher_id type="string"/>  
+            <website_names_string type="string"/>  
+            <output-type type="string" mapping="output_type"/> 
+          </action-inputs>
+          <action-resources> 
+            <report-definition mapping="report-definition1"/> 
+          </action-resources>
+          <action-outputs/>
+          <component-definition> 
+            <jndi><![CDATA[verveReportConnection]]></jndi> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+  
+      <actions> 
+        <condition><![CDATA[p_network_id=='2,4']]></condition>  
+        <action-definition> 
+          <component-name>JasperReportsComponent</component-name>
+          <action-type>Jasper</action-type>
+          <action-inputs> 
+            <p_start_date type="string"/>  
+            <p_end_date type="string"/>  
+            <p_publisher_id type="string"/>  
+            <website_names_string type="string"/>  
+            <p_network_id type="string"/>  
+            <output-type type="string" mapping="output_type"/> 
+          </action-inputs>
+          <action-resources> 
+            <report-definition mapping="report-definition1"/> 
+          </action-resources>
+          <component-definition> 
+            <jndi><![CDATA[verveReportConnection]]></jndi> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+ 
+    </actions>
+ 
+  </actions> 
+</action-sequence>

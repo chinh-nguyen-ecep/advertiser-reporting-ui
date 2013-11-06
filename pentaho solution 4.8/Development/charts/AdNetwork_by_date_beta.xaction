@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Ad-Network by Date</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author/>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <device type="string-list"> 
+      <default-value type="string-list"> 
+        <list-item>All Partners</list-item> 
+      </default-value>  
+      <sources> 
+        <request>device</request> 
+      </sources> 
+    </device>  
+    <chart_type type="string"> 
+      <sources> 
+        <request>chart_type</request> 
+      </sources>  
+      <default-value><![CDATA[column]]></default-value> 
+    </chart_type>  
+    <chart_type_list type="string-list"> 
+      <default-value type="string-list"> 
+        <list-item>bar</list-item>  
+        <list-item>column</list-item>  
+        <list-item>line</list-item>  
+        <list-item>spline</list-item>  
+        <list-item>scatter</list-item>  
+        <list-item>area</list-item> 
+      </default-value> 
+    </chart_type_list>  
+    <p_start_date type="string"> 
+      <sources> 
+        <request>p_start_date</request> 
+      </sources>  
+      <default-value/> 
+    </p_start_date>  
+    <p_end_date type="string"> 
+      <sources> 
+        <request>p_end_date</request> 
+      </sources>  
+      <default-value/> 
+    </p_end_date>  
+    <p_measures type="string"> 
+      <sources> 
+        <request>p_measures</request> 
+      </sources>  
+      <default-value><![CDATA[fullfilled_code_y]]></default-value> 
+    </p_measures>  
+    <List_Measures type="result-set"> 
+      <default-value type="result-set"> 
+        <row> 
+          <value>fullfilled_code_y</value>  
+          <name>Yes Ad responses</name> 
+        </row>  
+        <row> 
+          <value>fullfilled_code_count</value>  
+          <name>Total Ad responses</name> 
+        </row>  
+        <row> 
+          <value>fullfilled_code_n</value>  
+          <name>No Ad responses</name> 
+        </row>  
+        <row> 
+          <value>fullfilled_code_e</value>  
+          <name>Error Ad responses</name> 
+        </row>  
+        <row> 
+          <value>fullfilled_code_t</value>  
+          <name>Timeout Ad responses</name> 
+        </row> 
+      </default-value>  
+      <columns> 
+        <value type="string"/>  
+        <name type="string"/> 
+      </columns> 
+    </List_Measures>  
+    <p_mode type="string"> 
+      <sources> 
+        <request>p_mode</request> 
+      </sources>  
+      <default-value><![CDATA[date]]></default-value> 
+    </p_mode>  
+    <List_mode type="result-set"> 
+      <default-value type="result-set"> 
+        <row> 
+          <New_Column>date</New_Column> 
+        </row>  
+        <row> 
+          <New_Column>month</New_Column> 
+        </row> 
+      </default-value>  
+      <columns> 
+        <New_Column type="string"/> 
+      </columns> 
+    </List_mode>  
+    <p_start_month type="string"> 
+      <sources> 
+        <request>p_start_month</request> 
+      </sources>  
+      <default-value><![CDATA[0]]></default-value> 
+    </p_start_month>  
+    <p_end_month type="string"> 
+      <sources> 
+        <request>p_end_month</request> 
+      </sources>  
+      <default-value><![CDATA[0]]></default-value> 
+    </p_end_month>  
+    <v_max_date type="string"> 
+      <sources> 
+        <request>v_max_date</request> 
+      </sources>  
+      <default-value/> 
+    </v_max_date>  
+    <v_min_date type="string"> 
+      <sources> 
+        <request>v_min_date</request> 
+      </sources>  
+      <default-value/> 
+    </v_min_date>  
+    <p_network type="string"> 
+      <sources> 
+        <request>p_network</request> 
+      </sources>  
+      <default-value><![CDATA[All Networks]]></default-value> 
+    </p_network>  
+    <v_chart_title type="string"> 
+      <sources/>  
+      <default-value><![CDATA[Ad - Network Report ]]></default-value> 
+    </v_chart_title>  
+    <p_dimension_mode type="string"> 
+      <sources> 
+        <request>p_dimension_mode</request> 
+      </sources>  
+      <default-value><![CDATA[Group]]></default-value> 
+    </p_dimension_mode>  
+    <List_of_dimension_mode type="string-list"> 
+      <default-value type="string-list"> 
+        <list-item>Group</list-item>  
+        <list-item>Partner</list-item>  
+        <list-item>Portal</list-item> 
+      </default-value> 
+    </List_of_dimension_mode>  
+    <q_date_list type="result-set"> 
+      <default-value/> 
+    </q_date_list>  
+    <chartWidth type="string"> 
+      <sources> 
+        <request>chartWidth</request> 
+      </sources>  
+      <default-value><![CDATA[900]]></default-value> 
+    </chartWidth>  
+    <chartHeight type="string"> 
+      <sources> 
+        <request>chartHeight</request> 
+      </sources>  
+      <default-value><![CDATA[400]]></default-value> 
+    </chartHeight>  
+    <chartSingleMode type="string"> 
+      <sources> 
+        <request>chartSingleMode</request> 
+      </sources>  
+      <default-value><![CDATA[true]]></default-value> 
+    </chartSingleMode>  
+    <v_chart_sub_title type="string"> 
+      <sources> 
+        <request>v_chart_sub_title</request> 
+      </sources>  
+      <default-value><![CDATA[sub title]]></default-value> 
+    </v_chart_sub_title>  
+    <chartName type="string"> 
+      <sources> 
+        <request>chartName</request> 
+      </sources>  
+      <default-value><![CDATA[chart]]></default-value> 
+    </chartName>  
+    <p_chart_polar type="string"> 
+      <sources> 
+        <request>p_chart_polar</request> 
+      </sources>  
+      <default-value><![CDATA[false]]></default-value> 
+    </p_chart_polar>  
+    <testMode type="string"> 
+      <sources> 
+        <request>testMode</request> 
+      </sources>  
+      <default-value><![CDATA[false]]></default-value> 
+    </testMode> 
+  </inputs>
+
+  <outputs> 
+    <webapp type="string"/> 
+  </outputs>
+
+  <resources> 
+    <pageTemplate> 
+      <solution-file> 
+        <location>AdNetwork_by_date_beta.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </pageTemplate> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get list of network</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="q_networks"/>  
+        <ad_network_id type="string"/>  
+        <ad_network_name type="string"/>  
+        <row_order type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[olapConnection]]></jndi>  
+        <live><![CDATA[false]]></live>  
+        <query><![CDATA[SELECT a.*
+FROM (
+SELECT 0 as ad_network_id,'All Networks' as ad_network_name, 0 as row_order
+UNION
+SELECT ad_network_id,ad_network_name, 1 as row_order
+FROM adstraffic.daily_ad_serving_stats
+WHERE is_active=true GROUP by ad_network_id,ad_network_name
+) a
+ORDER BY row_order, ad_network_name;]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get max min date data</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="q_max_min_date"/>  
+        <max_full_date type="string"/>  
+        <min_full_date type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[olapConnection]]></jndi>  
+        <live><![CDATA[false]]></live>  
+        <query><![CDATA[SELECT b.min_full_date, b.max_full_date
+FROM refer.date_dim a,
+(SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM adstraffic.daily_ad_serving_stats WHERE is_active=true) b
+WHERE a.full_date = b.min_full_date OR a.full_date = b.max_full_date;]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get list of year-month</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="q_calendar_year_month"/>  
+        <row_count type="integer"/>  
+        <calendar_year_month type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[olapConnection]]></jndi>  
+        <live><![CDATA[false]]></live>  
+        <query><![CDATA[SELECT month_since_2005 as row_count,calendar_year_month
+  FROM adstraffic.daily_ad_serving_stats a
+WHERE is_active=true GROUP BY a.month_since_2005, a.calendar_year_month ORDER BY a.month_since_2005 desc;]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Prompt/Secure Filter</action-type>
+      <action-inputs> 
+        <chart_type type="string"/>  
+        <chart_type_list type="string-list"/>  
+        <p_start_date type="string"/>  
+        <p_end_date type="string"/>  
+        <p_measures type="string"/>  
+        <List_Measures type="result-set"/>  
+        <p_mode type="string"/>  
+        <List_mode type="result-set"/>  
+        <p_start_month type="integer"/>  
+        <p_end_month type="integer"/>  
+        <q_calendar_year_month type="result-set"/>  
+        <v_max_date type="string"/>  
+        <q_max_min_date type="result-set"/>  
+        <v_min_date type="string"/>  
+        <p_network type="string"/>  
+        <q_networks type="result-set"/>  
+        <p_dimension_mode type="string"/>  
+        <List_of_dimension_mode type="string-list"/> 
+      </action-inputs>
+      <action-resources> 
+        <pageTemplate type="resource"/> 
+      </action-resources>
+      <component-definition> 
+        <selections> 
+          <chart_type style="select"> 
+            <filter>chart_type_list</filter> 
+          </chart_type>  
+          <p_start_date filter="none" style="text-box"/>  
+          <p_end_date filter="none" style="text-box"/>  
+          <p_measures style="check-multi-scroll"> 
+            <filter value-col-name="value" display-col-name="name">List_Measures</filter> 
+          </p_measures>  
+          <p_mode style="radio"> 
+            <filter value-col-name="New_Column" display-col-name="New_Column">List_mode</filter> 
+          </p_mode>  
+          <p_start_month style="select"> 
+            <filter value-col-name="row_count" display-col-name="calendar_year_month">q_calendar_year_month</filter> 
+          </p_start_month>  
+          <p_end_month style="select"> 
+            <filter value-col-name="row_count" display-col-name="calendar_year_month">q_calendar_year_month</filter> 
+          </p_end_month>  
+          <v_max_date style="select" optional="true"> 
+            <filter value-col-name="max_full_date" display-col-name="max_full_date">q_max_min_date</filter> 
+          </v_max_date>  
+          <v_min_date style="select" optional="true"> 
+            <filter value-col-name="min_full_date" display-col-name="min_full_date">q_max_min_date</filter> 
+          </v_min_date>  
+          <p_network style="select"> 
+            <filter value-col-name="ad_network_id" display-col-name="ad_network_name">q_networks</filter> 
+          </p_network>  
+          <p_dimension_mode style="radio"> 
+            <filter>List_of_dimension_mode</filter> 
+          </p_dimension_mode> 
+        </selections>  
+        <xsl><![CDATA[pageTemplate]]></xsl> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>processQueryFromInput</action-type>
+      <action-inputs> 
+        <p_mode type="string"/>  
+        <p_start_date type="string"/>  
+        <p_end_date type="string"/>  
+        <p_start_month type="string"/>  
+        <p_end_month type="string"/>  
+        <device type="string-list"/>  
+        <p_network type="string"/>  
+        <p_dimension_mode type="string"/>  
+        <p_measures type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <sqlQuery type="string"/>  
+        <agg type="string"/>  
+        <fields type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var sqlQuery='';
+var agg='';
+var fields='';
+var st_from='';
+
+st_from="adstraffic.daily_ad_serving_stats";
+
+
+var p_measures_map_to_report_column_name={
+	'fullfilled_code_y':'Yes Ad responses',
+	'fullfilled_code_count':'Total Ad responses',
+	'fullfilled_code_n':'No Ad responses',
+	'fullfilled_code_e':'Error Ad responses',
+	'fullfilled_code_t':'Timeout Ad responses',
+}
+var p_dimension_mode_map_to_db_column_name={
+	'Partner':['partner_id','partner_name'],
+	'Portal':['portal_id','portal_name'],
+	'Group':['parent1_id','parent1_name']
+}
+var the_dimension=p_dimension_mode_map_to_db_column_name[p_dimension_mode];
+
+//check select mode
+var v_user_choose_mode;
+var measures;
+var dimension;
+measures=typeof(p_measures);
+dimension=typeof(device);
+if( measures == 'string' && dimension == 'object'){
+	v_user_choose_mode='multiDimensions';
+}else if( measures == 'object' && dimension == 'string'){
+	v_user_choose_mode = 'multiMeasures';
+}else if( measures == 'string' && dimension == 'string'){
+	v_user_choose_mode = 'multiMeasures';
+}else if( measures == 'object' && dimension == 'object'){
+	v_user_choose_mode = 'multiDeviceMeasures';
+}
+
+if(v_user_choose_mode=='multiMeasures'){	
+	//measures
+	var measures='';
+	var temp_summaries='';
+	var temp_fields='';
+	if(p_measures instanceof Array){
+		for(var i=0;i<p_measures.length;i++){
+			if(i>0){measures+=',';temp_summaries+=',';temp_fields+=','}
+			var column_name=p_measures_map_to_report_column_name[p_measures[i]];
+			measures+='SUM('+p_measures[i]+') as "'+column_name+'"';
+			temp_summaries+='"'+column_name+'"';
+			temp_fields+='{"name": "'+column_name+'","type": "integer","rowLabelable": false,"summarizable": "sum"}';
+		}	
+	}else{
+		var column_name=p_measures_map_to_report_column_name[p_measures];
+		measures+='SUM('+p_measures+') as "'+column_name+'"';
+		temp_summaries+='"'+column_name+'"';
+		temp_fields+='{"name": "'+column_name+'","type": "integer","rowLabelable": false,"summarizable": "sum"}';
+	};	
+	
+	if(p_mode=='date'){
+		sqlQuery='SELECT full_date as "Date",'+measures+' '+
+		'FROM '+st_from+' '+
+		'WHERE is_active=true '+
+		'AND full_date BETWEEN \''+p_start_date+'\'::date AND \''+p_end_date+'\'::date '+
+		'AND ('+the_dimension[0]+'='+device+' OR 0='+device+') '+
+		'AND (ad_network_id='+p_network+' OR '+'0='+p_network+') '+
+		'GROUP BY full_date '+
+		'ORDER BY full_date';	
+		agg='{"rowLabels":["Date"], "columnLabels":[],"summaries":['+temp_summaries+']'+'}';
+		fields='['+
+				'{"name": "Date","type": "date","rowLabelable": false},'+temp_fields+
+				']';
+	}else if(p_mode=='month'){
+		sqlQuery='SELECT calendar_year_month as "Month",'+measures+' '+
+		'FROM '+st_from+' '+
+		'WHERE is_active=true '+
+		'AND month_since_2005 BETWEEN '+p_start_month+' AND '+p_end_month+' '+
+		'AND ('+the_dimension[0]+'='+device+' OR 0='+device+') '+
+		'AND (ad_network_id='+p_network+' OR '+'0='+p_network+') '+
+		'GROUP BY month_since_2005,calendar_year_month '+
+		'ORDER BY month_since_2005';		
+		agg='{"rowLabels":["Month"], "columnLabels":[],"summaries":['+temp_summaries+']'+'}';
+		fields='['+
+				'{"name": "Month","type": "month","rowLabelable": false},'+temp_fields+
+				']';
+	}
+	
+
+}else{
+	//measures
+	var measures='';
+	var temp_summaries='';
+	var temp_fields='';
+	if(p_measures instanceof Array){		
+		var column_name=p_measures_map_to_report_column_name[p_measures[0]];
+		measures+='SUM((CASE WHEN '+p_measures[0]+' IS NULL THEN 0 ELSE '+p_measures[0]+' END)) as "'+column_name+'"';
+		temp_summaries+='"'+column_name+'"';
+		temp_fields+='{"name": "'+column_name+'","type": "integer","rowLabelable": false,"summarizable": "sum"}';			
+	}else{
+		var column_name=p_measures_map_to_report_column_name[p_measures];
+		measures+='SUM((CASE WHEN '+p_measures+' IS NULL THEN 0 ELSE '+p_measures+' END)) as "'+column_name+'"';
+		temp_summaries+='"'+column_name+'"';
+		temp_fields+='{"name": "'+column_name+'","type": "integer","rowLabelable": false,"summarizable": "sum"}';
+	};	
+	
+	if(p_mode=='date'){
+		sqlQuery='SELECT full_date as "Date",'+the_dimension[1]+' as "Dimension",'+measures+' '+
+		'FROM '+st_from+' '+
+		'WHERE is_active=true '+
+		'AND full_date BETWEEN \''+p_start_date+'\'::date AND \''+p_end_date+'\'::date '+
+		'AND '+the_dimension[0]+' IN ('+device.join(',')+') '+
+		'AND (ad_network_id='+p_network+' OR '+'0='+p_network+') '+
+		'GROUP BY full_date,'+the_dimension[1]+' '+
+		'ORDER BY full_date,'+the_dimension[1]+' ';	
+		
+		agg='{"rowLabels":["Date"], "columnLabels":["Dimension"],"summaries":['+temp_summaries+']'+'}';
+		fields='['+
+				'{"name": "Date","type": "date","rowLabelable": false},'+
+				'{"name": "Dimension","type": "string","rowLabelable": false},'+
+				temp_fields+				
+				']';
+	}else if(p_mode=='month'){
+		sqlQuery='SELECT calendar_year_month as "Month",'+the_dimension[1]+' as "Dimension",'+measures+' '+
+		'FROM '+st_from+' '+
+		'WHERE is_active=true '+
+		'AND month_since_2005 BETWEEN '+p_start_month+' AND '+p_end_month+' '+
+		'AND '+the_dimension[0]+' IN ('+device.join(',')+') '+
+		'AND (ad_network_id='+p_network+' OR '+'0='+p_network+') '+
+		'GROUP BY calendar_year_month,month_since_2005,'+the_dimension[1]+' '+
+		'ORDER BY month_since_2005,'+the_dimension[1]+'';	
+		
+		agg='{"rowLabels":["Month"], "columnLabels":["Dimension"],"summaries":['+temp_summaries+']'+'}';
+		fields='['+
+				'{"name": "Month","type": "month","rowLabelable": false},'+
+				'{"name": "Dimension","type": "string","rowLabelable": false},'+
+				temp_fields+				
+				']';
+	}
+}]]></script>
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Relational</action-type>
+      <action-inputs> 
+        <query type="string" mapping="sqlQuery"/> 
+      </action-inputs>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result_chartData"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[verveReportConnection]]></jndi>  
+        <live><![CDATA[true]]></live> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>processChartData</action-type>
+      <action-inputs> 
+        <query_result_chartData type="result-set"/> 
+      </action-inputs>
+      <action-outputs> 
+        <data type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var data='';
+var result_set=query_result_chartData;
+var meta = result_set.getMetaData();      // Returns an IPentahoMetaData object
+var colCount = meta.getColumnCount();
+var colHeaders = meta.getColumnHeaders(); //getColumnHeaders() returns object[][]
+var rowHeaders = meta.getRowHeaders(); 
+
+data='[';
+
+//process column name
+data+='[';
+for ( var i = 0 ; i < colCount ; i++ ){
+	if(i>0){data+=',';}
+	data+='\\"'+colHeaders[0][i]+'\\"';
+}
+data+=']';
+//end
+//process data item
+for(var i=0;i<result_set.getRowCount();i++){
+	data+=',[';
+	for(var j=0;j<result_set.getColumnCount();j++){ 
+		if(j>0){data+=','}
+		data+='\\"'+result_set.getValueAt(i,j)+'\\"';
+	}
+	data+=']';
+}
+//end
+data+=']';]]></script> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>TemplateComponent</component-name>
+      <action-type>Message Template</action-type>
+      <action-inputs> 
+        <agg type="string"/>  
+        <v_chart_sub_title type="string"/>  
+        <data type="string"/>  
+        <chart_type type="string"/>  
+        <chartSingleMode type="string"/>  
+        <p_chart_polar type="string"/>  
+        <v_chart_title type="string"/>  
+        <fields type="string"/> 
+      </action-inputs>
+      <action-resources/>
+      <action-outputs> 
+        <output-message type="string" mapping="webapp"/> 
+      </action-outputs>
+      <component-definition> 
+        <template><![CDATA[{
+			"chartTitle":"{v_chart_title}",
+			"chartSubTitle":"{v_chart_sub_title}",
+			"chartType":"{chart_type}",
+			"chart_polar": {p_chart_polar},
+			"chartSingleMode": {chartSingleMode},
+			"chartData":"{data}",
+			"agg":{agg},
+			"fields":{fields},
+			"sqlQuery":""
+		}]]></template> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

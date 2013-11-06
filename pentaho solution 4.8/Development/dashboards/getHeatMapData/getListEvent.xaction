@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title/>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author/>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <p_flight_id type="string"> 
+      <sources> 
+        <request>p_flight_id</request> 
+      </sources>  
+      <default-value/> 
+    </p_flight_id> 
+  </inputs>
+
+  <outputs> 
+    <jsonResult type="string"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </jsonResult> 
+  </outputs>
+
+  <resources/>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>TemplateComponent</component-name>
+      <action-type>Message Template</action-type>
+      <action-inputs/>
+      <action-outputs> 
+        <output-message type="string" mapping="query"/> 
+      </action-outputs>
+      <component-definition> 
+        <template><![CDATA[SELECT 'All Event names' as event_name , 0 as level
+UNION ALL
+SELECT DISTINCT( event_name)  event_name, 1 as level FROM evttracker.daily_event_maps
+WHERE is_active=true
+ORDER BY level,event_name]]></template> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Relational</action-type>
+      <action-inputs> 
+        <query type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[dw3]]></jndi>  
+        <live><![CDATA[true]]></live> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>JsonResponse</action-type>
+      <action-inputs> 
+        <query_result type="result-set"/> 
+      </action-inputs>
+      <action-outputs> 
+        <jsonResult type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var jsonResult;
+jsonResult='{';
+
+//add flight id list
+jsonResult+='"list_event_names":[';
+for(var i=0;i<query_result.getRowCount();i++){
+	if(i>0){
+		jsonResult+=',';	
+	}
+	var value=query_result.getValueAt(i,0);
+	var name=query_result.getValueAt(i,0);
+	var title=query_result.getValueAt(i,0);
+	jsonResult+='{"value":"'+value+'","name":"'+name+'","title":"'+title+'"}';
+}
+jsonResult+=']';
+//end
+
+jsonResult+='}';]]></script> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

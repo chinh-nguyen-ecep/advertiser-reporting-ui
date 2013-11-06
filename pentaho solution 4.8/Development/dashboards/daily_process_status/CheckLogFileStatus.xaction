@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Check Log Files Status</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>ChinhNguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <full_date type="string"> 
+      <sources> 
+        <request>full_date</request> 
+      </sources>  
+      <default-value/> 
+    </full_date>  
+    <group_process type="string"> 
+      <sources> 
+        <request>group_process</request> 
+      </sources>  
+      <default-value/> 
+    </group_process>  
+    <rs_total_file type="result-set"> 
+      <default-value/> 
+    </rs_total_file>  
+    <rs_total_file_su type="result-set"> 
+      <default-value/> 
+    </rs_total_file_su>  
+    <rs_list_file_er type="result-set"> 
+      <default-value/> 
+    </rs_list_file_er>  
+    <p_server type="string"> 
+      <sources> 
+        <request>p_server</request> 
+      </sources>  
+      <default-value><![CDATA[dw3dw3]]></default-value> 
+    </p_server> 
+  </inputs>
+
+  <outputs> 
+    <html type="string"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </html> 
+  </outputs>
+
+  <resources/>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Relational Connection</action-type>
+      <action-inputs> 
+        <jndi type="string" mapping="p_server"/> 
+      </action-inputs>
+      <action-outputs> 
+        <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
+      </action-outputs>
+      <component-definition/> 
+    </action-definition>
+  
+    <actions> 
+      <condition><![CDATA[group_process=='3rdAdnetwork']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>GetTotalFile</action-type>
+        <action-inputs> 
+          <full_date type="string"/>  
+          <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="rs_total_file"/> 
+        </action-outputs>
+        <component-definition> 
+          <query><![CDATA[SELECT COUNT(*) FROM control.data_file WHERE data_file_config_id IN (39,40,41,43,44,49,50,47,48,52,53,103,104,126,170) AND file_timestamp::date=(date '{full_date}' - integer '0')]]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>GetTotalFile_SU</action-type>
+        <action-inputs> 
+          <full_date type="string"/>  
+          <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="rs_total_file_su"/> 
+        </action-outputs>
+        <component-definition> 
+          <query><![CDATA[SELECT COUNT(*) FROM control.data_file WHERE data_file_config_id IN (39,40,41,43,44,49,50,47,48,52,53,103,104,126,170) AND file_timestamp::date=(date '{full_date}' - integer '0') AND file_status LIKE 'SU']]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>GetListlFile_ER</action-type>
+        <action-inputs> 
+          <full_date type="string"/>  
+          <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="rs_list_file_er"/> 
+        </action-outputs>
+        <component-definition> 
+          <live><![CDATA[true]]></live>  
+          <query><![CDATA[SELECT file_name,file_status,staging_load_count,fact_table_load_count,file_timestamp FROM control.data_file WHERE data_file_config_id IN (39,40,41,43,44,49,50,47,48,52,53,103,104,126,170) AND file_timestamp::date =(date '{full_date}' - integer '0') AND (file_status LIKE 'EF' OR (file_status LIKE 'SU' AND staging_load_count=0) OR (file_status LIKE 'SU' AND fact_table_load_count=0))]]></query> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[group_process=='Double Click']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>GetTotalFile</action-type>
+        <action-inputs> 
+          <full_date type="string"/>  
+          <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="rs_total_file"/> 
+        </action-outputs>
+        <component-definition> 
+          <query><![CDATA[SELECT COUNT(*) FROM control.data_file WHERE data_file_config_id IN (23,26,30,31,32,33,34,35,42,54,63,76,71,78,125,165) AND file_timestamp::date=(date '{full_date}' - integer '0')]]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>GetTotalFile_SU</action-type>
+        <action-inputs> 
+          <full_date type="string"/>  
+          <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="rs_total_file_su"/> 
+        </action-outputs>
+        <component-definition> 
+          <query><![CDATA[SELECT COUNT(*) FROM control.data_file WHERE data_file_config_id IN (23,26,30,31,32,33,34,35,42,54,63,76,71,78,125,165) AND file_timestamp::date=(date '{full_date}' - integer '0') AND file_status LIKE 'SU']]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>GetListlFile_ER</action-type>
+        <action-inputs> 
+          <full_date type="string"/>  
+          <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="rs_list_file_er"/> 
+        </action-outputs>
+        <component-definition> 
+          <live><![CDATA[true]]></live>  
+          <query><![CDATA[SELECT file_name,file_status,staging_load_count,fact_table_load_count,file_timestamp FROM control.data_file WHERE data_file_config_id IN (23,26,30,31,32,33,34,35,42,54,63,76,71,78,125,165) AND file_timestamp::date =(date '{full_date}' - integer '0') AND (file_status LIKE 'EF' OR (file_status LIKE 'SU' AND staging_load_count=0) OR (file_status LIKE 'SU' AND fact_table_load_count=0))]]></query> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[group_process=='Event Tracker']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>GetTotalFile</action-type>
+        <action-inputs> 
+          <full_date type="string"/>  
+          <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="rs_total_file"/> 
+        </action-outputs>
+        <component-definition> 
+          <query><![CDATA[SELECT COUNT(*) FROM control.data_file WHERE data_file_config_id IN (92,93,94,95,96,97,98,99,100,110,111,133,134,135,161,162,163,164,168) AND file_timestamp::date=(date '{full_date}' - integer '0')]]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>GetTotalFile_SU</action-type>
+        <action-inputs> 
+          <full_date type="string"/>  
+          <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="rs_total_file_su"/> 
+        </action-outputs>
+        <component-definition> 
+          <query><![CDATA[SELECT COUNT(*) FROM control.data_file WHERE data_file_config_id IN (92,93,94,95,96,97,98,99,100,110,111,133,134,135,161,162,163,164,168) AND file_timestamp::date=(date '{full_date}' - integer '0') AND file_status LIKE 'SU']]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>GetListlFile_ER</action-type>
+        <action-inputs> 
+          <full_date type="string"/>  
+          <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="rs_list_file_er"/> 
+        </action-outputs>
+        <component-definition> 
+          <live><![CDATA[true]]></live>  
+          <query><![CDATA[SELECT file_name,file_status,staging_load_count,fact_table_load_count,file_timestamp FROM control.data_file WHERE data_file_config_id IN (92,93,94,95,96,97,98,99,100,110,111,133,134,135,161,162,163,164,168) AND file_timestamp::date =(date '{full_date}' - integer '0') AND (file_status LIKE 'EF' OR (file_status LIKE 'SU' AND staging_load_count=0) OR (file_status LIKE 'SU' AND fact_table_load_count=0))]]></query> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[group_process=='Adcel']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>GetTotalFile</action-type>
+        <action-inputs> 
+          <full_date type="string"/>  
+          <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="rs_total_file"/> 
+        </action-outputs>
+        <component-definition> 
+          <query><![CDATA[SELECT COUNT(*) FROM control.data_file WHERE data_file_config_id IN (16,17,18,19,20, 27, 28,29,81,82,83,84,85,86,87,88,89,90,106,107,108,109,127,128,129,130,131,132,153,154,155,156,157,158,159,160,166,167) AND file_timestamp::date=(date '{full_date}' - integer '0')]]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>GetTotalFile_SU</action-type>
+        <action-inputs> 
+          <full_date type="string"/>  
+          <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="rs_total_file_su"/> 
+        </action-outputs>
+        <component-definition> 
+          <query><![CDATA[SELECT COUNT(*) FROM control.data_file WHERE data_file_config_id IN (16,17,18,19,20, 27, 28,29,81,82,83,84,85,86,87,88,89,90,106,107,108,109,127,128,129,130,131,132,153,154,155,156,157,158,159,160,166,167) AND file_timestamp::date=(date '{full_date}' - integer '0') AND file_status LIKE 'SU']]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>GetListlFile_ER</action-type>
+        <action-inputs> 
+          <full_date type="string"/>  
+          <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="rs_list_file_er"/> 
+        </action-outputs>
+        <component-definition> 
+          <live><![CDATA[true]]></live>  
+          <query><![CDATA[SELECT file_name,file_status,staging_load_count,fact_table_load_count,file_timestamp FROM control.data_file WHERE data_file_config_id IN (16,17,18,19,20, 27, 28,29,81,82,83,84,85,86,87,88,89,90,106,107,108,109,127,128,129,130,131,132,153,154,155,156,157,158,159,160,166,167) AND file_timestamp::date =(date '{full_date}' - integer '0') AND (file_status LIKE 'EF' OR (file_status LIKE 'SU' AND staging_load_count=0) OR (file_status LIKE 'SU' AND fact_table_load_count=0))]]></query> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[group_process=='ADM2.0']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>GetTotalFile</action-type>
+        <action-inputs> 
+          <full_date type="string"/>  
+          <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="rs_total_file"/> 
+        </action-outputs>
+        <component-definition> 
+          <query><![CDATA[SELECT COUNT(*) FROM control.data_file WHERE data_file_config_id IN (136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151) AND file_timestamp::date=(date '{full_date}' - integer '0')]]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>GetTotalFile_SU</action-type>
+        <action-inputs> 
+          <full_date type="string"/>  
+          <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="rs_total_file_su"/> 
+        </action-outputs>
+        <component-definition> 
+          <query><![CDATA[SELECT COUNT(*) FROM control.data_file WHERE data_file_config_id IN (136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151) AND file_timestamp::date=(date '{full_date}' - integer '0') AND file_status LIKE 'SU']]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>GetListlFile_ER</action-type>
+        <action-inputs> 
+          <full_date type="string"/>  
+          <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="rs_list_file_er"/> 
+        </action-outputs>
+        <component-definition> 
+          <live><![CDATA[true]]></live>  
+          <query><![CDATA[SELECT file_name,file_status,staging_load_count,fact_table_load_count,file_timestamp FROM control.data_file WHERE data_file_config_id IN (136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151) AND file_timestamp::date =(date '{full_date}' - integer '0') AND (file_status LIKE 'EF' OR (file_status LIKE 'SU' AND staging_load_count=0) OR (file_status LIKE 'SU' AND fact_table_load_count=0))]]></query> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>JavaScript</action-type>
+      <action-inputs> 
+        <rs_total_file type="result-set"/>  
+        <rs_total_file_su type="result-set"/>  
+        <rs_list_file_er type="result-set"/>  
+        <full_date type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <html type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var html;
+var total_file=rs_total_file.getValueAt(0,0);
+var total_file_su=rs_total_file_su.getValueAt(0,0);
+var total_file_er=rs_list_file_er.getRowCount();
+
+html='<ul>';
+html+='<li><span>Total files on '+full_date+' :</span> '+total_file+'</li><li><span>SU:</span> '+total_file_su+'</li><li><span>Errors:</span> '+total_file_er+'</li>';
+html+='</ul>';
+for(var i=0;i<total_file_er;i++){
+	var file_name=rs_list_file_er.getValueAt(i,0);
+	var file_status=rs_list_file_er.getValueAt(i,1);
+	var staging_load_count=rs_list_file_er.getValueAt(i,2);
+	var fact_table_load_count=rs_list_file_er.getValueAt(i,3);
+	if(i==0) html+='<br /><span>List error files:</span><ul class="list_error_files">';
+	html+='<li>'+file_name+' ('+file_status+','+staging_load_count+','+fact_table_load_count+')</li>';
+	if(i-1==total_file_er) html+='</ul>';
+}]]></script> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

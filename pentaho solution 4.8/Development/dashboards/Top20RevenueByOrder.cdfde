@@ -1,0 +1,108 @@
+{
+ "layout": {
+  "title": "CDF - Sample structure",
+  "rows": [
+   {
+    "id": "1d09a0e0-b4ff-127e-f0af-187d94e05d44",
+    "type": "LayoutResourceFile",
+    "typeDesc": "Resource",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "Charttool",
+      "type": "Id"
+     },
+     {
+      "name": "resourceFile",
+      "value": "${res:cde/verve-lib/css/charttool.css}",
+      "type": "ResourceFile"
+     },
+     {
+      "name": "resourceType",
+      "value": "Css",
+      "type": "Label"
+     }
+    ]
+   },
+   {
+    "id": "5b0b57c7-76a7-e939-dc3d-3e8acaa189ea",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "Head",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "ed07d61b-13a6-7038-797b-634b06ea236f",
+    "type": "LayoutHtml",
+    "typeDesc": "Html",
+    "parent": "5b0b57c7-76a7-e939-dc3d-3e8acaa189ea",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "html",
+      "value": "   <div id=\"toolbar\" class=\"ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix\">\r\n       <div class=\"leftGroup\">\r\n            <span>Hello</span>\r\n\t   </div>\r\n\t   \r\n\t   <div class=\"rightGroup\">\r\n\r\n\t   </div>\r\n\r\n   </div> ",
+      "type": "Html"
+     },
+     {
+      "name": "fontSize",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "color",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   }
+  ]
+ },
+ "components": {
+  "rows": []
+ },
+ "datasources": {
+  "rows": []
+ },
+ "filename": "/Development/dashboards/Top20RevenueByOrder.cdfde"
+}

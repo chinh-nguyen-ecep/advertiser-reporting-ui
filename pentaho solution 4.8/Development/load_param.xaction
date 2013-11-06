@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Load param</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>chinhnguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <p_table type="string"> 
+      <sources> 
+        <request>p_table</request> 
+      </sources>  
+      <default-value><![CDATA[refer.adm_dim_publishers]]></default-value> 
+    </p_table>  
+    <p_value_field type="string"> 
+      <sources> 
+        <request>p_value_field</request> 
+      </sources>  
+      <default-value><![CDATA[publisher_id]]></default-value> 
+    </p_value_field>  
+    <p_name_field type="string"> 
+      <sources> 
+        <request>p_name_field</request> 
+      </sources>  
+      <default-value><![CDATA[company_name]]></default-value> 
+    </p_name_field>  
+    <p_condition type="string"> 
+      <sources> 
+        <request>p_condition</request> 
+      </sources>  
+      <default-value><![CDATA[dt_expire%3D'9999-12-31']]></default-value> 
+    </p_condition>  
+    <p_prompt_stype type="string"> 
+      <sources> 
+        <request>p_prompt_stype</request> 
+      </sources>  
+      <default-value><![CDATA[Scrolling Check List]]></default-value> 
+    </p_prompt_stype>  
+    <p_all_name type="string"> 
+      <sources> 
+        <request>p_all_name</request> 
+      </sources>  
+      <default-value><![CDATA[All Publishers]]></default-value> 
+    </p_all_name>  
+    <p_all_value type="string"> 
+      <sources> 
+        <request>p_all_value</request> 
+      </sources>  
+      <default-value><![CDATA[0]]></default-value> 
+    </p_all_value>  
+    <v_query type="string"> 
+      <sources> 
+        <request>v_query</request> 
+      </sources>  
+      <default-value/> 
+    </v_query>  
+    <p_jndi type="string"> 
+      <sources> 
+        <request>p_jndi</request> 
+      </sources>  
+      <default-value><![CDATA[verveReportConnection]]></default-value> 
+    </p_jndi>  
+    <p_param_name type="string"> 
+      <sources> 
+        <request>p_param_name</request> 
+      </sources>  
+      <default-value/> 
+    </p_param_name>  
+    <v_result type="string"> 
+      <sources> 
+        <request>v_result</request> 
+      </sources>  
+      <default-value/> 
+    </v_result>  
+    <p_option_field type="string"> 
+      <sources> 
+        <request>p_option_field</request> 
+      </sources>  
+      <default-value/> 
+    </p_option_field>  
+    <p_group_by type="string"> 
+      <sources> 
+        <request>p_group_by</request> 
+      </sources>  
+      <default-value/> 
+    </p_group_by>  
+    <testMode type="string">
+      <sources>
+        <request>testMode</request>
+      </sources>
+      <default-value><![CDATA[false]]></default-value>
+    </testMode>
+  </inputs>
+
+  <outputs> 
+    <v_result type="string"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </v_result> 
+  </outputs>
+
+  <resources/>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>JavaScript</action-type>
+      <action-inputs> 
+        <v_query type="string"/>  
+        <p_table type="string"/>  
+        <p_value_field type="string"/>  
+        <p_name_field type="string"/>  
+        <p_all_name type="string"/>  
+        <p_condition type="string"/>  
+        <p_all_value type="string"/>  
+        <p_option_field type="string"/>  
+        <p_group_by type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <v_query type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[v_query='SELECT a.* ';
+v_query+='FROM (';
+
+if(p_all_name!=''){
+	if(p_option_field!=''){
+	v_query+='SELECT \''+p_all_value+'\' as "value",\''+p_all_name+'\' as title,\''+p_all_name+'\' as name_view,0 as option_field, 0 as row_order ';
+	}else{
+	v_query+='SELECT \''+p_all_value+'\' as "value",\''+p_all_name+'\' as title,\''+p_all_name+'\' as name_view, 0 as row_order ';
+	}
+v_query+='UNION ';
+}
+v_query+='SELECT ';
+v_query+=p_value_field+' as "value",';
+v_query+=p_name_field+' as title,';
+v_query+=p_name_field+' as name_view,';
+
+if(p_option_field!=''){
+	v_query+=p_option_field+' as option_field,';
+}
+
+v_query+='1 as row_order ';
+v_query+='FROM '+p_table;
+	
+if(p_condition!=''){
+	v_query+=' WHERE '+p_condition;
+}
+
+if(p_group_by!=''){
+	v_query+=' GROUP BY "value",title,row_order,'+p_group_by;
+}else{
+	v_query+=' GROUP BY "value",title';
+}
+
+
+v_query+=') a ';
+v_query+='ORDER BY row_order,name_view;';]]></script>
+      </component-definition> 
+    </action-definition>
+  
+    <actions>
+      <condition><![CDATA[testMode=='true']]></condition>
+      <action-definition>
+        <component-name>JavascriptRule</component-name>
+        <action-type>JavaScript</action-type>
+        <action-inputs>
+          <v_query type="string"/>
+          <v_result type="string"/>
+        </action-inputs>
+        <action-outputs>
+          <v_result type="string"/>
+        </action-outputs>
+        <component-definition>
+          <script><![CDATA[v_result=v_query;]]></script>
+        </component-definition>
+      </action-definition>
+
+    </actions>
+
+    <actions>
+      <condition><![CDATA[testMode=='false']]></condition>
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="p_jndi"/>  
+          <query type="string" mapping="v_query"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
+        </action-outputs>
+        <component-definition> 
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
+      </action-definition>
+
+      <actions> 
+        <condition><![CDATA[p_prompt_stype=='pulldown']]></condition>  
+        <action-definition> 
+          <component-name>JavascriptRule</component-name>
+          <action-type>JavaScript</action-type>
+          <action-inputs> 
+            <v_result type="string"/>  
+            <p_param_name type="string"/>  
+            <query_result type="result-set"/> 
+          </action-inputs>
+          <action-outputs> 
+            <v_result type="string"/> 
+          </action-outputs>
+          <component-definition> 
+            <script><![CDATA[v_result='<SELECT name="'+p_param_name+'">';
+for(var i=0;i<query_result.getRowCount();i++){
+	var value=query_result.getValueAt(i,0);
+	var title=query_result.getValueAt(i,1);
+	var view=query_result.getValueAt(i,2);
+	if(i==0){
+		v_result+='<option selected="selected" value="'+value+'">'+view+'</option>';
+	}else{
+		v_result+='<option value="'+value+'">'+view+'</option>';
+	}
+}]]></script> 
+          </component-definition> 
+        </action-definition>
+  
+        <action-definition> 
+          <component-name>SecureFilterComponent</component-name>
+          <action-type>Prompt/Secure Filter</action-type>
+          <action-inputs> 
+            <p_value_field type="string"/> 
+          </action-inputs>
+          <component-definition> 
+            <selections> 
+              <p_value_field filter="none" style="check-multi-scroll"/> 
+            </selections> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+
+      <actions> 
+        <condition><![CDATA[p_prompt_stype=='Scrolling Check List']]></condition>  
+        <action-definition> 
+          <component-name>JavascriptRule</component-name>
+          <action-type>JavaScript</action-type>
+          <action-inputs> 
+            <v_result type="string"/>  
+            <query_result type="result-set"/>  
+            <p_param_name type="string"/> 
+          </action-inputs>
+          <action-outputs> 
+            <v_result type="string"/> 
+          </action-outputs>
+          <component-definition> 
+            <script><![CDATA[v_result='<table><tr></tr>';
+
+for(var i=0;i<query_result.getRowCount();i++){
+	var value=query_result.getValueAt(i,0);
+	var title=query_result.getValueAt(i,1);
+	var view=query_result.getValueAt(i,2);
+	if(i==0){
+	v_result+='<tr><td><input id="id_'+value+'" class="portlet-form-field" type="checkbox" name="'+p_param_name+'" value="'+value+'" checked="checked"><span id="device-label" class="portlet-form-field-label" title="'+title+'">'+view+'</span></td></tr>';
+	}else{
+	v_result+='<tr><td><input id="id_'+value+'" class="portlet-form-field" type="checkbox" name="'+p_param_name+'" value="'+value+'" ><span id="device-label" class="portlet-form-field-label" title="'+title+'">'+view+'</span></td></tr>';
+	}
+	
+}
+
+v_result+='</table>';]]></script> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+
+    </actions>
+ 
+  </actions> 
+</action-sequence>

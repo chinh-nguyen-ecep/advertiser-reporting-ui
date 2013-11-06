@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Query name="55D7886A-EC32-4895-A22B-39AD697B036B" type="QM" connection="SampleData" cube="[Quadrant Analysis]" catalog="SampleData" schema="SampleData">
+  <QueryModel>
+    <Axes>
+      <Axis location="ROWS" nonEmpty="true">
+        <Dimensions>
+          <Dimension name="Region" hierarchizeMode="PRE" hierarchyConsistent="true">
+            <Inclusions>
+              <Selection dimension="Region" type="level" node="[Region].[Region]" operator="MEMBERS" />
+            </Inclusions>
+            <Exclusions />
+          </Dimension>
+        </Dimensions>
+      </Axis>
+      <Axis location="COLUMNS" nonEmpty="true">
+        <Dimensions>
+          <Dimension name="Measures" hierarchizeMode="PRE" hierarchyConsistent="false">
+            <Inclusions>
+              <Selection dimension="Measures" type="member" node="[Measures].[Budget]" operator="MEMBER" />
+              <Selection dimension="Measures" type="member" node="[Measures].[Actual]" operator="MEMBER" />
+              <Selection dimension="Measures" type="member" node="[Measures].[Variance]" operator="MEMBER" />
+            </Inclusions>
+            <Exclusions />
+          </Dimension>
+        </Dimensions>
+      </Axis>
+      <Axis location="FILTER" nonEmpty="false" />
+    </Axes>
+  </QueryModel>
+  <MDX>SELECT&#xD;
+NON EMPTY {Hierarchize({[Measures].[Budget], [Measures].[Actual], [Measures].[Variance]})} ON COLUMNS,&#xD;
+NON EMPTY {Hierarchize({[Region].[Region].Members})} ON ROWS&#xD;
+FROM [Quadrant Analysis]</MDX>
+</Query>
+

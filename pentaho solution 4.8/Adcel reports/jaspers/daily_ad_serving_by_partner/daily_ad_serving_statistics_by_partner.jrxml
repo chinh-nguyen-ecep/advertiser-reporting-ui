@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_ad_serving_statistics" pageWidth="962" pageHeight="595" orientation="Landscape" columnWidth="922" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="p_eastern_date_sk" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("1")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_partner" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("1")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="parameter1" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/opt/pentaho/biserver-ce/pentaho-solutions/Adcel reports/jaspers/daily_ad_serving_by_partner/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_publisher" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT *
+FROM (
+SELECT
+a.eastern_date_sk,
+a.full_date,
+a.partner_id,
+a.partner_name,
+sum(a.fullfilled_code_count) as fullfilled_code_count,
+sum(a.fullfilled_code_y) as fullfilled_code_y,
+sum(a.fullfilled_code_n) as fullfilled_code_n,
+sum(a.fullfilled_code_e) as fullfilled_code_e,
+sum(a.fullfilled_code_t) as fullfilled_code_t,
+sum(a.location_quality_100) as location_quality_100,
+(max(a.dt_lastchange)::timestamp with time zone AT TIME ZONE 'America/Los_Angeles')::timestamp with time zone AT TIME ZONE 'America/New_York'as dt_lastchange
+FROM adstraffic.daily_ad_serving_stats a
+WHERE a.is_active = true
+AND a.eastern_date_sk = $P{p_eastern_date_sk}::int
+AND a.partner_id = $P{p_partner}::int
+AND a.parent1_id=$P{p_publisher}::int
+GROUP BY
+a.eastern_date_sk,
+a.full_date,
+a.partner_id,
+a.partner_name
+UNION
+SELECT
+a.eastern_date_sk,
+a.full_date,
+a.partner_id,
+a.partner_name,
+sum(a.fullfilled_code_count) as fullfilled_code_count,
+sum(a.fullfilled_code_y) as fullfilled_code_y,
+sum(a.fullfilled_code_n) as fullfilled_code_n,
+sum(a.fullfilled_code_e) as fullfilled_code_e,
+sum(a.fullfilled_code_t) as fullfilled_code_t,
+sum(a.location_quality_100) as location_quality_100,
+(max(a.dt_lastchange)::timestamp with time zone AT TIME ZONE 'America/Los_Angeles')::timestamp with time zone AT TIME ZONE 'America/New_York'as dt_lastchange
+FROM adstraffic.daily_ad_serving_stats a
+WHERE a.is_active = true
+AND a.eastern_date_sk = $P{p_eastern_date_sk}::int
+AND $P{p_partner}::int = -1
+AND a.parent1_id=$P{p_publisher}::int
+GROUP BY
+a.eastern_date_sk,
+a.full_date,
+a.partner_id,
+a.partner_name
+) a
+ORDER BY
+fullfilled_code_count desc,
+fullfilled_code_y desc,
+fullfilled_code_n desc,
+fullfilled_code_e desc,
+fullfilled_code_t desc]]>
+	</queryString>
+	<field name="eastern_date_sk" class="java.lang.Integer"/>
+	<field name="full_date" class="java.sql.Date"/>
+	<field name="partner_id" class="java.lang.Integer"/>
+	<field name="partner_name" class="java.lang.String"/>
+	<field name="fullfilled_code_count" class="java.lang.Long"/>
+	<field name="fullfilled_code_y" class="java.lang.Long"/>
+	<field name="fullfilled_code_n" class="java.lang.Long"/>
+	<field name="fullfilled_code_e" class="java.lang.Long"/>
+	<field name="fullfilled_code_t" class="java.lang.Long"/>
+	<field name="location_quality_100" class="java.lang.Long"/>
+	<field name="dt_lastchange" class="java.sql.Timestamp"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="86">
+			<image>
+				<reportElement x="0" y="9" width="64" height="20"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"vervelogo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="64" y="9" width="857" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Daily AdCel Statistics]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="40" width="240" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Date: " + $F{full_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="240" y="40" width="504" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Refresh Date (ET):]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="744" y="40" width="178" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{dt_lastchange}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="310">
+			<textField>
+				<reportElement x="0" y="15" width="555" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Ad Partner: " + $F{partner_name} + " (" + $F{partner_id} + ")"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="5" width="922" height="1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="45" width="922" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="67" width="240" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ad Network Responses Overview:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="100" width="140" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Total Ad Responses:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="140" y="100" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{fullfilled_code_count}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="120" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{fullfilled_code_y}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="120" width="140" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Yes Ad Responses:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="140" y="140" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{fullfilled_code_n}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="140" width="140" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[No Ad Responses:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="180" width="140" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Timeout Ad Responses:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="160" width="140" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Error Ad Responses:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="140" y="180" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{fullfilled_code_t}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="160" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{fullfilled_code_e}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="270" width="922" height="20"/>
+				<subreportParameter name="eastern_date_sk">
+					<subreportParameterExpression><![CDATA[new Integer($P{p_eastern_date_sk})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_location_quality_100">
+					<subreportParameterExpression><![CDATA[$F{location_quality_100}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_t">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_t}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_e">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_e}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_count">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_count}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_y">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_y}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_partner_id">
+					<subreportParameterExpression><![CDATA[$F{partner_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_n">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_n}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"subreport_by_portal.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="250" width="922" height="20"/>
+				<subreportParameter name="eastern_date_sk">
+					<subreportParameterExpression><![CDATA[new Integer($P{p_eastern_date_sk})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_location_quality_100">
+					<subreportParameterExpression><![CDATA[$F{location_quality_100}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_t">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_t}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_e">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_e}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_count">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_count}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_y">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_y}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_partner_id">
+					<subreportParameterExpression><![CDATA[$F{partner_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_n">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_n}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"subreport_by_group.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="290" width="922" height="20"/>
+				<subreportParameter name="eastern_date_sk">
+					<subreportParameterExpression><![CDATA[new Integer($P{p_eastern_date_sk})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_location_quality_100">
+					<subreportParameterExpression><![CDATA[$F{location_quality_100}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_t">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_t}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_e">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_e}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_count">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_count}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_y">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_y}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_partner_id">
+					<subreportParameterExpression><![CDATA[$F{partner_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_n">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_n}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "subreport_by_content_categories.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="0" y="200" width="140" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Location Quality (100):]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="140" y="200" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{location_quality_100}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="230" width="921" height="20"/>
+				<subreportParameter name="eastern_date_sk">
+					<subreportParameterExpression><![CDATA[new Integer($P{p_eastern_date_sk})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_location_quality_100">
+					<subreportParameterExpression><![CDATA[$F{location_quality_100}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_t">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_t}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_e">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_e}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_count">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_count}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_y">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_y}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_n">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_n}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_partner_id">
+					<subreportParameterExpression><![CDATA[$F{partner_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "subreport_by_network.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="26">
+			<textField>
+				<reportElement x="0" y="4" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="706" y="4" width="178" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="884" y="4" width="37" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="2" width="922" height="1"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

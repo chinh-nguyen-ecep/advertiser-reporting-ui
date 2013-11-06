@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Daily Event by Distance</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>chinhnguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type>report</result-type>  
+    <icon>chart_1(2).png|chart_1(2).png</icon> 
+  </documentation>
+
+  <inputs> 
+    <p_output type="string"> 
+      <sources> 
+        <request>p_output</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </p_output>  
+    <p_start_date type="string"> 
+      <sources> 
+        <request>p_start_date</request> 
+      </sources>  
+      <default-value/> 
+    </p_start_date>  
+    <p_end_date type="string"> 
+      <sources> 
+        <request>p_end_date</request> 
+      </sources>  
+      <default-value/> 
+    </p_end_date>  
+    <v_max_date type="string"> 
+      <sources> 
+        <request>v_max_date</request> 
+      </sources>  
+      <default-value/> 
+    </v_max_date>  
+    <v_min_date type="string"> 
+      <sources> 
+        <request>v_min_date</request> 
+      </sources>  
+      <default-value/> 
+    </v_min_date>  
+    <p_flight_id type="string"> 
+      <sources> 
+        <request>p_flight_id</request> 
+      </sources>  
+      <default-value><![CDATA[All Flight ID]]></default-value> 
+    </p_flight_id>  
+    <p_event_name type="string"> 
+      <sources> 
+        <request>p_event_name</request> 
+      </sources>  
+      <default-value><![CDATA[All Event Names]]></default-value> 
+    </p_event_name> 
+  </inputs>
+
+  <outputs> 
+    <p_flight_id type="string"/>  
+    <event_names_string type="string"/> 
+  </outputs>
+
+  <resources> 
+    <pageTemplate1> 
+      <solution-file> 
+        <location>daily_event_distance/daily_event_by_distance_template.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </pageTemplate1>  
+    <catalog> 
+      <solution-file> 
+        <location>/event_tracker.xml</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </catalog>  
+    <report-definition> 
+      <solution-file> 
+        <location>daily_event_distance/daily_event_distance_by_date_range.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get max min date data</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="q_max_min_date"/>  
+        <max_full_date type="string"/>  
+        <min_full_date type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[dw3]]></jndi>  
+        <live><![CDATA[false]]></live>  
+        <query><![CDATA[SELECT b.min_full_date, b.max_full_date
+FROM refer.date_dim a,
+(SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM evttracker.daily_event_by_distance WHERE is_active=true) b
+WHERE a.full_date = b.min_full_date OR a.full_date = b.max_full_date;]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Prompt/Secure Filter</action-type>
+      <action-inputs> 
+        <p_output type="string"/>  
+        <p_start_date type="string"/>  
+        <p_end_date type="string"/>  
+        <v_max_date type="string"/>  
+        <v_min_date type="string"/>  
+        <q_max_min_date type="result-set"/> 
+      </action-inputs>
+      <action-resources> 
+        <pageTemplate mapping="pageTemplate1"/> 
+      </action-resources>
+      <component-definition> 
+        <selections>  
+          <p_start_date filter="none" style="text-box"/>  
+          <p_end_date filter="none" style="text-box"/>  
+          <v_max_date style="select"> 
+            <filter value-col-name="max_full_date" display-col-name="max_full_date">q_max_min_date</filter> 
+          </v_max_date>  
+          <v_min_date style="select"> 
+            <filter value-col-name="min_full_date" display-col-name="min_full_date">q_max_min_date</filter> 
+          </v_min_date> 
+        </selections>  
+        <xsl><![CDATA[pageTemplate]]></xsl> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>JavaScript</action-type>
+      <action-inputs> 
+        <p_event_name type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <event_names_string type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var event_names_string;
+event_names_string='';
+//convert measures
+if(p_event_name!= ''){
+	if(p_event_name instanceof Array){
+		for(var i=0;i<p_event_name.length;i++){
+			if(i>0){
+			event_names_string+=',';
+			};
+			event_names_string+=p_event_name[i];
+		};
+	}else{
+		event_names_string=p_event_name;
+	};
+}]]></script> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JasperReportsComponent</component-name>
+      <action-type>Jasper</action-type>
+      <action-inputs> 
+        <p_start_date type="string"/>  
+        <p_end_date type="string"/>  
+        <p_flight_id type="string"/>  
+        <event_names_string type="string"/>  
+        <output-type type="string" mapping="p_output"/> 
+      </action-inputs>
+      <component-definition> 
+        <jndi><![CDATA[dw3]]></jndi> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

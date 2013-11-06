@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subreport_total_summary" pageWidth="922" pageHeight="555" orientation="Landscape" columnWidth="922" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="eastern_date_sk" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new Integer("1")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA["\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+a.eastern_date_sk,
+a.full_date,
+sum(a.fullfilled_code_count) as total_fullfilled_code_count,
+sum(a.fullfilled_code_y) as total_fullfilled_code_y,
+sum(a.fullfilled_code_n) as total_fullfilled_code_n,
+sum(a.fullfilled_code_e) as total_fullfilled_code_e,
+sum(a.fullfilled_code_t) as total_fullfilled_code_t,
+sum(a.location_quality_100) as total_location_quality_100
+FROM adstraffic.daily_ad_serving_stats a
+WHERE a.eastern_date_sk = $P{eastern_date_sk}
+AND a.is_active = true
+GROUP BY
+a.eastern_date_sk,
+a.full_date]]>
+	</queryString>
+	<field name="eastern_date_sk" class="java.lang.Integer"/>
+	<field name="full_date" class="java.sql.Date"/>
+	<field name="total_fullfilled_code_count" class="java.lang.Long"/>
+	<field name="total_fullfilled_code_y" class="java.lang.Long"/>
+	<field name="total_fullfilled_code_n" class="java.lang.Long"/>
+	<field name="total_fullfilled_code_e" class="java.lang.Long"/>
+	<field name="total_fullfilled_code_t" class="java.lang.Long"/>
+	<field name="total_location_quality_100" class="java.lang.Long"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="62">
+			<line>
+				<reportElement x="0" y="40" width="922" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="1" y="10" width="222" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ad Responses Summary:]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="0" y="40" width="922" height="20"/>
+				<subreportParameter name="eastern_date_sk">
+					<subreportParameterExpression><![CDATA[$P{eastern_date_sk}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_location_quality_100">
+					<subreportParameterExpression><![CDATA[$F{total_location_quality_100}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_t">
+					<subreportParameterExpression><![CDATA[$F{total_fullfilled_code_t}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_e">
+					<subreportParameterExpression><![CDATA[$F{total_fullfilled_code_e}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_count">
+					<subreportParameterExpression><![CDATA[$F{total_fullfilled_code_count}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_y">
+					<subreportParameterExpression><![CDATA[$F{total_fullfilled_code_y}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_n">
+					<subreportParameterExpression><![CDATA[$F{total_fullfilled_code_n}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"subreport_total_summary_detail.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageHeader>
+		<band/>
+	</pageHeader>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

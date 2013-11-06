@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Billing - Monthly Local Revenue Summary V4</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>Chinh nguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <calendar_year_month type="string"> 
+      <sources> 
+        <request>calendar_year_month</request> 
+      </sources>  
+      <default-value/> 
+    </calendar_year_month>  
+    <p_output type="string"> 
+      <sources> 
+        <request>p_output</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </p_output>  
+    <List_networks type="string-list"> 
+      <sources> 
+        <request>List_networks</request> 
+      </sources>  
+      <default-value type="string-list"> 
+        <list-item>JumpTap</list-item>  
+        <list-item>Millennial Media</list-item>  
+        <list-item>Google AdSense</list-item>  
+        <list-item>Marchex</list-item>  
+        <list-item>Where</list-item>  
+        <list-item>Superpages</list-item>  
+        <list-item>Superpages blue</list-item>  
+        <list-item>AT&amp;T(Yellowpages)</list-item>  
+        <list-item>AdSense DBCLK Channel</list-item>  
+        <list-item>City Grid</list-item>  
+        <list-item>iTunes</list-item> 
+      </default-value> 
+    </List_networks>  
+    <p_network type="string"> 
+      <sources> 
+        <request>p_network</request> 
+      </sources>  
+      <default-value><![CDATA[Jumptap]]></default-value> 
+    </p_network>  
+    <List_dates type="string-list"> 
+      <sources> 
+        <request>List_dates</request> 
+      </sources>  
+      <default-value type="string-list"> 
+        <list-item>2012-Jan</list-item>  
+        <list-item>2011-Dec</list-item> 
+      </default-value> 
+    </List_dates>  
+    <connection_name type="string"> 
+      <sources> 
+        <request>connection_name</request> 
+      </sources>  
+      <default-value><![CDATA[verveReportConnection]]></default-value> 
+    </connection_name> 
+  </inputs>
+
+  <outputs/>
+
+  <resources> 
+    <pageTemplate> 
+      <solution-file> 
+        <location>ba_monthly_local_revenue_summary_v4/parameter_template.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </pageTemplate>  
+    <report-definition10> 
+      <solution-file> 
+        <location>ba_monthly_local_revenue_summary_v4/ba_monthly_local_revenue_summary.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition10> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get calendar year month</action-type>
+      <action-inputs> 
+        <jndi type="string" mapping="connection_name"/> 
+      </action-inputs>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result"/>  
+        <calendar_year_month type="string"/>  
+        <month_since_2005 type="integer"/> 
+      </action-outputs>
+      <component-definition> 
+        <live><![CDATA[false]]></live>  
+        <query><![CDATA[SELECT DISTINCT calendar_year_month, month_since_2005
+FROM adm.ba_monthly_local_revenue_v4
+WHERE is_active = true
+ORDER BY month_since_2005 desc]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Prompt/Secure Filter</action-type>
+      <action-inputs> 
+        <calendar_year_month type="string"/>  
+        <query_result type="result-set"/> 
+      </action-inputs>
+      <action-resources> 
+        <pageTemplate type="resource"/> 
+      </action-resources>
+      <component-definition> 
+        <selections> 
+          <calendar_year_month style="select"> 
+            <filter value-col-name="calendar_year_month" display-col-name="calendar_year_month">query_result</filter>  
+            <title>Month</title> 
+          </calendar_year_month> 
+        </selections>  
+        <xsl><![CDATA[pageTemplate]]></xsl> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JasperReportsComponent</component-name>
+      <action-type>Jasper</action-type>
+      <action-inputs> 
+        <calendar_year_month type="string"/>  
+        <output-type type="string" mapping="p_output"/>  
+        <jndi type="string" mapping="connection_name"/> 
+      </action-inputs>
+      <action-resources> 
+        <report-definition mapping="report-definition10"/> 
+      </action-resources>
+      <component-definition/> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

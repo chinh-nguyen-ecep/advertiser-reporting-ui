@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="monthly_ad_serving_statistics_summary" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="calendar_year_month" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+a.calendar_year_month,
+sum(a.fullfilled_code_count) as fullfilled_code_count,
+sum(a.fullfilled_code_y) as fullfilled_code_y,
+sum(a.fullfilled_code_n) as fullfilled_code_n,
+sum(a.fullfilled_code_e) as fullfilled_code_e,
+sum(a.fullfilled_code_t) as fullfilled_code_t,
+sum(total_ad_requests) as total_ad_requests,
+(max(a.dt_lastchange)::timestamp with time zone AT TIME ZONE 'America/Los_Angeles')::timestamp with time zone AT TIME ZONE 'America/New_York'as dt_lastchange
+FROM adstraffic.monthly_ad_serving_stats_by_date a
+WHERE a.is_active = true
+AND a.calendar_year_month = $P{calendar_year_month}
+GROUP BY
+a.calendar_year_month]]>
+	</queryString>
+	<field name="calendar_year_month" class="java.lang.String"/>
+	<field name="fullfilled_code_count" class="java.math.BigDecimal"/>
+	<field name="fullfilled_code_y" class="java.math.BigDecimal"/>
+	<field name="fullfilled_code_n" class="java.math.BigDecimal"/>
+	<field name="fullfilled_code_e" class="java.math.BigDecimal"/>
+	<field name="fullfilled_code_t" class="java.math.BigDecimal"/>
+	<field name="total_ad_requests" class="java.math.BigDecimal"/>
+	<field name="dt_lastchange" class="java.sql.Timestamp"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="215">
+			<image>
+				<reportElement x="0" y="9" width="64" height="20"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"../vervelogo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="64" y="9" width="674" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monthly AdCel Statistics Summary]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="40" width="222" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Month: " + $P{calendar_year_month}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="517" y="40" width="107" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Refresh Date (ET):]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="624" y="40" width="178" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{dt_lastchange}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="0" y="70" width="802" height="20"/>
+				<subreportParameter name="total_fullfilled_code_t">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_t}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_e">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_e}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_count">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_count}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_ad_requests">
+					<subreportParameterExpression><![CDATA[$F{total_ad_requests}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_y">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_y}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_n">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_n}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="calendar_year_month">
+					<subreportParameterExpression><![CDATA[$P{calendar_year_month}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"subreport_by_date.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="90" width="802" height="20"/>
+				<subreportParameter name="total_fullfilled_code_t">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_t}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_e">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_e}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_count">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_count}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_y">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_y}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_n">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_n}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="calendar_year_month">
+					<subreportParameterExpression><![CDATA[$P{calendar_year_month}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"subreport_by_ad_networks.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="110" width="802" height="20"/>
+				<subreportParameter name="total_fullfilled_code_t">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_t}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_e">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_e}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_count">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_count}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_y">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_y}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_n">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_n}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="calendar_year_month">
+					<subreportParameterExpression><![CDATA[$P{calendar_year_month}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"subreport_by_ad_portals.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="130" width="802" height="20"/>
+				<subreportParameter name="total_fullfilled_code_t">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_t}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_e">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_e}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_count">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_count}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_y">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_y}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_n">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_n}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="calendar_year_month">
+					<subreportParameterExpression><![CDATA[$P{calendar_year_month}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"subreport_by_groups.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="150" width="802" height="20"/>
+				<subreportParameter name="total_fullfilled_code_t">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_t}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_e">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_e}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_count">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_count}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_y">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_y}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_n">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_n}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="calendar_year_month">
+					<subreportParameterExpression><![CDATA[$P{calendar_year_month}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"subreport_by_device_organic.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="170" width="802" height="20"/>
+				<subreportParameter name="total_fullfilled_code_t">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_t}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_e">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_e}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_count">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_count}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_y">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_y}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_n">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_n}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="calendar_year_month">
+					<subreportParameterExpression><![CDATA[$P{calendar_year_month}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"subreport_by_device_vendor.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="190" width="802" height="20"/>
+				<subreportParameter name="calendar_year_month">
+					<subreportParameterExpression><![CDATA[$P{calendar_year_month}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_count">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_count}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_y">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_y}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_n">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_y}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_e">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_e}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_t">
+					<subreportParameterExpression><![CDATA[$F{fullfilled_code_t}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "subreport_by_content_category.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="26">
+			<textField>
+				<reportElement x="0" y="4" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="587" y="4" width="178" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="765" y="4" width="35" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="2" width="802" height="1"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

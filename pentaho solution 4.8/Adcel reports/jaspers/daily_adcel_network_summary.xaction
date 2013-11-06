@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Daily AdCel Network Summary</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author/>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <eastern_date_sk type="string"> 
+      <sources> 
+        <request>eastern_date_sk</request> 
+      </sources>  
+      <default-value/> 
+    </eastern_date_sk>  
+    <ad_network_id type="string"> 
+      <sources> 
+        <request>ad_network_id</request> 
+      </sources>  
+      <default-value/> 
+    </ad_network_id>  
+    <p_output type="string"> 
+      <sources> 
+        <request>p_output</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </p_output>  
+    <connection_name type="string">
+      <sources>
+        <request>connection_name</request>
+      </sources>
+      <default-value><![CDATA[verveReportConnection]]></default-value>
+    </connection_name>
+  </inputs>
+
+  <outputs/>
+
+  <resources> 
+    <pageTemplate> 
+      <solution-file> 
+        <location>daily_adcel_network_summary/parameter_template.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </pageTemplate>  
+    <report-definition> 
+      <solution-file> 
+        <location>daily_adcel_network_summary/daily_adcel_network_summary.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get Date list</action-type>
+      <action-inputs>
+        <jndi type="string" mapping="connection_name"/>
+      </action-inputs>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result"/>  
+        <eastern_date_sk type="integer"/>  
+        <full_date type="string"/>  
+        <distinct type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <live><![CDATA[true]]></live>  
+        <query><![CDATA[select distinct eastern_date_sk, full_date from adstraffic.daily_ad_serving_stats where is_active = true order by eastern_date_sk desc]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Prompt/Secure Filter</action-type>
+      <action-inputs> 
+        <eastern_date_sk type="string"/>  
+        <query_result type="result-set"/> 
+      </action-inputs>
+      <action-resources> 
+        <pageTemplate type="resource"/> 
+      </action-resources>
+      <component-definition> 
+        <selections> 
+          <eastern_date_sk style="select"> 
+            <filter value-col-name="eastern_date_sk" display-col-name="full_date">query_result</filter>  
+            <title>Date</title> 
+          </eastern_date_sk> 
+        </selections>  
+        <xsl><![CDATA[pageTemplate]]></xsl> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JasperReportsComponent</component-name>
+      <action-type>Jasper</action-type>
+      <action-inputs> 
+        <eastern_date_sk type="string"/>  
+        <output-type type="string" mapping="p_output"/>  
+        <jndi type="string" mapping="connection_name"/>
+      </action-inputs>
+      <action-resources> 
+        <report-definition type="resource"/> 
+      </action-resources>
+      <component-definition/> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

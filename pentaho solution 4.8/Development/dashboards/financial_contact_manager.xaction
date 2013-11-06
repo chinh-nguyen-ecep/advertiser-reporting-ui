@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Contact manager</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>ChinhNguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <actions type="string"> 
+      <sources> 
+        <request>actions</request> 
+      </sources>  
+      <default-value><![CDATA[template]]></default-value> 
+    </actions>  
+    <actionResult type="string"> 
+      <sources> 
+        <request>actionResult</request> 
+      </sources>  
+      <default-value><![CDATA[adasd]]></default-value> 
+    </actionResult>  
+    <jtSorting type="string"> 
+      <sources> 
+        <request>jtSorting</request> 
+      </sources>  
+      <default-value/> 
+    </jtSorting>  
+    <jtStartIndex type="string"> 
+      <sources> 
+        <request>jtStartIndex</request> 
+      </sources>  
+      <default-value/> 
+    </jtStartIndex>  
+    <jtPageSize type="string"> 
+      <sources> 
+        <request>jtPageSize</request> 
+      </sources>  
+      <default-value/> 
+    </jtPageSize>  
+    <connectionName type="string"> 
+      <sources> 
+        <request>connectionName</request> 
+      </sources>  
+      <default-value><![CDATA[pentaho.ecepvn.org.financial]]></default-value> 
+    </connectionName>  
+    <principalName type="string"> 
+      <sources> 
+        <security>principalName</security> 
+      </sources>  
+      <default-value/> 
+    </principalName>  
+    <account_id type="string"> 
+      <sources> 
+        <request>account_id</request> 
+      </sources>  
+      <default-value/> 
+    </account_id>  
+    <address_1 type="string"> 
+      <sources> 
+        <request>address_1</request> 
+      </sources>  
+      <default-value/> 
+    </address_1>  
+    <address_2 type="string"> 
+      <sources> 
+        <request>address_2</request> 
+      </sources>  
+      <default-value/> 
+    </address_2>  
+    <address_3 type="string"> 
+      <sources> 
+        <request>address_3</request> 
+      </sources>  
+      <default-value/> 
+    </address_3>  
+    <city type="string"> 
+      <sources> 
+        <request>city</request> 
+      </sources>  
+      <default-value/> 
+    </city>  
+    <state type="string"> 
+      <sources> 
+        <request>state</request> 
+      </sources>  
+      <default-value/> 
+    </state>  
+    <zip type="string"> 
+      <sources> 
+        <request>zip</request> 
+      </sources>  
+      <default-value/> 
+    </zip>  
+    <primary_email type="string"> 
+      <sources> 
+        <request>primary_email</request> 
+      </sources>  
+      <default-value/> 
+    </primary_email>  
+    <additional_emails type="string"> 
+      <sources> 
+        <request>additional_emails</request> 
+      </sources>  
+      <default-value/> 
+    </additional_emails>  
+    <phone_1 type="string"> 
+      <sources> 
+        <request>phone_1</request> 
+      </sources>  
+      <default-value/> 
+    </phone_1>  
+    <phone_2 type="string"> 
+      <sources> 
+        <request>phone_2</request> 
+      </sources>  
+      <default-value/> 
+    </phone_2>  
+    <contact_id type="string"> 
+      <sources> 
+        <request>contact_id</request> 
+      </sources>  
+      <default-value/> 
+    </contact_id> 
+  </inputs>
+
+  <outputs> 
+    <actionResult type="string"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </actionResult> 
+  </outputs>
+
+  <resources/>
+  
+  <actions> 
+    <actions> 
+      <condition><![CDATA[actions=='list']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>GetTotalCount</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <account_id type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result_count"/> 
+        </action-outputs>
+        <component-definition> 
+          <live><![CDATA[true]]></live>  
+          <query><![CDATA[SELECT COUNT(1)
+FROM accounting.ba_contact
+WHERE account_id={account_id}]]></query> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jtPageSize type="string"/>  
+          <jtStartIndex type="string"/>  
+          <jndi type="string" mapping="connectionName"/>  
+          <account_id type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result_content"/> 
+        </action-outputs>
+        <component-definition> 
+          <query><![CDATA[SELECT id as contact_id
+,address_1
+,address_2
+,address_3
+,city
+,state
+,zip
+,primary_email
+,additional_emails
+,phone_1
+,phone_2
+FROM accounting.ba_contact
+WHERE account_id={account_id}
+ORDER BY created_at
+LIMIT {jtPageSize}
+OFFSET {jtStartIndex}]]></query>  
+          <live><![CDATA[false]]></live> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>jSonEncode</action-type>
+        <action-inputs> 
+          <actionResult type="string"/>  
+          <query_result_count type="result-set"/>  
+          <query_result_content type="result-set"/> 
+        </action-inputs>
+        <action-outputs> 
+          <actionResult type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var result_set=query_result_content;
+var totalCount=query_result_count.getValueAt(0,0);
+var rowCount=query_result_content.getRowCount();
+var meta = result_set.getMetaData();      // Returns an IPentahoMetaData object
+var colCount = meta.getColumnCount();
+var colHeaders = meta.getColumnHeaders(); //getColumnHeaders() returns object[][]
+var rowHeaders = meta.getRowHeaders(); 
+
+
+actionResult='{"Result":"OK","TotalRecordCount":"'+totalCount+'","Records":[';
+//process data item
+for(var i=0;i<result_set.getRowCount();i++){
+	var item='';
+	if(i>0){
+		item+=',';
+	}
+	item+='{';
+		for(var j=0;j<result_set.getColumnCount();j++){ 		
+			var value=result_set.getValueAt(i,j);
+			var columnValue=colHeaders[0][j];
+			if(j>0){
+				item+=',';
+			}
+			item+='"'+j+'":"'+value+'","'+columnValue+'":"'+value+'"';
+		}
+	item+='}';	
+
+actionResult+=item;
+}
+//end
+
+actionResult+=']}';]]></script> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='create']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <account_id type="string"/>  
+          <address_1 type="string"/>  
+          <address_2 type="string"/>  
+          <address_3 type="string"/>  
+          <city type="string"/>  
+          <zip type="string"/>  
+          <primary_email type="string"/>  
+          <additional_emails type="string"/>  
+          <phone_1 type="string"/>  
+          <phone_2 type="string"/>  
+          <state type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result_add_new_contact"/> 
+        </action-outputs>
+        <component-definition> 
+          <query><![CDATA[SELECT * FROM accounting.fn_add_new_contact({account_id},'{address_1}','{address_2}','{address_3}','{city}','{state}','{zip}','{primary_email}','{additional_emails}','{phone_1}','{phone_2}');]]></query>  
+          <live><![CDATA[false]]></live> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>jSonEncode</action-type>
+        <action-inputs> 
+          <query_result_add_new_contact type="result-set"/>  
+          <actionResult type="string"/>  
+          <account_id type="string"/>  
+          <address_1 type="string"/>  
+          <address_2 type="string"/>  
+          <address_3 type="string"/>  
+          <city type="string"/>  
+          <state type="string"/>  
+          <zip type="string"/>  
+          <primary_email type="string"/>  
+          <additional_emails type="string"/>  
+          <phone_1 type="string"/>  
+          <phone_2 type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <actionResult type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var result=query_result_add_new_contact.getValueAt(0,0);
+if(result=='0'){
+	actionResult='{"Result":"ERROR","Message":"Server is busy!"}';
+}else{
+	actionResult='{"Result":"OK","Record":{"account_id":'+account_id+',"contact_id":'+result+',"address_1":"'+address_1+'","address_2":"'+address_2+'","address_3":"'+address_3+'","city":"'+city+'","state":"'+state+'","zip":"'+zip+'","primary_email":"'+primary_email+'","additional_emails":"'+additional_emails+'","phone_1":"'+phone_1+'","phone_2":"'+phone_2+'"}}';
+}]]></script> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='update']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <contact_id type="string"/>
+          <zip type="string"/>
+          <phone_2 type="string"/>
+          <address_3 type="string"/>
+          <phone_1 type="string"/>
+          <additional_emails type="string"/>
+          <primary_email type="string"/>
+          <state type="string"/>
+          <address_1 type="string"/>
+          <address_2 type="string"/>
+          <city type="string"/>
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result_update_contact"/> 
+        </action-outputs>
+        <component-definition> 
+          <live><![CDATA[true]]></live>  
+          <query><![CDATA[SELECT * FROM accounting.fn_update_contact({contact_id},'{address_1}','{address_2}','{address_3}','{city}','{state}','{zip}','{primary_email}','{additional_emails}','{phone_1}','{phone_2}')]]></query> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>jSonEncode</action-type>
+        <action-inputs> 
+          <actionResult type="string"/>  
+          <query_result_update_contact type="result-set"/> 
+        </action-inputs>
+        <action-outputs> 
+          <actionResult type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var result=query_result_update_contact.getValueAt(0,0);
+if(result=='ER'){
+	actionResult='{"Result":"ERROR","Message":"Update Failed!"}';
+}else{
+	actionResult='{"Result":"OK","Record":{"updated_at":"'+result+'"}}';
+}]]></script> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='delete']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <contact_id type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result_del_contact"/> 
+        </action-outputs>
+        <component-definition> 
+          <query><![CDATA[SELECT * FROM accounting.fn_del_contact({contact_id});]]></query>  
+          <live><![CDATA[false]]></live> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>jSonEncode</action-type>
+        <action-inputs> 
+          <actionResult type="string"/>  
+          <query_result_del_contact type="result-set"/> 
+        </action-inputs>
+        <action-outputs> 
+          <actionResult type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var result=query_result_del_contact.getValueAt(0,0);
+if(result=='SU'){
+	actionResult='{"Result":"OK"}'
+}else if(result=='ER'){
+	actionResult='{"Result":"ERROR","Message":"Can\'t delete contact!"}';
+}]]></script> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+ 
+  </actions> 
+</action-sequence>

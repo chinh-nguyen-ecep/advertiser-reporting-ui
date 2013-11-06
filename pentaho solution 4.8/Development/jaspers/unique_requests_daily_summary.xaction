@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Unique Requests Daily Summary</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author/>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <eastern_date_sk type="string"> 
+      <sources> 
+        <request>eastern_date_sk</request> 
+      </sources>  
+      <default-value><![CDATA[null]]></default-value> 
+    </eastern_date_sk>  
+    <output type="string"> 
+      <sources> 
+        <request>output</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </output> 
+  </inputs>
+
+  <outputs/>
+
+  <resources> 
+    <report-definition> 
+      <solution-file> 
+        <location>unique_requests_daily_summary/unique_requests_daily_summary.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition>  
+    <pageTemplate> 
+      <solution-file> 
+        <location>unique_requests_daily_summary/parameter_template.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </pageTemplate> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>get date list</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result"/>  
+        <eastern_date_sk type="integer"/>  
+        <full_date type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[dw3]]></jndi>  
+        <query><![CDATA[select distinct eastern_date_sk, full_date from adstraffic.daily_olap_trxids_by_portal where is_active = true order by eastern_date_sk desc]]></query>  
+        <live><![CDATA[true]]></live> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Prompt/Secure Filter</action-type>
+      <action-inputs> 
+        <eastern_date_sk type="string"/>  
+        <query_result type="result-set"/> 
+      </action-inputs>
+      <action-resources> 
+        <pageTemplate type="resource"/> 
+      </action-resources>
+      <component-definition> 
+        <selections> 
+          <eastern_date_sk style="select"> 
+            <filter value-col-name="eastern_date_sk" display-col-name="full_date">query_result</filter>  
+            <title>Date</title> 
+          </eastern_date_sk> 
+        </selections>  
+        <xsl><![CDATA[pageTemplate]]></xsl> 
+      </component-definition> 
+    </action-definition>
+  
+    <actions> 
+      <condition><![CDATA[output=='html']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <eastern_date_sk type="string"/> 
+        </action-inputs>
+        <component-definition> 
+          <output-type>html</output-type>  
+          <jndi><![CDATA[dw3]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[output=='pdf']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <eastern_date_sk type="string"/> 
+        </action-inputs>
+        <component-definition> 
+          <output-type><![CDATA[pdf]]></output-type>  
+          <jndi><![CDATA[dw3]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[output=='csv']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <eastern_date_sk type="string"/> 
+        </action-inputs>
+        <component-definition> 
+          <output-type><![CDATA[csv]]></output-type>  
+          <jndi><![CDATA[dw3]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[output=='xls']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <eastern_date_sk type="string"/> 
+        </action-inputs>
+        <component-definition> 
+          <output-type><![CDATA[xls]]></output-type>  
+          <jndi><![CDATA[dw3]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[output=='xml']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <eastern_date_sk type="string"/> 
+        </action-inputs>
+        <component-definition> 
+          <output-type><![CDATA[xml]]></output-type>  
+          <jndi><![CDATA[dw3]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+ 
+  </actions> 
+</action-sequence>

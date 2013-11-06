@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Daily process status</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>ChinhNguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <full_date type="string"> 
+      <sources> 
+        <request>full_date</request> 
+      </sources>  
+      <default-value><![CDATA[2012-02-10]]></default-value> 
+    </full_date>  
+    <p_server type="string"> 
+      <sources> 
+        <request>p_server</request> 
+      </sources>  
+      <default-value><![CDATA[analyticsDB]]></default-value> 
+    </p_server> 
+  </inputs>
+
+  <outputs> 
+    <jsonResult type="string"> 
+      <destinations> 
+        <response>Content</response> 
+      </destinations> 
+    </jsonResult> 
+  </outputs>
+
+  <resources/>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Relational Connection</action-type>
+      <action-inputs> 
+        <jndi type="string" mapping="p_server"/> 
+      </action-inputs>
+      <action-outputs> 
+        <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
+      </action-outputs>
+      <component-definition/> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>TemplateComponent</component-name>
+      <action-type>query</action-type>
+      <action-inputs> 
+        <full_date type="string"/>
+      </action-inputs>
+      <action-outputs> 
+        <output-message type="string" mapping="query"/> 
+      </action-outputs>
+      <component-definition> 
+        <template><![CDATA[SELECT a.process_id
+     , a.full_date
+     , a.group_process_name
+     , a.process_config_id
+     , b.process_config_description
+     , (CASE
+            WHEN c.dt_process_completed IS NOT NULL THEN 'Completed'
+            WHEN c.dt_process_queued IS NOT NULL THEN 'Processing'
+            ELSE 'Waiting' 
+        END) AS process_status
+     , a.register_time
+     , (c.dt_process_queued::time) AS start_date
+     , (c.dt_process_completed::time) AS end_date
+     , (CASE WHEN c.process_id IS NULL THEN 0 ELSE c.process_id END) AS process_id_checking
+     , a.e_star_time
+     , a.e_completion_time
+     , (CASE
+            WHEN c.dt_process_completed::time IS NOT NULL AND c.dt_process_completed::time > a.e_completion_time THEN 'Completed late!'
+            WHEN c.dt_process_queued::time IS NOT NULL AND c.dt_process_queued::time > a.e_star_time THEN 'Started late!' 
+            ELSE ''
+        END) as note_status
+FROM control.daily_process_status a
+LEFT JOIN control.process_configuration b ON a.process_config_id = b.process_config_id
+LEFT JOIN control.process c ON c.process_config_id = a.process_config_id AND c.dt_process_queued::date = a.full_date
+WHERE a.full_date = '{full_date}' ORDER BY a.group_process_name, a.process_id
+;]]></template>
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Relational</action-type>
+      <action-inputs> 
+        <query type="string"/>  
+        <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
+      </action-inputs>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result"/> 
+      </action-outputs>
+      <component-definition> 
+        <live><![CDATA[true]]></live> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>JavaScript</action-type>
+      <action-inputs> 
+        <query_result type="result-set"/> 
+      </action-inputs>
+      <action-outputs> 
+        <jsonResult type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var jsonResult;
+jsonResult='{"adata":[';
+for(var i=0;i<query_result.getRowCount();i++){
+	var process_config_id=query_result.getValueAt(i,3);
+	var group_process_name=query_result.getValueAt(i,2);
+	var process_description=query_result.getValueAt(i,4);
+	var process_status=query_result.getValueAt(i,5);
+	var start_date=query_result.getValueAt(i,7);
+	var end_date=query_result.getValueAt(i,8);
+	var process_id_checking=query_result.getValueAt(i,9);
+	var e_star_time=query_result.getValueAt(i,10);
+	var e_completion_time=query_result.getValueAt(i,11);
+	var note_status=query_result.getValueAt(i,12);
+	if(i>0){
+		jsonResult+=',';
+	};
+	jsonResult+='["'+process_config_id+'","'
+	+group_process_name+'","'
+	+process_description+'","'
+	+process_status+'","'
+	+start_date+'","'
+	+end_date+'","'
+	+process_id_checking+'","'
+	+e_star_time+'","'
+	+e_completion_time+'","'
+	+note_status
+	+'"]';
+}
+jsonResult+=']}';]]></script> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

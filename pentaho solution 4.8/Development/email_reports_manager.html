@@ -1,0 +1,55 @@
+<html xmlns:xf="http://www.w3.org/2002/xforms">
+   <head>
+	<!-- do not include a <meta> tag -->
+	<title>Email reports manager</title>
+      <link rel="stylesheet" type="text/css" href="/verve_style_v2/css/dashboard.css"></link>
+	  <script src="/verve_style_v2/scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+	  <script src="/verve_style_v2/scripts/verve-script-jquery.js" type="text/javascript"></script>
+      <script src="/verve_style_v2/scripts/jasperReportCommonScript.js" type="text/javascript"></script>
+   </head>
+   <body class="pentaho">
+	<div name="dialog-form" title="Control Panel" style="width: 460px;height: 520px;">	
+		<form></form>
+		<form name="parameter-form" id="parameter-form" method="GET">
+			 <table class="tableForm">
+			 <tbody>	         
+				 <tr>
+					 <th>Mode:</th>
+					 <td>
+					 {p_mode}
+					</td>
+				 </tr>  		 
+			 </tbody>
+			 </table>
+			<div id="hide_in_form" style="display:none">
+			{solution}
+			{action}
+			{path}
+			</div>  
+		</form>	
+	</div>    
+	<script> <![CDATA[		 
+			$(document).ready(function(){
+				initJasperPageTemplate({
+					controlPanle_width: 460,
+					controlPanle_height: 370,
+					generateFormContent: generateFormContent,
+					formValidation:formValidation
+				});
+			});
+			
+			var generateFormContent=function(){
+				
+			}
+			
+			var formValidation=function(){
+				
+				return true;
+			}
+			
+			
+	]]>
+	</script>
+   </body>
+
+</html>

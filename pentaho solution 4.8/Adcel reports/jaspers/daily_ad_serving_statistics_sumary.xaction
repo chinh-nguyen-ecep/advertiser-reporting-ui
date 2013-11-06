@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Daily AdCel Statistics Summary</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author/>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <eastern_date_sk type="string"> 
+      <sources> 
+        <request>eastern_date_sk</request> 
+      </sources>  
+      <default-value/> 
+    </eastern_date_sk>  
+    <p_output type="string"> 
+      <sources> 
+        <request>p_output</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </p_output>  
+    <p_mailTo type="string"> 
+      <sources> 
+        <request>p_mailTo</request> 
+      </sources>  
+      <default-value><![CDATA[duychinhnguyenvn@gmail.com]]></default-value> 
+    </p_mailTo>  
+    <p_emailMode type="string"> 
+      <sources> 
+        <request>p_emailMode</request> 
+      </sources>  
+      <default-value><![CDATA[false]]></default-value> 
+    </p_emailMode>  
+    <p_emailExportFileType type="string"> 
+      <sources> 
+        <request>p_emailExportFileType</request> 
+      </sources>  
+      <default-value><![CDATA[pdf]]></default-value> 
+    </p_emailExportFileType>  
+    <parameter_string type="string"> 
+      <sources> 
+        <request>parameter_string</request> 
+      </sources>  
+      <default-value/> 
+    </parameter_string>  
+    <p_mailTitle type="string"> 
+      <sources> 
+        <request>p_mailTitle</request> 
+      </sources>  
+      <default-value><![CDATA[Report email]]></default-value> 
+    </p_mailTitle>  
+    <p_mailTextMessage type="string"> 
+      <sources> 
+        <request>p_mailTextMessage</request> 
+      </sources>  
+      <default-value><![CDATA[This email was sent from Pentaho system by scheduler.]]></default-value> 
+    </p_mailTextMessage> 
+  </inputs>
+
+  <outputs/>
+
+  <resources> 
+    <report-definition> 
+      <solution-file> 
+        <location>daily_ad_serving_statistics_summary/daily_ad_serving_statistics_summary.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition>  
+    <pageTemplate> 
+      <solution-file> 
+        <location>daily_ad_serving_statistics_summary/parameter_template.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </pageTemplate> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>get date list</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result"/>  
+        <eastern_date_sk type="integer"/>  
+        <full_date type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <query><![CDATA[select distinct eastern_date_sk, full_date from adstraffic.daily_ad_serving_stats where is_active = true order by eastern_date_sk desc]]></query>  
+        <live><![CDATA[false]]></live>  
+        <jndi><![CDATA[verveReportConnection]]></jndi> 
+      </component-definition> 
+    </action-definition>
+  
+    <actions> 
+      <condition><![CDATA[p_emailMode == 'false']]></condition>  
+      <action-definition> 
+        <component-name>SecureFilterComponent</component-name>
+        <action-type>Prompt/Secure Filter</action-type>
+        <action-inputs> 
+          <eastern_date_sk type="string"/>  
+          <query_result type="result-set"/> 
+        </action-inputs>
+        <action-resources> 
+          <pageTemplate type="resource"/> 
+        </action-resources>
+        <component-definition> 
+          <selections> 
+            <eastern_date_sk style="select"> 
+              <filter value-col-name="eastern_date_sk" display-col-name="full_date">query_result</filter>  
+              <title>Date</title> 
+            </eastern_date_sk> 
+          </selections>  
+          <xsl><![CDATA[pageTemplate]]></xsl> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <eastern_date_sk type="string"/>  
+          <output-type type="string" mapping="p_output"/> 
+        </action-inputs>
+        <component-definition> 
+          <jndi><![CDATA[verveReportConnection]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_emailMode == 'true']]></condition>  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>Process report input</action-type>
+        <action-inputs> 
+          <p_emailExportFileType type="string"/>  
+          <query_result type="result-set"/>  
+          <eastern_date_sk type="string"/>  
+          <parameter_string type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <reportName type="string"/>  
+          <eastern_date_sk type="string"/>  
+          <reportNameCsv type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var reportName='';
+var full_date_report='';
+
+eastern_date_sk=query_result.getValueAt(0,0);
+full_date_report=query_result.getValueAt(0,1);
+
+reportName='Daily_ad_serving_statistics_summary.'+full_date_report+'.'+p_emailExportFileType;
+reportNameCsv='Daily_ad_serving_statistics_summary.'+full_date_report+'.csv';]]></script> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <eastern_date_sk type="string"/>  
+          <output-type type="string" mapping="p_emailExportFileType"/> 
+        </action-inputs>
+        <action-outputs> 
+          <report-output type="content" mapping="daily_ad_serving_statistics_summary"/> 
+        </action-outputs>
+        <component-definition> 
+          <jndi><![CDATA[verveReportConnection]]></jndi> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <eastern_date_sk type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <report-output type="content" mapping="report_ou_csv"/> 
+        </action-outputs>
+        <component-definition> 
+          <output-type><![CDATA[csv]]></output-type>  
+          <jndi><![CDATA[verveReportConnection]]></jndi> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>EmailComponent</component-name>
+        <action-type>E-Mail</action-type>
+        <action-inputs> 
+          <to type="string" mapping="p_mailTo"/>  
+          <daily_ad_serving_statistics_summary type="content"/>  
+          <attach_name_1 type="string" mapping="reportName"/>  
+          <subject type="string" mapping="p_mailTitle"/>  
+          <message-plain type="string" mapping="p_mailTextMessage"/>  
+          <report_ou_csv type="content"/>  
+          <attach_name_2 type="string" mapping="reportNameCsv"/> 
+        </action-inputs>
+        <component-definition> 
+          <from><![CDATA[testMail]]></from>  
+          <attachment-ref name-param="attach_name_1" input-param="daily_ad_serving_statistics_summary"/>  
+          <attachment-ref name-param="attach_name_2" input-param="report_ou_csv"/> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+ 
+  </actions> 
+</action-sequence>

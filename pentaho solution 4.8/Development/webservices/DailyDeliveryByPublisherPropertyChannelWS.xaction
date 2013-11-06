@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Daily Delivery by Publisher Property Channel WS</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author/>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <full_start_date type="string"> 
+      <sources> 
+        <request>full_start_date</request> 
+      </sources>  
+      <default-value><![CDATA[2013-05-01]]></default-value> 
+    </full_start_date>  
+    <full_end_date type="string"> 
+      <sources> 
+        <request>full_end_date</request> 
+      </sources>  
+      <default-value><![CDATA[2013-05-01]]></default-value> 
+    </full_end_date>  
+    <publisher_id_list type="string"> 
+      <sources> 
+        <request>publisher_id_list</request> 
+      </sources>  
+      <default-value><![CDATA[0]]></default-value> 
+    </publisher_id_list>  
+    <property_id_list type="string"> 
+      <sources> 
+        <request>property_id_list</request> 
+      </sources>  
+      <default-value><![CDATA[0]]></default-value> 
+    </property_id_list>  
+    <channel_id_list type="string"> 
+      <sources> 
+        <request>channel_id_list</request> 
+      </sources>  
+      <default-value><![CDATA[0]]></default-value> 
+    </channel_id_list>  
+    <limit type="string"> 
+      <sources> 
+        <request>limit</request> 
+      </sources>  
+      <default-value><![CDATA[100]]></default-value> 
+    </limit>  
+    <page type="string"> 
+      <sources> 
+        <request>page</request> 
+      </sources>  
+      <default-value><![CDATA[1]]></default-value> 
+    </page> 
+  </inputs>
+
+  <outputs> 
+    <jSonResult type="string"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </jSonResult> 
+  </outputs>
+
+  <resources/>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Prompt/Secure Filter</action-type>
+      <action-inputs> 
+        <full_start_date type="string"/>  
+        <full_end_date type="string"/>  
+        <publisher_id_list type="string"/>  
+        <property_id_list type="string"/>  
+        <channel_id_list type="string"/> 
+      </action-inputs>
+      <component-definition> 
+        <selections> 
+          <full_start_date filter="none"/>  
+          <full_end_date filter="none"/>  
+          <publisher_id_list filter="none" optional="true"/>  
+          <property_id_list filter="none" optional="true"/>  
+          <channel_id_list filter="none" optional="true"/> 
+        </selections> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>Calculate OffSet value</action-type>
+      <action-inputs> 
+        <limit type="string"/>  
+        <page type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <offset type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var offset=0;
+offset=(page-1)*limit;]]></script> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Relational</action-type>
+      <action-inputs> 
+        <property_id_list type="string"/>  
+        <publisher_id_list type="string"/>  
+        <full_end_date type="string"/>  
+        <full_start_date type="string"/>  
+        <channel_id_list type="string"/>  
+        <limit type="string"/>  
+        <offset type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[verveReportConnection]]></jndi>  
+        <live><![CDATA[false]]></live>  
+        <query><![CDATA[SELECT a.full_date,a.publisher_id,a.publisher_name,a.property_id,a.property_name,a.channel_id,a.channel_name,
+	SUM(a.adcel_requests) AS adcel_requests,
+SUM(a.bannerclick_events) as bannerclick_events,
+	SUM(a.fullfilled_code_count) as adcel_response,
+       SUM(a.fullfilled_code_n) as no_response,
+       SUM(a.fullfilled_code_y) as yes_response,
+       SUM(a.fullfilled_code_t) as timeout_response,
+       SUM(a.fullfilled_code_e) as error_response,
+       (CASE WHEN SUM(a.adcel_requests)>0 THEN SUM(a.fullfilled_code_y)::float/SUM(a.adcel_requests) ELSE 0 END) as response_percentage,       
+       SUM(a.fullfilled_code_y)-SUM(a.verve_impressions) as undisplayed_impressions,
+       SUM(a.verve_impressions) as verve_impressions,
+       SUM(a.reported_impressions) as reported_impressions,
+       (CASE WHEN SUM(a.adcel_requests)>0 THEN SUM(a.verve_impressions)::float/SUM(a.adcel_requests) ELSE 0 END) as pub_fill_percentage,
+       (CASE WHEN SUM(a.fullfilled_code_y)>0 THEN SUM(a.undisplayed_impressions)::float/SUM(a.fullfilled_code_y) ELSE 0 END) as undisplayed_percentage,
+       (CASE WHEN SUM(a.verve_impressions)>0 THEN SUM(a.reported_impressions)::float/SUM(a.verve_impressions) ELSE 0 END) as impressions_discrepancy_percentage,
+       SUM(a.clicks) as clicks,
+       (CASE WHEN SUM(a.verve_impressions)> 0 THEN SUM(a.clicks)::float/SUM(a.verve_impressions) ELSE 0 END) as ctr,
+       (CASE WHEN SUM(a.verve_impressions)>0 THEN SUM(a.total_revenue)::float*1000/SUM(a.verve_impressions) ELSE 0 END) as cpm,
+       SUM(a.unreported_revenue) as unreported_revenuem,
+       SUM(a.reported_revenue) as reported_revenue,
+       SUM(a.total_revenue) as total_revenue,
+       SUM(a.verve_revenue) as verve_revenue,
+       (CASE WHEN SUM(a.verve_impressions)>0 THEN SUM(a.verve_revenue)::float*1000/SUM(a.verve_impressions) ELSE 0 END) as verve_rpm,
+       SUM(a.pub_revenue) as pub_revenue,
+       (CASE WHEN SUM(a.verve_impressions)>0 THEN SUM(a.pub_revenue)::float*1000/SUM(a.verve_impressions) ELSE 0 END) as pub_rpm,
+       SUM(b.total_requests)::bigint as api_total_requests
+	,SUM(b.total_filled_requests)::bigint as api_total_filled_requests
+	,SUM(b.total_revenue) as api_total_revenue
+	,SUM(b.total_net_revenue) as api_total_net_revenue
+	, CASE WHEN SUM(b.total_filled_requests) > 0 THEN SUM(b.total_revenue)*1000/SUM(b.total_filled_requests) ELSE 0 END AS api_total_ecpm
+	, CASE WHEN SUM(b.total_filled_requests) > 0 THEN SUM(b.total_net_revenue)*1000/SUM(b.total_filled_requests) ELSE 0 END AS api_total_net_ecpm
+	,SUM(b.local_impressions)::bigint as api_local_impressions
+	,SUM(b.local_revenue) as api_local_revenue
+	,SUM(b.local_net_revenue) as api_local_net_revenue
+	--API
+	, CASE WHEN SUM(b.local_impressions) > 0 THEN SUM(b.local_revenue)*1000/SUM(b.local_impressions) ELSE 0 END AS api_local_ecpm
+	, CASE WHEN SUM(b.local_impressions) > 0 THEN SUM(b.local_net_revenue)*1000/SUM(b.local_impressions) ELSE 0 END AS api_local_net_ecpm
+	, CASE WHEN SUM(b.local_revenue) > 0 THEN SUM(b.local_net_revenue)/SUM(b.local_revenue) ELSE 0 END AS api_local_rev_share
+	,SUM(b.vlm_impressions)::bigint as api_vlm_impressions
+	,SUM(b.vlm_revenue) as api_vlm_revenue
+	,SUM(b.vlm_net_revenue) as api_vlm_net_revenue
+	, CASE WHEN SUM(b.vlm_impressions) > 0 THEN SUM(b.vlm_revenue)*1000/SUM(b.vlm_impressions) ELSE 0 END AS api_vlm_ecpm
+	, CASE WHEN SUM(b.vlm_impressions) > 0 THEN SUM(b.vlm_net_revenue)*1000/SUM(b.vlm_impressions) ELSE 0 END AS api_vlm_net_ecpm
+	, CASE WHEN SUM(b.vlm_revenue) > 0 THEN SUM(b.vlm_net_revenue)/SUM(b.vlm_revenue) ELSE 0 END AS api_vlm_rev_share
+	,SUM(b.national_impressions)::bigint as api_national_impressions
+	,SUM(b.national_revenue) as api_national_revenue
+	,SUM(b.national_net_revenue) as api_national_net_revenue
+	, CASE WHEN SUM(b.national_impressions) > 0 THEN SUM(b.national_revenue)*1000/SUM(b.national_impressions) ELSE 0 END AS api_national_ecpm
+	, CASE WHEN SUM(b.national_impressions) > 0 THEN SUM(b.national_net_revenue)*1000/SUM(b.national_impressions) ELSE 0 END AS api_national_net_ecpm
+	, CASE WHEN SUM(b.national_revenue) > 0 THEN SUM(b.national_net_revenue)/SUM(b.national_revenue) ELSE 0 END AS api_national_rev_share
+	,SUM(b.remnant_impressions)::bigint as api_remnant_impressions
+	,SUM(b.remnant_revenue) as api_remnant_revenue
+	,SUM(b.remnant_net_revenue) as api_remnant_net_revenue
+	, CASE WHEN SUM(b.remnant_impressions) > 0 THEN SUM(b.remnant_revenue)*1000/SUM(b.remnant_impressions) ELSE 0 END AS api_remnant_ecpm
+	, CASE WHEN SUM(b.remnant_impressions) > 0 THEN SUM(b.remnant_net_revenue)*1000/SUM(b.remnant_impressions) ELSE 0 END AS api_remnant_net_ecpm
+	, CASE WHEN SUM(b.remnant_revenue) > 0 THEN SUM(b.remnant_net_revenue)/SUM(b.remnant_revenue) ELSE 0 END AS api_remnant_rev_share
+	, CASE WHEN SUM(b.total_requests) > 0 THEN SUM(b.local_impressions)::float/SUM(b.total_requests) ELSE 0 END AS api_local_fill_rate
+	, CASE WHEN SUM(b.total_requests) > 0 THEN SUM(b.total_filled_requests)::float/SUM(b.total_requests) ELSE 0 END AS api_total_fill_rate
+	--GEO
+	, CASE WHEN SUM(filled_count) > 0 THEN SUM(location_quality_0)::float/SUM(filled_count) ELSE 0 END AS location_quality_0
+	, CASE WHEN SUM(filled_count) > 0 THEN SUM(location_quality_1_48)::float/SUM(filled_count) ELSE 0 END AS location_quality_1_48
+	, CASE WHEN SUM(filled_count) > 0 THEN SUM(location_quality_49_50)::float/SUM(filled_count) ELSE 0 END AS location_quality_49_50
+	, CASE WHEN SUM(filled_count) > 0 THEN SUM(location_quality_51_100)::float/SUM(filled_count) ELSE 0 END AS location_quality_51_100
+	, CASE WHEN SUM(filled_count) > 0 THEN SUM(country_us)::float/SUM(filled_count) ELSE 0 END AS geo_us
+	, CASE WHEN SUM(filled_count) > 0 THEN SUM(country_international)::float/SUM(filled_count) ELSE 0 END AS geo_international
+FROM adsops.daily_agg_delivery_publisher_property_beta a
+LEFT JOIN (
+	SELECT
+		 eastern_date_sk
+		 , partner_id
+		 , channel_id
+		 , SUM(COALESCE(total_requests,0)) AS total_requests
+		 , SUM(COALESCE(local_impressions,0)) + SUM(COALESCE(vlm_impressions,0)) + SUM(COALESCE(national_impressions,0)) + SUM(COALESCE(remnant_impressions,0)) AS total_filled_requests
+		 , SUM(COALESCE(local_revenue,0)) + SUM(COALESCE(vlm_revenue,0)) + SUM(COALESCE(national_revenue,0)) + SUM(COALESCE(remnant_revenue,0)) AS total_revenue
+		 , SUM(COALESCE(local_net_revenue,0)) + SUM(COALESCE(vlm_net_revenue,0)) + SUM(COALESCE(national_net_revenue,0)) + SUM(COALESCE(remnant_net_revenue,0)) AS total_net_revenue
+		 , SUM(COALESCE(local_impressions,0)) AS local_impressions
+		 , SUM(COALESCE(local_revenue,0)) AS local_revenue
+		 , SUM(COALESCE(local_net_revenue,0)) AS local_net_revenue
+		 , SUM(COALESCE(vlm_impressions,0)) AS vlm_impressions
+		 , SUM(COALESCE(vlm_revenue,0)) AS vlm_revenue
+		 , SUM(COALESCE(vlm_net_revenue,0)) AS vlm_net_revenue
+		 , SUM(COALESCE(national_impressions,0)) AS national_impressions
+		 , SUM(COALESCE(national_revenue,0)) AS national_revenue
+		 , SUM(COALESCE(national_net_revenue,0)) AS national_net_revenue
+		 , SUM(COALESCE(remnant_impressions,0)) AS remnant_impressions
+		 , SUM(COALESCE(remnant_revenue,0)) AS remnant_revenue
+		 , SUM(COALESCE(remnant_net_revenue,0)) AS remnant_net_revenue
+	FROM adm.daily_agg_api_revenue_by_partner a
+	WHERE a.is_active = true
+	GROUP BY
+		 eastern_date_sk
+		 , partner_id
+		 , channel_id
+	) b ON a.partner_id=b.partner_id AND a.channel_id=b.channel_id AND a.eastern_date_sk=b.eastern_date_sk
+	LEFT JOIN(
+		SELECT
+			eastern_date_sk
+			, partner_id
+			, b.channel_id
+			, SUM(trxids_count) as trxids_count
+			, SUM(filled_count)::float as filled_count
+			, SUM(location_quality_0)::float as location_quality_0
+			, SUM(location_quality_1_48)::float as location_quality_1_48
+			, SUM(location_quality_49_50)::float as location_quality_49_50
+			, SUM(location_quality_51_100)::float as location_quality_51_100
+			, SUM(country_us)::float as country_us
+			, SUM(country_international)::float as country_international
+		FROM adstraffic.daily_geo_quality a
+		LEFT JOIN refer.adm_mapping_portals b ON b.dt_expire='9999-12-31' AND b.portal_id=a.portal_id
+		WHERE is_active=true
+		GROUP BY
+			eastern_date_sk
+			, partner_id
+			, b.channel_id
+	) c ON c.eastern_date_sk = a.eastern_date_sk AND c.partner_id=a.partner_id AND c.channel_id=a.channel_id
+INNER JOIN refer.date_dim d ON d.date_sk=a.eastern_date_sk AND d.full_date BETWEEN '{full_start_date}'::date AND '{full_end_date}'::date
+WHERE a.is_active=true
+AND (a.publisher_id IN (select unnest(string_to_array('{publisher_id_list}', ';'))::int) OR '0'='{publisher_id_list}')
+AND (a.property_id IN (select unnest(string_to_array('{property_id_list}', ';'))::int) OR '0'='{property_id_list}')
+AND (a.channel_id IN (select unnest(string_to_array('{channel_id_list}', ';'))::int) OR '0'='{channel_id_list}')
+GROUP BY a.full_date,a.publisher_id,a.publisher_name,a.property_id,a.property_name,a.channel_id,a.channel_name,a.total_yes_responses_today,a.total_revenue_today
+ORDER BY a.full_date,undisplayed_impressions desc, ctr desc
+LIMIT {limit} OFFSET {offset}]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>Convert Result Set to Json</action-type>
+      <action-inputs> 
+        <query_result type="result-set"/>  
+        <limit type="string"/>  
+        <page type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <jSonResult type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var jSonResult='';
+var data='';
+var result_set=query_result;
+var rowCount=result_set.getRowCount();
+var meta = result_set.getMetaData();      // Returns an IPentahoMetaData object
+var colCount = meta.getColumnCount();
+var colHeaders = meta.getColumnHeaders(); //getColumnHeaders() returns object[][]
+var rowHeaders = meta.getRowHeaders(); 
+
+data='{';
+//page nummber
+data+='"page":"'+page+'"';
+//process end page. Boolean 
+
+if(rowCount<limit){
+	data+='"endPage":true';
+}else{
+	data+=',"endPage":false';
+}
+//end
+
+//process column name
+data+=',"columns":[';
+for ( var i = 0 ; i < colCount ; i++ ){
+	if(i>0){data+=',';}
+	data+='"'+colHeaders[0][i]+'"';
+}
+data+=']';
+//end
+
+//process data item
+data+=',"data":[';
+for(var i=0;i<result_set.getRowCount();i++){
+	if(i>0){data+=','}
+	data+='[';
+	for(var j=0;j<result_set.getColumnCount();j++){ 
+		if(j>0){data+=','}
+		data+='"'+result_set.getValueAt(i,j)+'"';
+	}
+	data+=']';
+}
+data+=']';
+//end
+data+='}';
+jSonResult=data;]]></script> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

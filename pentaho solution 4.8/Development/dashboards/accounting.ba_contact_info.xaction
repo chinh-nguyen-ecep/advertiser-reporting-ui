@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Accounting ba Contact Info</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>ChinhNguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type>none</result-type>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <actions type="string"> 
+      <sources> 
+        <request>actions</request> 
+      </sources>  
+      <default-value><![CDATA[template]]></default-value> 
+    </actions>  
+    <actionResult type="string"> 
+      <sources> 
+        <request>actionResult</request> 
+      </sources>  
+      <default-value><![CDATA[adasd]]></default-value> 
+    </actionResult>  
+    <jtSorting type="string"> 
+      <sources> 
+        <request>jtSorting</request> 
+      </sources>  
+      <default-value/> 
+    </jtSorting>  
+    <jtStartIndex type="string"> 
+      <sources> 
+        <request>jtStartIndex</request> 
+      </sources>  
+      <default-value/> 
+    </jtStartIndex>  
+    <jtPageSize type="string"> 
+      <sources> 
+        <request>jtPageSize</request> 
+      </sources>  
+      <default-value/> 
+    </jtPageSize>  
+    <connectionName type="string"> 
+      <sources> 
+        <request>connectionName</request> 
+      </sources>  
+      <default-value><![CDATA[dw7financial]]></default-value> 
+    </connectionName>  
+    <principalName type="string"> 
+      <sources> 
+        <security>principalName</security> 
+      </sources>  
+      <default-value/> 
+    </principalName>  
+    <publisher_name_filter_value type="string"> 
+      <sources> 
+        <request>publisher_name_filter_value</request> 
+      </sources>  
+      <default-value/> 
+    </publisher_name_filter_value>  
+    <ba_contact_info_key type="string"> 
+      <sources> 
+        <request>ba_contact_info_key</request> 
+      </sources>  
+      <default-value/> 
+    </ba_contact_info_key>  
+    <address_1 type="string"> 
+      <sources> 
+        <request>address_1</request> 
+      </sources>  
+      <default-value/> 
+    </address_1>  
+    <address_2 type="string"> 
+      <sources> 
+        <request>address_2</request> 
+      </sources>  
+      <default-value/> 
+    </address_2>  
+    <address_3 type="string"> 
+      <sources> 
+        <request>address_3</request> 
+      </sources>  
+      <default-value/> 
+    </address_3>  
+    <city type="string"> 
+      <sources> 
+        <request>city</request> 
+      </sources>  
+      <default-value/> 
+    </city>  
+    <state type="string"> 
+      <sources> 
+        <request>state</request> 
+      </sources>  
+      <default-value/> 
+    </state>  
+    <zip type="string"> 
+      <sources> 
+        <request>zip</request> 
+      </sources>  
+      <default-value/> 
+    </zip>  
+    <email_1 type="string"> 
+      <sources> 
+        <request>email_1</request> 
+      </sources>  
+      <default-value/> 
+    </email_1>  
+    <email_2 type="string"> 
+      <sources> 
+        <request>email_2</request> 
+      </sources>  
+      <default-value/> 
+    </email_2>  
+    <email_3 type="string"> 
+      <sources> 
+        <request>email_3</request> 
+      </sources>  
+      <default-value/> 
+    </email_3>  
+    <email_4 type="string"> 
+      <sources> 
+        <request>email_4</request> 
+      </sources>  
+      <default-value/> 
+    </email_4>  
+    <email_5 type="string"> 
+      <sources> 
+        <request>email_5</request> 
+      </sources>  
+      <default-value/> 
+    </email_5>  
+    <email_6 type="string"> 
+      <sources> 
+        <request>email_6</request> 
+      </sources>  
+      <default-value/> 
+    </email_6>  
+    <email_7 type="string"> 
+      <sources> 
+        <request>email_7</request> 
+      </sources>  
+      <default-value/> 
+    </email_7>  
+    <email_8 type="string"> 
+      <sources> 
+        <request>email_8</request> 
+      </sources>  
+      <default-value/> 
+    </email_8> 
+  </inputs>
+
+  <outputs> 
+    <actionResult type="string"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </actionResult> 
+  </outputs>
+
+  <resources/>
+  
+  <actions> 
+    <actions> 
+      <condition><![CDATA[actions=='list']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>GetTotalCount</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <publisher_name_filter_value type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result_count"/> 
+        </action-outputs>
+        <component-definition> 
+          <live><![CDATA[true]]></live>  
+          <query><![CDATA[SELECT COUNT(ba_contact_info_key)
+FROM accounting.ba_contact_info
+WHERE dt_expire='9999-12-31'
+AND (upper(publisher_name) LIKE upper('%{publisher_name_filter_value}%') OR ''='{publisher_name_filter_value}')]]></query> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <jtSorting type="string"/>  
+          <jtPageSize type="string"/>  
+          <publisher_name_filter_value type="string"/>  
+          <jtStartIndex type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result_content"/> 
+        </action-outputs>
+        <component-definition> 
+          <live><![CDATA[true]]></live>  
+          <query><![CDATA[SELECT ba_contact_info_key,publisher_id,publisher_name,
+CASE WHEN ba_publisher_name IS NULL THEN '' ELSE ba_publisher_name END as ba_publisher_name,
+CASE WHEN address_1 IS NULL THEN '' ELSE address_1 END as address_1,
+CASE WHEN address_2 IS NULL THEN '' ELSE address_2 END as address_2,
+CASE WHEN address_3 IS NULL THEN '' ELSE address_3 END as address_3,
+CASE WHEN city IS NULL THEN '' ELSE city END as city,
+CASE WHEN state IS NULL THEN '' ELSE state END as state,
+CASE WHEN zip IS NULL THEN '' ELSE zip END as zip,
+CASE WHEN email_1 IS NULL THEN '' ELSE email_1 END as email_1,
+CASE WHEN email_2 IS NULL THEN '' ELSE email_2 END as email_2
+FROM accounting.ba_contact_info
+WHERE dt_expire='9999-12-31'
+AND (upper(publisher_name) LIKE upper('%{publisher_name_filter_value}%') OR ''='{publisher_name_filter_value}')
+ORDER BY {jtSorting}
+LIMIT {jtPageSize}
+OFFSET {jtStartIndex}]]></query> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>jSonEncode</action-type>
+        <action-inputs> 
+          <actionResult type="string"/>  
+          <query_result_count type="result-set"/>  
+          <query_result_content type="result-set"/> 
+        </action-inputs>
+        <action-outputs> 
+          <actionResult type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var result_set=query_result_content;
+var totalCount=query_result_count.getValueAt(0,0);
+var rowCount=query_result_content.getRowCount();
+var meta = result_set.getMetaData();      // Returns an IPentahoMetaData object
+var colCount = meta.getColumnCount();
+var colHeaders = meta.getColumnHeaders(); //getColumnHeaders() returns object[][]
+var rowHeaders = meta.getRowHeaders(); 
+
+
+actionResult='{"Result":"OK","TotalRecordCount":"'+totalCount+'","Records":[';
+//process data item
+for(var i=0;i<result_set.getRowCount();i++){
+	var item='';
+	if(i>0){
+		item+=',';
+	}
+	item+='{';
+		for(var j=0;j<result_set.getColumnCount();j++){ 		
+			var value=result_set.getValueAt(i,j);
+			var columnValue=colHeaders[0][j];
+			if(j>0){
+				item+=',';
+			}
+			item+='"'+j+'":"'+value+'","'+columnValue+'":"'+value+'"';
+		}
+	item+='}';	
+
+actionResult+=item;
+}
+//end
+
+actionResult+=']}';]]></script> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='create']]></condition> 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='update']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <address_1 type="string"/>  
+          <address_2 type="string"/>  
+          <city type="string"/>  
+          <state type="string"/>  
+          <zip type="string"/>  
+          <email_1 type="string"/>  
+          <email_2 type="string"/>  
+          <address_3 type="string"/>  
+          <ba_contact_info_key type="string"/>  
+          <principalName type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result_update"/> 
+        </action-outputs>
+        <component-definition> 
+          <query><![CDATA[SELECT * FROM accounting.fn_update_ba_contact_info_dim({ba_contact_info_key},'{address_1}','{address_2}','{address_3}','{city}','{state}','{zip}','{email_1}','{email_2}','{principalName}');]]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>jSonEncode</action-type>
+        <action-inputs> 
+          <actionResult type="string"/>  
+          <query_result_update type="result-set"/>  
+          <ba_contact_info_key type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <actionResult type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var result=query_result_update.getValueAt(0,0);
+if(result=='-100'){
+	actionResult='{"Result":"FAILE","keyValueOfRecord":"'+ba_contact_info_key+'"}';
+}else{
+	actionResult='{"Result":"OK","keyValueOfRecord":"'+result+'"}';
+}]]></script> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='delete']]></condition>  
+      <action-definition> 
+        <component-name>SQLExecute</component-name>
+        <action-type>SQL Commands</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <principalName type="string"/>  
+          <ba_contact_info_key type="string"/> 
+        </action-inputs>
+        <component-definition> 
+          <query><![CDATA[UPDATE refer.ba_adjustment_factor_dim 
+SET dt_expire=now()::timestamp without time zone,
+update_by='{principalName}'
+WHERE ba_contact_info_key={ba_contact_info_key} AND dt_expire='9999-12-31']]></query>  
+          <force_single_statement><![CDATA[true]]></force_single_statement> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>jSonEncode</action-type>
+        <action-inputs> 
+          <actionResult type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <actionResult type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[actionResult='{"Result":"OK"}';]]></script> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+ 
+  </actions> 
+</action-sequence>

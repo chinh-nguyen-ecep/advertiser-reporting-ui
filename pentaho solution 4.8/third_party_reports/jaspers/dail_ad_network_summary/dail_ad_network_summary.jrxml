@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="monthly_ad_serving_statistics_summary" pageWidth="1175" pageHeight="842" orientation="Landscape" columnWidth="1135" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="eastern_date_sk" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("1")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="parameter1" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/opt/pentaho/biserver-ce/pentaho-solutions/third_party_reports/jaspers/daily_performance_report/"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+	full_date,
+	(max (a.dt_lastchange)::timestamp with time zone AT TIME ZONE 'America/Los_Angeles')::timestamp with time zone AT TIME ZONE 'America/New_York'as dt_lastchange,
+	sum(requests)::bigint as requests,
+	sum(paid_impressions)::bigint as paid_impressions,
+	sum(clicks)::bigint as clicks,
+	sum(net_revenue) as net_revenue,
+	sum(fullfilled_code_count)::bigint as total_adcel_total,
+	sum(fullfilled_code_y)::bigint as total_adcel_yes
+FROM (
+/* AdSense DBCLK Channel */
+SELECT      eastern_date_sk, full_date,
+            0 as requests,
+            COALESCE(SUM(case impressions_delivered when -1 then null else impressions_delivered end),0) as paid_impressions,
+            COALESCE(SUM(case clicks_recorded when -1 then null else clicks_recorded end),0) as clicks,
+            COALESCE(SUM(case estimated_earnings when -1 then null else estimated_earnings end),0) as net_revenue,
+            0 as fullfilled_code_count,
+            0 as fullfilled_code_y,
+			max(dt_lastchange) as dt_lastchange
+FROM        adnetwork.daily_adsense_dbclk_channel
+WHERE       is_active = true AND eastern_date_sk = $P{eastern_date_sk}::int
+GROUP BY    eastern_date_sk, full_date
+UNION
+/* City Grid */
+SELECT      eastern_date_sk, full_date,
+            COALESCE(SUM(case requests when -1 then null else requests end),0) as requests,
+            COALESCE(SUM(case paid_impressions when -1 then null else paid_impressions end),0) as paid_impressions,
+            COALESCE(SUM(case clicks when -1 then null else clicks end),0) as clicks,
+            COALESCE(SUM(case estimated_net_earnings when -1 then null else estimated_net_earnings end),0) as net_revenue,
+            COALESCE(SUM(case fullfilled_code_count when -1 then null else fullfilled_code_count end),0) as fullfilled_code_count,
+            COALESCE(SUM(case fullfilled_code_y when -1 then null else fullfilled_code_y end),0) as fullfilled_code_y,
+			max(dt_lastchange) as dt_lastchange
+FROM        adnetwork.daily_cg_performance
+WHERE       is_active = true AND eastern_date_sk = $P{eastern_date_sk}::int
+GROUP BY    eastern_date_sk, full_date
+UNION
+/* City Grid Mobile */
+SELECT      eastern_date_sk, full_date,
+            COALESCE(SUM(case requests when -1 then null else requests end),0) as requests,
+            COALESCE(SUM(case paid_impressions when -1 then null else paid_impressions end),0) as paid_impressions,
+            COALESCE(SUM(case clicks when -1 then null else clicks end),0) as clicks,
+            COALESCE(SUM(case estimated_net_earnings when -1 then null else estimated_net_earnings end),0) as net_revenue,
+            COALESCE(SUM(case fullfilled_code_count when -1 then null else fullfilled_code_count end),0) as fullfilled_code_count,
+            COALESCE(SUM(case fullfilled_code_y when -1 then null else fullfilled_code_y end),0) as fullfilled_code_y,
+			max(dt_lastchange) as dt_lastchange
+FROM        adnetwork.daily_cg_mobile_performance
+WHERE       is_active = true AND eastern_date_sk = $P{eastern_date_sk}::int
+GROUP BY    eastern_date_sk, full_date
+UNION
+/* iTunes */
+SELECT      eastern_date_sk, full_date,
+            COALESCE(SUM(case requests when -1 then null else requests end),0) as requests,
+            COALESCE(SUM(case impressions when -1 then null else impressions end),0) as paid_impressions,
+            COALESCE(SUM(case clicks when -1 then null else clicks end),0) as clicks,
+            COALESCE(SUM(case revenue when -1 then null else revenue end),0) as net_revenue,
+            0,
+            0,
+			max(dt_lastchange) as dt_lastchange
+FROM        adnetwork.daily_it_performance
+WHERE       is_active = true AND eastern_date_sk = $P{eastern_date_sk}::int
+GROUP BY    eastern_date_sk, full_date
+UNION
+/* JumpTap */
+SELECT      eastern_date_sk, full_date,
+            COALESCE(SUM(case requests when -1 then null else requests end),0) as requests,
+            COALESCE(SUM(case paid_impressions when -1 then null else paid_impressions end),0) as paid_impressions,
+            COALESCE(SUM(case clicks when -1 then null else clicks end),-1) as clicks,
+            ROUND(COALESCE(SUM(case net_revenue when -1 then null else net_revenue end),0)::NUMERIC,3) as net_revenue,
+            COALESCE(SUM(case fullfilled_code_count when -1 then null else fullfilled_code_count end),0) as fullfilled_code_count,
+            COALESCE(SUM(case fullfilled_code_y when -1 then null else fullfilled_code_y end),0) as fullfilled_code_y,
+			max(dt_lastchange) as dt_lastchange
+FROM        adnetwork.daily_jt_performance
+WHERE       is_active = true AND eastern_date_sk = $P{eastern_date_sk}::int
+GROUP BY    eastern_date_sk, full_date
+UNION
+/* Millennial Media */
+SELECT      eastern_date_sk, full_date,
+            COALESCE(SUM(case requests when -1 then null else requests end),0) as requests,
+            COALESCE(SUM(case ads_served when -1 then null else ads_served end),0) as paid_impressions,
+            COALESCE(SUM(case clicks when -1 then null else clicks end),0) as clicks,
+            ROUND(COALESCE(SUM(case net_revenue when -1 then null else net_revenue end),0)::NUMERIC,3) as net_revenue,
+            COALESCE(SUM(case fullfilled_code_count when -1 then null else fullfilled_code_count end),0) as fullfilled_code_count,
+            COALESCE(SUM(case fullfilled_code_y when -1 then null else fullfilled_code_y end),0) as fullfilled_code_y,
+			max(dt_lastchange) as dt_lastchange
+FROM        adnetwork.daily_mm_performance
+WHERE       is_active = true
+AND ((is_estimated=1)OR(is_estimated=0 AND requests>0))
+AND eastern_date_sk = $P{eastern_date_sk}::int
+GROUP BY    eastern_date_sk, full_date
+UNION
+/* Marchex */
+SELECT      eastern_date_sk, full_date,
+            COALESCE(SUM(case total_ad_requests when -1 then null else total_ad_requests end),0) as requests,
+            COALESCE(SUM(case paid_impressions when -1 then null else paid_impressions end),0) as paid_impressions,
+            COALESCE(SUM(case clicks when -1 then null else clicks end),0) as clicks,
+            ROUND(COALESCE(SUM(case "cost" when -1 then null else "cost" end),0)::NUMERIC,3) as net_revenue,
+            COALESCE(SUM(case fullfilled_code_count when -1 then null else fullfilled_code_count end),0) as fullfilled_code_count,
+            COALESCE(SUM(case fullfilled_code_y when -1 then null else fullfilled_code_y end),0) as fullfilled_code_y,
+			max(dt_lastchange) as dt_lastchange
+FROM        adnetwork.daily_mx_performance
+WHERE       is_active = true AND eastern_date_sk = $P{eastern_date_sk}::int
+GROUP BY    eastern_date_sk, full_date
+UNION
+/* Superpages Blue */
+SELECT      eastern_date_sk, full_date,
+            0,
+            0,
+            0,
+            ROUND(COALESCE(SUM(case revenue when -1 then null else revenue end),0)::NUMERIC,3) as net_revenue,
+            COALESCE(SUM(case fullfilled_code_count when -1 then null else fullfilled_code_count end),0) as fullfilled_code_count,
+            COALESCE(SUM(case fullfilled_code_y when -1 then null else fullfilled_code_y end),0) as fullfilled_code_y,
+			max(dt_lastchange) as dt_lastchange
+FROM        adnetwork.daily_sp_blue_performance
+WHERE       is_active = true AND eastern_date_sk = $P{eastern_date_sk}::int
+GROUP BY    eastern_date_sk, full_date
+UNION
+/* WHERE */
+SELECT      eastern_date_sk, full_date,
+            COALESCE(SUM(case requests when -1 then null else requests end),0) as requests,
+            COALESCE(SUM(case filled when -1 then null else filled end),0) as paid_impressions,
+            COALESCE(SUM(case clicked when -1 then null else clicked end),0) as clicked,
+            ROUND(COALESCE(SUM(case revenue when -1 then null else revenue end),0)::NUMERIC,3) as net_revenue,
+            COALESCE(SUM(case fullfilled_code_count when -1 then null else fullfilled_code_count end),0) as fullfilled_code_count,
+            COALESCE(SUM(case fullfilled_code_y when -1 then null else fullfilled_code_y end),0) as fullfilled_code_y,
+			max(dt_lastchange) as dt_lastchange
+FROM        adnetwork.daily_wh_performance
+WHERE       is_active = true
+AND ((is_estimated=1)OR(is_estimated=0 AND requests>0))
+AND eastern_date_sk = $P{eastern_date_sk}::int
+GROUP BY    eastern_date_sk, full_date
+UNION
+/* AT&T Yellowpages */
+SELECT      eastern_date_sk, full_date,
+            COALESCE(SUM(requests),0) as requests,
+            COALESCE(SUM(impressions),0) as paid_impressions,
+            COALESCE(SUM(clicks),0) as clicked,
+            ROUND(COALESCE(SUM(case revenue when -1 then null else revenue end),0)::NUMERIC,3) as net_revenue,
+            COALESCE(SUM(case fullfilled_code_count when -1 then null else fullfilled_code_count end),0) as fullfilled_code_count,
+            COALESCE(SUM(case fullfilled_code_y when -1 then null else fullfilled_code_y end),0) as fullfilled_code_y,
+			max(dt_lastchange) as dt_lastchange
+FROM        adnetwork.daily_yp_performance
+WHERE       is_active = true AND eastern_date_sk = $P{eastern_date_sk}::int
+GROUP BY    eastern_date_sk, full_date
+UNION
+/* AT&T Static Banner Yellowpages */
+SELECT      eastern_date_sk, full_date,
+            COALESCE(SUM(requests),0) as requests,
+            COALESCE(SUM(impressions),0) as paid_impressions,
+            COALESCE(SUM(clicks),0) as clicked,
+            ROUND(COALESCE(SUM(case revenue when -1 then null else revenue end),0)::NUMERIC,3) as net_revenue,
+            COALESCE(SUM(case fullfilled_code_count when -1 then null else fullfilled_code_count end),0) as fullfilled_code_count,
+            COALESCE(SUM(case fullfilled_code_y when -1 then null else fullfilled_code_y end),0) as fullfilled_code_y,
+			max(dt_lastchange) as dt_lastchange
+FROM        adnetwork.daily_yp_sb_performance
+WHERE       is_active = true AND eastern_date_sk = $P{eastern_date_sk}::int
+GROUP BY    eastern_date_sk, full_date
+UNION
+/* AT&T No Logo Yellowpages */
+SELECT      eastern_date_sk, full_date,
+            COALESCE(SUM(requests),0) as requests,
+            COALESCE(SUM(impressions),0) as paid_impressions,
+            COALESCE(SUM(clicks),0) as clicked,
+            ROUND(COALESCE(SUM(case revenue when -1 then null else revenue end),0)::NUMERIC,3) as net_revenue,
+            COALESCE(SUM(case fullfilled_code_count when -1 then null else fullfilled_code_count end),0) as fullfilled_code_count,
+            COALESCE(SUM(case fullfilled_code_y when -1 then null else fullfilled_code_y end),0) as fullfilled_code_y,
+			max(dt_lastchange) as dt_lastchange
+FROM        adnetwork.daily_yp_no_performance
+WHERE       is_active = true AND eastern_date_sk = $P{eastern_date_sk}::int
+GROUP BY    eastern_date_sk, full_date
+UNION
+/* KlickThru */
+SELECT      eastern_date_sk, full_date,
+            0 as requests,
+            COALESCE(SUM(paid_impressions),0) as paid_impressions,
+            COALESCE(SUM(clicks),0) as clicked,
+            ROUND(COALESCE(SUM(case revenue when -1 then null else revenue end),0)::NUMERIC,3) as net_revenue,
+            COALESCE(SUM(case fullfilled_code_count when -1 then null else fullfilled_code_count end),0) as fullfilled_code_count,
+            COALESCE(SUM(case fullfilled_code_y when -1 then null else fullfilled_code_y end),0) as fullfilled_code_y,
+			max(dt_lastchange) as dt_lastchange
+FROM        adnetwork.daily_kt_performance
+WHERE       is_active = true AND eastern_date_sk = $P{eastern_date_sk}::int
+GROUP BY    eastern_date_sk, full_date
+) a
+GROUP BY full_date]]>
+	</queryString>
+	<field name="full_date" class="java.sql.Date"/>
+	<field name="dt_lastchange" class="java.sql.Timestamp"/>
+	<field name="requests" class="java.lang.Long"/>
+	<field name="paid_impressions" class="java.lang.Long"/>
+	<field name="clicks" class="java.lang.Long"/>
+	<field name="net_revenue" class="java.lang.Double"/>
+	<field name="total_adcel_total" class="java.lang.Long"/>
+	<field name="total_adcel_yes" class="java.lang.Long"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="380">
+			<image>
+				<reportElement x="0" y="9" width="64" height="20"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"../vervelogo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="64" y="9" width="1071" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Third Party Ad-Network Daily Revenue Summary]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="40" width="243" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Date: " + $F{full_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="855" y="40" width="140" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Refresh Date (ET):]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="995" y="40" width="140" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{dt_lastchange}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="80" width="243" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Performance Overview:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="100" width="143" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Total Ad Requests:]]></text>
+			</staticText>
+			<textField pattern="#,###;-#,###">
+				<reportElement x="143" y="100" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{requests}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###;-#,###">
+				<reportElement x="143" y="120" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{paid_impressions}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="120" width="143" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Total Paid Impressions:]]></text>
+			</staticText>
+			<textField pattern="#,###;-#,###">
+				<reportElement x="143" y="140" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{clicks}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="140" width="143" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Total Clicks:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="160" width="143" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Total Revenue:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement x="143" y="160" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{net_revenue}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="180" width="143" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Total Adcel's ad responses:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="200" width="143" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Total Adcel's Yes responses:]]></text>
+			</staticText>
+			<textField pattern="#,###;-#,###">
+				<reportElement x="143" y="180" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{total_adcel_total}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###;-#,###">
+				<reportElement x="143" y="200" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{total_adcel_yes}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="320" width="1135" height="20"/>
+				<subreportParameter name="requests">
+					<subreportParameterExpression><![CDATA[$F{requests}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="eastern_date_sk">
+					<subreportParameterExpression><![CDATA[new Integer($P{eastern_date_sk})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="clicks">
+					<subreportParameterExpression><![CDATA[$F{clicks}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_adcel_yes">
+					<subreportParameterExpression><![CDATA[$F{total_adcel_yes}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="net_revenue">
+					<subreportParameterExpression><![CDATA[$F{net_revenue}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_adcel_total">
+					<subreportParameterExpression><![CDATA[$F{total_adcel_total}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="paid_impressions">
+					<subreportParameterExpression><![CDATA[$F{paid_impressions}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "dail_ad_network_summary_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="350" width="1135" height="20"/>
+				<subreportParameter name="requests">
+					<subreportParameterExpression><![CDATA[$F{requests}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="eastern_date_sk">
+					<subreportParameterExpression><![CDATA[new Integer($P{eastern_date_sk})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="clicks">
+					<subreportParameterExpression><![CDATA[$F{clicks}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_adcel_yes">
+					<subreportParameterExpression><![CDATA[$F{total_adcel_yes}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="net_revenue">
+					<subreportParameterExpression><![CDATA[$F{net_revenue}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="paid_impressions">
+					<subreportParameterExpression><![CDATA[$F{paid_impressions}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_adcel_total">
+					<subreportParameterExpression><![CDATA[$F{total_adcel_total}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "dail_ad_network_summary_by_adnetwork_publisher.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="0" y="240" width="243" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Notes:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="260" width="1135" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[1- Unresolved partners/sites having N/A as publishers, partners]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="280" width="1135" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[2- Zero, '0' is assgined for Null data]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="26">
+			<textField>
+				<reportElement x="0" y="4" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="995" y="3" width="105" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="1100" y="4" width="35" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="3" width="1135" height="1"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

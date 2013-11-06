@@ -1,0 +1,102 @@
+<Schema name="Olap Network traffic">
+  <Cube name="vw_network_traffic_partner_act_device" cache="false" enabled="true">
+    <Table name="vw_network_traffic_partner_act_device" schema="olap">
+    </Table>
+    <Dimension type="StandardDimension" highCardinality="false" name="Year month">
+      <Hierarchy hasAll="true">
+        <Level name="calendar_year_month" column="calendar_year_month" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Parent">
+      <Hierarchy hasAll="true">
+        <Level name="parent1_name" column="parent1_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Partner">
+      <Hierarchy hasAll="true">
+        <Level name="partner_name" column="partner_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Portal">
+      <Hierarchy hasAll="true">
+        <Level name="portal_name" column="portal_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Device type">
+      <Hierarchy hasAll="true">
+        <Level name="device_type" column="device_type" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Page view" column="page_view_count" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="vw_network_traffic_partner_act_all" cache="true" enabled="true">
+    <Table name="network_traffic_partner_act_all" schema="olap">
+    </Table>
+    <Dimension type="StandardDimension" highCardinality="false" name="Year month">
+      <Hierarchy hasAll="true">
+        <Level name="calendar_year_month" column="calendar_year_month" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Parent">
+      <Hierarchy hasAll="true">
+        <Level name="parent1_name" column="parent1_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Partner">
+      <Hierarchy hasAll="true">
+        <Level name="partner_name" column="partner_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Unique view" column="unique_view_count" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Unique visit" column="unique_visit_count" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Page view" column="page_view_count" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="vw_network_traffic_partner_act_content_category" cache="true" enabled="true">
+    <Table name="vw_network_traffic_partner_act_content_category" schema="olap">
+    </Table>
+    <Dimension type="StandardDimension" highCardinality="false" name="Year month">
+      <Hierarchy hasAll="true">
+        <Level name="calendar_year_month" column="calendar_year_month" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Parent">
+      <Hierarchy hasAll="true">
+        <Level name="parent1_name" column="parent1_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Partner">
+      <Hierarchy hasAll="true">
+        <Level name="partner_name" column="partner_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Portal">
+      <Hierarchy hasAll="true">
+        <Level name="portal_name" column="portal_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Category">
+      <Hierarchy hasAll="true">
+        <Level name="category_name" column="category_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Page view" column="page_view_count" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+</Schema>

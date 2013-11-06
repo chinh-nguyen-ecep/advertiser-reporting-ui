@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>get_control_on_placement_daily_report</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>chinhnguyen</author>  
+    <description>get control from table adm.daily_agg_adm_data_feed</description>  
+    <help/>  
+    <result-type>report</result-type>  
+    <icon/> 
+  </documentation>
+
+  <inputs>
+    <p_publisher type="string">
+      <sources>
+        <request>p_publisher</request>
+      </sources>
+      <default-value><![CDATA[3794]]></default-value>
+    </p_publisher>
+  </inputs>
+
+  <outputs> 
+    <mssg type="string"> 
+      <destinations> 
+        <response>Content</response> 
+      </destinations> 
+    </mssg> 
+  </outputs>
+
+  <resources/>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get list of partner</action-type>
+      <action-inputs>
+        <p_publisher type="string"/>
+      </action-inputs>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result_partner"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[dw3]]></jndi>  
+        <live><![CDATA[false]]></live>  
+        <query><![CDATA[select a.* from
+(
+SELECT '-- All Partners --' as ad_partner_name, -1 as ad_partner_id, 0 as "sort" FROM refer.ad_network_dim
+UNION
+SELECT DISTINCT partner_name || ' (' || partner_id::text || ')' as ad_partner_name,partner_id as ad_partner_id, 1 as "sort"
+FROM adstraffic.daily_ad_serving_stats WHERE parent1_id= {p_publisher} )
+ a
+ORDER BY sort, ad_partner_name]]></query>
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>JavaScript</action-type>
+      <action-inputs> 
+        <query_result_partner type="result-set"/>
+      </action-inputs>
+      <action-outputs> 
+        <resultPartner type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var resultPartner;
+
+
+resultPartner='<table><tr></tr>';
+
+for(var i=0;i<query_result_partner.getRowCount();i++){
+	var name=query_result_partner.getValueAt(i,0);
+	var id=query_result_partner.getValueAt(i,1);
+	if(i==0){
+	resultPartner+='<tr><td><input id="p_partner_'+name+'" class="portlet-form-field" type="checkbox" name="p_partner" value="'+id+'" title="" checked><span id="device-label" class="portlet-form-field-label">'+name+'</span></td></tr>';
+	}else{
+	resultPartner+='<tr><td><input id="p_partner_'+name+'" class="portlet-form-field" type="checkbox" name="p_partner" value="'+id+'" title=""><span id="device-label" class="portlet-form-field-label">'+name+'</span></td></tr>';
+	};
+	
+};
+resultPartner+='</table>';]]></script>
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>TemplateComponent</component-name>
+      <action-type>Message Template</action-type>
+      <action-inputs> 
+        <resultPartner type="string"/>
+      </action-inputs>
+      <action-outputs> 
+        <output-message type="string" mapping="mssg"/> 
+      </action-outputs>
+      <component-definition> 
+        <template><![CDATA[<div id="dimesion" style="width: 300px;border: 1px solid gray;height: 145px;overflow: auto">
+						{resultPartner}]]></template> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

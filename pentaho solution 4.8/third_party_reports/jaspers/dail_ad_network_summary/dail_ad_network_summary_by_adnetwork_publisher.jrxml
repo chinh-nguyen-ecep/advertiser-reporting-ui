@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dail_ad_network_summary_subreport1" language="groovy" pageWidth="1135" pageHeight="842" orientation="Landscape" columnWidth="1135" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="eastern_date_sk" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="total_adcel_total" class="java.lang.Long"/>
+	<parameter name="total_adcel_yes" class="java.lang.Long"/>
+	<parameter name="requests" class="java.lang.Long"/>
+	<parameter name="paid_impressions" class="java.lang.Long"/>
+	<parameter name="clicks" class="java.lang.Long"/>
+	<parameter name="net_revenue" class="java.lang.Double"/>
+	<queryString>
+		<![CDATA[SELECT a.* FROM (
+/* AdSense DBCLK Channel */
+SELECT      'AdSense DBCLK Channel (-1)'::text as ad_network_name,
+            parent1_id  as publisher_id,
+	  parent1_name  as publisher,
+            partner_keyword,
+            partner_id,
+            portal_keyword,
+            0 as requests,
+            impressions_delivered as paid_impressions,
+            clicks_recorded as clicks,
+            estimated_earnings as net_revenue,
+            0 as fullfilled_code_count,
+            0 as fullfilled_code_y
+FROM        adnetwork.daily_adsense_dbclk_channel
+WHERE       is_active = true AND eastern_date_sk = $P{eastern_date_sk}::int
+UNION
+/* City Grid */
+SELECT      'City Grid/City Grid Proxy (20,29)'::text as ad_network_name,
+            parent1_id  as publisher_id,
+	  parent1_name  as publisher,
+            partner_keyword,
+            partner_id,
+            portal_keyword,
+            requests as requests,
+            paid_impressions as paid_impressions,
+            clicks as clicks,
+            estimated_net_earnings as net_revenue,
+            fullfilled_code_count as fullfilled_code_count,
+            fullfilled_code_y as fullfilled_code_y
+FROM        adnetwork.daily_cg_performance
+WHERE       is_active = true AND eastern_date_sk = $P{eastern_date_sk}::int
+UNION
+/* City Grid Mobile */
+SELECT      'City Grid Mobile (38)'::text as ad_network_name,
+            parent1_id  as publisher_id,
+	  parent1_name  as publisher,
+            partner_keyword,
+            partner_id,
+            portal_keyword,
+            requests as requests,
+            paid_impressions as paid_impressions,
+            clicks as clicks,
+            estimated_net_earnings as net_revenue,
+            fullfilled_code_count as fullfilled_code_count,
+            fullfilled_code_y as fullfilled_code_y
+FROM        adnetwork.daily_cg_mobile_performance
+WHERE       is_active = true AND eastern_date_sk = $P{eastern_date_sk}::int
+UNION
+/* iTunes */
+SELECT      'iTunes (-1)'::text as ad_network_name,
+            parent1_id  as publisher_id,
+	  parent1_name  as publisher,
+            partner_keyword,
+            partner_id,
+            portal_keyword,
+            requests as requests,
+            impressions as paid_impressions,
+            clicks as clicks,
+            revenue as net_revenue,
+            0 as fullfilled_code_count,
+            0 as fullfilled_code_y
+FROM        adnetwork.daily_it_performance
+WHERE       is_active = true AND eastern_date_sk = $P{eastern_date_sk}::int
+UNION
+/* JumpTap */
+SELECT      'JumpTap (11)'::text as ad_network_name,
+            parent1_id  as publisher_id,
+	  parent1_name  as publisher,
+            partner_keyword,
+            partner_id,
+            portal_keyword,
+            requests as requests,
+            paid_impressions as paid_impressions,
+            clicks as clicks,
+            ROUND(net_revenue::NUMERIC,3) as net_revenue,
+            fullfilled_code_count as fullfilled_code_count,
+            fullfilled_code_y as fullfilled_code_y
+FROM        adnetwork.daily_jt_performance
+WHERE       is_active = true AND eastern_date_sk = $P{eastern_date_sk}::int
+UNION
+/* Millennial Media */
+SELECT      'Millennial Media (4)'::text as ad_network_name,
+            parent1_id  as publisher_id,
+	  parent1_name  as publisher,
+            partner_keyword,
+            partner_id,
+            portal_keyword,
+            requests as requests,
+            ads_served as paid_impressions,
+            clicks as clicks,
+            ROUND(net_revenue::NUMERIC,3) as net_revenue,
+            fullfilled_code_count as fullfilled_code_count,
+            fullfilled_code_y as fullfilled_code_y
+FROM        adnetwork.daily_mm_performance
+WHERE       is_active = true
+AND ((is_estimated=1)OR(is_estimated=0 AND requests>0))
+AND eastern_date_sk = $P{eastern_date_sk}::int
+UNION
+/* Marchex */
+SELECT      'Marchex/Marchex Proxy (21,28)'::text as ad_network_name,
+            parent1_id  as publisher_id,
+	  parent1_name  as publisher,
+            partner_keyword,
+            partner_id,
+            portal_keyword,
+            total_ad_requests as requests,
+            paid_impressions as paid_impressions,
+            clicks as clicks,
+            ROUND("cost"::NUMERIC,3) as net_revenue,
+            fullfilled_code_count as fullfilled_code_count,
+            fullfilled_code_y as fullfilled_code_y
+FROM        adnetwork.daily_mx_performance
+WHERE       is_active = true AND eastern_date_sk = $P{eastern_date_sk}::int
+UNION
+/* Superpages Proxy/Blue */
+SELECT      'Superpages Proxy/Blue (30,26)'::text as ad_network_name,
+            parent1_id  as publisher_id,
+	  parent1_name  as publisher,
+            partner_keyword,
+            partner_id,
+            portal_keyword,
+            0 as requests,
+            0 as paid_impressions,
+            0 as clicks,
+            ROUND(revenue::NUMERIC,3) as net_revenue,
+            fullfilled_code_count as fullfilled_code_count,
+            fullfilled_code_y as fullfilled_code_y
+FROM        adnetwork.daily_sp_blue_performance
+WHERE       is_active = true AND eastern_date_sk = $P{eastern_date_sk}::int
+UNION
+/* WHERE */
+SELECT      'Where/Where HTML (23,25)'::text as ad_network_name,
+            parent1_id  as publisher_id,
+	  parent1_name  as publisher,
+            partner_keyword,
+            partner_id,
+            portal_keyword,
+            requests as requests,
+            filled as paid_impressions,
+            clicked as clicked,
+            ROUND(revenue::NUMERIC,3) as net_revenue,
+            fullfilled_code_count as fullfilled_code_count,
+            fullfilled_code_y as fullfilled_code_y
+FROM        adnetwork.daily_wh_performance
+WHERE       is_active = true
+AND ((is_estimated=1)OR(is_estimated=0 AND requests>0))
+AND eastern_date_sk = $P{eastern_date_sk}::int
+UNION
+/* AT&T Yellowpages */
+SELECT      'AT&T Yellowpages (27)'::text as ad_network_name,
+            parent1_id  as publisher_id,
+	  parent1_name  as publisher,
+            partner_keyword,
+            partner_id,
+            portal_keyword,
+            COALESCE(requests,0) as requests,
+            COALESCE(impressions,0) as paid_impressions,
+            COALESCE(clicks,0) as clicks,
+            ROUND(revenue::NUMERIC,3) as net_revenue,
+            fullfilled_code_count as fullfilled_code_count,
+            fullfilled_code_y as fullfilled_code_y
+FROM        adnetwork.daily_yp_performance
+WHERE       is_active = true AND eastern_date_sk = $P{eastern_date_sk}::int
+UNION
+/* AT&T Static Banner Yellowpages */
+SELECT      'AT&T Static Banner Yellowpages (32)'::text as ad_network_name,
+            parent1_id  as publisher_id,
+	  parent1_name  as publisher,
+            partner_keyword,
+            partner_id,
+            portal_keyword,
+            COALESCE(requests,0) as requests,
+            COALESCE(impressions,0) as paid_impressions,
+            COALESCE(clicks,0) as clicks,
+            ROUND(revenue::NUMERIC,3) as net_revenue,
+            fullfilled_code_count as fullfilled_code_count,
+            fullfilled_code_y as fullfilled_code_y
+FROM        adnetwork.daily_yp_sb_performance
+WHERE       is_active = true AND eastern_date_sk = $P{eastern_date_sk}::int
+UNION
+/* AT&T No Logo Yellowpages */
+SELECT      'AT&T No Logo Yellowpages (33)'::text as ad_network_name,
+            parent1_id  as publisher_id,
+	  parent1_name  as publisher,
+            partner_keyword,
+            partner_id,
+            portal_keyword,
+            COALESCE(requests,0) as requests,
+            COALESCE(impressions,0) as paid_impressions,
+            COALESCE(clicks,0) as clicks,
+            ROUND(revenue::NUMERIC,3) as net_revenue,
+            fullfilled_code_count as fullfilled_code_count,
+            fullfilled_code_y as fullfilled_code_y
+FROM        adnetwork.daily_yp_no_performance
+WHERE       is_active = true AND eastern_date_sk = $P{eastern_date_sk}::int
+UNION
+/* KlickThru */
+SELECT      'KlickThru (35)'::text as ad_network_name,
+            parent1_id  as publisher_id,
+	  parent1_name  as publisher,
+            partner_keyword,
+            partner_id,
+            portal_keyword,
+            0 as requests,
+            COALESCE(paid_impressions,0) as paid_impressions,
+            COALESCE(clicks,0) as clicks,
+            ROUND(revenue::NUMERIC,3) as net_revenue,
+            fullfilled_code_count as fullfilled_code_count,
+            fullfilled_code_y as fullfilled_code_y
+FROM        adnetwork.daily_kt_performance
+WHERE       is_active = true AND eastern_date_sk = $P{eastern_date_sk}::int
+) a
+ORDER BY ad_network_name, publisher, partner_keyword]]>
+	</queryString>
+	<field name="ad_network_name" class="java.lang.String"/>
+	<field name="publisher_id" class="java.lang.Integer"/>
+	<field name="publisher" class="java.lang.String"/>
+	<field name="partner_keyword" class="java.lang.String"/>
+	<field name="partner_id" class="java.lang.Integer"/>
+	<field name="portal_keyword" class="java.lang.String"/>
+	<field name="requests" class="java.lang.Double"/>
+	<field name="paid_impressions" class="java.lang.Double"/>
+	<field name="clicks" class="java.lang.Integer"/>
+	<field name="net_revenue" class="java.lang.Double"/>
+	<field name="fullfilled_code_count" class="java.lang.Integer"/>
+	<field name="fullfilled_code_y" class="java.lang.Integer"/>
+	<columnHeader>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="22" width="205" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ad Network Name (ID)]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="44" width="1135" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="0" width="405" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Performance By Ad Networks And Publishers/Partners:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="855" y="22" width="70" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Clicks]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="925" y="22" width="70" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Revenue]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="995" y="22" width="70" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Adcel's Reps]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1065" y="22" width="70" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Adcel's Ys]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="715" y="22" width="70" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Ad Rqs]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="785" y="22" width="70" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Paid Imps]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="205" y="22" width="200" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Publisher]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="475" y="22" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Partner Kw]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="405" y="22" width="70" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Publisher ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="575" y="22" width="70" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Partner ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="645" y="22" width="70" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Portal Kw]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="205" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ad_network_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="715" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{requests}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="785" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{paid_impressions}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="855" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{clicks}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="205" y="0" width="200" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{publisher}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="475" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{partner_keyword}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement x="925" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{net_revenue}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="995" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{fullfilled_code_count}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1065" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{fullfilled_code_y}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="405" y="0" width="70" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{publisher_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="575" y="0" width="70" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{partner_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="645" y="0" width="70" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{portal_keyword}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="43">
+			<textField pattern="#,###;-#,###">
+				<reportElement x="785" y="4" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$P{paid_impressions}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###;-#,###">
+				<reportElement x="855" y="4" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$P{clicks}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement x="925" y="4" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$P{net_revenue}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="1" width="1135" height="1"/>
+			</line>
+			<textField pattern="#,###;-#,###">
+				<reportElement x="995" y="4" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$P{total_adcel_total}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###;-#,###">
+				<reportElement x="1065" y="4" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$P{total_adcel_yes}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###;-#,###">
+				<reportElement x="715" y="4" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$P{requests}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

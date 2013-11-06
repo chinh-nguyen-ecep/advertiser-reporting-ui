@@ -1,0 +1,730 @@
+<html xmlns:xf="http://www.w3.org/2002/xforms">
+   <head>
+	<!-- do not include a <meta> tag -->
+      <link rel="stylesheet" type="text/css" href="/pentaho-style/active/default.css"></link>
+      <title>Network traffic</title>
+            			 <script language="javascript" src="/pentaho/js/pentaho-ajax.js"></script>
+						<script src="js/parameters.js" type="text/javascript"></script>
+						<script src="/verve_style/scripts/doform.js" type="text/javascript"></script>
+						
+						<script src="/verve_style/scripts/mootools-core-1.3.1.js" type="text/javascript"></script>
+						<script src="/verve_style/scripts/mootools-more.js" type="text/javascript"></script>
+						<script src="/verve_style/scripts/verve-script.js" type="text/javascript"></script>
+						
+						<script src="/verve_style/scripts/Date.js" type="text/javascript"></script>
+						<script src="/verve_style/scripts/datepicker/Locale.en-US.DatePicker.js" type="text/javascript"></script>
+						<script src="/verve_style/scripts/datepicker/Picker.js" type="text/javascript"></script>
+						<script src="/verve_style/scripts/datepicker/Picker.Attach.js" type="text/javascript"></script>
+						<script src="/verve_style/scripts/datepicker/Picker.Date.js" type="text/javascript"></script>
+					
+						<link href="style.css" rel="stylesheet" />
+						<link  href="/verve_style/scripts/datepicker/datepicker.css" rel="stylesheet" type="text/css" media="screen" />
+						<link  href="/verve_style/css/tableInForm.css" rel="stylesheet" type="text/css" media="screen" />
+						<link  href="/verve_style/css/charttool.css" rel="stylesheet" type="text/css" media="screen" />
+						<link  href="/verve_style/css/meio.aucomplete.css" rel="stylesheet" type="text/css" media="screen" />
+						
+      			<script><![CDATA[
+				var myPicker;
+      			  function setDefaultValue() {
+      			  	var obj = document.getElementById('v_max_date');
+      			  	obj.selectedIndex = 1;
+ 
+      			  	var curdate = document.getElementById('v_min_date');
+      			  	curdate.selectedIndex = 1;		  	
+      			  
+      			  }
+      			  //validation
+				var validation=function(){
+					var chartTarget=$('chartTargetValue').get('value');
+					var singleMode=$('singleModeValue').get('value');
+					var chartWidth=$('chartWidthValue').get('value');
+					var chartHeight=$('chartHeightValue').get('value');
+					
+					var validate=true;
+					
+					//check select device
+					var device=$('devices').getElements('input[name=device]:checked');
+					if(device.length==0){
+					alert('Please select dimension!');
+					validate=false;
+					}else if($$('input[name=p_measures]:checked').length==0){
+						alert('Please select measures!');
+						validate=false;	
+					}else if($$('input[name=p_measures]:checked').length>1&&device.length>1){
+						alert('Sorry! multi measures and multi dimension hasn\'t been developed');
+						validate=false;	
+					};
+					
+					/*
+					//check select measure/device
+					var device=$('mydiv').getElements('input[name=device]:checked');
+					var measure=$('mydiv').getElements('input[name=p_measures]:checked');
+					//alert('device.length: ' + device.length); // err
+					//alert('measure.length: ' + measure.length);
+					if(device.length == 0 || measure.length == 0) {
+						if (device.length == 0) {
+							alert('Please select dimension!');
+						}
+						if (measure.length == 0) {
+							alert('Please select measure!');
+						}
+						validate=false;
+					}
+					 else if(device.length > 1 && measure.length > 1) {
+						alert('Sorry! multi measures and multi dimension has not been developed');
+						validate=false;
+					};
+					*/
+				
+				/*
+					//check select device
+					var device=$('devices').getElements('input[name=device]:checked');
+					if(device.length==0){
+					alert('Please select dimension!');
+					validate=false;
+					};
+						*/
+					
+					
+					//Compares start date and end date.
+					var start_date_array=$('p_start_date').get('value').split("-");
+					var end_date_array=$('p_end_date').get('value').split("-");
+					var start_date=new Date();
+					start_date.setFullYear(start_date_array[0],start_date_array[1]-1,start_date_array[2]);
+					var end_date=new Date();
+					end_date.setFullYear(end_date_array[0],end_date_array[1]-1,end_date_array[2]);
+					
+					if(start_date>end_date){
+						alert('please choose start date < end date');
+						validate=false;
+					};
+					
+					
+					//var count_date=start_date.diff(end_date);
+					//if(count_date>7){
+					//	alert('max is 7 days');
+					//	validate=false;
+					//}
+					if(validate==true){
+						//doForm('a');
+						doChartToTarget(chartTarget,singleMode,chartWidth,chartHeight);
+						myPicker.close();						
+					};
+					
+				};	 
+      			]]></script>
+      		
+	{xform-header}
+
+   </head>
+   <body style="background-color: #fff">
+   
+   <div id="toolbar2">
+	   <div id="singleMode">
+		   <div class="leftGroup">
+		   <img id="open" title="Open control panel" src="/verve_style/images/preferences_system_windows_actions.png"/>
+		   <img stype="display:none" id="Chart compare mode" title="Chart compare mode" src="/verve_style/images/chart_bar_add.png"/>
+		   <a target="_blank" href="ViewAction?solution=NetWork traffic reports&amp;path=charts&amp;action=Network_traffic_report_by_type.xaction"><img id="Open full windown" title="Open full windown" src="/verve_style/images/fullscreen.png"/></a>
+		   </div>
+		   
+		   <div class="rightGroup" stype="display:none">
+		   <img id="Column chart" title="Bar chart" src="/verve_style/images/bar_chart(2).png"/>
+		   <img id="Line chart" title="Line chart" src="/verve_style/images/line_chart(2).png"/>
+		   <img id="Area chart" title="Area chart" src="/verve_style/images/graph(2).png"/>
+		   </div>
+	   </div>
+	   <div id="compareMode" style="display: none;">
+	   		<div class="leftGroup">
+	   		<img id="Chart single mode" title="Back to single mode" src="/verve_style/images/old_go_previous.png"/>
+	   		</div>
+	   </div>
+   
+   </div>
+   
+   <!--
+   <div style="position: absolute;left: 10px;top: 10px;width: 65px;height: 65px;background-color: transparent;z-index: 1000;">
+   <img style="cursor: pointer;" id="open" title="Open control panel" src="/verve_style/images/control_panel.png"/>
+   </div>
+   -->
+      <div style="min-height: 450px;width: 100%" id="mydiv">
+         <form name="parameter-form" id="parameter-form" method="GET">
+         <table class="tableForm">
+         <tbody>
+		 	<tr>
+		         <th>Report type:</th>
+		         <td><div style="float: left;">{p_report_type}</div>
+		         </td>
+	         </tr>
+	         <tr>
+		         <th>Mode:</th>
+		         <td><div style="float: left;">{p_mode}</div>
+		         </td>
+	         </tr>
+	         <tr>
+		         <th>Range from:</th>
+		         <td><div id="datemode" style="float: left;">
+		             <label style="margin-left: 0px;"></label> {p_start_date}
+		             <label style="margin-left: 0px;">To:</label> {p_end_date}
+		             </div>
+		             <div id="monthmode" style="display: none;float: left;">
+		             <label style="margin-left: 0px;"></label> {p_start_month}
+		             <label style="margin-left: 0px;">To:</label> {p_end_month}
+		             </div>
+		        </td>
+	         </tr>
+			<tr>
+		         <th>Measures:</th>
+		         <td>
+				 <div style="width: 300px;  border: 1px solid gray;height: 75px;">
+		          {p_measures} 
+				 </div>
+		         </td>
+	         </tr>
+	       
+	         
+         </tbody>
+         </table>
+		 
+		 <div id="switch_control_parent_mode" style="display: none;">
+			   <table class="tableForm">
+         <tbody>
+	         
+			<tr>
+		         <th>Parents mode:</th>
+		         <td>		        
+		         {p_parent_mode}        
+		         </td>
+	         </tr>
+	         <tr>
+		         <th><!--Parents:--></th>
+		         <td>	
+				 <div id="groupmode" style="float: left;" >
+					{p_group} 
+					</div>	
+					<div id="partnermode" style="display: none;float: left;"  >
+					{p_partner} 
+					</div>        
+		           
+		         </td>
+	         </tr>
+	       	         
+         </tbody>
+         </table>
+		 
+		 
+		</div>
+		 
+		 
+         	 <div id="switch_control_dimension_mode" style="display: ;">
+			   <table class="tableForm">
+         <tbody>
+	       
+			 <tr>
+		         <th>Dimensions mode:</th>
+		         <td>		        
+		         {p_dimension_mode}        
+		         </td>
+	         </tr>
+			 
+	         <tr>
+		         <th>Filter:</th>
+		         <td>
+					<input id="device_fillter" type="text" style="width: 302px;"/>
+					<div id="devices" style="width: 300px;border: 1px solid gray;height: 125px;overflow: auto;">
+					
+					</div>
+		         </td>
+	         </tr>
+	       	         
+         </tbody>
+         </table>
+		</div>
+		
+		
+		
+		<table class="tableForm">
+         <tbody>
+			<tr id="tr_bt">
+		         <th>Chart type:</th>
+		         <td>{chart_type}
+				 <input type="button" style="cursor: pointer;margin-left:5px;" name="go" class="portlet-form-button" value="Run" onClick="validation()"/></td>
+	         </tr>
+		 </tbody>
+		 </table>
+		
+             {v_max_date}{v_min_date}			
+		{solution}
+		{action}
+		{path}
+	    </form>
+		<!-- hiddent form -->
+		<div id="site_campaign_day_report" style="display: none;"></div>
+		<div id="site_day_report" style="display: none;"></div>
+		
+		<div style="display: none;">
+			<div id="listOfDevices"></div>
+			<div id="listOfPortals"></div>
+			<div id="listOfPartners"></div>
+			<div id="listOfGroup"></div>
+			<div id="listOfContentCategory"></div>
+			
+			<input type="hidden" id="chartTargetValue" value="theoutput"/>
+			<input type="hidden" id="singleModeValue" value="true"/>
+			<input type="hidden" id="chartWidthValue" value="900"/>
+			<input type="hidden" id="chartHeightValue" value="400"/>
+		</div>
+		
+		
+		<!-- end hiddent form -->
+      </div>    
+   
+   <iframe id="mainFrame" width="100%" height="100%" name="theoutput" frameborder="0" scrolling="yes" style="overflow-x:hidden;"></iframe>
+   <div id="compareScreen" style="display: none;">
+	   	<div class="mainGround" >
+	   			<div id="chart1" class="chartItem" style="float: left;margin-left: 1%;">
+	   			<img id="configbt1" alt="config" src="/verve_style/images/application_x_desktop.png" /> 
+				<iframe width="100%"  height="350px" name="theoutput1" frameborder="0" scrolling="yes" style="overflow:hidden;"></iframe>
+				</div>
+				<div id="chart2" class="chartItem" style="float: right;margin-right: 1%;">
+				<img id="configbt2" alt="config" src="/verve_style/images/application_x_desktop.png" />
+				<iframe width="100%" height="350px" name="theoutput2" frameborder="0" scrolling="yes" style="overflow:hidden;"></iframe>
+				</div>
+		</div>
+   </div>
+   <!--
+   <iframe width="100%" height="80%" name="theoutput" frameborder="0" scrolling="yes" style="overflow-x:hidden;"></iframe>
+   -->
+	<script>setDefaultValue();</script>
+	<script> 
+            window.addEvent('domready', function(){ 
+				
+            	//hide max_date and min_date
+            	$('v_min_date').setStyle('display','none');
+            	$('v_max_date').setStyle('display','none'); 
+				
+				//change report type
+				$('switch_control_parent_mode').setStyle('display','');
+					var measure=$('switch_control_dimension_mode').getElements('input[name=p_dimension_mode]');
+					var span=$('switch_control_dimension_mode').getElements('span[id=p_dimension_mode-label]');
+					measure[0].checked = true;
+					measure[0].style.display = '';
+					measure[1].style.display = '';
+					measure[2].style.display = '';
+					measure[3].style.display = 'none';
+					measure[4].style.display = 'none';
+					span[0].style.display = ''
+					span[1].style.display = ''
+					span[2].style.display = '';
+					span[3].style.display = 'none'
+					span[4].style.display = 'none';		
+				//Show dimension
+				$('p_report_type').addEvent('change',function(e){
+					var report_type=this.get('value');
+					if(report_type=='Unique view count'){
+						//add elememnt
+						$('switch_control_parent_mode').setStyle('display','none');	
+						
+						$('devices').set('html','Loading...');					
+					if($('listOfGroup').get('html')==''){
+						var theInnerHTML = pentahoAction( "NetWork traffic reports", "charts/Adnetwork_by_date", "loadListOfGroup.xaction");			
+						$('listOfGroup').set('html',theInnerHTML);
+					}
+					$('devices').set('html',$('listOfGroup').get('html'));
+					//show measure by Dimensions
+					var measure=$('mydiv').getElements('input[name=p_measures]');
+					var span=$('mydiv').getElements('span[id=p_measures-label]');
+					measure[1].style.display = '';
+					measure[2].style.display = '';
+					span[1].style.display = ''
+					span[2].style.display = '';
+						
+						//show dimension_mode by report type
+					var measure=$('switch_control_dimension_mode').getElements('input[name=p_dimension_mode]');
+					var span=$('switch_control_dimension_mode').getElements('span[id=p_dimension_mode-label]');
+					measure[3].checked = true;
+					measure[0].style.display = 'none';
+					measure[1].style.display = 'none';
+					measure[2].style.display = 'none';
+					measure[3].style.display = '';
+					measure[4].style.display = '';
+					span[0].style.display = 'none'
+					span[1].style.display = 'none'
+					span[2].style.display = 'none';
+					span[3].style.display = ''
+					span[4].style.display = '';
+					//alert('Not run done!!!');
+								
+					}else if(report_type=='Page view count'){
+						//add elememnt		
+						//alert('vao roi');
+						$('switch_control_parent_mode').setStyle('display','');	
+						//Show dimension
+						$('devices').set('html','Loading...');					
+					if($('listOfPortals').get('html')==''){
+						var theInnerHTML = pentahoAction( "NetWork traffic reports", "charts/Adnetwork_by_date", "loadListOfPortal.xaction");
+						$('listOfPortals').set('html',theInnerHTML);
+					}
+					$('devices').set('html',$('listOfPortals').get('html'));
+					//show measure by Dimensions
+					var measure=$('mydiv').getElements('input[name=p_measures]');
+					var span=$('mydiv').getElements('span[id=p_measures-label]');
+					measure[0].checked = true;
+					measure[1].checked = false;
+					measure[2].checked = false;
+					measure[1].style.display = 'none';
+					measure[2].style.display = 'none';
+					span[1].style.display = 'none'
+					span[2].style.display = 'none';
+						
+						
+						var measure=$('switch_control_dimension_mode').getElements('input[name=p_dimension_mode]');
+					var span=$('switch_control_dimension_mode').getElements('span[id=p_dimension_mode-label]');
+					measure[0].checked = true;
+					measure[0].style.display = '';
+					measure[1].style.display = '';
+					measure[2].style.display = '';
+					measure[3].style.display = 'none';
+					measure[4].style.display = 'none';
+					span[0].style.display = ''
+					span[1].style.display = ''
+					span[2].style.display = '';
+					span[3].style.display = 'none'
+					span[4].style.display = 'none';		
+					}
+				});
+				
+                //set default date
+                
+                $('p_end_date').setProperty('value',$('v_max_date').get('value'));
+                
+                var start_date_array=$('v_max_date').get('value').split("-");
+                var mydate=new Date();
+                mydate.setFullYear(start_date_array[0],start_date_array[1]-1,start_date_array[2]);
+                mydate.decrement('day', 6);
+                var todayCopy = mydate.clone().format('%Y-%m-%d');
+                
+                $('p_start_date').setProperty('value',todayCopy.toString());
+                
+                //create calendar
+                
+                new Picker.Date('p_start_date', {
+				format: '%Y-%m-%d',
+				minDate: $('v_min_date').get('value'),
+				maxDate: $('v_max_date').get('value')				
+				});
+				new Picker.Date('p_end_date', {
+				format: '%Y-%m-%d',
+				minDate: $('v_min_date').get('value'),
+				maxDate: $('v_max_date').get('value')				
+				});
+				
+					var measure=$('mydiv').getElements('input[name=p_measures]');
+					var span=$('mydiv').getElements('span[id=p_measures-label]');
+					/*
+					measure[0].value = 'Estimate page view';
+					measure[1].value = 'Estimate unique view'
+					measure[2].value = 'Estimate unique visit'
+					*/
+					span[0].innerHTML = 'Estimate page view';
+					span[1].innerHTML= 'Estimate unique view'
+					span[2].innerHTML = 'Estimate unique visit'
+					
+					
+					
+					
+				//change mode
+				$('p_mode_date').addEvent('click',function(){
+					$('datemode').setStyle('display','');
+					$('monthmode').setStyle('display','none');
+					//Change 
+					//Page view
+					//Unique view
+					//Unique visit
+					var measure=$('mydiv').getElements('input[name=p_measures]');
+					var span=$('mydiv').getElements('span[id=p_measures-label]');
+					/*
+					measure[0].value = 'Estimate page view';
+					measure[1].value = 'Estimate unique view'
+					measure[2].value = 'Estimate unique visit'
+					*/
+					span[0].innerHTML = 'Estimate page view';
+					span[1].innerHTML= 'Estimate unique view'
+					span[2].innerHTML = 'Estimate unique visit'
+					
+					
+				});
+				$('p_mode_month').addEvent('click',function(){
+					$('datemode').setStyle('display','none');
+					$('monthmode').setStyle('display','');
+					//Change 
+					//Page view
+					//Unique view
+					//Unique visit
+					var measure=$('mydiv').getElements('input[name=p_measures]');
+					var span=$('mydiv').getElements('span[id=p_measures-label]');
+					/*
+					measure[0].value = 'Page view';
+					measure[1].value = 'Unique view'
+					measure[2].value = 'Unique visit'
+					*/
+					span[0].innerHTML = 'Page view';
+					span[1].innerHTML= 'Unique view'
+					span[2].innerHTML = 'Unique visit'
+				});
+				
+				
+				//change parent mode 
+				$('p_parent_mode_Group').addEvent('click',function(){
+					$('groupmode').setStyle('display','');
+					$('partnermode').setStyle('display','none');
+				});
+				$('p_parent_mode_Partner').addEvent('click',function(){
+					$('groupmode').setStyle('display','none');
+					$('partnermode').setStyle('display','');
+				});
+				
+				//change dimension mode 								
+				$('p_dimension_mode_Portal').addEvent('click',function(event){
+					$('devices').set('html','Loading...');					
+					if($('listOfPortals').get('html')==''){
+						var theInnerHTML = pentahoAction( "NetWork traffic reports", "charts/Adnetwork_by_date", "loadListOfPortal.xaction");
+						$('listOfPortals').set('html',theInnerHTML);
+					}
+					$('devices').set('html',$('listOfPortals').get('html'));
+					//show measure by Dimensions
+					var measure=$('mydiv').getElements('input[name=p_measures]');
+					var span=$('mydiv').getElements('span[id=p_measures-label]');
+					measure[0].checked = true;
+					measure[1].checked = false;
+					measure[2].checked = false;
+					measure[1].style.display = 'none';
+					measure[2].style.display = 'none';
+					span[1].style.display = 'none'
+					span[2].style.display = 'none';
+				});
+				
+				$('p_dimension_mode_Device').addEvent('click',function(event){
+					$('devices').set('html','Loading...');					
+					if($('listOfDevices').get('html')==''){
+						var theInnerHTML = pentahoAction( "NetWork traffic reports", "charts/Adnetwork_by_date", "loadListOfDevice.xaction");
+						$('listOfDevices').set('html',theInnerHTML);
+					}
+					$('devices').set('html',$('listOfDevices').get('html'));
+					//show measure by Dimensions
+					var measure=$('mydiv').getElements('input[name=p_measures]');
+					var span=$('mydiv').getElements('span[id=p_measures-label]');
+					measure[0].checked = true;
+					measure[1].checked = false;
+					measure[2].checked = false;
+					measure[1].style.display = 'none';
+					measure[2].style.display = 'none';
+					span[1].style.display = 'none'
+					span[2].style.display = 'none';
+				});
+				$('p_dimension_mode_ContentCategory').addEvent('click',function(event){
+				
+					$('devices').set('html','Loading...');					
+					if($('listOfContentCategory').get('html')==''){
+						var theInnerHTML = pentahoAction( "NetWork traffic reports", "charts/Adnetwork_by_date", "loadListOfContentCategory.xaction");			
+						$('listOfContentCategory').set('html',theInnerHTML);
+					}						   
+					$('devices').set('html',$('listOfContentCategory').get('html'));
+					//show measure by Dimensions
+					var measure=$('mydiv').getElements('input[name=p_measures]');
+					var span=$('mydiv').getElements('span[id=p_measures-label]');
+					measure[0].checked = true;
+					measure[1].checked = false;
+					measure[2].checked = false;
+					measure[1].style.display = 'none';
+					measure[2].style.display = 'none';
+					span[1].style.display = 'none'
+					span[2].style.display = 'none';
+					
+					
+				});
+				
+				$('p_dimension_mode_Group').addEvent('click',function(event){
+				
+					$('devices').set('html','Loading...');					
+					if($('listOfGroup').get('html')==''){
+						var theInnerHTML = pentahoAction( "NetWork traffic reports", "charts/Adnetwork_by_date", "loadListOfGroup.xaction");			
+						$('listOfGroup').set('html',theInnerHTML);
+					}
+					$('devices').set('html',$('listOfGroup').get('html'));
+					//show measure by Dimensions
+					var measure=$('mydiv').getElements('input[name=p_measures]');
+					var span=$('mydiv').getElements('span[id=p_measures-label]');
+					measure[1].style.display = '';
+					measure[2].style.display = '';
+					span[1].style.display = ''
+					span[2].style.display = '';
+					
+				});
+				$('p_dimension_mode_Partner').addEvent('click',function(event){
+					$('devices').set('html','Loading...');
+					if($('listOfPartners').get('html')==''){
+						var theInnerHTML = pentahoAction( "NetWork traffic reports", "charts/Adnetwork_by_date", "loadListOfPartner.xaction");			
+						$('listOfPartners').set('html',theInnerHTML);
+					}
+					$('devices').set('html',$('listOfPartners').get('html'));
+					//show measure by Dimensions
+					var measure=$('mydiv').getElements('input[name=p_measures]');
+					var span=$('mydiv').getElements('span[id=p_measures-label]');
+					measure[1].style.display = '';
+					measure[2].style.display = '';
+					span[1].style.display = ''
+					span[2].style.display = '';
+				});
+						
+				//device_fillter
+				var device_fillter=$('device_fillter');
+				
+				device_fillter.addEvent('keyup', function(){
+					var fillter_value=this.get('value').toLowerCase();					
+					if(fillter_value != ""){
+					//get all check box contant value fillter
+					var list=$$('input[name=device]:not(:checked)');
+						list.each(function(item,index){
+							var valueOfItem=item.get('value').toLowerCase();
+							if(valueOfItem.indexOf(fillter_value)>-1){
+								var tr=item.getParent('tr');								
+								tr.setStyles({display: ''});
+							}else{
+								var tr=item.getParent('tr');								
+								tr.setStyles({display: 'none'});
+							};
+					
+						});
+						
+					}else{
+					//get all check box contant value fillter
+					var list=$$('input[name=device]');						
+						list.each(function(item,index){							
+								var tr=item.getParent('tr');								
+								tr.setStyles({display: ''});							
+						});
+					};
+				});
+				
+				
+				//picker
+				var myElement=$('mydiv');
+				myPicker = new Picker({
+					pickerClass: 'datepicker1',					
+					draggable: false,
+					width: 500,
+					height: 465,
+					zindex: 1003					
+				}).position(70, 17);
+				
+				myPicker.setContent(myElement,'fade');
+				myPicker.setTitle('Control panel');
+				myPicker.open();
+				
+				$('open').addEvent('click', function(e){
+				e.stop();
+				myPicker.open();
+				});
+				
+				
+				//remove choose
+				$$('option[value=]').each(function(item){
+					//alert(item.get('value'));
+					item.destroy();
+					
+				});
+				// chart button click
+				$('Column chart').addEvent('click',function(){
+					$('chart_type').set('value','column');
+					validation();
+				});
+				$('Line chart').addEvent('click',function(){
+					$('chart_type').set('value','line');
+					validation();
+				});
+				$('Area chart').addEvent('click',function(){
+					$('chart_type').set('value','area');
+					validation();
+				});
+				
+				$('configbt1').addEvent('click',function(){
+					var width=$('compareScreen').getElement('iframe[name=theoutput1]').getStyle('width').toInt(); 
+					var height=$('compareScreen').getElement('iframe[name=theoutput1]').getStyle('height').toInt(); 
+					
+					$('chartTargetValue').set('value','theoutput1');
+					$('singleModeValue').set('value','false');
+					$('chartWidthValue').set('value',width-20);
+					$('chartHeightValue').set('value',height-9);
+					
+					myPicker.open();					
+				});
+				$('configbt2').addEvent('click',function(){
+					var width=$('compareScreen').getElement('iframe[name=theoutput2]').getStyle('width').toInt(); 
+					var height=$('compareScreen').getElement('iframe[name=theoutput2]').getStyle('height').toInt(); 
+					$('chartTargetValue').set('value','theoutput2');
+					$('singleModeValue').set('value','false');
+					$('chartWidthValue').set('value',width-20);
+					$('chartHeightValue').set('value',height-9);
+					myPicker.open();					
+				});
+				
+				$('Chart compare mode').addEvent('click',function(){
+					//hiden main frame
+					$('mainFrame').setStyle('display','none');
+					$('singleMode').setStyle('display','none');
+					//set display
+					$('compareScreen').setStyle('display','');
+					$('compareMode').setStyle('display','');
+					myPicker.close();
+				});
+				$('Chart single mode').addEvent('click',function(){
+					//set display main frame
+					$('mainFrame').setStyle('display','');
+					$('singleMode').setStyle('display','');
+					//set hidden compare mode
+					$('compareScreen').setStyle('display','none');
+					$('compareMode').setStyle('display','none');
+					//set value datat
+					$('chartTargetValue').set('value','theoutput');
+					$('singleModeValue').set('value','true');
+					$('chartWidthValue').set('value','900');
+					$('chartHeightValue').set('value','400');
+					myPicker.close();
+				});
+				//load list of group
+				$('devices').set('html','Loading...');					
+					if($('listOfPortals').get('html')==''){
+						var theInnerHTML = pentahoAction( "NetWork traffic reports", "charts/Adnetwork_by_date", "loadListOfPortal.xaction");
+						$('listOfPortals').set('html',theInnerHTML);
+					}
+					$('devices').set('html',$('listOfPortals').get('html'));
+					var measure=$('mydiv').getElements('input[name=p_measures]');
+					var span=$('mydiv').getElements('span[id=p_measures-label]');
+					measure[0].checked = true;
+					measure[1].checked = false;
+					measure[2].checked = false;
+					measure[1].style.display = 'none';
+					measure[2].style.display = 'none';
+					span[1].style.display = 'none'
+					span[2].style.display = 'none';
+				/*
+				//load list of group
+				$('devices').set('html','Loading...');
+				if($('listOfGroup').get('html')==''){
+					var theInnerHTML = pentahoAction( "NetWork traffic reports", "charts/Adnetwork_by_date", "loadListOfGroup.xaction");
+					$('listOfGroup').set('html',theInnerHTML);
+				}
+				$('devices').set('html',$('listOfGroup').get('html'));
+				//load list of device
+				if($('listOfDevices').get('html')==''){
+					var theInnerHTML = pentahoAction( "NetWork traffic reports", "charts/Adnetwork_by_date", "loadListOfDevice.xaction");
+					$('listOfDevices').set('html',theInnerHTML);
+				}
+				
+					$('devices').set('html',$('listOfDevices').get('html'));
+					*/
+            }); 
+        </script>
+   </body>
+     
+</html>

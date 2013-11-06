@@ -1,0 +1,43 @@
+select NON EMPTY {[Event name].[adclick], [Event name].[adclk], [Event name].[adimp]} ON COLUMNS,
+  Crossjoin({[Id].[374]}, {[Latitude].Children}) ON ROWS
+from [daily_event_maps]
+where ([Full date].[2012-09-18], [Is Active].[true])
+
+select NON EMPTY Crossjoin({[Measures].[Event count]}, {[Event name].[adclick], [Event name].[adclk], [Event name].[adimp]}) ON COLUMNS,
+  NON EMPTY Hierarchize(Crossjoin({[Id].[All Ids]}, Union(Crossjoin({[Latitude].[All Latitudes]}, {[Longitude].[All Longitudes]}), Crossjoin({[Latitude].[All Latitudes]}, [Longitude].[All Longitudes].Children)))) ON ROWS
+from [daily_event_maps]
+where {[Full date].[2012-09-18]}
+
+select {[Event name].[adclick], [Event name].[adclk], [Event name].[adimp]} ON COLUMNS,
+  Crossjoin({[Id].[374]}, {[Latitude].Children}) ON ROWS
+from [daily_event_maps]
+where Crossjoin({[Is Active].[true]}, {[Time].[2012-Sep].[2012-09-18]})
+
+select NON EMPTY {[Event name].[adclick], [Event name].[adclk], [Event name].[adimp]} ON COLUMNS,
+  NON EMPTY Crossjoin({[Id].[374]}, {[Latitude].[41.609], [Latitude].[41.6165], [Latitude].[41.6337], [Latitude].[41.6936]}) ON ROWS
+from [daily_event_maps]
+where Crossjoin({[Is Active].[true]}, {[Time].[2012-Sep].[2012-09-18]})
+
+
+
+
+
+select NON EMPTY {[Event name].[adclick], [Event name].[adclk], [Event name].[adimp]} ON COLUMNS,
+  NON EMPTY Hierarchize(Union(Union(Union(Crossjoin({[Id].[374]}, Union(Crossjoin({[Latitude].[41.609]}, {[Longitude].[All Longitudes]}), Crossjoin({[Latitude].[41.609]}, [Longitude].[All Longitudes].Children))), Crossjoin({[Id].[374]}, Union(Crossjoin({[Latitude].[41.6165]}, {[Longitude].[All Longitudes]}), Crossjoin({[Latitude].[41.6165]}, [Longitude].[All Longitudes].Children)))), Crossjoin({[Id].[374]}, Union(Crossjoin({[Latitude].[41.6337]}, {[Longitude].[All Longitudes]}), Crossjoin({[Latitude].[41.6337]}, [Longitude].[All Longitudes].Children)))), Crossjoin({[Id].[374]}, Union(Crossjoin({[Latitude].[41.6936]}, {[Longitude].[All Longitudes]}), Crossjoin({[Latitude].[41.6936]}, [Longitude].[All Longitudes].Children))))) ON ROWS
+from [daily_event_maps]
+where Crossjoin({[Is Active].[true]}, {[Time].[2012-Sep].[2012-09-18]})
+
+
+select NON EMPTY {[Event name].[adclick], [Event name].[adclk], [Event name].[adimp]} ON COLUMNS,
+  NON EMPTY Crossjoin({[Id].[374]}, Crossjoin({[Latitude].Children}, {[Longitude].[-93.8047], [Longitude].[-93.7358], [Longitude].[-93.5973], [Longitude].[-93.5495]})) ON ROWS
+from [daily_event_maps]
+where Crossjoin({[Is Active].[true]}, {[Time].[2012-Sep].[2012-09-18]})
+
+select NON EMPTY {[Event name].Children} ON COLUMNS,
+  NON EMPTY Crossjoin({[Id].[14462]},Crossjoin({[Latitude].[All Latitudes].Children}, {[Longitude].[All Longitudes].Children})) ON ROWS
+from [daily_event_maps]
+where Crossjoin({[Is Active].[true]}, {[Time].[2012-Sep].[2012-09-15]:[Time].[2012-Sep].[2012-09-19]})
+
+
+
+

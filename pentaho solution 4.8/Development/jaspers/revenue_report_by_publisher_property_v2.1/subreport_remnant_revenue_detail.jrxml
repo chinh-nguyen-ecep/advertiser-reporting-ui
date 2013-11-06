@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="remnant_revenue_detail" language="groovy" pageWidth="1210" pageHeight="802" columnWidth="1210" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.100000000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="p_end_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_start_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_publisher_id" class="java.lang.String"/>
+	<parameter name="website_names_string" class="java.lang.String"/>
+	<parameter name="show_remnant" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("0")]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT a.full_date,
+a.ad_network_name,
+a.ad_network_id,
+a.paid_impressions,
+a.clicks,
+a.net_revenue,
+a.today_ys,
+a.today_estimate_revenue,
+(CASE WHEN b.cf_factor IS NULL THEN 1 ELSE b.cf_factor END) as cf_factor
+FROM(
+	SELECT     a.full_date,
+			'AdSense DBCLK Channel (-101)'::text as ad_network_name, -101 as ad_network_id,
+				sum(impressions_delivered) as paid_impressions,
+				sum(clicks_recorded) as clicks,
+				sum(estimated_earnings) as net_revenue,
+				0 as today_ys,
+				0 as today_estimate_revenue
+	FROM        adnetwork.daily_adsense_dbclk_channel a
+	INNER JOIN refer.date_dim b ON a.eastern_date_sk=b.date_sk
+	WHERE       is_active = true
+	AND b.full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
+	AND partner_id IN (
+		SELECT partner_id FROM refer.adm_website_dim
+		WHERE dt_expire='9999-12-31' AND publisher_id=$P{p_publisher_id}::int
+		AND (website_id IN (select unnest(string_to_array($P{website_names_string}, ';'))::int) OR '-1000' = $P{website_names_string})
+		)
+	GROUP BY a.full_date
+UNION
+	/* City Grid */
+	SELECT     a.full_date,
+			'City Grid/City Grid Proxy (20,29)'::text as ad_network_name,29 as ad_network_id,
+				sum(fullfilled_code_y) as paid_impressions,
+				sum(clicks) as clicks,
+				sum(estimated_net_earnings) as net_revenue,
+				sum(today_ys) as today_ys,
+				ROUND(sum(today_estimate_revenue)::NUMERIC,3) as today_estimate_revenue
+	FROM        adnetwork.daily_cg_performance a
+	INNER JOIN refer.date_dim b ON a.eastern_date_sk=b.date_sk
+	WHERE       is_active = true
+	AND b.full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
+	AND partner_id IN (
+		SELECT partner_id FROM refer.adm_website_dim
+		WHERE dt_expire='9999-12-31' AND publisher_id=$P{p_publisher_id}::int
+		AND (website_id IN (select unnest(string_to_array($P{website_names_string}, ';'))::int) OR '-1000' = $P{website_names_string})
+		)
+	GROUP BY a.full_date
+UNION
+	/* iTunes */
+	SELECT     a.full_date,
+			'iTunes (-1)'::text as ad_network_name, -102 as ad_network_id,
+				sum(impressions) as paid_impressions,
+				sum(clicks) as clicks,
+				sum(revenue) as net_revenue,
+				0 as today_ys,
+				0 as today_estimate_revenue
+	FROM        adnetwork.daily_it_performance a
+	INNER JOIN refer.date_dim b ON a.eastern_date_sk=b.date_sk
+	WHERE       is_active = true
+	AND b.full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
+	AND partner_id IN (
+		SELECT partner_id FROM refer.adm_website_dim
+		WHERE dt_expire='9999-12-31' AND publisher_id=$P{p_publisher_id}::int
+		AND (website_id IN (select unnest(string_to_array($P{website_names_string}, ';'))::int) OR '-1000' = $P{website_names_string})
+		)
+	GROUP BY a.full_date
+UNION
+	/* JumpTap */
+	SELECT     a.full_date,
+			'JumpTap (11)'::text as ad_network_name, 11 as ad_network_id,
+				sum(fullfilled_code_y) as paid_impressions,
+				sum(clicks) as clicks,
+				ROUND(sum(net_revenue)::NUMERIC,3) as net_revenue,
+				sum(today_ys) as today_ys,
+				ROUND(SUM(today_estimate_revenue)::NUMERIC,3) as today_estimate_revenue
+	FROM        adnetwork.daily_jt_performance a
+	INNER JOIN refer.date_dim b ON a.eastern_date_sk=b.date_sk
+	WHERE       is_active = true
+	AND b.full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
+	AND partner_id IN (
+		SELECT partner_id FROM refer.adm_website_dim
+		WHERE dt_expire='9999-12-31' AND publisher_id=$P{p_publisher_id}::int
+		AND (website_id IN (select unnest(string_to_array($P{website_names_string}, ';'))::int) OR '-1000' = $P{website_names_string})
+		)
+	GROUP BY a.full_date
+UNION
+	/* Millennial Media */
+	SELECT     a.full_date,
+			'Millennial Media (4)'::text as ad_network_name, 4 as ad_network_id,
+				sum(fullfilled_code_y) as paid_impressions,
+				sum(clicks) as clicks,
+				ROUND(sum(net_revenue)::NUMERIC,3) as net_revenue,
+				sum(today_ys) as today_ys,
+				ROUND(SUM(today_estimate_revenue)::NUMERIC,3) as today_estimate_revenue
+	FROM        adnetwork.daily_mm_performance a
+	INNER JOIN refer.date_dim b ON a.eastern_date_sk=b.date_sk
+	WHERE       is_active = true
+	AND b.full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
+	AND partner_id IN (
+		SELECT partner_id FROM refer.adm_website_dim
+		WHERE dt_expire='9999-12-31' AND publisher_id=$P{p_publisher_id}::int
+		AND (website_id IN (select unnest(string_to_array($P{website_names_string}, ';'))::int) OR '-1000' = $P{website_names_string})
+		)
+	GROUP BY a.full_date
+UNION
+	/* Marchex */
+	SELECT     a.full_date,
+			'Marchex/Marchex Proxy (21,28)'::text as ad_network_name, 28 as ad_network_id,
+				sum(fullfilled_code_y) as paid_impressions,
+				sum(clicks) as clicks,
+				ROUND(sum("cost")::NUMERIC,3) as net_revenue,
+				sum(today_ys) as today_ys,
+				ROUND(SUM(today_estimate_revenue)::NUMERIC,3) as today_estimate_revenue
+	FROM        adnetwork.daily_mx_performance a
+	INNER JOIN refer.date_dim b ON a.eastern_date_sk=b.date_sk
+	WHERE       is_active = true
+	AND b.full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
+	AND partner_id IN (
+		SELECT partner_id FROM refer.adm_website_dim
+		WHERE dt_expire='9999-12-31' AND publisher_id=$P{p_publisher_id}::int
+		AND (website_id IN (select unnest(string_to_array($P{website_names_string}, ';'))::int) OR '-1000' = $P{website_names_string})
+		)
+	GROUP BY a.full_date
+UNION
+	/* Superpages Proxy/Blue */
+	SELECT     a.full_date,
+			'Superpages Proxy/Blue (30,26)'::text as ad_network_name, 30 as ad_network_id,
+				sum(fullfilled_code_y) as paid_impressions,
+				0 as clicks,
+				ROUND(sum(revenue)::NUMERIC,3) as net_revenue,
+				sum(today_ys) as today_ys,
+				ROUND(SUM(today_estimate_revenue)::NUMERIC,3) as today_estimate_revenue
+	FROM        adnetwork.daily_sp_blue_performance a
+	INNER JOIN refer.date_dim b ON a.eastern_date_sk=b.date_sk
+	WHERE       is_active = true
+	AND b.full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
+	AND partner_id IN (
+		SELECT partner_id FROM refer.adm_website_dim
+		WHERE dt_expire='9999-12-31' AND publisher_id=$P{p_publisher_id}::int
+		AND (website_id IN (select unnest(string_to_array($P{website_names_string}, ';'))::int) OR '-1000' = $P{website_names_string})
+		)
+	GROUP BY a.full_date
+UNION
+	/* Where */
+	SELECT     a.full_date,
+			'Where/Where HTML (23,25)'::text as ad_network_name, 25 as ad_network_id,
+				sum(fullfilled_code_y) as paid_impressions,
+				sum(clicked) as clicked,
+				ROUND(sum(revenue)::NUMERIC,3) as net_revenue,
+				sum(today_ys) as today_ys,
+				ROUND(SUM(today_estimate_revenue)::NUMERIC,3) as today_estimate_revenue
+	FROM        adnetwork.daily_wh_performance a
+	INNER JOIN refer.date_dim b ON a.eastern_date_sk=b.date_sk
+	WHERE       is_active = true
+	AND b.full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
+	AND partner_id IN (
+		SELECT partner_id FROM refer.adm_website_dim
+		WHERE dt_expire='9999-12-31' AND publisher_id=$P{p_publisher_id}::int
+		AND (website_id IN (select unnest(string_to_array($P{website_names_string}, ';'))::int) OR '-1000' = $P{website_names_string})
+		)
+	GROUP BY a.full_date
+UNION
+	/* AT&T Yellowpages */
+	SELECT     a.full_date,
+			'AT&T Yellowpages (27)'::text as ad_network_name, 27 as ad_network_id,
+				sum(fullfilled_code_y) as paid_impressions,
+				sum(clicks) as clicks,
+				ROUND(sum(revenue)::NUMERIC,3) as net_revenue,
+				sum(today_ys) as today_ys,
+				ROUND(SUM(today_estimate_revenue)::NUMERIC,3) as today_estimate_revenue
+	FROM        adnetwork.daily_yp_performance a
+	INNER JOIN refer.date_dim b ON a.eastern_date_sk=b.date_sk
+	WHERE       is_active = true
+	AND b.full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
+	AND partner_id IN (
+		SELECT partner_id FROM refer.adm_website_dim
+		WHERE dt_expire='9999-12-31' AND publisher_id=$P{p_publisher_id}::int
+		AND (website_id IN (select unnest(string_to_array($P{website_names_string}, ';'))::int) OR '-1000' = $P{website_names_string})
+		)
+	GROUP BY a.full_date
+UNION
+	/* AT&T Static Banner Yellowpages */
+	SELECT     a.full_date,
+			'AT&T Static Banner Yellowpages (32)'::text as ad_network_name, 32 as ad_network_id,
+				sum(fullfilled_code_y) as paid_impressions,
+				sum(clicks) as clicks,
+				ROUND(sum(revenue)::NUMERIC,3) as net_revenue,
+				sum(today_ys) as today_ys,
+				ROUND(SUM(today_estimate_revenue)::NUMERIC,3) as today_estimate_revenue
+	FROM        adnetwork.daily_yp_sb_performance a
+	INNER JOIN refer.date_dim b ON a.eastern_date_sk=b.date_sk
+	WHERE       is_active = true
+	AND b.full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
+	AND partner_id IN (
+		SELECT partner_id FROM refer.adm_website_dim
+		WHERE dt_expire='9999-12-31' AND publisher_id=$P{p_publisher_id}::int
+		AND (website_id IN (select unnest(string_to_array($P{website_names_string}, ';'))::int) OR '-1000' = $P{website_names_string})
+		)
+	GROUP BY a.full_date
+UNION
+	/* AT&T Static No Logo Yellowpages */
+	SELECT     a.full_date,
+			'AT&T Static No Logo Yellowpages (33)'::text as ad_network_name, 33 as ad_network_id,
+				sum(fullfilled_code_y) as paid_impressions,
+				sum(clicks) as clicks,
+				ROUND(sum(revenue)::NUMERIC,3) as net_revenue,
+				sum(today_ys) as today_ys,
+				ROUND(SUM(today_estimate_revenue)::NUMERIC,3) as today_estimate_revenue
+	FROM        adnetwork.daily_yp_no_performance a
+	INNER JOIN refer.date_dim b ON a.eastern_date_sk=b.date_sk
+	WHERE       is_active = true
+	AND b.full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
+	AND partner_id IN (
+		SELECT partner_id FROM refer.adm_website_dim
+		WHERE dt_expire='9999-12-31' AND publisher_id=$P{p_publisher_id}::int
+		AND (website_id IN (select unnest(string_to_array($P{website_names_string}, ';'))::int) OR '-1000' = $P{website_names_string})
+		)
+	GROUP BY a.full_date
+UNION
+	/* KlickThru */
+	SELECT     a.full_date,
+			'KlickThru (35)'::text as ad_network_name, 35 as ad_network_id,
+				sum(fullfilled_code_y) as paid_impressions,
+				sum(clicks) as clicks,
+				ROUND(sum(revenue)::NUMERIC,3) as net_revenue,
+				sum(today_ys) as today_ys,
+				ROUND(SUM(today_estimate_revenue)::NUMERIC,3) as today_estimate_revenue
+	FROM        adnetwork.daily_kt_performance a
+	INNER JOIN refer.date_dim b ON a.eastern_date_sk=b.date_sk
+	WHERE       is_active = true
+	AND b.full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
+	AND partner_id IN (
+		SELECT partner_id FROM refer.adm_website_dim
+		WHERE dt_expire='9999-12-31' AND publisher_id=$P{p_publisher_id}::int
+		AND (website_id IN (select unnest(string_to_array($P{website_names_string}, ';'))::int) OR '-1000' = $P{website_names_string})
+		)
+	GROUP BY a.full_date
+UNION
+	/* City Grid mobile */
+	SELECT     a.full_date,
+			'City Grid Mobile (38)'::text as ad_network_name, 38 as ad_network_id,
+				sum(fullfilled_code_y) as paid_impressions,
+				sum(clicks) as clicks,
+				sum(estimated_net_earnings) as net_revenue,
+				sum(today_ys) as today_ys,
+				ROUND(SUM(today_estimate_revenue)::NUMERIC,3) as today_estimate_revenue
+	FROM        adnetwork.daily_cg_mobile_performance a
+	INNER JOIN refer.date_dim b ON a.eastern_date_sk=b.date_sk
+	WHERE       is_active = true
+	AND b.full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
+	AND partner_id IN (
+		SELECT partner_id FROM refer.adm_website_dim
+		WHERE dt_expire='9999-12-31' AND publisher_id=$P{p_publisher_id}::int
+		AND (website_id IN (select unnest(string_to_array($P{website_names_string}, ';'))::int) OR '-1000' = $P{website_names_string})
+		)
+	GROUP BY a.full_date
+) a
+LEFT JOIN refer.correction_factor_dim b ON a.full_date BETWEEN b.start_date::date AND b.end_date::date-1 AND a.ad_network_id=b.adnet_id AND b.cf_type=1
+WHERE 'true'=$P{show_remnant}
+ORDER BY full_date,ad_network_name]]>
+	</queryString>
+	<field name="full_date" class="java.sql.Date"/>
+	<field name="ad_network_name" class="java.lang.String"/>
+	<field name="ad_network_id" class="java.lang.Integer"/>
+	<field name="paid_impressions" class="java.lang.Double"/>
+	<field name="clicks" class="java.lang.Long"/>
+	<field name="net_revenue" class="java.lang.Double"/>
+	<field name="today_ys" class="java.lang.Long"/>
+	<field name="today_estimate_revenue" class="java.math.BigDecimal"/>
+	<field name="cf_factor" class="java.lang.Double"/>
+	<variable name="total_im" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{paid_impressions}]]></variableExpression>
+	</variable>
+	<variable name="total_cl" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{clicks}]]></variableExpression>
+	</variable>
+	<variable name="total_rev" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{net_revenue}]]></variableExpression>
+	</variable>
+	<variable name="paid_impressions_1" class="java.lang.Double" resetType="Group" resetGroup="full_date" calculation="Sum">
+		<variableExpression><![CDATA[$F{paid_impressions}]]></variableExpression>
+	</variable>
+	<variable name="clicks_1" class="java.lang.Long" resetType="Group" resetGroup="full_date" calculation="Sum">
+		<variableExpression><![CDATA[$F{clicks}]]></variableExpression>
+	</variable>
+	<variable name="net_revenue_1" class="java.lang.Double" resetType="Group" resetGroup="full_date" calculation="Sum">
+		<variableExpression><![CDATA[$F{net_revenue}]]></variableExpression>
+	</variable>
+	<variable name="today_ys_1" class="java.lang.Integer" resetType="Group" resetGroup="full_date" calculation="Sum">
+		<variableExpression><![CDATA[$F{today_ys}]]></variableExpression>
+	</variable>
+	<variable name="today_estimate_revenue_1" class="java.lang.Double" resetType="Group" resetGroup="full_date" calculation="Sum">
+		<variableExpression><![CDATA[$F{today_estimate_revenue}]]></variableExpression>
+	</variable>
+	<variable name="total_today_ys" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{today_ys}]]></variableExpression>
+	</variable>
+	<variable name="total_today_estimate_revenue" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{today_estimate_revenue}]]></variableExpression>
+	</variable>
+	<group name="full_date">
+		<groupExpression><![CDATA[$F{full_date}]]></groupExpression>
+		<groupHeader>
+			<band height="30">
+				<textField pattern="yyyy-MM-dd">
+					<reportElement x="0" y="0" width="160" height="30"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[$F{full_date}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="full_date" pattern="#,##0" isBlankWhenNull="false">
+					<reportElement mode="Transparent" x="362" y="0" width="113" height="30" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{paid_impressions_1}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="full_date" pattern="#,##0" isBlankWhenNull="false">
+					<reportElement mode="Transparent" x="475" y="0" width="60" height="30" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Long"><![CDATA[$V{clicks_1}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="full_date" pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement mode="Transparent" x="595" y="0" width="60" height="30" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{net_revenue_1}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="full_date" pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement mode="Transparent" x="535" y="0" width="60" height="30" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{today_estimate_revenue_1}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="full_date" pattern="#,##0.00" isBlankWhenNull="false">
+					<reportElement mode="Transparent" x="655" y="0" width="100" height="30" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+						<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{net_revenue_1}+$V{today_estimate_revenue_1}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="300" height="35"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Remnant Ad Networks Detail]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="37" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="34" width="1210" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="160" y="0" width="202" height="30"/>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Network]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="475" y="0" width="60" height="30"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Clicks]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="160" height="30"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Full date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="535" y="0" width="60" height="30"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unreported
+Revenue]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="362" y="0" width="113" height="30"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Impressions]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="595" y="0" width="60" height="30"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reported
+Revenue]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="655" y="0" width="100" height="30"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total
+Revenue]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="755" y="0" width="100" height="30"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[API Adjustment %]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="160" y="0" width="202" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ad_network_name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="362" y="0" width="113" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{paid_impressions}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="475" y="0" width="60" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{clicks}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="595" y="0" width="60" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{net_revenue}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="535" y="0" width="60" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{today_estimate_revenue}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="655" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="9" isBold="false" isItalic="true" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{net_revenue}+$F{today_estimate_revenue}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0 %">
+				<reportElement x="755" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{cf_factor}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="26" splitType="Stretch">
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="362" y="6" width="113" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total_im}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="475" y="6" width="60" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{total_cl}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="595" y="6" width="60" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total_rev}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="5" width="1210" height="1"/>
+			</line>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="535" y="6" width="60" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total_today_estimate_revenue}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="655" y="6" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total_today_estimate_revenue}+$V{total_rev}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

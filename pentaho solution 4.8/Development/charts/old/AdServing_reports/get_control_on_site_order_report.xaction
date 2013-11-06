@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>get control on site order report</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author/>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs/>
+
+  <outputs> 
+    <mssg type="string"> 
+      <destinations> 
+        <response>Content</response> 
+      </destinations> 
+    </mssg> 
+  </outputs>
+
+  <resources/>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get list of publisher</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result_publishers"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[dw3]]></jndi>  
+        <live><![CDATA[false]]></live>  
+        <query><![CDATA[SELECT a.*
+FROM (
+SELECT 'All Publishers' as publisher_name, 0 as row_order
+UNION
+SELECT publisher_name, 1 as row_order
+FROM dbclk.daily_agg_site_order
+WHERE is_active=true GROUP by publisher_name
+) a
+ORDER BY row_order, publisher_name;]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get list of campaign name</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result_campaigns"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[dw3]]></jndi>  
+        <query><![CDATA[SELECT a.*
+FROM (
+SELECT 'All Campaigns' as campaign_name, 0 as row_order
+UNION
+SELECT campaign_name, 1 as row_order
+FROM dbclk.daily_agg_site_order
+WHERE is_active=true GROUP by campaign_name
+) a
+ORDER BY row_order, campaign_name;]]></query>  
+        <live><![CDATA[false]]></live> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>JavaScript</action-type>
+      <action-inputs> 
+        <query_result_publishers type="result-set"/>  
+        <query_result_campaigns type="result-set"/> 
+      </action-inputs>
+      <action-outputs> 
+        <resultPublisher type="string"/>  
+        <resultCampiagn type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var resultPublisher;
+var resultCampiagn;
+
+resultPublisher='<select id="p_Publisher" name="p_Publisher" size="1" title="" class="portlet-form-field">';
+
+for(var i=0;i<query_result_publishers.getRowCount();i++){
+	var name=query_result_publishers.getValueAt(i,0);
+	resultPublisher+='<option value="'+name+'">'+name+'</option>';
+};	
+resultPublisher+='</select>';
+
+resultCampiagn='<table><tr></tr>';
+
+for(var i=0;i<query_result_campaigns.getRowCount();i++){
+	var name=query_result_campaigns.getValueAt(i,0);
+	if(i==0){
+	resultCampiagn+='<tr><td><input id="site_'+name+'" class="portlet-form-field" type="checkbox" name="p_Campaign" value="'+name+'" title="" checked><span id="device-label" class="portlet-form-field-label">'+name+'</span></td></tr>';
+	}else{
+	resultCampiagn+='<tr><td><input id="site_'+name+'" class="portlet-form-field" type="checkbox" name="p_Campaign" value="'+name+'" title=""><span id="device-label" class="portlet-form-field-label">'+name+'</span></td></tr>';
+	};
+	
+};
+resultCampiagn+='</table>';]]></script> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>TemplateComponent</component-name>
+      <action-type>Message Template</action-type>
+      <action-inputs> 
+        <resultCampiagn type="string"/>  
+        <resultPublisher type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <output-message type="string" mapping="mssg"/> 
+      </action-outputs>
+      <component-definition> 
+        <template><![CDATA[<table class="tableForm">
+         <tbody>
+				<tr>
+					 <th>Publisher:</th>
+					 <td>		        
+					 {resultPublisher}        
+					 </td>
+				 </tr>			
+				 
+				 <tr>
+					 <th>Campaigns:</th>
+					 <td>
+						<input id="dimesion_fillter" type="text" style="width: 300px;"/>
+						<div id="dimesion" style="width: 300px;border: 1px solid gray;height: 145px;overflow: auto">
+						{resultCampiagn}
+						</div>
+					 </td>
+				 </tr>
+			</tbody>
+		 </table>]]></template> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

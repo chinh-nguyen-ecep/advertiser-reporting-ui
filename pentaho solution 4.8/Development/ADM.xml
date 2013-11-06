@@ -1,0 +1,366 @@
+<Schema name="ADM-DBCLICK">
+  <Cube name="daily_agg_adm_data_feed" cache="true" enabled="true">
+    <Table name="daily_agg_adm_data_feed" schema="adm">
+    </Table>
+    <Dimension type="TimeDimension" highCardinality="false" name="Full date">
+      <Hierarchy hasAll="true">
+        <Level name="Full date" column="full_date" type="Date" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Calendar year month">
+      <Hierarchy hasAll="true">
+        <Level name="Calendar year month" column="calendar_year_month" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Is Active">
+      <Hierarchy hasAll="true" defaultMember="true">
+        <Level name="Is Active" column="is_active" type="Boolean" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Impression count" column="impressions" datatype="Integer" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Click count" column="clicks" datatype="Integer" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Revenue total" column="revenue" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="monthly_forecast" cache="true" enabled="false">
+    <Table name="monthly_forecast" schema="adm">
+    </Table>
+    <Dimension type="StandardDimension" highCardinality="false" name="Calendar year month">
+      <Hierarchy hasAll="true">
+        <Level name="Calendar year month" column="calendar_year_month" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Parent1">
+      <Hierarchy hasAll="true">
+        <Level name="Parent1" column="parent1_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Portal">
+      <Hierarchy hasAll="true">
+        <Level name="Portal" column="portal_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Device">
+      <Hierarchy hasAll="true">
+        <Level name="Device" column="device_type" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Is Active">
+      <Hierarchy hasAll="true" defaultMember="true">
+        <Level name="Is Active" column="is_active" type="Boolean" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="impressions" column="impressions" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="daily_agg_revenue_by_order" cache="true" enabled="true">
+    <Table name="daily_agg_revenue_by_order" schema="adm">
+    </Table>
+    <Dimension type="TimeDimension" highCardinality="false" name="Full date">
+      <Hierarchy hasAll="true">
+        <Level name="Full date" column="full_date" type="Date" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Order name">
+      <Hierarchy hasAll="true">
+        <Level name="Order name" column="order_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Metric">
+      <Hierarchy hasAll="true">
+        <Level name="Metric" column="metric" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Is active">
+      <Hierarchy hasAll="true" defaultMember="true">
+        <Level name="Is active" column="is_active" type="Boolean" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Impressions" column="impressions" datatype="Integer" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Clicks" column="clicks" datatype="Integer" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Revenue" column="revenue" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Rank" column="rank" datatype="Integer" aggregator="max" visible="true">
+    </Measure>
+    <Measure name="Yesterday Rank" column="yesterday_rank" datatype="Integer" aggregator="max" visible="true">
+    </Measure>
+    <Measure name="Rank After One Day" column="rank_after_one_day" datatype="Integer" aggregator="max" visible="true">
+    </Measure>
+    <Measure name="Budget" column="budget" datatype="Numeric" aggregator="max" visible="true">
+    </Measure>
+    <Measure name="Pacing" column="pacing" datatype="Numeric" aggregator="avg" visible="true">
+    </Measure>
+    <Measure name="MTD Total Revenue" column="mtd_total_revenue" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Remaining Monthly Budget" column="remaining_monthly_budget" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Next Month Budget" column="next_month_budget" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="ABudget" column="abudget" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="daily_agg_revenue_by_order_yesterday" cache="true" enabled="true">
+    <Table name="daily_agg_revenue_by_order_yesterday" schema="adm">
+    </Table>
+    <Dimension type="TimeDimension" highCardinality="false" name="Full date">
+      <Hierarchy hasAll="true">
+        <Level name="Full date" column="full_date" type="Date" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Order name">
+      <Hierarchy hasAll="true">
+        <Level name="Order name" column="order_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Metric">
+      <Hierarchy hasAll="true">
+        <Level name="Metric" column="metric" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Is active">
+      <Hierarchy hasAll="true" defaultMember="true">
+        <Level name="Is active" column="is_active" type="Boolean" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Impressions" column="impressions" datatype="Integer" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Clicks" column="clicks" datatype="Integer" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Revenue" column="revenue" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="TDRank" column="tdrank" datatype="Integer" aggregator="max" visible="true">
+    </Measure>
+    <Measure name="Yesterday Rank" column="yesterday_rank" datatype="Integer" aggregator="max" visible="true">
+    </Measure>
+    <Measure name="Budget" column="budget" datatype="Numeric" aggregator="max" visible="true">
+    </Measure>
+    <Measure name="Pacing" column="pacing" datatype="Numeric" aggregator="avg" visible="true">
+    </Measure>
+    <Measure name="MTD Total Revenue" column="mtd_total_revenue" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Remaining Monthly Budget" column="remaining_monthly_budget" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Next Month Budget" column="next_month_budget" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="ABudget" column="abudget" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="daily_agg_order_placement_creative_flight" cache="true" enabled="true">
+    <Table name="daily_agg_network_performance" schema="adm">
+    </Table>
+    <Dimension type="TimeDimension" highCardinality="false" name="Date">
+      <Hierarchy hasAll="true">
+        <Level name="Date" column="full_date" type="Date" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Year month">
+      <Hierarchy hasAll="true">
+        <Level name="Year month" column="calendar_year_month" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Order">
+      <Hierarchy hasAll="true">
+        <Level name="Order" column="order_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Placement">
+      <Hierarchy hasAll="true">
+        <Level name="Placement" column="placement_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Creative">
+      <Hierarchy hasAll="true">
+        <Level name="Creative" column="creative_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Flight id">
+      <Hierarchy hasAll="true">
+        <Level name="Flight id" column="flight_id" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Is active">
+      <Hierarchy hasAll="true" defaultMember="true">
+        <Level name="Is active" column="is_active" type="Boolean" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Revenue" column="revenue" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Impressions" column="impressions" datatype="Integer" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Clicks" column="clicks" datatype="Integer" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="daily_agg_network_performance" cache="true" enabled="true">
+    <Table name="daily_agg_network_performance" schema="adm">
+    </Table>
+    <Dimension type="TimeDimension" highCardinality="false" name="Date">
+      <Hierarchy hasAll="true">
+        <Level name="Date" column="full_date" type="Date" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Year month">
+      <Hierarchy hasAll="true">
+        <Level name="Year month" column="calendar_year_month" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Order">
+      <Hierarchy hasAll="true">
+        <Level name="Order" column="order_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Publisher">
+      <Hierarchy hasAll="true">
+        <Level name="Publisher" column="publisher_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Partner">
+      <Hierarchy hasAll="true">
+        <Level name="Partner" column="partner_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Property">
+      <Hierarchy hasAll="true" allMemberName="All Properties">
+        <Level name="Property" column="property_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Placement">
+      <Hierarchy hasAll="true">
+        <Level name="Placement" column="placement_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Creative">
+      <Hierarchy hasAll="true">
+        <Level name="Creative" column="creative_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Flight id">
+      <Hierarchy hasAll="true">
+        <Level name="Flight id" column="flight_id" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Active">
+      <Hierarchy hasAll="true" defaultMember="true">
+        <Level name="Active" column="is_active" type="Boolean" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Network">
+      <Hierarchy hasAll="true">
+        <Level name="Network" column="network_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Publication">
+      <Hierarchy hasAll="true">
+        <Level name="Publication" column="publication_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Organization">
+      <Hierarchy hasAll="true">
+        <Level name="Organization" column="organization_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Advertiser">
+      <Hierarchy hasAll="true">
+        <Level name="Advertiser" column="advertiser_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Parent1">
+      <Hierarchy hasAll="true">
+        <Level name="Parent1" column="parent1_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Revenue" column="revenue" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Impressions" column="impressions" datatype="Integer" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Clicks" column="clicks" datatype="Integer" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="daily_agg_publisher_website_partner" cache="true" enabled="true">
+    <Table name="daily_agg_network_performance" schema="adm">
+    </Table>
+    <Dimension type="TimeDimension" highCardinality="false" name="Date">
+      <Hierarchy hasAll="true">
+        <Level name="Date" column="full_date" type="Date" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Year month">
+      <Hierarchy hasAll="true">
+        <Level name="Year month" column="calendar_year_month" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Publisher">
+      <Hierarchy hasAll="true">
+        <Level name="Publisher" column="publisher_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Property">
+      <Hierarchy hasAll="true">
+        <Level name="Property" column="property_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Partner">
+      <Hierarchy hasAll="true">
+        <Level name="Partner" column="partner_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Active">
+      <Hierarchy hasAll="true" defaultMember="true">
+        <Level name="Active" column="is_active" type="Boolean" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Revenue" column="revenue" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Impressions" column="impressions" datatype="Integer" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Clicks" column="clicks" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+</Schema>

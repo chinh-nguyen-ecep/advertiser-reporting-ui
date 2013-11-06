@@ -1,0 +1,103 @@
+<script type="text/javascript" src="GetCDFResource?resource=/Development/dashboards/my_example_1/MetaLayerCharts.js"></script>
+<script type="text/javascript" src="GetCDFResource?resource=/Development/dashboards/verveScript.js"></script>
+<h1 class="dashboardName">Sites top 10 summary</h1>
+<div id="boxContenHiddenBoxs" class="mybox none">
+	<div class="box_content" id="hiddenDiv" style="width: 997px;">
+		
+	</div>	
+</div>
+<div class="mybox">
+	<div class="title">
+		<div id="topTenSitesTitle"></div>
+	</div>
+	<div class="box_content">
+	<div id="topTenSites" ></div>
+	</div>
+</div>
+<div class="mybox">
+	<div class="title">
+		<div id="siteDetailTitle" ></div>
+	</div>
+	<div class="box_content">
+	<div id="SiteDetailChart" ></div>
+	</div>
+</div>
+
+<div class="mybox">
+	<div class="title">
+		<div id="" >Measures count</div>
+	</div>
+	<div class="box_content">
+	<div id="MeasuresChart" ></div>
+	</div>
+</div>
+
+
+
+
+
+<script language="javascript" type="text/javascript">
+siteDetailTitle = 
+{
+  name: "siteDetailTitle",
+  type: "text",
+  title: "Top Ten Customers",
+  listeners:["MetaLayerCharts.selectedSite","MetaLayerCharts.selectedMeasures"],
+  htmlObject: "siteDetailTitle",
+  executeAtStart: true,
+  expression: function(){return this.title},
+  preExecution:function(){
+  	this.title=MetaLayerCharts.selectedSite+" "+MetaLayerCharts.selectedMeasures+' detail';
+  },
+  postExecution:function(){}
+}
+
+topTenSitesTitle = 
+{
+  name: "topTenSitesTitle",
+  type: "text",
+  title: "topTenSitesTitle",
+  listeners:["MetaLayerCharts.selectedMeasures"],
+  htmlObject: "topTenSitesTitle",
+  executeAtStart: true,
+  expression: function(){return this.title},
+  preExecution:function(){
+  	this.title="Top 10 "+MetaLayerCharts.selectedMeasures+" By Sites";
+  },
+  postExecution:function(){}
+}
+
+var topTenSites = 
+{
+	name: "topTenSites",
+	type: "jFreeChartComponent",
+	listeners:["MetaLayerCharts.selectedMeasures"],
+	chartDefinition: MetaLayerCharts.topTenSitesChartDefinition,
+	htmlObject: "topTenSites",
+	executeAtStart: true
+};
+
+var SiteDetailChart = 
+{
+	name: "SiteDetailChart",
+	type: "openFlashChartComponent",
+	listeners:["MetaLayerCharts.selectedSite","MetaLayerCharts.selectedMeasures"],	
+	chartDefinition: MetaLayerCharts.siteDetailChartDefinition,
+	htmlObject: "SiteDetailChart",
+	executeAtStart: true
+};
+
+var MeasuresChart = 
+{
+	name: "MeasuresChart",
+	type: "jFreeChartComponent",	
+	chartDefinition: MetaLayerCharts.measuresChartDefinition,
+	htmlObject: "MeasuresChart",
+	executeAtStart: true
+};
+
+
+var components = [topTenSites,SiteDetailChart,siteDetailTitle,MeasuresChart,topTenSitesTitle];
+Dashboards.init(components);
+					
+</script>

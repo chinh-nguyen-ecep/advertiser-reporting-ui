@@ -1,0 +1,60 @@
+<html xmlns:xf="http://www.w3.org/2002/xforms">
+   <head>
+	<!-- do not include a <meta> tag -->
+	<title></title>
+      <link rel="stylesheet" type="text/css" href="/verve-lib/css/jasperReportCommonScript.css"></link>
+	  <script src="/verve-lib/scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+	  <script src="/verve-lib/scripts/verve-script-jquery.js" type="text/javascript"></script>
+      <script src="/verve-lib/scripts/jasperReportCommonScript.js" type="text/javascript"></script>
+	  {xform-header}
+   </head>
+   <body class="pentaho">
+      <div name="dialog-form" title="Control Panel" style="width: 460px;height: 520px;">
+         <form name="parameter-form" id="parameter-form" method="GET">
+         <table class="tableForm">
+         <tbody>	         
+			<tr>
+				 <th>Year Week:</th>
+				 <td>
+					{p_year_week}
+				 </td>
+			 </tr>	 
+         </tbody>
+         </table>
+		 <div id="hide_in_form" style="display:none">
+			{solution}
+			{action}
+			{path}
+		 </div> 
+	    </form>
+      </div>    
+   
+ 	<script> <![CDATA[		 
+			$(document).ready(function(){
+				initJasperPageTemplate({
+					controlPanle_width: 360,
+					//controlPanle_height: 530,
+					generateFormContent: generateFormContent,
+					formValidation:formValidation,
+					reportName:'Weekly VLM New Flights Booked Report',
+					miniMode: true,
+					iframeMode:true
+				});
+			});
+			
+			var generateFormContent=function(domContentForm,completedFn){
+				$('option[value=]').remove();
+				
+			}
+			
+			var formValidation=function(domContentForm,divResult){
+				var form=domContentForm.children('form');
+				var validate=true;
+				
+				return true;
+			}
+	]]>
+	</script>
+   </body>
+     
+</html>

@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Daily Adcel Geo Quality</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>chinhnguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type>report</result-type>  
+    <icon>chart_1(2).png|chart_1(2).png</icon> 
+  </documentation>
+
+  <inputs> 
+    <p_start_date type="string"> 
+      <sources> 
+        <request>p_start_date</request> 
+      </sources>  
+      <default-value/> 
+    </p_start_date>  
+    <p_end_date type="string"> 
+      <sources> 
+        <request>p_end_date</request> 
+      </sources>  
+      <default-value/> 
+    </p_end_date>  
+    <v_max_date type="string"> 
+      <sources> 
+        <request>v_max_date</request> 
+      </sources>  
+      <default-value/> 
+    </v_max_date>  
+    <v_min_date type="string"> 
+      <sources> 
+        <request>v_min_date</request> 
+      </sources>  
+      <default-value/> 
+    </v_min_date>  
+    <List_report_type type="result-set"> 
+      <default-value type="result-set"> 
+        <row> 
+          <name>Partner</name>  
+          <value>Partner</value> 
+        </row>  
+        <row> 
+          <name>Partner Portal</name>  
+          <value>Partner Portal</value> 
+        </row> 
+      </default-value>  
+      <columns> 
+        <name type="string"/>  
+        <value type="string"/> 
+      </columns> 
+    </List_report_type>  
+    <p_report_type type="string"> 
+      <sources> 
+        <request>p_report_type</request> 
+      </sources>  
+      <default-value><![CDATA[Partner]]></default-value> 
+    </p_report_type>  
+    <List_output_type type="string-list"> 
+      <default-value type="string-list"> 
+        <list-item>html</list-item>  
+        <list-item>pdf</list-item>  
+        <list-item>xls</list-item>  
+        <list-item>rtf</list-item>  
+        <list-item>csv</list-item> 
+      </default-value> 
+    </List_output_type>  
+    <p_output type="string"> 
+      <sources> 
+        <request>p_output</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </p_output>  
+    <p_partner_ids type="string"> 
+      <sources> 
+        <request>p_partner_ids</request> 
+      </sources>  
+      <default-value/> 
+    </p_partner_ids>  
+    <p_publisher_ids type="string"> 
+      <sources> 
+        <request>p_publisher_ids</request> 
+      </sources>  
+      <default-value/> 
+    </p_publisher_ids>  
+    <p_mode type="string"> 
+      <sources> 
+        <request>p_mode</request> 
+      </sources>  
+      <default-value><![CDATA[Publisher]]></default-value> 
+    </p_mode>  
+    <List_mode type="result-set"> 
+      <sources> 
+        <request>List_mode</request> 
+      </sources>  
+      <default-value type="result-set"> 
+        <row> 
+          <name>Publisher</name>  
+          <value>Publisher</value> 
+        </row>  
+        <row> 
+          <name>Partner</name>  
+          <value>Partner</value> 
+        </row> 
+      </default-value>  
+      <columns> 
+        <name type="string"/>  
+        <value type="string"/> 
+      </columns> 
+    </List_mode>  
+    <p_publisher_id_list type="string"> 
+      <sources> 
+        <request>p_publisher_id_list</request> 
+      </sources>  
+      <default-value><![CDATA[00]]></default-value> 
+    </p_publisher_id_list>  
+    <p_partner_id_list type="string"> 
+      <sources> 
+        <request>p_partner_id_list</request> 
+      </sources>  
+      <default-value><![CDATA[00]]></default-value> 
+    </p_partner_id_list> 
+  </inputs>
+
+  <outputs> 
+    <p_mode type="string"/>  
+    <p_publisher_id_list type="string"/>  
+    <p_partner_id_list type="string"/> 
+  </outputs>
+
+  <resources> 
+    <pageTemplate1> 
+      <solution-file> 
+        <location>daily_adcel_geo_quality2/parameter_template2.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </pageTemplate1>  
+    <report-definition> 
+      <solution-file> 
+        <location>daily_adcel_geo_quality2/daily_adcel_geo_quality_partner.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition>  
+    <report-definition1> 
+      <solution-file> 
+        <location>daily_adcel_geo_quality2/daily_adcel_geo_quality_partner_portal.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition1> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get max min date data</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="q_max_min_date"/>  
+        <max_full_date type="string"/>  
+        <min_full_date type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[analyticsDB]]></jndi>  
+        <live><![CDATA[false]]></live>  
+        <query><![CDATA[SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM adstraffic.daily_geo_quality WHERE is_active=true
+UNION ALL
+SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM adstraffic.daily_geo_quality WHERE is_active=true]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Prompt/Secure Filter</action-type>
+      <action-inputs> 
+        <p_start_date type="string"/>  
+        <p_end_date type="string"/>  
+        <v_max_date type="string"/>  
+        <v_min_date type="string"/>  
+        <q_max_min_date type="result-set"/>  
+        <p_report_type type="string"/>  
+        <List_report_type type="result-set"/>  
+        <p_mode type="string"/>  
+        <List_mode type="result-set"/> 
+      </action-inputs>
+      <action-resources> 
+        <pageTemplate mapping="pageTemplate1"/> 
+      </action-resources>
+      <component-definition> 
+        <selections> 
+          <p_start_date filter="none" style="text-box"/>  
+          <p_end_date filter="none" style="text-box"/>  
+          <v_max_date style="select"> 
+            <filter value-col-name="max_full_date" display-col-name="max_full_date">q_max_min_date</filter> 
+          </v_max_date>  
+          <v_min_date style="select"> 
+            <filter value-col-name="min_full_date" display-col-name="min_full_date">q_max_min_date</filter> 
+          </v_min_date>  
+          <p_mode style="radio"> 
+            <filter value-col-name="value" display-col-name="name">List_mode</filter> 
+          </p_mode>  
+          <p_report_type style="select"> 
+            <filter value-col-name="name" display-col-name="value">List_report_type</filter> 
+          </p_report_type> 
+        </selections>  
+        <xsl><![CDATA[pageTemplate]]></xsl> 
+      </component-definition> 
+    </action-definition>
+  
+    <actions> 
+      <condition><![CDATA[p_mode=='Publisher']]></condition>  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>Process Publisher IDs</action-type>
+        <action-inputs> 
+          <p_publisher_ids type="string"/>  
+          <p_publisher_id_list type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <p_publisher_id_list type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[p_publisher_id_list='';
+//convert measures
+if(p_publisher_ids!= ''){
+	if(p_publisher_ids instanceof Array){
+		for(var i=0;i<p_publisher_ids.length;i++){
+			if(i>0){
+			p_publisher_id_list+=';';
+			};
+			p_publisher_id_list+=p_publisher_ids[i];
+		};
+	}else{
+		p_publisher_id_list=p_publisher_ids;
+	};
+}]]></script> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_mode=='Partner']]></condition>  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>Process Partner IDs</action-type>
+        <action-inputs> 
+          <p_partner_ids type="string"/>  
+          <p_partner_id_list type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <p_partner_id_list type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[p_partner_id_list='';
+//convert measures
+if(p_partner_ids!= ''){
+	if(p_partner_ids instanceof Array){
+		for(var i=0;i<p_partner_ids.length;i++){
+			if(i>0){
+			p_partner_id_list+=';';
+			};
+			p_partner_id_list+=p_partner_ids[i];
+		};
+	}else{
+		p_partner_id_list=p_partner_ids;
+	};
+}]]></script> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_report_type=='Partner']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <p_start_date type="string"/>  
+          <p_end_date type="string"/>  
+          <p_publisher_id_list type="string"/>  
+          <p_partner_id_list type="string"/>  
+          <output-type type="string" mapping="p_output"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition type="resource"/> 
+        </action-resources>
+        <component-definition> 
+          <jndi><![CDATA[analyticsDB]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_report_type=='Partner Portal']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <p_start_date type="string"/>  
+          <p_end_date type="string"/>  
+          <p_publisher_id_list type="string"/>  
+          <p_partner_id_list type="string"/>  
+          <output-type type="string" mapping="p_output"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition1"/> 
+        </action-resources>
+        <component-definition> 
+          <jndi><![CDATA[analyticsDB]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+ 
+  </actions> 
+</action-sequence>

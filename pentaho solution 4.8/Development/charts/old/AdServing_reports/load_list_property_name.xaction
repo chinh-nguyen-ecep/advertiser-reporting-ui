@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>load list event name</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>chinhnguyen</author>  
+    <description>get control from table adm.daily_agg_adm_data_feed</description>  
+    <help/>  
+    <result-type>report</result-type>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <p_input_id type="string"> 
+      <sources> 
+        <request>p_input_id</request> 
+      </sources>  
+      <default-value><![CDATA[All Publishers]]></default-value> 
+    </p_input_id>  
+    <mssg type="string"> 
+      <sources> 
+        <request>mssg</request> 
+      </sources>  
+      <default-value/> 
+    </mssg>  
+    <p_startdate type="string"> 
+      <sources> 
+        <request>p_startdate</request> 
+      </sources>  
+      <default-value><![CDATA[2000-01-01]]></default-value> 
+    </p_startdate>  
+    <p_enddate type="string"> 
+      <sources> 
+        <request>p_enddate</request> 
+      </sources>  
+      <default-value><![CDATA[9999-12-31]]></default-value> 
+    </p_enddate> 
+  </inputs>
+
+  <outputs> 
+    <mssg type="string"> 
+      <destinations> 
+        <response>Content</response> 
+      </destinations> 
+    </mssg> 
+  </outputs>
+
+  <resources/>
+  
+  <actions> 
+    <actions> 
+      <condition><![CDATA[p_input_id=='All Publishers']]></condition>  
+      <action-definition> 
+        <component-name>TemplateComponent</component-name>
+        <action-type>Message Template</action-type>
+        <action-inputs> 
+          <p_startdate type="string"/>  
+          <p_enddate type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <output-message type="string" mapping="querry"/> 
+        </action-outputs>
+        <component-definition> 
+          <template><![CDATA[SELECT a.*
+FROM (
+	SELECT -1000 as id,'All Properties' as name, 0 as row_order
+	UNION
+	SELECT b.property_id as id,(case when property_id=-100 then 'N/A' else b.property_name end) as name, (case when property_id=-100 then 2 else 1 end) as row_order
+	FROM adm.daily_agg_network_performance  b
+	WHERE b.is_active=true AND
+	full_date between trim(both ' ' from  ' {p_startdate}')::date and trim(both ' ' from  ' {p_enddate}')::date	
+	) a
+ORDER BY row_order, name;]]></template> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Get list of even name</action-type>
+        <action-inputs> 
+          <query type="string" mapping="querry"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result_event_name"/> 
+        </action-outputs>
+        <component-definition> 
+          <jndi><![CDATA[dw3]]></jndi>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_input_id!='All Publishers']]></condition>  
+      <action-definition> 
+        <component-name>TemplateComponent</component-name>
+        <action-type>Message Template</action-type>
+        <action-inputs> 
+          <p_enddate type="string"/>  
+          <p_startdate type="string"/>  
+          <p_input_id type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <output-message type="string" mapping="query"/> 
+        </action-outputs>
+        <component-definition> 
+          <template><![CDATA[SELECT a.*
+FROM (
+	SELECT -1000 as id,'All Properties' as name, 0 as row_order
+	UNION
+	SELECT b.property_id as id,(case when property_id=-100 then 'N/A' else b.property_name end) as name, (case when property_id=-100 then 2 else 1 end) as row_order
+	FROM adm.daily_agg_network_performance  b
+	WHERE b.is_active=true AND b.publisher_name = trim(both ' ' from ' {p_input_id}')
+	AND full_date between trim(both ' ' from  ' {p_startdate}')::date and trim(both ' ' from  ' {p_enddate}')::date	
+	) a
+ORDER BY row_order, name;]]></template> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Get list of even name</action-type>
+        <action-inputs> 
+          <query type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result_event_name"/> 
+        </action-outputs>
+        <component-definition> 
+          <jndi><![CDATA[dw3]]></jndi>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>JavaScript</action-type>
+      <action-inputs> 
+        <query_result_event_name type="result-set"/> 
+      </action-inputs>
+      <action-outputs> 
+        <resultEventName type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var resultEventName;
+
+resultEventName='<table><tr></tr>';
+
+for(var i=0;i<query_result_event_name.getRowCount();i++){
+	var value=query_result_event_name.getValueAt(i,0);
+	var name=query_result_event_name.getValueAt(i,1);
+	if(i==0){
+	resultEventName+='<tr><td><input id="event_'+name+'" class="portlet-form-field" type="checkbox" name="p_Property" value="'+name+'" title=""><span id="device-label" class="portlet-form-field-label">'+name+'</span></td></tr>';
+	}else{
+	resultEventName+='<tr><td><input id="event_'+name+'" class="portlet-form-field" type="checkbox" name="p_Property" value="'+name+'" title=""><span id="device-label" class="portlet-form-field-label">'+name+'</span></td></tr>';
+	};
+	
+};
+resultEventName+='</table>';]]></script>
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>TemplateComponent</component-name>
+      <action-type>Message Template</action-type>
+      <action-inputs> 
+        <resultEventName type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <output-message type="string" mapping="mssg"/> 
+      </action-outputs>
+      <component-definition> 
+        <template><![CDATA[{resultEventName}]]></template> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

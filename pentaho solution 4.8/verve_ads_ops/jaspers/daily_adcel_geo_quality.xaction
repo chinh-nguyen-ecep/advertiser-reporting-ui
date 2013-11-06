@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Daily Adcel Geo Quality</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author/>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type>none</result-type>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <eastern_date_sk type="string"> 
+      <sources> 
+        <request>eastern_date_sk</request> 
+      </sources>  
+      <default-value/> 
+    </eastern_date_sk>  
+    <p_report_type type="string"> 
+      <sources> 
+        <request>p_report_type</request> 
+      </sources>  
+      <default-value><![CDATA[Partner]]></default-value> 
+    </p_report_type>  
+    <output type="string"> 
+      <sources> 
+        <request>output</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </output>  
+    <List_report_type type="string-list"> 
+      <default-value type="string-list"> 
+        <list-item>Partner</list-item>  
+        <list-item>Partner Portal</list-item> 
+      </default-value> 
+    </List_report_type>  
+    <p_start_date_sk type="string"> 
+      <sources> 
+        <request>p_start_date_sk</request> 
+      </sources>  
+      <default-value/> 
+    </p_start_date_sk> 
+  </inputs>
+
+  <outputs> 
+    <p_report_type type="integer"/>  
+    <eastern_date_sk type="integer"/> 
+  </outputs>
+
+  <resources> 
+    <pageTemplate> 
+      <solution-file> 
+        <location>daily_adcel_geo_quality/parameter_template.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </pageTemplate>  
+    <report-definition> 
+      <solution-file> 
+        <location>daily_adcel_geo_quality/daily_adcel_geo_quality.jrxml</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition>  
+    <report-definition1> 
+      <solution-file> 
+        <location>daily_adcel_geo_quality/daily_adcel_geo_quality_2.jrxml</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition1> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get Date list</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result"/>  
+        <eastern_date_sk type="integer"/>  
+        <full_date type="string"/>  
+        <distinct type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[dw3]]></jndi>  
+        <live><![CDATA[false]]></live>  
+        <query><![CDATA[select distinct eastern_date_sk, full_date from adstraffic.daily_geo_quality where is_active = true order by eastern_date_sk desc]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Prompt/Secure Filter</action-type>
+      <action-inputs> 
+        <eastern_date_sk type="string"/>  
+        <query_result type="result-set"/>  
+        <p_report_type type="string"/>  
+        <List_report_type type="string-list"/>  
+        <p_start_date_sk type="string"/> 
+      </action-inputs>
+      <action-resources> 
+        <pageTemplate type="resource"/> 
+      </action-resources>
+      <component-definition> 
+        <selections> 
+          <eastern_date_sk style="select"> 
+            <filter value-col-name="eastern_date_sk" display-col-name="full_date">query_result</filter>  
+            <title>Date</title> 
+          </eastern_date_sk>  
+          <p_report_type style="select"> 
+            <filter>List_report_type</filter> 
+          </p_report_type>  
+          <p_start_date_sk style="select"> 
+            <filter value-col-name="eastern_date_sk" display-col-name="full_date">query_result</filter> 
+          </p_start_date_sk> 
+        </selections>  
+        <xsl><![CDATA[pageTemplate]]></xsl> 
+      </component-definition> 
+    </action-definition>
+  
+    <actions> 
+      <condition><![CDATA[p_report_type=='Partner']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <eastern_date_sk type="string"/>  
+          <output-type type="string" mapping="output"/>  
+          <p_start_date_sk type="string"/> 
+        </action-inputs>
+        <component-definition> 
+          <jndi><![CDATA[dw3]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_report_type=='Partner Portal']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <eastern_date_sk type="string"/>  
+          <output-type type="string" mapping="output"/>  
+          <p_start_date_sk type="string"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition1"/> 
+        </action-resources>
+        <component-definition> 
+          <jndi><![CDATA[dw3]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+ 
+  </actions> 
+</action-sequence>
