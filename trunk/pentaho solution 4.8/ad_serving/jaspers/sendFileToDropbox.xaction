@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Send files to Dropbox</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author/>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <listPublisherID type="result-set"> 
+      <sources> 
+        <request>listPublisherID</request> 
+      </sources>  
+      <default-value type="result-set"> 
+        <row> 
+          <id>10</id> 
+        </row>  
+        <row> 
+          <id>11</id> 
+        </row> 
+      </default-value>  
+      <columns> 
+        <id type="string"/> 
+      </columns> 
+    </listPublisherID>  
+    <result type="string"> 
+      <sources> 
+        <request>result</request> 
+      </sources>  
+      <default-value/> 
+    </result>  
+    <init type="integer"> 
+      <sources> 
+        <request>init</request> 
+      </sources>  
+      <default-value><![CDATA[0]]></default-value> 
+    </init> 
+  </inputs>
+
+  <outputs> 
+    <report_output type="content">
+      <destinations>
+        <file>D:\report_output.csv</file>
+      </destinations>
+    </report_output>
+  </outputs>
+
+  <resources> 
+    <report-definition> 
+      <solution-file> 
+        <location>blank.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>JavaScript</action-type>
+      <action-inputs/>
+      <action-outputs> 
+        <p_publisher_id type="string"/>  
+        <p_output type="string"/>  
+        <p_start_date type="string"/>  
+        <p_end_date type="string"/>  
+        <p_network_id type="string"/>  
+        <website_names_string type="string"/>  
+        <file_name type="string"/>  
+        <show_remnant type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var p_publisher_id=10;
+var p_output='csv';
+var p_start_date='2013-05-01';
+var p_end_date='2013-05-01';
+var p_network_id="0";
+var website_names_string="-1000";
+var show_remnant="true";
+var file_name="Revenue by publisher property."+".PublisherID."+p_publisher_id+"."+p_start_date+".csv";]]></script> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JasperReportsComponent</component-name>
+      <action-type>Jasper</action-type>
+      <action-inputs> 
+        <p_publisher_id type="string"/>  
+        <p_start_date type="string"/>  
+        <p_end_date type="string"/>  
+        <p_network_id type="string"/>  
+        <website_names_string type="string"/>  
+        <show_remnant type="string"/> 
+      </action-inputs>
+      <action-resources> 
+        <report-definition type="resource"/> 
+      </action-resources>
+      <action-outputs> 
+        <report-output type="content" mapping="report_output"/>
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[verveReportConnection]]></jndi>  
+        <output-type><![CDATA[html]]></output-type>
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

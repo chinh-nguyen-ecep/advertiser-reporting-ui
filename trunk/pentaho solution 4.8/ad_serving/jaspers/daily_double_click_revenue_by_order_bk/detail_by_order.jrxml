@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="detail_by_placement" language="groovy" pageWidth="1350" pageHeight="555" orientation="Landscape" columnWidth="1350" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.8627639691774651"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="eastern_date_sk" class="java.lang.Integer"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\Ecep\\Document-Tailieu\\Pentaho\\biserver-ce\\pentaho-solutions\\ad_serving\\jaspers\\daily_adm_data_feed\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+eastern_date_sk,
+full_date,
+rank,
+yesterday_rank,
+order_name as name_current,
+order_id,
+remote_id,
+start_date,
+end_date,
+budget,
+abudget,
+pacing,
+mtd_total_revenue,
+remaining_monthly_budget,
+next_month_budget,
+revenue as revenue_count,
+clicks as clicks_count,
+impressions as impressions_count,
+
+revenue_1d_ago as revenue_count_1,
+clicks_1d_ago as clicks_count_1,
+impressions_1d_ago as impressions_count_1,
+
+revenue_7d_ago as revenue_count_7,
+clicks_7d_ago as clicks_count_7,
+impressions_7d_ago as impressions_count_7,
+
+revenue_28d_ago as revenue_count_28,
+clicks_28d_ago as clicks_count_28,
+impressions_28d_ago as impressions_count_28
+FROM adm.daily_agg_revenue_by_order
+WHERE eastern_date_sk=$P{eastern_date_sk}::int
+AND is_active=true
+ORDER BY name_current]]>
+	</queryString>
+	<field name="eastern_date_sk" class="java.lang.Integer"/>
+	<field name="full_date" class="java.sql.Date"/>
+	<field name="rank" class="java.lang.Integer"/>
+	<field name="yesterday_rank" class="java.lang.Integer"/>
+	<field name="name_current" class="java.lang.String"/>
+	<field name="order_id" class="java.lang.Integer"/>
+	<field name="remote_id" class="java.lang.Integer"/>
+	<field name="start_date" class="java.sql.Timestamp"/>
+	<field name="end_date" class="java.sql.Timestamp"/>
+	<field name="budget" class="java.lang.Double"/>
+	<field name="abudget" class="java.lang.Double"/>
+	<field name="pacing" class="java.lang.Double"/>
+	<field name="mtd_total_revenue" class="java.lang.Double"/>
+	<field name="remaining_monthly_budget" class="java.lang.Double"/>
+	<field name="next_month_budget" class="java.lang.Double"/>
+	<field name="revenue_count" class="java.lang.Double"/>
+	<field name="clicks_count" class="java.lang.Integer"/>
+	<field name="impressions_count" class="java.lang.Integer"/>
+	<field name="revenue_count_1" class="java.lang.Double"/>
+	<field name="clicks_count_1" class="java.lang.Integer"/>
+	<field name="impressions_count_1" class="java.lang.Integer"/>
+	<field name="revenue_count_7" class="java.lang.Double"/>
+	<field name="clicks_count_7" class="java.lang.Integer"/>
+	<field name="impressions_count_7" class="java.lang.Integer"/>
+	<field name="revenue_count_28" class="java.lang.Double"/>
+	<field name="clicks_count_28" class="java.lang.Integer"/>
+	<field name="impressions_count_28" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="913" y="0" width="55" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[1 ago Imp]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="485" y="0" width="42" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Revenue]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="968" y="0" width="55" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[1 ago CTR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="527" y="0" width="50" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Imps]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="577" y="0" width="45" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CTR]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="30" width="1350" height="5"/>
+			</line>
+			<staticText>
+				<reportElement x="862" y="0" width="51" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[1 ago Rev]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1123" y="0" width="57" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[7 ago CTR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1023" y="0" width="50" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[7 ago Rev]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1073" y="0" width="50" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[7 ago Imp]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1180" y="0" width="56" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[28 ago Rev]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1236" y="0" width="57" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[28 ago Imp]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1293" y="0" width="57" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[28 ago CTR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="384" y="0" width="55" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BBudget]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="622" y="0" width="48" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pacing]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="670" y="0" width="54" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MTD total rev]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="725" y="0" width="73" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RMBudget]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="798" y="0" width="64" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NMBudget]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="34" y="0" width="29" height="30"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Y Rank]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="34" height="30"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TD Rank]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="326" y="0" width="58" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[End date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="63" y="0" width="135" height="30"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Order name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="198" y="0" width="31" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="229" y="0" width="39" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Remote ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="0" width="58" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Start date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="439" y="0" width="46" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ABudget]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="34" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{rank}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="577" y="0" width="45" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[new DecimalFormat("0.00").format(new Double(($F{clicks_count}.doubleValue()*100)/$F{impressions_count}.doubleValue())) + "%"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="527" y="0" width="50" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{impressions_count}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement x="384" y="0" width="55" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{budget}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="913" y="0" width="55" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{impressions_count_1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="968" y="0" width="54" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[new DecimalFormat("0.00").format(new Double(($F{clicks_count_1}.doubleValue()*100)/$F{impressions_count_1}.doubleValue())) + "%"]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00" isBlankWhenNull="true">
+				<reportElement x="862" y="0" width="51" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{revenue_count_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00" isBlankWhenNull="true">
+				<reportElement x="1022" y="0" width="50" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{revenue_count_7}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1072" y="0" width="51" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{impressions_count_7}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00" isBlankWhenNull="true">
+				<reportElement x="1180" y="0" width="56" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{revenue_count_28}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1236" y="0" width="57" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{impressions_count_28}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1123" y="0" width="57" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[new DecimalFormat("0.00").format(new Double(($F{clicks_count_7}.doubleValue()*100)/$F{impressions_count_7}.doubleValue())) + "%"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1293" y="0" width="57" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[new DecimalFormat("0.00").format(new Double(($F{clicks_count_28}.doubleValue()*100)/$F{impressions_count_28}.doubleValue())) + "%"]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="622" y="0" width="48" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[new DecimalFormat("0.00").format($F{pacing}) + "%"]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement x="670" y="0" width="54" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{mtd_total_revenue}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement x="725" y="0" width="73" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{remaining_monthly_budget}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement x="798" y="0" width="64" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{next_month_budget}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="34" y="0" width="29" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{yesterday_rank}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00" isBlankWhenNull="true">
+				<reportElement x="485" y="0" width="42" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{revenue_count}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="198" y="0" width="31" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{order_id}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="229" y="0" width="39" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{remote_id}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy/MM/dd">
+				<reportElement x="326" y="0" width="58" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{end_date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy/MM/dd">
+				<reportElement x="268" y="0" width="58" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{start_date}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="63" y="0" width="135" height="30"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{name_current}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="439" y="0" width="46" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{abudget}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="4">
+			<line>
+				<reportElement x="0" y="3" width="1350" height="1"/>
+			</line>
+		</band>
+	</summary>
+</jasperReport>
