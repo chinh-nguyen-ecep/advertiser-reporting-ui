@@ -43,3 +43,48 @@ function generateDateRange(settings){
 
 }
 
+function drawTableFromArray(settings){
+	settings=$.extend({},{
+		paging: false,
+		page: 1,
+		page_items: 10,
+		table_id: 'myTable',
+		table_colums: ['Date','values'],
+		table_data: [['2013-01-01',10],['2013-01-01',13],['2013-01-01',12]]
+	},settings);
+	var myTable=$('#'+settings.table_id);
+	myTable.empty();
+	myTable.addClass('table');
+	myTable.addClass('table-bordered');
+	myTable.addClass('table-hover');
+	//add head table
+	var head=$("<thead></thead>");
+	var tr='<tr>';
+	for(var i=0;i<settings.table_colums.length;i++){
+		tr+='<th class="header"><a href="#">'+settings.table_colums[i]+'</a><span class="glyphicon glyphicon-sort-by-attributes-alt"></span></th>';
+	}
+	tr+='</tr>';
+	head.append(tr);
+	myTable.append(head);
+	//add head row
+	var body=$('<tbody></tbody>');
+	var rows=[];
+	var start=0;
+	var end=settings.table_data.length;
+	if(paging){
+		start=(settings.page-1)*settings.page_items;
+		end=start+settings.page_items-1;
+	}
+	for(var i=start;i<end;i++){
+		var row_data=settings.table_data[i];
+		var tr='<tr>';
+		for(var j=0;j<row_data.length;j++){
+			tr+='<td>'+row_data[j]+'</td>';
+		}
+		tr+='</tr>';
+		rows.push(tr);
+	}
+	body.append(rows.join(''));
+	myTable.append(body);
+}
+

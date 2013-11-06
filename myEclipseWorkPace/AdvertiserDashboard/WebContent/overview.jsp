@@ -1,8 +1,12 @@
 	<nav class="navbar" role="navigation" style="margin-top: 10px;">
 		<div class="navbar-header">
 			    <form class="navbar-form navbar-left" role="export">			     
-	 			    <div class="form-group">			    	
-		       			<input type="text" value="2013/10/01 - 2013/10/07" class="form-control input-sm " style="width: 200px;" id="date_range" placeholder="">
+ 			  	  <div class="form-group">			    	
+		       			<div id="date_range" class="form-control input-sm">
+					    <i class="icon-calendar icon-large"></i>
+					    <span></span> <b class="caret"></b>
+						<input type="hidden" value="" />
+						</div>
 		      		</div>
 		      		 <button type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-upload"></span>Update</button>
 			    </form>
@@ -119,13 +123,25 @@
 	<script>
 	var start_date='2013/10/01';
 	var end_date='2013/10/07';
+	var selectStartDate=thirtyDayBefore;
+	var selectEndDate=yesterday;
  	$( document ).ready(function() {
  		var categories=['2013/10/01', '2013/10/02', '2013/10/03', '2013/10/04', '2013/10/05', '2013/10/06', '2013/10/07'];
  		var revenueData=[75210.53, 60458.54, 59711.42, 48817.37, 77542.50, 75413.57, 76140.97];
  		var impressionsData=[49077790, 69571356, 60724855, 73158140, 53020304, 81620436, 74791664];
  		getChart(categories,revenueData,impressionsData);
- 		generateDateRange("date_range");
+ 		generateDateRange({
+ 			stargetId:"date_range",
+ 			start_date: selectStartDate,
+ 			end_date: selectEndDate,
+ 			callback: function(start_date,end_date,value){
+ 				selectStartDate=start_date;
+ 				selectEndDate=end_date;
+ 				loadChart();
+ 			}
+ 		});
  		setTabActive("overview");
+ 		
  	});
 
  	//function generate chart 
