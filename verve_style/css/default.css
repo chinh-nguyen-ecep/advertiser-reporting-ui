@@ -1,0 +1,49 @@
+div.divform{
+margin:0px;
+border-bottom:1px solid #808080;
+padding:0px;
+height: 14%;
+overflow: hidden;
+background-color: #D8D8D8;
+}
+div.divform img.logo{
+float: right;
+margin-right: 10px;
+margin-top: 10px;
+}
+div.divform div.title{
+    font-weight: bold;
+    font-size: 13pt;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    margin-top: 10px;
+    margin-left: 10px;
+
+}
+div.divform form{
+    float: left;
+    margin-left: 10px;
+    margin-top: 5px;
+	width: 100%;
+}
+div.divform form label{
+    margin-left: 10px;
+}
+
+table.tableForm{
+width: 490px;
+float:left;
+font:90%/160% "Trebuchet MS",Verdana,Arial,Helvetica,sans-serif;
+text-align: left;
+
+}
+table.tableForm tbody tr th{
+	vertical-align: top;
+	width: 100px;
+	text-align: right;
+	padding-right: 5px;
+}
+table.tableForm tbody tr td{
+	padding-bottom: 5px;
+	vertical-align: middle;
+}
+

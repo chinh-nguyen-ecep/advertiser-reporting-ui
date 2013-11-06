@@ -1,0 +1,60 @@
+form{
+	font:Helvetica,sans-serif;
+	font-weight:normal;
+	font-size: 8pt;
+}
+form label{
+	font:bold 8pt Helvetica,sans-serif;
+}
+form label.radio_checkbox{
+	font-weight:normal;
+}
+form input[type=text].filter{
+	width: 300px;
+	color: gray;
+	font-size: 8pt;
+}
+#start_date{
+	width: 100px;
+}
+#end_date{
+	width: 100px;
+}
+table.tableForm{
+	width: 400px;
+}
+table.tableForm tbody tr th{
+	width: 100px;
+	vertical-align:middle;
+}
+table.tableForm tbody tr td{
+	width: 300px;
+}
+
+div.info{
+	color:red;
+	width: 100px;
+	height: 50px;
+	border: 1px gray solid;
+}
+div.my-panel{
+	float: left; 
+	width: 200px; 
+	height: 28px;
+	vertical-align:middle;
+	margin-top: 2px;
+	margin-left: 5px;
+	font:Helvetica,sans-serif;
+	font-weight:normal;
+	font-size: 8pt;
+}
+div.my-panel input,div.my-panel label,div.my-panel img{
+	float: left;
+	font-weight:normal;
+	vertical-align:middle;
+}
+div.my-panel img{				
+	vertical-align:middle;
+	width: 28px;
+	height: 28px;
+}
