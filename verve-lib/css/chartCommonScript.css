@@ -1,0 +1,9 @@
+@import "/verve-lib/scripts/jquery-ui-1.8.24.custom/css/smoothness/jquery-ui-1.8.24.custom.css";
+@import "/verve-lib/css/jqueryControlPanel.css";
+@import "/verve-lib/css/mytable.css";
+@import "/verve-lib/css/charttool.css";
+@import "/verve-lib/css/toolbar.css";
+body.pentaho{
+	background-color: black;
+	background: url('/pentaho/content/common-ui/resources/themes/onyx/images/bg_pentaho_default.png');
+}

@@ -1,0 +1,53 @@
+body.pentaho{
+	background-color: black;
+	background: url('/pentaho/content/common-ui/resources/themes/onyx/images/bg_pentaho_default.png');
+}
+#compareScreen{
+	overflow: auto;  
+	margin-left: auto ;
+	margin-right: auto ;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	border: 2px solid gray;
+	background-color: white;
+}
+
+#compareScreen .mainGround{
+	width: 100%;
+	height:438px;
+	padding-top: 0px;
+	background-image: url('/verve-lib/images/main_chart.jpg');
+	background-repeat: repeat-x;
+	margin-top: 75px;
+}
+#compareScreen .mainGround .chartItem{
+	border-bottom: 1px dashed gray;
+	border-left: 2px dashed gray;
+	background-color: transparent;
+	width: 48%;
+	height: 375px;
+	float: left;
+}
+#compareScreen .mainGround img{
+	cursor: pointer;
+	margin-left: 10px;
+}
+
+
+#chart_compare_mode{
+	opacity:0.4;
+}
+#chart_compare_mode:hover{
+	opacity:1.0;
+}
+div.chartBackground{
+	width: 100%;
+	height:450px;
+	background-image: url('/verve-lib/images/main_chart.jpg');
+	background-repeat: repeat-x;
+	margin-bottom: 2px;
+}
+
+#toolbar img.button_icon{
+	margin-left: 5px;
+}

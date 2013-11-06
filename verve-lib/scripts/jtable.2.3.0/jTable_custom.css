@@ -1,0 +1,9 @@
+span.jtable-column-header-text{
+	font-size: 10pt;
+}
+div.jtable-title-text{
+	font-size: 15pt;
+}
+div.jtable-main-container table.jtable tbody > tr {
+	height: 40px;
+}

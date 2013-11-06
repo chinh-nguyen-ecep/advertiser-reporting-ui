@@ -1,0 +1,205 @@
+<html>
+<head>
+  <link rel="stylesheet" href="pivot/bootstrap.min.css" type="text/css" />  
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script type="text/javascript" src="pivot/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="pivot/dataTables.bootstrap.js"></script>
+  <script type="text/javascript" src="pivot/pivot.js"></script>
+  <script type="text/javascript" src="pivot/jquery_pivot.js"></script>
+  <script src="http://code.highcharts.com/highcharts.js"></script>
+  <script src="http://code.highcharts.com/modules/exporting.js"></script> 
+  <style>
+	div.mydiv{
+		float: left;
+		width: 50%;
+		min-height: 300px;
+		border: 1px solid gray;
+		margin-bottom: 5px;	
+	}
+	div.chart{
+		width: 100%;
+		height: 200px;	
+	}
+  </style>
+</head>
+<body>
+
+   	<div class="mydiv" id="div1">
+{ "chartTitle":"Ad - Network Report ", "chartSubTitle":"sub title", "chartType":"column", "chart_polar": false, "chartSingleMode": true, "chartData":"[[\"Month\",\"Dimension\",\"Yes Ad responses\"],[\"2012-Dec\",\"A.H. Belo\",\"1589774\"],[\"2012-Dec\",\"AP\",\"96860661\"],[\"2013-Jan\",\"A.H. Belo\",\"1337041\"],[\"2013-Jan\",\"AP\",\"85203975\"],[\"2013-Jan\",\"AP Beta\",\"3\"],[\"2013-Feb\",\"A.H. Belo\",\"1773550\"],[\"2013-Feb\",\"AP\",\"84930115\"],[\"2013-Mar\",\"ABC Local TV\",\"1\"],[\"2013-Mar\",\"A.H. Belo\",\"1684285\"],[\"2013-Mar\",\"AP\",\"100719503\"],[\"2013-Apr\",\"A.H. Belo\",\"779969\"],[\"2013-Apr\",\"AP\",\"38396838\"]]", "agg":{"rowLabels":["Month"], "columnLabels":["Dimension"],"summaries":["Yes Ad responses"]}, "fields":[{"name": "Month","type": "month","rowLabelable": false},{"name": "Dimension","type": "string","rowLabelable": false},{"name": "Yes Ad responses","type": "integer","rowLabelable": false,"summarizable": "sum"}], "sqlQuery":"" }
+	</div>
+
+    <div class="mydiv" id="div2">
+		{
+			"chartTitle":"Demo 1",
+			"chartSubTitle":"Reporting chart",
+			"chartType":"line",
+			"chartData":"[[\"Publisher name\",\"Impressions\",\"Gross revenue\",\"Date\"],[\"A\", 32245, 100.00, \"Mon, 13 Feb 2012 00:00:00 +0000\"]]",
+			"agg":{"rowLabels":["Date"], "columnLabels":["Publisher name"], "summaries":["Gross revenue"]},
+			"fields":[
+					{"name": "Publisher name","type": "string","rowLabelable": false},
+					{"name": "Date","label":"Kdate","type": "date","rowLabelable": true},
+					{"name": "Impressions","label":"imPression","type": "integer","rowLabelable": false,"summarizable": "sum"}, 
+					{"name": "Gross revenue","type": "float",  "rowLabelable": false,"summarizable": "sum"}
+					]
+		}
+	</div>
+	<div class="mydiv" id="div3">
+		{
+			"chartTitle":"Demo 1",
+			"chartSubTitle":"Reporting chart",
+			"chartType":"column",
+			"chartData":"[[\"Publisher name\",\"Impressions\",\"Gross revenue\",\"Date\"],[\"A\", 32245, 100.00, \"Mon, 13 Feb 2012 00:00:00 +0000\"]]",
+			"agg":{"rowLabels":["Date"], "columnLabels":["Publisher name"], "summaries":["Gross revenue"]},
+			"fields":[
+					{"name": "Publisher name","type": "string","rowLabelable": false},
+					{"name": "Date","type": "date","rowLabelable": true},
+					{"name": "Impressions","type": "integer","rowLabelable": false,"summarizable": "sum"}, 
+					{"name": "Gross revenue","type": "float",  "rowLabelable": false,"summarizable": "sum"}
+					]
+		}
+	</div>
+
+
+<script type="text/javascript">
+
+//This function will genera chart from json content in divResult content
+var generateChart=function(divResult){
+	var jsonObject=jQuery.parseJSON(divResult.html());	
+	divResult.empty();
+	
+	var chartTitle=jsonObject.chartTitle;
+	var chartSubTitle=jsonObject.chartSubTitle;
+	var chartType=jsonObject.chartType;
+	var data=jsonObject.chartData;
+	var agg=jsonObject.agg;
+	var fields=jsonObject.fields;
+	//Check data query if no data
+	var jsonData=jQuery.parseJSON(data);
+	if(jsonData.length<=1){
+		return true;
+	};
+	
+	var chartName=divResult.attr('id')+'_pivot_chart';
+	var chartDom=$('<div class="chart" id="'+chartName+'"></div>');
+	var v_result_table=$('<div name="results_table"></div>');
+	var pivot_div=$('<div></div>');
+	divResult.append(chartDom);
+	divResult.append(v_result_table);
+	
+	var setupPivot=function(input){
+		input.callbacks = {afterUpdateResults: function(){
+		  v_result_table.find('table').dataTable({
+			"sDom": "<'row'<'span6'l><'span6'f>>t<'row'<'span6'i><'span6'p>>",
+			"iDisplayLength": 50,
+			"aLengthMenu": [[25, 50, 100, -1], [25, 50, 100, "All"]],
+			"sPaginationType": "bootstrap",
+			"oLanguage": {
+			  "sLengthMenu": "_MENU_ records per page"
+			},
+			"fnDrawCallback": function( oSettings ) {
+			  drawChart();
+			}
+		  });
+		}};
+		pivot_div.pivot_display('setup', input);
+	  };
+
+
+    // default fields are labelable, non-sumarrizable, non-filterable
+
+    $.extend( $.fn.dataTable.defaults, {
+        "bFilter": false,
+        "bPaginate": false,
+        "bLengthChange": false,
+        //"bSort": false,
+        "bInfo": false,
+		"bSortable": false
+    } );
+
+	var drawChart=function(){
+		var table = v_result_table.find('table'),
+		options = {
+			chart: {
+				renderTo: chartName,
+				type: chartType
+			},
+			title: {
+				text: chartTitle
+			},
+			xAxis: {
+			},
+			yAxis: {
+				title: {
+					text: 'Units'
+				}
+			},
+			tooltip: {
+				
+			}
+		};
+		var visualize = function(table, options) {
+			// the categories
+			options.xAxis.categories = [];
+			$('tbody tr', table).each( function(i) {
+				options.xAxis.categories.push($(this).children(':first').text());
+			});
+
+			// the data series
+			options.series = [];
+			$('tr', table).each( function(i) {
+				var tr = this;
+				$('th, td', tr).each( function(j) {
+					if (j > 0) { // skip first column
+						if (i == 0) { // get the name and init the series
+							options.series[j - 1] = {
+								name: this.innerHTML,
+								data: []
+							};
+						} else { // add values
+							var value=this.innerText;
+							value = value.replace(/^\s+|\s+$/g,'');
+							if(value==''){
+								value='0';
+							}
+							alert(value);
+							options.series[j - 1].data.push(parseFloat(value));
+						}
+					}
+				});
+			});
+
+			var chart = new Highcharts.Chart(options);
+			return chart;
+		}
+		var chart=visualize(table, options); 
+		return chart;
+	}
+
+	//alert(fields[3].summarizable);
+	agg=$.extend({},{json:data, fields: fields,result_table:v_result_table},agg);
+    setupPivot(agg);
+	pivot_div.pivot_display('reprocess_display', agg);
+	//drawChart();
+
+	var map={'map1':'abc','key2':'test2'}
+	//alert(map['key2']);
+	     var jnson = {
+        name: "Abdul Wakeel",
+        Contact: { Phone: "02923932", Mobile: "0233232@3" },
+        Trigger:function(){ return 'Good Evening';}
+     }
+     //var fun = jnson.Trigger;
+
+     //alert(fun());
+}
+var div1=$('#div1');
+generateChart(div1);
+
+var div2=$('#div2');
+generateChart(div2);
+
+var div3=$('#div3');
+generateChart(div3);
+</script>
+</body>
+</html>
