@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Daily ADM FLight Impression Zero</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>chinhnguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type>report</result-type>  
+    <icon>chart_1(2).png|chart_1(2).png</icon> 
+  </documentation>
+
+  <inputs> 
+    <p_start_date type="string"> 
+      <sources> 
+        <request>p_start_date</request> 
+      </sources>  
+      <default-value/> 
+    </p_start_date>  
+    <p_end_date type="string"> 
+      <sources> 
+        <request>p_end_date</request> 
+      </sources>  
+      <default-value/> 
+    </p_end_date>  
+    <v_max_date type="string"> 
+      <sources> 
+        <request>v_max_date</request> 
+      </sources>  
+      <default-value/> 
+    </v_max_date>  
+    <v_min_date type="string"> 
+      <sources> 
+        <request>v_min_date</request> 
+      </sources>  
+      <default-value/> 
+    </v_min_date>  
+    <List_output_type type="string-list"> 
+      <default-value type="string-list"> 
+        <list-item>html</list-item>  
+        <list-item>pdf</list-item>  
+        <list-item>xls</list-item>  
+        <list-item>rtf</list-item>  
+        <list-item>csv</list-item> 
+      </default-value> 
+    </List_output_type>  
+    <p_output type="string"> 
+      <sources> 
+        <request>p_output</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </p_output>  
+    <p_mailTo type="string"> 
+      <sources> 
+        <request>p_mailTo</request> 
+      </sources>  
+      <default-value><![CDATA[duychinhnguyenvn@gmail.com]]></default-value> 
+    </p_mailTo>  
+    <p_emailMode type="string"> 
+      <sources> 
+        <request>p_emailMode</request> 
+      </sources>  
+      <default-value><![CDATA[false]]></default-value> 
+    </p_emailMode>  
+    <p_emailExportFileType type="string"> 
+      <sources> 
+        <request>p_emailExportFileType</request> 
+      </sources>  
+      <default-value><![CDATA[pdf]]></default-value> 
+    </p_emailExportFileType>  
+    <parameter_string type="string"> 
+      <sources> 
+        <request>parameter_string</request> 
+      </sources>  
+      <default-value/> 
+    </parameter_string> 
+  </inputs>
+
+  <outputs/>
+
+  <resources> 
+    <pageTemplate1> 
+      <solution-file> 
+        <location>daily_adm_flight_impression_zero/daily_adm_flight_impression_zero.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </pageTemplate1>  
+    <report-definition> 
+      <solution-file> 
+        <location>daily_adm_flight_impression_zero/daily_adm_flight_impression_zero.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get max min date data</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="q_max_min_date"/>  
+        <max_full_date type="string"/>  
+        <min_full_date type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[verveReportConnection]]></jndi>  
+        <live><![CDATA[false]]></live>  
+        <query><![CDATA[SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM adstraffic.daily_ad_serving_stats WHERE is_active=true
+UNION ALL
+SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM adstraffic.daily_ad_serving_stats WHERE is_active=true]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <actions> 
+      <condition><![CDATA[p_emailMode=='false']]></condition>  
+      <action-definition> 
+        <component-name>SecureFilterComponent</component-name>
+        <action-type>Prompt/Secure Filter</action-type>
+        <action-inputs> 
+          <p_start_date type="string"/>  
+          <p_end_date type="string"/>  
+          <v_max_date type="string"/>  
+          <v_min_date type="string"/>  
+          <q_max_min_date type="result-set"/>  
+          <p_output type="string"/>  
+          <List_output_type type="string-list"/> 
+        </action-inputs>
+        <action-resources> 
+          <pageTemplate mapping="pageTemplate1"/> 
+        </action-resources>
+        <component-definition> 
+          <selections> 
+            <p_start_date filter="none" style="text-box"/>  
+            <p_end_date filter="none" style="text-box"/>  
+            <v_max_date style="select"> 
+              <filter value-col-name="max_full_date" display-col-name="max_full_date">q_max_min_date</filter> 
+            </v_max_date>  
+            <v_min_date style="select"> 
+              <filter value-col-name="min_full_date" display-col-name="min_full_date">q_max_min_date</filter> 
+            </v_min_date>  
+            <p_output style="select"> 
+              <filter>List_output_type</filter> 
+            </p_output> 
+          </selections>  
+          <xsl><![CDATA[pageTemplate]]></xsl> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>get date</action-type>
+        <action-inputs> 
+          <p_start_date type="string"/>  
+          <p_end_date type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <p_date type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var p_date='';
+p_date=p_start_date;]]></script> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <output-type type="string" mapping="p_output"/>  
+          <p_date type="string"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition type="resource"/> 
+        </action-resources>
+        <component-definition> 
+          <jndi><![CDATA[dw3dw3]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_emailMode == 'true']]></condition>  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>Process report input</action-type>
+        <action-inputs> 
+          <p_emailExportFileType type="string"/>  
+          <parameter_string type="string"/>  
+          <q_max_min_date type="result-set"/>  
+          <p_start_date type="string"/>  
+          <p_end_date type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <reportName type="string"/>  
+          <p_date type="string"/>  
+          <reportNameCsv type="string"/>  
+          <p_mailTextMessage type="string"/>  
+          <p_mailTitle type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var reportName='';
+var p_date='';
+
+p_start_date=q_max_min_date.getValueAt(0,1);
+p_end_date=p_start_date;
+p_date=p_start_date;
+var dateFormat=p_start_date;
+
+//dateFormat=dateFormat.replace(/\-/gi,"");
+reportName='daily_adm_flight_impression_zero_'+dateFormat+'.'+p_emailExportFileType;
+reportNameCsv='daily_adm_flight_impression_zero_'+dateFormat+'.csv';
+var p_mailTextMessage='Attached is the list of flights in ADM 1.0 that have impression = 0 with flights start date = '+p_date;
+var p_mailTitle='Daily ADM Flight Impression Zero';]]></script> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <output-type type="string" mapping="p_emailExportFileType"/>  
+          <p_date type="string"/>
+        </action-inputs>
+        <action-outputs> 
+          <report-output type="content" mapping="daily_ad_serving_statistics_summary"/> 
+        </action-outputs>
+        <component-definition> 
+          <jndi><![CDATA[dw3dw3]]></jndi> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <p_date type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <report-output type="content" mapping="report_ou_csv"/> 
+        </action-outputs>
+        <component-definition> 
+          <output-type><![CDATA[csv]]></output-type>  
+          <jndi><![CDATA[dw3dw3]]></jndi> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>EmailComponent</component-name>
+        <action-type>E-Mail</action-type>
+        <action-inputs> 
+          <to type="string" mapping="p_mailTo"/>  
+          <daily_ad_serving_statistics_summary type="content"/>  
+          <attach_name_1 type="string" mapping="reportName"/>  
+          <subject type="string" mapping="p_mailTitle"/>  
+          <message-plain type="string" mapping="p_mailTextMessage"/>  
+          <report_ou_csv type="content"/>  
+          <attach_name_2 type="string" mapping="reportNameCsv"/> 
+        </action-inputs>
+        <component-definition> 
+          <from><![CDATA[testMail]]></from>  
+          <attachment-ref name-param="attach_name_1" input-param="daily_ad_serving_statistics_summary"/>  
+          <attachment-ref name-param="attach_name_2" input-param="report_ou_csv"/> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+ 
+  </actions> 
+</action-sequence>

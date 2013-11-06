@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="api_revenue_by_partner_channel" pageWidth="2000" pageHeight="1684" orientation="Landscape" columnWidth="2000" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.6500000000000032"/>
+	<property name="ireport.x" value="2486"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("2013-05-22")]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select a.*
+,b.order_name
+,b.order_updated_by_email
+,b.publisher_id
+,b.publisher_name
+,b.organization_id
+,b.organization_name
+from(
+select flight_id
+, name_current as flight_name
+, remote_id as dfp_adunit_id
+, start_date_current as flight_start_date
+, end_date_current as flight_end_date
+, paused_at
+, cancelled_at
+, impressions as imps_delivered
+, rate_current as flight_rate
+, quantity
+, metric_current as flight_metric
+, budget_current as flight_budget
+, updated_by as flight_updated_by_email
+, order_id
+, network_id
+from refer.adm_flight_dim
+where dt_expire= '9999-12-31'
+and start_date =$P{p_date}::date
+)a
+inner join(
+--get info at order level---
+select a.order_id
+,a.name_current as order_name
+,a.updated_by as order_updated_by_email
+,a.publisher_id
+,b.company_name_current as publisher_name
+,a.organization_id
+,c.name_current  as organization_name
+from refer.adm_order_dim a
+left join refer.adm_dim_publishers b
+on b.dt_expire='9999-12-31' --and company_name = 'Media News'
+and b.publisher_id = a.publisher_id
+left join refer.adm_organization_dim c
+on c.dt_expire ='9999-12-31'
+and c.organization_id= a.organization_id
+where a.dt_expire = '9999-12-31'
+)b
+on a.order_id = b.order_id
+where a.imps_delivered = 0
+order by flight_start_date]]>
+	</queryString>
+	<field name="flight_id" class="java.lang.Integer"/>
+	<field name="flight_name" class="java.lang.String"/>
+	<field name="dfp_adunit_id" class="java.lang.Integer"/>
+	<field name="flight_start_date" class="java.sql.Timestamp"/>
+	<field name="flight_end_date" class="java.sql.Timestamp"/>
+	<field name="paused_at" class="java.sql.Timestamp"/>
+	<field name="cancelled_at" class="java.sql.Timestamp"/>
+	<field name="imps_delivered" class="java.lang.Integer"/>
+	<field name="flight_rate" class="java.lang.Double"/>
+	<field name="quantity" class="java.lang.Integer"/>
+	<field name="flight_metric" class="java.lang.String"/>
+	<field name="flight_budget" class="java.lang.Double"/>
+	<field name="flight_updated_by_email" class="java.lang.String"/>
+	<field name="order_id" class="java.lang.Integer"/>
+	<field name="network_id" class="java.lang.Integer"/>
+	<field name="order_name" class="java.lang.String"/>
+	<field name="order_updated_by_email" class="java.lang.String"/>
+	<field name="publisher_id" class="java.lang.Integer"/>
+	<field name="publisher_name" class="java.lang.String"/>
+	<field name="organization_id" class="java.lang.Integer"/>
+	<field name="organization_name" class="java.lang.String"/>
+	<background>
+		<band/>
+	</background>
+	<columnHeader>
+		<band height="23">
+			<staticText>
+				<reportElement x="0" y="0" width="70" height="20"/>
+				<textElement/>
+				<text><![CDATA[flight_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="0" width="130" height="20"/>
+				<textElement/>
+				<text><![CDATA[flight_name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="0" width="70" height="20"/>
+				<textElement/>
+				<text><![CDATA[dfp_adunit_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="270" y="0" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[flight_start_date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="0" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[flight_end_date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="470" y="0" width="70" height="20"/>
+				<textElement/>
+				<text><![CDATA[quantity]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="540" y="0" width="70" height="20"/>
+				<textElement/>
+				<text><![CDATA[flight_metric]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="610" y="0" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[flight_budget]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="710" y="0" width="150" height="20"/>
+				<textElement/>
+				<text><![CDATA[flight_updated_by_email]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="860" y="0" width="70" height="20"/>
+				<textElement/>
+				<text><![CDATA[order_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="930" y="0" width="70" height="20"/>
+				<textElement/>
+				<text><![CDATA[network_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1000" y="0" width="160" height="20"/>
+				<textElement/>
+				<text><![CDATA[order_name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1160" y="0" width="255" height="20"/>
+				<textElement/>
+				<text><![CDATA[order_updated_by_email]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1415" y="0" width="70" height="20"/>
+				<textElement/>
+				<text><![CDATA[publisher_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1485" y="0" width="266" height="20"/>
+				<textElement/>
+				<text><![CDATA[publisher_name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1751" y="0" width="99" height="20"/>
+				<textElement/>
+				<text><![CDATA[organization_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1850" y="0" width="150" height="20"/>
+				<textElement/>
+				<text><![CDATA[organization_name]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<textField>
+				<reportElement x="0" y="0" width="70" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{flight_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="0" width="130" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{flight_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="70" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{dfp_adunit_id}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd">
+				<reportElement x="270" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{flight_start_date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd">
+				<reportElement x="370" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{flight_end_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="470" y="0" width="70" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{quantity}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="540" y="0" width="70" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{flight_metric}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="610" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{flight_budget}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="710" y="0" width="150" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{flight_updated_by_email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="860" y="0" width="70" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{order_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="930" y="0" width="70" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{network_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1000" y="0" width="160" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{order_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1160" y="0" width="255" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{order_updated_by_email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1415" y="0" width="70" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{publisher_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1485" y="0" width="266" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{publisher_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1751" y="0" width="99" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{organization_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1850" y="0" width="150" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{organization_name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

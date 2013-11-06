@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_local_booked_low_rate" pageWidth="2363" pageHeight="842" orientation="Landscape" columnWidth="2323" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.8150000000000033"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="column_head" forecolor="#000000" backcolor="#99CCFF" vAlign="Middle" fontName="Calibri" isBold="true">
+		<box leftPadding="5" rightPadding="5">
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="column_row" vAlign="Middle" fontName="Calibri">
+		<box leftPadding="5" rightPadding="5">
+			<topPen lineWidth="0.0" lineStyle="Dashed" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+			<bottomPen lineWidth="0.25" lineStyle="Dotted" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="p_end_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("2013-07-01")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_start_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("2013-07-01")]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+full_date
+,dt_lastchange AS dt_lastchange
+,order_created_at AS "Order Created Date"
+,order_id AS "Order ID"
+,order_name AS "Order Name"
+,publisher_name AS "Publisher Name"
+,organization_name AS "Advertiser Name"
+,flight_rate AS "Booked Rate"
+,flight_metric AS "Flight Type"
+,flight_quantity AS "Booked Impressions"
+,flight_created_by AS "Flight Created by"
+,flight_updated_by AS "Flight Updated by"
+,flight_created_at AS "Flight Created"
+,flight_updated_at AS "Flight Last Updated"
+,flight_id AS "ADM Flight ID"
+,flight_name AS "Flight Name"
+,flight_start_date AS "Flight Start Date"
+,flight_end_date AS "Flight End Date"
+,(CASE WHEN network_id=1 THEN 'Local' WHEN network_id=4 THEN 'VLM' ELSE 'N/A' END) AS "Network"
+FROM adsops.daily_agg_low_rate
+WHERE is_active=true
+AND full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
+ORDER BY full_date,order_name,publisher_name,organization_name,flight_rate
+--LIMIT 10]]>
+	</queryString>
+	<field name="full_date" class="java.sql.Date"/>
+	<field name="dt_lastchange" class="java.sql.Timestamp"/>
+	<field name="Order Created Date" class="java.sql.Timestamp"/>
+	<field name="Order ID" class="java.lang.Integer"/>
+	<field name="Order Name" class="java.lang.String"/>
+	<field name="Publisher Name" class="java.lang.String"/>
+	<field name="Advertiser Name" class="java.lang.String"/>
+	<field name="Booked Rate" class="java.lang.Double"/>
+	<field name="Flight Type" class="java.lang.String"/>
+	<field name="Booked Impressions" class="java.lang.Integer"/>
+	<field name="Flight Created by" class="java.lang.String"/>
+	<field name="Flight Updated by" class="java.lang.String"/>
+	<field name="Flight Created" class="java.sql.Timestamp"/>
+	<field name="Flight Last Updated" class="java.sql.Timestamp"/>
+	<field name="ADM Flight ID" class="java.lang.Integer"/>
+	<field name="Flight Name" class="java.lang.String"/>
+	<field name="Flight Start Date" class="java.sql.Timestamp"/>
+	<field name="Flight End Date" class="java.sql.Timestamp"/>
+	<field name="Network" class="java.lang.String"/>
+	<background>
+		<band/>
+	</background>
+	<columnHeader>
+		<band height="25">
+			<staticText>
+				<reportElement style="column_head" mode="Opaque" x="0" y="0" width="80" height="25"/>
+				<textElement/>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="column_head" mode="Opaque" x="80" y="0" width="80" height="25"/>
+				<textElement/>
+				<text><![CDATA[Order Created Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="column_head" mode="Opaque" x="160" y="0" width="72" height="25"/>
+				<textElement/>
+				<text><![CDATA[Order ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="column_head" mode="Opaque" x="232" y="0" width="282" height="25"/>
+				<textElement/>
+				<text><![CDATA[Order Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="column_head" mode="Opaque" x="514" y="0" width="230" height="25"/>
+				<textElement/>
+				<text><![CDATA[Publisher Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="column_head" mode="Opaque" x="744" y="0" width="240" height="25"/>
+				<textElement/>
+				<text><![CDATA[Advertiser Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="column_head" mode="Opaque" x="984" y="0" width="70" height="25"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Booked Rate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="column_head" mode="Opaque" x="1154" y="0" width="70" height="25"/>
+				<textElement/>
+				<text><![CDATA[Flight Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="column_head" mode="Opaque" x="1224" y="0" width="254" height="25"/>
+				<textElement/>
+				<text><![CDATA[Flight Updated by]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="column_head" mode="Opaque" x="1478" y="0" width="80" height="25"/>
+				<textElement/>
+				<text><![CDATA[Flight Created]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="column_head" mode="Opaque" x="1558" y="0" width="130" height="25"/>
+				<textElement/>
+				<text><![CDATA[Flight Last Updated]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="column_head" mode="Opaque" x="1688" y="0" width="80" height="25"/>
+				<textElement/>
+				<text><![CDATA[ADM Flight ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="column_head" mode="Opaque" x="1768" y="0" width="275" height="25"/>
+				<textElement/>
+				<text><![CDATA[Flight Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="column_head" mode="Opaque" x="2043" y="0" width="100" height="25"/>
+				<textElement/>
+				<text><![CDATA[Flight Start Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="column_head" mode="Opaque" x="2143" y="0" width="100" height="25"/>
+				<textElement/>
+				<text><![CDATA[Flight End Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="column_head" mode="Opaque" x="2243" y="0" width="80" height="25"/>
+				<textElement/>
+				<text><![CDATA[Network]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="column_head" mode="Opaque" x="1054" y="0" width="100" height="25"/>
+				<textElement/>
+				<text><![CDATA[Booked Impressions]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25">
+			<textField pattern="yyyy-MM-dd">
+				<reportElement style="column_row" x="0" y="0" width="80" height="25"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{full_date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd">
+				<reportElement style="column_row" x="80" y="0" width="80" height="25"/>
+				<textElement/>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{Order Created Date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="column_row" x="160" y="0" width="72" height="25"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{Order ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="column_row" x="232" y="0" width="282" height="25"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Order Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="column_row" x="514" y="0" width="230" height="25"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Publisher Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="column_row" x="744" y="0" width="240" height="25"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Advertiser Name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00">
+				<reportElement style="column_row" x="984" y="0" width="70" height="25"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Booked Rate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="column_row" x="1154" y="0" width="70" height="25"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Flight Type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="column_row" x="1224" y="0" width="254" height="25"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Flight Updated by}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd">
+				<reportElement style="column_row" x="1478" y="0" width="80" height="25"/>
+				<textElement/>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{Flight Created}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd">
+				<reportElement style="column_row" x="1558" y="0" width="130" height="25"/>
+				<textElement/>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{Flight Last Updated}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="column_row" x="1688" y="0" width="80" height="25"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{ADM Flight ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="column_row" x="1768" y="0" width="275" height="25"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Flight Name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd">
+				<reportElement style="column_row" x="2043" y="0" width="100" height="25"/>
+				<textElement/>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{Flight Start Date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd">
+				<reportElement style="column_row" x="2143" y="0" width="100" height="25"/>
+				<textElement/>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{Flight End Date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="column_row" x="2243" y="0" width="80" height="25"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Network}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
+				<reportElement style="column_row" mode="Transparent" x="1054" y="0" width="100" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Calibri" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{Booked Impressions}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="11">
+			<line>
+				<reportElement x="0" y="0" width="2323" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

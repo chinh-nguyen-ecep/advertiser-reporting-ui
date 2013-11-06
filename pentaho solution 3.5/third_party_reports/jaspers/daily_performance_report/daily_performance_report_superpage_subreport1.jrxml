@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_performance_report_subreport1" language="groovy" pageWidth="802" pageHeight="1150" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.4641000000000028"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="eastern_date_sk" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="total_adcel_yes" class="java.lang.Long"/>
+	<parameter name="total_adcel_total" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[SELECT full_date,
+       partner_name as site ,
+       revenue as net_revenue,
+	parent1_name,parent1_id,partner_id,
+       dt_lastchange,
+partner_keyword,
+	fullfilled_code_y as adcel_y_ad_responses,
+fullfilled_code_count as adcel_total_ad_responses
+  FROM adnetwork.daily_sp_performance
+  WHERE eastern_date_sk=$P{eastern_date_sk}::int AND is_active=true
+ORDER BY site]]>
+	</queryString>
+	<field name="full_date" class="java.sql.Date"/>
+	<field name="site" class="java.lang.String"/>
+	<field name="net_revenue" class="java.lang.Double"/>
+	<field name="parent1_name" class="java.lang.String"/>
+	<field name="parent1_id" class="java.lang.Integer"/>
+	<field name="partner_id" class="java.lang.Integer"/>
+	<field name="dt_lastchange" class="java.sql.Timestamp"/>
+	<field name="partner_keyword" class="java.lang.String"/>
+	<field name="adcel_y_ad_responses" class="java.lang.Integer"/>
+	<field name="adcel_total_ad_responses" class="java.lang.Integer"/>
+	<variable name="Revenue sum" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{net_revenue}]]></variableExpression>
+	</variable>
+	<variable name="Adcel_Yes" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{adcel_y_ad_responses}]]></variableExpression>
+	</variable>
+	<columnHeader>
+		<band height="56" splitType="Stretch">
+			<staticText>
+				<reportElement x="3" y="22" width="205" height="30"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Partners/Sites]]></text>
+			</staticText>
+			<line>
+				<reportElement x="3" y="52" width="799" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="3" y="0" width="205" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Performance By Partners/Sites]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="399" y="22" width="185" height="30" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Publisher ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="748" y="22" width="54" height="30" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Partner ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="584" y="22" width="54" height="30" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Publisher ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="638" y="22" width="110" height="30" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Partner Kw]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="328" y="22" width="60" height="30" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Adcel's Ys]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="268" y="22" width="60" height="30" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Adcel's Reps]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="208" y="22" width="60" height="30" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Revenue]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="3" y="0" width="205" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{site}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="328" y="0" width="60" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{adcel_y_ad_responses}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement x="208" y="0" width="60" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{net_revenue}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="268" y="0" width="60" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{adcel_total_ad_responses}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="584" y="0" width="56" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{parent1_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="399" y="0" width="185" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{parent1_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="748" y="0" width="54" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{partner_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="640" y="0" width="108" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{partner_keyword}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="43">
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement x="208" y="6" width="60" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{Revenue sum}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="5" width="802" height="1"/>
+			</line>
+			<textField pattern="#,###;-#,###">
+				<reportElement x="329" y="6" width="59" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$P{total_adcel_yes}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###;-#,###" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="268" y="6" width="60" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$P{total_adcel_total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dail_ad_network_summary_subreport1" language="groovy" pageWidth="826" pageHeight="842" columnWidth="826" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="1611"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="calendar_year_month" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("")]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+publisher_id
+,publisher_name
+,SUM(gross_revenue) as gross_revenue
+,SUM(api_revenue) as net_revenue
+,SUM(delivered_units) as impressions
+,SUM(billable_revenue) as billable_revenue
+,SUM(adjusted_billable_revenue) as adjusted_billable_revenue
+FROM billing.ba_monthly_publisher_revenue_v5
+WHERE is_active=true AND calendar_year_month=$P{calendar_year_month} AND partner_revenue_share>0 AND round(partner_revenue_share::numeric, 2)<1
+GROUP BY publisher_id
+,publisher_name
+ORDER BY publisher_name]]>
+	</queryString>
+	<field name="publisher_id" class="java.lang.Integer"/>
+	<field name="publisher_name" class="java.lang.String"/>
+	<field name="gross_revenue" class="java.lang.Double"/>
+	<field name="net_revenue" class="java.lang.Double"/>
+	<field name="impressions" class="java.lang.Long"/>
+	<field name="billable_revenue" class="java.lang.Double"/>
+	<field name="adjusted_billable_revenue" class="java.lang.Double"/>
+	<variable name="impressions_1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{impressions}]]></variableExpression>
+	</variable>
+	<variable name="gross_revenue_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{gross_revenue}]]></variableExpression>
+	</variable>
+	<variable name="net_revenue_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{net_revenue}]]></variableExpression>
+	</variable>
+	<variable name="billable_revenue_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{billable_revenue}]]></variableExpression>
+	</variable>
+	<variable name="adjusted_billable_revenue_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{adjusted_billable_revenue}]]></variableExpression>
+	</variable>
+	<columnHeader>
+		<band height="76" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="68" width="826" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="0" width="226" height="38"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Performance By Publisher]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="466" y="38" width="120" height="30"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Billable Revenue]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="346" y="38" width="120" height="30"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gross Revenue]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="226" y="38" width="120" height="30"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Impressions]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="38" width="226" height="30"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Publisher Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="586" y="38" width="120" height="30"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Adjusted
+Billable Revenue]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="706" y="38" width="120" height="30"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Adjusted
+Net Revenue]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="226" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{publisher_name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="226" y="0" width="120" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{impressions}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="346" y="0" width="120" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{gross_revenue}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="466" y="0" width="120" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{billable_revenue}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="586" y="0" width="120" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{adjusted_billable_revenue}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="706" y="0" width="120" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{net_revenue}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="50">
+			<textField pattern="#,##0">
+				<reportElement x="226" y="1" width="120" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{impressions_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="346" y="1" width="120" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{gross_revenue_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="466" y="1" width="120" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{billable_revenue_1}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="826" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="1" width="226" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="586" y="1" width="120" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{adjusted_billable_revenue_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="706" y="1" width="120" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{net_revenue_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Local Invoice Summary Report</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>chinhnguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type>report</result-type>  
+    <icon>chart_1(2).png|chart_1(2).png</icon> 
+  </documentation>
+
+  <inputs> 
+    <p_output type="string"> 
+      <sources> 
+        <request>p_output</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </p_output>  
+    <p_month_year type="string"> 
+      <sources> 
+        <request>p_month_year</request> 
+      </sources>  
+      <default-value/> 
+    </p_month_year>  
+    <List_output type="string-list"> 
+      <sources> 
+        <request>List_output</request> 
+      </sources>  
+      <default-value type="string-list"> 
+        <list-item>csv</list-item>  
+        <list-item>html</list-item>  
+        <list-item>pdf</list-item>  
+        <list-item>xls</list-item> 
+      </default-value> 
+    </List_output>  
+    <connection_name type="string"> 
+      <sources> 
+        <request>connection_name</request> 
+      </sources>  
+      <default-value><![CDATA[dw5financial]]></default-value> 
+    </connection_name> 
+  </inputs>
+
+  <outputs/>
+
+  <resources> 
+    <report-definition> 
+      <solution-file> 
+        <location>local_invoice_summary_report/local_invoice_summary_report.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition>  
+    <pageTemplate1> 
+      <solution-file> 
+        <location>local_invoice_summary_report/local_invoice_summary_report.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </pageTemplate1> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get List of week</action-type>
+      <action-inputs> 
+        <jndi type="string" mapping="connection_name"/> 
+      </action-inputs>
+      <action-outputs> 
+        <query-result type="result-set" mapping="q_list_month"/>  
+        <year_month type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <live><![CDATA[false]]></live>  
+        <query><![CDATA[SELECT inv_mmyy as year_month FROM accounting.ba_inv_local_report_detail GROUP BY inv_mmyy  
+UNION ALL
+SELECT inv_mmyy as year_month FROM accounting.ba_inv_local_report_detail GROUP BY inv_mmyy  
+ORDER BY year_month desc]]></query>
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Prompt/Secure Filter</action-type>
+      <action-inputs> 
+        <p_output type="string"/>  
+        <List_output type="string-list"/>  
+        <p_month_year type="string"/>  
+        <q_list_month type="result-set"/> 
+      </action-inputs>
+      <action-resources> 
+        <pageTemplate mapping="pageTemplate1"/> 
+      </action-resources>
+      <component-definition> 
+        <selections> 
+          <p_output style="select"> 
+            <filter>List_output</filter> 
+          </p_output>  
+          <p_month_year style="select"> 
+            <filter value-col-name="year_month" display-col-name="year_month">q_list_month</filter> 
+          </p_month_year> 
+        </selections>  
+        <xsl><![CDATA[pageTemplate]]></xsl> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JasperReportsComponent</component-name>
+      <action-type>Jasper</action-type>
+      <action-inputs> 
+        <output-type type="string" mapping="p_output"/>  
+        <p_month_year type="string"/>  
+        <jndi type="string" mapping="connection_name"/> 
+      </action-inputs>
+      <action-resources> 
+        <report-definition type="resource"/> 
+      </action-resources>
+      <component-definition/> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

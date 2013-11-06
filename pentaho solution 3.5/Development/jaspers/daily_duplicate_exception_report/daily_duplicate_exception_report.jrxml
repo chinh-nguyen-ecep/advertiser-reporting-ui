@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="api_revenue_by_partner_channel" pageWidth="2000" pageHeight="1684" orientation="Landscape" columnWidth="2000" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="0.9313819845887342"/>
+	<property name="ireport.x" value="933"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_start_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("2012-11-30")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_end_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("2012-11-30")]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+full_date,
+output_publisher_id	,
+output_publisher_name,
+input_publisher_id,
+input_publisher_name,
+advertiser_id,
+advertiser_name,
+order_id,
+flight_id,
+flight_metric,
+flight_rate,
+flight_budget,
+flight_start_date,
+flight_end_date,
+'Local' as flight_network,
+SUM(delivered_units) as delivered_units
+FROM adm.ba_daily_flight_exception
+WHERE is_active=true AND full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
+GROUP BY
+full_date,
+output_publisher_id	,
+output_publisher_name,
+input_publisher_id,
+input_publisher_name,
+advertiser_id,
+advertiser_name,
+order_id,
+flight_id,
+flight_metric,
+flight_rate,
+flight_budget,
+flight_start_date,
+flight_end_date
+ORDER BY
+full_date,
+order_id,
+output_publisher_id,
+input_publisher_id,
+advertiser_name,
+flight_id,
+flight_metric]]>
+	</queryString>
+	<field name="full_date" class="java.sql.Date"/>
+	<field name="output_publisher_id" class="java.lang.Integer"/>
+	<field name="output_publisher_name" class="java.lang.String"/>
+	<field name="input_publisher_id" class="java.lang.Integer"/>
+	<field name="input_publisher_name" class="java.lang.String"/>
+	<field name="advertiser_id" class="java.lang.Integer"/>
+	<field name="advertiser_name" class="java.lang.String"/>
+	<field name="order_id" class="java.lang.Integer"/>
+	<field name="flight_id" class="java.lang.Integer"/>
+	<field name="flight_metric" class="java.lang.String"/>
+	<field name="flight_rate" class="java.lang.Double"/>
+	<field name="flight_budget" class="java.lang.Double"/>
+	<field name="flight_start_date" class="java.sql.Timestamp"/>
+	<field name="flight_end_date" class="java.sql.Timestamp"/>
+	<field name="flight_network" class="java.lang.String"/>
+	<field name="delivered_units" class="java.lang.Long"/>
+	<background>
+		<band/>
+	</background>
+	<columnHeader>
+		<band height="23">
+			<staticText>
+				<reportElement x="0" y="0" width="150" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="150" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Output Publisher ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="250" y="0" width="200" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Output Publisher Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Input Publisher ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="550" y="0" width="200" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Input Publisher Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="750" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Advertiser ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="850" y="0" width="200" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Advertiser Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1050" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Order ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1150" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Flight ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1250" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Flight Metric]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1350" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Flight Rate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1450" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Flight Budget]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1550" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Flight Start Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1650" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Flight End Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1900" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Flight Network]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1750" y="0" width="150" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Delivered Units]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<textField pattern="yyyy-MM-dd" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="0" y="0" width="150" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{full_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{output_publisher_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="250" y="0" width="200" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{output_publisher_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{input_publisher_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="550" y="0" width="200" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{input_publisher_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="750" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{advertiser_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="850" y="0" width="200" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{advertiser_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1250" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{flight_metric}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00">
+				<reportElement x="1350" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{flight_rate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00">
+				<reportElement x="1450" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{flight_budget}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd">
+				<reportElement x="1550" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{flight_start_date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd">
+				<reportElement x="1650" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{flight_end_date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="1750" y="0" width="150" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{delivered_units}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1900" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{flight_network}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1050" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{order_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1150" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{flight_id}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

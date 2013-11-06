@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Pgfouine reports</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author/>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <redirect_uri type="string"> 
+      <sources/>  
+      <default-value><![CDATA[/pgfouine_reports/reports/2012-10-03-dw10-hourly.html]]></default-value> 
+    </redirect_uri>  
+    <date type="string"> 
+      <sources> 
+        <request>date</request> 
+      </sources>  
+      <default-value/> 
+    </date>  
+    <server type="string"> 
+      <sources> 
+        <request>server</request> 
+      </sources>  
+      <default-value><![CDATA[dw0]]></default-value> 
+    </server>  
+    <list_servers type="string-list"> 
+      <default-value type="string-list"> 
+        <list-item>dw0</list-item>  
+        <list-item>dw1</list-item>  
+        <list-item>dw2</list-item>  
+        <list-item>dw3</list-item>  
+        <list-item>dw4</list-item>  
+        <list-item>dw5</list-item>  
+        <list-item>dw6</list-item>  
+        <list-item>dw10</list-item> 
+      </default-value> 
+    </list_servers>  
+    <report_type type="string"> 
+      <sources> 
+        <request>report_type</request> 
+      </sources>  
+      <default-value><![CDATA[hourly]]></default-value> 
+    </report_type>  
+    <list_reporttypes type="result-set"> 
+      <default-value type="result-set"> 
+        <row> 
+          <value>hourly</value>  
+          <name>Hourly</name> 
+        </row>  
+        <row> 
+          <value>errors</value>  
+          <name>Errors</name> 
+        </row>  
+        <row> 
+          <value>queries</value>  
+          <name>Queries</name> 
+        </row> 
+      </default-value>  
+      <columns> 
+        <value type="string"/>  
+        <name type="string"/> 
+      </columns> 
+    </list_reporttypes> 
+  </inputs>
+
+  <outputs> 
+    <redirect_uri type="string"> 
+      <destinations> 
+        <response>redirect</response> 
+      </destinations> 
+    </redirect_uri> 
+  </outputs>
+
+  <resources>
+    <pageTemplate>
+      <solution-file>
+        <location>pgfouine_reports.html</location>
+        <mime-type>text/plain</mime-type>
+      </solution-file>
+    </pageTemplate>
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Relational</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result"/>  
+        <full_date type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[dw3]]></jndi>  
+        <query><![CDATA[SELECT full_date FROM refer.date_dim WHERE full_date BETWEEN now()::date-30 AND now()::date ORDER BY full_date desc]]></query>  
+        <live><![CDATA[true]]></live> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Prompt/Secure Filter</action-type>
+      <action-inputs> 
+        <server type="string"/>  
+        <list_servers type="string-list"/>  
+        <date type="string"/>  
+        <query_result type="result-set"/>  
+        <report_type type="string"/>  
+        <list_reporttypes type="result-set"/> 
+      </action-inputs>
+      <action-resources>
+        <pageTemplate type="resource"/>
+      </action-resources>
+      <component-definition> 
+        <selections> 
+          <server style="select"> 
+            <filter>list_servers</filter>  
+            <title>Servers</title> 
+          </server>  
+          <date style="select"> 
+            <filter value-col-name="full_date" display-col-name="full_date">query_result</filter>  
+            <title>Date</title> 
+          </date>  
+          <report_type style="select"> 
+            <filter value-col-name="value" display-col-name="name">list_reporttypes</filter>  
+            <title>Type</title> 
+          </report_type> 
+        </selections>  
+        <xsl><![CDATA[pageTemplate]]></xsl>
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>JavaScript</action-type>
+      <action-inputs> 
+        <date type="string"/>  
+        <server type="string"/>  
+        <redirect_uri type="string"/>  
+        <report_type type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <redirect_uri type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[redirect_uri="/pgfouine_reports/reports/"+date+"-"+server+"-"+report_type+".html";]]></script> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

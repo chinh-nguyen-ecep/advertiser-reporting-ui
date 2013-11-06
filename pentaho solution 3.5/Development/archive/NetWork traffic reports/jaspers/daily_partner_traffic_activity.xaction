@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Daily Partner Traffic Activity</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>Chinh nguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <eastern_date_sk type="string"> 
+      <sources> 
+        <request>eastern_date_sk</request> 
+      </sources>  
+      <default-value/> 
+    </eastern_date_sk>  
+    <partner_id type="string"> 
+      <sources> 
+        <request>partner_id</request> 
+      </sources>  
+      <default-value/> 
+    </partner_id>  
+    <output type="string"> 
+      <sources> 
+        <request>output</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </output> 
+  </inputs>
+
+  <outputs/>
+
+  <resources> 
+    <report-definition> 
+      <solution-file> 
+        <location>daily_partner_traffic_activity/daily_partner_traffic_activity.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition>  
+    <pageTemplate1> 
+      <solution-file> 
+        <location>daily_partner_traffic_activity/parameter_template.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </pageTemplate1> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get list date</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result"/>  
+        <eastern_date_sk type="integer"/>  
+        <full_date type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[dw1]]></jndi>  
+        <live><![CDATA[true]]></live>  
+        <query><![CDATA[select distinct eastern_date_sk, full_date 
+from dw.daily_agg_partner_act_all 
+where is_active = true and organic = true 
+order by eastern_date_sk desc]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get list partner</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result2"/>  
+        <partner_name type="string"/>  
+        <partner_id type="integer"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[dw1]]></jndi>  
+        <live><![CDATA[true]]></live>  
+        <query><![CDATA[SELECT DISTINCT a.parent1_name || '-' || a.partner_description || ' (' || a.partner_id::text || ')' as partner_name, a.partner_id
+FROM dw.daily_agg_partner_act_all  a
+INNER JOIN 
+(SELECT partner_id,max(month_since_2005) AS month_since_2005
+	FROM dw.daily_agg_partner_act_all 
+	WHERE organic = true
+	AND is_active = true
+	GROUP BY partner_id) b ON a.partner_id=b.partner_id AND a.month_since_2005=b.month_since_2005
+WHERE a.organic = true
+AND a.is_active = true
+ORDER BY partner_name, partner_id]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Prompt/Secure Filter</action-type>
+      <action-inputs> 
+        <eastern_date_sk type="string"/>  
+        <partner_id type="string"/>  
+        <query_result type="result-set"/>  
+        <query_result2 type="result-set"/> 
+      </action-inputs>
+      <action-resources> 
+        <pageTemplate mapping="pageTemplate1"/> 
+      </action-resources>
+      <component-definition> 
+        <selections> 
+          <eastern_date_sk style="select"> 
+            <filter value-col-name="eastern_date_sk" display-col-name="full_date">query_result</filter> 
+          </eastern_date_sk>  
+          <partner_id style="select"> 
+            <filter value-col-name="partner_id" display-col-name="partner_name">query_result2</filter> 
+          </partner_id> 
+        </selections>  
+        <xsl><![CDATA[pageTemplate]]></xsl> 
+      </component-definition> 
+    </action-definition>
+  
+    <actions> 
+      <condition><![CDATA[output=='html']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <eastern_date_sk type="string"/>  
+          <partner_id type="string"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition type="resource"/> 
+        </action-resources>
+        <component-definition> 
+          <output-type>html</output-type>  
+          <jndi><![CDATA[dw1]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[output=='pdf']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <eastern_date_sk type="string"/>  
+          <partner_id type="string"/> 
+        </action-inputs>
+        <component-definition> 
+          <output-type><![CDATA[pdf]]></output-type>  
+          <jndi><![CDATA[dw1]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[output=='csv']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <eastern_date_sk type="string"/>  
+          <partner_id type="string"/> 
+        </action-inputs>
+        <component-definition> 
+          <output-type><![CDATA[csv]]></output-type>  
+          <jndi><![CDATA[dw1]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[output=='xls']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <eastern_date_sk type="string"/>  
+          <partner_id type="string"/> 
+        </action-inputs>
+        <component-definition> 
+          <output-type><![CDATA[xls]]></output-type>  
+          <jndi><![CDATA[dw1]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[output=='xml']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <eastern_date_sk type="string"/>  
+          <partner_id type="string"/> 
+        </action-inputs>
+        <component-definition> 
+          <output-type><![CDATA[xml]]></output-type>  
+          <jndi><![CDATA[dw1]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+ 
+  </actions> 
+</action-sequence>

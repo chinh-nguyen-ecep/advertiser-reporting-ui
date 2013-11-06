@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_adcel_geo_quality_by_partner" language="groovy" pageWidth="1150" pageHeight="802" columnWidth="1150" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.6105100000000039"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="p_publisher_id_list" class="java.lang.String"/>
+	<parameter name="p_partner_id_list" class="java.lang.String"/>
+	<parameter name="p_start_date" class="java.lang.String"/>
+	<parameter name="p_end_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("1")]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT a.*
+FROM
+(
+--All partners
+SELECT
+	eastern_date_sk
+	, a.full_date
+	, parent1_id as publisher_id
+	, parent1_name as publisher_name
+	, partner_id
+	, partner_name
+	, b.channel_id
+	, d.name_current as channel_name
+	, SUM(trxids_count) as total_imp
+	, CASE WHEN SUM(trxids_count) >0 THEN SUM(filled_count)::float/SUM(trxids_count) ELSE 0 END as fill_rate
+	, CASE WHEN SUM(filled_count)>0 THEN SUM(location_quality_0)::float/SUM(filled_count) ELSE 0 END as na_no_score
+	, CASE WHEN SUM(filled_count)>0 THEN SUM(location_quality_5)::float/SUM(filled_count) ELSE 0 END as foreign_content_ip_score_5
+	, CASE WHEN SUM(filled_count)>0 THEN SUM(location_quality_10)::float/SUM(filled_count) ELSE 0 END as mobile_ip_score_10
+	, CASE WHEN SUM(filled_count)>0 THEN SUM(location_quality_20)::float/SUM(filled_count) ELSE 0 END as content_location_score_20
+	, CASE WHEN SUM(filled_count)>0 THEN SUM(location_quality_45)::float/SUM(filled_count) ELSE 0 END as us_postal_score_45
+	, CASE WHEN SUM(filled_count)>0 THEN SUM(location_quality_50)::float/SUM(filled_count) ELSE 0 END as non_us_terr_ip_score_50
+	, CASE WHEN SUM(filled_count)>0 THEN SUM(location_quality_100)::float/SUM(filled_count) ELSE 0 END as lat_long_score_100
+	, CASE WHEN SUM(filled_count)>0 THEN SUM(country_us)::float/SUM(filled_count) ELSE 0 END as us
+	, CASE WHEN SUM(filled_count)>0 THEN SUM(country_international)::float/SUM(filled_count) ELSE 0 END as international
+FROM adstraffic.daily_geo_quality a
+LEFT JOIN refer.adm_mapping_portals b ON b.dt_expire='9999-12-31' AND b.portal_id=a.portal_id
+INNER JOIN refer.date_dim c ON c.date_sk=a.eastern_date_sk AND c.full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
+LEFT JOIN refer.adm_channel_dim d ON d.dt_expire='9999-12-31' AND d.channel_id=b.channel_id
+WHERE is_active=true
+AND (partner_id IN (select unnest(string_to_array($P{p_partner_id_list}, ';'))::int) OR '0'=$P{p_partner_id_list})
+GROUP BY eastern_date_sk,a.full_date,publisher_id,partner_id,publisher_name,partner_name,b.channel_id, channel_name
+UNION
+--All publisher
+SELECT
+	eastern_date_sk
+	, a.full_date
+	, parent1_id as publisher_id
+	, parent1_name as publisher_name
+	, partner_id
+	, partner_name
+	, b.channel_id
+	, d.name_current as channel_name
+	, SUM(trxids_count) as total_imp
+	, CASE WHEN SUM(trxids_count) >0 THEN SUM(filled_count)::float/SUM(trxids_count) ELSE 0 END as fill_rate
+	, CASE WHEN SUM(filled_count)>0 THEN SUM(location_quality_0)::float/SUM(filled_count) ELSE 0 END as na_no_score
+	, CASE WHEN SUM(filled_count)>0 THEN SUM(location_quality_5)::float/SUM(filled_count) ELSE 0 END as foreign_content_ip_score_5
+	, CASE WHEN SUM(filled_count)>0 THEN SUM(location_quality_10)::float/SUM(filled_count) ELSE 0 END as mobile_ip_score_10
+	, CASE WHEN SUM(filled_count)>0 THEN SUM(location_quality_20)::float/SUM(filled_count) ELSE 0 END as content_location_score_20
+	, CASE WHEN SUM(filled_count)>0 THEN SUM(location_quality_45)::float/SUM(filled_count) ELSE 0 END as us_postal_score_45
+	, CASE WHEN SUM(filled_count)>0 THEN SUM(location_quality_50)::float/SUM(filled_count) ELSE 0 END as non_us_terr_ip_score_50
+	, CASE WHEN SUM(filled_count)>0 THEN SUM(location_quality_100)::float/SUM(filled_count) ELSE 0 END as lat_long_score_100
+	, CASE WHEN SUM(filled_count)>0 THEN SUM(country_us)::float/SUM(filled_count) ELSE 0 END as us
+	, CASE WHEN SUM(filled_count)>0 THEN SUM(country_international)::float/SUM(filled_count) ELSE 0 END as international
+FROM adstraffic.daily_geo_quality a
+LEFT JOIN refer.adm_mapping_portals b ON b.dt_expire='9999-12-31' AND b.portal_id=a.portal_id
+INNER JOIN refer.date_dim c ON c.date_sk=a.eastern_date_sk AND c.full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
+LEFT JOIN refer.adm_channel_dim d ON d.dt_expire='9999-12-31' AND d.channel_id=b.channel_id
+WHERE is_active=true
+AND (parent1_id IN (select unnest(string_to_array($P{p_publisher_id_list}, ';'))::int) OR '0'=$P{p_publisher_id_list})
+GROUP BY eastern_date_sk,a.full_date,publisher_id,partner_id,publisher_name,partner_name,b.channel_id, channel_name
+)a
+ORDER BY eastern_date_sk,publisher_name,partner_name, channel_name]]>
+	</queryString>
+	<field name="eastern_date_sk" class="java.lang.Integer"/>
+	<field name="full_date" class="java.sql.Date"/>
+	<field name="publisher_id" class="java.lang.Integer"/>
+	<field name="publisher_name" class="java.lang.String"/>
+	<field name="partner_id" class="java.lang.Integer"/>
+	<field name="partner_name" class="java.lang.String"/>
+	<field name="channel_id" class="java.lang.Integer"/>
+	<field name="channel_name" class="java.lang.String"/>
+	<field name="total_imp" class="java.lang.Long"/>
+	<field name="fill_rate" class="java.lang.Double"/>
+	<field name="na_no_score" class="java.lang.Double"/>
+	<field name="foreign_content_ip_score_5" class="java.lang.Double"/>
+	<field name="mobile_ip_score_10" class="java.lang.Double"/>
+	<field name="content_location_score_20" class="java.lang.Double"/>
+	<field name="us_postal_score_45" class="java.lang.Double"/>
+	<field name="non_us_terr_ip_score_50" class="java.lang.Double"/>
+	<field name="lat_long_score_100" class="java.lang.Double"/>
+	<field name="us" class="java.lang.Double"/>
+	<field name="international" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="43">
+			<staticText>
+				<reportElement x="0" y="0" width="75" height="40"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="227" y="0" width="140" height="40"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Partner]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="470" y="0" width="70" height="40"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total
+Impressions]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="540" y="0" width="60" height="40"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fill
+Rate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="600" y="0" width="60" height="40"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[N/A
+No Score
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="660" y="0" width="60" height="40"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Foreign
+Content IP
+Score 5
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="720" y="0" width="60" height="40"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mobile IP
+Score 10]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="780" y="0" width="60" height="40"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Content
+Location
+Score 20]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="840" y="0" width="60" height="40"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[US Postal
+Score 45]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="900" y="0" width="60" height="40"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Non-US /
+Terrestrial IP
+Score 50]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="960" y="0" width="60" height="40"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lat / Long
+Score 100]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1020" y="0" width="60" height="40"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[US]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1080" y="0" width="70" height="40"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[International]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="40" width="1150" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="75" y="0" width="152" height="40"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Publisher]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="367" y="0" width="103" height="40" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Channel]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<textField pattern="yyyy-MM-dd">
+				<reportElement x="0" y="0" width="75" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{full_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="470" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{total_imp}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="540" y="0" width="60" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{fill_rate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="600" y="0" width="60" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{na_no_score}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="660" y="0" width="60" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{foreign_content_ip_score_5}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="720" y="0" width="60" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{mobile_ip_score_10}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="780" y="0" width="60" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{content_location_score_20}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="960" y="0" width="60" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{lat_long_score_100}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="1020" y="0" width="60" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{us}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="1080" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{international}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="227" y="0" width="140" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{partner_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="75" y="0" width="152" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{publisher_name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="840" y="0" width="60" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{us_postal_score_45}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="900" y="0" width="60" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{non_us_terr_ip_score_50}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="367" y="0" width="103" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{channel_name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

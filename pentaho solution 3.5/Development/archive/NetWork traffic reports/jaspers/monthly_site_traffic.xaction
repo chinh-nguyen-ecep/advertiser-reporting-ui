@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Monthly Site Traffic</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>chinhnguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type>report</result-type>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <Month type="string"> 
+      <sources> 
+        <request>Month</request> 
+      </sources>  
+      <default-value/> 
+    </Month>  
+    <Group type="string"> 
+      <sources> 
+        <request>Group</request> 
+      </sources>  
+      <default-value/> 
+    </Group>  
+    <output type="string"> 
+      <sources> 
+        <request>output</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </output>  
+    <output_list type="string-list"> 
+      <default-value type="string-list"> 
+        <list-item>html</list-item>  
+        <list-item>pdf</list-item>  
+        <list-item>xls</list-item>  
+        <list-item>csv</list-item>  
+        <list-item>xml</list-item> 
+      </default-value> 
+    </output_list> 
+  </inputs>
+
+  <outputs/>
+
+  <resources> 
+    <report-definition> 
+      <solution-file> 
+        <location>monthly_site_traffic/template.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition>  
+    <pageTemplate>
+      <solution-file>
+        <location>monthly_site_traffic/parameter_template.html</location>
+        <mime-type>text/plain</mime-type>
+      </solution-file>
+    </pageTemplate>
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get month</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="q_month"/>  
+        <calendar_year_month type="string"/>  
+        <month_since_2005 type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[dw1]]></jndi>  
+        <live><![CDATA[false]]></live>  
+        <query><![CDATA[SELECT DISTINCT calendar_year_month, month_since_2005
+FROM dw.monthly_agg_site_traffic
+ORDER BY month_since_2005 desc]]></query>
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get group</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="q_group"/>  
+        <parent1_name type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[dw1]]></jndi>  
+        <live><![CDATA[false]]></live>  
+        <query><![CDATA[SELECT DISTINCT parent1_name
+FROM dw.monthly_agg_site_traffic
+ORDER BY parent1_name]]></query>
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition>
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Prompt/Secure Filter</action-type>
+      <action-inputs>
+        <Month type="string"/>
+        <Group type="string"/>
+        <output type="string"/>
+        <q_month type="result-set"/>
+        <q_group type="result-set"/>
+        <output_list type="string-list"/>
+      </action-inputs>
+      <action-resources>
+        <pageTemplate type="resource"/>
+      </action-resources>
+      <component-definition>
+        <selections>
+          <Month style="select">
+            <filter value-col-name="calendar_year_month" display-col-name="calendar_year_month">q_month</filter>
+          </Month>
+          <Group style="select">
+            <filter value-col-name="parent1_name" display-col-name="parent1_name">q_group</filter>
+          </Group>
+          <output style="select">
+            <filter>output_list</filter>
+          </output>
+        </selections>
+        <xsl><![CDATA[pageTemplate]]></xsl>
+      </component-definition>
+    </action-definition>
+
+    <actions> 
+      <condition><![CDATA[output=='html']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <Group type="string"/>  
+          <Month type="string"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition type="resource"/> 
+        </action-resources>
+        <component-definition> 
+          <output-type>html</output-type>  
+          <jndi><![CDATA[dw1]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[output=='pdf']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <Group type="string"/>  
+          <Month type="string"/> 
+        </action-inputs>
+        <action-outputs/>
+        <component-definition> 
+          <output-type><![CDATA[pdf]]></output-type>  
+          <jndi><![CDATA[dw1]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[output=='csv']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <Group type="string"/>  
+          <Month type="string"/> 
+        </action-inputs>
+        <component-definition> 
+          <output-type><![CDATA[csv]]></output-type>  
+          <jndi><![CDATA[dw1]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[output=='xls']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <Group type="string"/>  
+          <Month type="string"/> 
+        </action-inputs>
+        <component-definition> 
+          <output-type><![CDATA[xls]]></output-type>  
+          <jndi><![CDATA[dw1]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[output=='xml']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <Group type="string"/>  
+          <Month type="string"/> 
+        </action-inputs>
+        <component-definition> 
+          <output-type><![CDATA[xml]]></output-type>  
+          <jndi><![CDATA[dw1]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+ 
+  </actions> 
+</action-sequence>

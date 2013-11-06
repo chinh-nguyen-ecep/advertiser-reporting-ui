@@ -1,0 +1,184 @@
+<Schema name="Double Click">
+  <Cube name="daily_agg_site_order" cache="true" enabled="false">
+    <Table name="daily_agg_site_order" schema="dbclk">
+    </Table>
+    <Dimension type="StandardDimension" highCardinality="false" name="Publisher">
+      <Hierarchy hasAll="true">
+        <Level name="Publisher name" column="publisher_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Campaign">
+      <Hierarchy hasAll="true">
+        <Level name="Campaign name" column="campaign_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Calendar year month">
+      <Hierarchy hasAll="true">
+        <Level name="Month" column="calendar_year_month" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="TimeDimension" highCardinality="false" name="Full date">
+      <Hierarchy hasAll="true">
+        <Level name="Full date" column="full_date" type="Date" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Is active">
+      <Hierarchy hasAll="true">
+        <Level name="Is active" column="is_active" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Impression count" column="impression_count" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Click count" column="click_count" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Revenue total" column="revenue_total" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="daily_agg_site_day" cache="true" enabled="true">
+    <Table name="daily_agg_site_day" schema="dbclk">
+    </Table>
+    <Dimension type="StandardDimension" highCardinality="false" name="Site">
+      <Hierarchy hasAll="true">
+        <Level name="Site name" column="site_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Calendar year month">
+      <Hierarchy hasAll="true">
+        <Level name="Month" column="calendar_year_month" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="TimeDimension" highCardinality="false" name="Full date">
+      <Hierarchy hasAll="true">
+        <Level name="Full date" column="full_date" type="Date" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Is active">
+      <Hierarchy hasAll="true">
+        <Level name="Is active" column="is_active" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Impression count" column="impression_count" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Click count" column="click_count" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Revenue total" column="revenue_total" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="daily_agg_site_order_day" cache="true" enabled="true">
+    <Table name="daily_agg_site_campaign_day" schema="dbclk">
+    </Table>
+    <Dimension type="StandardDimension" highCardinality="false" name="Site">
+      <Hierarchy hasAll="true">
+        <Level name="Site name" column="site_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Order">
+      <Hierarchy hasAll="true">
+        <Level name="Order name" column="campaign_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Calendar year month">
+      <Hierarchy hasAll="true">
+        <Level name="Month" column="calendar_year_month" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="TimeDimension" highCardinality="false" name="Full date">
+      <Hierarchy hasAll="true">
+        <Level name="Full date" column="full_date" type="Date" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Is active">
+      <Hierarchy hasAll="true">
+        <Level name="Is active" column="is_active" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Impression count" column="impression_count" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Click count" column="click_count" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Revenue total" column="revenue_total" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="daily_agg_publishers_day" cache="true" enabled="true">
+    <Table name="daily_agg_publishers_day" schema="dbclk">
+    </Table>
+    <Dimension type="StandardDimension" highCardinality="false" name="Publisher">
+      <Hierarchy hasAll="true">
+        <Level name="Publisher name" column="publisher_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Calendar year month">
+      <Hierarchy hasAll="true">
+        <Level name="Month" column="calendar_year_month" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="TimeDimension" highCardinality="false" name="Full date">
+      <Hierarchy hasAll="true">
+        <Level name="Full date" column="full_date" type="Date" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Is active">
+      <Hierarchy hasAll="true">
+        <Level name="Is active" column="is_active" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Impression count" column="impression_count" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Click count" column="click_count" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Revenue total" column="revenue_total" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="daily_agg_campaign" cache="true" enabled="false">
+    <Table name="daily_agg_campaign" schema="dbclk">
+    </Table>
+    <Dimension type="StandardDimension" highCardinality="false" name="Campaign name">
+      <Hierarchy hasAll="true">
+        <Level name="Campaign name" column="campaign_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Calendar year month">
+      <Hierarchy hasAll="true">
+        <Level name="Month" column="calendar_year_month" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="TimeDimension" highCardinality="false" name="Full date">
+      <Hierarchy hasAll="true">
+        <Level name="Full date" column="full_date" type="Date" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Is active">
+      <Hierarchy hasAll="true" defaultMember="true">
+        <Level name="Is active" column="is_active" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Impression count" column="impression_count" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Click count" column="click_count" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Revenue total" column="revenue_total" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+</Schema>

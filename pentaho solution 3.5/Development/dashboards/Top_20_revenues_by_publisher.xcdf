@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cdf>
+	<title>Top 20 Revenues By Publisher</title>
+	<author>chinhnguyen</author>
+	<description>Pentaho Home Dashboard</description>
+	<icon></icon>
+	<template>/Development/dashboards/Top_20_revenues_by_publisher/template.html</template>
+</cdf>

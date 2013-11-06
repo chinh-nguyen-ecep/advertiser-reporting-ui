@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Local Invoice Summary" pageWidth="1020" pageHeight="1190" columnWidth="980" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.6528925619834767"/>
+	<property name="ireport.x" value="387"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_month_year" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("0413")]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+a.INVOICE  as "Invoice"
+,a.ACCOUNT_NAME as "Account Name"
+,SUM(TOTAL_IMPS) AS "Total Impression"
+,SUM(GROSS_LOCAL_REVENUE)  AS "Gross Local Revenue"
+,SUM(PLATFORM_FEE)  AS "Platform Fee"
+,SUM(SMS_FEE) AS "Sms fee"
+,SUM(VERVE_LOCAL_NET)  AS "Verve Local Split"
+,verve_global_fee AS "Verve Global fee"
+,verve_invoice_amount AS "Verve Invoice Amount"
+FROM(
+SELECT
+inv_detail_id as INVOICE
+,ACCOUNT_NAME
+,adm_partner_id
+,SUM(COALESCE(BILLABLE_UNITS,0)) AS TOTAL_IMPS
+,SUM(COALESCE(GROSS_REVENUE,0)) AS GROSS_LOCAL_REVENUE
+,COALESCE(PLATFORM_FEE,0) as platform_fee
+,COALESCE(SMS_FEE,0) as sms_fee
+,COALESCE(LOCAL_SUBTOTAL,0) as VERVE_LOCAL_NET
+,coalesce(global_fee) as VERVE_GLOBAL_FEE
+,COALESCE(invoice_amount, 0) as verve_invoice_amount
+FROM accounting.ba_inv_Local_report_detail
+WHERE INV_MMYY=  $P{p_month_year}--pass month
+and status = 'ACTIVE' --pass active status
+--and inv_detail_id = '0813004'
+GROUP BY inv_detail_id
+,ACCOUNT_NAME
+,adm_partner_id
+,PLATFORM_FEE
+,SMS_FEE
+,LOCAL_SUBTOTAL
+,global_fee
+,invoice_amount
+)a
+GROUP BY a.INVOICE
+,a.ACCOUNT_NAME
+,a.verve_invoice_amount
+,a.verve_global_fee
+ORDER BY ACCOUNT_NAME;]]>
+	</queryString>
+	<field name="Invoice" class="java.lang.String"/>
+	<field name="Account Name" class="java.lang.String"/>
+	<field name="Total Impression" class="java.math.BigDecimal"/>
+	<field name="Gross Local Revenue" class="java.lang.Double"/>
+	<field name="Platform Fee" class="java.lang.Double"/>
+	<field name="Sms fee" class="java.lang.Double"/>
+	<field name="Verve Local Split" class="java.lang.Double"/>
+	<field name="Verve Global fee" class="java.lang.Double"/>
+	<field name="Verve Invoice Amount" class="java.lang.Double"/>
+	<variable name="Gross Local Revenue_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{Gross Local Revenue}]]></variableExpression>
+	</variable>
+	<variable name="Platform Fee_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{Platform Fee}]]></variableExpression>
+	</variable>
+	<variable name="Sms fee_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{Sms fee}]]></variableExpression>
+	</variable>
+	<variable name="Total Impression_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{Total Impression}]]></variableExpression>
+	</variable>
+	<variable name="Verve Local Split_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{Verve Local Split}]]></variableExpression>
+	</variable>
+	<variable name="Verve Invoice Amount_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{Verve Invoice Amount}]]></variableExpression>
+	</variable>
+	<variable name="Verve Global fee_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{Verve Global fee}]]></variableExpression>
+	</variable>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="161">
+			<image>
+				<reportElement x="0" y="0" width="100" height="40"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"../vervelogo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="100" y="0" width="880" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Local Invoice Summary Report]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="40" width="100" height="20"/>
+				<textElement>
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Month year: "+$P{p_month_year}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="60" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Note:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="80" width="980" height="15" forecolor="#FF0000"/>
+				<textElement>
+					<font size="10" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[- Total impressions is the to total of billable units]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="95" width="980" height="15" forecolor="#FF0000"/>
+				<textElement>
+					<font size="10" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[- Billable units : If the delivered_units > booked_units then booked_units Else delivered_units]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="110" width="980" height="15" forecolor="#FF0000"/>
+				<textElement>
+					<font size="10" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[- Gross revenue= billable units * booked rate /1000]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="125" width="980" height="15" forecolor="#FF0000"/>
+				<textElement>
+					<font size="10" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[- Verve net split  = gross revenue * verve share ( from SF)]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Invoice]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="172" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Account Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="272" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Impression]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="372" y="0" width="130" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gross Local Revenue]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="502" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Platform Fee]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="572" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sms fee]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="642" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Verve Local Split]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="742" y="0" width="138" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Verve Invoice Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="880" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Verve Global fee]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Invoice}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="172" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Account Name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00">
+				<reportElement x="372" y="0" width="130" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Gross Local Revenue}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00">
+				<reportElement x="502" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Platform Fee}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00">
+				<reportElement x="572" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Sms fee}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="272" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{Total Impression}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="642" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Verve Local Split}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="742" y="0" width="138" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Verve Invoice Amount}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="880" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Verve Global fee}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="26">
+			<textField>
+				<reportElement x="0" y="6" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="6" width="780" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="880" y="6" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="980" height="1"/>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="20">
+			<textField pattern="$#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="372" y="0" width="130" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{Gross Local Revenue_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="502" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{Platform Fee_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="572" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{Sms fee_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="172" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="272" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{Total Impression_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="642" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{Verve Local Split_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="742" y="0" width="138" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{Verve Invoice Amount_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="880" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{Verve Global fee_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

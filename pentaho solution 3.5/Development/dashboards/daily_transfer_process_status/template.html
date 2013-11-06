@@ -1,0 +1,197 @@
+		<link rel="shortcut icon" type="image/ico" href="http://a3.twimg.com/profile_images/558415661/pentaho_twitter3.png" />
+
+		<style type="text/css" title="currentStyle">
+			@import "/verve_style/scripts/jquery_ui/css/smoothness/jquery-ui-1.8.17.custom.css";
+			@import "/verve_style/scripts/jquery_clock/css/digital.css";
+			@import "/verve_style/scripts/bumpbox/bumpbox.css";
+			a{
+			text-decoration:none;
+			color:#678197;
+			font:"Tahoma",Verdana,Arial,Helvetica,sans-serif;
+			font-size: 10pt;
+			}
+			a.view_log_detail{
+			font:bold 8pt "Tahoma","Trebuchet MS",Arial,Helvetica,sans-serif;
+			color:#66a3d3;
+			margin-left: 5px;
+			}
+			div.etl_box{
+			overflow: auto;
+			font:"Tahoma","Trebuchet MS",Arial,Helvetica,sans-serif;
+			font-size: 10pt;
+			padding: 5px;
+			color: gray;
+			}
+			div.etl_box ul{
+				list-style-type: none;
+				width: 100%;
+				margin: 0;
+				padding: 0;
+			}
+			div.etl_box ul li{
+				float: left;
+				margin-right: 10px;
+			}
+			div.etl_box ul li span{
+				font:bold 8pt "Tahoma","Trebuchet MS",Arial,Helvetica,sans-serif;
+				color:#66a3d3;
+			}
+			
+			.dataTable thead tr th div.DataTables_sort_wrapper{
+				font:76%/160% "tahoma",Verdana,Arial,Helvetica,sans-serif;
+				color:gray;				
+			}
+			.dataTable{
+				border-left: 1px solid #AAAAAA;
+				border-right: 1px solid #AAAAAA;
+			}
+			.dataTable tbody{
+				font-size: 8pt;
+			}
+			.dataTable tbody tr.odd{
+				background-color: #DDFFDD;
+			}
+			.dataTable tbody tr.even{
+				background-color: #EEFFEE; 
+			}
+			.dataTable tbody tr.odd td.sorting_1{
+				background-color: #C4FFC4; 
+			}
+			.dataTable tbody tr.even td.sorting_1{
+				background-color: #D5FFD5; 
+			}
+			div.dataTables_length{
+				margin-left: 5px;
+			}
+			div.dataTables_filter{
+				margin-right: 5px;
+			}
+			div.dataTables_info{
+				font:8pt "tahoma",Verdana,Arial,Helvetica,sans-serif;
+				color:gray;
+				margin-left: 5px;
+				margin-top: 5px;
+			}
+		</style>
+
+		<script type="text/javascript" language="javascript" src="/verve_style/scripts/DataTables/media/js/jquery.js"></script>
+		<script type="text/javascript" language="javascript" src="/verve_style/scripts/DataTables/media/js/jquery.dataTables.js"></script>
+		<script type="text/javascript" language="javascript" src="/verve_style/scripts/jquery.form.js"></script>
+		<script type="text/javascript" language="javascript" src="/verve_style/scripts/jquery_ui/jquery-ui-1.8.17.custom.min.js"></script>
+		<script type="text/javascript" language="javascript" src="/verve_style/scripts/jquery_clock/js/jquery.clock.js"></script>
+		
+		<script type="text/javascript" language="javascript" src="/verve_style/scripts/bumpbox/tools.js"></script>
+		<script type="text/javascript" language="javascript" src="/verve_style/scripts/bumpbox/flowplayer-3.js"></script>
+		<script type="text/javascript" language="javascript" src="/verve_style/scripts/bumpbox/bumpbox.js"></script>
+		
+		<script language="javascript" src="/pentaho/js/pentaho-ajax.js"></script>
+		<script type="text/javascript" src="GetCDFResource?resource=/Development/dashboards/daily_transfer_process_status/MetaLayer.js"></script>
+		<script type="text/javascript" charset="utf-8">
+		$(document).ready(function() {
+			MetaLayer.init();
+		});
+		</script>
+
+
+	<h1 class="dashboardName" id="dashboardTitle">Daily Transfer Process Status</h1>
+	<input id="datepicker" type="text" > 
+	<div style="float: right;" class="clock">
+		<span class="title">New York</span>
+		<ul id="digital-clock-newyork" class="digital" >	
+		<li class="hour"></li>
+		<li class="min"></li>
+		<li class="sec"></li>
+		<li class="meridiem"></li>
+		</ul>
+	</div>	
+	<div style="float: right;" class="clock">
+		<span class="title">California</span>
+		<ul id="digital-clock" class="digital" >	
+		<li class="hour"></li>
+		<li class="min"></li>
+		<li class="sec"></li>
+		<li class="meridiem"></li>
+		</ul>
+	</div>
+	<div style="float: right;" class="clock">
+		<span class="title">SaiGon</span>
+		<ul id="digital-clock-SaiGon" class="digital" >	
+		<li class="hour"></li>
+		<li class="min"></li>
+		<li class="sec"></li>
+		<li class="meridiem"></li>
+		</ul>
+	</div>
+		<div style="float: right;" class="clock">
+		<span class="title">UTC</span>
+		<ul id="digital-clock-UTC" class="digital" >	
+		<li class="hour"></li>
+		<li class="min"></li>
+		<li class="sec"></li>
+		<li class="meridiem"></li>
+		</ul>
+	</div>
+	<div class="mybox" style="width: 100%">
+		<div class="title">Daily Transfer Process Status
+		<img src="/verve_style/images/arrow_refresh.png" id="bt_daily_process_status_refresh" class="bt" alt="refresh" title="refresh"/>
+		</div>
+		<div class="box_content" style="min-height: 550px;width: 100%">
+			<div id="list_log_files_dl">
+				<table cellpadding="0" cellspacing="0" border="0" class="display" id="list_log_files_tb" style="width: 100%">
+					<thead>
+						<tr>
+							<th width="40" title="Process ID">Process ID</th>
+							<th width="40" title="Transfer from">From</th>
+							<th width="120" title="Table">Table</th>
+							<th width="120" title="Conditions">Conditions</th>
+							<th width="40" title="Export count">Export count</th>
+							<th width="40" title="Start time">Start time</th>
+							<th width="40" title="Transfer to">To</th>
+							<th width="40" title="End time">End time</th>
+							<th width="40" title="Import count">Import count</th>	
+							<th width="40" title="Transfer type">Type</th>	
+							<th title="Is complete">Is complete</th>							
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td colspan="8" ></td>
+						</tr>
+						<tr>
+							<td colspan="8" ></td>
+						</tr>
+						<tr>
+							<td colspan="8" ></td>
+						</tr>
+						<tr>
+							<td colspan="8" ></td>
+						</tr>
+						<tr>
+							<td colspan="8" ></td>
+						</tr>
+						<tr>
+							<td colspan="8" ></td>
+						</tr>
+						<tr>
+							<td colspan="8" ></td>
+						</tr>
+						<tr>
+							<td colspan="8" ></td>
+						</tr>
+						<tr>
+							<td colspan="8" ></td>
+						</tr>
+						<tr>
+							<td colspan="8" ></td>
+						</tr>
+						<tr>
+							<td colspan="8" ></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	
+
+

@@ -1,0 +1,62 @@
+<Schema name="ADM-DBCLICK-infobrightDB">
+  <Cube name="daily_agg_adm_data_feed" cache="true" enabled="true">
+    <Table name="daily_agg_adm_data_feed" ></Table>
+    <Dimension type="StandardDimension" highCardinality="false" name="Calendar Month">
+	  <Hierarchy hasAll="true">
+		<Level name="Calendar year month" ordinalColumn="month_since_2005" column="calendar_year_month" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never"></Level>
+		<Level name="Full date" column="full_date" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never"></Level>
+	  </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Creative">
+      <Hierarchy hasAll="true">
+        <Level name="Creative id" column="creative_id" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Flight">
+      <Hierarchy hasAll="true">
+        <Level name="Flight id" column="flight_id" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Impression count" column="impressions" datatype="Integer" aggregator="sum" visible="true"></Measure>
+    <Measure name="Click count" column="clicks" datatype="Integer" aggregator="sum" visible="true"></Measure>
+    <Measure name="Revenue total" column="revenue" datatype="Numeric" aggregator="sum" visible="true"></Measure>
+  </Cube>
+  <Cube name="daily_event_maps" cache="true" enabled="true">
+    <Table name="daily_event_maps">
+    </Table>
+    <Dimension type="StandardDimension" highCardinality="false" name="Calendar Month">
+	  <Hierarchy hasAll="true">
+		<Level name="Calendar year month" ordinalColumn="month_since_2005" column="calendar_year_month" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never"></Level>
+		<Level name="Full date" column="full_date" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never"></Level>
+	  </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Id">
+      <Hierarchy hasAll="true">
+        <Level name="Id" column="id" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Latitude">
+      <Hierarchy hasAll="true">
+        <Level name="Latitude" column="latitude" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Longitude">
+      <Hierarchy hasAll="true">
+        <Level name="Longitude" column="longitude" type="Numeric" uniqueMembers="false" levelType="Regular">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Event name">
+      <Hierarchy hasAll="true">
+        <Level name="Event name" column="event_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Event count" column="event_count" datatype="Integer" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+</Schema>

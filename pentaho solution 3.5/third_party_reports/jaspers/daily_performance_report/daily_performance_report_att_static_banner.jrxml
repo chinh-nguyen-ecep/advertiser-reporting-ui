@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_performance_report_att_static_banner" pageWidth="1350" pageHeight="1350" orientation="Landscape" columnWidth="1310" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="528"/>
+	<parameter name="eastern_date_sk" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("0")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="parameter1" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/opt/pentaho/biserver-ce/pentaho-solutions/third_party_reports/jaspers/daily_performance_report/"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT   full_date
+        ,(max (a.dt_lastchange)::timestamp with time zone AT TIME ZONE 'America/Los_Angeles')::timestamp with time zone AT TIME ZONE 'America/New_York'as dt_lastchange
+        ,COALESCE(sum(case requests when -1 then 0 else requests end),0) as requests
+        ,COALESCE(sum(case impressions when -1 then 0 else impressions end),0) as paid_impressions
+        ,COALESCE(sum(case clicks when -1 then 0 else clicks end),0) as clicks
+        ,sum(revenue) as net_revenue
+        ,sum(case fullfilled_code_y when -1 then 0 else fullfilled_code_y end) as total_adcel_yes
+        ,sum(case fullfilled_code_count when -1 then 0 else fullfilled_code_count end) as total_adcel_total
+	,sum(today_estimate_revenue) as today_estimate_revenue
+	,sum(event_count) as today_event_count
+FROM adnetwork.daily_yp_sb_performance a
+WHERE eastern_date_sk=$P{eastern_date_sk}::int
+  AND is_active=true
+GROUP BY full_date]]>
+	</queryString>
+	<field name="full_date" class="java.sql.Date"/>
+	<field name="dt_lastchange" class="java.sql.Timestamp"/>
+	<field name="requests" class="java.lang.Long"/>
+	<field name="paid_impressions" class="java.lang.Long"/>
+	<field name="clicks" class="java.lang.Long"/>
+	<field name="net_revenue" class="java.lang.Double"/>
+	<field name="total_adcel_yes" class="java.lang.Long"/>
+	<field name="total_adcel_total" class="java.lang.Long"/>
+	<field name="today_estimate_revenue" class="java.lang.Double"/>
+	<field name="today_event_count" class="java.lang.Long"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="360">
+			<image>
+				<reportElement x="0" y="9" width="64" height="20"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"vervelogo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="64" y="9" width="1246" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ AT&T Static Banner (Yellowpages) Daily Performance ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="40" width="205" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Date: " + $F{full_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="205" y="40" width="965" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Refresh Date (ET):]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="1170" y="40" width="140" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{dt_lastchange}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="80" width="205" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Performance Overview:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="180" width="143" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Total Revenue:]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="0" y="333" width="1310" height="27"/>
+				<subreportParameter name="eastern_date_sk">
+					<subreportParameterExpression><![CDATA[new Integer($P{eastern_date_sk})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_requests">
+					<subreportParameterExpression><![CDATA[$F{requests}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_event_count">
+					<subreportParameterExpression><![CDATA[$F{today_event_count}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_clicks">
+					<subreportParameterExpression><![CDATA[$F{clicks}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_adcel_yes">
+					<subreportParameterExpression><![CDATA[$F{total_adcel_yes}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_imps">
+					<subreportParameterExpression><![CDATA[$F{paid_impressions}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_adcel_total">
+					<subreportParameterExpression><![CDATA[$F{total_adcel_total}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_performance_report_att_static_banner_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+			<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="143" y="180" width="62" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{net_revenue}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="220" width="143" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Total Adcel's Yes responses:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="200" width="143" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Total Adcel's Ad responses:]]></text>
+			</staticText>
+			<textField pattern="#,###;-#,###" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="143" y="200" width="62" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{total_adcel_total}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###;-#,###">
+				<reportElement x="143" y="220" width="62" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{total_adcel_yes}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###;-#,###" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="143" y="100" width="62" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{requests}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="100" width="143" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Total Ad Requests:]]></text>
+			</staticText>
+			<textField pattern="#,###;-#,###" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="143" y="120" width="62" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{paid_impressions}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="120" width="143" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Total Paid Impressions:]]></text>
+			</staticText>
+			<textField pattern="#,###;-#,###" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="143" y="140" width="62" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{clicks}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="140" width="143" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Total Clicks:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="273" width="205" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Notes:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="293" width="1310" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[1- Estimates for individual ATT Static Banner-YP's sites are based on bannerclk daily distribution (%)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="313" width="1310" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[2- Zero, '0' is assgined for Null data]]></text>
+			</staticText>
+			<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="143" y="160" width="62" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{today_estimate_revenue}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="160" width="143" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Total TD Estimate Revenue:]]></text>
+			</staticText>
+			<textField pattern="#,###;-#,###">
+				<reportElement x="143" y="240" width="62" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{today_event_count}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="240" width="143" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Total bannerclk Count:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="26">
+			<textField>
+				<reportElement x="0" y="4" width="205" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="205" y="4" width="1105" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page " + $V{PAGE_NUMBER} + " of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="3" width="1310" height="1"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

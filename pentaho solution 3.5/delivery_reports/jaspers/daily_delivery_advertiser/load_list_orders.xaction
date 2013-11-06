@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Load list of orders</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author/>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <query_result type="result-set"> 
+      <default-value/> 
+    </query_result>  
+    <p_name type="string"> 
+      <sources> 
+        <request>p_name</request> 
+      </sources>  
+      <default-value><![CDATA[p_order_ids]]></default-value> 
+    </p_name>  
+    <p_advertiser_id_list type="string"> 
+      <sources> 
+        <request>p_advertiser_id_list</request> 
+      </sources>  
+      <default-value><![CDATA[0]]></default-value> 
+    </p_advertiser_id_list> 
+  </inputs>
+
+  <outputs> 
+    <result type="string"> 
+      <destinations> 
+        <response>Content</response> 
+      </destinations> 
+    </result> 
+  </outputs>
+
+  <resources/>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Relational</action-type>
+      <action-inputs> 
+        <p_advertiser_id_list type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[dw3]]></jndi>  
+        <live><![CDATA[false]]></live>  
+        <query><![CDATA[SELECT a.*
+FROM (
+SELECT '0' as "value",'All Orders' as title,'All Orders' as name_view, 0 as row_order
+UNION
+SELECT 
+	a.order_id as "value",
+	a.name_current||'('||a.order_id||')' as title, 
+	(CASE WHEN char_length(a.name_current)>30 THEN substring(a.name_current from 0 for 20)||'...('||a.order_id||')' ELSE a.name_current||'('||a.order_id||')' END) as name_view,
+	1 as row_order
+FROM refer.adm_order_dim a
+INNER JOIN refer.adm_advertiser_dim b 
+	ON a.organization_id=b.organization_id 
+	AND a.publisher_id=b.publisher_id 
+	AND (b.advertiser_id IN (select unnest(string_to_array('{p_advertiser_id_list}', ','))::int)) 
+	AND b.dt_expire='9999-12-31'
+WHERE a.dt_expire='9999-12-31'
+GROUP BY "value",title,name_view
+) a
+ORDER BY row_order,name_view;]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>JavaScript</action-type>
+      <action-inputs> 
+        <query_result type="result-set"/>  
+        <p_name type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <result type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var result;
+result='<table><tr></tr>';
+
+for(var i=0;i<query_result.getRowCount();i++){
+	var value=query_result.getValueAt(i,0);
+	var title=query_result.getValueAt(i,1);
+	var view=query_result.getValueAt(i,2);
+	if(i==0){
+	result+='<tr><td><input id="id_'+value+'" class="portlet-form-field" type="checkbox" name="'+p_name+'" value="'+value+'" title="" ><span id="device-label" class="portlet-form-field-label" title="'+title+'">'+view+'</span></td></tr>';
+	}else{
+	result+='<tr><td><input id="id_'+value+'" class="portlet-form-field" type="checkbox" name="'+p_name+'" value="'+value+'" title=""><span id="device-label" class="portlet-form-field-label" title="'+title+'">'+view+'</span></td></tr>';
+	}
+	
+}
+
+result+='</table>';]]></script> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

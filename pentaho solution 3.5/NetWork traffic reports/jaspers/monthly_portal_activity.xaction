@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Monthly Portal Site Traffic Activity</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>chinhnguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type>report</result-type>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <calendar_year_month type="string"> 
+      <sources> 
+        <request>calendar_year_month</request> 
+      </sources>  
+      <default-value/> 
+    </calendar_year_month>  
+    <partner_id type="string"> 
+      <sources> 
+        <request>partner_id</request> 
+      </sources>  
+      <default-value/> 
+    </partner_id>  
+    <portal_name type="string"> 
+      <sources> 
+        <request>portal_name</request> 
+      </sources>  
+      <default-value/> 
+    </portal_name>  
+    <output type="string"> 
+      <sources> 
+        <request>output</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </output>  
+    <output_list type="string-list"> 
+      <default-value type="string-list"> 
+        <list-item>html</list-item>  
+        <list-item>pdf</list-item>  
+        <list-item>xls</list-item>  
+        <list-item>csv</list-item>  
+        <list-item>xml</list-item> 
+      </default-value> 
+    </output_list> 
+  </inputs>
+
+  <outputs/>
+
+  <resources> 
+    <pageTemplate> 
+      <solution-file> 
+        <location>monthly_portal_activity/parameter_template.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </pageTemplate>  
+    <report-definition> 
+      <solution-file> 
+        <location>monthly_portal_activity/template.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get calendar_year_month</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="q_calendar_year_month"/>  
+        <calendar_year_month type="string"/>  
+        <month_since_2005 type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[nwt.pentaho.ecepvn.org]]></jndi>  
+        <live><![CDATA[false]]></live>  
+        <query><![CDATA[SELECT DISTINCT calendar_year_month, month_since_2005 
+FROM dw.monthly_agg_portal_act_all
+WHERE organic = true
+AND is_active = true
+ORDER BY month_since_2005 desc]]></query>
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get portal_name</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="q_portal_name"/>  
+        <portal_name type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <live><![CDATA[true]]></live>  
+        <jndi><![CDATA[nwt.pentaho.ecepvn.org]]></jndi>  
+        <query><![CDATA[SELECT DISTINCT portal_name
+FROM dw.monthly_agg_portal_act_all
+WHERE organic = true
+AND is_active = true
+ORDER BY portal_name]]></query>
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Prompt/Secure Filter</action-type>
+      <action-inputs> 
+        <calendar_year_month type="string"/>  
+        <output type="string"/>  
+        <q_calendar_year_month type="result-set"/>  
+        <q_portal_name type="result-set"/>  
+        <output_list type="string-list"/>  
+        <portal_name type="string"/>
+      </action-inputs>
+      <action-resources> 
+        <pageTemplate type="resource"/> 
+      </action-resources>
+      <component-definition> 
+        <selections> 
+          <calendar_year_month style="select"> 
+            <filter value-col-name="calendar_year_month" display-col-name="calendar_year_month">q_calendar_year_month</filter> 
+          </calendar_year_month>  
+          <output style="select"> 
+            <filter>output_list</filter> 
+          </output>  
+          <portal_name style="select">
+            <filter value-col-name="portal_name" display-col-name="portal_name">q_portal_name</filter>
+          </portal_name>
+        </selections>  
+        <xsl><![CDATA[pageTemplate]]></xsl> 
+      </component-definition> 
+    </action-definition>
+  
+    <actions> 
+      <condition><![CDATA[output=='html']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <portal_name type="string"/>  
+          <calendar_year_month type="string"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition type="resource"/> 
+        </action-resources>
+        <component-definition> 
+          <output-type>html</output-type>  
+          <jndi><![CDATA[nwt.pentaho.ecepvn.org]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[output=='pdf']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <portal_name type="string"/>  
+          <calendar_year_month type="string"/> 
+        </action-inputs>
+        <action-outputs/>
+        <component-definition> 
+          <output-type><![CDATA[pdf]]></output-type>  
+          <jndi><![CDATA[nwt.pentaho.ecepvn.org]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[output=='csv']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <portal_name type="string"/>  
+          <calendar_year_month type="string"/> 
+        </action-inputs>
+        <component-definition> 
+          <output-type><![CDATA[csv]]></output-type>  
+          <jndi><![CDATA[nwt.pentaho.ecepvn.org]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[output=='xls']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <portal_name type="string"/>  
+          <calendar_year_month type="string"/> 
+        </action-inputs>
+        <component-definition> 
+          <output-type><![CDATA[xls]]></output-type>  
+          <jndi><![CDATA[nwt.pentaho.ecepvn.org]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[output=='xml']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <portal_name type="string"/>  
+          <calendar_year_month type="string"/> 
+        </action-inputs>
+        <component-definition> 
+          <output-type><![CDATA[xml]]></output-type>  
+          <jndi><![CDATA[nwt.pentaho.ecepvn.org]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+ 
+  </actions> 
+</action-sequence>

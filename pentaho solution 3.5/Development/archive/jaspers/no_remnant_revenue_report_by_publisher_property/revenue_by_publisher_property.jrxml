@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="revenue by publisher property" pageWidth="1250" pageHeight="842" orientation="Landscape" columnWidth="1210" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.1789738455000058"/>
+	<property name="ireport.x" value="690"/>
+	<property name="ireport.y" value="282"/>
+	<parameter name="p_start_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_end_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_publisher_id" class="java.lang.String"/>
+	<parameter name="website_names_string" class="java.lang.String"/>
+	<parameter name="p_network_id" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("0")]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT a.publisher_name,
+sum(a.impressions) as impressions,
+sum(a.clicks) as clicks,
+sum(a.revenue)::Decimal as revenue,
+sum(a.today_estimate_revenue) as today_estimate_revenue,
+sum(a.p_rev_share)::Decimal as p_rev_share,
+sum(a.api_revenue)::Decimal as api_revenue,
+sum(a.v_rev_share)::Decimal as v_rev_share,
+b.requests
+FROM adm.daily_agg_network_performance a
+LEFT JOIN
+	(SELECT publisher_id,sum(requests) as requests FROM adm.daily_network_fct_request
+	WHERE (property_id IN (select unnest(string_to_array($P{website_names_string}, ';'))::int) OR '-1000' = $P{website_names_string})
+	AND full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date AND is_active=true
+	GROUP BY publisher_id
+	) b ON b.publisher_id=a.publisher_id
+WHERE a.is_active=true
+AND a.full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
+AND a.publisher_id=$P{p_publisher_id}::int
+AND (a.property_id IN (select unnest(string_to_array($P{website_names_string}, ';'))::int) OR '-1000' = $P{website_names_string})
+AND (a.network_id IN (select unnest(string_to_array($P{p_network_id}, ','))::int) OR '0' = $P{p_network_id})
+GROUP BY a.publisher_name,b.requests]]>
+	</queryString>
+	<field name="publisher_name" class="java.lang.String"/>
+	<field name="impressions" class="java.lang.Long"/>
+	<field name="clicks" class="java.lang.Long"/>
+	<field name="revenue" class="java.math.BigDecimal"/>
+	<field name="today_estimate_revenue" class="java.lang.Double"/>
+	<field name="p_rev_share" class="java.math.BigDecimal"/>
+	<field name="api_revenue" class="java.math.BigDecimal"/>
+	<field name="v_rev_share" class="java.math.BigDecimal"/>
+	<field name="requests" class="java.lang.Long"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="623">
+			<staticText>
+				<reportElement x="64" y="9" width="1146" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Revenue by Publisher]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="105" width="300" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Publisher summary]]></text>
+			</staticText>
+			<textField pattern="yyyy/MM/dd h.mm a">
+				<reportElement x="1150" y="40" width="60" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="40" width="850" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Report Generation Date:    "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="40" width="160" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Publisher: "]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="0" y="9" width="64" height="20"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"vervelogo.jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="0" y="60" width="160" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Start date: "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="80" width="160" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["End date: "]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-mm-dd">
+				<reportElement x="160" y="60" width="140" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{p_start_date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-mm-dd">
+				<reportElement x="160" y="80" width="140" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{p_end_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="211" width="160" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Total revenue: "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="171" width="160" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Total clicks: "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="151" width="160" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Total impressions: "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="40" width="140" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{publisher_name}+"("+$P{p_publisher_id}+")"]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="443" width="1210" height="30"/>
+				<subreportParameter name="total_rev">
+					<subreportParameterExpression><![CDATA[$F{revenue}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_imp">
+					<subreportParameterExpression><![CDATA[$F{impressions}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_start_date">
+					<subreportParameterExpression><![CDATA[$P{p_start_date}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_publisher_id">
+					<subreportParameterExpression><![CDATA[$P{p_publisher_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_end_date">
+					<subreportParameterExpression><![CDATA[$P{p_end_date}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="website_names_string">
+					<subreportParameterExpression><![CDATA[$P{website_names_string}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_p_rev_share">
+					<subreportParameterExpression><![CDATA[$F{p_rev_share}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_network_id">
+					<subreportParameterExpression><![CDATA[$P{p_network_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_clk">
+					<subreportParameterExpression><![CDATA[$F{clicks}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_v_rev_share">
+					<subreportParameterExpression><![CDATA[$F{v_rev_share}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "subreport_group_by_date.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="563" width="1210" height="30"/>
+				<subreportParameter name="total_rev">
+					<subreportParameterExpression><![CDATA[$F{revenue}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_imp">
+					<subreportParameterExpression><![CDATA[$F{impressions}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_start_date">
+					<subreportParameterExpression><![CDATA[$P{p_start_date}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_publisher_id">
+					<subreportParameterExpression><![CDATA[$P{p_publisher_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_end_date">
+					<subreportParameterExpression><![CDATA[$P{p_end_date}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="website_names_string">
+					<subreportParameterExpression><![CDATA[$P{website_names_string}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_p_rev_share">
+					<subreportParameterExpression><![CDATA[$F{p_rev_share}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_network_id">
+					<subreportParameterExpression><![CDATA[$P{p_network_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_clk">
+					<subreportParameterExpression><![CDATA[$F{clicks}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_v_rev_share">
+					<subreportParameterExpression><![CDATA[$F{v_rev_share}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "subreport_group_by_order.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="593" width="1210" height="30"/>
+				<subreportParameter name="total_rev">
+					<subreportParameterExpression><![CDATA[$F{revenue}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_imp">
+					<subreportParameterExpression><![CDATA[$F{impressions}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_start_date">
+					<subreportParameterExpression><![CDATA[$P{p_start_date}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_publisher_id">
+					<subreportParameterExpression><![CDATA[$P{p_publisher_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_end_date">
+					<subreportParameterExpression><![CDATA[$P{p_end_date}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="website_names_string">
+					<subreportParameterExpression><![CDATA[$P{website_names_string}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_p_rev_share">
+					<subreportParameterExpression><![CDATA[$F{p_rev_share}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_network_id">
+					<subreportParameterExpression><![CDATA[$P{p_network_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_clk">
+					<subreportParameterExpression><![CDATA[$F{clicks}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_v_rev_share">
+					<subreportParameterExpression><![CDATA[$F{v_rev_share}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "subreport_group_by_placement.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="503" width="1210" height="30"/>
+				<subreportParameter name="total_rev">
+					<subreportParameterExpression><![CDATA[$F{revenue}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_imp">
+					<subreportParameterExpression><![CDATA[$F{impressions}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_start_date">
+					<subreportParameterExpression><![CDATA[$P{p_start_date}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_publisher_id">
+					<subreportParameterExpression><![CDATA[$P{p_publisher_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_end_date">
+					<subreportParameterExpression><![CDATA[$P{p_end_date}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="website_names_string">
+					<subreportParameterExpression><![CDATA[$P{website_names_string}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_p_rev_share">
+					<subreportParameterExpression><![CDATA[$F{p_rev_share}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_network_id">
+					<subreportParameterExpression><![CDATA[$P{p_network_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_clk">
+					<subreportParameterExpression><![CDATA[$F{clicks}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_v_rev_share">
+					<subreportParameterExpression><![CDATA[$F{v_rev_share}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "subreport_group_by_channel.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="473" width="1210" height="30"/>
+				<subreportParameter name="total_rev">
+					<subreportParameterExpression><![CDATA[$F{revenue}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_start_date">
+					<subreportParameterExpression><![CDATA[$P{p_start_date}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_end_date">
+					<subreportParameterExpression><![CDATA[$P{p_end_date}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_publisher_id">
+					<subreportParameterExpression><![CDATA[$P{p_publisher_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="website_names_string">
+					<subreportParameterExpression><![CDATA[$P{website_names_string}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_p_rev_share">
+					<subreportParameterExpression><![CDATA[$F{p_rev_share}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_network_id">
+					<subreportParameterExpression><![CDATA[$P{p_network_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_v_rev_share">
+					<subreportParameterExpression><![CDATA[$F{v_rev_share}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "subreport_group_by_portal2.jasper"]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement x="0" y="131" width="160" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Total requests: "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="291" width="160" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Fill Rate: "]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="160" y="151" width="140" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{impressions}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="160" y="171" width="140" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{clicks}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="160" y="211" width="140" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{revenue}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="160" y="131" width="140" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{requests}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="160" y="291" width="140" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{impressions}.doubleValue()/$F{requests}.doubleValue()]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="533" width="1210" height="30"/>
+				<subreportParameter name="total_rev">
+					<subreportParameterExpression><![CDATA[$F{revenue}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_imp">
+					<subreportParameterExpression><![CDATA[$F{impressions}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_start_date">
+					<subreportParameterExpression><![CDATA[$P{p_start_date}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_publisher_id">
+					<subreportParameterExpression><![CDATA[$P{p_publisher_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_end_date">
+					<subreportParameterExpression><![CDATA[$P{p_end_date}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="website_names_string">
+					<subreportParameterExpression><![CDATA[$P{website_names_string}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_p_rev_share">
+					<subreportParameterExpression><![CDATA[$F{p_rev_share}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_network_id">
+					<subreportParameterExpression><![CDATA[$P{p_network_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_clk">
+					<subreportParameterExpression><![CDATA[$F{clicks}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_v_rev_share">
+					<subreportParameterExpression><![CDATA[$F{v_rev_share}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "subreport_group_by_website.jasper"]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement x="0" y="231" width="160" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Total Publisher revenue: "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="271" width="160" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Total Verve revenue: "]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="160" y="231" width="140" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{p_rev_share}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="160" y="271" width="140" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{v_rev_share}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="160" y="191" width="140" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{today_estimate_revenue}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="191" width="160" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Total TD estimate revenue: "]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="160" y="251" width="140" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{api_revenue}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="251" width="160" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Total Api revenue: "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="311" width="300" height="33"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Notes:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="344" width="1210" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[1- Unreported Revenue is the estimated revenue. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="364" width="1210" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[2- Publisher Revenue is publisher revenue without estimated revenue.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="384" width="1210" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[3- Total Pub Rev = Publisher Revenue with estimated revenue.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="404" width="1210" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[4- Total Net Revenue = Unreported Revenue + Reported Revenue.]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="24">
+			<textField pattern="">
+				<reportElement x="0" y="4" width="300" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="4" width="850" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="1150" y="4" width="60" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="3" width="1210" height="1"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

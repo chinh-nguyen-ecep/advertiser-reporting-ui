@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Get the first data</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>ChinhNguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs/>
+
+  <outputs> 
+    <jsonResult type="string"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </jsonResult> 
+  </outputs>
+
+  <resources/>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Relational</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result_max_date"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[dw3]]></jndi>  
+        <live><![CDATA[true]]></live>  
+        <query><![CDATA[SELECT max(full_date),min(full_date),max(full_date) FROM evttracker.daily_event_maps]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get list Flight ID</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result_flight_id"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[dw3]]></jndi>  
+        <live><![CDATA[false]]></live>  
+        <query><![CDATA[SELECT DISTINCT id FROM evttracker.daily_event_maps WHERE is_active=true AND full_date>=now()::date-186 ORDER BY id]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>JsonResponse</action-type>
+      <action-inputs> 
+        <query_result_max_date type="result-set"/>  
+        <query_result_flight_id type="result-set"/> 
+      </action-inputs>
+      <action-outputs> 
+        <jsonResult type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var jsonResult;
+var maxDate=query_result_max_date.getValueAt(0,0);
+var minDate=query_result_max_date.getValueAt(0,1);
+var startDate=query_result_max_date.getValueAt(0,2);
+jsonResult='{';
+
+//add date
+jsonResult+='"maxDate":"'+maxDate+'","minDate":"'+minDate+'","start_date":"'+startDate+'"';
+//end
+
+//add flight id list
+jsonResult+=',"list_flight_ids":[';
+for(var i=0;i<query_result_flight_id.getRowCount();i++){
+	if(i>0){
+		jsonResult+=',';	
+	}
+	var value=query_result_flight_id.getValueAt(i,0);
+	var name=query_result_flight_id.getValueAt(i,0);
+	var title=query_result_flight_id.getValueAt(i,0);
+	jsonResult+='{"value":"'+value+'","name":"'+name+'","title":"'+title+'"}';
+}
+jsonResult+=']';
+//end
+jsonResult+='}';]]></script> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

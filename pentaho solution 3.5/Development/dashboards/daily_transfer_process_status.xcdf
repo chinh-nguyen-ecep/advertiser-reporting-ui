@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cdf>
+	<title>Daily Transfer Process Status</title>
+	<author>chinhnguyen</author>
+	<description>Daily ETL Status</description>
+	<icon>/Development/dashboards/daily_process_status/web.png</icon>
+	<template>/Development/dashboards/daily_transfer_process_status/template.html</template>
+</cdf>

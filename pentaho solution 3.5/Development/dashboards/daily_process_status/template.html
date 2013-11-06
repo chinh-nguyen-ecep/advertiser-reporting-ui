@@ -1,0 +1,350 @@
+		<link rel="shortcut icon" type="image/ico" href="http://a3.twimg.com/profile_images/558415661/pentaho_twitter3.png" />
+
+		<style type="text/css" title="currentStyle">
+			@import "/verve_style/scripts/jquery_ui/css/smoothness/jquery-ui-1.8.17.custom.css";
+			@import "/verve_style/scripts/jquery_clock/css/digital.css";
+			@import "/verve_style/scripts/bumpbox/bumpbox.css";
+			a{
+			text-decoration:none;
+			color:#678197;
+			font:"Tahoma",Verdana,Arial,Helvetica,sans-serif;
+			font-size: 10pt;
+			}
+			a.view_log_detail{
+			font:bold 8pt "Tahoma","Trebuchet MS",Arial,Helvetica,sans-serif;
+			color:#66a3d3;
+			margin-left: 5px;
+			}
+			div.etl_box{
+			overflow: auto;
+			font:"Tahoma","Trebuchet MS",Arial,Helvetica,sans-serif;
+			font-size: 10pt;
+			padding: 5px;
+			color: gray;
+			}
+			div.etl_box ul{
+				list-style-type: none;
+				width: 100%;
+				margin: 0;
+				padding: 0;
+			}
+			div.etl_box ul li{
+				float: left;
+				margin-right: 10px;
+			}
+			div.etl_box ul li span{
+				font:bold 8pt "Tahoma","Trebuchet MS",Arial,Helvetica,sans-serif;
+				color:#66a3d3;
+			}
+			
+			.dataTable thead tr th div.DataTables_sort_wrapper{
+				font:76%/160% "tahoma",Verdana,Arial,Helvetica,sans-serif;
+				color:gray;				
+			}
+			.dataTable{
+				border-left: 1px solid #AAAAAA;
+				border-right: 1px solid #AAAAAA;
+			}
+			.dataTable tbody{
+				font-size: 8pt;
+			}
+			.dataTable tbody tr.odd{
+				background-color: #DDFFDD;
+			}
+			.dataTable tbody tr.even{
+				background-color: #EEFFEE; 
+			}
+			.dataTable tbody tr.odd td.sorting_1{
+				background-color: #C4FFC4; 
+			}
+			.dataTable tbody tr.even td.sorting_1{
+				background-color: #D5FFD5; 
+			}
+			div.dataTables_length{
+				margin-left: 5px;
+			}
+			div.dataTables_filter{
+				margin-right: 5px;
+			}
+			div.dataTables_info{
+				font:8pt "tahoma",Verdana,Arial,Helvetica,sans-serif;
+				color:gray;
+				margin-left: 5px;
+				margin-top: 5px;
+			}
+			
+			div.etl_box ul.list_error_files{
+				float: none;
+				listStyleType: decimal-leading-zero;
+			}
+			div.etl_box ul.list_error_files li{
+				float: none;
+				listStyleType: decimal-leading-zero;
+			}
+		</style>
+
+		<script type="text/javascript" language="javascript" src="/verve_style/scripts/DataTables/media/js/jquery.js"></script>
+		<script type="text/javascript" language="javascript" src="/verve_style/scripts/DataTables/media/js/jquery.dataTables.js"></script>
+		<script type="text/javascript" language="javascript" src="/verve_style/scripts/jquery.form.js"></script>
+		<script type="text/javascript" language="javascript" src="/verve_style/scripts/jquery_ui/jquery-ui-1.8.17.custom.min.js"></script>
+		<script type="text/javascript" language="javascript" src="/verve_style/scripts/jquery_clock/js/jquery.clock.js"></script>
+		
+		<script type="text/javascript" language="javascript" src="/verve_style/scripts/bumpbox/tools.js"></script>
+		<script type="text/javascript" language="javascript" src="/verve_style/scripts/bumpbox/flowplayer-3.js"></script>
+		<script type="text/javascript" language="javascript" src="/verve_style/scripts/bumpbox/bumpbox.js"></script>
+		
+		
+		<script type="text/javascript" src="GetCDFResource?resource=/Development/dashboards/daily_process_status/MetaLayer.js"></script>
+		<script type="text/javascript" charset="utf-8">
+		$(document).ready(function() {
+			MetaLayer.init();
+		});
+		</script>
+
+
+	<h1 class="dashboardName" id="dashboardTitle">Daily process status</h1>
+	<input id="datepicker" type="text" > 
+	<div style="float: right;" class="clock">
+		<span class="title">New York</span>
+		<ul id="digital-clock-newyork" class="digital" >	
+		<li class="hour"></li>
+		<li class="min"></li>
+		<li class="sec"></li>
+		<li class="meridiem"></li>
+		</ul>
+	</div>	
+	<div style="float: right;" class="clock">
+		<span class="title">California</span>
+		<ul id="digital-clock" class="digital" >	
+		<li class="hour"></li>
+		<li class="min"></li>
+		<li class="sec"></li>
+		<li class="meridiem"></li>
+		</ul>
+	</div>
+	<div style="float: right;" class="clock">
+		<span class="title">SaiGon</span>
+		<ul id="digital-clock-SaiGon" class="digital" >	
+		<li class="hour"></li>
+		<li class="min"></li>
+		<li class="sec"></li>
+		<li class="meridiem"></li>
+		</ul>
+	</div>
+		<div style="float: right;" class="clock">
+		<span class="title">UTC</span>
+		<ul id="digital-clock-UTC" class="digital" >	
+		<li class="hour"></li>
+		<li class="min"></li>
+		<li class="sec"></li>
+		<li class="meridiem"></li>
+		</ul>
+	</div>
+	<div class="mybox" style="width: 100%">
+		<div class="title">
+			Daily ETL/Data Process Status On dw3
+			<img src="/verve_style/images/arrow_refresh.png" id="bt_daily_process_status_refresh" class="bt" alt="refresh" title="refresh"/>
+		</div>
+		<div class="box_content" style="min-height: 1200px;width: 100%">	
+			<br/>
+			<h2>Adcel</h2>
+			<div class="etl_box" id="adcel_etl_status">
+				<img src="/verve_style/images/loading.gif" />
+			</div>
+			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('16,17,18,19,20, 27, 28,29,81,82,83,84,85,86,87,88,89,90,106,107,108,109','Adcel log files',dateBefore,defaultServer);" title="Adcel log files" rev="16,17,18,19,20, 27, 28,29,81,82,83,84,85,86,87,88,89,90,106,107,108,109" class="view_log_detail">Log files detail</a>
+				<table  class="table1">
+					<thead>
+						<th width="300">Process</th>
+						<th width="50">Param</th>
+						<th width="70">Status</th>
+						<th>Start time</th>
+						<th title="Expected Start time">Exp St_time</th>
+						<th>Completion time</th>
+						<th title="Expected Completion time">Exp Co_time</th>
+						<th>Status note</th>
+					</thead>
+					<tbody id="adcel">
+						<tr><td colspan="8" style="text-align: left"><img src="/verve_style/images/loading.gif" /></td></tr>
+					</tbody>
+				</table>
+			<h2>3rd Adnetwork</h2>
+			<div class="etl_box" id="3rd_etl_status">
+				<img src="/verve_style/images/loading.gif" />
+			</div>
+			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('39,40,41,43,44,49,50,47,48,52,53,103,104,126,170','3rd Adnetwork log files',dateBefore,defaultServer);" title="3rd Adnetwork log files" class="view_log_detail">Log files detail</a>
+				<table class="table1">
+					<thead>
+						<th width="300">Process</th>
+						<th width="50">Param</th>
+						<th width="70">Status</th>
+						<th>Start time</th>
+						<th title="Expected Start time">Exp St_time</th>
+						<th>Completion time</th>
+						<th title="Expected Completion time">Exp Co_time</th>
+						<th>Status note</th>
+					</thead>
+					<tbody id="3rdAdnetwork">
+						<tr><td colspan="8" style="text-align: left"><img src="/verve_style/images/loading.gif" /></td></tr>
+					</tbody>
+				</table>
+			<h2>ADM & DFP 1.0</h2>
+			<div class="etl_box" id="dbclk_etl_status">
+				<img src="/verve_style/images/loading.gif" />
+			</div>
+			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('23,26,30,31,32,33,34,35,42,54,63,76,71,78,125,165','ADM Data mart log files',process_date,defaultServer);" title="ADM Data mart log files" class="view_log_detail">Log files detail</a>
+				<table  class="table1">
+					<thead>
+						<th width="300">Process</th>
+						<th width="50">Param</th>
+						<th width="70">Status</th>
+						<th>Start time</th>
+						<th title="Expected Start time">Exp St_time</th>
+						<th>Completion time</th>
+						<th title="Expected Completion time">Exp Co_time</th>
+						<th>Status note</th>
+					</thead>
+					<tbody id="doubleClick">
+						<tr><td colspan="8" style="text-align: left"><img src="/verve_style/images/loading.gif" /></td></tr>
+					</tbody>
+				</table>
+			<h2>ADM & DFP 2.0</h2>
+			
+			<div class="etl_box" id="adm_20_etl_status">
+				<img src="/verve_style/images/loading.gif" />
+			</div>
+			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151','ADM & DFP 2.0 log files',process_date,defaultServer);" title="ADM & DFP 2.0 log files" class="view_log_detail">Log files detail</a><br/>
+			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('152','ADM & DFP 2.0 log files',dateBefore,defaultServer);" title="ADM & DFP 2.0 log files" class="view_log_detail">Fact logs detail</a>
+				<table class="table1">
+					<thead>
+						<th width="300">Process</th>
+						<th width="50">Param</th>
+						<th width="70">Status</th>
+						<th>Start time</th>
+						<th title="Expected Start time">Exp St_time</th>
+						<th>Completion time</th>
+						<th title="Expected Completion time">Exp Co_time</th>
+						<th>Status note</th>
+					</thead>
+					<tbody id="adm20">
+						<tr><td colspan="8" style="text-align: left"><img src="/verve_style/images/loading.gif" /></td></tr>
+					</tbody>
+				</table>
+
+		</div>	
+	</div>
+	<div class="mybox" style="width: 100%">
+		<div class="title">Daily ETL/Data Process Status On dw4</div>
+		<div class="box_content" style="min-height: 300px;width: 100%">	
+			<br/>
+			<h2>Adcel</h2>
+			<div class="etl_box" id="adcel_etl_status_dw4">
+				<img src="/verve_style/images/loading.gif" />
+			</div>
+			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('16,17,18,19,20, 27, 28,29,81,82,83,84,85,86,87,88,89,90,106,107,108,109,127,128,129,130,131,132,153,154,155,156,157,158,159,160,166,167','Adcel log files',dateBefore,'dw4');" title="Adcel log files" class="view_log_detail">Log files detail</a>
+				<table  class="table1">
+					<thead>
+						<th width="300">Process</th>
+						<th width="50">Param</th>
+						<th width="70">Status</th>
+						<th>Start time</th>
+						<th title="Expected Start time">Exp St_time</th>
+						<th>Completion time</th>
+						<th title="Expected Completion time">Exp Co_time</th>
+						<th>Status note</th>
+					</thead>
+					<tbody id="adcel_dw4">
+						<tr><td colspan="8" style="text-align: left"><img src="/verve_style/images/loading.gif" /></td></tr>
+					</tbody>
+				</table>
+		</div>
+	</div>
+	<div class="mybox" style="width: 100%">
+		<div class="title">Daily ETL/Data Process Status On dw5</div>
+		<div class="box_content" style="min-height: 300px;width: 100%">	
+			<br/>
+			<h2>Adcel</h2>
+			<div class="etl_box" id="adcel_etl_status_dw5">
+				<img src="/verve_style/images/loading.gif" />
+			</div>
+			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('16,17,18,19,20, 27, 28,29,81,82,83,84,85,86,87,88,89,90,106,107,108,109,127,128,129,130,131,132,153,154,155,156,157,158,159,160,166,167','Adcel log files',dateBefore,'dw5');" title="Adcel log files" class="view_log_detail">Log files detail</a>
+				<table  class="table1">
+					<thead>
+						<th width="300">Process</th>
+						<th width="50">Param</th>
+						<th width="70">Status</th>
+						<th>Start time</th>
+						<th title="Expected Start time">Exp St_time</th>
+						<th>Completion time</th>
+						<th title="Expected Completion time">Exp Co_time</th>
+						<th>Status note</th>
+					</thead>
+					<tbody id="adcel_dw5">
+						<tr><td colspan="8" style="text-align: left"><img src="/verve_style/images/loading.gif" /></td></tr>
+					</tbody>
+				</table>
+		</div>
+	</div>
+	<div class="mybox" style="width: 100%">
+		<div class="title">Daily ETL/Data Process Status On dw6</div>
+		<div class="box_content" style="min-height: 300px;width: 100%">
+		<br/>		
+		<h2>Event Tracker</h2>
+			<div class="etl_box" id="adcel_etl_status_dw6">
+				<img src="/verve_style/images/loading.gif" />
+			</div>
+			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('16,17,18,19,20, 27, 28,29,81,82,83,84,85,86,87,88,89,90,106,107,108,109,127,128,129,130,131,132,153,154,155,156,157,158,159,160,166,167','Adcel log files',dateBefore,'dw6');" title="Adcel log files" class="view_log_detail">Adcel log files detail</a>
+			<div class="etl_box" id="event_etl_status_dw6">
+				<img src="/verve_style/images/loading.gif" />
+			</div>
+			
+			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('92,93,94,95,96,97,98,99,100,110,111,133,134,135,161,162,163,164,168','Event Tracker log files',dateBefore,'dw6');" title="Event Tracker log files" class="view_log_detail">Event log files detail</a>
+				<table class="table1">
+					<thead>
+						<th width="300">Process</th>
+						<th width="50">Param</th>
+						<th width="70">Status</th>
+						<th>Start time</th>
+						<th title="Expected Start time">Exp St_time</th>
+						<th>Completion time</th>
+						<th title="Expected Completion time">Exp Co_time</th>
+						<th>Status note</th>
+					</thead>
+					<tbody id="eventTracker_dw6">
+						<tr><td colspan="8" style="text-align: left"><img src="/verve_style/images/loading.gif" /></td></tr>
+					</tbody>
+				</table>
+		</div>
+	</div>	
+	<div id="list_log_files_dl">
+			<table cellpadding="0" cellspacing="0" border="0" class="display" id="list_log_files_tb" style="width: 100%">
+				<thead>
+					<tr>
+						<th width="40" title="Data File ID">Data File ID</th>
+						<th width="350" title="File Name">File Name</th>
+						<th width="80" title="File Timestamp">File Timestamp</th>
+						<th width="80" title="DT Process Loaded">DT Process Loaded</th>
+						<th title="File Status">File Status</th>
+						<th title="Staging Row Count">Stg Row Count</th>
+						<th title="Fact Table Row Count">Fct Row Count</th>						
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td colspan="8" ></td>
+					</tr>
+					<tr>
+						<td colspan="8" ></td>
+					</tr>
+					<tr>
+						<td colspan="8" ></td>
+					</tr>
+					<tr>
+						<td colspan="8" ></td>
+					</tr>
+					<tr>
+						<td colspan="8" ></td>
+					</tr>
+				</tbody>
+			</table>
+	</div>
+

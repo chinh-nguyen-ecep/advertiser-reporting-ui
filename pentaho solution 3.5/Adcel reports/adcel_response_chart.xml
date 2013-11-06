@@ -1,0 +1,58 @@
+<Schema name="Adcel response 2">
+  <Cube name="Agg daily serving stats" cache="true" enabled="true">
+    <Table name="daily_ad_serving_stats" schema="adstraffic">
+    </Table>
+    <Dimension type="StandardDimension" highCardinality="false" name="Parent">
+      <Hierarchy hasAll="true">
+        <Level name="name" column="parent1_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Partner">
+      <Hierarchy hasAll="true">
+        <Level name="name" column="partner_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Portal">
+      <Hierarchy hasAll="true">
+        <Level name="name" column="portal_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Network">
+      <Hierarchy hasAll="true">
+        <Level name="name" column="ad_network_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Year month">
+      <Hierarchy hasAll="true">
+        <Level name="month" column="calendar_year_month" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Date">
+      <Hierarchy hasAll="true">
+        <Level name="date" column="full_date" type="Date" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="IsActive">
+      <Hierarchy hasAll="true" defaultMember="true">
+        <Level name="isActive" column="is_active" type="Boolean" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Total Ad responses" column="fullfilled_code_count" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Yes Ad responses" column="fullfilled_code_y" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="No Ad responses" column="fullfilled_code_n" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Error Ad responses" column="fullfilled_code_e" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Timeout Ad responses" column="fullfilled_code_t" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+</Schema>

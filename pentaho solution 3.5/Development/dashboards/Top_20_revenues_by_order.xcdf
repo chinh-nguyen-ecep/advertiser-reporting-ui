@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cdf>
+	<title>Top 20 Revenues By Order</title>
+	<author>chinhnguyen</author>
+	<description>Pentaho Home Dashboard</description>
+	<icon></icon>
+	<template>Top_20_revenues_by_order\template.html</template>
+</cdf>

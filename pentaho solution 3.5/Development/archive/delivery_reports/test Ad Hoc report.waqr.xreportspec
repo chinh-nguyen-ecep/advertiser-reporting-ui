@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report-spec tool='waqr' tool-version='1.0' template-name='Pentaho'>
+<jndi-source><![CDATA[SampleData]]></jndi-source>
+<report-name><![CDATA[test Ad Hoc report]]></report-name>
+<report-desc><![CDATA[Created by the Web-based Adhoc Query and Reporting Client]]></report-desc>
+<query>
+<mql>
+<domain_type>relational</domain_type>
+<domain_id><![CDATA[Development/metadata.xmi]]></domain_id><model_id><![CDATA[Daily Revenue]]></model_id>
+<options>
+<disable_distinct>false</disable_distinct>
+</options>
+<selections>
+<selection><view>BC_ADM_PUBLISHER_DIM</view><column>BC_ADM_PUBLISHER_DIM_COMPANY_NAME</column></selection>
+<selection><view>BC_DAILY_AGG_NETWORK_REVENUE</view><column>BC_DAILY_AGG_NETWORK_REVENUE_FULL_DATE</column></selection>
+<selection><view>BC_ADM_ORDER_DIM</view><column>BC_ADM_ORDER_DIM_NAME</column></selection>
+<selection><view>BC_ADM_FLIGHT_DIM</view><column>BC_ADM_FLIGHT_DIM_FLIGHT_ID</column></selection>
+<selection><view>BC_ADM_FLIGHT_DIM</view><column>BC_ADM_FLIGHT_DIM_NAME</column></selection>
+<selection><view>BC_DAILY_AGG_NETWORK_REVENUE</view><column>BC_DAILY_AGG_NETWORK_REVENUE_TOTAL_PAID_IMPRESSIONS</column></selection>
+<selection><view>BC_DAILY_AGG_NETWORK_REVENUE</view><column>BC_DAILY_AGG_NETWORK_REVENUE_TOTAL_NET_REVENUE</column></selection>
+<selection><view>BC_DAILY_AGG_NETWORK_REVENUE</view><column>BC_DAILY_AGG_NETWORK_REVENUE_TOTAL_P_REV_SHARE</column></selection>
+<selection><view>BC_DAILY_AGG_NETWORK_REVENUE</view><column>BC_DAILY_AGG_NETWORK_REVENUE_TOTAL_V_REV_SHARE</column></selection>
+</selections>
+<constraints>
+<constraint><operator></operator><condition><![CDATA[LIKE( [BC_ADM_PUBLISHER_DIM.BC_ADM_PUBLISHER_DIM_COMPANY_NAME];"%\u004c\u0065\u0065\u0020\u0045\u006e\u0074\u0065\u0072\u0070\u0072\u0069\u0073\u0065\u0073%")]]></condition></constraint>
+<constraint><operator><![CDATA[AND]]></operator><condition><![CDATA[[BC_DAILY_AGG_NETWORK_REVENUE.BC_DAILY_AGG_NETWORK_REVENUE_FULL_DATE] = DATEVALUE("2012-12-18")]]></condition></constraint>
+</constraints>
+<orders>
+<order><direction>asc</direction><view_id>BC_ADM_PUBLISHER_DIM</view_id><column_id>BC_ADM_PUBLISHER_DIM_COMPANY_NAME</column_id></order>
+<order><direction>asc</direction><view_id>BC_DAILY_AGG_NETWORK_REVENUE</view_id><column_id>BC_DAILY_AGG_NETWORK_REVENUE_FULL_DATE</column_id></order>
+<order><direction>asc</direction><view_id>BC_ADM_ORDER_DIM</view_id><column_id>BC_ADM_ORDER_DIM_NAME</column_id></order>
+<order><direction>asc</direction><view_id>BC_ADM_FLIGHT_DIM</view_id><column_id>BC_ADM_FLIGHT_DIM_FLIGHT_ID</column_id></order>
+</orders>
+</mql>
+</query>
+<field-mapping key="reportheader" value="Daily Revenue by Publisher"/><field-mapping key="reportfooter" value=""/><field-mapping key="pageheader" value="Vervemobile.com"/><field-mapping key="pagefooter" value="Vervemobile.com"/><page-format><![CDATA[LETTER]]></page-format>
+<orientation><![CDATA[landscape]]></orientation>
+<use-row-banding><![CDATA[true]]></use-row-banding>
+<row-banding-color><![CDATA[#e7e7e7]]></row-banding-color>
+<use-column-header-background-color><![CDATA[true]]></use-column-header-background-color>
+<column-header-background-color><![CDATA[#9eaa36]]></column-header-background-color>
+<grand-totals-label><![CDATA[Grand Total]]></grand-totals-label>
+<grand-totals-horizontal-alignment><![CDATA[left]]></grand-totals-horizontal-alignment>
+<use-dummy-group-footer-background-color><![CDATA[true]]></use-dummy-group-footer-background-color>
+<dummy-group-footer-background-color><![CDATA[#e0d0c0]]></dummy-group-footer-background-color>
+<use-horizontal-gridlines><![CDATA[true]]></use-horizontal-gridlines>
+<use-vertical-gridlines><![CDATA[true]]></use-vertical-gridlines>
+<horizontal-gridlines-color><![CDATA[#c0c0c0]]></horizontal-gridlines-color>
+<vertical-gridlines-color><![CDATA[#c0c0c0]]></vertical-gridlines-color>
+<group-header-font-name><![CDATA[Arial]]></group-header-font-name>
+<group-header-font-style><![CDATA[1]]></group-header-font-style>
+<group-header-font-size><![CDATA[12]]></group-header-font-size>
+<group-header-font-color><![CDATA[#767676]]></group-header-font-color>
+<group-footer-font-name><![CDATA[Arial]]></group-footer-font-name>
+<group-footer-font-style><![CDATA[1]]></group-footer-font-style>
+<group-footer-font-size><![CDATA[12]]></group-footer-font-size>
+<group-footer-font-color><![CDATA[#ff7d17]]></group-footer-font-color>
+<column-header-font-name><![CDATA[Arial]]></column-header-font-name>
+<column-header-font-style><![CDATA[0]]></column-header-font-style>
+<column-header-font-size><![CDATA[10]]></column-header-font-size>
+<column-header-font-color><![CDATA[#ffffff]]></column-header-font-color>
+<column-header-gap><![CDATA[1]]></column-header-gap>
+<items-font-name><![CDATA[Arial]]></items-font-name>
+<items-font-style><![CDATA[0]]></items-font-style>
+<items-font-size><![CDATA[9]]></items-font-size>
+<items-font-color><![CDATA[#000000]]></items-font-color>
+<field is-detail="false" name="BC_ADM_PUBLISHER_DIM_COMPANY_NAME" horizontal-alignment="not-set" type="12" repeat-group-header="false" level-name="" group-totals-label="Total $(BC_ADM_PUBLISHER_DIM_COMPANY_NAME)" page-break-before-header="false" page-break-after-header="false" page-break-before-footer="false" page-break-after-footer="false" calculate-group-totals="true" create-group-header="true" vertical-alignment="top"/>
+<field is-detail="false" name="BC_DAILY_AGG_NETWORK_REVENUE_FULL_DATE" horizontal-alignment="not-set" format="" type="91" repeat-group-header="false" calculate-group-totals="false" create-group-header="true" vertical-alignment="top"/>
+<field is-detail="false" name="BC_ADM_ORDER_DIM_NAME" horizontal-alignment="not-set" type="12" repeat-group-header="false" level-name="" group-totals-label="Total $(BC_ADM_ORDER_DIM_NAME)" page-break-before-header="false" page-break-after-header="false" page-break-before-footer="false" page-break-after-footer="false" calculate-group-totals="true" create-group-header="true" vertical-alignment="top"/>
+<field is-detail="true" name="BC_ADM_FLIGHT_DIM_FLIGHT_ID" horizontal-alignment="left" format="####;-####" expression="none" type="2"/>
+<field is-detail="true" name="BC_ADM_FLIGHT_DIM_NAME" horizontal-alignment="left" expression="none" type="12"/>
+<field is-detail="true" name="BC_DAILY_AGG_NETWORK_REVENUE_TOTAL_PAID_IMPRESSIONS" horizontal-alignment="right" format="#,###.##;-#,###.##" expression="sum" type="2"/>
+<field is-detail="true" name="BC_DAILY_AGG_NETWORK_REVENUE_TOTAL_NET_REVENUE" horizontal-alignment="right" format="$ #,###.##;-$ #,###.##" expression="sum" type="2"/>
+<field is-detail="true" name="BC_DAILY_AGG_NETWORK_REVENUE_TOTAL_P_REV_SHARE" horizontal-alignment="right" format="$ #,###.##;-$ #,###.##" expression="sum" type="2"/>
+<field is-detail="true" name="BC_DAILY_AGG_NETWORK_REVENUE_TOTAL_V_REV_SHARE" horizontal-alignment="right" format="$ #,###.##;-$ #,###.##" expression="sum" type="2"/>
+</report-spec>

@@ -1,0 +1,1208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>DBCLK Forecasting - WIP</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author/>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <chart_type type="string"> 
+      <sources> 
+        <request>chart_type</request> 
+      </sources>  
+      <default-value><![CDATA[column]]></default-value> 
+    </chart_type>  
+    <chart_type_list type="string-list"> 
+      <default-value type="string-list"> 
+        <list-item>bar</list-item>  
+        <list-item>column</list-item> 
+      </default-value> 
+    </chart_type_list>  
+    <p_start_date type="string"> 
+      <sources> 
+        <request>p_start_date</request> 
+      </sources>  
+      <default-value/> 
+    </p_start_date>  
+    <p_end_date type="string"> 
+      <sources> 
+        <request>p_end_date</request> 
+      </sources>  
+      <default-value/> 
+    </p_end_date>  
+    <p_measures type="string"> 
+      <sources> 
+        <request>p_measures</request> 
+      </sources>  
+      <default-value><![CDATA[Yes Ad responses]]></default-value> 
+    </p_measures>  
+    <List_Measures type="result-set"> 
+      <default-value type="result-set"> 
+        <row> 
+          <measure>Yes Ad responses</measure> 
+        </row>  
+        <row> 
+          <measure>Total Ad responses</measure> 
+        </row>  
+        <row> 
+          <measure>No Ad responses</measure> 
+        </row>  
+        <row> 
+          <measure>Error Ad responses</measure> 
+        </row>  
+        <row> 
+          <measure>Timeout Ad responses</measure> 
+        </row> 
+      </default-value>  
+      <columns> 
+        <measure type="string"/> 
+      </columns> 
+    </List_Measures>  
+    <p_mode type="string"> 
+      <sources> 
+        <request>p_mode</request> 
+      </sources>  
+      <default-value><![CDATA[date]]></default-value> 
+    </p_mode>  
+    <List_mode type="result-set"> 
+      <default-value type="result-set"> 
+        <row> 
+          <New_Column>date</New_Column> 
+        </row>  
+        <row> 
+          <New_Column>month</New_Column> 
+        </row> 
+      </default-value>  
+      <columns> 
+        <New_Column type="string"/> 
+      </columns> 
+    </List_mode>  
+    <p_start_month type="string"> 
+      <sources> 
+        <request>p_start_month</request> 
+      </sources>  
+      <default-value><![CDATA[0]]></default-value> 
+    </p_start_month>  
+    <p_end_month type="string"> 
+      <sources> 
+        <request>p_end_month</request> 
+      </sources>  
+      <default-value><![CDATA[0]]></default-value> 
+    </p_end_month>  
+    <v_max_date type="string"> 
+      <sources> 
+        <request>v_max_date</request> 
+      </sources>  
+      <default-value/> 
+    </v_max_date>  
+    <v_min_date type="string"> 
+      <sources> 
+        <request>v_min_date</request> 
+      </sources>  
+      <default-value/> 
+    </v_min_date>  
+    <v_chart_title type="string"> 
+      <sources/>  
+      <default-value><![CDATA[DoubleClick Forecasting By Sites]]></default-value> 
+    </v_chart_title>  
+    <q_date_list type="result-set"> 
+      <default-value/> 
+    </q_date_list>  
+    <chartWidth type="string"> 
+      <sources> 
+        <request>chartWidth</request> 
+      </sources>  
+      <default-value><![CDATA[900]]></default-value> 
+    </chartWidth>  
+    <chartHeight type="string"> 
+      <sources> 
+        <request>chartHeight</request> 
+      </sources>  
+      <default-value><![CDATA[400]]></default-value> 
+    </chartHeight>  
+    <chartSingleMode type="string"> 
+      <sources> 
+        <request>chartSingleMode</request> 
+      </sources>  
+      <default-value><![CDATA[true]]></default-value> 
+    </chartSingleMode>  
+    <v_chart_sub_title type="string"> 
+      <sources> 
+        <request>v_chart_sub_title</request> 
+      </sources>  
+      <default-value/> 
+    </v_chart_sub_title>  
+    <p_Site type="string-list"> 
+      <sources> 
+        <request>p_Site</request> 
+      </sources>  
+      <default-value/> 
+    </p_Site>  
+    <p_output_type type="string"> 
+      <sources> 
+        <request>p_output_type</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </p_output_type>  
+    <ListOutputType type="string-list"> 
+      <sources> 
+        <request>ListOutputType</request> 
+      </sources>  
+      <default-value type="string-list"> 
+        <list-item>html</list-item>  
+        <list-item>pdf</list-item>  
+        <list-item>xls</list-item>  
+        <list-item>csv</list-item> 
+      </default-value> 
+    </ListOutputType> 
+  </inputs>
+
+  <outputs> 
+    <webpage type="string"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </webpage> 
+  </outputs>
+
+  <resources> 
+    <catalog1> 
+      <solution-file> 
+        <location>/adcel_response.xml</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </catalog1>  
+    <pageTemplate> 
+      <solution-file> 
+        <location>parameter_template/doubleclick_forecasting_report_template.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </pageTemplate>  
+    <report-definition> 
+      <solution-file> 
+        <location>/reports/doubleClickForecastingbySites_forChart.prpt</location>  
+        <mime-type>application/zip</mime-type> 
+      </solution-file> 
+    </report-definition>  
+    <report-definition1> 
+      <solution-file> 
+        <location>doubleclick_forecasting_report/doubleClickForecastingbySites_forChart.prpt</location>  
+        <mime-type>application/zip</mime-type> 
+      </solution-file> 
+    </report-definition1> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get max min date data</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="q_max_min_date"/>  
+        <max_full_date type="string"/>  
+        <min_full_date type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[dw3]]></jndi>  
+        <live><![CDATA[false]]></live>  
+        <query><![CDATA[SELECT b.full_date as min_full_date, c.full_date as max_full_date
+FROM dbclk.monthly_agg_site a
+INNER JOIN refer.date_dim b ON a.end_date_sk + 2= b.date_sk
+INNER JOIN refer.date_dim c ON a.end_date_sk + 2 = c.date_sk
+WHERE a.is_active = true
+  AND a.month_since_2005 = 32767
+LIMIT 2;]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get list of year-month</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="q_calendar_year_month"/>  
+        <row_count type="integer"/>  
+        <calendar_year_month type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[dw3]]></jndi>  
+        <live><![CDATA[false]]></live>  
+        <query><![CDATA[SELECT (month_since_2005 - max_month_since_2005)*-1 AS row_count,calendar_year_month
+  FROM adstraffic.daily_ad_serving_stats_by_device a
+  ,(SELect max (month_since_2005) as max_month_since_2005 from adstraffic.daily_ad_serving_stats_by_device WHERE organic = true AND is_active=true ) b
+WHERE organic = true AND is_active=true GROUP BY a.month_since_2005, a.calendar_year_month, b.max_month_since_2005 ORDER BY a.month_since_2005 desc;]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Prompt/Secure Filter</action-type>
+      <action-inputs> 
+        <chart_type type="string"/>  
+        <chart_type_list type="string-list"/>  
+        <p_start_date type="string"/>  
+        <p_end_date type="string"/>  
+        <p_measures type="string"/>  
+        <List_Measures type="result-set"/>  
+        <p_mode type="string"/>  
+        <List_mode type="result-set"/>  
+        <p_start_month type="integer"/>  
+        <p_end_month type="integer"/>  
+        <q_calendar_year_month type="result-set"/>  
+        <v_max_date type="string"/>  
+        <q_max_min_date type="result-set"/>  
+        <v_min_date type="string"/>  
+        <p_output_type type="string"/>  
+        <ListOutputType type="string-list"/> 
+      </action-inputs>
+      <action-resources> 
+        <pageTemplate type="resource"/> 
+      </action-resources>
+      <component-definition> 
+        <selections> 
+          <chart_type style="select"> 
+            <filter>chart_type_list</filter> 
+          </chart_type>  
+          <p_start_date filter="none" style="text-box"/>  
+          <p_end_date filter="none" style="text-box"/>  
+          <p_measures style="check-multi-scroll"> 
+            <filter value-col-name="measure" display-col-name="measure">List_Measures</filter> 
+          </p_measures>  
+          <p_mode style="radio"> 
+            <filter value-col-name="New_Column" display-col-name="New_Column">List_mode</filter> 
+          </p_mode>  
+          <p_start_month style="select"> 
+            <filter value-col-name="row_count" display-col-name="calendar_year_month">q_calendar_year_month</filter> 
+          </p_start_month>  
+          <p_end_month style="select"> 
+            <filter value-col-name="row_count" display-col-name="calendar_year_month">q_calendar_year_month</filter> 
+          </p_end_month>  
+          <v_max_date style="select"> 
+            <filter value-col-name="max_full_date" display-col-name="max_full_date">q_max_min_date</filter> 
+          </v_max_date>  
+          <v_min_date style="select"> 
+            <filter value-col-name="min_full_date" display-col-name="min_full_date">q_max_min_date</filter> 
+          </v_min_date>  
+          <p_output_type style="select"> 
+            <filter>ListOutputType</filter> 
+          </p_output_type> 
+        </selections>  
+        <xsl><![CDATA[pageTemplate]]></xsl> 
+      </component-definition> 
+    </action-definition>
+  
+    <actions> 
+      <condition><![CDATA[p_mode=='date']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Get date list</action-type>
+        <action-inputs> 
+          <p_start_date type="string"/>  
+          <p_end_date type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="q_date_list"/> 
+        </action-outputs>
+        <component-definition> 
+          <jndi><![CDATA[dw3]]></jndi>  
+          <query><![CDATA[SELECT 
+ full_date
+FROM 
+  adstraffic.daily_ad_serving_stats_by_device
+WHERE 
+  full_date BETWEEN '{p_start_date}' AND '{p_end_date}' GROUP BY full_date ORDER BY full_date ASC;]]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>Get user choose mode</action-type>
+      <action-inputs> 
+        <p_Site type="string-list"/> 
+      </action-inputs>
+      <action-outputs> 
+        <v_user_choose_mode type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var dimension;
+dimension=typeof(p_Site);
+
+if( dimension == 'string' ){
+	v_user_choose_mode='onlyOneSite';
+}else{
+	v_user_choose_mode='multiDimensions';
+}]]></script> 
+      </component-definition> 
+    </action-definition>
+  
+    <actions> 
+      <condition><![CDATA[p_output_type=='html']]></condition>  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>Create HTMLdata header</action-type>
+        <action-inputs/>
+        <action-outputs> 
+          <HTMLTable type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var HTMLTable;
+
+
+HTMLTable='';
+
+HTMLTable+='<table id="datatable"><thead><tr>';
+
+HTMLTable+='<th style="text-align: left;padding-left: 10px;">'+'Sites'+'</th>';
+HTMLTable+='<th width="80">'+'Total impressions'+'</th>';
+HTMLTable+='<th width="80">'+'Schedule impressions'+'</th>';
+HTMLTable+='<th width="80">'+'Available impressions'+'</th>';
+HTMLTable+='</tr></thead><tbody>';]]></script> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>SetChartTitle</action-type>
+        <action-inputs> 
+          <p_start_date type="string"/>  
+          <p_end_date type="string"/>  
+          <v_chart_sub_title type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <v_chart_sub_title type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[v_chart_sub_title=' From '+p_start_date+' To '+p_end_date;]]></script> 
+        </component-definition> 
+      </action-definition>
+  
+      <actions> 
+        <condition><![CDATA[v_user_choose_mode=='multiDimensions']]></condition>  
+        <actions loop-on="p_Site"> 
+          <action-definition> 
+            <component-name>SQLLookupRule</component-name>
+            <action-type>GetSiteName</action-type>
+            <action-inputs> 
+              <p_Site type="string"/> 
+            </action-inputs>
+            <action-outputs> 
+              <query-result type="result-set" mapping="query_result_siteName"/>  
+              <dart_site_name type="string"/> 
+            </action-outputs>
+            <component-definition> 
+              <jndi><![CDATA[dw3]]></jndi>  
+              <query><![CDATA[SELECT dart_site_name
+  FROM dbclk.monthly_agg_site WHERE dc_site_id={p_Site}]]></query>  
+              <live><![CDATA[false]]></live> 
+            </component-definition> 
+          </action-definition>
+  
+          <action-definition> 
+            <component-name>JavascriptRule</component-name>
+            <action-type>CreateQuery</action-type>
+            <action-inputs> 
+              <p_Site type="string-list"/>  
+              <p_start_date type="string"/>  
+              <p_end_date type="string"/> 
+            </action-inputs>
+            <action-outputs> 
+              <myQuery type="string"/> 
+            </action-outputs>
+            <component-definition> 
+              <script><![CDATA[var myQuery;
+myQuery='';
+
+myQuery='select site_name,estimate_impressions,reserved_impressions,estimate_impressions-reserved_impressions as available_impressions from  dbclk.fn_get_site_forecast(';
+myQuery+=p_Site;
+myQuery+=',\'';
+myQuery+=p_start_date;
+myQuery+='\',\'';
+myQuery+=p_end_date;
+myQuery+='\') as myschema(site_name text,estimate_impressions integer, reserved_impressions integer)';]]></script> 
+            </component-definition> 
+          </action-definition>
+  
+          <action-definition> 
+            <component-name>SQLLookupRule</component-name>
+            <action-type>Relational</action-type>
+            <action-inputs> 
+              <p_end_date type="string"/>  
+              <query type="string" mapping="myQuery"/> 
+            </action-inputs>
+            <action-resources/>
+            <action-outputs> 
+              <query-result type="result-set" mapping="query_result_forecast"/>  
+              <site_name type="string"/>  
+              <estimate_impressions type="integer"/>  
+              <reserved_impressions type="integer"/>  
+              <available_impressions type="integer"/> 
+            </action-outputs>
+            <component-definition> 
+              <jndi><![CDATA[dw3]]></jndi>  
+              <live><![CDATA[false]]></live> 
+            </component-definition> 
+          </action-definition>
+  
+          <action-definition> 
+            <component-name>JavascriptRule</component-name>
+            <action-type>Create HTMLdata row</action-type>
+            <action-inputs> 
+              <HTMLTable type="string"/>  
+              <query_result_forecast type="result-set"/>  
+              <p_Site type="string-list"/>  
+              <query_result_siteName type="result-set"/> 
+            </action-inputs>
+            <action-outputs> 
+              <HTMLTable type="string"/> 
+            </action-outputs>
+            <component-definition> 
+              <script><![CDATA[var rowCount=query_result_forecast.getRowCount();
+
+if(rowCount==1){
+var site_name=query_result_forecast.getValueAt(0,0);
+var estimate_impressions=query_result_forecast.getValueAt(0,1);
+var reserved_impressions=query_result_forecast.getValueAt(0,2);
+var available_impressions=query_result_forecast.getValueAt(0,3);
+
+	HTMLTable+='<tr class="tr1">';
+	
+	HTMLTable+='<th>'+site_name+'</th>';
+						
+		HTMLTable+='<td>'+estimate_impressions+'</td>';
+		HTMLTable+='<td>'+reserved_impressions+'</td>';
+		HTMLTable+='<td>'+available_impressions+'</td>';
+
+	HTMLTable+='</tr>';
+}else{
+	HTMLTable+='<tr>';	
+	HTMLTable+='<th>'+query_result_siteName.getValueAt(0,0)+'</th>';						
+		HTMLTable+='<td>0</td>';
+		HTMLTable+='<td>0</td>';
+		HTMLTable+='<td>0</td>';
+	HTMLTable+='</tr>';
+};]]></script> 
+            </component-definition> 
+          </action-definition>
+ 
+        </actions>
+ 
+      </actions>
+  
+      <actions> 
+        <condition><![CDATA[v_user_choose_mode=='onlyOneSite']]></condition>  
+        <action-definition> 
+          <component-name>SQLLookupRule</component-name>
+          <action-type>GetSiteName</action-type>
+          <action-inputs> 
+            <p_Site type="string"/> 
+          </action-inputs>
+          <action-outputs> 
+            <query-result type="result-set" mapping="query_result_siteName"/>  
+            <dart_site_name type="string"/> 
+          </action-outputs>
+          <component-definition> 
+            <jndi><![CDATA[dw3]]></jndi>  
+            <query><![CDATA[SELECT dart_site_name
+  FROM dbclk.monthly_agg_site WHERE dc_site_id={p_Site}]]></query>  
+            <live><![CDATA[false]]></live> 
+          </component-definition> 
+        </action-definition>
+  
+        <action-definition> 
+          <component-name>JavascriptRule</component-name>
+          <action-type>CreateQuery</action-type>
+          <action-inputs> 
+            <p_Site type="string-list"/>  
+            <p_start_date type="string"/>  
+            <p_end_date type="string"/> 
+          </action-inputs>
+          <action-outputs> 
+            <myQuery type="string"/> 
+          </action-outputs>
+          <component-definition> 
+            <script><![CDATA[var myQuery;
+myQuery='';
+
+myQuery='select site_name,estimate_impressions,reserved_impressions,estimate_impressions-reserved_impressions as available_impressions from  dbclk.fn_get_site_forecast(';
+myQuery+=p_Site;
+myQuery+=',\'';
+myQuery+=p_start_date;
+myQuery+='\',\'';
+myQuery+=p_end_date;
+myQuery+='\') as myschema(site_name text,estimate_impressions integer, reserved_impressions integer)';]]></script> 
+          </component-definition> 
+        </action-definition>
+  
+        <action-definition> 
+          <component-name>SQLLookupRule</component-name>
+          <action-type>Relational</action-type>
+          <action-inputs> 
+            <query type="string" mapping="myQuery"/> 
+          </action-inputs>
+          <action-outputs> 
+            <query-result type="result-set" mapping="query_result_forecast"/>  
+            <site_name type="string"/>  
+            <estimate_impressions type="integer"/>  
+            <reserved_impressions type="integer"/>  
+            <available_impressions type="integer"/> 
+          </action-outputs>
+          <component-definition> 
+            <jndi><![CDATA[dw3]]></jndi>  
+            <live><![CDATA[false]]></live> 
+          </component-definition> 
+        </action-definition>
+  
+        <action-definition> 
+          <component-name>JavascriptRule</component-name>
+          <action-type>Create HTMLdata row</action-type>
+          <action-inputs> 
+            <HTMLTable type="string"/>  
+            <query_result_forecast type="result-set"/>  
+            <query_result_siteName type="result-set"/>  
+            <p_Site type="string-list"/> 
+          </action-inputs>
+          <action-outputs> 
+            <HTMLTable type="string"/> 
+          </action-outputs>
+          <component-definition> 
+            <script><![CDATA[var rowCount=query_result_forecast.getRowCount();
+
+if(rowCount==1){
+var site_name=query_result_forecast.getValueAt(0,0);
+var estimate_impressions=query_result_forecast.getValueAt(0,1);
+var reserved_impressions=query_result_forecast.getValueAt(0,2);
+var available_impressions=query_result_forecast.getValueAt(0,3);
+
+	HTMLTable+='<tr class="tr1">';
+	
+	HTMLTable+='<th>'+site_name+'</th>';
+						
+		HTMLTable+='<td>'+estimate_impressions+'</td>';
+		HTMLTable+='<td>'+reserved_impressions+'</td>';
+		HTMLTable+='<td>'+available_impressions+'</td>';
+
+	HTMLTable+='</tr>';
+}else{
+	HTMLTable+='<tr>';	
+	HTMLTable+='<th>'+query_result_siteName.getValueAt(0,0)+'</th>';						
+		HTMLTable+='<td>0</td>';
+		HTMLTable+='<td>0</td>';
+		HTMLTable+='<td>0</td>';
+	HTMLTable+='</tr>';
+};]]></script> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>Create HTMLdata footer</action-type>
+        <action-inputs> 
+          <HTMLTable type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <HTMLTable type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[HTMLTable+='</tbody></table>';]]></script> 
+        </component-definition> 
+      </action-definition>
+  
+      <actions> 
+        <condition><![CDATA[chartSingleMode == 'true']]></condition>  
+        <action-definition> 
+          <component-name>TemplateComponent</component-name>
+          <action-type>HTML response</action-type>
+          <action-inputs> 
+            <HTMLTable type="string"/>  
+            <v_chart_sub_title type="string"/>  
+            <chartWidth type="string"/>  
+            <chart_type type="string"/>  
+            <chartHeight type="string"/>  
+            <v_chart_title type="string"/>  
+            <Object type="string"/> 
+          </action-inputs>
+          <action-outputs> 
+            <output-message type="string" mapping="webpage"/> 
+          </action-outputs>
+          <component-definition> 
+            <template><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Highcharts Example</title>
+		
+		<link rel="stylesheet" type="text/css" href="/verve_style/css/mytable.css"></link>
+		<!-- 1. Add these JavaScript inclusions in the head of your page 
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/mootools/1.3.0/mootools-yui-compressed.js" type="text/javascript"></script>
+		<script src="/verve_style/scripts/hightchart2.1.5/adapters/mootools-adapter.js" type="text/javascript"></script>
+		-->
+		
+		
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript"></script>
+		<script type="text/javascript" src="/verve_style/scripts/hightchart2.1.5/highcharts.js"></script>
+		<script type="text/javascript" src="/verve_style/scripts/table2CSV.js"></script>
+		<script type="text/javascript" src="/verve_style/scripts/extractCSV.js"></script>
+		<!-- 1a) Optional: add a theme file -->
+		<!--
+			<script type="text/javascript" src="/verve_style/scripts/hightchart2.1.5/themes/dark-blue.js"></script>
+		-->
+		
+		<!-- 1b) Optional: the exporting module -->
+		<script type="text/javascript" src="/verve_style/scripts/hightchart2.1.5/modules/exporting.js"></script>
+		
+		
+		<!-- 2. Add the JavaScript to initialize the chart on document ready -->
+		<script type="text/javascript">
+		
+			/**
+			 * Visualize an HTML table using Highcharts. The top (horizontal) header 
+			 * is used for series names, and the left (vertical) header is used 
+			 * for category names. This function is based on jQuery.
+			 * @param {Object} table The reference to the HTML table to visualize
+			 * @param {Object} options Highcharts options
+			 */
+			Highcharts.visualize = function(table, options) {
+				// the categories
+				options.xAxis.categories = [];
+				$('tbody th', table).each( function(i) {
+					options.xAxis.categories.push(this.innerHTML);
+				});
+				
+				// the data series
+				options.series = [];
+				$('tr', table).each( function(i) {
+					var tr = this;
+					$('th, td', tr).each( function(j) {
+						if (j > 0) { // skip first column
+							if (i == 0) { // get the name and init the series
+								options.series[j - 1] = { 
+									name: this.innerHTML,
+									data: []
+								};
+							} else { // add values
+								options.series[j - 1].data.push(parseFloat(this.innerHTML));
+							}
+						}
+					});
+				});
+				
+				var chart = new Highcharts.Chart(options);
+			}
+				
+			// On document ready, call visualize on the datatable.
+			$(document).ready(function() {			
+				var table = document.getElementById('datatable'),
+				options = {
+					   chart: {
+							renderTo: 'container',
+							defaultSeriesType:'{chart_type}',
+							zoomType: 'xy'
+						},
+						credits:{
+							text: 'Vervewireless.com',
+							href: 'http://www.vervewireless.com/'
+						},
+						title: {
+							text: ' {v_chart_title} '
+						},
+						subtitle: {
+							text: ' {v_chart_sub_title}'
+						},
+						tooltip: {
+							backgroundColor: {
+								linearGradient: [0, 0, 0, 60],
+								stops: [
+									[0, '#FFFFFF'],
+									[1, '#E0E0E0']
+								]
+							},
+							borderWidth: 1,
+							borderColor: '#AAA'
+						},
+						plotOptions: {
+						bar: {
+							dataLabels: {
+								enabled: true
+							}
+						},
+						column: {
+							dataLabels: {
+								enabled: true
+							}
+						}
+					},
+
+					   xAxis: {						
+					   },
+					   yAxis: {
+					      title: {
+					         text: 'Impression Count'
+					      }
+					   },
+					   tooltip: {
+					      formatter: function() {
+					         return '<b>'+ this.series.name +'</b><br/>'+
+					            this.y +' '+ this.x.toLowerCase();
+					      }
+					   }
+					};
+				
+			      					
+				Highcharts.visualize(table, options);
+			});
+				
+		</script>
+
+
+		
+	</head>
+	<body>
+
+		
+		<!-- 3. Add the container -->
+<div style="width: 100%;height:419px;background-image: url('/verve_style/images/main_chart.jpg');background-repeat: repeat-x;padding: 10px;padding-top: 12px;margin-top: 60px;margin-left: -10px;margin-bottom: 10px;">
+<div id="container" style="width: {chartWidth}px; height: {chartHeight}px; margin: 0 auto;"></div>
+</div>
+		
+
+<img style="cursor: pointer;float: right;margin-bottom: -10px;" title="Export CSV" src="/verve_style/images/document_excel_csv.png"  onclick="exportData('#datatable')"/>
+{HTMLTable}
+	</body>
+	
+</html>]]></template> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+  
+      <actions> 
+        <condition><![CDATA[chartSingleMode == 'false']]></condition>  
+        <action-definition> 
+          <component-name>TemplateComponent</component-name>
+          <action-type>HTML response</action-type>
+          <action-inputs> 
+            <HTMLTable type="string"/>  
+            <v_chart_sub_title type="string"/>  
+            <chartWidth type="string"/>  
+            <chart_type type="string"/>  
+            <chartHeight type="string"/>  
+            <v_chart_title type="string"/>  
+            <Object type="string"/> 
+          </action-inputs>
+          <action-outputs> 
+            <output-message type="string" mapping="webpage"/> 
+          </action-outputs>
+          <component-definition> 
+            <template><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Highcharts Example</title>
+		
+		<link rel="stylesheet" type="text/css" href="/verve_style/css/mytable.css"></link>
+		<!-- 1. Add these JavaScript inclusions in the head of your page 
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/mootools/1.3.0/mootools-yui-compressed.js" type="text/javascript"></script>
+		<script src="/verve_style/scripts/hightchart2.1.5/adapters/mootools-adapter.js" type="text/javascript"></script>
+		-->
+		
+		
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript"></script>
+		<script type="text/javascript" src="/verve_style/scripts/hightchart2.1.5/highcharts.js"></script>
+		<script type="text/javascript" src="/verve_style/scripts/table2CSV.js"></script>
+		<script type="text/javascript" src="/verve_style/scripts/extractCSV.js"></script>
+		<!-- 1a) Optional: add a theme file -->
+		<!--
+			<script type="text/javascript" src="/verve_style/scripts/hightchart2.1.5/themes/dark-blue.js"></script>
+		-->
+		
+		<!-- 1b) Optional: the exporting module -->
+		<script type="text/javascript" src="/verve_style/scripts/hightchart2.1.5/modules/exporting.js"></script>
+		
+		
+		<!-- 2. Add the JavaScript to initialize the chart on document ready -->
+		<script type="text/javascript">
+		
+			/**
+			 * Visualize an HTML table using Highcharts. The top (horizontal) header 
+			 * is used for series names, and the left (vertical) header is used 
+			 * for category names. This function is based on jQuery.
+			 * @param {Object} table The reference to the HTML table to visualize
+			 * @param {Object} options Highcharts options
+			 */
+			Highcharts.visualize = function(table, options) {
+				// the categories
+				options.xAxis.categories = [];
+				$('tbody th', table).each( function(i) {
+					options.xAxis.categories.push(this.innerHTML);
+				});
+				
+				// the data series
+				options.series = [];
+				$('tr', table).each( function(i) {
+					var tr = this;
+					$('th, td', tr).each( function(j) {
+						if (j > 0) { // skip first column
+							if (i == 0) { // get the name and init the series
+								options.series[j - 1] = { 
+									name: this.innerHTML,
+									data: []
+								};
+							} else { // add values
+								options.series[j - 1].data.push(parseFloat(this.innerHTML));
+							}
+						}
+					});
+				});
+				
+				var chart = new Highcharts.Chart(options);
+			}
+				
+			// On document ready, call visualize on the datatable.
+			$(document).ready(function() {			
+				var table = document.getElementById('datatable'),
+				options = {
+					   chart: {
+							renderTo: 'container',
+							defaultSeriesType:'{chart_type}',
+							zoomType: 'xy'
+
+						},
+						credits:{
+							text: 'Vervewireless.com',
+							href: 'http://www.vervewireless.com/'
+						},
+						title: {
+							text: ' {v_chart_title} '
+						},
+						subtitle: {
+							text: ' {v_chart_sub_title}'
+						},
+						plotOptions: {
+						bar: {
+							dataLabels: {
+								enabled: true
+							}
+						},
+						column: {
+							dataLabels: {
+								enabled: true
+							}
+						}
+					},
+
+					   xAxis: {						
+					   },
+					   yAxis: {
+					      title: {
+					         text: 'Impression Count'
+					      }
+					   },
+					   tooltip: {
+					      formatter: function() {
+					         return '<b>'+ this.series.name +'</b><br/>'+
+					            this.y +' '+ this.x.toLowerCase();
+					      }
+					   }
+					};
+				
+			      					
+				Highcharts.visualize(table, options);
+			});
+				
+		</script>
+
+
+		
+	</head>
+	<body>
+
+		
+		<!-- 3. Add the container -->
+
+<div id="container" style="width: {chartWidth}px; height: {chartHeight}px; margin: 0 auto;"></div>		
+
+<img style="position: absolute;cursor: pointer;float: right;top: 18px;right: 70px" title="Export CSV" src="/verve_style/images/export.png"  onclick="exportData('#datatable')"/>
+{HTMLTable}
+	</body>
+	
+</html>]]></template> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_output_type=='pdf']]></condition>  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>JavaScript</action-type>
+        <action-outputs> 
+          <p_siteid type="string"/>  
+          <i type="integer"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var p_siteid;
+var i;
+i=0;
+p_siteid='';]]></script> 
+        </component-definition> 
+      </action-definition>
+  
+      <actions> 
+        <condition><![CDATA[v_user_choose_mode=='multiDimensions']]></condition>  
+        <actions loop-on="p_Site"> 
+          <action-definition> 
+            <component-name>JavascriptRule</component-name>
+            <action-type>JavaScript</action-type>
+            <action-inputs> 
+              <p_Site type="string-list"/>  
+              <p_siteid type="string"/>  
+              <i type="integer"/> 
+            </action-inputs>
+            <action-outputs> 
+              <p_siteid type="string"/>  
+              <i type="integer"/> 
+            </action-outputs>
+            <component-definition> 
+              <script><![CDATA[if(i==0){
+	p_siteid+=p_Site;
+}else{
+	p_siteid+=','+p_Site;
+}
+i++;]]></script> 
+            </component-definition> 
+          </action-definition>
+ 
+        </actions>
+ 
+      </actions>
+  
+      <actions> 
+        <condition><![CDATA[v_user_choose_mode=='onlyOneSite']]></condition>  
+        <action-definition> 
+          <component-name>JavascriptRule</component-name>
+          <action-type>JavaScript</action-type>
+          <action-inputs> 
+            <p_siteid type="string"/>  
+            <p_Site type="string-list"/> 
+          </action-inputs>
+          <action-outputs> 
+            <p_siteid type="string"/> 
+          </action-outputs>
+          <component-definition> 
+            <script><![CDATA[p_siteid+=p_Site;]]></script> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+  
+      <action-definition> 
+        <component-name>SimpleReportingComponent</component-name>
+        <action-type>Pentaho Report</action-type>
+        <action-inputs> 
+          <p_start_date type="string"/>  
+          <p_end_date type="string"/>  
+          <p_siteid type="string"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition1"/> 
+        </action-resources>
+        <action-outputs> 
+          <outputstream type="content" mapping="webpage"/> 
+        </action-outputs>
+        <component-definition> 
+          <outputType><![CDATA[application/pdf]]></outputType> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_output_type=='xls']]></condition>  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>JavaScript</action-type>
+        <action-outputs> 
+          <p_siteid type="string"/>  
+          <i type="integer"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var p_siteid;
+var i;
+i=0;
+p_siteid='';]]></script> 
+        </component-definition> 
+      </action-definition>
+  
+      <actions> 
+        <condition><![CDATA[v_user_choose_mode=='multiDimensions']]></condition>  
+        <actions loop-on="p_Site"> 
+          <action-definition> 
+            <component-name>JavascriptRule</component-name>
+            <action-type>JavaScript</action-type>
+            <action-inputs> 
+              <p_Site type="string-list"/>  
+              <p_siteid type="string"/>  
+              <i type="integer"/> 
+            </action-inputs>
+            <action-outputs> 
+              <p_siteid type="string"/>  
+              <i type="integer"/> 
+            </action-outputs>
+            <component-definition> 
+              <script><![CDATA[if(i==0){
+	p_siteid+=p_Site;
+}else{
+	p_siteid+=','+p_Site;
+}
+i++;]]></script> 
+            </component-definition> 
+          </action-definition>
+ 
+        </actions>
+ 
+      </actions>
+  
+      <actions> 
+        <condition><![CDATA[v_user_choose_mode=='onlyOneSite']]></condition>  
+        <action-definition> 
+          <component-name>JavascriptRule</component-name>
+          <action-type>JavaScript</action-type>
+          <action-inputs> 
+            <p_siteid type="string"/>  
+            <p_Site type="string-list"/> 
+          </action-inputs>
+          <action-outputs> 
+            <p_siteid type="string"/> 
+          </action-outputs>
+          <component-definition> 
+            <script><![CDATA[p_siteid+=p_Site;]]></script> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+  
+      <action-definition> 
+        <component-name>SimpleReportingComponent</component-name>
+        <action-type>Pentaho Report</action-type>
+        <action-inputs> 
+          <p_start_date type="string"/>  
+          <p_end_date type="string"/>  
+          <p_siteid type="string"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition1"/> 
+        </action-resources>
+        <action-outputs> 
+          <outputstream type="content" mapping="webpage"/> 
+        </action-outputs>
+        <component-definition> 
+          <outputType><![CDATA[application/vnd.ms-excel]]></outputType> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_output_type=='csv']]></condition>  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>JavaScript</action-type>
+        <action-outputs> 
+          <p_siteid type="string"/>  
+          <i type="integer"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var p_siteid;
+var i;
+i=0;
+p_siteid='';]]></script> 
+        </component-definition> 
+      </action-definition>
+  
+      <actions> 
+        <condition><![CDATA[v_user_choose_mode=='multiDimensions']]></condition>  
+        <actions loop-on="p_Site"> 
+          <action-definition> 
+            <component-name>JavascriptRule</component-name>
+            <action-type>JavaScript</action-type>
+            <action-inputs> 
+              <p_Site type="string-list"/>  
+              <p_siteid type="string"/>  
+              <i type="integer"/> 
+            </action-inputs>
+            <action-outputs> 
+              <p_siteid type="string"/>  
+              <i type="integer"/> 
+            </action-outputs>
+            <component-definition> 
+              <script><![CDATA[if(i==0){
+	p_siteid+=p_Site;
+}else{
+	p_siteid+=','+p_Site;
+}
+i++;]]></script> 
+            </component-definition> 
+          </action-definition>
+ 
+        </actions>
+ 
+      </actions>
+  
+      <actions> 
+        <condition><![CDATA[v_user_choose_mode=='onlyOneSite']]></condition>  
+        <action-definition> 
+          <component-name>JavascriptRule</component-name>
+          <action-type>JavaScript</action-type>
+          <action-inputs> 
+            <p_siteid type="string"/>  
+            <p_Site type="string-list"/> 
+          </action-inputs>
+          <action-outputs> 
+            <p_siteid type="string"/> 
+          </action-outputs>
+          <component-definition> 
+            <script><![CDATA[p_siteid+=p_Site;]]></script> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+  
+      <action-definition> 
+        <component-name>SimpleReportingComponent</component-name>
+        <action-type>Pentaho Report</action-type>
+        <action-inputs> 
+          <p_start_date type="string"/>  
+          <p_end_date type="string"/>  
+          <p_siteid type="string"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition1"/> 
+        </action-resources>
+        <action-outputs> 
+          <outputstream type="content" mapping="webpage"/> 
+        </action-outputs>
+        <component-definition> 
+          <outputType><![CDATA[text/csv]]></outputType> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+ 
+  </actions> 
+</action-sequence>
