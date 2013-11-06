@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Daily Ad-network Performance</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>chinhnd</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <eastern_date_sk type="string"> 
+      <sources> 
+        <request>eastern_date_sk</request> 
+      </sources>  
+      <default-value/> 
+    </eastern_date_sk>  
+    <output type="string"> 
+      <sources> 
+        <request>output</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </output>  
+    <List_networks type="string-list"> 
+      <sources> 
+        <request>List_networks</request> 
+      </sources>  
+      <default-value type="string-list">
+        <list-item>AdSense DBCLK Channel</list-item>
+        <list-item>AT&amp;T (Yellowpages)</list-item>
+        <list-item>AT&amp;T No Logo (Yellowpages)</list-item>
+        <list-item>AT&amp;T Static Banner (Yellowpages)</list-item>
+        <list-item>City Grid/City Grid Proxy</list-item>
+        <list-item>City Grid Mobile</list-item>
+        <list-item>iTunes</list-item>
+        <list-item>JumpTap</list-item>
+        <list-item>Marchex/Marchex Proxy</list-item>
+        <list-item>Millennial Media</list-item>
+        <list-item>Superpages Proxy/Blue</list-item>
+        <list-item>Where/Where HTML</list-item>
+        <list-item>KlickThru</list-item>
+      </default-value> 
+    </List_networks>  
+    <p_network type="string"> 
+      <sources> 
+        <request>p_network</request> 
+      </sources>  
+      <default-value><![CDATA[Jumptap]]></default-value> 
+    </p_network> 
+  </inputs>
+
+  <outputs/>
+
+  <resources> 
+    <pageTemplate> 
+      <solution-file> 
+        <location>daily_performance_report/parameter_template.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </pageTemplate>  
+    <report-definition> 
+      <solution-file> 
+        <location>daily_performance_report/daily_performance_report_jumptap.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition>  
+    <report-definition1> 
+      <solution-file> 
+        <location>daily_performance_report/daily_performance_report_Adsense.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition1>  
+    <report-definition2> 
+      <solution-file> 
+        <location>daily_performance_report/daily_performance_report_Millennial.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition2>  
+    <report-definition3> 
+      <solution-file> 
+        <location>daily_performance_report/daily_performance_report_Marchex.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition3>  
+    <report-definition4> 
+      <solution-file> 
+        <location>daily_performance_report/daily_performance_report_adwhere.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition4>  
+    <report-definition5> 
+      <solution-file> 
+        <location>daily_performance_report/daily_performance_report_superpage.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition5>  
+    <report-definition6> 
+      <solution-file> 
+        <location>daily_performance_report/daily_performance_report_yellowpage.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition6>  
+    <report-definition7> 
+      <solution-file> 
+        <location>daily_performance_report/daily_performance_report_adsense_dbclk_channel.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition7>  
+    <report-definition8> 
+      <solution-file> 
+        <location>daily_performance_report/daily_performance_report_superpage_blue.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition8>  
+    <report-definition9> 
+      <solution-file> 
+        <location>daily_performance_report/daily_performance_report_city_grid.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition9>  
+    <report-definition10> 
+      <solution-file> 
+        <location>daily_performance_report/daily_performance_report_itune.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition10>  
+    <report-definition11> 
+      <solution-file> 
+        <location>daily_performance_report/daily_performance_report_att_static_banner.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition11>  
+    <report-definition12> 
+      <solution-file> 
+        <location>daily_performance_report/daily_performance_report_att_no_logo.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition12>  
+    <report-definition13> 
+      <solution-file> 
+        <location>daily_performance_report/daily_performance_report_city_grid_mobile.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition13>  
+    <report-definition14>
+      <solution-file>
+        <location>daily_performance_report/daily_performance_report_klick_thru.jasper</location>
+        <mime-type>text/plain</mime-type>
+      </solution-file>
+    </report-definition14>
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get Date list</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result"/>  
+        <eastern_date_sk type="integer"/>  
+        <full_date type="string"/>  
+        <distinct type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[dw3]]></jndi>  
+        <live><![CDATA[true]]></live>  
+        <query><![CDATA[select a.date_sk as eastern_date_sk, a.full_date 
+from refer.date_dim a,
+(
+select min(min_date_sk) as min_date_sk, max(max_date_sk) as max_date_sk
+from (
+select min(eastern_date_sk) as min_date_sk, max(eastern_date_sk) as max_date_sk from adnetwork.daily_cg_mobile_performance where is_active = true 
+union
+select min(eastern_date_sk) as min_date_sk, max(eastern_date_sk) as max_date_sk from adnetwork.daily_cg_performance where is_active = true 
+union
+select min(eastern_date_sk) as min_date_sk, max(eastern_date_sk) as max_date_sk from adnetwork.daily_jt_performance where is_active = true 
+union
+select min(eastern_date_sk) as min_date_sk, max(eastern_date_sk) as max_date_sk from adnetwork.daily_it_performance where is_active = true 
+union
+select min(eastern_date_sk) as min_date_sk, max(eastern_date_sk) as max_date_sk from adnetwork.daily_mm_performance where is_active = true 
+union
+select min(eastern_date_sk) as min_date_sk, max(eastern_date_sk) as max_date_sk from adnetwork.daily_mx_performance where is_active = true 
+union
+select min(eastern_date_sk) as min_date_sk, max(eastern_date_sk) as max_date_sk from adnetwork.daily_sp_blue_performance where is_active = true 
+union
+select min(eastern_date_sk) as min_date_sk, max(eastern_date_sk) as max_date_sk from adnetwork.daily_wh_performance where is_active = true 
+union
+select min(eastern_date_sk) as min_date_sk, max(eastern_date_sk) as max_date_sk from adnetwork.daily_yp_performance where is_active = true 
+union
+select min(eastern_date_sk) as min_date_sk, max(eastern_date_sk) as max_date_sk from adnetwork.daily_adsense_dbclk_channel where is_active = true 
+union
+select min(eastern_date_sk) as min_date_sk, max(eastern_date_sk) as max_date_sk from adnetwork.daily_yp_sb_performance where is_active = true 
+union
+select min(eastern_date_sk) as min_date_sk, max(eastern_date_sk) as max_date_sk from adnetwork.daily_yp_no_performance where is_active = true 
+) a ) b
+where a.date_sk between b.min_date_sk and b.max_date_sk
+order by a.date_sk desc;]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Prompt/Secure Filter</action-type>
+      <action-inputs> 
+        <eastern_date_sk type="string"/>  
+        <query_result type="result-set"/>  
+        <p_network type="string"/>  
+        <List_networks type="string-list"/> 
+      </action-inputs>
+      <action-resources> 
+        <pageTemplate type="resource"/> 
+      </action-resources>
+      <component-definition> 
+        <selections> 
+          <eastern_date_sk style="select"> 
+            <filter value-col-name="eastern_date_sk" display-col-name="full_date">query_result</filter>  
+            <title>Date</title> 
+          </eastern_date_sk>  
+          <p_network style="select"> 
+            <filter>List_networks</filter> 
+          </p_network> 
+        </selections>  
+        <xsl><![CDATA[pageTemplate]]></xsl> 
+      </component-definition> 
+    </action-definition>
+  
+    <actions> 
+      <condition><![CDATA[p_network=='JumpTap']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <eastern_date_sk type="string"/>  
+          <output-type type="string" mapping="output"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition type="resource"/> 
+        </action-resources>
+        <component-definition> 
+          <jndi><![CDATA[dw3]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_network=='Google AdSense']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <output-type type="string" mapping="output"/>  
+          <eastern_date_sk type="string"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition1"/> 
+        </action-resources>
+        <component-definition> 
+          <jndi><![CDATA[dw3]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_network=='Millennial Media']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <output-type type="string" mapping="output"/>  
+          <eastern_date_sk type="string"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition2"/> 
+        </action-resources>
+        <component-definition> 
+          <jndi><![CDATA[dw3]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_network=='Marchex/Marchex Proxy']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <eastern_date_sk type="string"/>  
+          <output-type type="string" mapping="output"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition3"/> 
+        </action-resources>
+        <component-definition> 
+          <jndi><![CDATA[dw3]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_network=='Where/Where HTML']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <eastern_date_sk type="string"/>  
+          <output-type type="string" mapping="output"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition4"/> 
+        </action-resources>
+        <component-definition> 
+          <jndi><![CDATA[dw3]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_network=='Superpages']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <eastern_date_sk type="string"/>  
+          <output-type type="string" mapping="output"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition5"/> 
+        </action-resources>
+        <component-definition> 
+          <jndi><![CDATA[dw3]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_network=='AT&T (Yellowpages)']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <eastern_date_sk type="string"/>  
+          <output-type type="string" mapping="output"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition6"/> 
+        </action-resources>
+        <component-definition> 
+          <jndi><![CDATA[dw3]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_network=='AdSense DBCLK Channel']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <eastern_date_sk type="string"/>  
+          <output-type type="string" mapping="output"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition7"/> 
+        </action-resources>
+        <component-definition> 
+          <jndi><![CDATA[dw3]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_network=='Superpages Proxy/Blue']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <eastern_date_sk type="string"/>  
+          <output-type type="string" mapping="output"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition8"/> 
+        </action-resources>
+        <component-definition> 
+          <jndi><![CDATA[dw3]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_network=='City Grid/City Grid Proxy']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <eastern_date_sk type="string"/>  
+          <output-type type="string" mapping="output"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition9"/> 
+        </action-resources>
+        <component-definition> 
+          <jndi><![CDATA[dw3]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_network=='iTunes']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <eastern_date_sk type="string"/>  
+          <output-type type="string" mapping="output"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition10"/> 
+        </action-resources>
+        <component-definition> 
+          <jndi><![CDATA[dw3]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_network=='AT&T Static Banner (Yellowpages)']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <eastern_date_sk type="string"/>  
+          <output-type type="string" mapping="output"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition11"/> 
+        </action-resources>
+        <component-definition> 
+          <jndi><![CDATA[dw3]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_network=='AT&T No Logo (Yellowpages)']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <eastern_date_sk type="string"/>  
+          <output-type type="string" mapping="output"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition12"/> 
+        </action-resources>
+        <component-definition> 
+          <jndi><![CDATA[dw3]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_network=='City Grid Mobile']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <eastern_date_sk type="string"/>  
+          <output-type type="string" mapping="output"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition13"/> 
+        </action-resources>
+        <component-definition> 
+          <jndi><![CDATA[dw3]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions>
+      <condition><![CDATA[p_network=='KlickThru']]></condition>
+      <action-definition>
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs>
+          <eastern_date_sk type="string"/>
+          <output-type type="string" mapping="output"/>
+        </action-inputs>
+        <action-resources>
+          <report-definition mapping="report-definition14"/>
+        </action-resources>
+        <component-definition>
+          <jndi><![CDATA[dw3]]></jndi>
+        </component-definition>
+      </action-definition>
+
+    </actions>
+
+  </actions> 
+</action-sequence>

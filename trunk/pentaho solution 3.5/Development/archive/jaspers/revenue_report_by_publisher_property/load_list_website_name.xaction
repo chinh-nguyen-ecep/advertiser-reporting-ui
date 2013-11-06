@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>load list event name</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>chinhnguyen</author>  
+    <description>get control from table adm.daily_agg_adm_data_feed</description>  
+    <help/>  
+    <result-type>report</result-type>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <p_input_id type="string"> 
+      <sources> 
+        <request>p_input_id</request> 
+      </sources>  
+      <default-value><![CDATA[-1000]]></default-value> 
+    </p_input_id>  
+    <mssg type="string"> 
+      <sources> 
+        <request>mssg</request> 
+      </sources>  
+      <default-value/> 
+    </mssg>  
+    <p_startdate type="string"> 
+      <sources> 
+        <request>p_startdate</request> 
+      </sources>  
+      <default-value><![CDATA[2000-01-01]]></default-value> 
+    </p_startdate>  
+    <p_enddate type="string"> 
+      <sources> 
+        <request>p_enddate</request> 
+      </sources>  
+      <default-value><![CDATA[9999-12-31]]></default-value> 
+    </p_enddate> 
+  </inputs>
+
+  <outputs> 
+    <resultEventName type="string"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </resultEventName> 
+  </outputs>
+
+  <resources/>
+  
+  <actions> 
+    <actions> 
+      <condition><![CDATA[p_input_id=='-1000']]></condition>  
+      <action-definition> 
+        <component-name>TemplateComponent</component-name>
+        <action-type>Message Template</action-type>
+        <action-inputs/>
+        <action-outputs> 
+          <output-message type="string" mapping="querry"/> 
+        </action-outputs>
+        <component-definition> 
+          <template><![CDATA[SELECT a.*
+FROM (
+	SELECT -1000 as id,'All Property Names' as name, 0 as row_order
+	UNION
+	SELECT a.website_id as id,(case when a.website_id=-100 then 'N/A' else a.name_current end) as name, (case when a.website_id=-100 then 2 else 1 end) as row_order
+	FROM refer.adm_website_dim  a
+	WHERE a.dt_expire='9999-12-31' 
+	) a
+ORDER BY row_order, name;]]></template>
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Get list of even name</action-type>
+        <action-inputs> 
+          <query type="string" mapping="querry"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result_event_name"/> 
+        </action-outputs>
+        <component-definition> 
+          <jndi><![CDATA[verveReportConnection]]></jndi>  
+          <live><![CDATA[false]]></live> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_input_id!='-1000']]></condition>  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>Get ID</action-type>
+        <action-inputs> 
+          <p_input_id type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <list_id type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var list_id;
+list_id='';
+//convert measures
+if(p_input_id!= ''){
+	if(p_input_id instanceof Array){
+		for(var i=0;i<p_input_id.length;i++){
+			if(i>0){
+			list_id+=',';
+			};
+			list_id+='\''+p_input_id[i]+'\'';
+		};
+	}else{
+		list_id+='\''+p_input_id+'\'';
+	};
+}]]></script> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>TemplateComponent</component-name>
+        <action-type>Message Template</action-type>
+        <action-inputs> 
+          <p_input_id type="string"/>
+        </action-inputs>
+        <action-outputs> 
+          <output-message type="string" mapping="query"/> 
+        </action-outputs>
+        <component-definition> 
+          <template><![CDATA[SELECT a.*
+FROM (
+	SELECT -1000 as id,'All Property Names' as name, 0 as row_order
+	UNION
+	SELECT a.website_id as id,(case when a.website_id=-100 then 'N/A' else a.name_current end) as name, (case when a.website_id=-100 then 2 else 1 end) as row_order
+	FROM refer.adm_website_dim  a
+	WHERE a.dt_expire='9999-12-31' AND a.publisher_id= {p_input_id}
+	) a
+ORDER BY row_order, name;]]></template>
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Get list of even name</action-type>
+        <action-inputs> 
+          <query type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result_event_name"/> 
+        </action-outputs>
+        <component-definition> 
+          <jndi><![CDATA[verveReportConnection]]></jndi>  
+          <live><![CDATA[false]]></live> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>JavaScript</action-type>
+      <action-inputs> 
+        <query_result_event_name type="result-set"/> 
+      </action-inputs>
+      <action-outputs> 
+        <resultEventName type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var resultEventName;
+
+resultEventName='<table><tr></tr>';
+
+for(var i=0;i<query_result_event_name.getRowCount();i++){
+	var value=query_result_event_name.getValueAt(i,0);
+	var name=query_result_event_name.getValueAt(i,1);
+	if(i==0){
+	resultEventName+='<tr><td><input id="event_'+name+'" class="portlet-form-field" type="checkbox" name="p_website_name" value="'+value+'" title=""><span id="device-label" class="portlet-form-field-label">'+name+'</span></td></tr>';
+	}else{
+	resultEventName+='<tr><td><input id="event_'+name+'" class="portlet-form-field" type="checkbox" name="p_website_name" value="'+value+'" title=""><span id="device-label" class="portlet-form-field-label">'+name+'</span></td></tr>';
+	};
+	
+};
+resultEventName+='</table>';]]></script> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

@@ -1,0 +1,85 @@
+<Schema name="ADM-DBCLICK">
+  <Dimension name="YearMonth">
+	  <Hierarchy hasAll="true" primaryKey="date_sk">
+		<Table name="date_dim" schema="refer"></Table>
+		<Level name="Calendar year month" ordinalColumn="month_since_2005" column="calendar_year_month" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never"></Level>
+		<Level name="Full date" column="full_date" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never"></Level>
+	  </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" highCardinality="false" name="Creative">
+    <Hierarchy hasAll="true" primaryKey="creative_id">
+      <Table name="adm_creative_dim" schema="refer">      </Table>
+      <Level name="Creative" column="name_current" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never"></Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" highCardinality="false" name="Partner">
+    <Hierarchy hasAll="true" primaryKey="partner_id">  
+	<Table name="partner_dim" schema="refer"></Table>
+      <Level name="Partner" column="name_current" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never"></Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" highCardinality="false" name="Location">
+    <Hierarchy hasAll="true" primaryKey="id">
+      <Table name="location" schema="verveloc">      </Table>
+      <Level name="Location" column="name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" highCardinality="false" name="Country">
+    <Hierarchy hasAll="true" primaryKey="id">
+      <Table name="country" schema="verveloc">      </Table>
+      <Level name="Country" column="name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" highCardinality="false" name="Region">
+    <Hierarchy hasAll="true" primaryKey="id">
+      <Table name="region" schema="verveloc">      </Table>
+      <Level name="Region" column="name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" highCardinality="false" name="Metro">
+    <Hierarchy hasAll="true" primaryKey="id">
+      <Table name="metro" schema="verveloc"></Table>
+      <Level name="Metro" column="name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" highCardinality="false" name="Metro">
+    <Hierarchy hasAll="true" primaryKey="id">
+      <Table name="metro" schema="verveloc"></Table>
+      <Level name="Metro" column="name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <!--Cube name="daily_agg_adm_data_feed" cache="true" enabled="true">
+    <Table name="daily_agg_adm_data_feed" schema="adm"></Table>
+	<DimensionUsage name="YearMonth" source="YearMonth" foreignKey="eastern_date_sk"></DimensionUsage>
+    <DimensionUsage source="Creative" name="Creative" foreignKey="creative_id" highCardinality="false"></DimensionUsage>
+    <Measure name="Impression count" column="impressions" datatype="Integer" aggregator="sum" visible="true"></Measure>
+    <Measure name="Click count" column="clicks" datatype="Integer" aggregator="sum" visible="true"></Measure>
+    <Measure name="Revenue total" column="revenue" datatype="Numeric" aggregator="sum" visible="true"></Measure>
+  </Cube-->
+  <Cube name="daily_agg_adm_data_feed" cache="true" enabled="true">
+    <Table name="daily_agg_adm_data_feed" schema="adm"></Table>
+    <Dimension type="StandardDimension" highCardinality="false" name="Calendar Month">
+	  <Hierarchy hasAll="true">
+		<Level name="Calendar year month" ordinalColumn="month_since_2005" column="calendar_year_month" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never"></Level>
+		<Level name="Full date" column="full_date" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never"></Level>
+	  </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Creative">
+      <Hierarchy hasAll="true">
+        <Level name="Creative id" column="creative_id" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Flight">
+      <Hierarchy hasAll="true">
+        <Level name="Flight id" column="flight_id" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Impression count" column="impressions" datatype="Integer" aggregator="sum" visible="true"></Measure>
+    <Measure name="Click count" column="clicks" datatype="Integer" aggregator="sum" visible="true"></Measure>
+    <Measure name="Revenue total" column="revenue" datatype="Numeric" aggregator="sum" visible="true"></Measure>
+  </Cube>
+</Schema>

@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Double Click Sellthrought</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>chinhnguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type>report</result-type>  
+    <icon>chart_1(2).png|chart_1(2).png</icon> 
+  </documentation>
+
+  <inputs> 
+    <p_start_date type="string"> 
+      <sources> 
+        <request>p_start_date</request> 
+      </sources>  
+      <default-value/> 
+    </p_start_date>  
+    <p_end_date type="string"> 
+      <sources> 
+        <request>p_end_date</request> 
+      </sources>  
+      <default-value/> 
+    </p_end_date>  
+    <v_max_date type="string"> 
+      <sources> 
+        <request>v_max_date</request> 
+      </sources>  
+      <default-value/> 
+    </v_max_date>  
+    <v_min_date type="string"> 
+      <sources> 
+        <request>v_min_date</request> 
+      </sources>  
+      <default-value/> 
+    </v_min_date>  
+    <p_Site type="string"> 
+      <sources> 
+        <request>p_Site</request> 
+      </sources>  
+      <default-value/> 
+    </p_Site>  
+    <List_report_type type="result-set"> 
+      <default-value type="result-set">
+        <row>
+          <name>Metro</name>
+          <value>Metro</value>
+        </row>
+        <row>
+          <name>Site</name>
+          <value>Site</value>
+        </row>
+      </default-value>  
+      <columns>
+        <name type="string"/>
+        <value type="string"/>
+      </columns>
+    </List_report_type>  
+    <p_report_type type="string"> 
+      <sources> 
+        <request>p_report_type</request> 
+      </sources>  
+      <default-value><![CDATA[Metro]]></default-value> 
+    </p_report_type>  
+    <p_Metro type="string"> 
+      <sources> 
+        <request>p_Metro</request> 
+      </sources>  
+      <default-value/> 
+    </p_Metro>  
+    <List_output_type type="string-list"> 
+      <default-value type="string-list"> 
+        <list-item>html</list-item>  
+        <list-item>pdf</list-item>  
+        <list-item>xls</list-item>  
+        <list-item>rtf</list-item>  
+        <list-item>csv</list-item> 
+      </default-value> 
+    </List_output_type>  
+    <p_output type="string"> 
+      <sources> 
+        <request>p_output</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </p_output> 
+  </inputs>
+
+  <outputs> 
+    <myreport type="content"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </myreport> 
+  </outputs>
+
+  <resources> 
+    <pageTemplate1> 
+      <solution-file> 
+        <location>parameter_template/DoubleClick_sellthrough.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </pageTemplate1>  
+    <report-definition> 
+      <solution-file> 
+        <location>DoubleClick_sellthrought/sellthroughtbymetro.prpt</location>  
+        <mime-type>application/zip</mime-type> 
+      </solution-file> 
+    </report-definition>  
+    <report-definition1> 
+      <solution-file> 
+        <location>DoubleClick_sellthrought/sellthroughtbysite.prpt</location>  
+        <mime-type>application/zip</mime-type> 
+      </solution-file> 
+    </report-definition1> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get max min date data</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="q_max_min_date"/>  
+        <max_full_date type="string"/>  
+        <min_full_date type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[dw3]]></jndi>  
+        <live><![CDATA[false]]></live>  
+        <query><![CDATA[SELECT b.min_full_date, b.max_full_date
+FROM refer.date_dim a,
+(SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM adstraffic.daily_db_sellthrough_by_metro WHERE is_active=true) b
+WHERE a.full_date = b.min_full_date OR a.full_date = b.max_full_date;]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Prompt/Secure Filter</action-type>
+      <action-inputs> 
+        <p_start_date type="string"/>  
+        <p_end_date type="string"/>  
+        <v_max_date type="string"/>  
+        <v_min_date type="string"/>  
+        <q_max_min_date type="result-set"/>  
+        <p_report_type type="string"/>  
+        <List_report_type type="result-set"/>  
+        <p_output type="string"/>  
+        <List_output_type type="string-list"/> 
+      </action-inputs>
+      <action-resources> 
+        <pageTemplate mapping="pageTemplate1"/> 
+      </action-resources>
+      <component-definition> 
+        <selections> 
+          <p_start_date filter="none" style="text-box"/>  
+          <p_end_date filter="none" style="text-box"/>  
+          <v_max_date style="select"> 
+            <filter value-col-name="max_full_date" display-col-name="max_full_date">q_max_min_date</filter> 
+          </v_max_date>  
+          <v_min_date style="select"> 
+            <filter value-col-name="min_full_date" display-col-name="min_full_date">q_max_min_date</filter> 
+          </v_min_date>  
+          <p_report_type style="select"> 
+            <filter value-col-name="value" display-col-name="name">List_report_type</filter> 
+          </p_report_type>  
+          <p_output style="select"> 
+            <filter>List_output_type</filter> 
+          </p_output> 
+        </selections>  
+        <xsl><![CDATA[pageTemplate]]></xsl> 
+      </component-definition> 
+    </action-definition>
+  
+    <actions> 
+      <condition><![CDATA[p_report_type=='Metro']]></condition>  
+      <actions> 
+        <condition><![CDATA[p_output=='html']]></condition>  
+        <action-definition> 
+          <component-name>SimpleReportingComponent</component-name>
+          <action-type>Pentaho Report</action-type>
+          <action-inputs> 
+            <p_start_date type="string"/>  
+            <p_end_date type="string"/>  
+            <p_Metro type="string"/> 
+          </action-inputs>
+          <action-outputs> 
+            <outputstream type="content" mapping="myreport"/> 
+          </action-outputs>
+          <component-definition> 
+            <outputType><![CDATA[text/html]]></outputType> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+  
+      <actions> 
+        <condition><![CDATA[p_output=='pdf']]></condition>  
+        <action-definition> 
+          <component-name>SimpleReportingComponent</component-name>
+          <action-type>Pentaho Report</action-type>
+          <action-inputs> 
+            <p_start_date type="string"/>  
+            <p_end_date type="string"/>  
+            <p_Metro type="string"/> 
+          </action-inputs>
+          <action-outputs> 
+            <outputstream type="content" mapping="myreport"/> 
+          </action-outputs>
+          <component-definition> 
+            <outputType><![CDATA[application/pdf]]></outputType> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+  
+      <actions> 
+        <condition><![CDATA[p_output=='xls']]></condition>  
+        <action-definition> 
+          <component-name>SimpleReportingComponent</component-name>
+          <action-type>Pentaho Report</action-type>
+          <action-inputs> 
+            <p_start_date type="string"/>  
+            <p_end_date type="string"/>  
+            <p_Metro type="string"/> 
+          </action-inputs>
+          <action-outputs> 
+            <outputstream type="content" mapping="myreport"/> 
+          </action-outputs>
+          <component-definition> 
+            <outputType><![CDATA[application/vnd.ms-excel]]></outputType> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+  
+      <actions> 
+        <condition><![CDATA[p_output=='rtf']]></condition>  
+        <action-definition> 
+          <component-name>SimpleReportingComponent</component-name>
+          <action-type>Pentaho Report</action-type>
+          <action-inputs> 
+            <p_start_date type="string"/>  
+            <p_end_date type="string"/>  
+            <p_Metro type="string"/> 
+          </action-inputs>
+          <action-outputs> 
+            <outputstream type="content" mapping="myreport"/> 
+          </action-outputs>
+          <component-definition> 
+            <outputType><![CDATA[application/rtf]]></outputType> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+  
+      <actions> 
+        <condition><![CDATA[p_output=='csv']]></condition>  
+        <action-definition> 
+          <component-name>SimpleReportingComponent</component-name>
+          <action-type>Pentaho Report</action-type>
+          <action-inputs> 
+            <p_start_date type="string"/>  
+            <p_end_date type="string"/>  
+            <p_Metro type="string"/> 
+          </action-inputs>
+          <action-outputs> 
+            <outputstream type="content" mapping="myreport"/> 
+          </action-outputs>
+          <component-definition> 
+            <outputType><![CDATA[text/csv]]></outputType> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_report_type=='Site']]></condition>  
+      <actions> 
+        <condition><![CDATA[p_output=='html']]></condition>  
+        <action-definition> 
+          <component-name>SimpleReportingComponent</component-name>
+          <action-type>Pentaho Report</action-type>
+          <action-inputs> 
+            <p_start_date type="string"/>  
+            <p_end_date type="string"/>  
+            <p_Site type="string"/> 
+          </action-inputs>
+          <action-resources> 
+            <report-definition mapping="report-definition1"/> 
+          </action-resources>
+          <action-outputs> 
+            <outputstream type="content" mapping="myreport"/> 
+          </action-outputs>
+          <component-definition> 
+            <outputType><![CDATA[text/html]]></outputType> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+  
+      <actions> 
+        <condition><![CDATA[p_output=='pdf']]></condition>  
+        <action-definition> 
+          <component-name>SimpleReportingComponent</component-name>
+          <action-type>Pentaho Report</action-type>
+          <action-inputs> 
+            <p_start_date type="string"/>  
+            <p_end_date type="string"/>  
+            <p_Site type="string"/> 
+          </action-inputs>
+          <action-resources> 
+            <report-definition mapping="report-definition1"/> 
+          </action-resources>
+          <action-outputs> 
+            <outputstream type="content" mapping="myreport"/> 
+          </action-outputs>
+          <component-definition> 
+            <outputType><![CDATA[application/pdf]]></outputType> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+  
+      <actions> 
+        <condition><![CDATA[p_output=='xls']]></condition>  
+        <action-definition> 
+          <component-name>SimpleReportingComponent</component-name>
+          <action-type>Pentaho Report</action-type>
+          <action-inputs> 
+            <p_start_date type="string"/>  
+            <p_end_date type="string"/>  
+            <p_Site type="string"/> 
+          </action-inputs>
+          <action-resources> 
+            <report-definition mapping="report-definition1"/> 
+          </action-resources>
+          <action-outputs> 
+            <outputstream type="content" mapping="myreport"/> 
+          </action-outputs>
+          <component-definition> 
+            <outputType><![CDATA[application/vnd.ms-excel]]></outputType> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+  
+      <actions> 
+        <condition><![CDATA[p_output=='rtf']]></condition>  
+        <action-definition> 
+          <component-name>SimpleReportingComponent</component-name>
+          <action-type>Pentaho Report</action-type>
+          <action-inputs> 
+            <p_start_date type="string"/>  
+            <p_end_date type="string"/>  
+            <p_Site type="string"/> 
+          </action-inputs>
+          <action-resources> 
+            <report-definition mapping="report-definition1"/> 
+          </action-resources>
+          <action-outputs> 
+            <outputstream type="content" mapping="myreport"/> 
+          </action-outputs>
+          <component-definition> 
+            <outputType><![CDATA[application/rtf]]></outputType> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+  
+      <actions> 
+        <condition><![CDATA[p_output=='csv']]></condition>  
+        <action-definition> 
+          <component-name>SimpleReportingComponent</component-name>
+          <action-type>Pentaho Report</action-type>
+          <action-inputs> 
+            <p_start_date type="string"/>  
+            <p_end_date type="string"/>  
+            <p_Site type="string"/> 
+          </action-inputs>
+          <action-resources> 
+            <report-definition mapping="report-definition1"/> 
+          </action-resources>
+          <action-outputs> 
+            <outputstream type="content" mapping="myreport"/> 
+          </action-outputs>
+          <component-definition> 
+            <outputType><![CDATA[text/csv]]></outputType> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+ 
+    </actions>
+ 
+  </actions> 
+</action-sequence>

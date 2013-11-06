@@ -1,0 +1,112 @@
+<html xmlns:xf="http://www.w3.org/2002/xforms">
+	<head>
+		<link type="text/css" href="/verve_style/css/tableInForm.css" rel="stylesheet" />
+		<link type="text/css" href="/jquery/css/smoothness/jquery-ui-1.8.13.custom.css" rel="stylesheet" />
+		<script type="text/javascript" language="javascript" src="/jquery/js/jquery-1.5.1.min.js"></script>
+		<script type="text/javascript" language="javascript" src="/jquery/js/jquery-ui-1.8.13.custom.min.js"></script>
+        <script type="text/javascript" language="javascript" src="/pentaho/js/pentaho-ajax.js"></script>
+		<script type="text/javascript" language="javascript" src="/jquery/js/ad_response_util.js"></script>
+		<script type="text/javascript">
+			var adNetworksHTML = '';
+			var groupsHTML = '';
+			var partnersHTML = '';
+			var portalsHTML = '';
+			var devicesHTML = '';
+			var currentDimensionMode = 'Ad Network'; // set default value
+			
+			$(function(){
+				
+				// Dialog			
+				$('#dialog').dialog({
+					autoOpen: true,
+					width: 500,
+					resizable: false,
+					buttons: {
+						"Run": function() { 
+							$(this).dialog("close"); 
+						}, 
+						"Cancel": function() { 
+							$('#textfilter').text('');
+							$('#listfilter').html('');
+							$(this).dialog("close"); 
+						} 
+					},
+					open: function(event, ui) {
+						onDimensionModeClick(currentDimensionMode);
+					}
+				});
+
+				
+				// Dialog Link
+				$('#dialog_link').click(function(){
+					$('#dialog').dialog('open');
+					return false;
+				});
+				
+			});
+		</script>
+	</head>
+	<body>
+		<div style="position: absolute;left: 10px;top: 10px;width: 50px;height: 50px; background-color: transparent; z-index: 1000;">
+	   		<img id="dialog_link" style="cursor: pointer; cursor: hand;" title="Open control panel" src="/verve_style/images/control_panel.png" />
+	   	</div>
+		<!-- ui-dialog -->
+		<div id="dialog" title="Control Panel" style="display: none;" class="modalFrom">
+			<table width="100%" cellspacing="2" cellpadding="2">
+            	<tr>
+                	<td class="cellTitle" style="width: 140px;">Modes:</td>
+                	<td colspan="3">{p_mode}</td>
+                </tr>
+                <tr>
+                	<td class="cellTitle">Range from:</td>
+                	<td>
+                    	<div id="daterange">
+                        	{p_start_date}To:{p_end_date}
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                	<td class="cellTitle">Measures:</td>
+                	<td>
+                    	<div class="wapper" style="width: 358px;">{p_measure}</div>
+                    </td>
+                </tr>
+            	<tr>
+                	<td class="cellTitle">Dimension modes:</td>
+                	<td><div id="dimensionmode">{p_dimension}</div></td>
+                </tr>
+                <tr>
+                	<td class="cellTitle"></td>
+                	<td>
+                    	<input id="textfilter" type="text" style="width: 360px;" />
+	                    <div class="wapper" id="listfilter" style="width: 358px; height: 120px; overflow: auto;"></div>
+                    </td>
+                </tr>
+                <tr>
+                	<td class="cellTitle">Chart types:</td>
+                	<td><div id="charttype">{p_chart}</div></td>
+                </tr>
+            </table>
+            <!-- hidden value -->
+            <div style="display: none">
+            	{v_min_date}{v_max_date}
+            </div>
+		</div>
+        <script>
+			$('#v_min_date option')[1].selected = true;
+			$('#v_max_date option')[1].selected = true;	
+
+			//change mode
+			$('#p_mode_date').click(function(){
+				//$('datemode').setStyle('display','');
+				//$('monthmode').setStyle('display','none');
+				alert($('#v_min_date option:selected').text());
+			});
+			$('#p_mode_month').click(function(){
+				//$('datemode').setStyle('display','none');
+				//$('monthmode').setStyle('display','');
+				alert($('#v_max_date option:selected').text());
+			});
+        </script>
+	</body>
+</html>

@@ -1,0 +1,71 @@
+<style type="text/css" title="currentStyle">
+			@import "/verve_style/scripts/jquery_ui/css/smoothness/jquery-ui-1.8.17.custom.css";
+			@import "/verve_style/scripts/jquery_clock/css/digital.css";
+			@import "/verve_style/scripts/bumpbox/bumpbox.css";
+			@import "/verve_style/css/tableInForm.css";
+			@import "/verve_style/css/jqueryControlaPanel.css";
+</style>
+
+<h1 class="dashboardName" id="dashboardTitle">Get HeatMap Data</h1>
+<button id="control-panel" >Control panel loading...</button>
+<div  id="boxContenHiddenBoxs" class="mybox none">
+	<div class="box_content" id="hiddenDiv" style="width: 997px;">
+		
+	</div>	
+</div>
+<div class="mybox" style="width: 997px;">
+	<div class="title">
+		<div id="">Olap		
+		</div>
+	</div>
+	<div class="box_content">		
+			<div id="sampleObject" style="width: 900px; min-height: 300px;"></div>		
+	</div>
+</div>
+
+<div id="dialog-form" title="Control Panel" style="display:none">
+	<form id="control_panel_form">
+		<table class="tableForm">
+			 <tbody>			 
+					 <tr>
+						 <th>Date from:</th>
+						 <td>
+						 <input id="start_date" name="start_date" type="text" class="text ui-widget-content ui-corner-all" > 
+						 <label for="end_date" style="margin-left: 0px;">To:</label>
+						 <input id="end_date" name="end_date" type="text" class="text ui-widget-content ui-corner-all">
+						 </td>
+					 </tr>
+					 <tr>
+						 <th>ID Search: </th>
+						 <td>
+						 <input id="sr_flightID" type="text" class="text ui-widget-content ui-corner-all filter">
+						 <div id="lc_flightID" class="text ui-widget-content ui-corner-all" style="height: 200px;overflow-x:hidden"></div>
+						 </td>
+					 </tr>
+					 <tr style="display:none">
+						 <th>Event Name: </th>
+						 <td>
+						 <input id="sr_eventName" type="text" class="text ui-widget-content ui-corner-all filter">
+						 <div id="lc_eventName" class="text ui-widget-content ui-corner-all" style="height: 100px;overflow-x:hidden"></div>	
+						 </td>
+					 </tr>
+			</tbody>
+		 </table>
+	</form>
+</div>
+
+<script language="javascript" src="/pentaho/js/pentaho-ajax.js"></script>
+<script language="javascript" src="/verve_style/scripts/verve-script-jquery.js"></script>
+<!--script type="text/javascript" language="javascript" src="/verve_style/scripts/jquery-1.7.1.min.js"></script-->
+<!--script type="text/javascript" language="javascript" src="/verve_style/scripts/jquery_ui/jquery-ui-1.8.17.custom.min.js"></script>
+<script type="text/javascript" language="javascript" src="/verve_style/scripts/jquery_ui/jquery-ui-datepicker-1.8.12.js"></script-->
+
+<script type="text/javascript" src="GetCDFResource?resource=/Development/archive/jaspers/getHeatMapData/MetaLayer.js"></script>
+<script type="text/javascript" src="GetCDFResource?resource=/Development/dashboards/verveScript.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function() {
+		//alert($.fn.jquery);
+		MetaLayer.init();		
+});
+</script>

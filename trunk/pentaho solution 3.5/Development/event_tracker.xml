@@ -1,0 +1,122 @@
+<Schema name="Event tracker">
+  <Cube name="daily_trane_stats" cache="true" enabled="true">
+    <Table name="daily_trane_stats" schema="evttracker">
+    </Table>
+    <Dimension type="TimeDimension" highCardinality="false" name="Full date">
+      <Hierarchy hasAll="true">
+        <Level name="Full date" column="full_date" type="Date" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Calendar year month">
+      <Hierarchy hasAll="true">
+        <Level name="Calendar year month" column="calendar_year_month" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Event Name">
+      <Hierarchy hasAll="true">
+        <Level name="Event Name" column="event_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Is Active">
+      <Hierarchy hasAll="true" defaultMember="true">
+        <Level name="Is Active" column="is_active" type="Boolean" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Event count" column="event_count" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="daily_event_stats" cache="true" enabled="true">
+    <Table name="daily_event_stats" schema="evttracker">
+    </Table>
+    <Dimension type="TimeDimension" highCardinality="false" name="Full date">
+      <Hierarchy hasAll="true">
+        <Level name="Full date" column="full_date" type="Date" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Calendar year month">
+      <Hierarchy hasAll="true">
+        <Level name="Calendar year month" column="calendar_year_month" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Flight ID">
+      <Hierarchy hasAll="true" allMemberName="All Flight ID">
+        <Level name="Flight ID" column="flight_id" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Creative ID">
+      <Hierarchy hasAll="true" allMemberName="All Creative ID">
+        <Level name="Creative ID" column="creative_id" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Event Name">
+      <Hierarchy hasAll="true">
+        <Level name="Event Name" column="event_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Is Active">
+      <Hierarchy hasAll="true" defaultMember="true">
+        <Level name="Is Active" column="is_active" type="Boolean" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Event count" column="event_count" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="daily_event_stats_by_hour" cache="true" enabled="true">
+    <Table name="daily_event_stats_by_hour" schema="evttracker">
+    </Table>
+    <Dimension type="TimeDimension" highCardinality="false" name="Full date">
+      <Hierarchy hasAll="true">
+        <Level name="Full date" column="full_date" type="Date" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Calendar year month">
+      <Hierarchy hasAll="true">
+        <Level name="Calendar year month" column="calendar_year_month" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Flight ID">
+      <Hierarchy hasAll="true" allMemberName="All Flight ID">
+        <Level name="Flight ID" column="flight_id" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Creative ID">
+      <Hierarchy hasAll="true" allMemberName="All Creative ID">
+        <Level name="Creative ID" column="creative_id" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Hour OF Day">
+      <Hierarchy hasAll="true">
+        <Level name="Hour OF Day" column="hour24_of_day" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Event Name">
+      <Hierarchy hasAll="true">
+        <Level name="Event Name" column="event_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Is Active">
+      <Hierarchy hasAll="true" defaultMember="true">
+        <Level name="Is Active" column="is_active" type="Boolean" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Event count" column="event_count" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+</Schema>

@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Billing Monthly Local Revenue Summary " pageWidth="1520" pageHeight="842" orientation="Landscape" columnWidth="1480" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="1463"/>
+	<property name="ireport.y" value="536"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="parameter1" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/opt/pentaho/biserver-ce/pentaho-solutions/third_party_reports/jaspers/daily_performance_report/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="calendar_year_month" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT calendar_year_month
+, (max (a.dt_lastchange)::timestamp with time zone AT TIME ZONE 'America/Los_Angeles')::timestamp with time zone AT TIME ZONE 'America/New_York' as dt_lastchange
+, sum(delivered_units)::bigint as delivered_units
+, sum(billable_units)::bigint as billable_units
+, sum(case gross_revenue when 0 then 0 else gross_revenue end) as gross_revenue
+, sum(case p_net_revenue when 0 then 0 else p_net_revenue end) as p_net_revenue
+, sum(case v_net_revenue when 0 then 0 else v_net_revenue end) as v_net_revenue
+FROM (
+
+SELECT calendar_year_month
+, dt_lastchange
+, publisher_name
+, partner_id
+, adm_order_id
+, flight_id
+, flight_metric
+, adname
+, booked_rate
+, verve_rate
+, booked_units
+, verve_share
+, delivered_units
+, CASE flight_metric
+  WHEN 'SPONSORSHIP' THEN remaining_units
+  ELSE
+      CASE WHEN delivered_units > booked_units THEN booked_units - delivered_units ELSE remaining_units END
+  END AS remaining_units
+, CASE flight_metric
+  WHEN 'SPONSORSHIP' THEN billable_units
+  ELSE
+      CASE WHEN delivered_units > booked_units THEN booked_units ELSE delivered_units END
+  END AS billable_units
+, CASE flight_metric
+  WHEN 'SPONSORSHIP' THEN gross_revenue
+  ELSE
+      (CASE WHEN delivered_units > booked_units THEN booked_units ELSE delivered_units END)::float * booked_rate / 1000
+  END AS gross_revenue
+, CASE flight_metric
+  WHEN 'SPONSORSHIP' THEN p_net_revenue
+  ELSE
+      (CASE WHEN delivered_units > booked_units THEN booked_units ELSE delivered_units END)::float * booked_rate / 1000 * (1 - verve_share)
+  END AS p_net_revenue
+, CASE flight_metric
+  WHEN 'SPONSORSHIP' THEN v_net_revenue
+  ELSE
+      (CASE WHEN delivered_units > booked_units THEN booked_units ELSE delivered_units END)::float * booked_rate / 1000 * verve_share
+  END AS v_net_revenue
+FROM (
+SELECT calendar_year_month
+, max(dt_lastchange) as dt_lastchange
+, publisher_name
+, partner_id
+, adm_order_id
+, flight_id
+, upper(flight_metric) as flight_metric
+, dfp_advertiser_name as adname
+, booked_rate as booked_rate
+, verve_rate as verve_rate
+, booked_units as booked_units
+,(case when sum(gross_revenue) > 0 then sum(v_net_revenue)/sum(gross_revenue) else 0 end) as verve_share
+, sum(delivered_units) as delivered_units
+, sum(partner_remaining_units) as remaining_units
+, sum(partner_billable_units) as billable_units
+, sum(gross_revenue) as gross_revenue
+, sum(p_net_revenue) as p_net_revenue
+, sum(v_net_revenue) as v_net_revenue
+FROM adm.ba_monthly_local_revenue_v5 a
+WHERE calendar_year_month=$P{calendar_year_month}::text
+AND delivered_units>0
+AND is_active=true
+GROUP BY calendar_year_month,publisher_name,dfp_advertiser_name,partner_id,adm_order_id,flight_id,flight_metric,booked_rate,verve_rate,booked_units
+) a
+WHERE verve_share > 0 AND round(verve_share) < 1
+) a
+GROUP BY calendar_year_month]]>
+	</queryString>
+	<field name="calendar_year_month" class="java.lang.String"/>
+	<field name="dt_lastchange" class="java.sql.Timestamp"/>
+	<field name="delivered_units" class="java.lang.Long"/>
+	<field name="billable_units" class="java.lang.Long"/>
+	<field name="gross_revenue" class="java.lang.Double"/>
+	<field name="p_net_revenue" class="java.lang.Double"/>
+	<field name="v_net_revenue" class="java.lang.Double"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="355">
+			<image>
+				<reportElement x="0" y="9" width="64" height="40"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"../vervelogo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="64" y="9" width="1416" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Billing Monthly Local Revenue Summary V5
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="64" y="29" width="1416" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Month: " + $F{calendar_year_month}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="49" width="153" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Refresh Date (ET):]]></text>
+			</staticText>
+			<textField pattern="yyyy-MM-dd">
+				<reportElement x="153" y="49" width="107" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{dt_lastchange}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="100" width="260" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Performance Overview:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="120" width="153" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Total Delivered Units:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="140" width="153" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Total Billable Units:]]></text>
+			</staticText>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="335" width="1480" height="20"/>
+				<subreportParameter name="calendar_year_month">
+					<subreportParameterExpression><![CDATA[$F{calendar_year_month}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "ba_monthly_local_revenue_summary_by_publisher.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="0" y="220" width="260" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Notes:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="240" width="1480" height="15" forecolor="#FF0000"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[*Billable units take into account over-delivery issues]]></text>
+			</staticText>
+			<textField pattern="$ #,##0.00">
+				<reportElement x="153" y="160" width="107" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{gross_revenue}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="160" width="153" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Total Gross Revenue:]]></text>
+			</staticText>
+			<textField pattern="$ #,##0.00">
+				<reportElement x="153" y="180" width="107" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{p_net_revenue}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="180" width="153" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Total Publisher Net Revenue:]]></text>
+			</staticText>
+			<textField pattern="$ #,##0.00">
+				<reportElement x="153" y="200" width="107" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{v_net_revenue}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="200" width="153" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Total Verve Net Revenue:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="270" width="1480" height="15" forecolor="#FF0000"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[*Gross Revenue is calculated from Billable units]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="255" width="1480" height="15" forecolor="#FF0000"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[*eCPM is calculated for Sponsorship orders]]></text>
+			</staticText>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="153" y="120" width="107" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{delivered_units}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="153" y="140" width="107" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{billable_units}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="285" width="1480" height="15" forecolor="#FF0000"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[*Verve Local Share % = (Verve Net Revenue/Gross Revenue)*100%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="300" width="1480" height="15" forecolor="#FF0000"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[*When Flight Metric is SPONSORSHIP run on both ADM 1.0 & ADM 2.0, we will manual set Flight Budget is 0 (zero) on ADM 2.0]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="26">
+			<textField>
+				<reportElement x="0" y="4" width="260" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="260" y="4" width="1220" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page " + $V{PAGE_NUMBER} + " of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="3" width="1480" height="1"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

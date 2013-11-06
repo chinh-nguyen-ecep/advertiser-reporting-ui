@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_appinstall_event_download" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="70"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="parameter1" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/opt/pentaho/biserver-ce/pentaho-solutions/third_party_reports/jaspers/daily_performance_report/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_flight_id" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_start_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("9999-12-31")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_end_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("9999-12-31")]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+	(max(dt_lastchange)::timestamp with time zone AT TIME ZONE 'America/Los_Angeles')::timestamp with time zone AT TIME ZONE 'America/New_York' as dt_lastchange,
+	sum(adclick_count) as adclick_count,
+	sum(download_count) as download_count
+  FROM evttracker.daily_event_download
+  WHERE
+	is_active=true AND
+	full_date>=$P{p_start_date}::date AND
+	full_date<=$P{p_end_date}::date AND
+	flight_id=$P{p_flight_id}]]>
+	</queryString>
+	<field name="dt_lastchange" class="java.sql.Timestamp"/>
+	<field name="adclick_count" class="java.lang.Long"/>
+	<field name="download_count" class="java.lang.Long"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="180">
+			<image>
+				<reportElement x="0" y="9" width="64" height="20"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"vervelogo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="64" y="9" width="428" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[App Installs]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="440" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Refresh Date (ET):]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="440" y="40" width="115" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{dt_lastchange}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="64" y="70" width="100" height="20"/>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{p_flight_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="64" y="90" width="100" height="20"/>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{p_start_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="64" y="110" width="100" height="20"/>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{p_end_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="70" width="64" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="90" width="64" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Start date:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="110" width="64" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[End date:]]></text>
+			</staticText>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="140" width="555" height="32"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_start_date">
+					<subreportParameterExpression><![CDATA[$P{p_start_date}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_end_date">
+					<subreportParameterExpression><![CDATA[$P{p_end_date}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="Download_total">
+					<subreportParameterExpression><![CDATA[$F{download_count}.intValue()]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_flight_id">
+					<subreportParameterExpression><![CDATA[$P{p_flight_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="AdClick_total">
+					<subreportParameterExpression><![CDATA[$F{adclick_count}.intValue()]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_event_download_by_date_range_sub_main.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="26">
+			<textField>
+				<reportElement x="0" y="4" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="341" y="4" width="178" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="519" y="4" width="36" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="3" width="555" height="1"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

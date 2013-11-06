@@ -1,0 +1,178 @@
+<script type="text/javascript" src="GetCDFResource?resource=/Development/dashboards/Top_20_revenues_by_order/MetaLayerCharts.js"></script>
+<script type="text/javascript" src="GetCDFResource?resource=/Development/dashboards/verveScript.js"></script>
+<h1 class="dashboardName" id="dashboardTitle">Orders revenue</h1>
+
+<div id="boxContenHiddenBoxs" class="mybox none">
+	<div class="box_content" id="hiddenDiv" style="width: 997px;">
+		
+	</div>	
+</div>
+
+<div class="mybox">
+	<div class="title">
+		<div id="topSitesOfYesterdayTitle"></div>
+	</div>
+	<div class="box_content">		
+		<div id="topSitesOfYesterday" ></div>
+	</div>	
+</div>
+<div class="mybox" style="display: none" id="comparebox">
+	<div class="title">
+		<div id="compareChartTitle"></div>
+	</div>
+	<div class="box_content">
+		<div id="compareChart1" ></div>
+	</div>
+	<div class="box_content">
+		<div id="compareChart2" ></div>
+	</div>
+	<div class="box_content">
+		<div id="compareChart3" ></div>
+	</div>
+	<div class="box_content" >
+		<div id="reportDetail" style="width: 800px"></div>
+	</div>
+</div>
+
+<div class="mybox" >
+	<div class="title">
+		<div id="topSitesOf1DayAgoTitle"></div>
+	</div>
+	<div class="box_content">
+		<div id="topSitesOf1DayAgo" ></div>
+	</div>
+</div>
+
+
+
+<div id="result"></div>
+
+
+<script language="javascript" type="text/javascript">
+
+//titile components
+
+
+orderStatusReport = 
+{
+  name: "orderStatus",
+  type: "prpt",
+  solution: "ad_serving",
+  path: "dashboards/prpt_report",
+  action: "order.prpt",
+  listeners:["selectedSite"],
+  parameters: [["order_name","selectedSite"],["full_date","yesterday"]],
+  htmlObject: "reportDetail",
+  paginate: false,
+  showParameters: false,
+  iframe: false,
+  executeAtStart: true
+};
+
+var topSitesOfYesterday = 
+{
+	name: "topSitesOfYesterday",
+	type: "tableComponent",
+	listeners:["selectedMeasures"],
+	chartDefinition: MetaLayerCharts.topSitesOfYesterdayChartDefinition,
+	htmlObject: "topSitesOfYesterday",
+	executeAtStart: true
+};
+
+var topSitesOf1DayAgo = 
+{
+	name: "topSitesOf1DayAgo",
+	type: "tableComponent",
+	listeners:["selectedMeasures"],
+	chartDefinition: MetaLayerCharts.topSitesOf1DayAgoChartDefinition,
+	htmlObject: "topSitesOf1DayAgo",
+	executeAtStart: true
+};
+
+// create compareChart
+compareChartTitle = 
+{
+  name: "compareChartTitle",
+  type: "text",
+  title: "",
+  listeners:["selectedSite"],
+  htmlObject: "compareChartTitle",
+  executeAtStart: true,
+  expression: function(){return this.title},
+  preExecution:function(){
+  	this.title=selectedSite+" detail";
+  },
+  postExecution:function(){}
+};
+var compareChart1 = 
+{
+	name: "compareChart1",
+	type: "openFlashChartComponent",
+	listeners:["selectedMeasures","selectedSite"],
+	chartDefinition: MetaLayerCharts.compareChartDefinition1,
+	htmlObject: "compareChart1",
+	executeAtStart: true
+};
+var compareChart2 = 
+{
+	name: "compareChart2",
+	type: "openFlashChartComponent",
+	listeners:["selectedMeasures","selectedSite"],
+	chartDefinition: MetaLayerCharts.compareChartDefinition2,
+	htmlObject: "compareChart2",
+	executeAtStart: true
+};
+var compareChart3 = 
+{
+	name: "compareChart3",
+	type: "openFlashChartComponent",
+	listeners:["selectedMeasures","selectedSite"],
+	chartDefinition: MetaLayerCharts.compareChartDefinition3,
+	htmlObject: "compareChart3",
+	executeAtStart: true
+};
+//to get the last data date
+var excuteResult="";
+var executeQueryComponent = 
+{
+	name: "executeQueryComponent",
+	type: "queryComponent",
+	htmlObject: "result",
+	executeAtStart: true,
+	resultvar: "excuteResult",
+	queryDefinition: MetaLayerCharts.executeQueryComponentDefinition,	
+	preExecution: function(){
+		
+	},
+	postExecution: function(){
+		//set current data date
+		yesterday=excuteResult[0][0];
+		$('#topSitesOfYesterdayTitle').html("Today "+yesterday);
+		//set oneDayAgo date
+		var arrayDate=yesterday.split('-');
+		var myDate=new Date(arrayDate[0],(arrayDate[1]/1)-1,arrayDate[2]/1);
+		var date = myDate;
+		date.setDate(date.getDate()-1);
+		oneDayAgo=myFunctions.parseDate(date);
+		$('#topSitesOf1DayAgoTitle').html("Yesterday "+oneDayAgo);
+		//set sevenDayAgo date
+		var date = new Date(arrayDate[0],(arrayDate[1]/1)-1,arrayDate[2]/1);
+		date.setDate(date.getDate()-7);
+		sevenDayAgo=myFunctions.parseDate(date);
+		$('#topSitesOf7DayAgoTitle').html("Sites Top Of Seven Day Ago "+sevenDayAgo);
+		//set thirtyDayAgo date
+		var date = new Date(arrayDate[0],(arrayDate[1]/1)-1,arrayDate[2]/1);
+		date.setDate(date.getDate()-30);
+		thirtyDayAgo=myFunctions.parseDate(date);
+		$('#topSitesOf30DayAgoTitle').html("Sites Top Of Thirty Day Ago "+thirtyDayAgo);
+		//submit change
+		Dashboards.fireChange("yesterday",yesterday);
+	}
+};
+
+var components = [executeQueryComponent,topSitesOfYesterday,compareChart1,compareChart2,compareChart3,compareChartTitle,orderStatusReport,topSitesOf1DayAgo];
+Dashboards.init(components);
+
+
+
+</script>

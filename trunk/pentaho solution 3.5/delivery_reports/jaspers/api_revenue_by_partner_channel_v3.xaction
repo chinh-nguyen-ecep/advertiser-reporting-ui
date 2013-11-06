@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>API Revenue by Partner Channel V3</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>chinhnguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type>report</result-type>  
+    <icon>chart_1(2).png|chart_1(2).png</icon> 
+  </documentation>
+
+  <inputs> 
+    <p_start_date type="string"> 
+      <sources> 
+        <request>p_start_date</request> 
+      </sources>  
+      <default-value/> 
+    </p_start_date>  
+    <p_end_date type="string"> 
+      <sources> 
+        <request>p_end_date</request> 
+      </sources>  
+      <default-value/> 
+    </p_end_date>  
+    <v_max_date type="string"> 
+      <sources> 
+        <request>v_max_date</request> 
+      </sources>  
+      <default-value/> 
+    </v_max_date>  
+    <v_min_date type="string"> 
+      <sources> 
+        <request>v_min_date</request> 
+      </sources>  
+      <default-value/> 
+    </v_min_date>  
+    <List_output_type type="string-list"> 
+      <default-value type="string-list"> 
+        <list-item>html</list-item>  
+        <list-item>pdf</list-item>  
+        <list-item>xls</list-item>  
+        <list-item>rtf</list-item>  
+        <list-item>csv</list-item> 
+      </default-value> 
+    </List_output_type>  
+    <p_output type="string"> 
+      <sources> 
+        <request>p_output</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </p_output>  
+    <p_parent1_ids type="string"> 
+      <sources> 
+        <request>p_parent1_ids</request> 
+      </sources>  
+      <default-value/> 
+    </p_parent1_ids>  
+    <p_channel_ids type="string"> 
+      <sources> 
+        <request>p_channel_ids</request> 
+      </sources>  
+      <default-value/> 
+    </p_channel_ids>  
+    <p_partner_ids type="string"> 
+      <sources> 
+        <request>p_partner_ids</request> 
+      </sources>  
+      <default-value/> 
+    </p_partner_ids> 
+  </inputs>
+
+  <outputs/>
+
+  <resources> 
+    <pageTemplate1> 
+      <solution-file> 
+        <location>api_revenue_by_partner_channel_v3/tp_pub_partner_channel_v3.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </pageTemplate1>  
+    <report-definition> 
+      <solution-file> 
+        <location>api_revenue_by_partner_channel_v3/api_revenue_by_partner_channel.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get max min date data</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="q_max_min_date"/>  
+        <max_full_date type="string"/>  
+        <min_full_date type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[verveReportConnection]]></jndi>  
+        <live><![CDATA[false]]></live>  
+        <query><![CDATA[SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM adm.daily_agg_api_revenue_by_partner_v3 WHERE is_active=true
+UNION ALL
+SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM adm.daily_agg_api_revenue_by_partner_v3 WHERE is_active=true]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Prompt/Secure Filter</action-type>
+      <action-inputs> 
+        <p_start_date type="string"/>  
+        <p_end_date type="string"/>  
+        <v_max_date type="string"/>  
+        <v_min_date type="string"/>  
+        <q_max_min_date type="result-set"/>  
+        <p_output type="string"/>  
+        <List_output_type type="string-list"/> 
+      </action-inputs>
+      <action-resources> 
+        <pageTemplate mapping="pageTemplate1"/> 
+      </action-resources>
+      <component-definition> 
+        <selections> 
+          <p_start_date filter="none" style="text-box"/>  
+          <p_end_date filter="none" style="text-box"/>  
+          <v_max_date style="select"> 
+            <filter value-col-name="max_full_date" display-col-name="max_full_date">q_max_min_date</filter> 
+          </v_max_date>  
+          <v_min_date style="select"> 
+            <filter value-col-name="min_full_date" display-col-name="min_full_date">q_max_min_date</filter> 
+          </v_min_date>  
+          <p_output style="select"> 
+            <filter>List_output_type</filter> 
+          </p_output> 
+        </selections>  
+        <xsl><![CDATA[pageTemplate]]></xsl> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>Process Parent1 IDs</action-type>
+      <action-inputs> 
+        <p_parent1_ids type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <p_parent1_id_list type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var p_parent1_id_list='';
+//convert measures
+if(p_parent1_ids!= ''){
+	if(p_parent1_ids instanceof Array){		
+		p_parent1_id_list=p_parent1_ids.join();
+	}else{
+		p_parent1_id_list=p_parent1_ids;
+	};
+}]]></script> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>Process Channel IDs</action-type>
+      <action-inputs> 
+        <p_channel_ids type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <p_channel_id_list type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var p_channel_id_list='';
+//convert measures
+if(p_channel_ids!= ''){
+	if(p_channel_ids instanceof Array){
+		for(var i=0;i<p_channel_ids.length;i++){
+			if(i>0){
+			p_channel_id_list+=';';
+			};
+			p_channel_id_list+=p_channel_ids[i];
+		};
+	}else{
+		p_channel_id_list=p_channel_ids;
+	};
+}]]></script> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>Process Partner IDs</action-type>
+      <action-inputs> 
+        <p_partner_ids type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <p_partner_id_list type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var p_partner_id_list='';
+//convert measures
+if(p_partner_ids!= ''){
+	if(p_partner_ids instanceof Array){
+		for(var i=0;i<p_partner_ids.length;i++){
+			if(i>0){
+			p_partner_id_list+=';';
+			};
+			p_partner_id_list+=p_partner_ids[i];
+		};
+	}else{
+		p_partner_id_list=p_partner_ids;
+	};
+}]]></script> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JasperReportsComponent</component-name>
+      <action-type>Jasper</action-type>
+      <action-inputs> 
+        <p_start_date type="string"/>  
+        <p_end_date type="string"/>  
+        <p_parent1_id_list type="string"/>  
+        <p_partner_id_list type="string"/>  
+        <p_channel_id_list type="string"/>  
+        <output-type type="string" mapping="p_output"/> 
+      </action-inputs>
+      <action-resources> 
+        <report-definition type="resource"/> 
+      </action-resources>
+      <component-definition> 
+        <jndi><![CDATA[verveReportConnection]]></jndi> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

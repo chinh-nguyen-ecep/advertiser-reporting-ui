@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Get the first data</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>ChinhNguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs>
+    <p_server type="string">
+      <sources>
+        <request>p_server</request>
+      </sources>
+      <default-value><![CDATA[dw3dw3]]></default-value>
+    </p_server>
+  </inputs>
+
+  <outputs> 
+    <jsonResult type="string"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </jsonResult> 
+  </outputs>
+
+  <resources/>
+  
+  <actions> 
+    <action-definition>
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Relational Connection</action-type>
+      <action-inputs>
+        <jndi type="string" mapping="p_server"/>
+      </action-inputs>
+      <action-outputs>
+        <prepared_component type="sql-connection" mapping="shared_sql_connection"/>
+      </action-outputs>
+      <component-definition/>
+    </action-definition>
+
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Relational</action-type>
+      <action-inputs>
+        <prepared_component type="sql-connection" mapping="shared_sql_connection"/>
+      </action-inputs>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result_max_date"/> 
+      </action-outputs>
+      <component-definition> 
+        <live><![CDATA[true]]></live>  
+        <query><![CDATA[SELECT max(full_date),min(full_date),max(full_date)-1 FROM control.daily_process_status]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>JsonResponse</action-type>
+      <action-inputs> 
+        <query_result_max_date type="result-set"/> 
+      </action-inputs>
+      <action-outputs> 
+        <jsonResult type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var jsonResult;
+var maxDate=query_result_max_date.getValueAt(0,0);
+var minDate=query_result_max_date.getValueAt(0,1);
+var dateBeforMaxDate=query_result_max_date.getValueAt(0,2);
+jsonResult='{';
+jsonResult+='"processCurrentDate":"'+maxDate+'","minDate":"'+minDate+'","dateBefore":"'+dateBeforMaxDate+'"';
+jsonResult+='}';]]></script> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

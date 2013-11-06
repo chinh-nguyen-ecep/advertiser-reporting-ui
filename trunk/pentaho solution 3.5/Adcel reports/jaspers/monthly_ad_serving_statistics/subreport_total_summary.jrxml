@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subreport_total_summary" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="calendar_year_month" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("")]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+a.calendar_year_month,
+sum(a.fullfilled_code_count) as total_fullfilled_code_count,
+sum(a.fullfilled_code_y) as total_fullfilled_code_y,
+sum(a.fullfilled_code_n) as total_fullfilled_code_n,
+sum(a.fullfilled_code_e) as total_fullfilled_code_e,
+sum(a.fullfilled_code_t) as total_fullfilled_code_t
+FROM adstraffic.monthly_ad_serving_stats a
+WHERE a.calendar_year_month = $P{calendar_year_month}
+AND a.is_active = true
+GROUP BY
+a.calendar_year_month]]>
+	</queryString>
+	<field name="calendar_year_month" class="java.lang.String"/>
+	<field name="total_fullfilled_code_count" class="java.math.BigDecimal"/>
+	<field name="total_fullfilled_code_y" class="java.math.BigDecimal"/>
+	<field name="total_fullfilled_code_n" class="java.math.BigDecimal"/>
+	<field name="total_fullfilled_code_e" class="java.math.BigDecimal"/>
+	<field name="total_fullfilled_code_t" class="java.math.BigDecimal"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="62">
+			<line>
+				<reportElement x="0" y="40" width="802" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="1" y="10" width="222" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ad Responses Summary:]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="0" y="40" width="802" height="20"/>
+				<subreportParameter name="total_fullfilled_code_t">
+					<subreportParameterExpression><![CDATA[$F{total_fullfilled_code_t}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_e">
+					<subreportParameterExpression><![CDATA[$F{total_fullfilled_code_e}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_count">
+					<subreportParameterExpression><![CDATA[$F{total_fullfilled_code_count}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_y">
+					<subreportParameterExpression><![CDATA[$F{total_fullfilled_code_y}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_fullfilled_code_n">
+					<subreportParameterExpression><![CDATA[$F{total_fullfilled_code_n}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="calendar_year_month">
+					<subreportParameterExpression><![CDATA[$P{calendar_year_month}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"subreport_total_summary_detail.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageHeader>
+		<band/>
+	</pageHeader>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

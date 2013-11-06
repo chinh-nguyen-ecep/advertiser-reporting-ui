@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Monthly AdCel Statistics</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>Chinh nguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <calendar_year_month type="string"> 
+      <sources> 
+        <request>calendar_year_month</request> 
+      </sources>  
+      <default-value/> 
+    </calendar_year_month>  
+    <ad_network_id type="string"> 
+      <sources> 
+        <request>ad_network_id</request> 
+      </sources>  
+      <default-value/> 
+    </ad_network_id>  
+    <newInput type="result-set"> 
+      <sources> 
+        <request>newInput</request> 
+      </sources>  
+      <default-value type="result-set"> 
+        <row> 
+          <calendar_year_month>30 day</calendar_year_month>  
+          <month_since_2005>32767</month_since_2005> 
+        </row>  
+        <row> 
+          <calendar_year_month>30 day</calendar_year_month>  
+          <month_since_2005>32767</month_since_2005> 
+        </row> 
+      </default-value>  
+      <columns> 
+        <calendar_year_month type="string"/>  
+        <month_since_2005 type="string"/> 
+      </columns> 
+    </newInput>  
+    <output type="string"> 
+      <sources> 
+        <request>output</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </output> 
+  </inputs>
+
+  <outputs/>
+
+  <resources> 
+    <report-definition> 
+      <solution-file> 
+        <location>monthly_ad_serving_statistics/monthly_ad_serving_statistics.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition>  
+    <pageTemplate> 
+      <solution-file> 
+        <location>monthly_ad_serving_statistics/parameter_template.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </pageTemplate> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get calendar year month</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result"/>  
+        <calendar_year_month type="string"/>  
+        <month_since_2005 type="integer"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[dw3]]></jndi>  
+        <query><![CDATA[SELECT DISTINCT calendar_year_month, month_since_2005
+FROM adstraffic.monthly_ad_serving_stats
+WHERE is_active = true
+ORDER BY month_since_2005 desc]]></query>  
+        <live><![CDATA[true]]></live> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get network list</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result2"/>  
+        <ad_network_name type="string"/>  
+        <ad_network_id type="integer"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[dw3]]></jndi>  
+        <query><![CDATA[select a.* from
+(
+SELECT '-- All Ad Networks --' as ad_network_name, -1 as ad_network_id, 0 as "sort" FROM refer.ad_network_dim
+UNION
+SELECT DISTINCT ad_network_name_current || ' (' || ad_network_id::text || ')' as ad_network_name, ad_network_id, 1 as "sort"
+FROM refer.ad_network_dim)
+ a
+ORDER BY sort, ad_network_name]]></query>  
+        <live><![CDATA[true]]></live> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Prompt/Secure Filter</action-type>
+      <action-inputs> 
+        <calendar_year_month type="string"/>  
+        <ad_network_id type="string"/>  
+        <query_result2 type="result-set"/>  
+        <query_result type="result-set"/> 
+      </action-inputs>
+      <action-resources> 
+        <pageTemplate type="resource"/> 
+      </action-resources>
+      <component-definition> 
+        <selections> 
+          <calendar_year_month style="select"> 
+            <filter value-col-name="calendar_year_month" display-col-name="calendar_year_month">query_result</filter>  
+            <title>Month</title> 
+          </calendar_year_month>  
+          <ad_network_id style="select"> 
+            <filter value-col-name="ad_network_id" display-col-name="ad_network_name">query_result2</filter>  
+            <title>Ad Network</title> 
+          </ad_network_id> 
+        </selections>  
+        <xsl><![CDATA[pageTemplate]]></xsl> 
+      </component-definition> 
+    </action-definition>
+  
+    <actions> 
+      <condition><![CDATA[output=='html']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <calendar_year_month type="string"/>  
+          <ad_network_id type="string"/> 
+        </action-inputs>
+        <component-definition> 
+          <output-type>html</output-type>  
+          <jndi><![CDATA[dw3]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[output=='pdf']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <calendar_year_month type="string"/>  
+          <ad_network_id type="string"/> 
+        </action-inputs>
+        <component-definition> 
+          <output-type><![CDATA[pdf]]></output-type>  
+          <jndi><![CDATA[dw3]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[output=='csv']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <calendar_year_month type="string"/>  
+          <ad_network_id type="string"/> 
+        </action-inputs>
+        <component-definition> 
+          <output-type><![CDATA[csv]]></output-type>  
+          <jndi><![CDATA[dw3]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[output=='xls']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <calendar_year_month type="string"/>  
+          <ad_network_id type="string"/> 
+        </action-inputs>
+        <component-definition> 
+          <output-type><![CDATA[xls]]></output-type>  
+          <jndi><![CDATA[dw3]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[output=='xml']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <calendar_year_month type="string"/>  
+          <ad_network_id type="string"/> 
+        </action-inputs>
+        <component-definition> 
+          <output-type><![CDATA[xml]]></output-type>  
+          <jndi><![CDATA[dw3]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+ 
+  </actions> 
+</action-sequence>

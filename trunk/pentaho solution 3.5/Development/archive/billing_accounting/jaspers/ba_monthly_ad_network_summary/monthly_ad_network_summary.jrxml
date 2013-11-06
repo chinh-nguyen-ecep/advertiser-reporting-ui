@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Billing Monthly Remnant Revenue Summary " pageWidth="1042" pageHeight="1175" columnWidth="1002" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="0.9330147604194673"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="parameter1" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/opt/pentaho/biserver-ce/pentaho-solutions/third_party_reports/jaspers/daily_performance_report/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="calendar_year_month" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT calendar_year_month,(max (a.dt_lastchange)::timestamp with time zone AT TIME ZONE 'America/Los_Angeles')::timestamp with time zone AT TIME ZONE 'America/New_York'as dt_lastchange,
+sum(case requests when -1 then 0 else requests end) as requests,
+sum(case paid_impressions when -1 then 0 else paid_impressions end) as paid_impressions,
+sum(case clicks when -1 then 0 else clicks end) as clicks,
+sum(case net_revenue when -1 then 0 else net_revenue end) as net_revenue,
+sum(case gross_revenue when -1 then 0 else gross_revenue end) as gross_revenue,
+sum(case p_net_revenue when -1 then 0 else p_net_revenue end) as p_net_revenue,
+sum(case v_net_revenue when -1 then 0 else v_net_revenue end) as v_net_revenue,
+sum(case fullfilled_code_count when -1 then 0 else fullfilled_code_count end) as total_adcel_total,
+sum(case fullfilled_code_y when -1 then 0 else fullfilled_code_y end) as total_adcel_yes,
+sum(total_billable_impressions) as total_billable_impressions
+  FROM adnetwork.ba_monthly_adnetwork_summary a
+WHERE calendar_year_month=$P{calendar_year_month}::text
+  AND is_active=true
+  GROUP BY calendar_year_month]]>
+	</queryString>
+	<field name="calendar_year_month" class="java.lang.String"/>
+	<field name="dt_lastchange" class="java.sql.Timestamp"/>
+	<field name="requests" class="java.lang.Long"/>
+	<field name="paid_impressions" class="java.lang.Long"/>
+	<field name="clicks" class="java.lang.Long"/>
+	<field name="net_revenue" class="java.lang.Double"/>
+	<field name="gross_revenue" class="java.lang.Double"/>
+	<field name="p_net_revenue" class="java.lang.Double"/>
+	<field name="v_net_revenue" class="java.lang.Double"/>
+	<field name="total_adcel_total" class="java.lang.Long"/>
+	<field name="total_adcel_yes" class="java.lang.Long"/>
+	<field name="total_billable_impressions" class="java.lang.Long"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="360">
+			<image>
+				<reportElement x="0" y="9" width="64" height="60"/>
+				<imageExpression class="java.lang.String"><![CDATA["../vervelogo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="64" y="9" width="938" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Billing Monthly Remnant Revenue Summary
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="64" y="29" width="938" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Month: " + $F{calendar_year_month}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="69" width="143" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Refresh Date (ET):]]></text>
+			</staticText>
+			<textField pattern="yyyy-MM-dd">
+				<reportElement x="143" y="69" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{dt_lastchange}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="100" width="243" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Performance Overview:]]></text>
+			</staticText>
+			<textField pattern="#,###;-#,###">
+				<reportElement x="143" y="120" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{paid_impressions}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="120" width="143" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Total Paid Impressions:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="140" width="143" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Total Adcel's Yes responses:]]></text>
+			</staticText>
+			<textField pattern="#,###;-#,###">
+				<reportElement x="143" y="140" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{total_adcel_yes}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="320" width="1002" height="20"/>
+				<subreportParameter name="requests">
+					<subreportParameterExpression><![CDATA[$F{requests}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="clicks">
+					<subreportParameterExpression><![CDATA[$F{clicks}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_adcel_yes">
+					<subreportParameterExpression><![CDATA[$F{total_adcel_yes}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="net_revenue">
+					<subreportParameterExpression><![CDATA[$F{net_revenue}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="paid_impressions">
+					<subreportParameterExpression><![CDATA[$F{paid_impressions}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_adcel_total">
+					<subreportParameterExpression><![CDATA[$F{total_adcel_total}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="calendar_year_month">
+					<subreportParameterExpression><![CDATA[$F{calendar_year_month}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "monthly_ad_network_summary_by_adnetwork.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="340" width="1002" height="20"/>
+				<subreportParameter name="requests">
+					<subreportParameterExpression><![CDATA[$F{requests}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="clicks">
+					<subreportParameterExpression><![CDATA[$F{clicks}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_adcel_yes">
+					<subreportParameterExpression><![CDATA[$F{total_adcel_yes}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="net_revenue">
+					<subreportParameterExpression><![CDATA[$F{net_revenue}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_adcel_total">
+					<subreportParameterExpression><![CDATA[$F{total_adcel_total}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="paid_impressions">
+					<subreportParameterExpression><![CDATA[$F{paid_impressions}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="calendar_year_month">
+					<subreportParameterExpression><![CDATA[$F{calendar_year_month}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "monthly_ad_network_summary_by_adnetwork_publisher.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="0" y="240" width="243" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Notes:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="280" width="1002" height="20" forecolor="#FF0000"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[2- Zero, '0' is assgined for Null data]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="260" width="1002" height="20" forecolor="#FF0000"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[1- Unresolved partners/sites having N/A as publishers, partners]]></text>
+			</staticText>
+			<textField pattern="$ #,##0.00">
+				<reportElement x="143" y="180" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{gross_revenue}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="180" width="143" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Total Gross Revenue:]]></text>
+			</staticText>
+			<textField pattern="$ #,##0.00">
+				<reportElement x="143" y="200" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{p_net_revenue}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="200" width="143" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Total Publisher Net Revenue:]]></text>
+			</staticText>
+			<textField pattern="$ #,##0.00">
+				<reportElement x="143" y="220" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{v_net_revenue}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="220" width="143" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Total Verve Net Revenue:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="64" y="49" width="938" height="20" forecolor="#FF0000"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["**Final**"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="300" width="1002" height="20" forecolor="#FF0000"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[3- Publisher Share % = (Publisher Net Revenue/Gross Revenue)*100%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="160" width="143" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Total Billable Impressions:]]></text>
+			</staticText>
+			<textField pattern="#,###;-#,###">
+				<reportElement x="143" y="160" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{total_billable_impressions}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="26">
+			<textField>
+				<reportElement x="0" y="4" width="243" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="243" y="4" width="724" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="967" y="4" width="35" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="3" width="1002" height="1"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

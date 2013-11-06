@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<action-sequence> 
+  <name>Pivot.xaction</name>
+  <title>Pivot Table</title>
+  <version>1</version>
+  <logging-level>TRACE</logging-level>
+  <documentation> 
+    <author>Pedro Alves</author>  
+    <description>Pivot table sample for Community Dashboard Framework</description>  
+    <help/>  
+    <result-type>none</result-type>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <mode type="string"> 
+      <default-value/>  
+      <sources> 
+        <request>mode</request> 
+      </sources> 
+    </mode>  
+    <p_id type="string"> 
+      <sources> 
+        <request>p_id</request> 
+      </sources>  
+      <default-value><![CDATA[[Id].[374]]]></default-value> 
+    </p_id>  
+    <p_start_date type="string"> 
+      <sources> 
+        <request>p_start_date</request> 
+      </sources>  
+      <default-value><![CDATA[2012-09-15]]></default-value> 
+    </p_start_date>  
+    <p_end_date type="string"> 
+      <sources> 
+        <request>p_end_date</request> 
+      </sources>  
+      <default-value><![CDATA[2012-09-18]]></default-value> 
+    </p_end_date>  
+    <p_event_name type="string"> 
+      <sources> 
+        <request>p_event_name</request> 
+      </sources>  
+      <default-value><![CDATA[[Event name].Children]]></default-value> 
+    </p_event_name> 
+  </inputs>
+
+  <outputs> 
+    <condition type="string">
+      <destinations>
+        <response>content</response>
+      </destinations>
+    </condition>
+  </outputs>
+
+  <resources/>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>TemplateComponent</component-name>
+      <action-type>processDateQuery</action-type>
+      <action-inputs> 
+        <p_start_date type="string"/>  
+        <p_end_date type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <output-message type="string" mapping="processDateQuery"/> 
+      </action-outputs>
+      <component-definition> 
+        <template><![CDATA[SELECT '[Time].['||calendar_year_month||'].['||full_date||']' FROM  refer.date_dim WHERE full_date='{p_start_date}' OR full_date='{p_end_date}';]]></template> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>processDate</action-type>
+      <action-inputs> 
+        <query type="string" mapping="processDateQuery"/> 
+      </action-inputs>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_date"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[dw3]]></jndi>  
+        <live><![CDATA[false]]></live> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>JavaScript</action-type>
+      <action-inputs> 
+        <p_event_name type="string"/>  
+        <query_date type="result-set"/>  
+        <p_id type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <condition type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var time='';
+var condition='';
+
+time=query_date.getValueAt(0,0)+':'+query_date.getValueAt(1,0);
+
+condition='select NON EMPTY {'+p_event_name+'} ON COLUMNS, ';
+condition+='NON EMPTY Crossjoin({'+p_id+'},Crossjoin({[Latitude].[All Latitudes].Children}, {[Longitude].[All Longitudes].Children})) ON ROWS ';
+condition+='from [daily_event_maps] ';
+condition+='where Crossjoin({[Is Active].[true]}, {'+time+'})';]]></script> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

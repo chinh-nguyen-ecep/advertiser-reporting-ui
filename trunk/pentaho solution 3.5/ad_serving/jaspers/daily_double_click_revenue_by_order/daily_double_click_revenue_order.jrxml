@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_ad_serving_statistics" pageWidth="1390" pageHeight="595" orientation="Landscape" columnWidth="1350" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0980750000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="eastern_date_sk" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("1")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+sum(revenue) as total_revenue_today,
+full_date,
+sum(budget) as total_budget,
+min(start_date) as min_start_date,
+max(end_date) as max_end_date,
+sum(cumulative_revenue+revenue) as revenue_total_spent,
+sum(budget)-(sum(cumulative_revenue+revenue)) as rest_of_budget,
+sum(mtd_total_revenue) as mtd_total_revenue,
+sum(remaining_monthly_budget) as remaining_monthly_budget,
+sum(next_month_budget) as next_month_budget
+FROM adm.daily_agg_revenue_by_order
+WHERE eastern_date_sk=$P{eastern_date_sk}::int
+AND is_active=true
+GROUP BY
+full_date]]>
+	</queryString>
+	<field name="total_revenue_today" class="java.lang.Double"/>
+	<field name="full_date" class="java.sql.Date"/>
+	<field name="total_budget" class="java.lang.Double"/>
+	<field name="min_start_date" class="java.sql.Timestamp"/>
+	<field name="max_end_date" class="java.sql.Timestamp"/>
+	<field name="revenue_total_spent" class="java.lang.Double"/>
+	<field name="rest_of_budget" class="java.lang.Double"/>
+	<field name="mtd_total_revenue" class="java.lang.Double"/>
+	<field name="remaining_monthly_budget" class="java.lang.Double"/>
+	<field name="next_month_budget" class="java.lang.Double"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="409">
+			<rectangle>
+				<reportElement positionType="Float" x="0" y="345" width="1350" height="20" backcolor="#CCCCCC"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="92" width="1350" height="20" backcolor="#CCCCCC"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="64" y="9" width="1286" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Daily Revenue By Order]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="630" y="206" width="119" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[and Max End Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="345" width="354" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ADM-DBCLK Daily Revenues by Order detail]]></text>
+			</staticText>
+			<textField pattern="yyyy/MM/dd">
+				<reportElement x="530" y="206" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{min_start_date}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="311" width="1350" height="26"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="eastern_date_sk">
+					<subreportParameterExpression><![CDATA[new Integer($P{eastern_date_sk})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="totalRevenue">
+					<subreportParameterExpression><![CDATA[$F{total_revenue_today}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "top_20_revenue_order_yesterday.jasper"]]></subreportExpression>
+			</subreport>
+			<textField pattern="yyyy/MM/dd">
+				<reportElement x="749" y="206" width="600" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{max_end_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="120" width="200" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[MTD total revenue:]]></text>
+			</staticText>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="279" width="1350" height="26"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="eastern_date_sk">
+					<subreportParameterExpression><![CDATA[new Integer($P{eastern_date_sk})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="totalRevenue">
+					<subreportParameterExpression><![CDATA[$F{total_revenue_today}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "top_20_revenue_campaign.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="0" y="92" width="354" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ADM-DBCLK Daily Revenue by Order summary]]></text>
+			</staticText>
+			<textField pattern="yyyy/MM/dd">
+				<reportElement x="100" y="40" width="200" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{full_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="160" width="200" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Next Month Budget:]]></text>
+			</staticText>
+			<textField pattern="$###,###.00;$-###,###.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="200" y="160" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{next_month_budget}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="140" width="200" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Remaining Monthly Budget:]]></text>
+			</staticText>
+			<textField pattern="$###,###.00;$-###,###.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="200" y="226" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{revenue_total_spent}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy/MM/dd h.mm a">
+				<reportElement x="1226" y="40" width="124" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="$###,###.00;$-###,###.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="200" y="246" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{rest_of_budget}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="40" width="926" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Report Generation Date: "]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="368" width="1350" height="24"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="eastern_date_sk">
+					<subreportParameterExpression><![CDATA[new Integer($P{eastern_date_sk})]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "detail_by_order.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="0" y="182" width="200" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Today Total Revenue:]]></text>
+			</staticText>
+			<textField pattern="$###,###.00;$-###,###.00">
+				<reportElement x="200" y="120" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{mtd_total_revenue}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="246" width="198" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Total Remaining Budget :]]></text>
+			</staticText>
+			<textField pattern="$###,###.00;$-###,###.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="200" y="206" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{total_budget}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="40" width="100" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Report Date: "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="206" width="199" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Total TD Order :
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="206" width="230" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[with Min Start Date]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="9" width="64" height="20"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"vervelogo.jpg"]]></imageExpression>
+			</image>
+			<textField pattern="$###,###.00;$-###,###.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="200" y="140" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{remaining_monthly_budget}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="226" width="198" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Total TD Budget:]]></text>
+			</staticText>
+			<textField pattern="$###,###.00;$-###,###.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="200" y="182" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{total_revenue_today}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="24">
+			<textField pattern="">
+				<reportElement x="1" y="3" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1136" y="4" width="178" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="1314" y="4" width="35" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="1350" height="3"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -1,0 +1,45 @@
+<html xmlns:xf="http://www.w3.org/2002/xforms">
+   <head>
+	<!-- do not include a <meta> tag -->
+      <link rel="stylesheet" type="text/css" href="/pentaho-style/active/default.css"></link>
+      <link rel="stylesheet" type="text/css" href="/pentaho-style/chinhnd/css/default.css"></link>
+      <title>Monthly Ad-network Performance</title>
+            			
+						<script src="js/parameters.js" type="text/javascript"></script>
+						<script src="/pentaho-style/chinhnd/scripts/doform.js" type="text/javascript"></script>
+      			<script><![CDATA[      			  
+      			  function setDefaultValue() {
+      			  	var obj = document.getElementById('p_network');
+      			  	obj.selectedIndex = 1;
+ 
+      			  	var curdate = document.getElementById('calendar_year_month');
+      			  	curdate.selectedIndex = 1;
+      			  }
+      			]]></script>
+      		
+	{xform-header}
+
+   </head>
+   <body>
+      <div class="divform">      
+      <div class="title">Monthly Ad-network Performance</div>
+         <form name="parameter-form" id="parameter-form" method="GET">
+             <label style="margin-left: 0px;">Month:</label> {calendar_year_month}
+             <label>Network:</label> {p_network}
+             <input type="button" name="go" class="portlet-form-button" value="Run..." onClick="doForm('html')"/>
+             <input type="button" name="go" class="portlet-form-button" value="Get PDF" onClick="doForm('pdf')"/>
+			 <input type="button" name="go" class="portlet-form-button" value="Get XLS" onClick="doForm('xls')"/>
+			 <input type="button" name="go" class="portlet-form-button" value="Get CSV" onClick="doForm('csv')"/>
+			 <input type="button" name="go" class="portlet-form-button" value="Get XML" onClick="doForm('xml')"/>
+		{solution}
+		{action}
+		{path}
+	    </form>
+      </div>    
+   <div>
+   <iframe width="100%" height="85%" name="theoutput" frameborder="0" scrolling="yes" style=""></iframe>
+   </div>
+	<script>setDefaultValue();</script>
+   </body>
+     
+</html>

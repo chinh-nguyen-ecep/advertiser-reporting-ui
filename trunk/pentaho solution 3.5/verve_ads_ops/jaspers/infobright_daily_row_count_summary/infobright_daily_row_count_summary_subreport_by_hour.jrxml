@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="infobright_daily_row_count_summary_subreport_by_hour" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.9487171000000014"/>
+	<property name="ireport.x" value="41"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Table_CH" mode="Opaque" backcolor="#99CCFF">
+		<box leftPadding="5" rightPadding="5">
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TDH" mode="Opaque" backcolor="#99CCFF">
+		<box leftPadding="5" rightPadding="5">
+			<pen lineWidth="0.5"/>
+			<topPen lineWidth="0.0"/>
+			<leftPen lineWidth="0.5"/>
+			<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+			<rightPen lineWidth="0.5"/>
+		</box>
+	</style>
+	<style name="Table_Cell">
+		<box leftPadding="5" rightPadding="5">
+			<pen lineWidth="0.5"/>
+			<topPen lineWidth="0.0"/>
+			<leftPen lineWidth="0.5"/>
+			<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+			<rightPen lineWidth="0.5"/>
+		</box>
+	</style>
+	<style name="Table_Cell_7" style="Table_Cell">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{day_7}==0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#FF0000"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{delta_6}>=20]]></conditionExpression>
+			<style mode="Opaque" backcolor="#FFFF00"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{delta_6}<=-20]]></conditionExpression>
+			<style mode="Opaque" backcolor="#FF00FF"/>
+		</conditionalStyle>
+	</style>
+	<style name="Table_Cell_1" style="Table_Cell">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{day_1}==0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#FF0000"/>
+		</conditionalStyle>
+	</style>
+	<style name="Table_Cell_2" style="Table_Cell">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{day_2}==0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#FF0000"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{delta_1}>=20]]></conditionExpression>
+			<style mode="Opaque" backcolor="#FFFF00"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{delta_1}<=-20]]></conditionExpression>
+			<style mode="Opaque" backcolor="#FF00FF"/>
+		</conditionalStyle>
+	</style>
+	<style name="Table_Cell_3" style="Table_Cell">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{day_3}==0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#FF0000"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{delta_2}>=20]]></conditionExpression>
+			<style mode="Opaque" backcolor="#FFFF00"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{delta_2}<=-20]]></conditionExpression>
+			<style mode="Opaque" backcolor="#FF00FF"/>
+		</conditionalStyle>
+	</style>
+	<style name="Table_Cell_4" style="Table_Cell">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{day_4}==0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#FF0000"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{delta_3}>=20]]></conditionExpression>
+			<style mode="Opaque" backcolor="#FFFF00"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{delta_3}<=-20]]></conditionExpression>
+			<style mode="Opaque" backcolor="#FF00FF"/>
+		</conditionalStyle>
+	</style>
+	<style name="Table_Cell_5" style="Table_Cell">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{day_5}==0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#FF0000"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{delta_4}>=20]]></conditionExpression>
+			<style mode="Opaque" backcolor="#FFFF00"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{delta_4}<=-20]]></conditionExpression>
+			<style mode="Opaque" backcolor="#FF00FF"/>
+		</conditionalStyle>
+	</style>
+	<style name="Table_Cell_6" style="Table_Cell">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{day_6}==0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#FF0000"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{delta_5}>=20]]></conditionExpression>
+			<style mode="Opaque" backcolor="#FFFF00"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{delta_5}<=-20]]></conditionExpression>
+			<style mode="Opaque" backcolor="#FF00FF"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="full_date" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[SELECT group_value,day_7,day_6,day_5,day_4,day_3,day_2,day_1,(delta_6*100)::int as delta_6,(delta_5*100)::int as delta_5,(delta_4*100)::int as delta_4,(delta_3*100)::int as delta_3,(delta_2*100)::int as delta_2,(delta_1*100)::int as delta_1 FROM adsops.daily_infobright_counts WHERE full_date=$P{full_date} AND group_type='hour' order by group_value;]]>
+	</queryString>
+	<field name="group_value" class="java.lang.String"/>
+	<field name="day_7" class="java.lang.Integer"/>
+	<field name="day_6" class="java.lang.Integer"/>
+	<field name="day_5" class="java.lang.Integer"/>
+	<field name="day_4" class="java.lang.Integer"/>
+	<field name="day_3" class="java.lang.Integer"/>
+	<field name="day_2" class="java.lang.Integer"/>
+	<field name="day_1" class="java.lang.Integer"/>
+	<field name="delta_6" class="java.lang.Integer"/>
+	<field name="delta_5" class="java.lang.Integer"/>
+	<field name="delta_4" class="java.lang.Integer"/>
+	<field name="delta_3" class="java.lang.Integer"/>
+	<field name="delta_2" class="java.lang.Integer"/>
+	<field name="delta_1" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<textField pattern="yyyy-MM-dd">
+				<reportElement style="Table_CH" mode="Opaque" x="490" y="0" width="65" height="25"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[new SimpleDateFormat("yyyy-MM-dd").format($P{full_date})]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd">
+				<reportElement style="Table_CH" mode="Opaque" x="425" y="0" width="65" height="25"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[new SimpleDateFormat("yyyy-MM-dd").format($P{full_date}-1)]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd">
+				<reportElement style="Table_CH" mode="Opaque" x="360" y="0" width="65" height="25"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[new SimpleDateFormat("yyyy-MM-dd").format($P{full_date}-2)]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd">
+				<reportElement style="Table_CH" mode="Opaque" x="295" y="0" width="65" height="25"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[new SimpleDateFormat("yyyy-MM-dd").format($P{full_date}-3)]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd">
+				<reportElement style="Table_CH" mode="Opaque" x="230" y="0" width="65" height="25"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[new SimpleDateFormat("yyyy-MM-dd").format($P{full_date}-4)]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd">
+				<reportElement style="Table_CH" mode="Opaque" x="165" y="0" width="65" height="25"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[new SimpleDateFormat("yyyy-MM-dd").format($P{full_date}-5)]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd">
+				<reportElement style="Table_CH" mode="Opaque" x="100" y="0" width="65" height="25"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[new SimpleDateFormat("yyyy-MM-dd").format($P{full_date}-6)]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Table_CH" mode="Opaque" x="0" y="0" width="100" height="25" forecolor="#000000" backcolor="#99CCFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Calibri" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Hour\Date]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement style="Table_TDH" mode="Opaque" x="0" y="0" width="100" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{group_value}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="Table_Cell_7" x="100" y="0" width="65" height="25"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{day_7}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="Table_Cell_6" mode="Opaque" x="165" y="0" width="65" height="25"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{day_6}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="Table_Cell_5" mode="Opaque" x="230" y="0" width="65" height="25"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{day_5}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="Table_Cell_4" mode="Opaque" x="295" y="0" width="65" height="25"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{day_4}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="Table_Cell_3" mode="Opaque" x="360" y="0" width="65" height="25"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{day_3}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="Table_Cell_2" mode="Opaque" x="425" y="0" width="65" height="25"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{day_2}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="Table_Cell_1" mode="Opaque" x="490" y="0" width="65" height="25"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{day_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

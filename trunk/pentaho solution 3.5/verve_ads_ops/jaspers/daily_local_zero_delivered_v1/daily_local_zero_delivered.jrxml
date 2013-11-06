@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_local_zero_delivered v1" pageWidth="2580" pageHeight="842" orientation="Landscape" columnWidth="2540" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.8150000000000013"/>
+	<property name="ireport.x" value="4083"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="p_end_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("2013-07-01")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_start_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("2013-07-01")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_flight_id_list" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("0")]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+full_date as "Date"
+,(max(dt_lastchange)::timestamp with time zone AT TIME ZONE 'America/Los_Angeles')::timestamp with time zone AT TIME ZONE 'America/New_York'as dt_lastchange
+,network_id as "Network ID"
+,(CASE WHEN network_id=1 THEN 'Local' ELSE 'VLM' END) as "Network name"
+,order_id as "Order ID"
+,order_name as "Order Name"
+,flight_id as "Flight ID"
+,flight_name as "Flight Name"
+,flight_start_date as "Flight Start Date"
+,flight_end_date as "Flight End Date"
+,flight_impressions as "Total Impressions delivered to date"
+,flight_clicks as "Total clicks to date"
+,consecutive_days_zero_impressions as "Total Number of consecutive days 0 impressions"
+,consecutive_days_zero_clicks as "Total Number of consecutive days 0 clicks"
+--RWD 99
+,publisher_name as "Publisher Name"
+,flight_active_ads_count as "Active Creatives"
+,(CASE WHEN upper(flight_metric)=upper('Sponsorship') THEN 'N/A' ELSE to_char(flight_actual_delivery-flight_expected_delivery,'999G990D00') END) as "Delivery Indicator"
+,order_updated_by as "Order last updated by"
+,flight_updated_by as "Flight last updated by"
+FROM adsops.daily_agg_local_zero_delivered_v1
+WHERE is_active = true
+AND full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
+AND (flight_id IN (select unnest(string_to_array($P{p_flight_id_list}, ';'))::int) OR '0'=$P{p_flight_id_list})
+GROUP BY
+full_date
+,network_id
+,"Network name"
+,publisher_name
+,order_id
+,order_name
+,flight_id
+,flight_name
+,flight_start_date
+,flight_end_date
+,flight_impressions
+,flight_clicks
+,flight_metric
+,consecutive_days_zero_impressions
+,consecutive_days_zero_clicks
+,flight_active_ads_count
+,flight_actual_delivery
+,flight_expected_delivery
+,order_updated_by
+,flight_updated_by
+ORDER BY full_date desc,publisher_name,order_name,flight_name]]>
+	</queryString>
+	<field name="Date" class="java.sql.Date"/>
+	<field name="dt_lastchange" class="java.sql.Timestamp"/>
+	<field name="Network ID" class="java.lang.Integer"/>
+	<field name="Network name" class="java.lang.String"/>
+	<field name="Order ID" class="java.lang.Integer"/>
+	<field name="Order Name" class="java.lang.String"/>
+	<field name="Flight ID" class="java.lang.Integer"/>
+	<field name="Flight Name" class="java.lang.String"/>
+	<field name="Flight Start Date" class="java.sql.Timestamp"/>
+	<field name="Flight End Date" class="java.sql.Timestamp"/>
+	<field name="Total Impressions delivered to date" class="java.lang.Integer"/>
+	<field name="Total clicks to date" class="java.lang.Integer"/>
+	<field name="Total Number of consecutive days 0 impressions" class="java.lang.Integer"/>
+	<field name="Total Number of consecutive days 0 clicks" class="java.lang.Integer"/>
+	<field name="Publisher Name" class="java.lang.String"/>
+	<field name="Active Creatives" class="java.lang.Integer"/>
+	<field name="Delivery Indicator" class="java.lang.String"/>
+	<field name="Order last updated by" class="java.lang.String"/>
+	<field name="Flight last updated by" class="java.lang.String"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="76">
+			<image>
+				<reportElement x="0" y="9" width="227" height="20"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"../vervelogo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="227" y="9" width="2313" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Daily Local/VLM 0 Delivery and/or Clicks Report]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="40" width="2390" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $P{p_start_date}.equals( $P{p_end_date} ) ? "Date: "+$P{p_start_date} : "From Date " + $P{p_start_date}+" To Date " +$P{p_end_date})]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd hh:mm aaa">
+				<reportElement x="2390" y="40" width="150" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{dt_lastchange}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20">
+			<staticText>
+				<reportElement x="354" y="0" width="73" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Order ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="841" y="0" width="289" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Flight Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="768" y="0" width="73" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Flight ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="77" y="0" width="77" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Network]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="427" y="0" width="341" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Order Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="77" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1242" y="0" width="105" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Flight End Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2027" y="0" width="113" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Imps to date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2140" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Clks to date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2240" y="0" width="150" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Consecutive days of 0 imps]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2390" y="0" width="150" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Consecutive days of 0 clks]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1130" y="0" width="112" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Flight Start Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="154" y="0" width="200" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Publisher Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1347" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Active Creatives]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1447" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Delivery Indicator]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1547" y="0" width="240" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Order last updated by]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1787" y="0" width="240" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Flight last updated by]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<textField>
+				<reportElement x="354" y="0" width="73" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{Order ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="841" y="0" width="289" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Flight Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="768" y="0" width="73" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{Flight ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="77" y="0" width="77" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Network name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd">
+				<reportElement x="0" y="0" width="77" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{Date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd">
+				<reportElement x="1242" y="0" width="105" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{Flight End Date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd">
+				<reportElement x="1130" y="0" width="112" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{Flight Start Date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="2027" y="0" width="113" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{Total Impressions delivered to date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="2140" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{Total clicks to date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="2240" y="0" width="150" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{Total Number of consecutive days 0 impressions}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="2390" y="0" width="150" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{Total Number of consecutive days 0 clicks}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="427" y="0" width="341" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Order Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="154" y="0" width="200" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Publisher Name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="1347" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{Active Creatives}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="1447" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Delivery Indicator}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1547" y="0" width="240" height="20"/>
+				<textElement textAlignment="Right">
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Order last updated by}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1787" y="0" width="240" height="20"/>
+				<textElement textAlignment="Right">
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Flight last updated by}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="26">
+			<textField>
+				<reportElement x="0" y="4" width="227" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="2" width="2540" height="1"/>
+			</line>
+			<textField>
+				<reportElement x="227" y="4" width="2313" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

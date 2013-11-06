@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Monthly Revenue Summary</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>Chinh nguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <calendar_year_month type="string"> 
+      <sources> 
+        <request>calendar_year_month</request> 
+      </sources>  
+      <default-value/> 
+    </calendar_year_month>  
+    <output type="string"> 
+      <sources> 
+        <request>output</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </output>  
+    <List_networks type="string-list"> 
+      <sources> 
+        <request>List_networks</request> 
+      </sources>  
+      <default-value type="string-list"> 
+        <list-item>JumpTap</list-item>  
+        <list-item>Millennial Media</list-item>  
+        <list-item>Google AdSense</list-item>  
+        <list-item>Marchex</list-item>  
+        <list-item>Where</list-item>  
+        <list-item>Superpages</list-item>  
+        <list-item>Superpages blue</list-item>  
+        <list-item>AT&amp;T(Yellowpages)</list-item>  
+        <list-item>AdSense DBCLK Channel</list-item>  
+        <list-item>City Grid</list-item>  
+        <list-item>iTunes</list-item> 
+      </default-value> 
+    </List_networks>  
+    <p_network type="string"> 
+      <sources> 
+        <request>p_network</request> 
+      </sources>  
+      <default-value><![CDATA[Jumptap]]></default-value> 
+    </p_network> 
+  </inputs>
+
+  <outputs/>
+
+  <resources> 
+    <pageTemplate> 
+      <solution-file> 
+        <location>monthly_ad_network_summary/parameter_template.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </pageTemplate>  
+    <report-definition> 
+      <solution-file> 
+        <location>monthly_performance_report/monthly_performance_report_jumptap.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition>  
+    <report-definition1> 
+      <solution-file> 
+        <location>monthly_performance_report/monthly_performance_report_adsense.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition1>  
+    <report-definition2> 
+      <solution-file> 
+        <location>monthly_performance_report/monthly_performance_report_millenial.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition2>  
+    <report-definition3> 
+      <solution-file> 
+        <location>monthly_performance_report/monthly_performance_report_marchexl.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition3>  
+    <report-definition4> 
+      <solution-file> 
+        <location>monthly_performance_report/monthly_performance_report_adwhere.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition4>  
+    <report-definition5> 
+      <solution-file> 
+        <location>monthly_performance_report/monthly_performance_report_super_page.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition5>  
+    <report-definition6> 
+      <solution-file> 
+        <location>monthly_performance_report/monthly_performance_report_super_page_blue.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition6>  
+    <report-definition7> 
+      <solution-file> 
+        <location>monthly_performance_report/monthly_performance_report_yellow_pages.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition7>  
+    <report-definition8> 
+      <solution-file> 
+        <location>monthly_performance_report/monthly_performance_report_adsense_dbclk_channel.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition8>  
+    <report-definition9> 
+      <solution-file> 
+        <location>monthly_performance_report/monthly_performance_report_citigrid.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition9>  
+    <report-definition10> 
+      <solution-file> 
+        <location>monthly_ad_network_summary/monthly_ad_network_summary.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition10>  
+    <report-definition11> 
+      <solution-file> 
+        <location>monthly_performance_report/monthly_performance_report_citigrid.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition11> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get calendar year month</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result"/>  
+        <calendar_year_month type="string"/>  
+        <month_since_2005 type="integer"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[dw3]]></jndi>  
+        <live><![CDATA[true]]></live>  
+        <query><![CDATA[SELECT DISTINCT calendar_year_month, month_since_2005
+FROM adnetwork.monthly_adnetwork_summary
+WHERE is_active = true
+ORDER BY month_since_2005 desc]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Prompt/Secure Filter</action-type>
+      <action-inputs> 
+        <calendar_year_month type="string"/>  
+        <query_result type="result-set"/> 
+      </action-inputs>
+      <action-resources> 
+        <pageTemplate type="resource"/> 
+      </action-resources>
+      <component-definition> 
+        <selections> 
+          <calendar_year_month style="select"> 
+            <filter value-col-name="calendar_year_month" display-col-name="calendar_year_month">query_result</filter>  
+            <title>Month</title> 
+          </calendar_year_month> 
+        </selections>  
+        <xsl><![CDATA[pageTemplate]]></xsl> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JasperReportsComponent</component-name>
+      <action-type>Jasper</action-type>
+      <action-inputs> 
+        <calendar_year_month type="string"/>  
+        <output-type type="string" mapping="output"/> 
+      </action-inputs>
+      <action-resources> 
+        <report-definition mapping="report-definition10"/> 
+      </action-resources>
+      <component-definition> 
+        <jndi><![CDATA[dw3]]></jndi> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

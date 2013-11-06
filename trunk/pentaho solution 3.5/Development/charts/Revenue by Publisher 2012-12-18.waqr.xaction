@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<action-sequence>
+  <name>Revenue by Publisher 2012-12-18.waqr.xaction</name>
+  <version>1</version>
+  <title>Revenue by Publisher 2012-12-18</title>
+  <logging-level>warn</logging-level>
+  <documentation>
+    <author>chinh.nguyen@vervemobile.com</author>
+    <description>Created by the Web-based Adhoc Query and Reporting Client</description>
+    <icon>PentahoReporting.png</icon>
+    <help>Auto-generated action-sequence for WAQR.</help>
+    <result-type>report</result-type>
+  </documentation>
+  <inputs>
+    <output-type type="string">
+      <default-value>html</default-value>
+      <sources>
+        <request>type</request>
+      </sources>
+    </output-type>
+  </inputs>
+  <outputs>
+    <report type="content">
+      <destinations>
+        <response>content</response>
+      </destinations>
+    </report>
+  </outputs>
+  <resources>
+    <report-definition>
+      <solution-file>
+        <location>Revenue by Publisher 2012-12-18.waqr.xml</location>
+        <mime-type>text/xml</mime-type>
+      </solution-file>
+    </report-definition>
+  </resources>
+  <actions>
+    <action-definition>
+      <action-outputs>
+        <rule-result type="result-set"/>
+      </action-outputs>
+      <component-name>MQLRelationalDataComponent</component-name>
+      <action-type>rule</action-type>
+      <component-definition>
+        <mql> 
+          <domain_type>relational</domain_type>  
+          <domain_id><![CDATA[Development/metadata.xmi]]></domain_id>
+          <model_id><![CDATA[Daily Revenue]]></model_id>  
+          <options> 
+            <disable_distinct>false</disable_distinct> 
+          </options>  
+          <selections> 
+            <selection>
+              <view>BC_ADM_PUBLISHER_DIM</view>
+              <column>BC_ADM_PUBLISHER_DIM_COMPANY_NAME</column>
+            </selection>  
+            <selection>
+              <view>BC_DAILY_AGG_NETWORK_REVENUE</view>
+              <column>BC_DAILY_AGG_NETWORK_REVENUE_FULL_DATE</column>
+            </selection>  
+            <selection>
+              <view>BC_ADM_ORDER_DIM</view>
+              <column>BC_ADM_ORDER_DIM_NAME</column>
+            </selection>  
+            <selection>
+              <view>BC_ADM_FLIGHT_DIM</view>
+              <column>BC_ADM_FLIGHT_DIM_FLIGHT_ID</column>
+            </selection>  
+            <selection>
+              <view>BC_ADM_FLIGHT_DIM</view>
+              <column>BC_ADM_FLIGHT_DIM_NAME</column>
+            </selection>  
+            <selection>
+              <view>BC_DAILY_AGG_NETWORK_REVENUE</view>
+              <column>BC_DAILY_AGG_NETWORK_REVENUE_TOTAL_PAID_IMPRESSIONS</column>
+            </selection>  
+            <selection>
+              <view>BC_DAILY_AGG_NETWORK_REVENUE</view>
+              <column>BC_DAILY_AGG_NETWORK_REVENUE_TOTAL_NET_REVENUE</column>
+            </selection>  
+            <selection>
+              <view>BC_DAILY_AGG_NETWORK_REVENUE</view>
+              <column>BC_DAILY_AGG_NETWORK_REVENUE_TOTAL_P_REV_SHARE</column>
+            </selection>  
+            <selection>
+              <view>BC_DAILY_AGG_NETWORK_REVENUE</view>
+              <column>BC_DAILY_AGG_NETWORK_REVENUE_TOTAL_V_REV_SHARE</column>
+            </selection> 
+          </selections>  
+          <constraints> 
+            <constraint>
+              <operator/>
+              <condition><![CDATA[LIKE( [BC_ADM_PUBLISHER_DIM.BC_ADM_PUBLISHER_DIM_COMPANY_NAME];"%\u004c\u0065\u0065\u0020\u0045\u006e\u0074\u0065\u0072\u0070\u0072\u0069\u0073\u0065\u0073%")]]></condition>
+            </constraint>  
+            <constraint>
+              <operator><![CDATA[AND]]></operator>
+              <condition><![CDATA[[BC_DAILY_AGG_NETWORK_REVENUE.BC_DAILY_AGG_NETWORK_REVENUE_FULL_DATE] = DATEVALUE("2012-12-18")]]></condition>
+            </constraint> 
+          </constraints>  
+          <orders> 
+            <order>
+              <direction>asc</direction>
+              <view_id>BC_ADM_PUBLISHER_DIM</view_id>
+              <column_id>BC_ADM_PUBLISHER_DIM_COMPANY_NAME</column_id>
+            </order>  
+            <order>
+              <direction>asc</direction>
+              <view_id>BC_DAILY_AGG_NETWORK_REVENUE</view_id>
+              <column_id>BC_DAILY_AGG_NETWORK_REVENUE_FULL_DATE</column_id>
+            </order>  
+            <order>
+              <direction>asc</direction>
+              <view_id>BC_ADM_ORDER_DIM</view_id>
+              <column_id>BC_ADM_ORDER_DIM_NAME</column_id>
+            </order>  
+            <order>
+              <direction>asc</direction>
+              <view_id>BC_ADM_FLIGHT_DIM</view_id>
+              <column_id>BC_ADM_FLIGHT_DIM_FLIGHT_ID</column_id>
+            </order> 
+          </orders> 
+        </mql>
+        <live>true</live>
+        <display-names>false</display-names>
+      </component-definition>
+    </action-definition>
+    <action-definition>
+      <action-outputs>
+        <report type="content"/>
+      </action-outputs>
+      <action-inputs>
+        <output-type type="string"/>
+        <data type="result-set" mapping="rule-result"/>
+      </action-inputs>
+      <action-resources>
+        <report-definition type="resource"/>
+      </action-resources>
+      <component-name>JFreeReportComponent</component-name>
+      <action-type>report</action-type>
+      <component-definition>
+        <output-type>html</output-type>
+      </component-definition>
+    </action-definition>
+  </actions>
+</action-sequence>

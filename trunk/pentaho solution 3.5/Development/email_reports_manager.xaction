@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Email Reports Manager</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>chinhnguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs>
+    <p_mode type="string">
+      <sources>
+        <request>p_mode</request>
+      </sources>
+      <default-value/>
+    </p_mode>
+  </inputs>
+
+  <outputs>
+    <p_mode type="string"/>
+  </outputs>
+
+  <resources>
+    <pageTemplate>
+      <solution-file>
+        <location>email_reports_manager.html</location>
+        <mime-type>text/plain</mime-type>
+      </solution-file>
+    </pageTemplate>
+  </resources>
+  
+  <actions> 
+    <action-definition>
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Prompt/Secure Filter</action-type>
+      <action-inputs>
+        <p_mode type="string"/>
+      </action-inputs>
+      <action-resources>
+        <pageTemplate type="resource"/>
+      </action-resources>
+      <component-definition>
+        <xsl><![CDATA[pageTemplate]]></xsl>
+        <selections>
+          <p_mode filter="none" style="text-box"/>
+        </selections>
+      </component-definition>
+    </action-definition>
+
+    <actions>
+      <condition><![CDATA[p_mode=='view']]></condition>
+    </actions>
+
+  </actions> 
+</action-sequence>
