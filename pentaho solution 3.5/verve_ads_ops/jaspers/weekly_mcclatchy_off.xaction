@@ -73,7 +73,9 @@
       </action-outputs>
       <component-definition> 
         <live><![CDATA[false]]></live>  
-        <query><![CDATA[SELECT year_week FROM adsops.weekly_low_rate WHERE is_active=true GROUP BY year_week 
+        <query><![CDATA[SELECT year_week FROM adsops.weekly_agg_mcclatchy_off WHERE is_active=true GROUP BY year_week 
+UNION ALL
+SELECT year_week FROM adsops.weekly_agg_mcclatchy_off WHERE is_active=true GROUP BY year_week 
 ORDER BY year_week desc]]></query> 
       </component-definition> 
     </action-definition>
