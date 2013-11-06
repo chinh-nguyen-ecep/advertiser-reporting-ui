@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cdf>
+	<title>New Dashboard Design </title>
+	<author>chinhnguyen</author>
+	<description>New Dashboard Design</description>
+	<icon></icon>
+	<template>/Development/dashboards/top_20_revenue_by_publisher_new/template.html</template>
+</cdf>

@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Manager Page - Data Source Tables</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>Chinh Nguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <actions type="string"> 
+      <sources> 
+        <request>actions</request> 
+      </sources>  
+      <default-value><![CDATA[template]]></default-value> 
+    </actions>  
+    <connection_name type="string"> 
+      <sources> 
+        <request>connection_name</request> 
+      </sources>  
+      <default-value><![CDATA[analyticsdbVPC]]></default-value> 
+    </connection_name>  
+    <returnResult type="string"> 
+      <sources> 
+        <request>returnResult</request> 
+      </sources>  
+      <default-value/> 
+    </returnResult>  
+    <query_result type="result-set"> 
+      <sources> 
+        <request>query_result</request> 
+      </sources>  
+      <default-value/> 
+    </query_result>  
+    <page type="string"> 
+      <sources> 
+        <request>page</request> 
+      </sources>  
+      <default-value><![CDATA[1]]></default-value> 
+    </page>  
+    <rows type="string"> 
+      <sources> 
+        <request>rows</request> 
+      </sources>  
+      <default-value><![CDATA[20]]></default-value> 
+    </rows>  
+    <sort type="string"> 
+      <sources> 
+        <request>sort</request> 
+      </sources>  
+      <default-value/> 
+    </sort>  
+    <order type="string"> 
+      <sources> 
+        <request>order</request> 
+      </sources>  
+      <default-value><![CDATA[asc]]></default-value> 
+    </order>  
+    <query_result_total_rows type="result-set"> 
+      <sources> 
+        <request>query_result_total_rows</request> 
+      </sources>  
+      <default-value/> 
+    </query_result_total_rows> 
+  </inputs>
+
+  <outputs> 
+    <returnResult type="string"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </returnResult> 
+  </outputs>
+
+  <resources/>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>process sorting input</action-type>
+      <action-inputs> 
+        <sort type="string"/>  
+        <order type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <p_sort type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var sort_array=sort.split(",");
+var order_array=order.split(",");
+var temp='';
+for(var i=0;i<sort_array.length;i++){
+	if(i>0){
+		temp+=',';
+	}
+	temp+=sort_array[i]+" "+order_array[i];
+}
+sort=temp;
+
+if(sort==''){
+	sort='0 desc';
+}]]></script> 
+      </component-definition> 
+    </action-definition>
+  
+    <actions> 
+      <condition><![CDATA[actions=='template']]></condition>  
+      <action-definition> 
+        <component-name>TemplateComponent</component-name>
+        <action-type>Message Template</action-type>
+        <action-inputs/>
+        <action-outputs> 
+          <output-message type="string" mapping="returnResult"/> 
+        </action-outputs>
+        <component-definition> 
+          <template><![CDATA[<table id="manager_data_sources_tables_table"></table>
+
+<script>
+var xactionUrl='ViewAction?solution='+solution+'&path='+path+'/subscriptionManager&action=manager_page_data_source_table.xaction';
+$('#manager_page_item_title').html('Data Source Tables');
+var initDataSoureTable=function(){
+			
+			$('#manager_data_sources_tables_table').datagrid({
+				//title: 'Data source tables',
+				url:xactionUrl+'&actions=listDataSourceTables',
+				fit: true,
+				columns:[[
+					{field:'data_source_table_id',title:'ID',width: 10},
+					{field:'table_type',title:'Type',sortable: 'true',width: 15,
+						formatter: function(value,row,index){
+							if(value=='MLA'){
+								return 'Monthly Aggregate';
+							}else if(value=='DLA'){
+								return 'Daily Aggregate';
+							}else return value;
+						}					
+					},
+					{field:'table_name',title:'Name',sortable: 'true',width: 50},
+					{field:'date_up_to_date',title:'Date Up to Date',sortable: 'true',
+						formatter: function(value,row,index){
+							if(value=='null'){
+								return '';
+							}else return value;
+						}
+					},
+					{field:'week_up_to_date',title:'Week Up to Date',sortable: 'true',
+						formatter: function(value,row,index){
+							if(value=='null'){
+								return '';
+							}else return value;
+						}
+					},					
+					{field:'month_up_to_date',title:'Month Up to Date',sortable: 'true',
+						formatter: function(value,row,index){
+							if(value=='null'){
+								return '';
+							}else return value;
+						}					
+					}
+				]],
+				sortName: 'table_type,date_up_to_date',
+				sortOrder: 'asc,desc',
+				pagination: true,
+				rownumbers:true,
+				singleSelect:true,
+				collapsible:true,
+				fitColumns:true,
+				showFooter: true,
+				pagePosition: 'top',
+				pageSize: 40,
+				multiSort: true,
+				toolbar:[{
+					text:'Add',
+					iconCls: 'icon-add',
+					handler: function(){alert('add')}
+				},{
+					text:'Edit',
+					iconCls: 'icon-edit',
+					handler: function(){alert('edit')}
+				}]
+			});
+		}
+initDataSoureTable();
+</script>]]></template> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='listDataSourceTables']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational load total rows</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connection_name"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result_total_rows"/> 
+        </action-outputs>
+        <component-definition> 
+          <query><![CDATA[SELECT COUNT(1) as count FROM control.spctl_data_source_tables 
+WHERE table_type<>'DIM']]></query>  
+          <live><![CDATA[false]]></live> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connection_name"/>  
+          <rows type="string"/>  
+          <page type="string"/>  
+          <p_sort type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
+        </action-outputs>
+        <component-definition> 
+          <live><![CDATA[false]]></live>  
+          <query><![CDATA[SELECT data_source_table_id,table_type,table_name,date_up_to_date,week_up_to_date,month_up_to_date FROM control.spctl_data_source_tables 
+WHERE table_type<>'DIM'
+ORDER BY {p_sort}
+LIMIT {rows} 
+OFFSET ({page}-1)*{rows};]]></query> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>Process data grid</action-type>
+      <action-inputs> 
+        <returnResult type="string"/>  
+        <query_result_total_rows type="result-set"/>  
+        <actions type="string"/>  
+        <query_result type="result-set"/>  
+        <sort type="string"/>  
+        <p_sort type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <returnResult type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var result_set=query_result;
+var rowCount=query_result.getRowCount();
+var meta = result_set.getMetaData();      // Returns an IPentahoMetaData object
+var colCount = meta.getColumnCount();
+var colHeaders = meta.getColumnHeaders(); //getColumnHeaders() returns object[][]
+var rowHeaders = meta.getRowHeaders(); 
+
+var result_set_total_rows=query_result_total_rows;
+var total_rows=0;
+
+if(actions=='template'){
+	returnResult=returnResult;
+}else{
+	total_rows=result_set_total_rows.getValueAt(0,0);
+	returnResult='{"total":"'+total_rows+'","rows":[';
+	//process data item
+	for(var i=0;i<result_set.getRowCount();i++){
+		var item='';
+		if(i>0){
+			item+=',';
+		}
+		item+='{';
+			for(var j=0;j<result_set.getColumnCount();j++){ 		
+				var value=result_set.getValueAt(i,j);
+				var columnValue=colHeaders[0][j];
+				if(j>0){
+					item+=',';
+				}
+				item+='"'+columnValue+'":"'+value+'"';
+			}
+		item+='}';	
+
+	returnResult+=item;
+	}
+	//end
+
+	returnResult+='],"sort":"'+p_sort+'"}';
+}]]></script> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

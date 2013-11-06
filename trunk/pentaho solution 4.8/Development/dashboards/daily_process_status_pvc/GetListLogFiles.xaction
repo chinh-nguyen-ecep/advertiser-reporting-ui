@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>GetDataTable</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author/>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <iDisplayStart type="string"> 
+      <sources> 
+        <request>iDisplayStart</request> 
+      </sources>  
+      <default-value><![CDATA[0]]></default-value> 
+    </iDisplayStart>  
+    <name type="string"> 
+      <sources> 
+        <session>name</session> 
+      </sources>  
+      <default-value/> 
+    </name>  
+    <iDisplayLength type="string"> 
+      <sources> 
+        <request>iDisplayLength</request> 
+      </sources>  
+      <default-value><![CDATA[10]]></default-value> 
+    </iDisplayLength>  
+    <sSearch type="string"> 
+      <sources> 
+        <request>sSearch</request> 
+      </sources>  
+      <default-value/> 
+    </sSearch>  
+    <sEcho type="string"> 
+      <sources> 
+        <request>sEcho</request> 
+      </sources>  
+      <default-value/> 
+    </sEcho>  
+    <full_date type="string"> 
+      <sources> 
+        <request>full_date</request> 
+      </sources>  
+      <default-value/> 
+    </full_date>  
+    <iSortCol_0 type="string"> 
+      <sources> 
+        <request>iSortCol_0</request> 
+      </sources>  
+      <default-value><![CDATA[0]]></default-value> 
+    </iSortCol_0>  
+    <iSortingCols type="string"> 
+      <sources> 
+        <request>iSortingCols</request> 
+      </sources>  
+      <default-value><![CDATA[1]]></default-value> 
+    </iSortingCols>  
+    <sSortDir_0 type="string"> 
+      <sources> 
+        <request>sSortDir_0</request> 
+      </sources>  
+      <default-value><![CDATA[asc]]></default-value> 
+    </sSortDir_0>  
+    <table type="string"> 
+      <sources> 
+        <request>table</request> 
+      </sources>  
+      <default-value/> 
+    </table>  
+    <dimensions type="string"> 
+      <sources> 
+        <request>dimensions</request> 
+      </sources>  
+      <default-value/> 
+    </dimensions>  
+    <measures type="string"> 
+      <sources> 
+        <request>measures</request> 
+      </sources>  
+      <default-value/> 
+    </measures>  
+    <search_by type="string"> 
+      <sources> 
+        <request>search_by</request> 
+      </sources>  
+      <default-value/> 
+    </search_by>  
+    <data_file_config_id type="string"> 
+      <sources> 
+        <request>data_file_config_id</request> 
+      </sources>  
+      <default-value/> 
+    </data_file_config_id>  
+    <p_server type="string">
+      <sources>
+        <request>p_server</request>
+      </sources>
+      <default-value><![CDATA[dw3dw3]]></default-value>
+    </p_server>
+  </inputs>
+
+  <outputs> 
+    <json_response type="string"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </json_response> 
+  </outputs>
+
+  <resources/>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Relational Connection</action-type>
+      <action-inputs>
+        <jndi type="string" mapping="p_server"/>
+      </action-inputs>
+      <action-outputs> 
+        <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
+      </action-outputs>
+      <component-definition/> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>ConvertSortColumnIndex</action-type>
+      <action-inputs> 
+        <iSortCol_0 type="string"/>  
+        <measures type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <sortByCol type="string"/>  
+        <t_measures type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var sortByCol;
+var t_measures;
+
+t_measures='';
+sortByCol=parseInt(iSortCol_0)+1;
+sortByCol=sortByCol.toFixed(0);
+
+var measures_array=measures.split(',');
+for(var i=0;i<measures_array.length;i++){
+	if(i>=0){
+		t_measures+=',';
+	};
+		t_measures+='sum('+measures_array[i]+')';
+};
+
+if(measures=='') t_measures='';]]></script> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>TemplateComponent</component-name>
+      <action-type>GetTotalRecordQuery</action-type>
+      <action-inputs> 
+        <table type="string"/>  
+        <dimensions type="string"/>  
+        <search_by type="string"/>  
+        <data_file_config_id type="string"/>  
+        <full_date type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <output-message type="string" mapping="GetTotalRecordQuery"/> 
+      </action-outputs>
+      <component-definition> 
+        <template><![CDATA[SELECT COUNT(*)
+FROM (
+SELECT 1
+FROM {table}
+WHERE file_timestamp::date=(date '{full_date}' - integer '0') AND upper({search_by}) LIKE upper( '%%')
+AND data_file_config_id IN ({data_file_config_id})
+GROUP BY {dimensions}) a]]></template> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>GetTotalRecord</action-type>
+      <action-inputs> 
+        <query type="string" mapping="GetTotalRecordQuery"/>  
+        <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
+      </action-inputs>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result_total_rows"/> 
+      </action-outputs>
+      <component-definition> 
+        <live><![CDATA[true]]></live> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>TemplateComponent</component-name>
+      <action-type>GetTotalDisplayQuery</action-type>
+      <action-inputs> 
+        <sSearch type="string"/>  
+        <table type="string"/>  
+        <dimensions type="string"/>  
+        <search_by type="string"/>  
+        <data_file_config_id type="string"/>  
+        <full_date type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <output-message type="string" mapping="GetTotalDisplayRecordQuery"/> 
+      </action-outputs>
+      <component-definition> 
+        <template><![CDATA[SELECT COUNT(*)
+FROM (
+SELECT 1
+FROM {table}
+WHERE file_timestamp::date=(date '{full_date}' - integer '0') AND upper({search_by}) LIKE upper( '%{sSearch}%')
+AND data_file_config_id IN ({data_file_config_id})
+GROUP BY {dimensions}) a]]></template> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>GetTotalDisplay</action-type>
+      <action-inputs> 
+        <query type="string" mapping="GetTotalDisplayRecordQuery"/>  
+        <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
+      </action-inputs>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result_total_display"/> 
+      </action-outputs>
+      <component-definition> 
+        <live><![CDATA[true]]></live> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>TemplateComponent</component-name>
+      <action-type>GetTableDataQuery</action-type>
+      <action-inputs> 
+        <iDisplayLength type="string"/>  
+        <iDisplayStart type="string"/>  
+        <sSearch type="string"/>  
+        <sSortDir_0 type="string"/>  
+        <sortByCol type="string"/>  
+        <table type="string"/>  
+        <dimensions type="string"/>  
+        <t_measures type="string"/>  
+        <search_by type="string"/>  
+        <data_file_config_id type="string"/>  
+        <full_date type="string"/> 
+      </action-inputs>
+      <action-resources/>
+      <action-outputs> 
+        <output-message type="string" mapping="TableDataQuery"/> 
+      </action-outputs>
+      <component-definition> 
+        <template><![CDATA[SELECT {dimensions} {t_measures} 
+  FROM {table}
+  WHERE file_timestamp::date=(date '{full_date}' - integer '0') AND upper({search_by}) LIKE upper( '%{sSearch}%')
+AND data_file_config_id IN ({data_file_config_id})
+  GROUP BY {dimensions}
+  ORDER BY {sortByCol} {sSortDir_0}
+  LIMIT {iDisplayLength} OFFSET {iDisplayStart}]]></template> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>GetTableData</action-type>
+      <action-inputs> 
+        <query type="string" mapping="TableDataQuery"/>  
+        <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
+      </action-inputs>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result_table_data"/> 
+      </action-outputs>
+      <component-definition> 
+        <live><![CDATA[true]]></live> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>Create json response</action-type>
+      <action-inputs> 
+        <query_result_total_rows type="result-set"/>  
+        <query_result_table_data type="result-set"/>  
+        <sEcho type="string"/>  
+        <query_result_total_display type="result-set"/>  
+        <TableDataQuery type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <json_response type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var iTotalRecords;
+var iTotalDisplayRecords;
+var json_response;
+var num_col;
+json_response='';
+num_col=query_result_table_data.getColumnCount();
+
+iTotalDisplayRecords=query_result_total_display.getValueAt(0,0);
+iTotalRecords=query_result_total_rows.getValueAt(0,0);
+
+json_response='{"sEcho":"'+sEcho+'","iTotalRecords":"'+iTotalRecords+'","iTotalDisplayRecords":"'+iTotalDisplayRecords+'",';
+
+var aaData='"aaData":[';
+for(var i=0;i<query_result_table_data.getRowCount();i++){
+	if(i>0){
+	aaData+=',';
+	};
+
+	aaData+='[';
+		for(var l=0;l<num_col;l++){
+			if(l>0) {aaData+=',';};
+			var temp=query_result_table_data.getValueAt(i,l);
+			//if(l==2){temp=temp/1;temp=temp.toFixed(2);};
+			aaData+='"'+temp+'"';
+		};
+	aaData+=']';
+};
+aaData+=']';
+
+json_response+=aaData+'}';]]></script> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>TemplateComponent</component-name>
+      <action-type>Message Template</action-type>
+      <action-inputs> 
+        <iDisplayStart type="string"/>  
+        <sSearch type="string"/>  
+        <name type="string"/>  
+        <iDisplayLength type="string"/>  
+        <sEcho type="string"/> 
+      </action-inputs>
+      <action-resources/>
+      <action-outputs> 
+        <output-message type="string" mapping="result"/> 
+      </action-outputs>
+      <component-definition> 
+        <template><![CDATA[{
+"user": "{name}" ,
+"displayStart": "{iDisplayStart}",
+"displayLenght":"{iDisplayLength}",
+"search": "{sSearch}",
+"sEcho":{sEcho},
+  "iTotalRecords":"30",
+  "iTotalDisplayRecords":"30",
+  "aaData":[["Trident",
+      "Internet Explorer 4.0",
+      "Win 95+",
+      "4",
+      "X"
+    ],
+    ["Trident",
+      "Internet Explorer 5.0",
+      "Win 95+",
+      "5",
+      "C"
+    ],
+    ["Trident",
+      "Internet Explorer 5.5",
+      "Win 95+",
+      "5.5",
+      "A"
+    ],
+    ["Trident",
+      "Internet Explorer 6",
+      "Win 98+",
+      "6",
+      "A"
+    ],
+    ["Trident",
+      "Internet Explorer 7",
+      "Win XP SP2+",
+      "7",
+      "A"
+    ],
+    ["Trident",
+      "AOL browser (AOL desktop)",
+      "Win XP",
+      "6",
+      "A"
+    ],
+    ["Gecko",
+      "Firefox 1.0",
+      "Win 98+ / OSX.2+",
+      "1.7",
+      "A"
+    ],
+    ["Gecko",
+      "Firefox 1.5",
+      "Win 98+ / OSX.2+",
+      "1.8",
+      "A"
+    ]
+  ]
+}]]></template> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Manager Page - Customer Manager</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>Chinh Nguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <actions type="string"> 
+      <sources> 
+        <request>actions</request> 
+      </sources>  
+      <default-value><![CDATA[template]]></default-value> 
+    </actions>  
+    <connection_name type="string"> 
+      <sources> 
+        <request>connection_name</request> 
+      </sources>  
+      <default-value><![CDATA[analyticsdbVPC]]></default-value> 
+    </connection_name>  
+    <returnResult type="string"> 
+      <sources> 
+        <request>returnResult</request> 
+      </sources>  
+      <default-value/> 
+    </returnResult>  
+    <query_result type="result-set"> 
+      <sources> 
+        <request>query_result</request> 
+      </sources>  
+      <default-value/> 
+    </query_result>  
+    <p_customer_key type="string">
+      <sources>
+        <request>p_customer_key</request>
+      </sources>
+      <default-value><![CDATA[0]]></default-value>
+    </p_customer_key>
+  </inputs>
+
+  <outputs> 
+    <returnResult type="string"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </returnResult> 
+  </outputs>
+
+  <resources/>
+  
+  <actions> 
+    <actions> 
+      <condition><![CDATA[actions=='template']]></condition>  
+      <action-definition> 
+        <component-name>TemplateComponent</component-name>
+        <action-type>Message Template</action-type>
+        <action-outputs> 
+          <output-message type="string" mapping="returnResult"/> 
+        </action-outputs>
+        <component-definition> 
+          <template><![CDATA[<div class="easyui-layout" style="" data-options="fit:true" >
+        <div  data-options="region:'center',title:'Customers'" style="padding:1px">
+			<table id="cm_customer"></table>
+        </div>
+        <div data-options="region:'south',split:true,collapsible:false,title:'Customer contacts'" style="height:250px;padding:1px">
+			<table id="cm_contact"></table>
+        </div>
+    </div>
+	
+<script>
+//Set title of sub page
+$('#manager_page_item_title').html('Customers Manager');
+
+//Load customer
+var cutomersDataGrid=$('#cm_customer');
+cutomersDataGrid.datagrid({
+			url:rootSubPath+'&action=manager_page_customer_manager.xaction&actions=listCustomerDetail',
+			fit: true,
+			columns:[[
+				{field:'customer_key',title:'ID'},
+				{field:'customer_name',title:'Name'},	
+				{field:'customer_type',title:'Type'},	
+				{field:'customer_host_name',title:'Host name'},	
+				{field:'customer_destination_folder',title:'Destination',width: 200},	
+				{field:'customer_desc',title:'Description'},		
+				{field:'customer_status',title:'Status'},	
+				{field:'transfer_script_name',title:'Transfer script'},	
+				{field:'folder_content_transfer_script',title:'Folder content transfer script',width: 150}
+			]],
+			//rownumbers:true,
+			singleSelect:true,
+			collapsible:true,
+			fitColumns:true,
+			border: false,
+			fitColumns: true,
+			onSelect: function(rowIndex, rowData){
+				contactLoader(rowData.customer_key);
+			}
+		});
+//function load contact
+var contactLoader=function(customer_key){
+	var contactDataGrid=$('#cm_contact');
+	contactDataGrid.datagrid({
+			url:rootSubPath+'&action=manager_page_customer_manager.xaction&actions=listContactByCustomerKey&p_customer_key='+customer_key,
+			fit:true,
+			columns:[[
+				{field:'customer_contact_id',title:'Key'},
+				{field:'customer_email',title:'Email'},
+				{field:'customer_phone_number',title:'Phone number'},
+				{field:'customer_contact_status',title:'Status'}
+			]],
+			//rownumbers:true,
+			singleSelect:true,
+			collapsible:true,
+			fitColumns:true,
+			onSelect: function(rowIndex, rowData){
+
+			}
+		});
+}
+</script>]]></template>
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions>
+      <condition><![CDATA[actions=='listCustomerDetail']]></condition>
+      <action-definition>
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs>
+          <jndi type="string" mapping="connection_name"/>
+        </action-inputs>
+        <action-outputs>
+          <query-result type="result-set" mapping="query_result"/>
+        </action-outputs>
+        <component-definition>
+          <query><![CDATA[SELECT customer_key, customer_name, customer_type, customer_host_name, 
+       customer_destination_folder, customer_desc, customer_status, 
+       transfer_script_name, folder_content_transfer_script
+FROM control.spctl_pub_customer
+ORDER BY customer_name]]></query>
+          <live><![CDATA[false]]></live>
+        </component-definition>
+      </action-definition>
+
+    </actions>
+
+    <actions>
+      <condition><![CDATA[actions=='listContactByCustomerKey']]></condition>
+      <action-definition>
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs>
+          <jndi type="string" mapping="connection_name"/>
+          <p_customer_key type="string"/>
+        </action-inputs>
+        <action-outputs>
+          <query-result type="result-set" mapping="query_result"/>
+        </action-outputs>
+        <component-definition>
+          <query><![CDATA[SELECT customer_contact_id, customer_email, customer_phone_number, 
+       customer_contact_status
+FROM control.spctl_customer_contact
+WHERE customer_key={p_customer_key}]]></query>
+          <live><![CDATA[false]]></live>
+        </component-definition>
+      </action-definition>
+
+    </actions>
+
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>Process data grid</action-type>
+      <action-inputs> 
+        <returnResult type="string"/>  
+        <query_result type="result-set"/>  
+        <actions type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <returnResult type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var result_set=query_result;
+var rowCount=query_result.getRowCount();
+var meta = result_set.getMetaData();      // Returns an IPentahoMetaData object
+var colCount = meta.getColumnCount();
+var colHeaders = meta.getColumnHeaders(); //getColumnHeaders() returns object[][]
+var rowHeaders = meta.getRowHeaders(); 
+
+if(actions=='template'){
+	returnResult=returnResult;
+}else{
+	returnResult='[';
+	//process data item
+	for(var i=0;i<result_set.getRowCount();i++){
+		var item='';
+		if(i>0){
+			item+=',';
+		}
+		item+='{';
+			for(var j=0;j<result_set.getColumnCount();j++){ 		
+				var value=result_set.getValueAt(i,j);
+				var columnValue=colHeaders[0][j];
+				if(j>0){
+					item+=',';
+				}
+				item+='"'+columnValue+'":"'+value+'"';
+			}
+		item+='}';	
+
+	returnResult+=item;
+	}
+	//end
+
+	returnResult+=']';
+}]]></script> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

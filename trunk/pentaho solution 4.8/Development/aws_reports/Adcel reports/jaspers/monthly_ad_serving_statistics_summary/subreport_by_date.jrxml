@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subreport_by_date" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="calendar_year_month" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="total_fullfilled_code_count" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal("1")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="total_fullfilled_code_y" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal("1")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="total_fullfilled_code_n" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal("1")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="total_fullfilled_code_e" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal("1")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="total_fullfilled_code_t" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal("1")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="total_ad_requests" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[new BigDecimal("1")]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+a.full_date,
+sum(a.fullfilled_code_count) as fullfilled_code_count,
+sum(a.fullfilled_code_y) as fullfilled_code_y,
+sum(a.fullfilled_code_n) as fullfilled_code_n,
+sum(a.fullfilled_code_e) as fullfilled_code_e,
+sum(a.fullfilled_code_t) as fullfilled_code_t,
+sum(total_ad_requests) as total_ad_requests
+FROM adstraffic.monthly_ad_serving_stats_by_date a
+WHERE a.calendar_year_month = $P{calendar_year_month}
+AND a.is_active = true
+GROUP BY
+a.full_date
+ORDER BY
+a.full_date]]>
+	</queryString>
+	<field name="full_date" class="java.sql.Date"/>
+	<field name="fullfilled_code_count" class="java.math.BigDecimal"/>
+	<field name="fullfilled_code_y" class="java.math.BigDecimal"/>
+	<field name="fullfilled_code_n" class="java.math.BigDecimal"/>
+	<field name="fullfilled_code_e" class="java.math.BigDecimal"/>
+	<field name="fullfilled_code_t" class="java.math.BigDecimal"/>
+	<field name="total_ad_requests" class="java.math.BigDecimal"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="30">
+			<staticText>
+				<reportElement x="0" y="5" width="200" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ad Responses By Date:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band/>
+	</pageHeader>
+	<columnHeader>
+		<band height="38">
+			<staticText>
+				<reportElement x="530" y="5" width="50" height="30"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="5" width="70" height="30"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[No Ad Responses]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="5" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Full date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="690" y="5" width="65" height="30"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Timeout Ad Responses]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="5" width="50" height="30"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="340" y="5" width="70" height="30"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Yes Ad Responses]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="755" y="5" width="45" height="30"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="220" y="5" width="70" height="30"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Total Ad Responses]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="580" y="5" width="65" height="30"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Error Ad Responses]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="290" y="5" width="50" height="30"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="645" y="5" width="45" height="30"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[%]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="37" width="802" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="170" y="5" width="50" height="30"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="5" width="70" height="30"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Total Ad Requests]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21">
+			<textField pattern="MM/dd/yyyy">
+				<reportElement x="0" y="1" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{full_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="220" y="1" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{fullfilled_code_count}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="1" width="50" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[new DecimalFormat("0.00").format(new Double(($F{fullfilled_code_count}.doubleValue()*100)/$P{total_fullfilled_code_count}.doubleValue())) + "%"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="410" y="1" width="50" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[new DecimalFormat("0.00").format(new Double(($F{fullfilled_code_y}.doubleValue()*100)/$F{fullfilled_code_count}.doubleValue())) + "%"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="340" y="1" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{fullfilled_code_y}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="530" y="1" width="50" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[new DecimalFormat("0.00").format(new Double(($F{fullfilled_code_n}.doubleValue()*100)/$F{fullfilled_code_count}.doubleValue())) + "%"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="1" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{fullfilled_code_n}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="580" y="1" width="65" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{fullfilled_code_e}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="645" y="1" width="45" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[new DecimalFormat("0.00").format(new Double(($F{fullfilled_code_e}.doubleValue()*100)/$F{fullfilled_code_count}.doubleValue())) + "%"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="690" y="1" width="65" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{fullfilled_code_t}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="755" y="1" width="45" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[new DecimalFormat("0.00").format(new Double(($F{fullfilled_code_t}.doubleValue()*100)/$F{fullfilled_code_count}.doubleValue())) + "%"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="1" width="50" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[new DecimalFormat("0.00").format(new Double(($F{total_ad_requests}.doubleValue()*100)/$P{total_ad_requests}.doubleValue())) + "%"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="1" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{total_ad_requests}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="22">
+			<textField>
+				<reportElement x="220" y="2" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{total_fullfilled_code_count}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="340" y="2" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{total_fullfilled_code_y}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="2" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{total_fullfilled_code_n}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="580" y="2" width="65" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{total_fullfilled_code_e}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="690" y="2" width="65" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{total_fullfilled_code_t}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="1" width="802" height="1"/>
+			</line>
+			<textField>
+				<reportElement x="100" y="2" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$P{total_ad_requests}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

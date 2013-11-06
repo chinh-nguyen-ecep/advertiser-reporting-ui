@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Billing Monthly Local Revenue Summary " pageWidth="1520" pageHeight="842" orientation="Landscape" columnWidth="1480" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="63"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="parameter1" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/opt/pentaho/biserver-ce/pentaho-solutions/third_party_reports/jaspers/daily_performance_report/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="calendar_year_month" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT calendar_year_month
+, (max (a.dt_lastchange)::timestamp with time zone AT TIME ZONE 'America/Los_Angeles')::timestamp with time zone AT TIME ZONE 'America/New_York' as dt_lastchange
+FROM billing.ba_monthly_advance_digital a
+WHERE calendar_year_month=$P{calendar_year_month}::text
+AND is_active=true
+GROUP BY calendar_year_month]]>
+	</queryString>
+	<field name="calendar_year_month" class="java.lang.String"/>
+	<field name="dt_lastchange" class="java.sql.Timestamp"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="125">
+			<image>
+				<reportElement x="0" y="9" width="64" height="40"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"../vervelogo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="64" y="9" width="1416" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Billing Monthly Advance Digital
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="64" y="29" width="1416" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Month: " + $F{calendar_year_month}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="49" width="153" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Refresh Date (ET):]]></text>
+			</staticText>
+			<textField pattern="yyyy-MM-dd">
+				<reportElement x="153" y="49" width="107" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{dt_lastchange}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="92" width="1480" height="20"/>
+				<subreportParameter name="calendar_year_month">
+					<subreportParameterExpression><![CDATA[$F{calendar_year_month}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "ba_monthly_advance_digital_by_publisher.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="26">
+			<textField>
+				<reportElement x="0" y="4" width="260" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="260" y="4" width="1220" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page " + $V{PAGE_NUMBER} + " of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="3" width="1480" height="1"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

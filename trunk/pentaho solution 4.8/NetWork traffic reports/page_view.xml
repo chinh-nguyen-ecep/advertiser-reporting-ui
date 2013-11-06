@@ -1,0 +1,164 @@
+<Schema name="Page view">
+  <Dimension type="StandardDimension" highCardinality="false" name="Partner">
+    <Hierarchy hasAll="true" primaryKey="partner_sk">
+      <Table name="partner_dim" schema="dw">
+      </Table>
+      <Level name="name" column="name_current" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" highCardinality="false" name="Portal host">
+    <Hierarchy hasAll="true" primaryKey="portal_host_sk">
+      <Table name="portal_host_dim" schema="dw">
+      </Table>
+      <Level name="name" column="hostname" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" highCardinality="false" name="Content category">
+    <Hierarchy hasAll="true" primaryKey="content_category_sk">
+      <Table name="content_category_dim" schema="dw">
+      </Table>
+      <Level name="name" column="category_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" highCardinality="false" name="Partner module">
+    <Hierarchy hasAll="true" primaryKey="partner_module_sk">
+      <Table name="partner_module_dim" schema="dw">
+      </Table>
+      <Level name="name" column="display_name_current" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" highCardinality="false" name="User agent device type">
+    <Hierarchy hasAll="true" primaryKey="user_agent_sk">
+      <Table name="user_agent_dim" schema="dw">
+      </Table>
+      <Level name="device type" column="device_type" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" highCardinality="false" name="User agent device manufacturer">
+    <Hierarchy hasAll="true" primaryKey="user_agent_sk">
+      <Table name="user_agent_dim" schema="dw">
+      </Table>
+      <Level name="device manufacturer" column="device_manufacturer" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" highCardinality="false" name="User agent organic">
+    <Hierarchy hasAll="true" primaryKey="user_agent_sk">
+      <Table name="user_agent_dim" schema="dw">
+      </Table>
+      <Level name="User agent organic" column="organic" type="Boolean" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" highCardinality="false" name="Portal">
+    <Hierarchy hasAll="true" primaryKey="portal_sk">
+      <Table name="portal_dim" schema="dw">
+      </Table>
+      <Level name="name" column="portal_name_current" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" highCardinality="false" name="Display block">
+    <Hierarchy hasAll="true" primaryKey="display_block_sk">
+      <Table name="display_block_dim" schema="dw">
+      </Table>
+      <Level name="name" column="display_name_current" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="TimeDimension" highCardinality="false" name="Eastern date">
+    <Hierarchy hasAll="true" primaryKey="date_sk">
+      <Table name="date_dim" schema="dw">
+      </Table>
+      <Level name="date" column="full_date" type="Date" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" highCardinality="false" name="Network type">
+    <Hierarchy hasAll="true" primaryKey="network_type_sk">
+      <Table name="network_type_dim" schema="dw">
+      </Table>
+      <Level name="name" column="network_type" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" highCardinality="false" name="Month">
+    <Hierarchy hasAll="true" primaryKey="date_sk">
+      <Table name="date_dim" schema="dw">
+      </Table>
+      <Level name="month" column="calendar_month" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" highCardinality="false" name="Year">
+    <Hierarchy hasAll="true" primaryKey="date_sk">
+      <Table name="date_dim" schema="dw">
+      </Table>
+      <Level name="year" column="calendar_year" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Cube name="page_view_fact_agg_03" cache="true" enabled="true">
+    <Table name="page_view_fact_agg_03" schema="dw">
+    </Table>
+    <DimensionUsage source="Partner" name="Partner" foreignKey="partner_sk" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Portal host" name="Portal host" foreignKey="portal_host_sk" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Content category" name="Content category" foreignKey="content_category_sk" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Partner module" name="Partner module" foreignKey="partner_module_sk" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="User agent device type" name="User agent device type" foreignKey="user_agent_sk" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="User agent device manufacturer" name="User agent device manufacturer" foreignKey="user_agent_sk" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="User agent organic" name="User agent organic" foreignKey="user_agent_sk" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Portal" name="Portal" foreignKey="portal_sk" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Display block" name="Display block" foreignKey="display_block_sk" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Eastern date" name="Eastern date" foreignKey="eastern_date_sk" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Month" name="Month" foreignKey="eastern_date_sk">
+    </DimensionUsage>
+    <DimensionUsage source="Year" name="Year" foreignKey="eastern_date_sk">
+    </DimensionUsage>
+    <Measure name="Page view" column="page_view_count" datatype="Integer" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="page_view_fact_agg_04" cache="true" enabled="true">
+    <Table name="page_view_fact_agg_04" schema="dw">
+    </Table>
+    <DimensionUsage source="Partner" name="Partner" foreignKey="partner_sk" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Portal" name="Portal" foreignKey="portal_sk" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="User agent device type" name="User agent device type" foreignKey="user_agent_sk" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="User agent organic" name="User agent organic" foreignKey="user_agent_sk" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Eastern date" name="Eastern date" foreignKey="eastern_date_sk" highCardinality="false">
+    </DimensionUsage>
+    <Dimension type="StandardDimension" highCardinality="false" name="Hour 24 of day">
+      <Hierarchy hasAll="true">
+        <Level name="Hour 24 of day" column="hour24_of_day" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <DimensionUsage source="User agent device manufacturer" name="User agent device manufacturer" foreignKey="user_agent_sk" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Month" name="Month" foreignKey="eastern_date_sk" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Year" name="Year" foreignKey="eastern_date_sk" highCardinality="false">
+    </DimensionUsage>
+    <Measure name="Page view" column="page_view_count" datatype="Integer" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+</Schema>

@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Ba Adjustment Factor Table</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>ChinhNguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <actions type="string"> 
+      <sources> 
+        <request>actions</request> 
+      </sources>  
+      <default-value><![CDATA[template]]></default-value> 
+    </actions>  
+    <actionResult type="string"> 
+      <sources> 
+        <request>actionResult</request> 
+      </sources>  
+      <default-value><![CDATA[adasd]]></default-value> 
+    </actionResult>  
+    <jtSorting type="string"> 
+      <sources> 
+        <request>jtSorting</request> 
+      </sources>  
+      <default-value/> 
+    </jtSorting>  
+    <jtStartIndex type="string"> 
+      <sources> 
+        <request>jtStartIndex</request> 
+      </sources>  
+      <default-value/> 
+    </jtStartIndex>  
+    <jtPageSize type="string"> 
+      <sources> 
+        <request>jtPageSize</request> 
+      </sources>  
+      <default-value/> 
+    </jtPageSize>  
+    <connectionName type="string"> 
+      <sources> 
+        <request>connectionName</request> 
+      </sources>  
+      <default-value><![CDATA[dw3dw3]]></default-value> 
+    </connectionName>  
+    <publisher_id type="string"> 
+      <sources> 
+        <request>publisher_id</request> 
+      </sources>  
+      <default-value><![CDATA[0]]></default-value> 
+    </publisher_id>  
+    <sf_local_share type="string"> 
+      <sources> 
+        <request>sf_local_share</request> 
+      </sources>  
+      <default-value/> 
+    </sf_local_share>  
+    <threshold type="string"> 
+      <sources> 
+        <request>threshold</request> 
+      </sources>  
+      <default-value/> 
+    </threshold>  
+    <principalName type="string"> 
+      <sources> 
+        <security>principalName</security> 
+      </sources>  
+      <default-value/> 
+    </principalName>  
+    <ba_local_share type="string"> 
+      <sources> 
+        <request>ba_local_share</request> 
+      </sources>  
+      <default-value/> 
+    </ba_local_share>  
+    <ba_adjust_share type="string"> 
+      <sources> 
+        <request>ba_adjust_share</request> 
+      </sources>  
+      <default-value/> 
+    </ba_adjust_share>  
+    <ba_adjust_amount type="string"> 
+      <sources> 
+        <request>ba_adjust_amount</request> 
+      </sources>  
+      <default-value/> 
+    </ba_adjust_amount>  
+    <threshold type="string"> 
+      <sources> 
+        <request>threshold</request> 
+      </sources>  
+      <default-value/> 
+    </threshold>  
+    <publisher_name_filter_value type="string"> 
+      <sources> 
+        <request>publisher_name_filter_value</request> 
+      </sources>  
+      <default-value/> 
+    </publisher_name_filter_value> 
+  </inputs>
+
+  <outputs> 
+    <actionResult type="string"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </actionResult> 
+  </outputs>
+
+  <resources/>
+  
+  <actions> 
+    <actions> 
+      <condition><![CDATA[actions=='list']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>GetTotalCount</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <publisher_name_filter_value type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result_count"/> 
+        </action-outputs>
+        <component-definition> 
+          <live><![CDATA[true]]></live>  
+          <query><![CDATA[SELECT COUNT(DISTINCT b.publisher_id)
+FROM refer.ba_adjustment_factor_dim a,refer.adm_dim_publishers b
+WHERE a.dt_expire='9999-12-31' 
+AND b.dt_expire='9999-12-31' 
+AND a.publisher_id=b.publisher_id
+AND (upper(b.company_name) LIKE upper('%{publisher_name_filter_value}%') OR ''='{publisher_name_filter_value}')]]></query> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jtSorting type="string"/>  
+          <jtPageSize type="string"/>  
+          <jtStartIndex type="string"/>  
+          <jndi type="string" mapping="connectionName"/>  
+          <publisher_name_filter_value type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result_content"/> 
+        </action-outputs>
+        <component-definition> 
+          <query><![CDATA[SELECT a.publisher_id,a.publisher_id as publisher_id_show,b.company_name as publisher_name, sf_local_share,ba_local_share,ba_adjust_share,ba_adjust_amount,threshold
+FROM refer.ba_adjustment_factor_dim a, refer.adm_dim_publishers b
+WHERE a.dt_expire='9999-12-31' 
+AND b.dt_expire='9999-12-31' 
+AND a.publisher_id=b.publisher_id
+AND (upper(b.company_name) LIKE upper('%{publisher_name_filter_value}%') OR ''='{publisher_name_filter_value}')
+GROUP BY a.publisher_id,publisher_name, sf_local_share,ba_local_share,ba_adjust_share,ba_adjust_amount,threshold
+ORDER BY {jtSorting}
+LIMIT {jtPageSize}
+OFFSET {jtStartIndex}]]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>jSonEncode</action-type>
+        <action-inputs> 
+          <actionResult type="string"/>  
+          <query_result_count type="result-set"/>  
+          <query_result_content type="result-set"/> 
+        </action-inputs>
+        <action-outputs> 
+          <actionResult type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var result_set=query_result_content;
+var totalCount=query_result_count.getValueAt(0,0);
+var rowCount=query_result_content.getRowCount();
+var meta = result_set.getMetaData();      // Returns an IPentahoMetaData object
+var colCount = meta.getColumnCount();
+var colHeaders = meta.getColumnHeaders(); //getColumnHeaders() returns object[][]
+var rowHeaders = meta.getRowHeaders(); 
+
+
+actionResult='{"Result":"OK","TotalRecordCount":"'+totalCount+'","Records":[';
+//process data item
+for(var i=0;i<result_set.getRowCount();i++){
+	var item='';
+	if(i>0){
+		item+=',';
+	}
+	item+='{';
+		for(var j=0;j<result_set.getColumnCount();j++){ 		
+			var value=result_set.getValueAt(i,j);
+			var columnValue=colHeaders[0][j];
+			if(j>0){
+				item+=',';
+			}
+			item+='"'+j+'":"'+value+'","'+columnValue+'":"'+value+'"';
+		}
+	item+='}';	
+
+actionResult+=item;
+}
+//end
+
+actionResult+=']}';]]></script> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='create']]></condition> 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='update']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <sf_local_share type="string"/>  
+          <ba_local_share type="string"/>  
+          <ba_adjust_share type="string"/>  
+          <ba_adjust_amount type="string"/>  
+          <threshold type="string"/>  
+          <principalName type="string"/>  
+          <publisher_id type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result_update"/> 
+        </action-outputs>
+        <component-definition> 
+          <query><![CDATA[SELECT * FROM refer.fn_update_ba_adjustment_factor_dim('{sf_local_share}','{ba_local_share}','{ba_adjust_share}','{ba_adjust_amount}','{threshold}',{publisher_id},'{principalName}');]]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>jSonEncode</action-type>
+        <action-inputs> 
+          <actionResult type="string"/>  
+          <publisher_id type="string"/>  
+          <query_result_update type="result-set"/> 
+        </action-inputs>
+        <action-outputs> 
+          <actionResult type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var result=query_result_update.getValueAt(0,0);
+if(result=='-100'){
+	actionResult='{"Result":"FAILE","keyValueOfRecord":"'+publisher_id+'"}';
+}else{
+	actionResult='{"Result":"OK","keyValueOfRecord":"'+publisher_id+'"}';
+}]]></script> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='delete']]></condition>  
+      <action-definition> 
+        <component-name>SQLExecute</component-name>
+        <action-type>SQL Commands</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <publisher_id type="string"/>  
+          <principalName type="string"/> 
+        </action-inputs>
+        <component-definition> 
+          <query><![CDATA[UPDATE refer.ba_adjustment_factor_dim 
+SET dt_expire=now()::timestamp without time zone,
+update_by='{principalName}'
+WHERE publisher_id={publisher_id} AND dt_expire='9999-12-31']]></query>  
+          <force_single_statement><![CDATA[true]]></force_single_statement> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>jSonEncode</action-type>
+        <action-inputs> 
+          <actionResult type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <actionResult type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[actionResult='{"Result":"OK"}';]]></script> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='template']]></condition>  
+      <action-definition> 
+        <component-name>TemplateComponent</component-name>
+        <action-type>Message Template</action-type>
+        <action-outputs> 
+          <output-message type="string" mapping="actionResult"/> 
+        </action-outputs>
+        <component-definition> 
+          <template><![CDATA[<html>
+  <head>
+	<link href="/verve-lib/scripts/jquery-ui-1.8.24.custom/css/smoothness/jquery-ui-1.8.24.custom.css" rel="stylesheet" type="text/css" />
+	<link href="/verve-lib/scripts/jtable.2.3.0/themes/lightcolor/blue/jtable.css" rel="stylesheet" type="text/css" />
+	<link href="/verve-lib/scripts/jtable.2.3.0/jTable_custom.css" rel="stylesheet" type="text/css" />
+	<link href="/verve-lib/css/validationEngine.jquery.css" rel="stylesheet" type="text/css" />
+	
+	<script src="/verve-lib/scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="/verve-lib/scripts/jquery-ui-1.8.24.custom/js/jquery-ui-1.8.24.custom.min.js" type="text/javascript"></script>
+	<script src="/verve-lib/scripts/jtable.2.3.0/jquery.jtable.js" type="text/javascript"></script>
+	<script src="/verve-lib/scripts/utils/jquery.validationEngine-en.js" type="text/javascript"></script>
+	<script src="/verve-lib/scripts/utils/jquery.validationEngine.js" type="text/javascript"></script>
+	<script src="/verve-lib/scripts/verve-script-jquery.js" type="text/javascript"></script>	
+  </head>
+  <body>
+	<div id="PublisherTableContainer" style="width: 100%;"></div>
+	<div id="PublisherDetailDialog" style="width: 100%;display: none">
+		<div id="PublisherTableDetail" style="width: 100%;"></div>
+	</div>
+	<script type="text/javascript">
+
+		$(document).ready(function () {
+		var xaction='ba_adjustment_factor_dim_manager.xaction';
+		    //Prepare jTable
+			$('#PublisherTableContainer').jtable({
+				title: 'Ba adjustment factor dim',
+				paging: true,
+				pageSize:100,
+				sorting: true,
+				defaultSorting: 'publisher_name ASC',
+				actions: {
+					listAction: 'ViewAction?solution='+solution+'&path='+path+'&action='+xaction+'&actions=list',
+					createAction: 'ViewAction?solution='+solution+'&path='+path+'&action='+xaction+'&actions=create',
+					updateAction: 'ViewAction?solution='+solution+'&path='+path+'&action='+xaction+'&actions=update',
+					deleteAction: 'ViewAction?solution='+solution+'&path='+path+'&action='+xaction+'&actions=delete'
+				},
+				fields: {
+					publisher_id: {
+						key: true,
+						create: false,
+						edit: false,
+						list: false
+					},publisher_id_show: {
+						title: 'Publisher ID',
+						width: '100px',
+						edit: false
+					},publisher_name: {
+						title: 'Publisher Name',
+						width: '200px',
+						edit: false
+					},sf_local_share:{
+						title: 'sf_local_share',
+						width: '100px'
+					},ba_local_share:{
+						title: 'ba_local_share',
+						width: '100px'
+					},ba_adjust_share:{
+						title: 'ba_adjust_share',
+						width: '100px'					
+					},ba_adjust_amount: {
+						title: 'ba_adjust_amount',
+						width: '100px'
+					},threshold: {
+						title: 'Threshold',
+						width: '20%'
+					}
+				},
+				//Initialize validation logic when a form is created
+				formCreated: function (event, data) {
+					data.form.find('input[name="sf_local_share"]').addClass('validate[required,custom[number]]');
+					data.form.find('input[name="ba_local_share"]').addClass('validate[required,custom[number]]');
+					data.form.find('input[name="ba_adjust_share"]').addClass('validate[required,custom[number]]');
+					data.form.find('input[name="ba_adjust_amount"]').addClass('validate[required,custom[number]]');
+					data.form.find('input[name="threshold"]').addClass('validate[required,custom[number]]');
+					data.form.validationEngine();
+				},
+				//Validate form when it is being submitted
+				formSubmitting: function (event, data) {
+					return data.form.validationEngine('validate');
+				},
+				//Dispose validation logic when form is closed
+				formClosed: function (event, data) {
+					data.form.validationEngine('hide');
+					data.form.validationEngine('detach');
+				},
+				recordsLoaded: function(event, data) {
+					 $('#PublisherTableContainer .jtable-data-row').click(function() {
+							var row_id = $(this).attr('data-record-key');
+							var publisher_name=$(this).find('td:first').next().text();
+							//alert('Row id:'+row_id+' name:'+publisher_name);
+							viewDetail(row_id,publisher_name);
+						});
+				}
+			});
+
+			//Load person list from server
+			$('#PublisherTableContainer').jtable('load');
+			
+			//Hide add record button
+			$('span.jtable-toolbar-item-add-record').hide();
+			
+			//Add Search input
+			$('div.jtable-toolbar').append(
+				'<input id="search_input" type="text" value="Search" class="ui-corner-all" style="margin-bottom: 3px;padding:4px"/>'
+			);
+			
+			$('#search_input').focus(function(){
+				if($(this).attr("value")=="Search"){
+					$(this).attr("value","");
+				}				
+			});
+			$('#search_input').focusout(function(){
+				if($(this).attr("value")==""){
+					$(this).attr("value","Search");
+					delay_timeout(1000,function(){						
+						//reloadTableWithFilter("");
+					})	
+				}else{
+				
+				}				
+			});
+			//Re-load records when user type input filter
+			$('#search_input').keyup(function(){
+				delay_timeout(1000,function(){
+					var filterValue=$('#search_input').attr("value");
+					reloadTableWithFilter(filterValue);
+				})				
+			})
+	
+			var reloadTableWithFilter=function(filterInput){
+				$('#PublisherTableContainer').jtable('load',{
+					publisher_name_filter_value: filterInput
+				});
+			}
+			
+
+			//View detail
+
+			var viewDetail=function(p_publisher_id,p_publisher_name){
+				$( "#PublisherDetailDialog" ).show();
+				$( "#PublisherDetailDialog" ).dialog({
+					title: p_publisher_name + '('+p_publisher_id+')',
+					autoOpen: true,
+					width: '95%',
+					position: ['center',20],
+					modal : true,
+					closeOnEscape: true,
+					resizable : false,
+					draggable : false,
+					open: function( event, ui ) {
+						$('#PublisherTableDetail').jtable('load',{
+							publisher_id: p_publisher_id
+						});					
+					},
+					beforeClose: function( event, ui ) {
+					
+					},
+					buttons: [{
+						text:"Close",
+						click: function(){
+							$( this ).dialog( "close" );
+						}
+					}]
+				});
+			}
+			//Detail table init
+			$('#PublisherTableDetail').jtable({
+				title: 'Detail',
+				paging: true,
+				pageSize:10,
+				sorting: true,
+				defaultSorting: 'partner_name ASC',
+				actions: {
+					listAction: 'ViewAction?solution='+solution+'&path='+path+'&action='+xaction+'&actions=listDetail',
+					//createAction: 'ViewAction?solution='+solution+'&path='+path+'&action='+xaction+'&actions=create',
+					//updateAction: 'ViewAction?solution='+solution+'&path='+path+'&action='+xaction+'&actions=update',
+					//deleteAction: 'ViewAction?solution='+solution+'&path='+path+'&action='+xaction+'&actions=delete'
+				},
+				fields: {
+					partner_id: {
+						key: true,
+						create: false,
+						edit: false,
+						list: false
+					},partner_id_show: {
+						title: 'Partner ID',
+						width: '100px',
+						edit: false
+					},partner_name: {
+						title: 'Partner Name',
+						width: '200px',
+						edit: false
+					},sf_local_share:{
+						title: 'sf_local_share',
+						width: '100px'
+					},ba_local_share:{
+						title: 'ba_local_share',
+						width: '100px'
+					},ba_adjust_share:{
+						title: 'ba_adjust_share',
+						width: '100px'					
+					},ba_adjust_amount: {
+						title: 'ba_adjust_amount',
+						width: '100px'
+					},threshold: {
+						title: 'Threshold',
+						width: '20%'
+					}				
+				}
+				
+				});
+		});
+
+	</script>
+ 
+  </body>
+</html>]]></template> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='listDetail']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Get total count</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <publisher_id type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result_count"/> 
+        </action-outputs>
+        <component-definition> 
+          <query><![CDATA[SELECT COUNT(DISTINCT (a.publisher_id,a.partner_id))
+FROM refer.ba_adjustment_factor_dim a,refer.adm_dim_publishers b
+WHERE a.dt_expire='9999-12-31' 
+AND b.dt_expire='9999-12-31' 
+AND a.publisher_id=b.publisher_id
+AND a.publisher_id={publisher_id}]]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <jtSorting type="string"/>  
+          <jtPageSize type="string"/>  
+          <jtStartIndex type="string"/>  
+          <publisher_id type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result_content"/> 
+        </action-outputs>
+        <component-definition> 
+          <query><![CDATA[SELECT a.partner_id,a.partner_id as partner_id_show,c.name as partner_name,sf_local_share,ba_local_share,ba_adjust_share,ba_adjust_amount,threshold
+FROM refer.ba_adjustment_factor_dim a, refer.adm_dim_publishers b, refer.partner_dim c
+WHERE a.dt_expire='9999-12-31' 
+AND b.dt_expire='9999-12-31' 
+AND c.dt_expire='9999-12-31' 
+AND a.publisher_id=b.publisher_id
+AND a.partner_id=c.partner_id
+AND a.publisher_id={publisher_id}
+GROUP BY a.partner_id,partner_name, sf_local_share,ba_local_share,ba_adjust_share,ba_adjust_amount,threshold
+ORDER BY {jtSorting}
+LIMIT {jtPageSize}
+OFFSET {jtStartIndex}]]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>jSonEncode</action-type>
+        <action-inputs> 
+          <actionResult type="string"/>  
+          <query_result_count type="result-set"/>  
+          <query_result_content type="result-set"/> 
+        </action-inputs>
+        <action-outputs> 
+          <actionResult type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var result_set=query_result_content;
+var totalCount=query_result_count.getValueAt(0,0);
+var rowCount=query_result_content.getRowCount();
+var meta = result_set.getMetaData();      // Returns an IPentahoMetaData object
+var colCount = meta.getColumnCount();
+var colHeaders = meta.getColumnHeaders(); //getColumnHeaders() returns object[][]
+var rowHeaders = meta.getRowHeaders(); 
+
+
+actionResult='{"Result":"OK","TotalRecordCount":"'+totalCount+'","Records":[';
+//process data item
+for(var i=0;i<result_set.getRowCount();i++){
+	var item='';
+	if(i>0){
+		item+=',';
+	}
+	item+='{';
+		for(var j=0;j<result_set.getColumnCount();j++){ 		
+			var value=result_set.getValueAt(i,j);
+			var columnValue=colHeaders[0][j];
+			if(j>0){
+				item+=',';
+			}
+			item+='"'+j+'":"'+value+'","'+columnValue+'":"'+value+'"';
+		}
+	item+='}';	
+
+actionResult+=item;
+}
+//end
+
+actionResult+=']}';]]></script> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+ 
+  </actions> 
+</action-sequence>

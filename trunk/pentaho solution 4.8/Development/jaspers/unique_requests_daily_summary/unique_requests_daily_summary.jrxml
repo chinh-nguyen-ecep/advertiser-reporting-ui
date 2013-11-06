@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="unique_requests_daily_summary" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="558"/>
+	<parameter name="eastern_date_sk" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("1")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select a.eastern_date_sk
+     , a.full_date
+     , a.total_unfilled_count
+     , ((a.dt_lastchange)::timestamp with time zone AT TIME ZONE 'America/Los_Angeles')::timestamp with time zone AT TIME ZONE 'America/New_York' as dt_lastchange
+     , COALESCE(b.total_fullfilled_code_count, 0) as total_fullfilled_code_count
+     , COALESCE(b.total_fullfilled_code_y, 0) as total_fullfilled_code_y
+     , COALESCE(b.total_fullfilled_code_n, 0) as total_fullfilled_code_n
+     , COALESCE(b.total_fullfilled_code_e, 0) as total_fullfilled_code_e
+     , COALESCE(b.total_fullfilled_code_t, 0) as total_fullfilled_code_t
+     , COALESCE(c.total_ad_requests, COALESCE(b.total_fullfilled_code_y, 0) + a.total_unfilled_count) as total_ad_requests
+from
+     (select eastern_date_sk
+           , full_date
+           , sum(unfilled_count) as total_unfilled_count
+           , max(dt_lastchange) as dt_lastchange
+      from   adstraffic.daily_unfilled_stats
+      where  eastern_date_sk = $P{eastern_date_sk}::INTEGER
+        and  is_active = true
+      group by eastern_date_sk, full_date
+     ) a
+left join
+     (select eastern_date_sk
+           , sum(fullfilled_code_count) as total_fullfilled_code_count
+           , sum(fullfilled_code_y) as total_fullfilled_code_y
+           , sum(fullfilled_code_n) as total_fullfilled_code_n
+           , sum(fullfilled_code_e) as total_fullfilled_code_e
+           , sum(fullfilled_code_t) as total_fullfilled_code_t
+      from   adstraffic.daily_ad_serving_stats
+      where  eastern_date_sk = $P{eastern_date_sk}::INTEGER
+        and  is_active = true
+      group by eastern_date_sk
+     ) b on a.eastern_date_sk = b.eastern_date_sk
+left join
+     (select eastern_date_sk
+           , max(total_ad_requests) as total_ad_requests
+      from   adstraffic.daily_adcel_stats
+      where  eastern_date_sk = $P{eastern_date_sk}::INTEGER
+        and  is_active = true
+      group by eastern_date_sk
+     ) c on a.eastern_date_sk = c.eastern_date_sk
+;]]>
+	</queryString>
+	<field name="eastern_date_sk" class="java.lang.Integer"/>
+	<field name="full_date" class="java.sql.Date"/>
+	<field name="total_unfilled_count" class="java.lang.Long"/>
+	<field name="dt_lastchange" class="java.sql.Timestamp"/>
+	<field name="total_fullfilled_code_count" class="java.lang.Long"/>
+	<field name="total_fullfilled_code_y" class="java.lang.Long"/>
+	<field name="total_fullfilled_code_n" class="java.lang.Long"/>
+	<field name="total_fullfilled_code_e" class="java.lang.Long"/>
+	<field name="total_fullfilled_code_t" class="java.lang.Long"/>
+	<field name="total_ad_requests" class="java.lang.Long"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="425">
+			<image>
+				<reportElement x="0" y="9" width="64" height="20"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"vervelogo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="64" y="9" width="738" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unique Request Daily Summary]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="40" width="200" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Date: " + $F{full_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="552" y="40" width="125" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Refresh Date (ET):]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="677" y="40" width="125" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{dt_lastchange}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="0" y="260" width="802" height="20"/>
+				<subreportParameter name="eastern_date_sk">
+					<subreportParameterExpression><![CDATA[new Integer($P{eastern_date_sk})]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"subreport_by_ad_serving.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="280" width="802" height="20"/>
+				<subreportParameter name="eastern_date_sk">
+					<subreportParameterExpression><![CDATA[new Integer($P{eastern_date_sk})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_trxids_count">
+					<subreportParameterExpression><![CDATA[$F{total_ad_requests}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"subreport_by_portals.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="300" width="802" height="20"/>
+				<subreportParameter name="eastern_date_sk">
+					<subreportParameterExpression><![CDATA[new Integer($P{eastern_date_sk})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_trxids_count">
+					<subreportParameterExpression><![CDATA[$F{total_ad_requests}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"subreport_by_groups.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="320" width="802" height="20"/>
+				<subreportParameter name="eastern_date_sk">
+					<subreportParameterExpression><![CDATA[new Integer($P{eastern_date_sk})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_trxids_count">
+					<subreportParameterExpression><![CDATA[$F{total_ad_requests}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"subreport_by_device_organics.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="340" width="802" height="20"/>
+				<subreportParameter name="eastern_date_sk">
+					<subreportParameterExpression><![CDATA[new Integer($P{eastern_date_sk})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_trxids_count">
+					<subreportParameterExpression><![CDATA[$F{total_ad_requests}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"subreport_by_device_vendors.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="360" width="802" height="20"/>
+				<subreportParameter name="eastern_date_sk">
+					<subreportParameterExpression><![CDATA[new Integer($P{eastern_date_sk})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_trxids_count">
+					<subreportParameterExpression><![CDATA[$F{total_ad_requests}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"subreport_by_content_categories.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="380" width="802" height="20"/>
+				<subreportParameter name="eastern_date_sk">
+					<subreportParameterExpression><![CDATA[new Integer($P{eastern_date_sk})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_trxids_count">
+					<subreportParameterExpression><![CDATA[$F{total_ad_requests}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"subreport_by_countries.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="0" y="80" width="230" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Overview:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="100" width="140" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Total Ad Requests:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="120" width="140" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Total Unfilled Requests:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="140" width="140" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Total Ad Responses:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="160" width="140" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Total Yes Ad Responses:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="180" width="140" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Total No Ad Responses:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="200" width="140" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Total Error Ad Responses:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="220" width="140" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Total Timeout Ad Responses:]]></text>
+			</staticText>
+			<textField pattern="#,###;-#,###">
+				<reportElement x="140" y="100" width="90" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{total_ad_requests}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###;-#,###">
+				<reportElement x="140" y="120" width="90" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{total_unfilled_count}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###;-#,###">
+				<reportElement x="140" y="140" width="90" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{total_fullfilled_code_count}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###;-#,###">
+				<reportElement x="140" y="160" width="90" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{total_fullfilled_code_y}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###;-#,###">
+				<reportElement x="140" y="180" width="90" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{total_fullfilled_code_n}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###;-#,###">
+				<reportElement x="140" y="200" width="90" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{total_fullfilled_code_e}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###;-#,###">
+				<reportElement x="140" y="220" width="90" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{total_fullfilled_code_t}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="400" width="802" height="20"/>
+				<subreportParameter name="eastern_date_sk">
+					<subreportParameterExpression><![CDATA[new Integer($P{eastern_date_sk})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_trxids_count">
+					<subreportParameterExpression><![CDATA[$F{total_ad_requests}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"subreport_by_metros.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="26">
+			<textField>
+				<reportElement x="0" y="4" width="140" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="677" y="4" width="90" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="767" y="4" width="35" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="2" width="802" height="1"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

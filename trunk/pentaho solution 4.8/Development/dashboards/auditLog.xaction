@@ -1,0 +1,942 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Pentaho Audit Log</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>Chinhnguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <actions type="string"> 
+      <sources> 
+        <request>actions</request> 
+      </sources>  
+      <default-value><![CDATA[firstPage]]></default-value> 
+    </actions>  
+    <action_result type="string"> 
+      <sources> 
+        <request>action_result</request> 
+      </sources>  
+      <default-value/> 
+    </action_result>  
+    <connectionName type="string"> 
+      <sources> 
+        <request>connectionName</request> 
+      </sources>  
+      <default-value><![CDATA[verveReportConnection]]></default-value> 
+    </connectionName>  
+    <p_user type="string"> 
+      <sources> 
+        <request>p_user</request> 
+      </sources>  
+      <default-value/> 
+    </p_user>  
+    <p_report_name type="string"> 
+      <sources> 
+        <request>p_report_name</request> 
+      </sources>  
+      <default-value/> 
+    </p_report_name>  
+    <p_obj_id type="string"> 
+      <sources> 
+        <request>p_obj_id</request> 
+      </sources>  
+      <default-value/> 
+    </p_obj_id>  
+    <p_roll_back_date type="integer"> 
+      <sources> 
+        <request>p_roll_back_date</request> 
+      </sources>  
+      <default-value><![CDATA[7]]></default-value> 
+    </p_roll_back_date>  
+    <p_start_date type="string"> 
+      <sources> 
+        <request>p_start_date</request> 
+      </sources>  
+      <default-value><![CDATA[2013-08-01]]></default-value> 
+    </p_start_date>  
+    <p_end_date type="string"> 
+      <sources> 
+        <request>p_end_date</request> 
+      </sources>  
+      <default-value><![CDATA[2013-08-03]]></default-value> 
+    </p_end_date> 
+  </inputs>
+
+  <outputs> 
+    <action_result type="string"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </action_result> 
+  </outputs>
+
+  <resources/>
+  
+  <actions> 
+    <actions> 
+      <condition><![CDATA[actions=='firstPage']]></condition>  
+      <action-definition> 
+        <component-name>TemplateComponent</component-name>
+        <action-type>Message Template</action-type>
+        <action-inputs/>
+        <action-outputs> 
+          <output-message type="string" mapping="action_result"/> 
+        </action-outputs>
+        <component-definition> 
+          <template><![CDATA[<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Pentaho log manager</title>
+    <link rel="stylesheet" type="text/css" href="/verve-lib/scripts/jquery-easyui-1.3.3/themes/bootstrap/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/verve-lib/scripts/jquery-easyui-1.3.3/themes/icon.css">
+    <script type="text/javascript" src="/verve-lib/scripts/jquery-easyui-1.3.3/jquery.min.js"></script>
+    <script type="text/javascript" src="/verve-lib/scripts/jquery-easyui-1.3.3/jquery.easyui.min.js"></script>
+	<script src="/verve-lib/scripts/Highcharts-3.0.4/js/highcharts.js"></script>
+	<script src="/verve-lib/scripts/Highcharts-3.0.4/js/modules/exporting.js"></script>
+	<style>
+		body{
+			font-family:Helvetica,"Times New Roman", Times, serif;
+		}
+	</style>
+</head>
+<body>
+<div id="configureDialog" class="easyui-dialog" title="Configuration" data-options="iconCls:'icon-configuration',resizable:true,modal:true,close:true">
+	
+	<div style="float:left; margin: 5px;">
+	<span style="">Start date:</span>
+		<div id="calendar_start_date" class="easyui-calendar"></div>
+		
+	</div>
+	
+	<div style="float:left; margin-right:5px;margin-top:5px;">
+	<span style="">End date:</span>
+	<div id="calendar_end_date" class="easyui-calendar"></div>	
+	</div>
+
+</div>
+<div id="main_panel" class="easyui-panel" data-options="fit:true" >
+    <div class="easyui-layout" data-options="fit:true">
+        <div data-options="region:'center'" >	
+			<div class="easyui-layout" data-options="fit:true">
+				<div data-options="region:'west',title:'Users use pentaho ',split:true,iconCls:'icon-tip'" title="West" style="width:300px;">
+					<table id="top10user" class="easyui-datagrid" data-options="border:false,singleSelect:true,fit:true,fitColumns:true">
+						
+					</table>				
+				</div>
+				<div data-options="region:'east',title:'Reports run slowest',split:true,iconCls:'icon-tip'" title="East" style="width:570px;">
+					<table id="top10reportRunSlow" class="easyui-datagrid" data-options="border:false,singleSelect:true,fit:true,fitColumns:true">
+						
+					</table>				
+				</div>
+				<div data-options="region:'center',title:'Reports used by users',iconCls:'icon-tip'">	
+					<table id="top10reportUsed" class="easyui-datagrid" data-options="border:false,singleSelect:true,fit:true,fitColumns:true">
+						
+					</table>
+				</div>
+			</div>			
+		</div>
+        <div data-options="region:'south',title:'Pentaho performance by hour',iconCls:'icon-tip'" style="height:250px;">	
+			<div id="container" style="min-width: 310px; height: 200px; margin: 0 auto"></div>
+		</div>
+    </div>
+</div>
+
+ 
+ <script>
+	//this function paser param from url
+	function gup( name ){
+	  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+	  var regexS = "[\\?&]"+name+"=([^&#]*)";
+	  var regex = new RegExp( regexS );
+	  var results = regex.exec( window.location.href );
+	  if( results == null )
+		return "";
+	  else
+		return results[1];
+	}
+	//This function paser date from date object
+	function parseDate(date){
+		var result='';
+		var months = new Array('01','02','03','04','05','06','07','08','09','10','11','12');
+		var tdate=date.getDate();
+		if(tdate<10) tdate='0'+tdate;
+		result=date.getFullYear()+'-'+months[date.getMonth()]+'-'+tdate;
+		return result;
+	}
+	
+	var solution=gup('solution');
+	var path=gup('path');
+	var rootPath='ViewAction?solution='+solution+'&path='+path+'&action=auditLog.xaction';
+	var user_reports_dialog='';
+	var user_reports_content_datagrid='';
+	var report_users_dialog='';
+	var report_users_content_datagrid='';
+	var v_start_date='';
+	var v_end_date='';
+	// process default start date and end date
+	var myDate=new Date();
+	var date = myDate;
+	date.setDate(date.getDate()-6);
+	v_start_date=parseDate(date);	
+	var myDate=new Date();
+	v_end_date=parseDate(myDate);
+	
+	// end process start date , end date 
+	$( document ).ready(function() {
+		console.log( "ready!" );
+		console.log("jQuery verion: "+jQuery.fn.jquery);
+		initMainPannel();	
+		initTop10UserUsedPentaho();
+		initTop10ReportsUsed();
+		initRop10ReportsRunSlow();
+		loadPerformanceChartData();
+	});
+	var initMainPannel=function(){
+		$('#main_panel').panel({
+			title: 'Pentaho audit log from '+v_start_date+' to '+v_end_date,
+			 tools:[{
+				iconCls:'icon-calendar',
+				handler:function(){
+					$('#configureDialog').dialog('open');
+				}
+			 },{
+				iconCls:'icon-reload',
+				handler:function(){
+					refreshDashboard();
+				}
+			 }]
+		});
+		//configuration dialog
+		
+		$('#configureDialog').dialog({
+			closable: false,
+			buttons:[{			
+				text:'Save',
+				handler:function(){
+					//compair start date and end date
+					var start_date=new Date(v_start_date);
+					var end_date=new Date(v_end_date);
+					if(start_date<=end_date){
+						$('#configureDialog').dialog('close');
+						refreshDashboard();				
+					}else{
+						$.messager.alert('Warning','The end date must be greater than start date');
+					}					
+				}
+			}]
+		});
+		$('#configureDialog').dialog('close');
+		
+		//configure start date calendar
+		$('#calendar_start_date').calendar('moveTo',new Date(v_start_date));
+		$('#calendar_start_date').calendar({
+			onSelect: function(date){
+				v_start_date=parseDate(date);
+			}
+		});
+		//configure end date calendar
+		$('#calendar_end_date').calendar({
+			current: new Date(),
+			onSelect: function(date){
+				v_end_date=parseDate(date);
+			}
+		});
+	}
+	var initTop10UserUsedPentaho=function(){
+		console.log( "Create top 10 user use pentaho data grid" );
+		$('#top10user').datagrid({
+			url: rootPath+'&actions=loadTop10User',
+			columns:[[
+				{field:'user',title:'User name',width:60},
+				{field:'countinstance',title:'Instance count',align:'right'}
+			]],
+			onSelect: function(rowIndex, rowData){
+				loadReportsUseByUser(rowData.user);
+			}
+		});
+		$('#top10user').datagrid('load', {
+			p_start_date: v_start_date,
+			p_end_date:v_end_date
+		});
+	}
+	var initTop10ReportsUsed=function(){
+		console.log( "Create top 10 reports used in 7 day" );
+		$('#top10reportUsed').datagrid({
+			url: rootPath+'&actions=loadTop10Reports',
+			columns:[[
+				{field:'report_name',title:'Report name',width:60},
+				{field:'countinstance',title:'Instance count',align:'right'}
+			]],
+			onSelect: function(rowIndex, rowData){
+				loadUsersByReport(rowData.report,rowData.report_name);
+			}
+		});	
+		$('#top10reportUsed').datagrid('load', {
+			p_start_date: v_start_date,
+			p_end_date:v_end_date
+		});
+	}
+	
+	var initRop10ReportsRunSlow=function(){		
+		console.log( "Create top 10 reports run slowest in 7 day" );
+		$('#top10reportRunSlow').datagrid({
+			url: rootPath+'&actions=loadTop10ReportsRunSlow',
+			columns:[[
+				{field:'report_name',title:'Report name',width:60},
+				{field:'avgduration',title:'AVG Duration(s)',align:'right'},
+				{field:'min_duration',title:'Min Duration(s)',align:'right'},
+				{field:'max_duration',title:'Max Duration(s)',align:'right'}
+			]],
+			onSelect: function(rowIndex, rowData){
+				loadUsersByReport(rowData.report,rowData.report_name);
+			}
+		});
+		$('#top10reportRunSlow').datagrid('load', {
+			p_start_date: v_start_date,
+			p_end_date:v_end_date
+		});
+	}
+	var chartPerformance='';
+	var initChartPerfomance=function(categories,data1,data2){
+		console.log( "Create chart performance today" );
+		if(chartPerformance !='' ){
+			chartPerformance.highcharts().destroy();
+		}
+        chartPerformance=$('#container').highcharts({
+            chart: {
+                zoomType: 'xy'
+            },
+            title: {
+                text: 'Pentaho performance'
+            },
+            subtitle: {
+                text: 'Instant count & Duration in 24 hour'
+            },
+            xAxis: [{
+                categories: categories
+            }],
+            yAxis: [{ // Primary yAxis
+                labels: {
+                    formatter: function() {
+                        return this.value +' s';
+                    },
+                    style: {
+                        color: '#89A54E'
+                    }
+                },
+                title: {
+                    text: 'AVG Duration time',
+                    style: {
+                        color: '#89A54E'
+                    }
+                },
+                opposite: true
+    
+            }, { // Secondary yAxis
+                gridLineWidth: 0,
+                title: {
+                    text: 'Instatnt count',
+                    style: {
+                        color: '#4572A7'
+                    }
+                },
+                labels: {
+                    formatter: function() {
+                        return this.value ;
+                    },
+                    style: {
+                        color: '#4572A7'
+                    }
+                }
+    
+            }],
+            tooltip: {
+                shared: true
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'left',
+                x: 120,
+                verticalAlign: 'top',
+                y: 0,
+                floating: true,
+                backgroundColor: '#FFFFFF'
+            },
+            series: [{
+                name: 'Instant count',
+                color: '#4572A7',
+                type: 'line',
+                yAxis: 1,
+                data: data1,
+                tooltip: {
+                    //valueSuffix: ' mm'
+                }
+    
+            }, {
+                name: 'AVG Duration time',
+                color: '#89A54E',
+                type: 'spline',
+                data: data2,
+                tooltip: {
+                    valueSuffix: ' s'
+                }
+            }]
+        });
+		
+		}	
+
+	
+	var loadPerformanceChartData=function(){
+		$.getJSON(rootPath+'&actions=performanceChartByHour',function(data){
+			var category=data.category;
+			initChartPerfomance(category,data.data1,data.data2);
+		})
+	}
+	
+	var loadReportsUseByUser=function(userName){		
+		if(user_reports_dialog==''){
+			user_reports_dialog=$("<div></div>");
+			user_reports_content_datagrid=$('<table class="easyui-datagrid" data-options="border:false,singleSelect:true,fit:true,fitColumns:true"></table>');
+			user_reports_content_datagrid.appendTo(user_reports_dialog);
+			user_reports_dialog.dialog({
+				title: 'Reports used by '+userName+'',
+				width: 400,
+				height: 300,
+				closed: false,
+				cache: false,
+				//href: 'get_content.php',
+				modal: true,
+				buttons:[{text: 'Close',handler: function(){user_reports_dialog.dialog('close')}}]
+			});
+			user_reports_content_datagrid.datagrid({
+				url: rootPath+'&actions=loadReportsByUser',
+				columns:[[
+					{field:'report_name',title:'Report name',width:60},
+					{field:'countinstance',title:'Instance count',align:'right'}
+				]],
+				queryParams:{
+					p_start_date: v_start_date,
+					p_end_date:v_end_date,
+					p_user: userName
+				}
+			});	
+			//user_reports_content_datagrid.datagrid('load',{p_user: userName});
+		}else{
+			user_reports_dialog.dialog('setTitle','Reports used by '+userName+'');
+			user_reports_dialog.dialog('open');
+			user_reports_content_datagrid.datagrid('load',{
+					p_start_date: v_start_date,
+					p_end_date:v_end_date,
+					p_user: userName
+			});
+		}
+		
+	}
+	var loadUsersByReport=function(job_id,reportName){
+		if(report_users_dialog==''){
+			report_users_dialog=$("<div></div>");
+			report_users_content_datagrid=$('<table class="easyui-datagrid" data-options="border:false,singleSelect:true,fit:true,fitColumns:true"></table>');
+			report_users_content_datagrid.appendTo(report_users_dialog);
+			report_users_dialog.dialog({
+				title: reportName + ' used by users',
+				width: 450,
+				height: 300,
+				closed: false,
+				cache: false,
+				//href: 'get_content.php',
+				modal: true,
+				buttons:[{text: 'Close',handler: function(){report_users_dialog.dialog('close')}}]
+			});
+			report_users_content_datagrid.datagrid({
+				url: rootPath+'&actions=loadUsersByReport',
+				columns:[[
+					{field:'user',title:'User name',width:60},
+					{field:'countinstance',title:'Instance count',align:'right'}
+				]],
+				queryParams:{
+					p_start_date: v_start_date,
+					p_end_date:v_end_date,
+					p_obj_id:job_id,
+					p_report_name: reportName 
+				}
+			});	
+			//report_users_content_datagrid.datagrid('load',{p_obj_id:job_id,p_report_name: reportName });
+		}else{
+			report_users_dialog.dialog('setTitle',reportName + ' used by users');
+			report_users_dialog.dialog('open');
+			report_users_content_datagrid.datagrid('load',{p_start_date: v_start_date,
+					p_end_date:v_end_date,
+					p_obj_id:job_id,
+					p_report_name: reportName 
+			});
+		}		
+	}
+	var refreshDashboard=function(){
+		$('#top10user').datagrid('load',{
+			p_start_date: v_start_date,
+			p_end_date:v_end_date
+		});
+		$('#top10reportUsed').datagrid('load',{
+			p_start_date: v_start_date,
+			p_end_date:v_end_date
+		});
+		$('#top10reportRunSlow').datagrid('load',{
+			p_start_date: v_start_date,
+			p_end_date:v_end_date
+		});
+		//refresh data performance chart();
+		loadPerformanceChartData();
+		//Set main pannel title
+		$('#main_panel').panel('setTitle','Pentaho audit log from '+v_start_date+' to '+v_end_date);	
+	}
+ </script>
+</body>
+</html>]]></template>
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='loadTop10User']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <p_start_date type="string"/>  
+          <p_end_date type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result_top_10_users"/> 
+        </action-outputs>
+        <component-definition> 
+          <live><![CDATA[false]]></live>  
+          <query><![CDATA[SELECT actor as user,count(1) as countInstance 
+FROM control.pro_audit_run_xaction a
+INNER JOIN refer.pro_audit_report_name_dim b ON a.obj_id=b.obj_id AND b.is_active=true
+WHERE message_type='instance_start' AND audit_time::date BETWEEN '{p_start_date}'::date AND '{p_end_date}'::date
+GROUP BY actor 
+ORDER BY countInstance desc]]></query> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>Process data grid</action-type>
+        <action-inputs> 
+          <action_result type="string"/>  
+          <query_result_top_10_users type="result-set"/> 
+        </action-inputs>
+        <action-outputs> 
+          <action_result type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var result_set=query_result_top_10_users;
+var rowCount=query_result_top_10_users.getRowCount();
+var meta = result_set.getMetaData();      // Returns an IPentahoMetaData object
+var colCount = meta.getColumnCount();
+var colHeaders = meta.getColumnHeaders(); //getColumnHeaders() returns object[][]
+var rowHeaders = meta.getRowHeaders(); 
+
+
+action_result='[';
+//process data item
+for(var i=0;i<result_set.getRowCount();i++){
+	var item='';
+	if(i>0){
+		item+=',';
+	}
+	item+='{';
+		for(var j=0;j<result_set.getColumnCount();j++){ 		
+			var value=result_set.getValueAt(i,j);
+			var columnValue=colHeaders[0][j];
+			if(j>0){
+				item+=',';
+			}
+			item+='"'+columnValue+'":"'+value+'"';
+		}
+	item+='}';	
+
+action_result+=item;
+}
+//end
+
+action_result+=']';]]></script> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='loadTop10Reports']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <p_start_date type="string"/>  
+          <p_end_date type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result_top_10_reports"/> 
+        </action-outputs>
+        <component-definition> 
+          <live><![CDATA[false]]></live>  
+          <query><![CDATA[SELECT a.obj_id as report,count(1) as countInstance ,b.report_name as report_name
+FROM control.pro_audit_run_xaction a 
+INNER JOIN refer.pro_audit_report_name_dim b ON a.obj_id=b.obj_id AND b.is_active=true
+WHERE message_type='instance_start' AND audit_time::date BETWEEN '{p_start_date}'::date AND '{p_end_date}'::date
+GROUP BY a.obj_id,b.report_name
+ORDER BY countInstance desc;]]></query> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>JavaScript</action-type>
+        <action-inputs> 
+          <query_result_top_10_reports type="result-set"/>  
+          <action_result type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <action_result type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var result_set=query_result_top_10_reports;
+var rowCount=query_result_top_10_reports.getRowCount();
+var meta = result_set.getMetaData();      // Returns an IPentahoMetaData object
+var colCount = meta.getColumnCount();
+var colHeaders = meta.getColumnHeaders(); //getColumnHeaders() returns object[][]
+var rowHeaders = meta.getRowHeaders(); 
+
+
+action_result='[';
+//process data item
+for(var i=0;i<result_set.getRowCount();i++){
+	var item='';
+	if(i>0){
+		item+=',';
+	}
+	item+='{';
+		for(var j=0;j<result_set.getColumnCount();j++){ 		
+			var value=result_set.getValueAt(i,j);
+			var columnValue=colHeaders[0][j];
+			if(j>0){
+				item+=',';
+			}
+			item+='"'+columnValue+'":"'+value+'"';
+		}
+	item+='}';	
+
+action_result+=item;
+}
+//end
+
+action_result+=']';]]></script> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='loadTop10ReportsRunSlow']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <p_start_date type="string"/>  
+          <p_end_date type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result_top_10_run_slow"/> 
+        </action-outputs>
+        <component-definition> 
+          <live><![CDATA[false]]></live>  
+          <query><![CDATA[SELECT a.obj_id as report,round(AVG(duration),2) as avgduration , b.report_name,min(duration) as min_duration,max(duration) as max_duration
+FROM control.pro_audit_run_xaction a
+INNER JOIN refer.pro_audit_report_name_dim b ON a.obj_id=b.obj_id AND b.is_active=true
+WHERE message_type='instance_end' AND audit_time::date BETWEEN '{p_start_date}'::date AND '{p_end_date}'::date
+GROUP BY a.obj_id,b.report_name ORDER BY avgduration desc LIMIT 10]]></query> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>JavaScript</action-type>
+        <action-inputs> 
+          <action_result type="string"/>  
+          <query_result_top_10_run_slow type="result-set"/> 
+        </action-inputs>
+        <action-outputs> 
+          <action_result type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var result_set=query_result_top_10_run_slow;
+var rowCount=query_result_top_10_run_slow.getRowCount();
+var meta = result_set.getMetaData();      // Returns an IPentahoMetaData object
+var colCount = meta.getColumnCount();
+var colHeaders = meta.getColumnHeaders(); //getColumnHeaders() returns object[][]
+var rowHeaders = meta.getRowHeaders(); 
+
+
+action_result='[';
+//process data item
+for(var i=0;i<result_set.getRowCount();i++){
+	var item='';
+	if(i>0){
+		item+=',';
+	}
+	item+='{';
+		for(var j=0;j<result_set.getColumnCount();j++){ 		
+			var value=result_set.getValueAt(i,j);
+			var columnValue=colHeaders[0][j];
+			if(j>0){
+				item+=',';
+			}
+			item+='"'+columnValue+'":"'+value+'"';
+		}
+	item+='}';	
+
+action_result+=item;
+}
+//end
+
+action_result+=']';]]></script> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='performanceChartByHour']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result_performance_chart"/> 
+        </action-outputs>
+        <component-definition> 
+          <live><![CDATA[false]]></live>  
+          <query><![CDATA[SELECT 
+a.hour_in_day
+,(CASE WHEN b.instant_count IS NULL THEN 0 ELSE b.instant_count END) as instant_count
+,(CASE WHEN b.avg_duration_time IS NULL THEN 0 ELSE b.avg_duration_time END) as avg_duration_time
+,(CASE WHEN a.hour_in_day::int> date_part('hour',now())::int THEN now()::date-1 ELSE now()::date END) as date_time
+FROM
+(SELECT UNNEST(ARRAY[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]) as hour_in_day)a
+LEFT JOIN
+(
+SELECT date_part('hour',audit_time) as hourInDay,COUNT(1) as instant_count,round(AVG(duration_instance_end),2) as avg_duration_time 
+FROM control.pro_audit_run_xaction a
+INNER JOIN refer.pro_audit_report_name_dim b ON a.obj_id=b.obj_id AND b.is_active=true
+WHERE message_type='instance_start' AND completed=true AND duration_instance_end>0 AND audit_time>=now()- interval '23 hours'
+GROUP BY hourInDay
+ORDER BY hourInDay
+) b ON a.hour_in_day=b.hourInDay
+ORDER BY date_time,a.hour_in_day]]></query> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>JavaScript</action-type>
+        <action-inputs> 
+          <query_result_performance_chart type="result-set"/>  
+          <action_result type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <action_result type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var result_set=query_result_performance_chart;
+var rowCount=query_result_performance_chart.getRowCount();
+var meta = result_set.getMetaData();      // Returns an IPentahoMetaData object
+var colCount = meta.getColumnCount();
+var colHeaders = meta.getColumnHeaders(); //getColumnHeaders() returns object[][]
+var rowHeaders = meta.getRowHeaders(); 
+
+var category='"category":[';
+var data1='"data1":[';
+var data2='"data2":[';
+action_result='{';
+//process data item
+for(var i=0;i<result_set.getRowCount();i++){
+	var category_value=result_set.getValueAt(i,0);
+	var instant_count=result_set.getValueAt(i,1);
+	var avg_duration_time=result_set.getValueAt(i,2);
+	if(i>0){
+		category+=",";
+		data1+=",";
+		data2+=",";
+	}
+	category+='"'+category_value+'"';
+	data1+=instant_count;
+	data2+=avg_duration_time;
+}
+//end
+	category+="]";
+	data1+="]";
+	data2+="]";
+action_result+=''+data1+','+data2+','+category+'}';]]></script> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='loadReportsByUser']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <p_user type="string"/>  
+          <p_start_date type="string"/>  
+          <p_end_date type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result_reports_by_user"/> 
+        </action-outputs>
+        <component-definition> 
+          <live><![CDATA[false]]></live>  
+          <query><![CDATA[SELECT a.obj_id as report,count(1) as countInstance,b.report_name FROM control.pro_audit_run_xaction a
+INNER JOIN refer.pro_audit_report_name_dim b ON a.obj_id=b.obj_id AND b.is_active=true
+WHERE message_type='instance_start' AND audit_time::date BETWEEN '{p_start_date}'::date AND '{p_end_date}'::date AND actor='{p_user}' 
+GROUP BY a.obj_id ,b.report_name
+ORDER BY countInstance desc;]]></query> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>JavaScript</action-type>
+        <action-inputs> 
+          <query_result_reports_by_user type="result-set"/>  
+          <action_result type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <action_result type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var result_set=query_result_reports_by_user;
+var rowCount=query_result_reports_by_user.getRowCount();
+var meta = result_set.getMetaData();      // Returns an IPentahoMetaData object
+var colCount = meta.getColumnCount();
+var colHeaders = meta.getColumnHeaders(); //getColumnHeaders() returns object[][]
+var rowHeaders = meta.getRowHeaders(); 
+
+
+action_result='[';
+//process data item
+for(var i=0;i<result_set.getRowCount();i++){
+	var item='';
+	if(i>0){
+		item+=',';
+	}
+	item+='{';
+		for(var j=0;j<result_set.getColumnCount();j++){ 		
+			var value=result_set.getValueAt(i,j);
+			var columnValue=colHeaders[0][j];
+			if(j>0){
+				item+=',';
+			}
+			item+='"'+columnValue+'":"'+value+'"';
+		}
+	item+='}';	
+
+action_result+=item;
+}
+//end
+
+action_result+=']';]]></script> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='loadUsersByReport']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <p_obj_id type="string"/>  
+          <p_report_name type="string"/>  
+          <p_start_date type="string"/>  
+          <p_end_date type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result_users_by_report"/> 
+        </action-outputs>
+        <component-definition> 
+          <live><![CDATA[false]]></live>  
+          <query><![CDATA[SELECT actor as user,count(1) as countInstance 
+FROM control.pro_audit_run_xaction a
+INNER JOIN refer.pro_audit_report_name_dim b ON a.obj_id = b.obj_id AND b.obj_id='{p_obj_id}' AND b.report_name='{p_report_name}'
+WHERE message_type='instance_start' 
+AND audit_time::date BETWEEN '{p_start_date}'::date AND '{p_end_date}'::date GROUP BY actor ORDER BY countInstance desc;]]></query> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>JavaScript</action-type>
+        <action-inputs> 
+          <query_result_users_by_report type="result-set"/>  
+          <action_result type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <action_result type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var result_set=query_result_users_by_report;
+var rowCount=query_result_users_by_report.getRowCount();
+var meta = result_set.getMetaData();      // Returns an IPentahoMetaData object
+var colCount = meta.getColumnCount();
+var colHeaders = meta.getColumnHeaders(); //getColumnHeaders() returns object[][]
+var rowHeaders = meta.getRowHeaders(); 
+
+
+action_result='[';
+//process data item
+for(var i=0;i<result_set.getRowCount();i++){
+	var item='';
+	if(i>0){
+		item+=',';
+	}
+	item+='{';
+		for(var j=0;j<result_set.getColumnCount();j++){ 		
+			var value=result_set.getValueAt(i,j);
+			var columnValue=colHeaders[0][j];
+			if(j>0){
+				item+=',';
+			}
+			item+='"'+columnValue+'":"'+value+'"';
+		}
+	item+='}';	
+
+action_result+=item;
+}
+//end
+
+action_result+=']';]]></script> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+ 
+  </actions> 
+</action-sequence>

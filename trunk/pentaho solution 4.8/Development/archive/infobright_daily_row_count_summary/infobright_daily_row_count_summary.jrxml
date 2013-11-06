@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="infobright_daily_row_count_summary" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="0.8481952367449728"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Crosstab Data Text" mode="Transparent" hAlign="Center" fontName="Calibri">
+		<box leftPadding="5" rightPadding="5"/>
+	</style>
+	<style name="cell_value" mode="Opaque" backcolor="#FFFFFF" fontName="Calibri">
+		<box leftPadding="5" rightPadding="5"/>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{totalMeasure}==0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#FF0000"/>
+		</conditionalStyle>
+	</style>
+	<style name="border">
+		<box>
+			<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+			<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" backcolor="#C0C0C0">
+		<box leftPadding="5" rightPadding="5">
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.75" lineColor="#000000"/>
+			<leftPen lineWidth="0.75" lineColor="#000000"/>
+			<bottomPen lineWidth="0.75" lineColor="#000000"/>
+			<rightPen lineWidth="0.75" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="7DayReportByHour">
+		<queryString>
+			<![CDATA[SELECT
+hour,
+day AS date,
+count(*) AS total
+FROM stage.fact_event_tracker_agg_by_hour_hourly
+WHERE day BETWEEN current_date -7 AND current_date -1 GROUP BY day, hour
+ORDER BY date,hour]]>
+		</queryString>
+		<field name="hour" class="java.lang.Integer"/>
+		<field name="date" class="java.sql.Date"/>
+		<field name="total" class="java.lang.Long"/>
+	</subDataset>
+	<subDataset name="7DayBasicAggByEventType">
+		<queryString>
+			<![CDATA[select
+event_type,
+date, count(*) as total
+from stage.fact_event_basic_agg_v5
+where date BETWEEN current_date -7 AND current_date -1
+group by date, event_type
+order by date, event_type]]>
+		</queryString>
+		<field name="event_type" class="java.lang.String"/>
+		<field name="date" class="java.sql.Date"/>
+		<field name="total" class="java.lang.Long"/>
+	</subDataset>
+	<subDataset name="7DayEventAnalyticsByGroup">
+		<queryString>
+			<![CDATA[select
+group_type,
+date,  count(*) as total
+from stage.fact_event_analytics_agg_v5
+where date BETWEEN current_date -7 AND current_date -1
+group by date, group_type
+order by date, group_type]]>
+		</queryString>
+		<field name="group_type" class="java.lang.String"/>
+		<field name="date" class="java.sql.Date"/>
+		<field name="total" class="java.lang.Long"/>
+	</subDataset>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT 1]]>
+	</queryString>
+	<field name="1" class="java.lang.Long"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="317">
+			<image>
+				<reportElement x="0" y="0" width="100" height="37"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"../logo-verve-wireless.gif"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="100" y="0" width="455" height="37" forecolor="#0099CC"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Calibri" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Infobright Daily Row Count Summary]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="57" width="555" height="20"/>
+				<textElement/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="77" width="555" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[7-Day Records - Agg By Hour Hourly]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="137" width="555" height="20"/>
+				<textElement/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="157" width="555" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[7-Day Records - Basic Agg By Event Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="257" width="555" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[7-Day Records - Event Analytics By Group]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="237" width="555" height="20"/>
+				<textElement/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField pattern="yyyy-MM-dd hh:mm:ss aaa">
+				<reportElement x="0" y="37" width="555" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<crosstab>
+				<reportElement positionType="Float" x="0" y="97" width="555" height="40"/>
+				<crosstabDataset>
+					<dataset>
+						<datasetRun subDataset="7DayReportByHour">
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+					</dataset>
+				</crosstabDataset>
+				<crosstabHeaderCell>
+					<cellContents>
+						<staticText>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="100" height="30"/>
+							<textElement verticalAlignment="Middle"/>
+							<text><![CDATA[Hour\Date]]></text>
+						</staticText>
+					</cellContents>
+				</crosstabHeaderCell>
+				<rowGroup name="hour" width="100">
+					<bucket>
+						<bucketExpression class="java.lang.Integer"><![CDATA[$F{hour}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents backcolor="#F0F8FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="100" height="25"/>
+								<textElement verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<textFieldExpression class="java.lang.Integer"><![CDATA[$V{hour}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents/>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<columnGroup name="date" height="30">
+					<bucket>
+						<bucketExpression class="java.sql.Date"><![CDATA[$F{date}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents backcolor="#F0F8FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField pattern="yyyy-MM-dd" isBlankWhenNull="false">
+								<reportElement style="Crosstab Data Text" mode="Transparent" x="0" y="0" width="65" height="30" forecolor="#000000" backcolor="#FFFFFF"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+									<font fontName="Calibri" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								</textElement>
+								<textFieldExpression class="java.util.Date"><![CDATA[$V{date}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents/>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<measure name="totalMeasure" class="java.lang.Long" calculation="Sum">
+					<measureExpression><![CDATA[$F{total}]]></measureExpression>
+				</measure>
+				<crosstabCell width="65" height="25">
+					<cellContents>
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField pattern="#,##0">
+							<reportElement style="cell_value" x="0" y="0" width="65" height="25"/>
+							<textElement textAlignment="Right" verticalAlignment="Middle"/>
+							<textFieldExpression class="java.lang.Long"><![CDATA[$V{totalMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell height="25" rowTotalGroup="hour">
+					<cellContents backcolor="#BFE1FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25"/>
+							<textElement/>
+							<textFieldExpression class="java.lang.Long"><![CDATA[$V{totalMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="50" columnTotalGroup="date">
+					<cellContents backcolor="#BFE1FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25"/>
+							<textElement/>
+							<textFieldExpression class="java.lang.Long"><![CDATA[$V{totalMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="hour" columnTotalGroup="date">
+					<cellContents backcolor="#BFE1FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25"/>
+							<textElement/>
+							<textFieldExpression class="java.lang.Long"><![CDATA[$V{totalMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+			</crosstab>
+			<crosstab>
+				<reportElement positionType="Float" x="0" y="177" width="555" height="40"/>
+				<crosstabDataset>
+					<dataset>
+						<datasetRun subDataset="7DayBasicAggByEventType">
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+					</dataset>
+				</crosstabDataset>
+				<crosstabHeaderCell>
+					<cellContents>
+						<staticText>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="100" height="30"/>
+							<textElement verticalAlignment="Middle">
+								<font isBold="true"/>
+							</textElement>
+							<text><![CDATA[Events\Date]]></text>
+						</staticText>
+					</cellContents>
+				</crosstabHeaderCell>
+				<rowGroup name="event_type" width="100">
+					<bucket>
+						<bucketExpression class="java.lang.String"><![CDATA[$F{event_type}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents backcolor="#F0F8FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="100" height="25"/>
+								<textElement verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<textFieldExpression class="java.lang.String"><![CDATA[$V{event_type}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents/>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<columnGroup name="date" height="30">
+					<bucket>
+						<bucketExpression class="java.sql.Date"><![CDATA[$F{date}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents backcolor="#F0F8FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField pattern="yyyy-MM-dd" isBlankWhenNull="false">
+								<reportElement style="Crosstab Data Text" mode="Transparent" x="0" y="0" width="65" height="30" forecolor="#000000" backcolor="#FFFFFF"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+									<font fontName="Calibri" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								</textElement>
+								<textFieldExpression class="java.util.Date"><![CDATA[$V{date}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents/>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<measure name="totalMeasure" class="java.lang.Long" calculation="Sum">
+					<measureExpression><![CDATA[$F{total}]]></measureExpression>
+				</measure>
+				<crosstabCell width="65" height="25">
+					<cellContents>
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField pattern="#,##0">
+							<reportElement style="cell_value" x="0" y="0" width="65" height="25"/>
+							<textElement textAlignment="Right" verticalAlignment="Middle"/>
+							<textFieldExpression class="java.lang.Long"><![CDATA[$V{totalMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell height="25" rowTotalGroup="event_type">
+					<cellContents backcolor="#BFE1FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25"/>
+							<textElement/>
+							<textFieldExpression class="java.lang.Long"><![CDATA[$V{totalMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="50" columnTotalGroup="date">
+					<cellContents backcolor="#BFE1FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25"/>
+							<textElement/>
+							<textFieldExpression class="java.lang.Long"><![CDATA[$V{totalMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="event_type" columnTotalGroup="date">
+					<cellContents backcolor="#BFE1FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25"/>
+							<textElement/>
+							<textFieldExpression class="java.lang.Long"><![CDATA[$V{totalMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+			</crosstab>
+			<crosstab>
+				<reportElement positionType="Float" x="0" y="277" width="555" height="40"/>
+				<crosstabDataset>
+					<dataset>
+						<datasetRun subDataset="7DayEventAnalyticsByGroup">
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+					</dataset>
+				</crosstabDataset>
+				<crosstabHeaderCell>
+					<cellContents>
+						<staticText>
+							<reportElement style="Crosstab Data Text" mode="Transparent" x="0" y="0" width="100" height="30" forecolor="#000000" backcolor="#FFFFFF"/>
+							<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+								<font fontName="Calibri" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+							</textElement>
+							<text><![CDATA[Group\Date]]></text>
+						</staticText>
+					</cellContents>
+				</crosstabHeaderCell>
+				<rowGroup name="group_type" width="100">
+					<bucket>
+						<bucketExpression class="java.lang.String"><![CDATA[$F{group_type}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents backcolor="#F0F8FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="100" height="25"/>
+								<textElement verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<textFieldExpression class="java.lang.String"><![CDATA[$V{group_type}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents/>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<columnGroup name="date" height="30">
+					<bucket>
+						<bucketExpression class="java.sql.Date"><![CDATA[$F{date}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents backcolor="#F0F8FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField pattern="yyyy-MM-dd" isBlankWhenNull="false">
+								<reportElement style="Crosstab Data Text" mode="Transparent" x="0" y="0" width="65" height="30" forecolor="#000000" backcolor="#FFFFFF"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+									<font fontName="Calibri" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								</textElement>
+								<textFieldExpression class="java.util.Date"><![CDATA[$V{date}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents/>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<measure name="totalMeasure" class="java.lang.Long" calculation="Sum">
+					<measureExpression><![CDATA[$F{total}]]></measureExpression>
+				</measure>
+				<crosstabCell width="65" height="25">
+					<cellContents>
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField pattern="#,##0">
+							<reportElement style="cell_value" x="0" y="0" width="65" height="25"/>
+							<textElement textAlignment="Right" verticalAlignment="Middle"/>
+							<textFieldExpression class="java.lang.Long"><![CDATA[$V{totalMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell height="25" rowTotalGroup="group_type">
+					<cellContents backcolor="#BFE1FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25"/>
+							<textElement/>
+							<textFieldExpression class="java.lang.Long"><![CDATA[$V{totalMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="50" columnTotalGroup="date">
+					<cellContents backcolor="#BFE1FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25"/>
+							<textElement/>
+							<textFieldExpression class="java.lang.Long"><![CDATA[$V{totalMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="group_type" columnTotalGroup="date">
+					<cellContents backcolor="#BFE1FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25"/>
+							<textElement/>
+							<textFieldExpression class="java.lang.Long"><![CDATA[$V{totalMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+			</crosstab>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="20">
+			<textField>
+				<reportElement x="425" y="0" width="65" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="490" y="0" width="65" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

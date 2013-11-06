@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="monthly_event_stats_sub" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.9487171000000019"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="p_flight_id" class="java.lang.String"/>
+	<parameter name="p_event_name" class="java.lang.String"/>
+	<parameter name="p_calendar_year_month" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="total_event" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT event_name, event_count
+  FROM evttracker.monthly_event_stats
+  WHERE calendar_year_month=$P{p_calendar_year_month} AND is_active=true AND flight_id=$P{p_flight_id}]]>
+	</queryString>
+	<field name="event_name" class="java.lang.String"/>
+	<field name="event_count" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="98">
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{p_event_name}+"  - Total Event Count "+$P{total_event}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="20" width="555" height="25"/>
+				<subreportParameter name="p_event_name">
+					<subreportParameterExpression><![CDATA[$P{p_event_name}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_event">
+					<subreportParameterExpression><![CDATA[$P{total_event}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_flight_id">
+					<subreportParameterExpression><![CDATA[$P{p_flight_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_calendar_year_month">
+					<subreportParameterExpression><![CDATA[$P{p_calendar_year_month}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "monthly_event_stats_sub_by_date.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="45" width="555" height="28"/>
+				<subreportParameter name="p_event_name">
+					<subreportParameterExpression><![CDATA[$P{p_event_name}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_event">
+					<subreportParameterExpression><![CDATA[$P{total_event}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_flight_id">
+					<subreportParameterExpression><![CDATA[$P{p_flight_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_calendar_year_month">
+					<subreportParameterExpression><![CDATA[$P{p_calendar_year_month}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "monthly_event_stats_sub_by_day_of_week.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="73" width="555" height="25"/>
+				<subreportParameter name="p_event_name">
+					<subreportParameterExpression><![CDATA[$P{p_event_name}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_event">
+					<subreportParameterExpression><![CDATA[$P{total_event}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_flight_id">
+					<subreportParameterExpression><![CDATA[$P{p_flight_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_calendar_year_month">
+					<subreportParameterExpression><![CDATA[$P{p_calendar_year_month}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "monthly_event_stats_sub_by_hour.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+</jasperReport>

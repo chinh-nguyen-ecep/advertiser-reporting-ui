@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="monthly_ad_serving_statistics_summary" pageWidth="1190" pageHeight="842" orientation="Landscape" columnWidth="1150" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="eastern_date_sk" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/opt/pentaho/biserver-ce/pentaho-solutions/Adcel reports/jaspers/daily_ad_location/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="parameter1" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/opt/pentaho/biserver-ce/pentaho-solutions/Adcel reports/jaspers/daily_ad_location/"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT full_date,(max (a.dt_lastchange)::timestamp with time zone AT TIME ZONE 'America/Los_Angeles')::timestamp with time zone AT TIME ZONE 'America/New_York'as dt_lastchange,sum(trxids_count) as trxids_count,sum(fullfilled_code_count) as fullfilled_code_count, sum(fullfilled_code_y) as fullfilled_code_y,
+       sum(fullfilled_code_n) as fullfilled_code_n, sum(fullfilled_code_e) as fullfilled_code_e, sum(fullfilled_code_t) as fullfilled_code_t
+  FROM adstraffic.daily_location_stats_by_metro a
+  WHERE is_active=true AND eastern_date_sk=$P{eastern_date_sk}::int
+GROUP BY full_date]]>
+	</queryString>
+	<field name="full_date" class="java.sql.Date"/>
+	<field name="dt_lastchange" class="java.sql.Timestamp"/>
+	<field name="trxids_count" class="java.lang.Long"/>
+	<field name="fullfilled_code_count" class="java.lang.Long"/>
+	<field name="fullfilled_code_y" class="java.lang.Long"/>
+	<field name="fullfilled_code_n" class="java.lang.Long"/>
+	<field name="fullfilled_code_e" class="java.lang.Long"/>
+	<field name="fullfilled_code_t" class="java.lang.Long"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="250">
+			<image>
+				<reportElement x="0" y="9" width="64" height="20"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"vervelogo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="64" y="9" width="1086" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Daily Location Stats By Metro]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="40" width="222" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Date: " + $F{full_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="938" y="40" width="107" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Refresh Date (ET):]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="1045" y="40" width="105" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{dt_lastchange}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="77" width="173" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Performance Overview:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="117" width="122" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Total Ad Responses:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="137" width="122" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Yes Ad Responses:	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="157" width="122" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[No Ad Responses:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="177" width="122" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Error Ad Responses:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="197" width="122" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Timeout Ad Responses:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="97" width="122" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Total Ad Requests:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="122" y="97" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{trxids_count}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="122" y="117" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{fullfilled_code_count}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="122" y="137" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{fullfilled_code_y}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="122" y="157" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{fullfilled_code_n}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="122" y="177" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{fullfilled_code_e}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="122" y="197" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{fullfilled_code_t}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="223" width="1150" height="27"/>
+				<subreportParameter name="eastern_date_sk">
+					<subreportParameterExpression><![CDATA[new Integer($P{eastern_date_sk})]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_ad_location_by_metro_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="40">
+			<textField>
+				<reportElement x="0" y="4" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="937" y="4" width="178" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="1115" y="4" width="35" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="3" width="1150" height="1"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>get_control_on_site_report</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>chinhnguyen</author>  
+    <description>get control from table adm.daily_agg_adm_data_feed</description>  
+    <help/>  
+    <result-type>report</result-type>  
+    <icon/> 
+  </documentation>
+
+  <inputs/>
+
+  <outputs> 
+    <mssg type="string"> 
+      <destinations> 
+        <response>Content</response> 
+      </destinations> 
+    </mssg> 
+  </outputs>
+
+  <resources/>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get list of sites</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result_sites"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[dw3]]></jndi>  
+        <live><![CDATA[false]]></live>  
+        <query><![CDATA[SELECT a.*
+FROM (
+SELECT 'All Sites' as name, 0 as row_order
+UNION
+SELECT dart_site_name as dart_site_name, 1 as row_order
+FROM adstraffic.daily_db_sellthrough
+WHERE is_active=true
+GROUP BY dart_site_name
+) a
+ORDER BY row_order, name;]]></query>
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>JavaScript</action-type>
+      <action-inputs> 
+        <query_result_sites type="result-set"/> 
+      </action-inputs>
+      <action-outputs> 
+        <resultSite type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var resultSite;
+
+resultSite='<table><tr></tr>';
+
+for(var i=0;i<query_result_sites.getRowCount();i++){
+	var name=query_result_sites.getValueAt(i,0);
+	if(i==0){
+	resultSite+='<tr><td><input id="site_'+name+'" class="portlet-form-field" type="checkbox" name="p_Site" value="'+name+'" title="" checked><span id="device-label" class="portlet-form-field-label">'+name+'</span></td></tr>';
+	}else{
+	resultSite+='<tr><td><input id="site_'+name+'" class="portlet-form-field" type="checkbox" name="p_Site" value="'+name+'" title=""><span id="device-label" class="portlet-form-field-label">'+name+'</span></td></tr>';
+	};
+};
+resultSite+='</table>';]]></script>
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>TemplateComponent</component-name>
+      <action-type>Message Template</action-type>
+      <action-inputs> 
+        <resultSite type="string"/>
+      </action-inputs>
+      <action-outputs> 
+        <output-message type="string" mapping="mssg"/> 
+      </action-outputs>
+      <component-definition> 
+        <template><![CDATA[<table class="tableForm">
+         <tbody>
+			 
+				 <tr>
+					 <th>Sites:</th>
+					 <td>
+						<input id="dimesion_fillter" type="text" style="width: 300px;"/>
+						<div id="dimesion" style="width: 300px;border: 1px solid gray;height: 145px;overflow: auto">
+						{resultSite}
+						</div>
+					 </td>
+				 </tr>
+			</tbody>
+		 </table>]]></template> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

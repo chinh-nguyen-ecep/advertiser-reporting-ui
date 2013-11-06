@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Accounting Ba Adj Factor</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>ChinhNguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type>none</result-type>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <actions type="string"> 
+      <sources> 
+        <request>actions</request> 
+      </sources>  
+      <default-value><![CDATA[template]]></default-value> 
+    </actions>  
+    <actionResult type="string"> 
+      <sources> 
+        <request>actionResult</request> 
+      </sources>  
+      <default-value><![CDATA[adasd]]></default-value> 
+    </actionResult>  
+    <jtSorting type="string"> 
+      <sources> 
+        <request>jtSorting</request> 
+      </sources>  
+      <default-value/> 
+    </jtSorting>  
+    <jtStartIndex type="string"> 
+      <sources> 
+        <request>jtStartIndex</request> 
+      </sources>  
+      <default-value/> 
+    </jtStartIndex>  
+    <jtPageSize type="string"> 
+      <sources> 
+        <request>jtPageSize</request> 
+      </sources>  
+      <default-value/> 
+    </jtPageSize>  
+    <connectionName type="string"> 
+      <sources> 
+        <request>connectionName</request> 
+      </sources>  
+      <default-value><![CDATA[dw7financial]]></default-value> 
+    </connectionName>  
+    <ba_adj_factor_key type="string"> 
+      <sources> 
+        <request>ba_adj_factor_key</request> 
+      </sources>  
+      <default-value><![CDATA[0]]></default-value> 
+    </ba_adj_factor_key>  
+    <adj_local_share type="string"> 
+      <sources> 
+        <request>adj_local_share</request> 
+      </sources>  
+      <default-value/> 
+    </adj_local_share>  
+    <publisher_name_filter_value type="string"> 
+      <sources> 
+        <request>publisher_name_filter_value</request> 
+      </sources>  
+      <default-value/> 
+    </publisher_name_filter_value>  
+    <sms_quantity type="string"> 
+      <sources> 
+        <request>sms_quantity</request> 
+      </sources>  
+      <default-value/> 
+    </sms_quantity>  
+    <sms_rate type="string"> 
+      <sources> 
+        <request>sms_rate</request> 
+      </sources>  
+      <default-value/> 
+    </sms_rate>  
+    <fee_or_discount type="string"> 
+      <sources> 
+        <request>fee_or_discount</request> 
+      </sources>  
+      <default-value/> 
+    </fee_or_discount>  
+    <fee_or_discount_desc type="string"> 
+      <sources> 
+        <request>fee_or_discount_desc</request> 
+      </sources>  
+      <default-value/> 
+    </fee_or_discount_desc>  
+    <principalName type="string"> 
+      <sources> 
+        <security>principalName</security> 
+      </sources>  
+      <default-value/> 
+    </principalName> 
+  </inputs>
+
+  <outputs> 
+    <actionResult type="string"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </actionResult> 
+  </outputs>
+
+  <resources/>
+  
+  <actions> 
+    <actions> 
+      <condition><![CDATA[actions=='list']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>GetTotalCount</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <publisher_name_filter_value type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result_count"/> 
+        </action-outputs>
+        <component-definition> 
+          <live><![CDATA[true]]></live>  
+          <query><![CDATA[SELECT COUNT(ba_adj_factor_key)
+FROM accounting.ba_adj_factor
+WHERE dt_expire='9999-12-31' 
+AND (upper(publisher_name) LIKE upper('%{publisher_name_filter_value}%') OR ''='{publisher_name_filter_value}')]]></query> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jtSorting type="string"/>  
+          <jtPageSize type="string"/>  
+          <jtStartIndex type="string"/>  
+          <jndi type="string" mapping="connectionName"/>  
+          <publisher_name_filter_value type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result_content"/> 
+        </action-outputs>
+        <component-definition> 
+          <query><![CDATA[SELECT ba_adj_factor_key,publisher_id,publisher_name,partner_id,partner_name,sf_local_share,
+adj_local_share,sms_quantity,sms_rate,fee_or_discount,fee_or_discount_desc
+FROM accounting.ba_adj_factor
+WHERE dt_expire='9999-12-31' 
+AND (upper(publisher_name) LIKE upper('%{publisher_name_filter_value}%') OR ''='{publisher_name_filter_value}')
+ORDER BY {jtSorting}
+LIMIT {jtPageSize}
+OFFSET {jtStartIndex}]]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>jSonEncode</action-type>
+        <action-inputs> 
+          <actionResult type="string"/>  
+          <query_result_count type="result-set"/>  
+          <query_result_content type="result-set"/> 
+        </action-inputs>
+        <action-outputs> 
+          <actionResult type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var result_set=query_result_content;
+var totalCount=query_result_count.getValueAt(0,0);
+var rowCount=query_result_content.getRowCount();
+var meta = result_set.getMetaData();      // Returns an IPentahoMetaData object
+var colCount = meta.getColumnCount();
+var colHeaders = meta.getColumnHeaders(); //getColumnHeaders() returns object[][]
+var rowHeaders = meta.getRowHeaders(); 
+
+
+actionResult='{"Result":"OK","TotalRecordCount":"'+totalCount+'","Records":[';
+//process data item
+for(var i=0;i<result_set.getRowCount();i++){
+	var item='';
+	if(i>0){
+		item+=',';
+	}
+	item+='{';
+		for(var j=0;j<result_set.getColumnCount();j++){ 		
+			var value=result_set.getValueAt(i,j);
+			var columnValue=colHeaders[0][j];
+			if(j>0){
+				item+=',';
+			}
+			item+='"'+j+'":"'+value+'","'+columnValue+'":"'+value+'"';
+		}
+	item+='}';	
+
+actionResult+=item;
+}
+//end
+
+actionResult+=']}';]]></script> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='create']]></condition> 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='update']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <adj_local_share type="string"/>  
+          <sms_quantity type="string"/>  
+          <sms_rate type="string"/>  
+          <fee_or_discount type="string"/>  
+          <fee_or_discount_desc type="string"/>  
+          <ba_adj_factor_key type="string"/>  
+          <principalName type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result_update"/> 
+        </action-outputs>
+        <component-definition> 
+          <live><![CDATA[true]]></live>  
+          <query><![CDATA[SELECT * FROM accounting.fn_update_ba_adj_factor({ba_adj_factor_key},{adj_local_share},{sms_quantity},{sms_rate},{fee_or_discount},'{fee_or_discount_desc}','{principalName}')]]></query> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>jSonEncode</action-type>
+        <action-inputs> 
+          <actionResult type="string"/>  
+          <ba_adj_factor_key type="string"/>  
+          <query_result_update type="result-set"/> 
+        </action-inputs>
+        <action-outputs> 
+          <actionResult type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var result=query_result_update.getValueAt(0,0);
+if(result=='-100'){
+	actionResult='{"Result":"Update faile!","keyValueOfRecord":"'+ba_adj_factor_key+'"}';
+}else{
+	actionResult='{"Result":"OK","keyValueOfRecord":"'+result+'"}';
+}]]></script> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='delete']]></condition>  
+      <action-definition> 
+        <component-name>SQLExecute</component-name>
+        <action-type>SQL Commands</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <ba_adj_factor_key type="string"/>  
+          <principalName type="string"/> 
+        </action-inputs>
+        <component-definition> 
+          <query><![CDATA[UPDATE refer.ba_adjustment_factor_dim 
+SET dt_expire=now()::timestamp without time zone,
+update_by='{principalName}'
+WHERE publisher_id={ba_adj_factor_key} AND dt_expire='9999-12-31']]></query>  
+          <force_single_statement><![CDATA[true]]></force_single_statement> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>jSonEncode</action-type>
+        <action-inputs> 
+          <actionResult type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <actionResult type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[actionResult='{"Result":"OK"}';]]></script> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+ 
+  </actions> 
+</action-sequence>

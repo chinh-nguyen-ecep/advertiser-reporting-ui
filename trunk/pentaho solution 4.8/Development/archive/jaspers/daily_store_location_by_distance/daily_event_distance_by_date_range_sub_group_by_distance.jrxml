@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_event_distance_by_date_range_sub_group_by_distance" language="groovy" pageWidth="802" pageHeight="802" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.4641000000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="p_flight_id" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_start_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("9999-12-31")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_end_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("9999-12-31")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="event_names_string" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="total_event" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[SELECT *
+FROM (
+SELECT
+a.full_date
+,b.external_id_current as store_location_id
+,(case when a.store_location_name='N/A (key)' then 'Unallocated Store' else a.store_location_name end) as store_location_name
+,a.event_name
+,a.distance_name,
+sum(a.event_count) as event_count
+FROM evttracker.daily_store_location_by_distance a
+INNER JOIN refer.store_location_dim b ON b.store_location_id=a.store_location_id
+WHERE a.flight_id=$P{p_flight_id}
+AND a.is_active=true
+AND a.full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
+AND a.event_name IN (select unnest(string_to_array($P{event_names_string},',')))
+GROUP BY a.full_date,b.external_id_current,a.store_location_name,a.event_name,a.distance_name
+UNION
+SELECT
+a.full_date
+,b.external_id_current as store_location_id
+,(case when a.store_location_name='N/A (key)' then 'Unallocated Store' else a.store_location_name end) as store_location_name
+,a.event_name
+,a.distance_name,
+sum(a.event_count) as event_count
+FROM evttracker.daily_store_location_by_distance a
+INNER JOIN refer.store_location_dim b ON b.store_location_id=a.store_location_id
+WHERE $P{p_flight_id}='All Flight ID'
+AND a.is_active=true
+AND a.full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
+AND a.event_name IN (select unnest(string_to_array($P{event_names_string},',')))
+GROUP BY a.full_date,b.external_id_current,a.store_location_name,a.event_name,a.distance_name
+) a
+ORDER BY a.full_date,a.store_location_name,a.store_location_id,a.event_name,a.distance_name]]>
+	</queryString>
+	<field name="full_date" class="java.sql.Date"/>
+	<field name="store_location_id" class="java.lang.String"/>
+	<field name="store_location_name" class="java.lang.String"/>
+	<field name="event_name" class="java.lang.String"/>
+	<field name="distance_name" class="java.lang.String"/>
+	<field name="event_count" class="java.lang.Long"/>
+	<variable name="total_event" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{event_count}]]></variableExpression>
+	</variable>
+	<group name="full_date">
+		<groupExpression><![CDATA[$F{full_date}]]></groupExpression>
+	</group>
+	<group name="event_name">
+		<groupExpression><![CDATA[$F{event_name}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="0" width="802" height="32" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Group by Distance]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement x="400" y="0" width="150" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Event name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Full date]]></text>
+			</staticText>
+			<line>
+				<reportElement positionType="Float" x="0" y="20" width="802" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="550" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Distance]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="650" y="0" width="152" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Event count]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="100" y="0" width="200" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Store Location Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="300" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Store Location ID]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="550" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{distance_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="650" y="0" width="152" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{event_count}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd">
+				<reportElement x="0" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{full_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="0" width="150" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{event_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="200" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{store_location_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{store_location_id}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="50">
+			<staticText>
+				<reportElement x="0" y="0" width="650" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement x="650" y="0" width="152" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{total_event}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

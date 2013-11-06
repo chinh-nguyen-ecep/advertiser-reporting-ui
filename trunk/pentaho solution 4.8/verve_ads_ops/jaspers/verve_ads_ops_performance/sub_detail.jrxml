@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_detail" language="groovy" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.4641000000000015"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="p_start_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_end_date" class="java.lang.String"/>
+	<parameter name="p_adnet_id" class="java.lang.Integer"/>
+	<parameter name="p_adnet_name" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+full_date
+,sum(fullfilled_code_count) as Requests
+,sum(fullfilled_code_y) as Fills
+,sum(fullfilled_code_e) as Errors
+,sum(fullfilled_code_t) as Timeouts
+,(case WHEN sum(fullfilled_code_count)>0 THEN sum(fullfilled_code_y)::double precision/sum(fullfilled_code_count) else 0 END) as fill
+,(case WHEN sum(fullfilled_code_count)>0 THEN sum(fullfilled_code_e)::double precision/sum(fullfilled_code_count) else 0 END) as error
+,(case WHEN sum(fullfilled_code_count)>0 THEN sum(fullfilled_code_t)::double precision/sum(fullfilled_code_count) else 0 END) as timeout
+FROM adstraffic.daily_ad_serving_stats
+WHERE is_active=true
+AND ad_network_id =$P{p_adnet_id}::int
+AND full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
+GROUP BY full_date
+ORDER BY full_date]]>
+	</queryString>
+	<field name="full_date" class="java.sql.Date"/>
+	<field name="requests" class="java.lang.Long"/>
+	<field name="fills" class="java.lang.Long"/>
+	<field name="errors" class="java.lang.Long"/>
+	<field name="timeouts" class="java.lang.Long"/>
+	<field name="fill" class="java.lang.Double"/>
+	<field name="error" class="java.lang.Double"/>
+	<field name="timeout" class="java.lang.Double"/>
+	<variable name="tt_request" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{requests}]]></variableExpression>
+	</variable>
+	<variable name="tt_fills" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{fills}]]></variableExpression>
+	</variable>
+	<variable name="tt_errors" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{errors}]]></variableExpression>
+	</variable>
+	<variable name="tt_timeouts" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{timeouts}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="65" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="30" width="162" height="30"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="322" y="30" width="80" height="30"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Errors]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="562" y="30" width="60" height="30"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Error
+%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="162" y="30" width="83" height="30"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Requests]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="245" y="30" width="77" height="30"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fills]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="402" y="30" width="80" height="30"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Timeouts]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="482" y="30" width="80" height="30"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fill
+%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="622" y="30" width="60" height="30"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Timeout
+%]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="60" width="802" height="1"/>
+			</line>
+			<textField>
+				<reportElement x="0" y="0" width="245" height="30"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{p_adnet_name}+" Performance"]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField pattern="yyyy-MM-dd">
+				<reportElement x="0" y="0" width="162" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{full_date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="162" y="0" width="83" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{requests}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="245" y="0" width="77" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{fills}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="322" y="0" width="80" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{errors}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="402" y="0" width="80" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{timeouts}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="482" y="0" width="80" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{fill}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="562" y="0" width="60" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{error}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="622" y="0" width="60" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{timeout}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<textField pattern="#,##0">
+				<reportElement x="162" y="6" width="83" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{tt_request}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="245" y="6" width="77" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{tt_fills}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="322" y="6" width="80" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{tt_errors}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="402" y="6" width="80" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{tt_timeouts}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="482" y="6" width="80" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{tt_fills}.doubleValue()/$V{tt_request}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="562" y="6" width="60" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{tt_errors}.doubleValue()/$V{tt_request}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="622" y="6" width="60" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{tt_timeouts}.doubleValue()/$V{tt_request}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="5" width="802" height="1"/>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

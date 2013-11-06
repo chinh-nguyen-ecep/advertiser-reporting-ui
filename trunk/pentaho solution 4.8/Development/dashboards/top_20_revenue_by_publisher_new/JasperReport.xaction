@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title/>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author/>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs/>
+
+  <outputs/>
+
+  <resources>
+    <report-definition>
+      <solution-file>
+        <location>resource_jasper/publisherDetail.jasper</location>
+        <mime-type>text/plain</mime-type>
+      </solution-file>
+    </report-definition>
+  </resources>
+  
+  <actions> 
+    <action-definition>
+      <component-name>JasperReportsComponent</component-name>
+      <action-type>Jasper</action-type>
+      <action-resources>
+        <report-definition type="resource"/>
+      </action-resources>
+      <component-definition>
+        <output-type>html</output-type>
+        <jndi><![CDATA[dw3]]></jndi>
+      </component-definition>
+    </action-definition>
+
+  </actions> 
+</action-sequence>

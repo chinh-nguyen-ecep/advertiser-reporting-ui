@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Load list of content category</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author/>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type>none</result-type>  
+    <icon/> 
+  </documentation>
+
+  <inputs/>
+
+  <outputs> 
+    <result type="string"> 
+      <destinations> 
+        <response>Content</response> 
+      </destinations> 
+    </result> 
+  </outputs>
+
+  <resources/>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Relational</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[dw1]]></jndi>  
+        <live><![CDATA[true]]></live>  
+        <query><![CDATA[SELECT a.*
+FROM (
+SELECT 'All Categorys' as category_name, 0 as row_order
+UNION
+SELECT category_name, 1 as row_order
+FROM dw.daily_agg_partner_act_content_category
+WHERE  is_active=true GROUP by category_name
+) a
+ORDER BY row_order, category_name;]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>JavaScript</action-type>
+      <action-inputs> 
+        <query_result type="result-set"/> 
+      </action-inputs>
+      <action-outputs> 
+        <result type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var result;
+result='<table><tr></tr>';
+
+for(var i=0;i<query_result.getRowCount();i++){
+	var name=query_result.getValueAt(i,0);
+	if(i==0){
+	result+='<tr><td><input id="device_'+name+'" class="portlet-form-field" type="checkbox" name="device" value="'+name+'" title="" checked><span id="device-label" class="portlet-form-field-label">'+name+'</span></td></tr>';
+	}else{
+	result+='<tr><td><input id="device_'+name+'" class="portlet-form-field" type="checkbox" name="device" value="'+name+'" title=""><span id="device-label" class="portlet-form-field-label">'+name+'</span></td></tr>';
+	}
+	
+}
+
+result+='</table>';]]></script> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

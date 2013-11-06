@@ -1,0 +1,740 @@
+<Schema name="Adcel response">
+  <Cube name="Daily reqs by dma_portal_qlty" cache="true" enabled="true">
+    <Table name="daily_olap_trxids_by_portal" schema="adstraffic">
+    </Table>
+    <Dimension type="StandardDimension" highCardinality="false" name="Date">
+      <Hierarchy hasAll="true">
+        <Level name="date" column="full_date" type="Date" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Month">
+      <Hierarchy hasAll="true">
+        <Level name="month" column="calendar_year_month" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Metro">
+      <Hierarchy hasAll="true">
+        <Level name="Metro" column="metro_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Country">
+      <Hierarchy hasAll="true" allMemberName="All Contries">
+        <Level name="Country" column="country_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Country code">
+      <Hierarchy hasAll="true">
+        <Level name="Country code" column="country_alpha2" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Publisher">
+      <Hierarchy hasAll="true">
+        <Level name="Publisher" column="parent1_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Partner">
+      <Hierarchy hasAll="true">
+        <Level name="name" column="partner_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Portal">
+      <Hierarchy hasAll="true">
+        <Level name="name" column="portal_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Location quality">
+      <Hierarchy hasAll="true" allMemberName="Location qualities">
+        <Level name="Location quality" column="location_quality" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="IsActive">
+      <Hierarchy hasAll="true" defaultMember="true">
+        <Level name="isActive" column="is_active" type="Boolean" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Trxids count" column="trxids_count" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="Daily reqs by vendor_device_qlty" cache="true" enabled="true">
+    <Table name="daily_olap_trxids_by_device" schema="adstraffic">
+    </Table>
+    <Dimension type="StandardDimension" highCardinality="false" name="Date">
+      <Hierarchy hasAll="true">
+        <Level name="date" column="full_date" type="Date" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Month">
+      <Hierarchy hasAll="true">
+        <Level name="month" column="calendar_year_month" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Metro">
+      <Hierarchy hasAll="true">
+        <Level name="Metro" column="metro_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Country">
+      <Hierarchy hasAll="true" allMemberName="All Contries">
+        <Level name="Country" column="country_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Country code">
+      <Hierarchy hasAll="true">
+        <Level name="Country code" column="country_alpha2" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Publisher">
+      <Hierarchy hasAll="true">
+        <Level name="Publisher" column="parent1_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Partner">
+      <Hierarchy hasAll="true">
+        <Level name="name" column="partner_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Device type">
+      <Hierarchy hasAll="true">
+        <Level name="Device type" column="device_type" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Device manufacturer">
+      <Hierarchy hasAll="true">
+        <Level name="Device manufacturer" column="device_manufacturer" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Location quality">
+      <Hierarchy hasAll="true" allMemberName="Location qualities">
+        <Level name="Location quality" column="location_quality" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="IsActive">
+      <Hierarchy hasAll="true" defaultMember="true">
+        <Level name="isActive" column="is_active" type="Boolean" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Trxids count" column="trxids_count" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="Daily reqs by dma_content_qlty" cache="true" enabled="true">
+    <Table name="daily_olap_trxids_by_content_category" schema="adstraffic">
+    </Table>
+    <Dimension type="StandardDimension" highCardinality="false" name="Date">
+      <Hierarchy hasAll="true">
+        <Level name="date" column="full_date" type="Date" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Month">
+      <Hierarchy hasAll="true">
+        <Level name="month" column="calendar_year_month" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Metro">
+      <Hierarchy hasAll="true">
+        <Level name="Metro" column="metro_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Country">
+      <Hierarchy hasAll="true" allMemberName="All Contries">
+        <Level name="Country" column="country_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Country code">
+      <Hierarchy hasAll="true">
+        <Level name="Country code" column="country_alpha2" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Publisher">
+      <Hierarchy hasAll="true">
+        <Level name="Publisher" column="parent1_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Partner">
+      <Hierarchy hasAll="true">
+        <Level name="name" column="partner_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Category">
+      <Hierarchy hasAll="true">
+        <Level name="Category" column="category_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Location quality">
+      <Hierarchy hasAll="true" allMemberName="Location qualities">
+        <Level name="Location quality" column="location_quality" type="Numeric" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="IsActive">
+      <Hierarchy hasAll="true" defaultMember="true">
+        <Level name="isActive" column="is_active" type="Boolean" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Trxids count" column="trxids_count" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="Daily filled requests by dma_portal" cache="true" enabled="true">
+    <Table name="daily_olap_filled_by_portal" schema="adstraffic">
+    </Table>
+    <Dimension type="StandardDimension" highCardinality="false" name="Date">
+      <Hierarchy hasAll="true">
+        <Level name="date" column="full_date" type="Date" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Month">
+      <Hierarchy hasAll="true">
+        <Level name="month" column="calendar_year_month" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Metro">
+      <Hierarchy hasAll="true">
+        <Level name="Metro" column="metro_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Country">
+      <Hierarchy hasAll="true" allMemberName="All Contries">
+        <Level name="Country" column="country_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Country code">
+      <Hierarchy hasAll="true">
+        <Level name="Country code" column="country_alpha2" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Publisher">
+      <Hierarchy hasAll="true">
+        <Level name="Publisher" column="parent1_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Partner">
+      <Hierarchy hasAll="true">
+        <Level name="name" column="partner_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Portal">
+      <Hierarchy hasAll="true">
+        <Level name="name" column="portal_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="IsActive">
+      <Hierarchy hasAll="true" defaultMember="true">
+        <Level name="isActive" column="is_active" type="Boolean" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Filled count" column="filled_count" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="Daily unfilled by dma_portal" cache="true" enabled="true">
+    <Table name="daily_unfilled_stats_by_dma" schema="adstraffic">
+    </Table>
+    <Dimension type="StandardDimension" highCardinality="false" name="Date">
+      <Hierarchy hasAll="true">
+        <Level name="date" column="full_date" type="Date" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Month">
+      <Hierarchy hasAll="true">
+        <Level name="month" column="calendar_year_month" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Metro">
+      <Hierarchy hasAll="true">
+        <Level name="Metro" column="metro_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Country">
+      <Hierarchy hasAll="true" allMemberName="All Contries">
+        <Level name="Country" column="country_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Country code">
+      <Hierarchy hasAll="true">
+        <Level name="Country code" column="country_alpha2" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Publisher">
+      <Hierarchy hasAll="true">
+        <Level name="Publisher" column="parent1_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Partner">
+      <Hierarchy hasAll="true">
+        <Level name="name" column="partner_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Portal">
+      <Hierarchy hasAll="true">
+        <Level name="name" column="portal_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Network">
+      <Hierarchy hasAll="true">
+        <Level name="name" column="ad_network_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="IsActive">
+      <Hierarchy hasAll="true" defaultMember="true">
+        <Level name="isActive" column="is_active" type="Boolean" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Unfilled count" column="unfilled_count" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="Daily unfilled by dma_portal_qlty" cache="true" enabled="true">
+    <Table name="daily_olap_unfilled_by_portal" schema="adstraffic">
+    </Table>
+    <Dimension type="StandardDimension" highCardinality="false" name="Date">
+      <Hierarchy hasAll="true">
+        <Level name="date" column="full_date" type="Date" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Month">
+      <Hierarchy hasAll="true">
+        <Level name="month" column="calendar_year_month" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Metro">
+      <Hierarchy hasAll="true">
+        <Level name="Metro" column="metro_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Country">
+      <Hierarchy hasAll="true" allMemberName="All Contries">
+        <Level name="Country" column="country_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Country code">
+      <Hierarchy hasAll="true">
+        <Level name="Country code" column="country_alpha2" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Publisher">
+      <Hierarchy hasAll="true">
+        <Level name="Publisher" column="parent1_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Partner">
+      <Hierarchy hasAll="true">
+        <Level name="Partner" column="partner_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Portal">
+      <Hierarchy hasAll="true">
+        <Level name="Portal" column="portal_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Location quality">
+      <Hierarchy hasAll="true">
+        <Level name="Location quality" column="location_quality" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="IsActive">
+      <Hierarchy hasAll="true" defaultMember="true">
+        <Level name="isActive" column="is_active" type="Boolean" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Unfilled count" column="unfilled_count" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="Daily unfilled by content_category" cache="true" enabled="true">
+    <Table name="daily_unfilled_stats_by_content_category" schema="adstraffic">
+    </Table>
+    <Dimension type="StandardDimension" highCardinality="false" name="Date">
+      <Hierarchy hasAll="true">
+        <Level name="date" column="full_date" type="Date" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Month">
+      <Hierarchy hasAll="true">
+        <Level name="month" column="calendar_year_month" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Publisher">
+      <Hierarchy hasAll="true">
+        <Level name="Publisher" column="parent1_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Partner">
+      <Hierarchy hasAll="true">
+        <Level name="name" column="partner_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Portal">
+      <Hierarchy hasAll="true">
+        <Level name="name" column="portal_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Network">
+      <Hierarchy hasAll="true">
+        <Level name="name" column="ad_network_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Category">
+      <Hierarchy hasAll="true" allMemberName="All Categories">
+        <Level name="Category" column="category_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="IsActive">
+      <Hierarchy hasAll="true" defaultMember="true">
+        <Level name="isActive" column="is_active" type="Boolean" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Unfilled count" column="unfilled_count" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="Daily unfilled by portal" cache="true" enabled="true">
+    <Table name="daily_unfilled_stats" schema="adstraffic">
+    </Table>
+    <Dimension type="StandardDimension" highCardinality="false" name="Date">
+      <Hierarchy hasAll="true">
+        <Level name="date" column="full_date" type="Date" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Month">
+      <Hierarchy hasAll="true">
+        <Level name="month" column="calendar_year_month" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Publisher">
+      <Hierarchy hasAll="true">
+        <Level name="Publisher" column="parent1_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Partner">
+      <Hierarchy hasAll="true">
+        <Level name="name" column="partner_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Portal">
+      <Hierarchy hasAll="true">
+        <Level name="name" column="portal_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Network">
+      <Hierarchy hasAll="true">
+        <Level name="name" column="ad_network_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="IsActive">
+      <Hierarchy hasAll="true" defaultMember="true">
+        <Level name="isActive" column="is_active" type="Boolean" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Unfilled count" column="unfilled_count" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="Daily unfilled by device" cache="true" enabled="true">
+    <Table name="daily_unfilled_stats_by_device" schema="adstraffic">
+    </Table>
+    <Dimension type="StandardDimension" highCardinality="false" name="Date">
+      <Hierarchy hasAll="true">
+        <Level name="date" column="full_date" type="Date" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Month">
+      <Hierarchy hasAll="true">
+        <Level name="Month" column="calendar_year_month" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Publisher">
+      <Hierarchy hasAll="true">
+        <Level name="Publisher" column="parent1_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Partner">
+      <Hierarchy hasAll="true">
+        <Level name="name" column="partner_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Portal">
+      <Hierarchy hasAll="true">
+        <Level name="name" column="portal_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Network">
+      <Hierarchy hasAll="true">
+        <Level name="name" column="ad_network_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Device manufacturer">
+      <Hierarchy hasAll="true">
+        <Level name="name" column="device_manufacturer" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Device type">
+      <Hierarchy hasAll="true">
+        <Level name="name" column="device_type" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Organic">
+      <Hierarchy hasAll="true" defaultMember="true">
+        <Level name="organic" column="organic" type="Boolean" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="IsActive">
+      <Hierarchy hasAll="true" defaultMember="true">
+        <Level name="isActive" column="is_active" type="Boolean" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Unfilled count" column="unfilled_count" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="Agg daily serving stats" cache="true" enabled="true">
+    <Table name="daily_ad_serving_stats" schema="adstraffic">
+    </Table>
+    <Dimension type="StandardDimension" highCardinality="false" name="Parent">
+      <Hierarchy hasAll="true">
+        <Level name="name" column="parent1_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Partner">
+      <Hierarchy hasAll="true">
+        <Level name="name" column="partner_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Portal">
+      <Hierarchy hasAll="true">
+        <Level name="name" column="portal_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Network">
+      <Hierarchy hasAll="true">
+        <Level name="name" column="ad_network_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Month">
+      <Hierarchy hasAll="true">
+        <Level name="month" column="calendar_year_month" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Date">
+      <Hierarchy hasAll="true">
+        <Level name="date" column="full_date" type="Date" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="IsActive">
+      <Hierarchy hasAll="true" defaultMember="true">
+        <Level name="isActive" column="is_active" type="Boolean" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Total Ad responses" column="fullfilled_code_count" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Yes Ad responses" column="fullfilled_code_y" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="No Ad responses" column="fullfilled_code_n" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Error Ad responses" column="fullfilled_code_e" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Timeout Ad responses" column="fullfilled_code_t" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="Agg daily serving stats by device" cache="true" enabled="true">
+    <Table name="daily_ad_serving_stats_by_device" schema="adstraffic">
+    </Table>
+    <Dimension type="StandardDimension" highCardinality="false" name="Parent">
+      <Hierarchy hasAll="true">
+        <Level name="name" column="parent1_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Partner">
+      <Hierarchy hasAll="true">
+        <Level name="name" column="partner_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Portal">
+      <Hierarchy hasAll="true">
+        <Level name="name" column="portal_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Network">
+      <Hierarchy hasAll="true">
+        <Level name="name" column="ad_network_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Device manufacturer">
+      <Hierarchy hasAll="true">
+        <Level name="name" column="device_manufacturer" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Device type">
+      <Hierarchy hasAll="true">
+        <Level name="name" column="device_type" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Year month">
+      <Hierarchy hasAll="true">
+        <Level name="month" column="calendar_year_month" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Date">
+      <Hierarchy hasAll="true">
+        <Level name="date" column="full_date" type="Date" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Organic">
+      <Hierarchy hasAll="true">
+        <Level name="organic" column="organic" type="Boolean" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="IsActive">
+      <Hierarchy hasAll="true" defaultMember="true">
+        <Level name="isActive" column="is_active" type="Boolean" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Total Ad responses" column="fullfilled_code_count" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Yes Ad responses" column="fullfilled_code_y" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="No Ad responses" column="fullfilled_code_n" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Error Ad responses" column="fullfilled_code_e" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Timeout Ad responses" column="fullfilled_code_t" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+  <Cube name="Daily db Sellthrough by Metro" cache="true" enabled="true">
+    <Table name="daily_db_sellthrough" schema="adstraffic">
+    </Table>
+    <Dimension type="TimeDimension" highCardinality="false" name="Date">
+      <Hierarchy hasAll="true">
+        <Level name="Date" column="full_date" type="Date" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Year month">
+      <Hierarchy hasAll="true">
+        <Level name="Year month" column="calendar_year_month" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Network">
+      <Hierarchy hasAll="true">
+        <Level name="Network" column="ad_network_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Site">
+      <Hierarchy hasAll="true">
+        <Level name="Site" column="dart_site_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" highCardinality="false" name="Metro">
+      <Hierarchy hasAll="true">
+        <Level name="Metro" column="metro_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Total Ad responses" column="fullfilled_code_count" datatype="Integer" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Yes Ad responses" column="fullfilled_code_y" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="No Ad responses" column="fullfilled_code_n" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Error Ad responses" column="fullfilled_code_e" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Timeout Ad responses" column="fullfilled_code_t" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+</Schema>

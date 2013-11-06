@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subreport_detail_platform_fee" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.7715610000000015"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="default" fontName="Calibri"/>
+	<style name="cell_border_top" mode="Opaque">
+		<box leftPadding="5" rightPadding="5">
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.0" lineColor="#000000"/>
+			<bottomPen lineWidth="0.0" lineColor="#000000"/>
+			<rightPen lineWidth="0.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="padding" mode="Opaque" fontName="Calibri">
+		<box leftPadding="5" rightPadding="5"/>
+	</style>
+	<style name="table1_CF" mode="Opaque" vAlign="Middle" fontName="Calibri" isBold="true" isItalic="true">
+		<box leftPadding="5" rightPadding="5">
+			<pen lineWidth="0.5"/>
+			<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_cell" mode="Opaque" fontName="Calibri">
+		<pen lineWidth="0.5" lineColor="#000000"/>
+		<box leftPadding="5" rightPadding="5">
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineStyle="Dotted" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table1_CH" isDefault="true" mode="Opaque" forecolor="#333333" backcolor="#CCCCCC" fill="Solid" vAlign="Middle" fontName="Calibri" isBold="true" isItalic="false">
+		<pen lineWidth="0.5" lineColor="#000000"/>
+		<box leftPadding="5" rightPadding="5">
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="p_inv_detail_id" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("0413")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_month_year" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("0813")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="account_partner_map_id" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="local_total" class="java.lang.Double">
+		<defaultValueExpression><![CDATA[new Double("0")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="verve_share" class="java.lang.Double">
+		<defaultValueExpression><![CDATA[new Double("0")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_site" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("")]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+a.platform_name AS type
+,a.monthly_fee AS Platform_fee
+,a.account_partner_map_id
+FROM(
+SELECT
+c.inv_detail_id
+,c.account_partner_map_id
+,b.name AS platform_name
+,a.monthly_fee
+FROM  accounting.ba_platform_fee a
+INNER JOIN accounting.ba_platform b
+ON(b.is_active = 1 AND b.id = a.platform_id)
+INNER JOIN( SELECT distinct inv_detail_id, account_partner_map_id
+FROM accounting.ba_inv_Local_report_detail
+WHERE
+inv_mmyy = $P{p_month_year}
+AND status = 'ACTIVE'
+)c
+ON(c.account_partner_map_id = a.account_partner_map_id)
+WHERE
+a.is_active = 1
+AND a.decommission_date='9999-12-31'
+)a
+WHERE
+a.inv_detail_id = $P{p_inv_detail_id}
+AND a.account_partner_map_id =  $P{account_partner_map_id}]]>
+	</queryString>
+	<field name="type" class="java.lang.String"/>
+	<field name="platform_fee" class="java.lang.Double"/>
+	<field name="account_partner_map_id" class="java.lang.Integer"/>
+	<variable name="platform_fee_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{platform_fee}]]></variableExpression>
+	</variable>
+	<variable name="local_sub_total" class="java.lang.Double" resetType="None">
+		<variableExpression><![CDATA[( ($P{local_total}-$V{platform_fee_1})<0 ? $V{platform_fee_1} : (($P{local_total}-$V{platform_fee_1})*$P{verve_share})+$V{platform_fee_1} )]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="20">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="20" backcolor="#FFFFFF"/>
+				<box leftPadding="0" rightPadding="0">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Platform Fees]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement style="table1_CH" x="397" y="0" width="80" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table1_CH" x="477" y="0" width="78" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Platform Fees]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table1_CH" x="236" y="0" width="161" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Site]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="table_cell" mode="Transparent" x="397" y="0" width="80" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{type}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00">
+				<reportElement style="table_cell" mode="Transparent" x="477" y="0" width="78" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{platform_fee}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_cell" mode="Transparent" x="236" y="0" width="161" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{p_site}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="40" width="555" height="20" backcolor="#FFFFFF"/>
+				<box leftPadding="0" rightPadding="0">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField pattern="$ #,##0.00">
+				<reportElement style="table1_CF" x="477" y="0" width="78" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{platform_fee_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="padding" mode="Opaque" x="328" y="20" width="149" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Local Subtotal]]></text>
+			</staticText>
+			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
+				<reportElement style="table1_CF" mode="Opaque" x="477" y="20" width="78" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Calibri" size="10" isBold="true" isItalic="true" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{local_sub_total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="cell_border_top" mode="Opaque" x="236" y="0" width="241" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Platform Total]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

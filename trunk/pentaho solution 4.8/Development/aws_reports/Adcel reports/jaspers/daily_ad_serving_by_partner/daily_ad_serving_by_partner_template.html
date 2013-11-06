@@ -1,0 +1,102 @@
+<html xmlns:xf="http://www.w3.org/2002/xforms">
+   <head>
+	<!-- do not include a <meta> tag -->
+	<title></title>
+      <link rel="stylesheet" type="text/css" href="/verve-lib/css/jasperReportCommonScript.css"></link>
+	  <script src="/verve-lib/scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+	  <script src="/verve-lib/scripts/verve-script-jquery.js" type="text/javascript"></script>
+      <script src="/verve-lib/scripts/jasperReportCommonScript.js" type="text/javascript"></script>
+	  {xform-header}
+   </head>
+   <body class="pentaho">
+
+      <div name="dialog-form" title="Control Panel" style="width: 460px;height: 520px;">		
+         <form name="parameter-form" id="parameter-form" method="GET">
+         <table class="tableForm">
+         <tbody>	         
+	         <tr>
+		         <th>Date:</th>
+		         <td>{p_eastern_date_sk}</td>
+	         </tr>  
+			 <tr>
+		         <th>Publishers:</th>
+		         <td>{p_publisher}</td>
+	         </tr>  
+
+			<tr>
+				 <th>Partners:</th>
+				 <td>
+					<input class="dimesion" name="dimension_fillter" type="text" style=""/>
+					<div class="dimesion" name='dimension' style="height: 180px"></div>
+				 </td>
+			</tr>	
+         </tbody>
+         </table>
+		 <div id="hide_in_form" style="display:none">
+			{solution}
+			{action}
+			{path}
+		 </div>  
+	    </form>
+      </div>    
+	<script> <![CDATA[		 
+			$(document).ready(function(){
+				initJasperPageTemplate({
+					controlPanle_width: 460,
+					controlPanle_height: 370,
+					generateFormContent: generateFormContent,
+					formValidation:formValidation,
+					reportName:'Daily AdCel Serving Publisher/Partner',
+					miniMode:false
+				});
+			});
+			
+			var generateFormContent=function(domContentForm,completedFn){
+				$('option[value=]').remove();
+				var loadPartner=function(){
+					var condition='is_active=true AND parent1_id='+$('#p_publisher').attr('value');	
+					var publisher_id=$('#p_publisher').attr('value');	
+					loadParam({
+						text:'Loading Partners Of '+publisher_id,
+						p_table:'adstraffic.daily_ad_serving_stats',
+						p_value_field:'partner_id',
+						p_name_field:'partner_name',
+						p_condition:condition,
+						p_all_name:'All Partners',
+						p_all_value:'-1', //default 0
+						p_prompt_stype:'Scrolling Check List', //pulldown or Scrolling Check List
+						p_param_name:'p_partner',
+						dom_content_result:$('div[name=dimension]'),
+						success: function(){
+							createFillter({
+								box_filter:$('input[name=dimension_fillter]'),
+								check_box_list:$('div[name=dimension]'),
+								fillter_by:'name',//option name,title,value
+								select_type:'single_mode'//option check_all,single_mode
+							});
+						}
+					});
+				}
+				loadPartner();
+				$('#p_publisher').change(function(){
+					loadPartner();
+				});
+
+			}
+			
+			var formValidation=function(domContentForm,divResult){
+				var form=domContentForm.children('form');
+				var validate=true;
+				//check select partner
+				var dimesion=form.find('div[name=dimension] input:checked');
+				if(dimesion.length==0){
+					alert('Please select Partners!');
+					return false;
+				}
+				return true;
+			}
+	]]>
+	</script>
+   </body>
+     
+</html>

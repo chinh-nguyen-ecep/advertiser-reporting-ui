@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Daily AdCel Statistics</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author/>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <eastern_date_sk type="string"> 
+      <sources> 
+        <request>eastern_date_sk</request> 
+      </sources>  
+      <default-value/> 
+    </eastern_date_sk>  
+    <ad_network_id type="string"> 
+      <sources> 
+        <request>ad_network_id</request> 
+      </sources>  
+      <default-value/> 
+    </ad_network_id>  
+    <p_output type="string"> 
+      <sources> 
+        <request>p_output</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </p_output> 
+  </inputs>
+
+  <outputs> 
+    <ad_network_id type="integer"/>  
+    <eastern_date_sk type="integer"/> 
+  </outputs>
+
+  <resources> 
+    <report-definition> 
+      <solution-file> 
+        <location>daily_ad_serving_statistics/daily_ad_serving_statistics.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition>  
+    <pageTemplate> 
+      <solution-file> 
+        <location>daily_ad_serving_statistics/parameter_template.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </pageTemplate> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get Date list</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result"/>  
+        <eastern_date_sk type="integer"/>  
+        <full_date type="string"/>  
+        <distinct type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[analyticsDB]]></jndi>  
+        <live><![CDATA[true]]></live>  
+        <query><![CDATA[select distinct eastern_date_sk, full_date from adstraffic.daily_ad_serving_stats where is_active = true order by eastern_date_sk desc]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get Network List</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result2"/>  
+        <ad_network_name type="string"/>  
+        <ad_network_id type="integer"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[analyticsDB]]></jndi>  
+        <live><![CDATA[true]]></live>  
+        <query><![CDATA[select a.* from
+(
+SELECT '-- All Ad Networks --' as ad_network_name, -1 as ad_network_id, 0 as "sort" FROM refer.ad_network_dim
+UNION
+SELECT DISTINCT ad_network_name_current || ' (' || ad_network_id::text || ')' as ad_network_name, ad_network_id, 1 as "sort"
+FROM refer.ad_network_dim)
+ a
+ORDER BY sort, ad_network_name]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Prompt/Secure Filter</action-type>
+      <action-inputs> 
+        <ad_network_id type="string"/>  
+        <eastern_date_sk type="string"/>  
+        <query_result type="result-set"/>  
+        <query_result2 type="result-set"/> 
+      </action-inputs>
+      <action-resources> 
+        <pageTemplate type="resource"/> 
+      </action-resources>
+      <component-definition> 
+        <selections> 
+          <eastern_date_sk style="select"> 
+            <filter value-col-name="eastern_date_sk" display-col-name="full_date">query_result</filter>  
+            <title>Date</title> 
+          </eastern_date_sk>  
+          <ad_network_id style="select"> 
+            <filter value-col-name="ad_network_id" display-col-name="ad_network_name">query_result2</filter>  
+            <title>Network</title> 
+          </ad_network_id> 
+        </selections>  
+        <xsl><![CDATA[pageTemplate]]></xsl> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JasperReportsComponent</component-name>
+      <action-type>Jasper</action-type>
+      <action-inputs> 
+        <eastern_date_sk type="string"/>  
+        <ad_network_id type="string"/>  
+        <output-type type="string" mapping="p_output"/>
+      </action-inputs>
+      <component-definition> 
+        <jndi><![CDATA[verveReportConnection]]></jndi> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

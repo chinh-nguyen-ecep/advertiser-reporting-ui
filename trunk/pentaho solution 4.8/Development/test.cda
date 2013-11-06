@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CDADescriptor>
+   <DataSources>
+      <Connection id="loadDate" type="sql.jndi">
+         <Jndi>verveReportConnection</Jndi>
+      </Connection>
+   </DataSources>
+   <DataAccess access="public" cache="true" cacheDuration="3600" connection="loadDate"
+               id="loadDate"
+               type="sql">
+      <Columns>
+         <Column idx="1">
+            <Name>full_date</Name>
+         </Column>
+      </Columns>
+      <Parameters/>
+      <Query>SELECT full_date FROM refer.date_dim ORDER BY date_sk desc LIMIT 10;</Query>
+   </DataAccess>
+</CDADescriptor>

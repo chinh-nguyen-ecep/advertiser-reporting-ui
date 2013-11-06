@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="monthly_ad_serving_statistics_summary" pageWidth="842" pageHeight="1175" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5026296018031562"/>
+	<property name="ireport.x" value="507"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_start_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_end_date" class="java.lang.String"/>
+	<parameter name="p_list_adnetwork_id" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT DISTINCT ON (ad_network_id,ad_network_name) ad_network_id,ad_network_name,max(dt_lastchange) as dt_lastchange, $P{p_end_date}::date-$P{p_start_date}::date+1 as days
+FROM adstraffic.daily_ad_serving_stats
+WHERE is_active=true
+AND ad_network_id IN (select unnest(string_to_array($P{p_list_adnetwork_id}::text,';'))::int)
+AND full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
+GROUP BY ad_network_id,ad_network_name,dt_lastchange ORDER BY ad_network_name]]>
+	</queryString>
+	<field name="ad_network_id" class="java.lang.Integer"/>
+	<field name="ad_network_name" class="java.lang.String"/>
+	<field name="dt_lastchange" class="java.sql.Timestamp"/>
+	<field name="days" class="java.lang.Integer"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="94">
+			<image>
+				<reportElement x="0" y="9" width="64" height="40"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"vervelogo.jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="64" y="29" width="738" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["From  "+$P{p_start_date}+"  To  "+$P{p_end_date}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="69" width="802" height="25"/>
+				<subreportParameter name="p_start_date">
+					<subreportParameterExpression><![CDATA[$P{p_start_date}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_end_date">
+					<subreportParameterExpression><![CDATA[$P{p_end_date}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_list_adnetwork_id">
+					<subreportParameterExpression><![CDATA[$P{p_list_adnetwork_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "sub_overall_performance.jasper"]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement x="0" y="49" width="245" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Refresh date: "+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss z").format($F{dt_lastchange})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Transparent" x="64" y="9" width="738" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Verve Ads "+$F{days}+"-Day Operational Performance"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="25">
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="25"/>
+				<subreportParameter name="p_start_date">
+					<subreportParameterExpression><![CDATA[$P{p_start_date}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_end_date">
+					<subreportParameterExpression><![CDATA[$P{p_end_date}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_adnet_id">
+					<subreportParameterExpression><![CDATA[$F{ad_network_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_list_adnetwork_id">
+					<subreportParameterExpression><![CDATA[$P{p_list_adnetwork_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_adnet_name">
+					<subreportParameterExpression><![CDATA[$F{ad_network_name}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "sub_detail.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="26">
+			<textField>
+				<reportElement x="0" y="4" width="245" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="245" y="4" width="497" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="742" y="4" width="60" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="3" width="802" height="1"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

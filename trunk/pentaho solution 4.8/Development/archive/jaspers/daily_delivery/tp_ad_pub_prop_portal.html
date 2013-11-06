@@ -1,0 +1,238 @@
+<html xmlns:xf="http://www.w3.org/2002/xforms">
+   <head>
+	<!-- do not include a <meta> tag -->
+      <link rel="stylesheet" type="text/css" href="/pentaho-style/active/default.css"></link>
+      <title>Daily Delivery by Adnetwork Publisher</title>
+            			 <script language="javascript" src="/pentaho/js/pentaho-ajax.js"></script>
+						<script src="js/parameters.js" type="text/javascript"></script>
+						<script src="/verve_style/scripts/doform.js" type="text/javascript"></script>
+						
+						<script src="/verve_style/scripts/mootools-core-1.3.2.js" type="text/javascript"></script>
+						<script src="/verve_style/scripts/mootools-more.js" type="text/javascript"></script>
+						<script src="/verve_style/scripts/verve-script.js" type="text/javascript"></script>
+
+						<script src="/verve_style/scripts/Date.js" type="text/javascript"></script>
+						<script src="/verve_style/scripts/datepicker/Locale.en-US.DatePicker.js" type="text/javascript"></script>
+						<script src="/verve_style/scripts/datepicker/Picker.js" type="text/javascript"></script>
+						<script src="/verve_style/scripts/datepicker/Picker.Attach.js" type="text/javascript"></script>
+						<script src="/verve_style/scripts/datepicker/Picker.Date.js" type="text/javascript"></script>
+					
+						<link href="style.css" rel="stylesheet" />
+						<link  href="/verve_style/scripts/datepicker/datepicker.css" rel="stylesheet" type="text/css" media="screen" />
+						<link  href="/verve_style/css/tableInForm.css" rel="stylesheet" type="text/css" media="screen" />
+						<link  href="/verve_style/css/charttool.css" rel="stylesheet" type="text/css" media="screen" />
+						<link  href="/verve_style/css/meio.aucomplete.css" rel="stylesheet" type="text/css" media="screen" />
+						
+      			<script><![CDATA[
+				var myPicker;
+      			  function setDefaultValue() {
+      			  	var obj = document.getElementById('v_max_date');
+      			  	obj.selectedIndex = 1;
+ 
+      			  	var curdate = document.getElementById('v_min_date');
+      			  	curdate.selectedIndex = 1;		  	
+      			  
+      			  }
+      			  //validation
+				var validation=function(){					
+										
+					var validate=true;			
+					//check select publisher
+					var dimesion=$('dimesion').getElements('input:checked');
+					if(dimesion.length==0){
+					alert('Please select adnetwork!');
+					validate=false;
+					}
+					//check select property
+					var dimesion=$('dimesion3').getElements('input:checked');
+					if(dimesion.length==0){
+					alert('Please select property!');
+					validate=false;
+					}					
+					//Compares start date and end date.
+					var start_date_array=$('p_start_date').get('value').split("-");
+					var end_date_array=$('p_end_date').get('value').split("-");
+					var start_date=new Date();
+					start_date.setFullYear(start_date_array[0],start_date_array[1]-1,start_date_array[2]);
+					var end_date=new Date();
+					end_date.setFullYear(end_date_array[0],end_date_array[1]-1,end_date_array[2]);
+					
+					if(start_date>end_date){
+						alert('please choose start date < end date');
+						validate=false;
+					};
+					
+					if(validate==true){
+						doForm('html'); 
+						myPicker.close();						
+					};
+					
+				};	 
+      			]]></script>
+      		
+	{xform-header}
+
+   </head>
+   <body style="background-color: #fff">
+   <div id="toolbar2">	   
+		   <div class="leftGroup">
+		   <img id="open" title="Open control panel" src="/verve_style/images/preferences_system_windows_actions.png"/>		   
+		   </div>	  
+   </div>
+      <div style="min-height: 380px;width: 100%;display: none;" id="mydiv">
+         <form name="parameter-form" id="parameter-form" method="GET">
+         <table class="tableForm">
+         <tbody>	         
+	         <tr>
+		         <th>Range from:</th>
+		         <td>
+				 <div id="datemode" style="float: left;">
+		             <label style="margin-left: 0px;"></label> {p_start_date}
+		             <label style="margin-left: 0px;">To:</label> {p_end_date}
+		             </div>
+		             
+		        </td>
+	         </tr>  
+			<tr>
+				 <th>Adnetwork Filter:</th>
+				 <td>
+					<input id="dimesion_fillter" type="text" style="width: 300px;"/>
+					<div id="dimesion" style="width: 300px;border: 1px solid gray;overflow: auto;height: 100px;">
+					Loading....
+					</div>
+				 </td>
+			 </tr>	
+			<tr>
+				 <th>Property Filter:</th>
+				 <td>
+					<input id="dimesion_fillter3" type="text" style="width: 300px;"/>
+					<div id="dimesion3" style="width: 300px;border: 1px solid gray;overflow: auto;height: 100px;">
+					Loading....
+					</div>
+				 </td>
+			 </tr>	
+			<tr>
+				 <th>Portal Filter:</th>
+				 <td>
+					<input id="dimesion_fillter2" type="text" style="width: 300px;"/>
+					<div id="dimesion2" style="width: 300px;border: 1px solid gray;overflow: auto;height: 100px;">
+					Loading....
+					</div>
+				 </td>
+			 </tr>	
+			<tr id="tr_bt">
+				<th>Output type: </th>
+				<td>
+				{p_output}<input type="button" style="cursor: pointer;margin-left: 5px" name="go" class="portlet-form-button" value="Run" onClick="validation()"/>
+				</td>
+				 
+	         </tr>
+         </tbody>
+         </table>
+        {v_max_date}
+		{v_min_date} 
+		{solution}
+		{action}
+		{path}
+	    </form>
+		
+		<!-- hiddent form -->
+		<div id="publisher_list" style="display: none;"></div>
+
+
+		<!-- end hiddent form -->
+      </div>    
+   
+   <iframe id="mainFrame" width="100%" height="100%" name="theoutput" frameborder="0" scrolling="yes" style="overflow-x:hidden;"></iframe>
+
+	<script>setDefaultValue();</script>
+	<script> 
+            window.addEvent('domready', function(){ 
+				
+            	//hide max_date and min_date
+            	$('v_min_date').setStyle('display','none');
+            	$('v_max_date').setStyle('display','none'); 
+				
+                //set default date
+                
+                $('p_end_date').setProperty('value',$('v_max_date').get('value'));
+                
+                var start_date_array=$('v_max_date').get('value').split("-");
+                var mydate=new Date();
+                mydate.setFullYear(start_date_array[0],start_date_array[1]-1,start_date_array[2]);
+                //mydate.decrement('day', 6);
+				mydate.decrement('day', 0);
+                var todayCopy = mydate.clone().format('%Y-%m-%d');
+                
+                $('p_start_date').setProperty('value',todayCopy.toString());
+                
+                //create calendar
+                
+                new Picker.Date('p_start_date', {
+				format: '%Y-%m-%d',
+				minDate: $('v_min_date').get('value'),
+				maxDate: $('v_max_date').get('value')				
+				});
+				new Picker.Date('p_end_date', {
+				format: '%Y-%m-%d',
+				minDate: $('v_min_date').get('value'),
+				maxDate: $('v_max_date').get('value')				
+				});
+				
+				//picker
+				var myElement=$('mydiv');
+				myPicker = new Picker({
+					pickerClass: 'datepicker1',					
+					draggable: false,
+					width: 500,
+					height: 520,
+					zindex: 1003					
+				}).position(100, 35);
+				
+				myPicker.setContent(myElement,'fade');
+				myPicker.setTitle('Control panel');
+				myPicker.open();
+				$('mydiv').setStyle('display','');
+				$('open').addEvent('click', function(e){
+				e.stop();
+				myPicker.open();
+				});
+				
+				//remove choose
+				$$('option[value=]').each(function(item){
+					//alert(item.get('value'));
+					item.destroy();					
+				});
+				
+				reloadAdnetworkIDs();				
+				reloadPropertyIDs();
+				reloadPortalIDs();
+            }); 
+			function reloadAdnetworkIDs(){					
+				$('dimesion').set('html','loading...');
+					var theInnerHTML='';
+					theInnerHTML = pentahoAction( "Development", "archive/jaspers/daily_delivery", "load_list_adnetworks.xaction");
+					$('dimesion').set('html',theInnerHTML);
+					new Fillter('dimesion_fillter','dimesion','title','muti not all check');
+					
+			};
+			function reloadPropertyIDs(){					
+				$('dimesion3').set('html','loading...');
+					var theInnerHTML='';
+					theInnerHTML = pentahoAction( "Development", "archive/jaspers/daily_delivery", "load_list_properties.xaction");
+					$('dimesion3').set('html',theInnerHTML);
+					new Fillter('dimesion_fillter3','dimesion3','title','muti not all check');					
+			};
+			function reloadPortalIDs(){					
+				$('dimesion2').set('html','loading...');
+					var theInnerHTML='';
+					theInnerHTML = pentahoAction( "Development", "archive/jaspers/daily_delivery", "load_list_portals.xaction");
+					$('dimesion2').set('html',theInnerHTML);
+					new Fillter('dimesion_fillter2','dimesion2','title','muti not all check');					
+			};
+			
+
+        </script>
+   </body>
+     
+</html>

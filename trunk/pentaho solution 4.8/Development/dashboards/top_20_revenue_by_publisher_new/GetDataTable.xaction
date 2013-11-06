@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>GetDataTable</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author/>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <iDisplayStart type="string"> 
+      <sources> 
+        <request>iDisplayStart</request> 
+      </sources>  
+      <default-value><![CDATA[0]]></default-value> 
+    </iDisplayStart>  
+    <name type="string"> 
+      <sources> 
+        <session>name</session> 
+      </sources>  
+      <default-value/> 
+    </name>  
+    <iDisplayLength type="string"> 
+      <sources> 
+        <request>iDisplayLength</request> 
+      </sources>  
+      <default-value><![CDATA[10]]></default-value> 
+    </iDisplayLength>  
+    <sSearch type="string"> 
+      <sources> 
+        <request>sSearch</request> 
+      </sources>  
+      <default-value/> 
+    </sSearch>  
+    <sEcho type="string"> 
+      <sources> 
+        <request>sEcho</request> 
+      </sources>  
+      <default-value/> 
+    </sEcho>  
+    <full_date type="string"> 
+      <sources> 
+        <request>full_date</request> 
+      </sources>  
+      <default-value/> 
+    </full_date>  
+    <iSortCol_0 type="string"> 
+      <sources> 
+        <request>iSortCol_0</request> 
+      </sources>  
+      <default-value><![CDATA[0]]></default-value> 
+    </iSortCol_0>  
+    <iSortingCols type="string"> 
+      <sources> 
+        <request>iSortingCols</request> 
+      </sources>  
+      <default-value><![CDATA[1]]></default-value> 
+    </iSortingCols>  
+    <sSortDir_0 type="string"> 
+      <sources> 
+        <request>sSortDir_0</request> 
+      </sources>  
+      <default-value><![CDATA[asc]]></default-value> 
+    </sSortDir_0> 
+  </inputs>
+
+  <outputs> 
+    <json_response type="string"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </json_response> 
+  </outputs>
+
+  <resources/>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>ConvertSortColumnIndex</action-type>
+      <action-inputs> 
+        <iSortCol_0 type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <sortByCol type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var sortByCol;
+sortByCol=parseInt(iSortCol_0)+1;
+sortByCol=sortByCol.toFixed(0);]]></script> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>GetTotalRecord</action-type>
+      <action-inputs> 
+        <full_date type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result_total_rows"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[dw3]]></jndi>  
+        <live><![CDATA[true]]></live>  
+        <query><![CDATA[SELECT COUNT(DISTINCT  publisher_id)
+  FROM adm.daily_agg_network_performance 
+  WHERE is_active=true AND full_date='{full_date}']]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>TemplateComponent</component-name>
+      <action-type>GetTotalDisplayRecordQuery</action-type>
+      <action-inputs> 
+        <sSearch type="string"/>  
+        <full_date type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <output-message type="string" mapping="GetTotalDisplayRecordQuery"/> 
+      </action-outputs>
+      <component-definition> 
+        <template><![CDATA[SELECT publisher_id, publisher_name, 
+       sum(impressions), sum(clicks), sum(revenue)
+  FROM adm.daily_agg_network_performance 
+  WHERE is_active=true AND full_date='{full_date}' AND upper(publisher_name) LIKE  upper( '%{sSearch}%')
+  GROUP BY publisher_id, publisher_name]]></template> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>GetTotalDisplay</action-type>
+      <action-inputs> 
+        <query type="string" mapping="GetTotalDisplayRecordQuery"/> 
+      </action-inputs>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result_total_display"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[dw3]]></jndi>  
+        <live><![CDATA[true]]></live> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>TemplateComponent</component-name>
+      <action-type>GetTableDataQuery</action-type>
+      <action-inputs> 
+        <iDisplayLength type="string"/>  
+        <iDisplayStart type="string"/>  
+        <sSearch type="string"/>  
+        <full_date type="string"/>  
+        <sSortDir_0 type="string"/>  
+        <sortByCol type="string"/> 
+      </action-inputs>
+      <action-resources/>
+      <action-outputs> 
+        <output-message type="string" mapping="TableDataQuery"/> 
+      </action-outputs>
+      <component-definition> 
+        <template><![CDATA[SELECT publisher_name, sum(revenue) as revenue,sum(impressions), sum(clicks),publisher_id
+  FROM adm.daily_agg_network_performance 
+  WHERE is_active=true AND full_date='{full_date}' AND upper(publisher_name) LIKE upper( '%{sSearch}%')
+  GROUP BY publisher_id, publisher_name
+  ORDER BY {sortByCol} {sSortDir_0}
+  LIMIT {iDisplayLength} OFFSET {iDisplayStart}]]></template> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>GetTableData</action-type>
+      <action-inputs> 
+        <query type="string" mapping="TableDataQuery"/> 
+      </action-inputs>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result_table_data"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[dw3]]></jndi>  
+        <live><![CDATA[true]]></live> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>Create json response</action-type>
+      <action-inputs> 
+        <query_result_total_rows type="result-set"/>  
+        <query_result_table_data type="result-set"/>  
+        <sEcho type="string"/>  
+        <query_result_total_display type="result-set"/>  
+        <TableDataQuery type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <json_response type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var iTotalRecords;
+var iTotalDisplayRecords;
+var json_response;
+json_response='';
+
+iTotalDisplayRecords=query_result_total_display.getRowCount();
+iTotalRecords=query_result_total_rows.getValueAt(0,0);
+
+json_response='{"sEcho":'+sEcho+',"iTotalRecords":"'+iTotalRecords+'","iTotalDisplayRecords":"'+iTotalDisplayRecords+'","Query":"'+TableDataQuery+'",';
+
+var aaData='"aaData":[';
+for(var i=0;i<query_result_table_data.getRowCount();i++){
+	var publisher_id=query_result_table_data.getValueAt(i,4);
+	var publisher_name=query_result_table_data.getValueAt(i,0);
+	var impressions=query_result_table_data.getValueAt(i,2);
+	var clicks=query_result_table_data.getValueAt(i,3);
+	var revenue=query_result_table_data.getValueAt(i,1);
+	revenue=revenue/1;
+	revenue=revenue.toFixed(2);
+	if(i==0){
+		aaData+='["'+publisher_name+'","'+revenue+'","'+impressions+'","'+clicks+'"]';
+	}else{
+		aaData+=',["'+publisher_name+'","'+revenue+'","'+impressions+'","'+clicks+'"]';
+	}
+};
+aaData+=']';
+
+json_response+=aaData+'}';]]></script> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>TemplateComponent</component-name>
+      <action-type>Message Template</action-type>
+      <action-inputs> 
+        <iDisplayStart type="string"/>  
+        <sSearch type="string"/>  
+        <name type="string"/>  
+        <iDisplayLength type="string"/>  
+        <sEcho type="string"/> 
+      </action-inputs>
+      <action-resources/>
+      <action-outputs> 
+        <output-message type="string" mapping="result"/> 
+      </action-outputs>
+      <component-definition> 
+        <template><![CDATA[{
+"user": "{name}" ,
+"displayStart": "{iDisplayStart}",
+"displayLenght":"{iDisplayLength}",
+"search": "{sSearch}",
+"sEcho":{sEcho},
+  "iTotalRecords":"30",
+  "iTotalDisplayRecords":"30",
+  "aaData":[["Trident",
+      "Internet Explorer 4.0",
+      "Win 95+",
+      "4",
+      "X"
+    ],
+    ["Trident",
+      "Internet Explorer 5.0",
+      "Win 95+",
+      "5",
+      "C"
+    ],
+    ["Trident",
+      "Internet Explorer 5.5",
+      "Win 95+",
+      "5.5",
+      "A"
+    ],
+    ["Trident",
+      "Internet Explorer 6",
+      "Win 98+",
+      "6",
+      "A"
+    ],
+    ["Trident",
+      "Internet Explorer 7",
+      "Win XP SP2+",
+      "7",
+      "A"
+    ],
+    ["Trident",
+      "AOL browser (AOL desktop)",
+      "Win XP",
+      "6",
+      "A"
+    ],
+    ["Gecko",
+      "Firefox 1.0",
+      "Win 98+ / OSX.2+",
+      "1.7",
+      "A"
+    ],
+    ["Gecko",
+      "Firefox 1.5",
+      "Win 98+ / OSX.2+",
+      "1.8",
+      "A"
+    ]
+  ]
+}]]></template> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

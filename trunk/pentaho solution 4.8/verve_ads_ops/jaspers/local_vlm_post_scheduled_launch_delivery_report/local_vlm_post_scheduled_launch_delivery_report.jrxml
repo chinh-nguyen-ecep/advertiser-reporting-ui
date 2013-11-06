@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="api_revenue_by_partner_channel" pageWidth="2735" pageHeight="1684" orientation="Landscape" columnWidth="2735" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.6500000000000032"/>
+	<property name="ireport.x" value="3842"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("2013-05-22")]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select
+o.order_id
+,o.name_current as order_name
+,o.publisher_id as booked_by_publisher_id
+,p.company_name_current as booked_by_publisher_name
+,f.rate_current as rate
+,f.metric_current as type
+,f.impressions as impressions_delivered
+--,f.clicks
+,f.quantity as impressions_booked
+,f.budget_current as budget
+,f.updated_by as flight_last_update_by
+,o.updated_by as Order_last_update_by
+,f.updated_at as flight_last_update_date
+,f.flight_id as ADM_Flight_ID
+,f.dfp_line_item_id as DFP_flight_id
+,f.name_current as flight_name
+,f.start_date_current as ADM_flight_start_date
+,f.end_date_current as ADM_flight_end_date
+,f.created_at as ADM_created_at
+,f.paused_at as ADM_paused_at
+,case f.network_id when 1 then 'Local'
+    when 4 then 'VLM' end Network
+,f.active_ads_count
+from refer.adm_dim_flights f
+inner join refer.adm_dim_orders o
+    on (o.dt_expire = '9999-12-31' and f.order_id = o.order_id)
+inner join refer.adm_dim_publishers p
+    on (p.dt_expire = '9999-12-31' and p.publisher_id <> 35 and p.publisher_id = o.publisher_id)
+where f.dt_expire = '9999-12-31'
+and f.network_id in(1,4)
+and f.cancelled_at is null
+and f.start_date_current = $P{p_date}::date
+and f.impressions = 0
+order by f.flight_id]]>
+	</queryString>
+	<field name="order_id" class="java.lang.Integer"/>
+	<field name="order_name" class="java.lang.String"/>
+	<field name="booked_by_publisher_id" class="java.lang.Integer"/>
+	<field name="booked_by_publisher_name" class="java.lang.String"/>
+	<field name="rate" class="java.lang.Double"/>
+	<field name="type" class="java.lang.String"/>
+	<field name="impressions_delivered" class="java.lang.Integer"/>
+	<field name="impressions_booked" class="java.lang.Integer"/>
+	<field name="budget" class="java.lang.Double"/>
+	<field name="flight_last_update_by" class="java.lang.String"/>
+	<field name="order_last_update_by" class="java.lang.String"/>
+	<field name="flight_last_update_date" class="java.sql.Timestamp"/>
+	<field name="adm_flight_id" class="java.lang.Integer"/>
+	<field name="dfp_flight_id" class="java.lang.Long"/>
+	<field name="flight_name" class="java.lang.String"/>
+	<field name="adm_flight_start_date" class="java.sql.Timestamp"/>
+	<field name="adm_flight_end_date" class="java.sql.Timestamp"/>
+	<field name="adm_created_at" class="java.sql.Timestamp"/>
+	<field name="adm_paused_at" class="java.sql.Timestamp"/>
+	<field name="network" class="java.lang.String"/>
+	<field name="active_ads_count" class="java.lang.Integer"/>
+	<background>
+		<band/>
+	</background>
+	<columnHeader>
+		<band height="23">
+			<staticText>
+				<reportElement x="0" y="0" width="95" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Order ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="95" y="0" width="271" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Order Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="366" y="0" width="119" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Booked by Publisher ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="485" y="0" width="220" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Booked by Publisher Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="705" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="775" y="0" width="70" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="845" y="0" width="120" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Impressions Delivered]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="965" y="0" width="130" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Impressions Booked]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1095" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Budget]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1165" y="0" width="234" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Flight Last Update by]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1399" y="0" width="236" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Order Last Update by]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1635" y="0" width="140" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Flight Last Update Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1775" y="0" width="80" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ADM Flight ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1855" y="0" width="80" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DFP Flight ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1935" y="0" width="200" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Flight Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2135" y="0" width="110" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ADM Flight Start Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2245" y="0" width="110" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ADM Flight End Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2355" y="0" width="95" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ADM Created At]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2450" y="0" width="95" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ADM Paused At]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2545" y="0" width="50" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Network]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="2595" y="0" width="90" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Active Creatives]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<textField>
+				<reportElement x="0" y="0" width="95" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{order_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="95" y="0" width="271" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{order_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="366" y="0" width="119" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{booked_by_publisher_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="485" y="0" width="220" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{booked_by_publisher_name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00">
+				<reportElement x="705" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{rate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="775" y="0" width="70" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{type}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="845" y="0" width="120" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{impressions_delivered}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="965" y="0" width="130" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{impressions_booked}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="1095" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{budget}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1165" y="0" width="234" height="20"/>
+				<textElement textAlignment="Right">
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{flight_last_update_by}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="1399" y="0" width="236" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="true" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{order_last_update_by}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="1635" y="0" width="140" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{flight_last_update_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1775" y="0" width="80" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{adm_flight_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1855" y="0" width="80" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{dfp_flight_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1935" y="0" width="200" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{flight_name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="2135" y="0" width="110" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{adm_flight_start_date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="2245" y="0" width="110" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{adm_flight_end_date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="2355" y="0" width="95" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{adm_created_at}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd">
+				<reportElement x="2450" y="0" width="95" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{adm_paused_at}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2545" y="0" width="50" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{network}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="2595" y="0" width="90" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{active_ads_count}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

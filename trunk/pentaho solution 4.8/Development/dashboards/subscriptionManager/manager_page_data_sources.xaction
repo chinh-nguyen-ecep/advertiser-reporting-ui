@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Manager Page - Data Source</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>Chinh Nguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <actions type="string"> 
+      <sources> 
+        <request>actions</request> 
+      </sources>  
+      <default-value><![CDATA[template]]></default-value> 
+    </actions>  
+    <connection_name type="string"> 
+      <sources> 
+        <request>connection_name</request> 
+      </sources>  
+      <default-value><![CDATA[analyticsdbVPC]]></default-value> 
+    </connection_name>  
+    <returnResult type="string"> 
+      <sources> 
+        <request>returnResult</request> 
+      </sources>  
+      <default-value/> 
+    </returnResult>  
+    <query_result type="result-set"> 
+      <sources> 
+        <request>query_result</request> 
+      </sources>  
+      <default-value/> 
+    </query_result>  
+    <p_data_subject_id type="string">
+      <sources>
+        <request>p_data_subject_id</request>
+      </sources>
+      <default-value><![CDATA[0]]></default-value>
+    </p_data_subject_id>
+  </inputs>
+
+  <outputs> 
+    <returnResult type="string"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </returnResult> 
+  </outputs>
+
+  <resources/>
+  
+  <actions> 
+    <actions> 
+      <condition><![CDATA[actions=='template']]></condition>  
+      <action-definition> 
+        <component-name>TemplateComponent</component-name>
+        <action-type>Message Template</action-type>
+        <action-outputs> 
+          <output-message type="string" mapping="returnResult"/> 
+        </action-outputs>
+        <component-definition> 
+          <template><![CDATA[<div class="easyui-layout" style="" data-options="fit:true" >
+        <div data-options="region:'north',split:true,collapsible:false,title:'Data subjects'" style="height:200px;padding:0px">
+			<table id="dts_subject"></table>
+        </div>
+        <div  data-options="region:'center',title:'Data file configuration'" style="padding:0px">
+			<table id="dts_data_file_cf"></table>
+        </div>
+    </div>
+	
+<script>
+//Set title of sub page
+$('#manager_page_item_title').html('Data Sources');
+
+//Load data subject
+var DataSubjectDataGrid=$('#dts_subject');
+DataSubjectDataGrid.datagrid({
+			url:rootSubPath+'&action=manager_page_data_sources.xaction&actions=listDataSubject',
+			fit: true,
+			columns:[[
+				{field:'data_subject_id',title:'Key'},
+				{field:'data_subject_name',title:'Name'},	
+				{field:'data_subject_desc',title:'Description',width: 150},		
+				{field:'data_subject_status',title:'Status'}
+			]],
+			//rownumbers:true,
+			singleSelect:true,
+			collapsible:true,
+			fitColumns:true,
+			border: false,
+			onSelect: function(rowIndex, rowData){
+				dt_file_config_loader(rowData.data_subject_id);
+			}
+		});
+//function load data file config from data subject key
+var dt_file_config_loader=function(data_subject_id){
+	var dataFileConfigDataGrid=$('#dts_data_file_cf');
+	dataFileConfigDataGrid.datagrid({
+			url:rootSubPath+'&action=manager_page_data_sources.xaction&actions=listDataFileConfig&p_data_subject_id='+data_subject_id,
+			fit: true,
+			columns:[[
+				{field:'df_config_id',title:'Key'},
+				{field:'df_config_name',title:'Name'},	
+				{field:'df_config_format',title:'Format'},		
+				{field:'df_status',title:'Status'},
+				{field:'df_source_file',title:'Source file',width: 200},
+				{field:'table_name',title:'Source table'},
+				{field:'dt_column_list',title:'Column list'},
+				{field:'df_attribute',title:'Attribute'},
+				{field:'module_desc',title:'Export module'},
+				{field:'script_name',title:'Export script'}		
+			]],
+			//rownumbers:true,
+			singleSelect:true,
+			collapsible:true,
+			border: false,
+			onSelect: function(rowIndex, rowData){
+				
+			}
+		});	
+}
+</script>]]></template>
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions>
+      <condition><![CDATA[actions=='listDataSubject']]></condition>
+      <action-definition>
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs>
+          <jndi type="string" mapping="connection_name"/>
+        </action-inputs>
+        <action-outputs>
+          <query-result type="result-set" mapping="query_result"/>
+        </action-outputs>
+        <component-definition>
+          <query><![CDATA[SELECT data_subject_id, data_subject_name, data_subject_desc, data_subject_status
+  FROM control.spctl_data_subject;]]></query>
+          <live><![CDATA[false]]></live>
+        </component-definition>
+      </action-definition>
+
+    </actions>
+
+    <actions>
+      <condition><![CDATA[actions=='listDataFileConfig']]></condition>
+      <action-definition>
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs>
+          <jndi type="string" mapping="connection_name"/>
+          <p_data_subject_id type="string"/>
+        </action-inputs>
+        <action-outputs>
+          <query-result type="result-set" mapping="query_result"/>
+        </action-outputs>
+        <component-definition>
+          <live><![CDATA[false]]></live>
+          <query><![CDATA[SELECT df_config_id,df_config_name,df_config_format,dt_desc,df_status,df_source_file,dt_column_list,df_attribute,c.export_module_id,c.module_desc,c.bin_dir,c.script_name,c.export_dir,c.export_file_name_format,b.table_name
+FROM control.spctl_data_file_config a,control.spctl_data_source_tables b,control.spctl_export_module c
+WHERE a.data_subject_id={p_data_subject_id} AND a.data_source_table_id=b.data_source_table_id AND a.export_module_id=c.export_module_id
+ORDER BY df_config_id]]></query>
+        </component-definition>
+      </action-definition>
+
+    </actions>
+
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>Process data grid</action-type>
+      <action-inputs> 
+        <returnResult type="string"/>  
+        <query_result type="result-set"/>  
+        <actions type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <returnResult type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var result_set=query_result;
+var rowCount=query_result.getRowCount();
+var meta = result_set.getMetaData();      // Returns an IPentahoMetaData object
+var colCount = meta.getColumnCount();
+var colHeaders = meta.getColumnHeaders(); //getColumnHeaders() returns object[][]
+var rowHeaders = meta.getRowHeaders(); 
+
+if(actions=='template'){
+	returnResult=returnResult;
+}else{
+	returnResult='[';
+	//process data item
+	for(var i=0;i<result_set.getRowCount();i++){
+		var item='';
+		if(i>0){
+			item+=',';
+		}
+		item+='{';
+			for(var j=0;j<result_set.getColumnCount();j++){ 		
+				var value=result_set.getValueAt(i,j);
+				var columnValue=colHeaders[0][j];
+				if(j>0){
+					item+=',';
+				}
+				item+='"'+columnValue+'":"'+value+'"';
+			}
+		item+='}';	
+
+	returnResult+=item;
+	}
+	//end
+
+	returnResult+=']';
+}]]></script> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title/>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author/>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <p_event_name type="string"> 
+      <sources> 
+        <request>p_event_name</request> 
+      </sources>  
+      <default-value/> 
+    </p_event_name>  
+    <full_date type="string"> 
+      <sources> 
+        <request>full_date</request> 
+      </sources>  
+      <default-value/> 
+    </full_date>  
+    <start_date type="string"> 
+      <sources> 
+        <request>start_date</request> 
+      </sources>  
+      <default-value/> 
+    </start_date>  
+    <end_date type="string"> 
+      <sources> 
+        <request>end_date</request> 
+      </sources>  
+      <default-value/> 
+    </end_date>  
+    <p_flight_id type="string"> 
+      <sources> 
+        <request>p_flight_id</request> 
+      </sources>  
+      <default-value/> 
+    </p_flight_id>  
+    <p_summary type="string"> 
+      <sources> 
+        <request>p_summary</request> 
+      </sources>  
+      <default-value><![CDATA[no]]></default-value> 
+    </p_summary>  
+    <v_myquery type="string"> 
+      <sources> 
+        <request>v_myquery</request> 
+      </sources>  
+      <default-value/> 
+    </v_myquery> 
+  </inputs>
+
+  <outputs> 
+    <jsonResult type="string"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </jsonResult> 
+  </outputs>
+
+  <resources> 
+    <transformation-file> 
+      <file> 
+        <location/>  
+        <mime-type>text/plain</mime-type> 
+      </file> 
+    </transformation-file> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>TemplateComponent</component-name>
+      <action-type>Message Template</action-type>
+      <action-inputs> 
+        <p_event_name type="string"/>  
+        <p_flight_id type="string"/>  
+        <full_date type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <output-message type="string" mapping="v_myquery"/> 
+      </action-outputs>
+      <component-definition> 
+        <template><![CDATA[SELECT latitude,longitude,sum(event_count) FROM evttracker.daily_event_maps 
+WHERE full_date='{full_date}'
+AND event_name='{p_event_name}'
+AND id='{p_flight_id}'
+AND is_active=true
+GROUP BY latitude,longitude]]></template> 
+      </component-definition> 
+    </action-definition>
+  
+    <actions> 
+      <condition><![CDATA[p_summary=='true']]></condition>  
+      <action-definition> 
+        <component-name>TemplateComponent</component-name>
+        <action-type>Message Template</action-type>
+        <action-inputs> 
+          <p_event_name type="string"/>  
+          <p_flight_id type="string"/>  
+          <start_date type="string"/>  
+          <end_date type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <output-message type="string" mapping="v_myquery"/> 
+        </action-outputs>
+        <component-definition> 
+          <template><![CDATA[SELECT latitude,longitude,sum(event_count) FROM evttracker.daily_event_maps 
+WHERE full_date BETWEEN '{start_date}'::date AND '{end_date}'::date
+AND event_name='{p_event_name}'
+AND id='{p_flight_id}'
+AND is_active=true
+GROUP BY latitude,longitude]]></template> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Relational</action-type>
+      <action-inputs> 
+        <query type="string" mapping="v_myquery"/> 
+      </action-inputs>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[dw3]]></jndi>  
+        <live><![CDATA[false]]></live> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>JsonResponse</action-type>
+      <action-inputs> 
+        <query_result type="result-set"/> 
+      </action-inputs>
+      <action-outputs> 
+        <jsonResult type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var jsonResult;
+
+jsonResult='{';
+jsonResult+='"mapData":[';
+for(var i=0;i<query_result.getRowCount();i++){
+	if(i>0){
+		jsonResult+=',';	
+	}
+	var latitude=query_result.getValueAt(i,0);
+	var longitude=query_result.getValueAt(i,1);
+	var count=query_result.getValueAt(i,2);
+	jsonResult+='{"lat": "'+latitude+'","lng":"'+longitude+'","data": "'+count+'"}';
+}
+jsonResult+=']';
+jsonResult+='}';]]></script> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

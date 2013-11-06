@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Daily AdCel Network Summary WS</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author/>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <full_date type="string"> 
+      <sources> 
+        <request>full_date</request> 
+      </sources>  
+      <default-value/> 
+    </full_date> 
+  </inputs>
+
+  <outputs> 
+    <jSonResult type="string"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </jSonResult> 
+  </outputs>
+
+  <resources/>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Prompt/Secure Filter</action-type>
+      <action-inputs> 
+        <full_date type="string"/> 
+      </action-inputs>
+      <component-definition> 
+        <selections> 
+          <full_date filter="none" style="text-box"/> 
+        </selections> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Relational</action-type>
+      <action-inputs> 
+        <full_date type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[verveReportConnection]]></jndi>  
+        <live><![CDATA[true]]></live>  
+        <query><![CDATA[SELECT
+a.full_date as "Date",
+a.ad_network_id as "Ad Netowrk ID",
+a.ad_network_name as "Ad Network Name",
+a.partner_id as "Partner ID",
+a.partner_name as "Partner Name",
+a.portal_id as "Portal ID",
+a.portal_name as "Portal Name",
+sum(a.fullfilled_code_count) as "Total Ad Response",
+sum(a.fullfilled_code_y) as "Total Yes Response",
+sum(a.fullfilled_code_n) as "Total No Response",
+sum(a.fullfilled_code_e) as "Total Error Response",
+sum(a.fullfilled_code_t) as "Total Timeout Response"
+FROM adstraffic.daily_ad_serving_stats a
+WHERE a.full_date = '{full_date}'::date
+AND a.is_active = true
+GROUP BY
+a.full_date,
+a.ad_network_id,
+a.ad_network_name,
+a.partner_id,
+a.partner_name,
+a.portal_id,
+a.portal_name
+ORDER BY
+a.ad_network_name,
+a.portal_name,
+a.partner_name
+LIMIT 100]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>Convert Result Set to Json</action-type>
+      <action-inputs> 
+        <query_result type="result-set"/> 
+      </action-inputs>
+      <action-outputs> 
+        <jSonResult type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var jSonResult='';
+var data='';
+var result_set=query_result;
+var meta = result_set.getMetaData();      // Returns an IPentahoMetaData object
+var colCount = meta.getColumnCount();
+var colHeaders = meta.getColumnHeaders(); //getColumnHeaders() returns object[][]
+var rowHeaders = meta.getRowHeaders(); 
+
+data='{';
+
+//process column name
+data+='"column":[';
+for ( var i = 0 ; i < colCount ; i++ ){
+	if(i>0){data+=',';}
+	data+='"'+colHeaders[0][i]+'"';
+}
+data+=']';
+//end
+//process data item
+data+=',"data":[';
+for(var i=0;i<result_set.getRowCount();i++){
+	if(i>0){data+=','}
+	data+='[';
+	for(var j=0;j<result_set.getColumnCount();j++){ 
+		if(j>0){data+=','}
+		data+='"'+result_set.getValueAt(i,j)+'"';
+	}
+	data+=']';
+}
+data+=']';
+//end
+data+='}';
+jSonResult=data;]]></script> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

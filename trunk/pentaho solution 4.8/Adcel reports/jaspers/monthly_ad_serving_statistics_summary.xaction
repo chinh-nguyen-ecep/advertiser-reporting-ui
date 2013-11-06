@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Monthly AdCel Statistics Summary</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>Chinh nguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <p_output type="string"> 
+      <sources> 
+        <request>p_output</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </p_output>  
+    <calendar_year_month type="string"> 
+      <sources> 
+        <request>calendar_year_month</request> 
+      </sources>  
+      <default-value><![CDATA[30 day]]></default-value> 
+    </calendar_year_month>  
+    <newInput type="result-set"> 
+      <sources> 
+        <request>newInput</request> 
+      </sources>  
+      <default-value type="result-set"> 
+        <row> 
+          <calendar_year_month>30 day</calendar_year_month>  
+          <month_since_2005>337787</month_since_2005> 
+        </row>  
+        <row> 
+          <calendar_year_month>30 day</calendar_year_month>  
+          <month_since_2005>337768</month_since_2005> 
+        </row> 
+      </default-value>  
+      <columns> 
+        <calendar_year_month type="string"/>  
+        <month_since_2005 type="string"/> 
+      </columns> 
+    </newInput> 
+  </inputs>
+
+  <outputs> 
+    <query_result type="result-set"/>  
+    <newInput type="result-set"/> 
+  </outputs>
+
+  <resources> 
+    <pageTemplate> 
+      <solution-file> 
+        <location>monthly_ad_serving_statistics_summary/parameter_template.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </pageTemplate>  
+    <report-definition> 
+      <solution-file> 
+        <location>monthly_ad_serving_statistics_summary/monthly_ad_serving_statistics_summary.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get calendar month year</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result"/>  
+        <calendar_year_month type="string"/>  
+        <month_since_2005 type="integer"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[dw3]]></jndi>  
+        <query><![CDATA[SELECT DISTINCT calendar_year_month, month_since_2005
+FROM adstraffic.monthly_ad_serving_stats
+WHERE is_active = true
+ORDER BY month_since_2005 desc]]></query>  
+        <live><![CDATA[true]]></live> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Prompt/Secure Filter</action-type>
+      <action-inputs> 
+        <calendar_year_month type="string"/>  
+        <query_result type="result-set"/> 
+      </action-inputs>
+      <action-resources> 
+        <pageTemplate type="resource"/> 
+      </action-resources>
+      <component-definition> 
+        <selections> 
+          <calendar_year_month style="select"> 
+            <filter value-col-name="calendar_year_month" display-col-name="calendar_year_month">query_result</filter>  
+            <title>Month</title> 
+          </calendar_year_month> 
+        </selections>  
+        <xsl><![CDATA[pageTemplate]]></xsl> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JasperReportsComponent</component-name>
+      <action-type>Jasper</action-type>
+      <action-inputs> 
+        <calendar_year_month type="string"/>  
+        <output-type type="string" mapping="p_output"/>
+      </action-inputs>
+      <action-resources> 
+        <report-definition type="resource"/> 
+      </action-resources>
+      <component-definition> 
+        <jndi><![CDATA[verveReportConnection]]></jndi> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

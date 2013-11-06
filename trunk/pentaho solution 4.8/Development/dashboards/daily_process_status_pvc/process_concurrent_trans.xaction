@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Check process_concurrent_trans</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author/>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <process_id type="string"> 
+      <sources> 
+        <request>process_id</request> 
+      </sources>  
+      <default-value/> 
+    </process_id>  
+    <p_server type="string"> 
+      <sources> 
+        <request>p_server</request> 
+      </sources>  
+      <default-value><![CDATA[analyticsDB]]></default-value> 
+    </p_server> 
+  </inputs>
+
+  <outputs> 
+    <HTML type="string"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </HTML> 
+  </outputs>
+
+  <resources/>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Relational Connection</action-type>
+      <action-inputs> 
+        <jndi type="string" mapping="p_server"/> 
+      </action-inputs>
+      <action-outputs> 
+        <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
+      </action-outputs>
+      <component-definition/> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>TemplateComponent</component-name>
+      <action-type>query</action-type>
+      <action-inputs> 
+        <process_id type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <output-message type="string" mapping="query"/> 
+      </action-outputs>
+      <component-definition> 
+        <template><![CDATA[SELECT process_id, concurrent_trans_name, is_complete, dt_lastchange
+FROM control.process_concurrent_trans 
+WHERE process_id = {process_id} ORDER BY concurrent_trans_name]]></template> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Relational</action-type>
+      <action-inputs> 
+        <query type="string"/>  
+        <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
+      </action-inputs>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result"/> 
+      </action-outputs>
+      <component-definition> 
+        <live><![CDATA[true]]></live> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>JavaScript</action-type>
+      <action-inputs> 
+        <query_result type="result-set"/> 
+      </action-inputs>
+      <action-outputs> 
+        <HTML type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var HTML;
+HTML='<style type="text/css" title="currentStyle">@import "/verve-lib/css/mytable1.css";</style><table class="table1"><thead><th>Concurrent Trans Name</th><th>Is Complete</th><th>Date Last Change</th></thead><tbody>';
+for(var i=0;i<query_result.getRowCount();i++){
+	var process_id=query_result.getValueAt(i,0);
+	var concurrent_trans_name=query_result.getValueAt(i,1);
+	var is_complete=query_result.getValueAt(i,2);
+	var dt_lastchange=query_result.getValueAt(i,3);
+	if(is_complete==false) is_complete='<font color="red">'+is_complete+'</font>';
+	if(is_complete==true) is_complete='<font color="green">'+is_complete+'</font>';
+	
+	if(i%2==0){
+		HTML+='<tr>';
+	}else{
+		HTML+='<tr class="tr1">';
+	}
+	HTML+='<th>'+concurrent_trans_name+'</th><td>'+is_complete+'</td><td>'+dt_lastchange+'</td></tr>';
+}
+HTML+='</tbody></table>';]]></script> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>
