@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="detail_by_placement" language="groovy" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="eastern_date_sk" class="java.lang.Integer"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA["D:\\Ecep\\Document-Tailieu\\Pentaho\\biserver-ce\\pentaho-solutions\\ad_serving\\jaspers\\daily_adm_data_feed\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="totalRevenue" class="java.lang.Double"/>
+	<queryString>
+		<![CDATA[SELECT sum(a.total_revenue) FROM (
+SELECT
+a.eastern_date_sk,
+a.full_date,
+b.name_current,
+b.website_id,
+sum(a.total_revenue) as total_revenue,
+sum(a.total_impressions) as total_impressions,
+sum(a.total_clicks) as total_clicks
+FROM (
+	SELECT
+	  a.eastern_date_sk,
+	  a.full_date,
+	  b.website_id,
+	  sum(a.revenue) as total_revenue,
+	  sum(a.impressions) as total_impressions,
+	  sum(a.clicks) as total_clicks
+	FROM adm.daily_agg_adm_data_feed a
+	 INNER JOIN refer.adm_placement_dim b ON a.placement_id = b.placement_id
+	WHERE
+	  a.is_active=true AND
+	  b.dt_expire='9999-12-31' AND
+	  a.eastern_date_sk = $P{eastern_date_sk}
+	GROUP BY
+	  a.eastern_date_sk,
+	  a.full_date,
+	  b.website_id
+	) a
+INNER JOIN refer.adm_website_dim b ON a.website_id=b.website_id
+WHERE
+b.dt_expire='9999-12-31'
+GROUP BY
+a.eastern_date_sk,
+a.full_date,
+b.name_current,
+b.website_id
+ORDER BY
+total_revenue desc
+LIMIT 20
+) a]]>
+	</queryString>
+	<field name="sum" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="20">
+			<staticText>
+				<reportElement x="0" y="0" width="200" height="20"/>
+				<textElement verticalAlignment="Top">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Today Daily Top 20 properties' revenue:]]></text>
+			</staticText>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement x="200" y="0" width="64" height="20"/>
+				<textElement verticalAlignment="Top">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{sum}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="264" y="0" width="50" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[new DecimalFormat("0.00").format(new Double(($F{sum}.doubleValue()*100)/$P{totalRevenue})) + "%"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="29" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="802" height="29"/>
+				<subreportParameter name="eastern_date_sk">
+					<subreportParameterExpression><![CDATA[$P{eastern_date_sk}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "top_20_revenue_websites_subreport_detail.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<summary>
+		<band height="30"/>
+	</summary>
+</jasperReport>

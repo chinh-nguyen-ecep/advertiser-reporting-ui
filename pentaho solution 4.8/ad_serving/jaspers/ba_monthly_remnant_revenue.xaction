@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Monthly Remnant Revenue</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>Chinh nguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <calendar_year_month type="string"> 
+      <sources> 
+        <request>calendar_year_month</request> 
+      </sources>  
+      <default-value/> 
+    </calendar_year_month>  
+    <p_output type="string"> 
+      <sources> 
+        <request>p_output</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </p_output>  
+    <List_networks type="string-list"> 
+      <sources> 
+        <request>List_networks</request> 
+      </sources>  
+      <default-value type="string-list"> 
+        <list-item>AdSense DBCLK Channel</list-item>  
+        <list-item>AT&amp;T (Yellowpages)</list-item>  
+        <list-item>AT&amp;T No Logo (Yellowpages)</list-item>  
+        <list-item>AT&amp;T Static Banner (Yellowpages)</list-item>  
+        <list-item>City Grid/City Grid Proxy</list-item>  
+        <list-item>City Grid Mobile</list-item>  
+        <list-item>iTunes</list-item>  
+        <list-item>JumpTap</list-item>  
+        <list-item>Marchex/Marchex Proxy</list-item>  
+        <list-item>Millennial Media</list-item>  
+        <list-item>Superpages Proxy/Blue</list-item>  
+        <list-item>Where/Where HTML</list-item>  
+        <list-item>KlickThru</list-item> 
+      </default-value> 
+    </List_networks>  
+    <p_network type="string"> 
+      <sources> 
+        <request>p_network</request> 
+      </sources>  
+      <default-value><![CDATA[Jumptap]]></default-value> 
+    </p_network>  
+    <List_year_month type="string-list"> 
+      <sources> 
+        <request>List_year_month</request> 
+      </sources>  
+      <default-value type="string-list"> 
+        <list-item>2012-Jan</list-item>  
+        <list-item>2011-Dec</list-item> 
+      </default-value> 
+    </List_year_month>  
+    <connection_name type="string"> 
+      <sources> 
+        <request>connection_name</request> 
+      </sources>  
+      <default-value><![CDATA[verveReportConnection]]></default-value> 
+    </connection_name> 
+  </inputs>
+
+  <outputs/>
+
+  <resources> 
+    <pageTemplate> 
+      <solution-file> 
+        <location>ba_monthly_remnant_revenue/parameter_template.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </pageTemplate>  
+    <report-definition> 
+      <solution-file> 
+        <location>ba_monthly_remnant_revenue/monthly_performance_report_jumptap.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition>  
+    <report-definition1> 
+      <solution-file> 
+        <location>ba_monthly_remnant_revenue/monthly_performance_report_adsense.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition1>  
+    <report-definition2> 
+      <solution-file> 
+        <location>ba_monthly_remnant_revenue/monthly_performance_report_millenial.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition2>  
+    <report-definition3> 
+      <solution-file> 
+        <location>ba_monthly_remnant_revenue/monthly_performance_report_marchexl.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition3>  
+    <report-definition4> 
+      <solution-file> 
+        <location>ba_monthly_remnant_revenue/monthly_performance_report_adwhere.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition4>  
+    <report-definition5> 
+      <solution-file> 
+        <location>ba_monthly_remnant_revenue/monthly_performance_report_super_page.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition5>  
+    <report-definition6> 
+      <solution-file> 
+        <location>ba_monthly_remnant_revenue/monthly_performance_report_super_page_blue.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition6>  
+    <report-definition7> 
+      <solution-file> 
+        <location>ba_monthly_remnant_revenue/monthly_performance_report_yellow_pages.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition7>  
+    <report-definition8> 
+      <solution-file> 
+        <location>ba_monthly_remnant_revenue/monthly_performance_report_adsense_dbclk_channel.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition8>  
+    <report-definition9> 
+      <solution-file> 
+        <location>ba_monthly_remnant_revenue/monthly_performance_report_citigrid.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition9>  
+    <report-definition10> 
+      <solution-file> 
+        <location>ba_monthly_remnant_revenue/monthly_performance_report_itune.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition10>  
+    <report-definition11> 
+      <solution-file> 
+        <location>ba_monthly_remnant_revenue/monthly_performance_report_citigrid.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition11>  
+    <report-definition12> 
+      <solution-file> 
+        <location>ba_monthly_remnant_revenue/monthly_performance_report_att_static_banner.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition12>  
+    <report-definition13> 
+      <solution-file> 
+        <location>ba_monthly_remnant_revenue/monthly_performance_report_att_no_logo.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition13>  
+    <report-definition14> 
+      <solution-file> 
+        <location>ba_monthly_remnant_revenue/monthly_performance_report_klickthru.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition14>  
+    <report-definition15> 
+      <solution-file> 
+        <location>ba_monthly_remnant_revenue/monthly_performance_report_citigrid_mobile.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition15> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get calendar year month</action-type>
+      <action-inputs> 
+        <jndi type="string" mapping="connection_name"/> 
+      </action-inputs>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result"/>  
+        <calendar_year_month type="string"/>  
+        <month_since_2005 type="integer"/> 
+      </action-outputs>
+      <component-definition> 
+        <live><![CDATA[true]]></live>  
+        <query><![CDATA[SELECT DISTINCT calendar_year_month, month_since_2005
+FROM billing.ba_monthly_jt_performance
+WHERE is_active = true
+ORDER BY month_since_2005 desc]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Prompt/Secure Filter</action-type>
+      <action-inputs> 
+        <calendar_year_month type="string"/>  
+        <p_network type="string"/>  
+        <List_networks type="string-list"/>  
+        <query_result type="result-set"/> 
+      </action-inputs>
+      <action-resources> 
+        <pageTemplate type="resource"/> 
+      </action-resources>
+      <component-definition> 
+        <selections> 
+          <calendar_year_month style="select"> 
+            <filter value-col-name="calendar_year_month" display-col-name="calendar_year_month">query_result</filter>  
+            <title>Month</title> 
+          </calendar_year_month>  
+          <p_network style="select"> 
+            <filter>List_networks</filter> 
+          </p_network> 
+        </selections>  
+        <xsl><![CDATA[pageTemplate]]></xsl> 
+      </component-definition> 
+    </action-definition>
+  
+    <actions> 
+      <condition><![CDATA[p_network=='JumpTap']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <calendar_year_month type="string"/>  
+          <output-type type="string" mapping="p_output"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition type="resource"/> 
+        </action-resources>
+        <component-definition> 
+          <jndi><![CDATA[verveReportConnection]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_network=='Google AdSense']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <calendar_year_month type="string"/>  
+          <output-type type="string" mapping="p_output"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition1"/> 
+        </action-resources>
+        <component-definition> 
+          <jndi><![CDATA[verveReportConnection]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_network=='Millennial Media']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <calendar_year_month type="string"/>  
+          <output-type type="string" mapping="p_output"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition2"/> 
+        </action-resources>
+        <component-definition> 
+          <jndi><![CDATA[verveReportConnection]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_network=='Marchex/Marchex Proxy']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <calendar_year_month type="string"/>  
+          <output-type type="string" mapping="p_output"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition3"/> 
+        </action-resources>
+        <component-definition> 
+          <jndi><![CDATA[verveReportConnection]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_network=='Where/Where HTML']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <calendar_year_month type="string"/>  
+          <output-type type="string" mapping="p_output"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition4"/> 
+        </action-resources>
+        <component-definition> 
+          <jndi><![CDATA[verveReportConnection]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_network=='Superpages']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <calendar_year_month type="string"/>  
+          <output-type type="string" mapping="p_output"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition5"/> 
+        </action-resources>
+        <component-definition> 
+          <jndi><![CDATA[verveReportConnection]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_network=='Superpages Proxy/Blue']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <calendar_year_month type="string"/>  
+          <output-type type="string" mapping="p_output"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition6"/> 
+        </action-resources>
+        <component-definition> 
+          <jndi><![CDATA[verveReportConnection]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_network=='AT&T (Yellowpages)']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <calendar_year_month type="string"/>  
+          <output-type type="string" mapping="p_output"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition7"/> 
+        </action-resources>
+        <component-definition> 
+          <jndi><![CDATA[verveReportConnection]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_network=='AT&T Static Banner (Yellowpages)']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <calendar_year_month type="string"/>  
+          <output-type type="string" mapping="p_output"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition12"/> 
+        </action-resources>
+        <component-definition> 
+          <jndi><![CDATA[verveReportConnection]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_network=='AT&T No Logo (Yellowpages)']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <calendar_year_month type="string"/>  
+          <output-type type="string" mapping="p_output"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition13"/> 
+        </action-resources>
+        <component-definition> 
+          <jndi><![CDATA[verveReportConnection]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_network=='AdSense DBCLK Channel']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <calendar_year_month type="string"/>  
+          <output-type type="string" mapping="p_output"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition8"/> 
+        </action-resources>
+        <component-definition> 
+          <jndi><![CDATA[verveReportConnection]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_network=='City Grid/City Grid Proxy']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <calendar_year_month type="string"/>  
+          <output-type type="string" mapping="p_output"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition9"/> 
+        </action-resources>
+        <component-definition> 
+          <jndi><![CDATA[verveReportConnection]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_network=='iTunes']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <calendar_year_month type="string"/>  
+          <output-type type="string" mapping="p_output"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition10"/> 
+        </action-resources>
+        <component-definition> 
+          <jndi><![CDATA[verveReportConnection]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_network=='KlickThru']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <calendar_year_month type="string"/>  
+          <output-type type="string" mapping="p_output"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition14"/> 
+        </action-resources>
+        <component-definition> 
+          <jndi><![CDATA[verveReportConnection]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_network=='City Grid Mobile']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <calendar_year_month type="string"/>  
+          <output-type type="string" mapping="p_output"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition15"/> 
+        </action-resources>
+        <component-definition> 
+          <jndi><![CDATA[verveReportConnection]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+ 
+  </actions> 
+</action-sequence>

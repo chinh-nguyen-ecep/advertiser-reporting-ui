@@ -1,0 +1,879 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Revenue Performance Chart</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>chinhnguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type>report</result-type>  
+    <icon>chart_1(2).png|chart_1(2).png</icon> 
+  </documentation>
+
+  <inputs> 
+    <queryOLAP type="string"> 
+      <sources/>  
+      <default-value><![CDATA[^^]]></default-value> 
+    </queryOLAP>  
+    <p_Campaign type="string"> 
+      <default-value type="string-list"/>  
+      <sources> 
+        <request>p_Campaign</request> 
+      </sources> 
+    </p_Campaign>  
+    <chart_type type="string"> 
+      <sources> 
+        <request>chart_type</request> 
+      </sources>  
+      <default-value><![CDATA[column]]></default-value> 
+    </chart_type>  
+    <chart_type_list type="string-list"> 
+      <default-value type="string-list"> 
+        <list-item>bar</list-item>  
+        <list-item>column</list-item>  
+        <list-item>line</list-item>  
+        <list-item>spline</list-item>  
+        <list-item>scatter</list-item>  
+        <list-item>area</list-item> 
+      </default-value> 
+    </chart_type_list>  
+    <p_start_date type="string"> 
+      <sources> 
+        <request>p_start_date</request> 
+      </sources>  
+      <default-value/> 
+    </p_start_date>  
+    <p_end_date type="string"> 
+      <sources> 
+        <request>p_end_date</request> 
+      </sources>  
+      <default-value/> 
+    </p_end_date>  
+    <p_measures type="string"> 
+      <sources> 
+        <request>p_measures</request> 
+      </sources>  
+      <default-value><![CDATA[Revenue]]></default-value> 
+    </p_measures>  
+    <List_Measures type="result-set"> 
+      <default-value type="result-set"> 
+        <row> 
+          <measure>Impressions</measure> 
+        </row>  
+        <row> 
+          <measure>Clicks</measure> 
+        </row>  
+        <row> 
+          <measure>Revenue</measure> 
+        </row> 
+      </default-value>  
+      <columns> 
+        <measure type="string"/> 
+      </columns> 
+    </List_Measures>  
+    <p_date_mode type="string"> 
+      <sources> 
+        <request>p_date_mode</request> 
+      </sources>  
+      <default-value><![CDATA[date]]></default-value> 
+    </p_date_mode>  
+    <List_date_mode type="result-set"> 
+      <default-value type="result-set"> 
+        <row> 
+          <New_Column>date</New_Column> 
+        </row>  
+        <row> 
+          <New_Column>month</New_Column> 
+        </row> 
+      </default-value>  
+      <columns> 
+        <New_Column type="string"/> 
+      </columns> 
+    </List_date_mode>  
+    <p_start_month type="string"> 
+      <sources> 
+        <request>p_start_month</request> 
+      </sources>  
+      <default-value><![CDATA[0]]></default-value> 
+    </p_start_month>  
+    <p_end_month type="string"> 
+      <sources> 
+        <request>p_end_month</request> 
+      </sources>  
+      <default-value><![CDATA[0]]></default-value> 
+    </p_end_month>  
+    <v_max_date type="string"> 
+      <sources> 
+        <request>v_max_date</request> 
+      </sources>  
+      <default-value/> 
+    </v_max_date>  
+    <v_min_date type="string"> 
+      <sources> 
+        <request>v_min_date</request> 
+      </sources>  
+      <default-value/> 
+    </v_min_date>  
+    <p_Site type="string"> 
+      <sources> 
+        <request>p_Site</request> 
+      </sources>  
+      <default-value/> 
+    </p_Site>  
+    <v_chart_title type="string"> 
+      <sources/>  
+      <default-value><![CDATA[Ad serving]]></default-value> 
+    </v_chart_title>  
+    <q_date_list type="result-set"> 
+      <default-value/> 
+    </q_date_list>  
+    <List_report_type type="result-set"> 
+      <default-value type="result-set"> 
+        <row> 
+          <name>Publisher Property report</name>  
+          <value>Publisher Property report</value> 
+        </row>  
+        <row> 
+          <name>Placement daily report</name>  
+          <value>Placement daily report</value> 
+        </row> 
+      </default-value>  
+      <columns> 
+        <name type="string"/>  
+        <value type="string"/> 
+      </columns> 
+    </List_report_type>  
+    <p_report_type type="string"> 
+      <sources> 
+        <request>p_report_type</request> 
+      </sources>  
+      <default-value><![CDATA[Site campaign day report]]></default-value> 
+    </p_report_type>  
+    <v_chart_sub_title type="string"> 
+      <sources> 
+        <request>v_chart_sub_title</request> 
+      </sources>  
+      <default-value/> 
+    </v_chart_sub_title>  
+    <p_Publisher type="string"> 
+      <sources> 
+        <request>p_Publisher</request> 
+      </sources>  
+      <default-value/> 
+    </p_Publisher>  
+    <chartWidth type="string"> 
+      <sources> 
+        <request>chartWidth</request> 
+      </sources>  
+      <default-value><![CDATA[900]]></default-value> 
+    </chartWidth>  
+    <chartHeight type="string"> 
+      <sources> 
+        <request>chartHeight</request> 
+      </sources>  
+      <default-value><![CDATA[400]]></default-value> 
+    </chartHeight>  
+    <chartSingleMode type="string"> 
+      <sources> 
+        <request>chartSingleMode</request> 
+      </sources>  
+      <default-value><![CDATA[true]]></default-value> 
+    </chartSingleMode>  
+    <webpage type="string"> 
+      <sources> 
+        <request>webpage</request> 
+      </sources>  
+      <default-value/> 
+    </webpage>  
+    <p_Placement type="string"> 
+      <sources> 
+        <request>p_Placement</request> 
+      </sources>  
+      <default-value/> 
+    </p_Placement>  
+    <p_Creative type="string"> 
+      <sources> 
+        <request>p_Creative</request> 
+      </sources>  
+      <default-value/> 
+    </p_Creative>  
+    <OLAPResult type="result-set"> 
+      <sources> 
+        <request>OLAPResult</request> 
+      </sources>  
+      <default-value/> 
+    </OLAPResult>  
+    <p_Publisher type="string"> 
+      <sources> 
+        <request>p_Publisher</request> 
+      </sources>  
+      <default-value><![CDATA[All Publishers]]></default-value> 
+    </p_Publisher>  
+    <p_Property type="string"> 
+      <sources> 
+        <request>p_Property</request> 
+      </sources>  
+      <default-value><![CDATA[All Properties]]></default-value> 
+    </p_Property>  
+    <v_user_choose_mode type="string"> 
+      <sources> 
+        <request>v_user_choose_mode</request> 
+      </sources>  
+      <default-value/> 
+    </v_user_choose_mode>  
+    <chartName type="string"> 
+      <sources> 
+        <request>chartName</request> 
+      </sources>  
+      <default-value><![CDATA[chart]]></default-value> 
+    </chartName>  
+    <p_chart_polar type="string"> 
+      <sources> 
+        <request>p_chart_polar</request> 
+      </sources>  
+      <default-value><![CDATA[false]]></default-value> 
+    </p_chart_polar> 
+  </inputs>
+
+  <outputs> 
+    <webpage type="string"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </webpage> 
+  </outputs>
+
+  <resources> 
+    <pageTemplate1> 
+      <solution-file> 
+        <location>ADM_report_template.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </pageTemplate1>  
+    <catalog1> 
+      <solution-file> 
+        <location>/ADM.xml</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </catalog1>  
+    <template> 
+      <solution-file> 
+        <location>/hightChart_template.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </template>  
+    <template1> 
+      <solution-file> 
+        <location>/hightChart_template2.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </template1> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get max min date data</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="q_max_min_date"/>  
+        <max_full_date type="string"/>  
+        <min_full_date type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[verveReportConnection]]></jndi>  
+        <live><![CDATA[false]]></live>  
+        <query><![CDATA[SELECT b.min_full_date, b.max_full_date
+FROM refer.date_dim a,
+(SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM adm.daily_agg_network_performance_min WHERE is_active=true) b
+WHERE a.full_date = b.min_full_date OR a.full_date = b.max_full_date;]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get list of year-month</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="q_calendar_year_month"/>  
+        <row_count type="integer"/>  
+        <calendar_year_month type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[verveReportConnection]]></jndi>  
+        <live><![CDATA[false]]></live>  
+        <query><![CDATA[SELECT (month_since_2005 - max_month_since_2005)*-1 AS row_count,calendar_year_month
+  FROM adm.daily_agg_network_performance_min a
+  ,(SELect max (month_since_2005) as max_month_since_2005 from adm.daily_agg_network_performance_min WHERE is_active=true ) b
+WHERE is_active=true GROUP BY a.month_since_2005, a.calendar_year_month, b.max_month_since_2005 ORDER BY a.month_since_2005 desc;]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Prompt/Secure Filter</action-type>
+      <action-inputs> 
+        <chart_type type="string"/>  
+        <p_start_date type="string"/>  
+        <p_end_date type="string"/>  
+        <p_measures type="string"/>  
+        <p_date_mode type="string"/>  
+        <p_start_month type="string"/>  
+        <p_end_month type="string"/>  
+        <v_max_date type="string"/>  
+        <v_min_date type="string"/>  
+        <chart_type_list type="string-list"/>  
+        <List_Measures type="result-set"/>  
+        <List_date_mode type="result-set"/>  
+        <q_calendar_year_month type="result-set"/>  
+        <q_max_min_date type="result-set"/>  
+        <p_report_type type="string"/>  
+        <List_report_type type="result-set"/> 
+      </action-inputs>
+      <action-resources> 
+        <pageTemplate mapping="pageTemplate1"/> 
+      </action-resources>
+      <component-definition> 
+        <selections> 
+          <chart_type style="select"> 
+            <filter>chart_type_list</filter> 
+          </chart_type>  
+          <p_start_date filter="none" style="text-box"/>  
+          <p_end_date filter="none" style="text-box"/>  
+          <p_measures style="check-multi-scroll"> 
+            <filter value-col-name="measure" display-col-name="measure">List_Measures</filter> 
+          </p_measures>  
+          <p_date_mode style="radio"> 
+            <filter value-col-name="New_Column" display-col-name="New_Column">List_date_mode</filter> 
+          </p_date_mode>  
+          <p_start_month style="select"> 
+            <filter value-col-name="row_count" display-col-name="calendar_year_month">q_calendar_year_month</filter> 
+          </p_start_month>  
+          <p_end_month style="select"> 
+            <filter value-col-name="row_count" display-col-name="calendar_year_month">q_calendar_year_month</filter> 
+          </p_end_month>  
+          <v_max_date style="select"> 
+            <filter value-col-name="max_full_date" display-col-name="max_full_date">q_max_min_date</filter> 
+          </v_max_date>  
+          <v_min_date style="select"> 
+            <filter value-col-name="min_full_date" display-col-name="min_full_date">q_max_min_date</filter> 
+          </v_min_date>  
+          <p_report_type style="select"> 
+            <filter value-col-name="value" display-col-name="name">List_report_type</filter> 
+          </p_report_type> 
+        </selections>  
+        <xsl><![CDATA[pageTemplate]]></xsl> 
+      </component-definition> 
+    </action-definition>
+  
+    <actions> 
+      <condition><![CDATA[p_date_mode=='date']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Get date list</action-type>
+        <action-inputs> 
+          <p_start_date type="string"/>  
+          <p_end_date type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="q_date_list"/> 
+        </action-outputs>
+        <component-definition> 
+          <jndi><![CDATA[verveReportConnection]]></jndi>  
+          <query><![CDATA[SELECT 
+ full_date
+FROM 
+  refer.date_dim
+WHERE 
+  full_date BETWEEN '{p_start_date}' AND '{p_end_date}' GROUP BY full_date ORDER BY full_date ASC;]]></query>  
+          <live><![CDATA[false]]></live> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>Convert Parameter to OLAP script</action-type>
+      <action-inputs> 
+        <p_Campaign type="string-list"/>  
+        <p_Site type="string"/>  
+        <q_calendar_year_month type="result-set"/>  
+        <q_date_list type="result-set"/>  
+        <p_start_month type="string"/>  
+        <p_end_month type="string"/>  
+        <p_measures type="string"/>  
+        <p_Publisher type="string"/>  
+        <p_Placement type="string"/>  
+        <p_Creative type="string"/>  
+        <p_Property type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <t_measures type="string"/>  
+        <t_campain type="string"/>  
+        <t_site type="string"/>  
+        <t_date_list type="string"/>  
+        <t_month_list type="string"/>  
+        <t_publisher type="string"/>  
+        <t_placement type="string"/>  
+        <t_creative type="string"/>  
+        <t_property type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var t_measures;
+var t_campain;
+var t_date_list;
+var t_month_list;
+var t_site;
+var t_publisher;
+var t_placement;
+var t_creative;
+var t_property;
+//set default value
+t_measures='';
+t_campain='';
+t_date_list='';
+t_month_list='';
+t_site='';
+t_publisher='';
+t_placement='';
+t_creative='';
+t_property='';
+
+//convert measures
+if(p_measures!= ''){
+	if(p_measures instanceof Array){
+		for(var i=0;i<p_measures.length;i++){
+			if(i>0){
+			t_measures+=',';
+			};
+			t_measures+='[Measures].['+p_measures[i]+']';
+		};
+	}else{
+		t_measures+='[Measures].['+p_measures+']';
+	};
+}
+
+
+//convert dimension
+if(p_Campaign != ''){
+	if(p_Campaign instanceof Array){
+		for(var i=0;i<p_Campaign.length;i++){
+			if(i>0){
+			t_campain+=',';
+			};
+			t_campain+='[Order].['+p_Campaign[i].replace(']',']]')+']';
+		};
+	}else{
+		t_campain+='[Order].['+p_Campaign.replace(']',']]')+']';
+	};
+}
+
+
+//convert site
+if(p_Site !=''){
+	if(p_Site instanceof Array){
+		for(var i=0;i<p_Site.length;i++){
+			if(i>0){
+			t_site+=',';
+			};		
+			t_site+='[Site].['+p_Site[i].replace(']',']]')+']';
+		};
+	}else{
+		t_site+='[Site].['+p_Site.replace(']',']]')+']';
+	};
+}
+
+
+//convert publisher
+if(p_Publisher !=''){
+	if(p_Publisher instanceof Array){
+		for(var i=0;i<p_Publisher.length;i++){
+			if(i>0){
+			t_publisher+=',';
+			};		
+			t_publisher+='[Publisher].['+p_Publisher[i].replace(']',']]')+']';
+		};
+	}else{
+		t_publisher+='[Publisher].['+p_Publisher.replace(']',']]')+']';
+	};
+};
+
+//convert property
+if(p_Property !=''){
+	if(p_Property instanceof Array){
+		for(var i=0;i<p_Property.length;i++){
+			if(i>0){
+			t_property+=',';
+			};		
+			t_property+='[Property].['+p_Property[i].replace(']',']]')+']';
+		};
+	}else{
+		t_property+='[Property].['+p_Property.replace(']',']]')+']';
+	};
+};
+
+//convert placement
+if(p_Placement !=''){
+	if(p_Placement instanceof Array){
+		for(var i=0;i<p_Placement.length;i++){
+			if(i>0){
+			t_placement+=',';
+			};		
+			t_placement+='[Placement].['+p_Placement[i].replace(']',']]')+']';
+		};
+	}else{
+		t_placement+='[Placement].['+p_Placement.replace(']',']]')+']';
+	};
+};
+
+
+//convert placement
+if(p_Creative !=''){
+	if(p_Creative instanceof Array){
+		for(var i=0;i<p_Creative.length;i++){
+			if(i>0){
+			t_creative+=',';
+			};		
+			t_creative+='[Creative].['+p_Creative[i].replace(']',']]')+']';
+		};
+	}else{
+		t_creative+='[Creative].['+p_Creative.replace(']',']]')+']';
+	};
+};
+
+//convert date list
+var countDateList=q_date_list.getRowCount();
+for(var i=0;i<countDateList;i++){
+		if(i>0){
+			t_date_list+=',';
+		};
+		t_date_list+='[Date].['+q_date_list.getValueAt(i,0)+']';		
+	};
+
+//convert month list
+var minRage;
+var maxRage;
+if(p_start_month<p_end_month){
+	minRage=p_start_month;
+	maxRage=p_end_month;
+}else{
+	minRage=p_end_month;
+	maxRage=p_start_month;
+};
+
+for(var i=maxRage;i>=minRage;i--){
+		if(i<maxRage){
+			t_month_list+=',';
+		};
+		t_month_list+='[Year month].['+q_calendar_year_month.getValueAt(i,1)+']';
+				
+	};]]></script> 
+      </component-definition> 
+    </action-definition>
+  
+    <actions> 
+      <condition><![CDATA[p_report_type=='Placement daily report']]></condition>  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>Get user choose mode</action-type>
+        <action-inputs> 
+          <p_measures type="string"/>  
+          <p_Creative type="string"/>  
+          <v_user_choose_mode type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <v_user_choose_mode type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var measures;
+var dimension;
+
+measures=typeof(p_measures);
+dimension=typeof(p_Creative);
+
+if( measures == 'string' && dimension == 'object'){
+	v_user_choose_mode='multiDimensions';
+}else if( measures == 'object' && dimension == 'string'){
+	v_user_choose_mode = 'multiMeasures';
+}else if( measures == 'string' && dimension == 'string'){
+	v_user_choose_mode = 'multiMeasures';
+}else if( measures == 'object' && dimension == 'object'){
+	v_user_choose_mode = 'multiDimensionMeasures';
+}]]></script> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>Make OLAP query</action-type>
+        <action-inputs> 
+          <p_measures type="string"/>  
+          <t_creative type="string"/>  
+          <t_measures type="string"/>  
+          <t_placement type="string"/>  
+          <p_Placement type="string"/>  
+          <p_Creative type="string"/>  
+          <p_date_mode type="string"/>  
+          <v_user_choose_mode type="string"/>  
+          <queryOLAP type="string"/>  
+          <v_chart_sub_title type="string"/>  
+          <v_chart_title type="string"/>  
+          <p_report_type type="string"/>  
+          <t_date_list type="string"/>  
+          <t_month_list type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <queryOLAP type="string"/>  
+          <v_chart_title type="string"/>  
+          <v_chart_sub_title type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[v_chart_title=p_report_type;
+if(v_user_choose_mode=='multiDimensions'){
+	if(p_date_mode=='date'){
+	queryOLAP='select Crossjoin({'+t_measures+'}, {'+t_creative+'}) ON COLUMNS, {'+t_date_list+'} ON ROWS from [daily_agg_network_performance] where Crossjoin({[Active].[true]}, {'+t_placement+'})'
+	}else if(p_date_mode=='month'){
+	queryOLAP='select Crossjoin({'+t_measures+'}, {'+t_creative+'}) ON COLUMNS, {'+t_month_list+'} ON ROWS from [daily_agg_network_performance] where Crossjoin({[Active].[true]}, {'+t_placement+'})'
+	};
+	// set chart title
+	v_chart_sub_title=p_measures +' on ' + p_Placement;
+}else if(v_user_choose_mode=='multiMeasures'){
+	if(p_date_mode=='date'){
+	queryOLAP='select Crossjoin({'+t_creative+'}, {'+t_measures+'}) ON COLUMNS, {'+t_date_list+'} ON ROWS from [daily_agg_network_performance] where Crossjoin({[Active].[true]}, {'+t_placement+'})'
+	}else if(p_date_mode=='month'){
+	queryOLAP='select Crossjoin({'+t_creative+'}, {'+t_measures+'}) ON COLUMNS, {'+t_month_list+'} ON ROWS from [daily_agg_network_performance] where Crossjoin({[Active].[true]}, {'+t_placement+'})'
+	};
+	// set chart title
+	v_chart_sub_title=p_Creative+' on ' + p_Placement;
+}else if(v_user_choose_mode ==  'multiDimensionMeasures'){
+	if(p_date_mode=='date'){
+	queryOLAP='select Crossjoin({[Measures].['+p_measures[0]+']}, {'+t_creative+'}) ON COLUMNS, {'+t_date_list+'} ON ROWS from [daily_agg_network_performance] where Crossjoin({[Active].[true]}, {'+t_placement+'})'
+	}else if(p_date_mode=='month'){
+	queryOLAP='select Crossjoin({[Measures].['+p_measures[0]+']}, {'+t_creative+'}) ON COLUMNS, {'+t_month_list+'} ON ROWS from [daily_agg_network_performance] where Crossjoin({[Active].[true]}, {'+t_placement+'})'
+	};
+	// set chart title
+	v_chart_sub_title=p_measures[0] +' on ' + p_Placement;
+}]]></script> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_report_type=='Publisher Property report']]></condition>  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>Get user choose mode</action-type>
+        <action-inputs> 
+          <p_measures type="string"/>  
+          <p_Property type="string"/>  
+          <v_user_choose_mode type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <v_user_choose_mode type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var measures;
+var dimension;
+
+measures=typeof(p_measures);
+dimension=typeof(p_Property);
+
+if( measures == 'string' && dimension == 'object'){
+	v_user_choose_mode='multiDimensions';
+}else if( measures == 'object' && dimension == 'string'){
+	v_user_choose_mode = 'multiMeasures';
+}else if( measures == 'string' && dimension == 'string'){
+	v_user_choose_mode = 'multiMeasures';
+}else if( measures == 'object' && dimension == 'object'){
+	v_user_choose_mode = 'multiDimensionMeasures';
+}]]></script> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>Make OLAP query</action-type>
+        <action-inputs> 
+          <p_measures type="string"/>  
+          <t_measures type="string"/>  
+          <p_date_mode type="string"/>  
+          <v_user_choose_mode type="string"/>  
+          <queryOLAP type="string"/>  
+          <v_chart_sub_title type="string"/>  
+          <v_chart_title type="string"/>  
+          <p_report_type type="string"/>  
+          <t_date_list type="string"/>  
+          <t_month_list type="string"/>  
+          <t_property type="string"/>  
+          <t_publisher type="string"/>  
+          <p_Property type="string"/>  
+          <p_Publisher type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <queryOLAP type="string"/>  
+          <v_chart_title type="string"/>  
+          <v_chart_sub_title type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[v_chart_title=p_report_type;
+if(v_user_choose_mode=='multiDimensions'){
+	if(p_date_mode=='date'){
+	queryOLAP='select Crossjoin({'+t_measures+'}, {'+t_property+'}) ON COLUMNS, {'+t_date_list+'} ON ROWS from [daily_agg_network_performance] where Crossjoin({[Active].[true]}, {'+t_publisher+'})';
+	}else if(p_date_mode=='month'){
+	queryOLAP='select Crossjoin({'+t_measures+'}, {'+t_property+'}) ON COLUMNS, {'+t_month_list+'} ON ROWS from [daily_agg_network_performance] where Crossjoin({[Active].[true]}, {'+t_publisher+'})';
+	};
+	// set chart title
+	v_chart_sub_title=p_measures +' on ' + p_Publisher;
+}else if(v_user_choose_mode=='multiMeasures'){
+	if(p_date_mode=='date'){
+	queryOLAP='select Crossjoin({'+t_property+'}, {'+t_measures+'}) ON COLUMNS, {'+t_date_list+'} ON ROWS from [daily_agg_network_performance] where Crossjoin({[Active].[true]}, {'+t_publisher+'})';
+	}else if(p_date_mode=='month'){
+	queryOLAP='select Crossjoin({'+t_property+'}, {'+t_measures+'}) ON COLUMNS, {'+t_month_list+'} ON ROWS from [daily_agg_network_performance] where Crossjoin({[Active].[true]}, {'+t_publisher+'})';
+	};
+	// set chart title
+	v_chart_sub_title=p_Property+' on ' + p_Publisher;
+}else if(v_user_choose_mode ==  'multiDimensionMeasures'){
+	if(p_date_mode=='date'){
+	queryOLAP='select Crossjoin({[Measures].['+p_measures[0]+']}, {'+t_property+'}) ON COLUMNS, {'+t_date_list+'} ON ROWS from [daily_agg_network_performance] where Crossjoin({[Active].[true]}, {'+t_publisher+'})';
+	}else if(p_date_mode=='month'){
+	queryOLAP='select Crossjoin({[Measures].['+p_measures[0]+']}, {'+t_property+'}) ON COLUMNS, {'+t_month_list+'} ON ROWS from [daily_agg_network_performance] where Crossjoin({[Active].[true]}, {'+t_publisher+'})';
+	};
+	// set chart title
+	v_chart_sub_title=p_measures[0] +' on ' + p_Publisher;
+}]]></script> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <action-definition> 
+      <component-name>MDXLookupRule</component-name>
+      <action-type>OLAP</action-type>
+      <action-inputs> 
+        <query type="string" mapping="queryOLAP"/> 
+      </action-inputs>
+      <action-resources> 
+        <catalog mapping="catalog1"/> 
+      </action-resources>
+      <action-outputs> 
+        <query-results type="result-set" mapping="OLAPResult"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[verveReportConnection]]></jndi>  
+        <location><![CDATA[mondrian]]></location> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>Create HTMLdata</action-type>
+      <action-inputs> 
+        <OLAPResult type="result-set"/>  
+        <p_measures type="string"/>  
+        <chartName type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <HTMLTable type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var results;
+var HTMLTable;
+var measures;
+results = OLAPResult;
+HTMLTable='';
+measures=typeof(p_measures);
+var meta = results.getMetaData();      // Returns an IPentahoMetaData object
+var colCount = meta.getColumnCount();
+var colHeaders = meta.getColumnHeaders(); //getColumnHeaders() returns object[][]
+var rowHeaders = meta.getRowHeaders(); 
+HTMLTable+='<table id="'+chartName+'_datatable" class="datatable"><thead><tr><th></th>';
+for ( var i = 0 ; i < colCount ; i++ ){
+   
+	HTMLTable+='<th width="80">'+colHeaders[1][i]+'</th>';
+
+}
+HTMLTable+='</tr></thead><tbody>';
+
+
+
+for(var i=0;i<results.getRowCount();i++){
+	if(i%2==0){
+	HTMLTable+='<tr>';
+	}else{
+	HTMLTable+='<tr class="tr1">';
+	}
+	
+	HTMLTable+='<th>'+rowHeaders[i][0]+'</th>';
+	for(var j=0;j<results.getColumnCount();j++){ 
+		var temp=results.getValueAt(i,j);
+		
+		if(temp==null) temp=0;
+		temp=temp/1;
+		if(measures == 'string' && p_measures == 'Revenue'){
+			temp=temp.toFixed(2);
+		}else
+		if(colHeaders[1][j]=='Revenue'){
+			temp=temp.toFixed(2);
+		}
+		
+		HTMLTable+='<td>'+temp+'</td>';
+	}
+	HTMLTable+='</tr>'
+}
+
+HTMLTable+='</tbody></table>';]]></script> 
+      </component-definition> 
+    </action-definition>
+  
+    <actions> 
+      <condition><![CDATA[chartSingleMode == 'true']]></condition>  
+      <action-definition> 
+        <component-name>TemplateComponent</component-name>
+        <action-type>Message Template</action-type>
+        <action-inputs> 
+          <HTMLTable type="string"/>  
+          <v_chart_sub_title type="string"/>  
+          <chart_type type="string"/>  
+          <chartName type="string"/>  
+          <p_chart_polar type="string"/>  
+          <v_chart_title type="string"/> 
+        </action-inputs>
+        <action-resources> 
+          <template type="resource"/> 
+        </action-resources>
+        <action-outputs> 
+          <output-message type="string" mapping="webpage"/> 
+        </action-outputs>
+        <component-definition/> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[chartSingleMode == 'false']]></condition>  
+      <action-definition> 
+        <component-name>TemplateComponent</component-name>
+        <action-type>Message Template</action-type>
+        <action-inputs> 
+          <HTMLTable type="string"/>  
+          <v_chart_sub_title type="string"/>  
+          <chart_type type="string"/>  
+          <chartName type="string"/>  
+          <chartHeight type="string"/>  
+          <p_chart_polar type="string"/>  
+          <v_chart_title type="string"/> 
+        </action-inputs>
+        <action-resources> 
+          <template mapping="template1"/> 
+        </action-resources>
+        <action-outputs> 
+          <output-message type="string" mapping="webpage"/> 
+        </action-outputs>
+        <component-definition/> 
+      </action-definition>
+ 
+    </actions>
+ 
+  </actions> 
+</action-sequence>
