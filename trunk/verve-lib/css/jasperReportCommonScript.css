@@ -1,0 +1,25 @@
+@import "/verve-lib/scripts/jquery-ui-1.8.24.custom/css/smoothness/jquery-ui-1.8.24.custom.css";
+@import "/verve-lib/css/jqueryControlPanel.css";
+@import "/verve-lib/css/toolbar.css";
+body.pentaho{
+	background-color: black;
+	background: url('/pentaho/content/common-ui/resources/themes/onyx/images/bg_pentaho_default.png');
+}
+div.jasper-content{
+	overflow: auto;  
+	margin-left: auto ;
+	margin-right: auto ;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	border: 2px solid gray;
+	background-color: white;
+}
+
+iframe.jasper-content{
+	overflow: auto;  
+	margin-left: auto ;
+	margin-right: auto ;
+	margin-top: 5px;
+	border: 2px solid gray;
+	background-color: white;
+}

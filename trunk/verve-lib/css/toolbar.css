@@ -1,0 +1,65 @@
+
+#toolbar{
+	width: 100%;
+	overflow: auto;  
+	padding-top:2px;
+	padding-bottom:2px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 2px;
+	margin-top: 5px;
+}
+#toolbar2{
+	position: absolute;
+	top: 0px;
+}
+
+#toolbar .leftGroup img,#toolbar2 .leftGroup img,
+#toolbar .rightGroup img{
+	cursor: pointer;
+	border: 0px;
+	float: left;
+}
+#toolbar .rightGroup span{
+	color: white;
+	font-weight: bold;
+	font-style:italic;
+	font-size: 10pt;
+	float: left;
+}
+
+#toolbar  span.slip,#toolbar2 span.slip{
+	vertical-align: middle;
+	border-right: 1px dashed gray;
+	margin-right: 5px;
+	height: 22px;
+	margin-top: -5px;
+	width: 5px;
+	float: left;
+}
+#toolbar .leftGroup span.reportName{
+	float: left;
+	margin-left: 5px;
+}
+#toolbar .leftGroup,#toolbar2 .leftGroup{
+	float: left;
+	margin-left: 5px;
+}
+#toolbar .rightGroup,#toolbar2 .rightGroup{
+	float: right;
+	margin-right: 10px;
+	margin-left:10px;
+}
+
+#toolbar  div.group{
+	float: left;
+	height: 16px;
+}
+input[type=checkbox], input[type=radio] {
+vertical-align: middle;
+position: relative;
+bottom: 1px;
+}
+input[type=radio] {
+bottom: 2px;
+}

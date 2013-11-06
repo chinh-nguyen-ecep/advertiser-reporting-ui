@@ -1,0 +1,38 @@
+table.datatable{
+width:100%;
+border-top:1px solid #e5eff8;
+border-right:1px solid #e5eff8;
+margin-top: 2px;
+border-collapse:collapse;
+
+}
+table.datatable thead th {
+background:#f4f9fe;
+text-align:center;
+font:bold 8pt "Century Gothic","Trebuchet MS",Arial,Helvetica,sans-serif;
+color:#66a3d3;
+border-left:1px solid #e5eff8;
+border-bottom:1px solid #e5eff8;
+font-size: 10pt;
+}
+
+table.datatable td{
+color:#678197;
+border-bottom:1px solid #e5eff8;
+border-left:1px solid #e5eff8;
+padding: 5px 1em;
+text-align:right;
+font:76%/160% "Trebuchet MS",Verdana,Arial,Helvetica,sans-serif;
+}
+table.datatable tbody th{
+color:#678197;
+border-bottom:1px solid #e5eff8;
+border-left:1px solid #e5eff8;
+padding: 5px 1em;
+text-align:left;
+font:76%/160% "Trebuchet MS",Verdana,Arial,Helvetica,sans-serif;
+}
+
+table.datatable tbody tr.tr1{
+background:#f4f9fe;
+}

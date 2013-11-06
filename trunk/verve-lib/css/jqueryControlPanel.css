@@ -1,0 +1,97 @@
+form{
+	font:Helvetica,sans-serif;
+	font-weight:normal;
+	font-size: 8pt;
+}
+form input[type=text]{
+	color: gray;
+	font-size: 8pt;
+	border: 1px solid gray;
+	width: 100px;
+}
+
+form input[type=text].fillter{
+	width:300px;
+}
+form select{
+	color: gray;
+	font-size: 8pt;
+	border: 1px solid gray;
+}
+
+form div.check_list_box{
+	width: 300px;
+	border: 1px solid gray;
+	overflow: auto;
+	height: 100px;
+}
+
+table.tableForm{
+width: 100%;
+float:left;
+font:90%/160% "Trebuchet MS",Verdana,Arial,Helvetica,sans-serif;
+text-align: left;
+
+}
+table.tableForm tbody tr th{
+	vertical-align: top;
+	width: 100px;
+	text-align: right;
+	padding-right: 5px;
+}
+table.tableForm tbody tr td{
+	width: 300px;
+	padding-bottom: 5px;
+	vertical-align: middle;
+}
+
+table.tableForm tbody tr td img{
+	margin: auto;
+	margin-right: 2px;
+	vertical-align: middle;
+}
+
+table.tableForm tbody tr td input[type=text].dimesion{
+	width: 302px;
+}
+table.tableForm tbody tr td input[type=text].dimension{
+	width: 302px;
+}
+
+table.tableForm tbody tr td div.dimesion{
+	width: 300px;
+	border: 1px solid gray;
+	overflow: auto;
+	overflow-x: hidden;
+	height: 100px;
+}
+table.tableForm tbody tr td div.dimension{
+	width: 300px;
+	border: 1px solid gray;
+	overflow: auto;
+	overflow-x: hidden;
+	height: 100px;
+}
+#processing_box{
+	text-align:center;
+	font-size: 10pt;
+	color: white;
+	font-weight:bold;
+	font:"Trebuchet MS",Verdana,Arial,Helvetica,sans-serif;
+}
+
+#processing_box img{
+	margin: auto;
+	margin-right: 5px;
+	vertical-align: middle;
+}
+div#mainFrame{
+	overflow: auto;  
+	margin-left: auto ;
+	margin-right: auto ;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	border: 2px solid gray;
+	background-color: white;
+}
+

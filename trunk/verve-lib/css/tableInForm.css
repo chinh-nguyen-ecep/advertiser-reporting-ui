@@ -1,0 +1,18 @@
+
+table.tableForm{
+width: 490px;
+float:left;
+font:90%/160% "Trebuchet MS",Verdana,Arial,Helvetica,sans-serif;
+text-align: left;
+
+}
+table.tableForm tbody tr th{
+	vertical-align: top;
+	width: 100px;
+	text-align: right;
+	padding-right: 5px;
+}
+table.tableForm tbody tr td{
+	padding-bottom: 5px;
+	vertical-align: middle;
+}
