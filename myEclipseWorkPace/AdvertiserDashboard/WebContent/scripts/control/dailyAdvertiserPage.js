@@ -2,8 +2,10 @@
  * 
  */
 // 
-var selectStartDate=thirtyDayBefore;
-var selectEndDate=yesterday;
+//var selectStartDate=thirtyDayBefore;
+//var selectEndDate=yesterday;
+var selectStartDate=new Date('2013-10-01');
+var selectEndDate=new Date('2013-10-01');;
 var chart;
 var subtitle;
 var title;
@@ -12,7 +14,7 @@ var series_clicks=[];
 var series_impressions=[];
 var series_cta=[];
 var table_data=[];
-
+var myTable;
 $(document).ready(function(){ 
 	setTabActive('dailyAdvertiser');
 	generateDateRange({
@@ -38,77 +40,117 @@ $(document).ready(function(){
 		series_cta=[];
 		var dateRange_value=$("#date_range_dailyAdvertiser input").val();
 		var measureValue=$("#e2").val();
-		var url=apiRootUrl+'/AdvertiserByHour?select=date|hour&limit=1000&'+dateRange_value+"&by=clicks|impressions|cta_maps";
+		var url=apiRootUrl+'/AdvertiserByHour?select=date|hour&limit=2000&'+dateRange_value+"&by=clicks|impressions|cta_maps";
 		if(chart !=null){
 			chart.showLoading();
 		}
-		$.ajax({
-			  dataType: "json",
-			  url: url,
-			   xhrFields: {
-				      withCredentials: true
-				   },
-			  success: function(json){
-				  	table_data=json.data;
-				  	title="Advertiser Clicks By Date";
-				  	subtitle="From "+selectStartDate.format("yyyy-mm-dd")+" to "+selectEndDate.format("yyyy-mm-dd");
-				  	var responseStatus=json.responseStatus;
-				  	var page=json.page;
-				  	if(responseStatus=='OK' && page==1){
-				  		data=json.data;
-				  		var name='';
-				  		//this loop add date to series
-				  		for(var i=0;i<data.length;i++){				  			
-				  			var row=data[i];
-				  			var newName=row[0];
-				  			if(newName!=name){
-				  				console.log("Add serie: "+newName);
-				  				var row={name: newName,data:[]};
-				  				var row2={name: newName,data:[]};
-				  				var row3={name: newName,data:[]};
-				  				series_clicks.push(row);
-				  				series_impressions.push(row2);
-				  				series_cta.push(row3);
-				  				name=newName;
-				  			}
+		if(myAjaxStore.isLoading()){
+			return;
+		}
+		var ajaxData=myAjaxStore.get(url);
+		if(ajaxData==null){
+			myAjaxStore.registe(url);
+			$.ajax({
+				  dataType: "json",
+				  url: url,
+				   xhrFields: {
+					      withCredentials: true
+					   },
+				  success: function(json){
+					  myAjaxStore.add(url,json);
+					  processData(json);
+				  }
+				});			
+		}else{
+			processData(ajaxData);
+		}
 
-				  		}
-				  		
-				  		//add value
-				  		for(var i=0;i<data.length;i++){
-				  			var row=data[i];
-				  			var newName=row[0];
-				  			var value=row[2];
-				  			var value_imp=row[3];
-				  			var value_cta=row[4];
-				  			console.log("Add Value: "+newName+" ckl "+value+" im "+value_imp+" cta "+value_cta);
-				  			for(var j=0;j<series_clicks.length;j++){
-					  			var item=series_clicks[j];	
-					  			if(item.name==newName){
-					  				console.log("Locate: "+j);
-					  				series_clicks[j].data.push(parseFloat(value));
-					  				series_impressions[j].data.push(parseFloat(value_imp));
-					  				series_cta[j].data.push(parseFloat(value_cta));
-					  			}
-					  		}
-				  		}
-				  		
-				  	}else{
-				  		return;
-				  	}
-				  	
-				  	if(chart){
-				  		chart.hideLoading();
-				  	}
-				  	drawChart(categories,series_clicks,title,subtitle);
-				  	drawTableFromArray({
-				  		table_id: 'mainDataTable',
-				  		table_colums: ['Date','Hour','Clicks','Impressions','Cta maps'],
-				  		table_data: table_data,
-				  		paging: true
-				  	});
-			  }
-			});
+		function processData(json){
+		  	title="Advertiser Clicks By Date";
+		  	subtitle="From "+selectStartDate.format("yyyy-mm-dd")+" to "+selectEndDate.format("yyyy-mm-dd");
+		  	var responseStatus=json.responseStatus;
+		  	var page=json.page;
+		  	if(responseStatus=='OK' && page==1){
+		  		data=json.data;
+		  		var name='';
+		  		//this loop add date to series
+		  		for(var i=0;i<data.length;i++){				  			
+		  			var row=data[i];
+		  			var newName=row[0];
+		  			if(newName!=name){
+		  				console.log("Add serie: "+newName);
+		  				var row={name: newName,data:[]};
+		  				var row2={name: newName,data:[]};
+		  				var row3={name: newName,data:[]};
+		  				series_clicks.push(row);
+		  				series_impressions.push(row2);
+		  				series_cta.push(row3);
+		  				name=newName;
+		  			}
+
+		  		}
+		  		
+		  		//add value
+		  		for(var i=0;i<data.length;i++){
+		  			var row=data[i];
+		  			var newName=row[0];
+		  			var value=row[2];
+		  			var value_imp=row[3];
+		  			var value_cta=row[4];
+		  			console.log("Add Value: "+newName+" ckl "+value+" im "+value_imp+" cta "+value_cta);
+		  			for(var j=0;j<series_clicks.length;j++){
+			  			var item=series_clicks[j];	
+			  			if(item.name==newName){
+			  				console.log("Locate: "+j);
+			  				series_clicks[j].data.push(parseFloat(value));
+			  				series_impressions[j].data.push(parseFloat(value_imp));
+			  				series_cta[j].data.push(parseFloat(value_cta));
+			  			}
+			  		}
+		  		}
+		  		
+		  	}else{
+		  		return;
+		  	}
+		  	
+		  	if(chart){
+		  		chart.hideLoading();
+		  	}
+		  	drawChart(categories,series_clicks,title,subtitle);
+		  	//get table data
+		  	table_data=json.data;
+		  	var items = {}, base, key;
+		  	$.each(table_data, function(index, val) {
+		  	    key = [val[0]];
+		  	    if (!items[key]) {
+		  	        items[key] = [0,0,0];
+		  	    }
+		  	    items[key][0]+=parseFloat(val[2]);
+		  	    items[key][1]+=parseFloat(val[3]);
+		  	    items[key][2]+=parseFloat(val[4]);
+		  	});
+
+		  	var table_data = [];
+		  	$.each(items, function(key, val) {
+		  	    var a=[];
+		  	    a=a.concat(key,["All"],val);
+		  	    table_data.push(a);
+		  	});
+		  	
+		  	myTable=new drawTableFromArray({
+		  		table_id: 'mainDataTable',
+		  		table_colums: ['Date','Hour','Clicks','Impressions','Cta maps'],
+		  		columns_format:['','','number','number','number'],
+		  		table_data: table_data,
+		  		page_items: 20,
+		  		paging: true,
+		  		sort_by: 'Date',
+		  		sortable: true,
+		  		onClickRow: function(row){
+		  			alert(row[0]);
+		  		}
+		  	});
+		};
 	}
 
 	//function generate chart 
