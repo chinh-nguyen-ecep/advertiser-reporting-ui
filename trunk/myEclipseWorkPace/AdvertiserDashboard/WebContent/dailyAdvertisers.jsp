@@ -33,6 +33,16 @@
 	    <div id="container" style="min-width: 310px; height: 350px; margin: 0 auto" class="loading"></div>
 	  </div>
 	</div>
+	<div class="row">
+	<div class="col-md-10">
+ 	 </div>
+	  <div class="col-md-2">
+			<ul class="pager">
+			  <li><a href="#" onclick="disabledEventPropagation(event);myTable.previous();">Previous</a></li>
+			  <li><a href="#" onclick="disabledEventPropagation(event);myTable.next();">Next</a></li>
+			</ul>	  	
+	  </div>
+	</div>
 	<div class="panel panel-default">
 		  <div class="panel-body" style="padding: 0px;">
    			<table  id="mainDataTable">
@@ -46,8 +56,8 @@
 	 	 </div>
 		  <div class="col-md-2">
 				<ul class="pager">
-				  <li><a href="#">Previous</a></li>
-				  <li><a href="#">Next</a></li>
+				  <li><a href="#" onclick="disabledEventPropagation(event);myTable.previous();">Previous</a></li>
+				  <li><a href="#" onclick="disabledEventPropagation(event);myTable.next();">Next</a></li>
 				</ul>	  	
 		  </div>
 		</div>
