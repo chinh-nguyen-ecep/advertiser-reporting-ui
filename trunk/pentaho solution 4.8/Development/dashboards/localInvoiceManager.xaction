@@ -253,11 +253,11 @@ background-size: 50px 50px;
 
 	<div class="container" id="main-content">
 
-		<div id="summary-content" style="min-height: 200px;">
+		<div id="summary-content" style="min-height: 200px;" class="loading">
 
 		<div class="content"></div>		
 		</div>
-		<div id="invoice-detail" style="display: none;"></div>
+		<div id="invoice-detail" style="display: none;min-height: 200px;"></div>
 	</div>
 <!-- Modal Publishing Status-->
 
@@ -305,6 +305,7 @@ function delay_timeout(second_time,func){
 			var monthYear = $('select[name=month-year]').val();
 			$('#summary-content').addClass('loading');
 			$('#exportSummary_bt').hide();
+			$('#summary-content div.content').empty();
 			$('#summary-content div.content').load(	rootPath + '&actions=summaryReport&p_month_year='+ monthYear,function(){
 				$('#summary-content').removeClass('loading');
 				$('#exportSummary_bt').show();
@@ -317,8 +318,12 @@ function delay_timeout(second_time,func){
 		}
 		var loadInvoiceDetail = function() {
 			var monthYear = $('select[name=month-year]').val();
-			$('#invoice-detail').load(rootPath + '&actions=template2&p_month_year=' + monthYear);
-			dataDetail=[];
+			$('#invoice-detail').empty();
+			$('#invoice-detail').addClass('loading');
+			$('#invoice-detail').load(rootPath + '&actions=template2&p_month_year=' + monthYear,function(){
+				$('#invoice-detail').removeClass('loading');
+			});
+			//dataDetail=[];
 		}
 
 		//for tab select
@@ -394,7 +399,7 @@ function delay_timeout(second_time,func){
 			}
 		}
 		console.log("Get content from Data detail of invoice: "+invoide_id);
-		console.log("Result: "+result);
+		//console.log("Result: "+result);
 		return result;
 	}
 	</script>
@@ -478,8 +483,7 @@ background: #F8F8F8;
 	var data = [];
 	var monthYear = $('select[name=month-year]').val();
 	$.ajax({
-		url : rootPath + '&actions=listInvoiceByMonth&data=json&p_month_year='
-				+ monthYear,
+		url : rootPath + '&actions=listInvoiceByMonth&data=json&p_month_year='+ monthYear,
 		dataType : 'json',
 		data : data,
 		success : function(json) {
@@ -526,8 +530,7 @@ background: #F8F8F8;
 				function() {
 					var isChecked = $(this).is(':checked');
 					console.log(isChecked);
-					$('#mainDataTable tbody input:checkbox:not(:disabled)')
-							.prop('checked', isChecked);
+					$('#mainDataTable tbody input:checkbox:not(:disabled)').prop('checked', isChecked);
 
 				});
 		//tr click to check box
@@ -563,6 +566,7 @@ background: #F8F8F8;
 	
 	//click and view invoice report
 	function viewInvoiceReportDetail(invoiceID) {
+		var monthYear = $('select[name=month-year]').val();
 		console.log('View detail report id: ' + invoiceID);
 		$('#myModal h4.modal-title').html('Invoice Detail <small>('+invoiceID+')</small>');
 		
@@ -574,7 +578,7 @@ background: #F8F8F8;
 		if(html!=null){
 			$('#myModal div.modal-body').html(html);
 		}else{
-			$.ajax(rootPath + '&actions=invoiceDetail&p_inv_detail_id='+ invoiceID,{
+			$.ajax(rootPath + '&actions=invoiceDetail&p_inv_detail_id='+ invoiceID+'&p_month_year='+monthYear,{
 				success: function(data){				
 					addContentOfInvoideToDataDetail(invoiceID,data);
 					//Set content to modal
@@ -801,21 +805,21 @@ background: #F8F8F8;
  
     </actions>
   
-    <actions>
-      <condition><![CDATA[actions=='summaryReportExport']]></condition>
-      <action-definition>
+    <actions> 
+      <condition><![CDATA[actions=='summaryReportExport']]></condition>  
+      <action-definition> 
         <component-name>JasperReportsComponent</component-name>
         <action-type>Jasper</action-type>
-        <action-inputs>
-          <p_month_year type="string"/>
-          <output-type type="string" mapping="exportType"/>
-          <jndi type="string" mapping="connectionName"/>
+        <action-inputs> 
+          <p_month_year type="string"/>  
+          <output-type type="string" mapping="exportType"/>  
+          <jndi type="string" mapping="connectionName"/> 
         </action-inputs>
-        <component-definition/>
+        <component-definition/> 
       </action-definition>
-
+ 
     </actions>
-
+  
     <actions> 
       <condition><![CDATA[actions=='invoiceDetail']]></condition>  
       <action-definition> 
@@ -871,7 +875,7 @@ background: #F8F8F8;
         </action-outputs>
         <component-definition> 
           <live><![CDATA[false]]></live>  
-          <query><![CDATA[SELECT inv_mmyy as value,to_char(to_date(inv_mmyy, 'MMYY'),'Mon YYYY') as name FROM accounting.ba_inv_detail GROUP BY inv_mmyy ORDER BY name;]]></query> 
+          <query><![CDATA[SELECT inv_mmyy as value,to_char(to_date(inv_mmyy, 'MMYY'),'Mon YYYY') as name FROM accounting.ba_inv_detail GROUP BY inv_mmyy ORDER BY name desc;]]></query> 
         </component-definition> 
       </action-definition>
  
