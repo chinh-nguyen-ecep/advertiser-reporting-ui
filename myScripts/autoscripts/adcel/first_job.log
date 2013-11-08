@@ -1,0 +1,647 @@
+*Get report date_sk!
+**Report date_sk=2848
+**Report date=2012-10-18
+*Check Adcel files!
+**Total file on dw4: 2016 	 Loaded: 2016 	 Fail: 0
+**Total file on dw5: 2016 	 Loaded: 2016 	 Fail: 0
+**Adcel files loading is completed with total file= 2016
+*Truncate data!
+**Truncate data on dw3...
+**Truncate data on dw4...
+**Truncate data on dw5...
+*RESOLVE MISSING USER AGENT............................
+**Transfer missing user agent from dw4 to master server dw3...
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+Starting : Get data form adstraffic.ad_response_fact_app015_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app015_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/daily_user_agent/db_data/adstraffic.ad_response_fact_app015_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app015_user_agent where full_date = 2012-10-18
+import to adstraffic.dw4_ad_response_fact_app015_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app015_user_agent : 0 Seconds
+Starting : Get data form adstraffic.ad_response_fact_app12_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app12_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/daily_user_agent/db_data/adstraffic.ad_response_fact_app12_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app12_user_agent where full_date = 2012-10-18
+import to adstraffic.dw4_ad_response_fact_app12_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app12_user_agent : 0 Seconds
+Starting : Get data form adstraffic.ad_response_fact_app13_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app13_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/daily_user_agent/db_data/adstraffic.ad_response_fact_app13_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app13_user_agent where full_date = 2012-10-18
+import to adstraffic.dw4_ad_response_fact_app13_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app13_user_agent : 0 Seconds
+Starting : Get data form adstraffic.ad_response_fact_app14_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app14_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/daily_user_agent/db_data/adstraffic.ad_response_fact_app14_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app14_user_agent where full_date = 2012-10-18
+import to adstraffic.dw4_ad_response_fact_app14_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app14_user_agent : 0 Seconds
+Starting : Get data form adstraffic.ad_response_fact_app3_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app3_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/daily_user_agent/db_data/adstraffic.ad_response_fact_app3_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app3_user_agent where full_date = 2012-10-18
+import to adstraffic.dw4_ad_response_fact_app3_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app3_user_agent : 0 Seconds
+Starting : Get data form adstraffic.ad_response_fact_app4_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app4_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/daily_user_agent/db_data/adstraffic.ad_response_fact_app4_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app4_user_agent where full_date = 2012-10-18
+import to adstraffic.dw4_ad_response_fact_app4_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app4_user_agent : 0 Seconds
+Starting : Get data form adstraffic.ad_response_fact_app6_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app6_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/daily_user_agent/db_data/adstraffic.ad_response_fact_app6_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app6_user_agent where full_date = 2012-10-18
+import to adstraffic.dw4_ad_response_fact_app6_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app6_user_agent : 0 Seconds
+Starting : Get data form adstraffic.ad_response_fact_app8_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app8_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/daily_user_agent/db_data/adstraffic.ad_response_fact_app8_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app8_user_agent where full_date = 2012-10-18
+import to adstraffic.dw4_ad_response_fact_app8_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app8_user_agent : 0 Seconds
+Starting : Get data form adstraffic.ad_response_fact_app9_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app9_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/daily_user_agent/db_data/adstraffic.ad_response_fact_app9_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app9_user_agent where full_date = 2012-10-18
+import to adstraffic.dw4_ad_response_fact_app9_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app9_user_agent : 0 Seconds
+Starting : Get data form adstraffic.ad_response_fact_app016_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app016_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/daily_user_agent/db_data/adstraffic.ad_response_fact_app016_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app016_user_agent where full_date = 2012-10-18
+import to adstraffic.dw4_ad_response_fact_app016_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app016_user_agent : 0 Seconds
+Starting : Get data form adstraffic.ad_response_fact_app017_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app017_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/daily_user_agent/db_data/adstraffic.ad_response_fact_app017_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app017_user_agent where full_date = 2012-10-18
+import to adstraffic.dw4_ad_response_fact_app017_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app017_user_agent : 0 Seconds
+Starting : Get data form adstraffic.ad_response_fact_app018_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app018_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/daily_user_agent/db_data/adstraffic.ad_response_fact_app018_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app018_user_agent where full_date = 2012-10-18
+import to adstraffic.dw4_ad_response_fact_app018_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app018_user_agent : 0 Seconds
+Starting : Get data form adstraffic.ad_response_fact_app019_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app019_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/daily_user_agent/db_data/adstraffic.ad_response_fact_app019_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app019_user_agent where full_date = 2012-10-18
+import to adstraffic.dw4_ad_response_fact_app019_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app019_user_agent : 0 Seconds
+Starting : Get data form adstraffic.ad_response_fact_app020_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app020_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/daily_user_agent/db_data/adstraffic.ad_response_fact_app020_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app020_user_agent where full_date = 2012-10-18
+import to adstraffic.dw4_ad_response_fact_app020_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app020_user_agent : 0 Seconds
+Starting : Get data form adstraffic.ad_response_fact_app021_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app021_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/daily_user_agent/db_data/adstraffic.ad_response_fact_app021_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app021_user_agent where full_date = 2012-10-18
+import to adstraffic.dw4_ad_response_fact_app021_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app021_user_agent : 0 Seconds
+Starting : Get data form adstraffic.ad_response_fact_app024_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app024_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/daily_user_agent/db_data/adstraffic.ad_response_fact_app024_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app024_user_agent where full_date = 2012-10-18
+import to adstraffic.dw4_ad_response_fact_app024_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app024_user_agent : 0 Seconds
+Starting : Get data form adstraffic.ad_response_fact_app025_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app025_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/daily_user_agent/db_data/adstraffic.ad_response_fact_app025_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app025_user_agent where full_date = 2012-10-18
+import to adstraffic.dw4_ad_response_fact_app025_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app025_user_agent : 0 Seconds
+Starting : Get data form adstraffic.ad_response_fact_app026_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app026_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/daily_user_agent/db_data/adstraffic.ad_response_fact_app026_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app026_user_agent where full_date = 2012-10-18
+import to adstraffic.dw4_ad_response_fact_app026_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app026_user_agent : 0 Seconds
+**Transfer missing user agent from dw5 to master server dw3...
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+Starting : Get data form adstraffic.ad_response_fact_app015_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app015_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/dim_daily_dw3_dw5/db_data/adstraffic.ad_response_fact_app015_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app015_user_agent where full_date = 2012-10-18
+import to adstraffic.dw5_ad_response_fact_app015_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app015_user_agent : 0 Seconds
+Starting : Get data form adstraffic.ad_response_fact_app12_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app12_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/dim_daily_dw3_dw5/db_data/adstraffic.ad_response_fact_app12_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app12_user_agent where full_date = 2012-10-18
+import to adstraffic.dw5_ad_response_fact_app12_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app12_user_agent : 0 Seconds
+Starting : Get data form adstraffic.ad_response_fact_app13_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app13_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/dim_daily_dw3_dw5/db_data/adstraffic.ad_response_fact_app13_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app13_user_agent where full_date = 2012-10-18
+import to adstraffic.dw5_ad_response_fact_app13_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app13_user_agent : 0 Seconds
+Starting : Get data form adstraffic.ad_response_fact_app14_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app14_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/dim_daily_dw3_dw5/db_data/adstraffic.ad_response_fact_app14_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app14_user_agent where full_date = 2012-10-18
+import to adstraffic.dw5_ad_response_fact_app14_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app14_user_agent : 0 Seconds
+Starting : Get data form adstraffic.ad_response_fact_app3_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app3_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/dim_daily_dw3_dw5/db_data/adstraffic.ad_response_fact_app3_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app3_user_agent where full_date = 2012-10-18
+import to adstraffic.dw5_ad_response_fact_app3_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app3_user_agent : 0 Seconds
+Starting : Get data form adstraffic.ad_response_fact_app4_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app4_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/dim_daily_dw3_dw5/db_data/adstraffic.ad_response_fact_app4_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app4_user_agent where full_date = 2012-10-18
+import to adstraffic.dw5_ad_response_fact_app4_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app4_user_agent : 0 Seconds
+Starting : Get data form adstraffic.ad_response_fact_app6_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app6_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/dim_daily_dw3_dw5/db_data/adstraffic.ad_response_fact_app6_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app6_user_agent where full_date = 2012-10-18
+import to adstraffic.dw5_ad_response_fact_app6_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app6_user_agent : 0 Seconds
+Starting : Get data form adstraffic.ad_response_fact_app8_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app8_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/dim_daily_dw3_dw5/db_data/adstraffic.ad_response_fact_app8_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app8_user_agent where full_date = 2012-10-18
+import to adstraffic.dw5_ad_response_fact_app8_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app8_user_agent : 0 Seconds
+Starting : Get data form adstraffic.ad_response_fact_app9_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app9_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/dim_daily_dw3_dw5/db_data/adstraffic.ad_response_fact_app9_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app9_user_agent where full_date = 2012-10-18
+import to adstraffic.dw5_ad_response_fact_app9_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app9_user_agent : 0 Seconds
+Starting : Get data form adstraffic.ad_response_fact_app016_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app016_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/dim_daily_dw3_dw5/db_data/adstraffic.ad_response_fact_app016_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app016_user_agent where full_date = 2012-10-18
+import to adstraffic.dw5_ad_response_fact_app016_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app016_user_agent : 0 Seconds
+Starting : Get data form adstraffic.ad_response_fact_app017_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app017_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/dim_daily_dw3_dw5/db_data/adstraffic.ad_response_fact_app017_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app017_user_agent where full_date = 2012-10-18
+import to adstraffic.dw5_ad_response_fact_app017_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app017_user_agent : 0 Seconds
+Starting : Get data form adstraffic.ad_response_fact_app018_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app018_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/dim_daily_dw3_dw5/db_data/adstraffic.ad_response_fact_app018_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app018_user_agent where full_date = 2012-10-18
+import to adstraffic.dw5_ad_response_fact_app018_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app018_user_agent : 0 Seconds
+Starting : Get data form adstraffic.ad_response_fact_app019_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app019_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/dim_daily_dw3_dw5/db_data/adstraffic.ad_response_fact_app019_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app019_user_agent where full_date = 2012-10-18
+import to adstraffic.dw5_ad_response_fact_app019_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app019_user_agent : 0 Seconds
+Starting : Get data form adstraffic.ad_response_fact_app020_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app020_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/dim_daily_dw3_dw5/db_data/adstraffic.ad_response_fact_app020_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app020_user_agent where full_date = 2012-10-18
+import to adstraffic.dw5_ad_response_fact_app020_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app020_user_agent : 0 Seconds
+Starting : Get data form adstraffic.ad_response_fact_app021_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app021_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/dim_daily_dw3_dw5/db_data/adstraffic.ad_response_fact_app021_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app021_user_agent where full_date = 2012-10-18
+import to adstraffic.dw5_ad_response_fact_app021_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app021_user_agent : 0 Seconds
+Starting : Get data form adstraffic.ad_response_fact_app024_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app024_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/dim_daily_dw3_dw5/db_data/adstraffic.ad_response_fact_app024_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app024_user_agent where full_date = 2012-10-18
+import to adstraffic.dw5_ad_response_fact_app024_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app024_user_agent : 0 Seconds
+Starting : Get data form adstraffic.ad_response_fact_app025_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app025_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/dim_daily_dw3_dw5/db_data/adstraffic.ad_response_fact_app025_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app025_user_agent where full_date = 2012-10-18
+import to adstraffic.dw5_ad_response_fact_app025_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app025_user_agent : 0 Seconds
+Starting : Get data form adstraffic.ad_response_fact_app026_user_agent where full_date = 2012-10-18
+file export :adstraffic.ad_response_fact_app026_user_agent-2012-10-18.csv
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+fullpath :/u11/temp/dim_daily_dw3_dw5/db_data/adstraffic.ad_response_fact_app026_user_agent-2012-10-18.csv
+Exporting : Number of Records : 0
+Ending : Get data from adstraffic.ad_response_fact_app026_user_agent where full_date = 2012-10-18
+import to adstraffic.dw5_ad_response_fact_app026_user_agent
+You made it, take control your database now!
+Connected to the database : warehouse
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse
+Import Count : 0
+Time Transfer for adstraffic.ad_response_fact_app026_user_agent : 0 Seconds
+**Insert new user agent on master server...
+**Transfer new user agent to ETL server dw4...
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+frommax : dw3 :8464735
+tomax : dw4 :8464735
+user_sk missing
+Sent message successfully....
+**Transfer new user agent to ETL server dw5...
+You made it, take control your database now!
+Connected to the database : warehouse
+You made it, take control your database now!
+Connected to the database : warehouse
+frommax : dw3 :8464735
+tomax : dw5 :8464735
+user_sk missing
+Sent message successfully....
+**Resolve missing user agent on ETL server dw4...
+**Resolve missing user agent on ETL server dw5...

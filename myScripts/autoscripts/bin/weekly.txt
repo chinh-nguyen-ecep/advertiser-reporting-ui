@@ -1,0 +1,15 @@
+total 5648
+drwxr-xr-x  3 chinh dwadmin    4096 Apr 23 01:10 .
+drwxrwxrwx 11 chinh dwadmin    4096 Apr 16 23:02 ..
+-rw-r--r--  1 root  root        799 Apr 23 01:10 caa.txt
+-rw-r--r--  1 chinh dwadmin    3123 Dec 26 21:16 checkparam.pl
+-rw-r--r--  1 chinh dwadmin     228 Apr  7 01:54 config.properties
+-rw-r--r--  1 chinh dwadmin    3030 Apr 23 01:05 daily_schedule.config
+-rw-r--r--  1 chinh dwadmin 1901762 Apr  7 01:04 dw3_runparam.jar
+-rw-r--r--  1 chinh dwadmin   12389 Apr 16 20:18 dw3_utils.pl
+drwxr-xr-x  2 chinh dwadmin    4096 Apr  6 00:30 logs
+-rw-r--r--  1 chinh dwadmin 1901785 Apr 16 21:41 mail.jar
+-rw-r--r--  1 chinh dwadmin 1901606 Apr  5 23:38 nettraffic.jar
+-rw-r--r--  1 chinh dwadmin     825 Apr 16 21:38 runscript.pl
+-rw-r--r--  1 chinh dwadmin    6528 Apr 23 01:08 schedule.pl
+-rw-r--r--  1 root  root          0 Apr 23 01:10 weekly.txt

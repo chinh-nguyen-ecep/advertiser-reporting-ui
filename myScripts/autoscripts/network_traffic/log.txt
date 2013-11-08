@@ -1,0 +1,2851 @@
+5-11-2013 14:27:19 # Run Param 2
+V.5.0
+Run param2
+Result is: 1
+5-11-2013 14:27:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	0
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 14:27:20 # process is runing
+5-11-2013 14:27:20 # Checked
+5-11-2013 14:32:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	0
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 14:32:20 # process is runing
+5-11-2013 14:32:20 # Checked
+5-11-2013 14:37:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	0
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 14:37:20 # process is runing
+5-11-2013 14:37:20 # Checked
+5-11-2013 14:42:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	0
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 14:42:20 # process is runing
+5-11-2013 14:42:20 # Checked
+5-11-2013 14:47:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	0
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 14:47:20 # process is runing
+5-11-2013 14:47:20 # Checked
+5-11-2013 14:52:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	0
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 14:52:20 # process is runing
+5-11-2013 14:52:20 # Checked
+5-11-2013 14:57:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	0
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 14:57:20 # process is runing
+5-11-2013 14:57:20 # Checked
+5-11-2013 15:2:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	0
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 15:2:20 # process is runing
+5-11-2013 15:2:20 # Checked
+5-11-2013 15:7:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	0
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 15:7:20 # process is runing
+5-11-2013 15:7:20 # Checked
+5-11-2013 15:12:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	0
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 15:12:20 # process is runing
+5-11-2013 15:12:20 # Checked
+5-11-2013 15:17:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	0
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 15:17:20 # process is runing
+5-11-2013 15:17:20 # Checked
+5-11-2013 15:22:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	0
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 15:22:20 # process is runing
+5-11-2013 15:22:20 # Checked
+5-11-2013 15:27:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	0
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 15:27:20 # process is runing
+5-11-2013 15:27:20 # Checked
+5-11-2013 15:32:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	0
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 15:32:20 # process is runing
+5-11-2013 15:32:20 # Checked
+5-11-2013 15:37:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	0
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 15:37:20 # process is runing
+5-11-2013 15:37:20 # Checked
+5-11-2013 15:42:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	0
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 15:42:20 # process is runing
+5-11-2013 15:42:20 # Checked
+5-11-2013 15:47:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	0
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 15:47:20 # process is runing
+5-11-2013 15:47:20 # Checked
+5-11-2013 15:52:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	0
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 15:52:20 # process is runing
+5-11-2013 15:52:20 # Checked
+5-11-2013 15:57:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	0
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 15:57:20 # process is runing
+5-11-2013 15:57:20 # Checked
+5-11-2013 16:2:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 16:2:20 # process is runing
+5-11-2013 16:2:20 # Checked
+5-11-2013 16:7:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 16:7:20 # process is runing
+5-11-2013 16:7:20 # Checked
+5-11-2013 16:12:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 16:12:20 # process is runing
+5-11-2013 16:12:20 # Checked
+5-11-2013 16:17:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 16:17:20 # process is runing
+5-11-2013 16:17:20 # Checked
+5-11-2013 16:22:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 16:22:20 # process is runing
+5-11-2013 16:22:20 # Checked
+5-11-2013 16:27:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 16:27:20 # process is runing
+5-11-2013 16:27:20 # Checked
+5-11-2013 16:32:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 16:32:20 # process is runing
+5-11-2013 16:32:20 # Checked
+5-11-2013 16:37:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 16:37:20 # process is runing
+5-11-2013 16:37:20 # Checked
+5-11-2013 16:42:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 16:42:20 # process is runing
+5-11-2013 16:42:20 # Checked
+5-11-2013 16:47:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 16:47:20 # process is runing
+5-11-2013 16:47:20 # Checked
+5-11-2013 16:52:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 16:52:20 # process is runing
+5-11-2013 16:52:20 # Checked
+5-11-2013 16:57:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 16:57:20 # process is runing
+5-11-2013 16:57:20 # Checked
+5-11-2013 17:2:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 17:2:20 # process is runing
+5-11-2013 17:2:20 # Checked
+5-11-2013 17:7:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 17:7:20 # process is runing
+5-11-2013 17:7:20 # Checked
+5-11-2013 17:12:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 17:12:20 # process is runing
+5-11-2013 17:12:20 # Checked
+5-11-2013 17:17:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 17:17:20 # process is runing
+5-11-2013 17:17:20 # Checked
+5-11-2013 17:22:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 17:22:20 # process is runing
+5-11-2013 17:22:20 # Checked
+5-11-2013 17:27:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 17:27:20 # process is runing
+5-11-2013 17:27:20 # Checked
+5-11-2013 17:32:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 17:32:20 # process is runing
+5-11-2013 17:32:20 # Checked
+5-11-2013 17:37:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 17:37:20 # process is runing
+5-11-2013 17:37:20 # Checked
+5-11-2013 17:42:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 17:42:20 # process is runing
+5-11-2013 17:42:20 # Checked
+5-11-2013 17:47:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 17:47:20 # process is runing
+5-11-2013 17:47:20 # Checked
+5-11-2013 17:52:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	0
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 17:52:20 # process is runing
+5-11-2013 17:52:20 # Checked
+5-11-2013 17:57:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 17:57:20 # process is runing
+5-11-2013 17:57:20 # Checked
+5-11-2013 18:2:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 18:2:20 # process is runing
+5-11-2013 18:2:20 # Checked
+5-11-2013 18:7:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 18:7:20 # process is runing
+5-11-2013 18:7:20 # Checked
+5-11-2013 18:12:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	0
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 18:12:20 # process is runing
+5-11-2013 18:12:20 # Checked
+5-11-2013 18:17:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 18:17:20 # process is runing
+5-11-2013 18:17:20 # Checked
+5-11-2013 18:22:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 18:22:20 # process is runing
+5-11-2013 18:22:20 # Checked
+5-11-2013 18:27:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 18:27:20 # process is runing
+5-11-2013 18:27:20 # Checked
+5-11-2013 18:32:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 18:32:20 # process is runing
+5-11-2013 18:32:20 # Checked
+5-11-2013 18:37:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 18:37:20 # process is runing
+5-11-2013 18:37:20 # Checked
+5-11-2013 18:42:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 18:42:20 # process is runing
+5-11-2013 18:42:20 # Checked
+5-11-2013 18:47:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 18:47:20 # process is runing
+5-11-2013 18:47:20 # Checked
+5-11-2013 18:52:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 18:52:20 # process is runing
+5-11-2013 18:52:20 # Checked
+5-11-2013 18:57:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 18:57:20 # process is runing
+5-11-2013 18:57:20 # Checked
+5-11-2013 19:2:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 19:2:20 # process is runing
+5-11-2013 19:2:20 # Checked
+5-11-2013 19:7:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 19:7:20 # process is runing
+5-11-2013 19:7:20 # Checked
+5-11-2013 19:12:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 19:12:20 # process is runing
+5-11-2013 19:12:20 # Checked
+5-11-2013 19:17:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 19:17:20 # process is runing
+5-11-2013 19:17:20 # Checked
+5-11-2013 19:22:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 19:22:20 # process is runing
+5-11-2013 19:22:20 # Checked
+5-11-2013 19:27:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 19:27:20 # process is runing
+5-11-2013 19:27:20 # Checked
+5-11-2013 19:32:20 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 19:32:21 # process is runing
+5-11-2013 19:32:21 # Checked
+5-11-2013 19:37:21 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 19:37:21 # process is runing
+5-11-2013 19:37:21 # Checked
+5-11-2013 19:42:21 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 19:42:21 # process is runing
+5-11-2013 19:42:21 # Checked
+5-11-2013 19:47:21 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 19:47:21 # process is runing
+5-11-2013 19:47:21 # Checked
+5-11-2013 19:52:21 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 19:52:21 # process is runing
+5-11-2013 19:52:21 # Checked
+5-11-2013 19:57:21 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 19:57:21 # process is runing
+5-11-2013 19:57:21 # Checked
+5-11-2013 20:2:21 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 20:2:21 # process is runing
+5-11-2013 20:2:21 # Checked
+5-11-2013 20:7:21 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 20:7:21 # process is runing
+5-11-2013 20:7:21 # Checked
+5-11-2013 20:12:21 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 20:12:21 # process is runing
+5-11-2013 20:12:21 # Checked
+5-11-2013 20:17:21 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 20:17:21 # process is runing
+5-11-2013 20:17:21 # Checked
+5-11-2013 20:22:21 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 20:22:21 # process is runing
+5-11-2013 20:22:21 # Checked
+5-11-2013 20:27:21 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 20:27:21 # process is runing
+5-11-2013 20:27:21 # Checked
+5-11-2013 20:32:21 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 20:32:21 # process is runing
+5-11-2013 20:32:21 # Checked
+5-11-2013 20:37:21 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 20:37:21 # process is runing
+5-11-2013 20:37:21 # Checked
+5-11-2013 20:42:21 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 20:42:21 # process is runing
+5-11-2013 20:42:21 # Checked
+5-11-2013 20:47:21 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 20:47:21 # process is runing
+5-11-2013 20:47:21 # Checked
+5-11-2013 20:52:21 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 20:52:21 # process is runing
+5-11-2013 20:52:21 # Checked
+5-11-2013 20:57:21 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 20:57:21 # process is runing
+5-11-2013 20:57:21 # Checked
+5-11-2013 21:2:21 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 21:2:21 # process is runing
+5-11-2013 21:2:21 # Checked
+5-11-2013 21:7:21 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 21:7:21 # process is runing
+5-11-2013 21:7:21 # Checked
+5-11-2013 21:12:21 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 21:12:21 # process is runing
+5-11-2013 21:12:21 # Checked
+5-11-2013 21:17:21 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 21:17:21 # process is runing
+5-11-2013 21:17:21 # Checked
+5-11-2013 21:22:21 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 21:22:21 # process is runing
+5-11-2013 21:22:21 # Checked
+5-11-2013 21:27:21 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 21:27:21 # process is runing
+5-11-2013 21:27:21 # Checked
+5-11-2013 21:32:21 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 21:32:21 # process is runing
+5-11-2013 21:32:21 # Checked
+5-11-2013 21:37:21 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 21:37:21 # process is runing
+5-11-2013 21:37:21 # Checked
+5-11-2013 21:42:21 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 21:42:21 # process is runing
+5-11-2013 21:42:21 # Checked
+5-11-2013 21:47:21 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 21:47:21 # process is runing
+5-11-2013 21:47:21 # Checked
+5-11-2013 21:52:21 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 21:52:21 # process is runing
+5-11-2013 21:52:21 # Checked
+5-11-2013 21:57:21 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 21:57:21 # process is runing
+5-11-2013 21:57:21 # Checked
+5-11-2013 22:2:21 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 22:2:21 # process is runing
+5-11-2013 22:2:21 # Checked
+5-11-2013 22:7:21 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 22:7:21 # process is runing
+5-11-2013 22:7:21 # Checked
+5-11-2013 22:12:21 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 22:12:21 # process is runing
+5-11-2013 22:12:21 # Checked
+5-11-2013 22:17:21 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 22:17:21 # process is runing
+5-11-2013 22:17:21 # Checked
+5-11-2013 22:22:21 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 22:22:22 # process is runing
+5-11-2013 22:22:22 # Checked
+5-11-2013 22:27:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 22:27:22 # process is runing
+5-11-2013 22:27:22 # Checked
+5-11-2013 22:32:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 22:32:22 # process is runing
+5-11-2013 22:32:22 # Checked
+5-11-2013 22:37:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 22:37:22 # process is runing
+5-11-2013 22:37:22 # Checked
+5-11-2013 22:42:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 22:42:22 # process is runing
+5-11-2013 22:42:22 # Checked
+5-11-2013 22:47:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 22:47:22 # process is runing
+5-11-2013 22:47:22 # Checked
+5-11-2013 22:52:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 22:52:22 # process is runing
+5-11-2013 22:52:22 # Checked
+5-11-2013 22:57:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 22:57:22 # process is runing
+5-11-2013 22:57:22 # Checked
+5-11-2013 23:2:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 23:2:22 # process is runing
+5-11-2013 23:2:22 # Checked
+5-11-2013 23:7:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 23:7:22 # process is runing
+5-11-2013 23:7:22 # Checked
+5-11-2013 23:12:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 23:12:22 # process is runing
+5-11-2013 23:12:22 # Checked
+5-11-2013 23:17:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 23:17:22 # process is runing
+5-11-2013 23:17:22 # Checked
+5-11-2013 23:22:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 23:22:22 # process is runing
+5-11-2013 23:22:22 # Checked
+5-11-2013 23:27:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 23:27:22 # process is runing
+5-11-2013 23:27:22 # Checked
+5-11-2013 23:32:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 23:32:22 # process is runing
+5-11-2013 23:32:22 # Checked
+5-11-2013 23:37:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 23:37:22 # process is runing
+5-11-2013 23:37:22 # Checked
+5-11-2013 23:42:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 23:42:22 # process is runing
+5-11-2013 23:42:22 # Checked
+5-11-2013 23:47:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 23:47:22 # process is runing
+5-11-2013 23:47:22 # Checked
+5-11-2013 23:52:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 23:52:22 # process is runing
+5-11-2013 23:52:22 # Checked
+5-11-2013 23:57:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+5-11-2013 23:57:22 # process is runing
+5-11-2013 23:57:22 # Checked
+6-11-2013 0:2:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 0:2:22 # process is runing
+6-11-2013 0:2:22 # Checked
+6-11-2013 0:7:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 0:7:22 # process is runing
+6-11-2013 0:7:22 # Checked
+6-11-2013 0:12:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 0:12:22 # process is runing
+6-11-2013 0:12:22 # Checked
+6-11-2013 0:17:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 0:17:22 # process is runing
+6-11-2013 0:17:22 # Checked
+6-11-2013 0:22:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 0:22:22 # process is runing
+6-11-2013 0:22:22 # Checked
+6-11-2013 0:27:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 0:27:22 # process is runing
+6-11-2013 0:27:22 # Checked
+6-11-2013 0:32:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 0:32:22 # process is runing
+6-11-2013 0:32:22 # Checked
+6-11-2013 0:37:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 0:37:22 # process is runing
+6-11-2013 0:37:22 # Checked
+6-11-2013 0:42:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 0:42:22 # process is runing
+6-11-2013 0:42:22 # Checked
+6-11-2013 0:47:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 0:47:22 # process is runing
+6-11-2013 0:47:22 # Checked
+6-11-2013 0:52:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 0:52:22 # process is runing
+6-11-2013 0:52:22 # Checked
+6-11-2013 0:57:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 0:57:22 # process is runing
+6-11-2013 0:57:22 # Checked
+6-11-2013 1:2:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 1:2:22 # process is runing
+6-11-2013 1:2:22 # Checked
+6-11-2013 1:7:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 1:7:22 # process is runing
+6-11-2013 1:7:22 # Checked
+6-11-2013 1:12:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 1:12:22 # process is runing
+6-11-2013 1:12:22 # Checked
+6-11-2013 1:17:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 1:17:22 # process is runing
+6-11-2013 1:17:22 # Checked
+6-11-2013 1:22:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 1:22:22 # process is runing
+6-11-2013 1:22:22 # Checked
+6-11-2013 1:27:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 1:27:22 # process is runing
+6-11-2013 1:27:22 # Checked
+6-11-2013 1:32:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 1:32:22 # process is runing
+6-11-2013 1:32:22 # Checked
+6-11-2013 1:37:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 1:37:22 # process is runing
+6-11-2013 1:37:22 # Checked
+6-11-2013 1:42:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 1:42:22 # process is runing
+6-11-2013 1:42:22 # Checked
+6-11-2013 1:47:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 1:47:22 # process is runing
+6-11-2013 1:47:22 # Checked
+6-11-2013 1:52:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 1:52:22 # process is runing
+6-11-2013 1:52:22 # Checked
+6-11-2013 1:57:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 1:57:22 # process is runing
+6-11-2013 1:57:22 # Checked
+6-11-2013 2:2:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 2:2:22 # process is runing
+6-11-2013 2:2:22 # Checked
+6-11-2013 2:7:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 2:7:22 # process is runing
+6-11-2013 2:7:22 # Checked
+6-11-2013 2:12:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 2:12:22 # process is runing
+6-11-2013 2:12:22 # Checked
+6-11-2013 2:17:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 2:17:22 # process is runing
+6-11-2013 2:17:22 # Checked
+6-11-2013 2:22:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 2:22:22 # process is runing
+6-11-2013 2:22:22 # Checked
+6-11-2013 2:27:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 2:27:22 # process is runing
+6-11-2013 2:27:22 # Checked
+6-11-2013 2:32:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 2:32:22 # process is runing
+6-11-2013 2:32:22 # Checked
+6-11-2013 2:37:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 2:37:22 # process is runing
+6-11-2013 2:37:22 # Checked
+6-11-2013 2:42:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 2:42:22 # process is runing
+6-11-2013 2:42:22 # Checked
+6-11-2013 2:47:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 2:47:22 # process is runing
+6-11-2013 2:47:22 # Checked
+6-11-2013 2:52:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 2:52:22 # process is runing
+6-11-2013 2:52:22 # Checked
+6-11-2013 2:57:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 2:57:22 # process is runing
+6-11-2013 2:57:22 # Checked
+6-11-2013 3:2:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 3:2:22 # process is runing
+6-11-2013 3:2:22 # Checked
+6-11-2013 3:7:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 3:7:22 # process is runing
+6-11-2013 3:7:22 # Checked
+6-11-2013 3:12:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 3:12:22 # process is runing
+6-11-2013 3:12:22 # Checked
+6-11-2013 3:17:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 3:17:22 # process is runing
+6-11-2013 3:17:22 # Checked
+6-11-2013 3:22:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 3:22:22 # process is runing
+6-11-2013 3:22:22 # Checked
+6-11-2013 3:27:22 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 3:27:22 # process is runing
+6-11-2013 3:27:22 # Checked
+6-11-2013 3:32:23 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 3:32:23 # process is runing
+6-11-2013 3:32:23 # Checked
+6-11-2013 3:37:23 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 3:37:23 # process is runing
+6-11-2013 3:37:23 # Checked
+6-11-2013 3:42:23 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 3:42:23 # process is runing
+6-11-2013 3:42:23 # Checked
+6-11-2013 3:47:23 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 3:47:23 # process is runing
+6-11-2013 3:47:23 # Checked
+6-11-2013 3:52:23 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 3:52:23 # process is runing
+6-11-2013 3:52:23 # Checked
+6-11-2013 3:57:23 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 3:57:23 # process is runing
+6-11-2013 3:57:23 # Checked
+6-11-2013 4:2:23 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 4:2:23 # process is runing
+6-11-2013 4:2:23 # Checked
+6-11-2013 4:7:23 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 4:7:23 # process is runing
+6-11-2013 4:7:23 # Checked
+6-11-2013 4:12:23 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 4:12:23 # process is runing
+6-11-2013 4:12:23 # Checked
+6-11-2013 4:17:23 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 4:17:23 # process is runing
+6-11-2013 4:17:23 # Checked
+6-11-2013 4:22:23 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 4:22:23 # process is runing
+6-11-2013 4:22:23 # Checked
+6-11-2013 4:27:23 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 4:27:23 # process is runing
+6-11-2013 4:27:23 # Checked
+6-11-2013 4:32:23 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 4:32:23 # process is runing
+6-11-2013 4:32:23 # Checked
+6-11-2013 4:37:23 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 4:37:23 # process is runing
+6-11-2013 4:37:23 # Checked
+6-11-2013 4:42:23 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 4:42:23 # process is runing
+6-11-2013 4:42:23 # Checked
+6-11-2013 4:47:23 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	0
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 4:47:23 # process is runing
+6-11-2013 4:47:23 # Checked
+6-11-2013 4:52:23 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 4:52:23 # process is runing
+6-11-2013 4:52:23 # Checked
+6-11-2013 4:57:23 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 4:57:23 # process is runing
+6-11-2013 4:57:23 # Checked
+6-11-2013 5:2:23 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 5:2:23 # process is runing
+6-11-2013 5:2:23 # Checked
+6-11-2013 5:7:23 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 5:7:23 # process is runing
+6-11-2013 5:7:23 # Checked
+6-11-2013 5:12:23 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 5:12:23 # process is runing
+6-11-2013 5:12:23 # Checked
+6-11-2013 5:17:23 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 5:17:23 # process is runing
+6-11-2013 5:17:23 # Checked
+6-11-2013 5:22:23 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 5:22:23 # process is runing
+6-11-2013 5:22:23 # Checked
+6-11-2013 5:27:23 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 5:27:23 # process is runing
+6-11-2013 5:27:23 # Checked
+6-11-2013 5:32:23 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 5:32:23 # process is runing
+6-11-2013 5:32:23 # Checked
+6-11-2013 5:37:23 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 5:37:23 # process is runing
+6-11-2013 5:37:23 # Checked
+6-11-2013 5:42:23 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 5:42:25 # process is runing
+6-11-2013 5:42:25 # Checked
+6-11-2013 5:47:25 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 5:47:26 # process is runing
+6-11-2013 5:47:26 # Checked
+6-11-2013 5:52:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 5:52:26 # process is runing
+6-11-2013 5:52:26 # Checked
+6-11-2013 5:57:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 5:57:26 # process is runing
+6-11-2013 5:57:26 # Checked
+6-11-2013 6:2:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 6:2:26 # process is runing
+6-11-2013 6:2:26 # Checked
+6-11-2013 6:7:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 6:7:26 # process is runing
+6-11-2013 6:7:26 # Checked
+6-11-2013 6:12:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	0
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 6:12:26 # process is runing
+6-11-2013 6:12:26 # Checked
+6-11-2013 6:17:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 6:17:26 # process is runing
+6-11-2013 6:17:26 # Checked
+6-11-2013 6:22:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 6:22:26 # process is runing
+6-11-2013 6:22:26 # Checked
+6-11-2013 6:27:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 6:27:26 # process is runing
+6-11-2013 6:27:26 # Checked
+6-11-2013 6:32:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 6:32:26 # process is runing
+6-11-2013 6:32:26 # Checked
+6-11-2013 6:37:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 6:37:26 # process is runing
+6-11-2013 6:37:26 # Checked
+6-11-2013 6:42:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 6:42:26 # process is runing
+6-11-2013 6:42:26 # Checked
+6-11-2013 6:47:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 6:47:26 # process is runing
+6-11-2013 6:47:26 # Checked
+6-11-2013 6:52:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 6:52:26 # process is runing
+6-11-2013 6:52:26 # Checked
+6-11-2013 6:57:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 6:57:26 # process is runing
+6-11-2013 6:57:26 # Checked
+6-11-2013 7:2:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 7:2:26 # process is runing
+6-11-2013 7:2:26 # Checked
+6-11-2013 7:7:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 7:7:26 # process is runing
+6-11-2013 7:7:26 # Checked
+6-11-2013 7:12:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 7:12:26 # process is runing
+6-11-2013 7:12:26 # Checked
+6-11-2013 7:17:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	0
+6-11-2013 7:17:26 # process is runing
+6-11-2013 7:17:26 # Checked
+6-11-2013 7:22:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	0
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	1
+6-11-2013 7:22:26 # process is runing
+6-11-2013 7:22:26 # Checked
+6-11-2013 7:27:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	1
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	1
+6-11-2013 7:27:26 # process is runing
+6-11-2013 7:27:26 # Checked
+6-11-2013 7:32:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	1
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	1
+6-11-2013 7:32:26 # process is runing
+6-11-2013 7:32:26 # Checked
+6-11-2013 7:37:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	1
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	1
+6-11-2013 7:37:26 # process is runing
+6-11-2013 7:37:26 # Checked
+6-11-2013 7:42:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	1
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	1
+6-11-2013 7:42:26 # process is runing
+6-11-2013 7:42:26 # Checked
+6-11-2013 7:47:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	1
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	1
+6-11-2013 7:47:26 # process is runing
+6-11-2013 7:47:26 # Checked
+6-11-2013 7:52:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	1
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	1
+6-11-2013 7:52:26 # process is runing
+6-11-2013 7:52:26 # Checked
+6-11-2013 7:57:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	1
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	1
+6-11-2013 7:57:26 # process is runing
+6-11-2013 7:57:26 # Checked
+6-11-2013 8:2:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	1
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	1
+6-11-2013 8:2:26 # process is runing
+6-11-2013 8:2:26 # Checked
+6-11-2013 8:7:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	1
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	1
+6-11-2013 8:7:26 # process is runing
+6-11-2013 8:7:26 # Checked
+6-11-2013 8:12:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	1
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	1
+6-11-2013 8:12:26 # process is runing
+6-11-2013 8:12:26 # Checked
+6-11-2013 8:17:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	1
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	1
+6-11-2013 8:17:26 # process is runing
+6-11-2013 8:17:26 # Checked
+6-11-2013 8:22:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	1
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	1
+6-11-2013 8:22:26 # process is runing
+6-11-2013 8:22:26 # Checked
+6-11-2013 8:27:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	1
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	1
+6-11-2013 8:27:26 # process is runing
+6-11-2013 8:27:26 # Checked
+6-11-2013 8:32:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	1
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	1
+6-11-2013 8:32:26 # process is runing
+6-11-2013 8:32:26 # Checked
+6-11-2013 8:37:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	1
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	1
+6-11-2013 8:37:26 # process is runing
+6-11-2013 8:37:26 # Checked
+6-11-2013 8:42:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	1
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	1
+6-11-2013 8:42:26 # process is runing
+6-11-2013 8:42:26 # Checked
+6-11-2013 8:47:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	1
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	1
+6-11-2013 8:47:26 # process is runing
+6-11-2013 8:47:26 # Checked
+6-11-2013 8:52:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	1
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	1
+6-11-2013 8:52:26 # process is runing
+6-11-2013 8:52:26 # Checked
+6-11-2013 8:57:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	1
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	1
+6-11-2013 8:57:26 # process is runing
+6-11-2013 8:57:26 # Checked
+6-11-2013 9:2:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	1
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	1
+6-11-2013 9:2:26 # process is runing
+6-11-2013 9:2:26 # Checked
+6-11-2013 9:7:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	1
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	1
+6-11-2013 9:7:26 # process is runing
+6-11-2013 9:7:26 # Checked
+6-11-2013 9:12:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	1
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	1
+6-11-2013 9:12:26 # process is runing
+6-11-2013 9:12:26 # Checked
+6-11-2013 9:17:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	1
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	1
+6-11-2013 9:17:26 # process is runing
+6-11-2013 9:17:26 # Checked
+6-11-2013 9:22:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	1
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	0
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	1
+6-11-2013 9:22:26 # process is runing
+6-11-2013 9:22:26 # Checked
+6-11-2013 9:27:26 # Check Param 2
+4020	PS
+4020	fn_build_monthly_adm_forecast_data_feed	1
+4020	fn_build_monthly_agg_group_act_all	1
+4020	fn_build_monthly_agg_group_portal_act_all	1
+4020	fn_build_monthly_agg_network_act_all	1
+4020	fn_build_monthly_agg_partner_act	1
+4020	fn_build_monthly_agg_partner_act_all	1
+4020	fn_build_monthly_agg_partner_module_act_all	1
+4020	fn_build_monthly_agg_portal_act_all	1
+6-11-2013 9:27:26 # Checked
+6-11-2013 9:27:26 # Param 2 finished
+V.5.0
+promote monthly partner report
+6-11-2013 9:27:57 # Run Param 3
+V.5.0
+Run param3
+Run fn_refresh_monthly_site_traffic_report()
+Result is: 1
+6-11-2013 19:31:13 # Check Param 3
+4023	PS
+4023	fn_build_monthly_agg_site_traffic	1
+6-11-2013 19:31:13 # Checked
+6-11-2013 19:31:13 # Param 3 finished
+6-11-2013 19:31:13 # Run Param 3 has finished
+V.5.0
+promote monthly traffic report
+6-11-2013 19:31:18 # Run Param 7
+V.5.0
+Run param7
+Result is: 1
+6-11-2013 19:31:19 # Check Param 7
+4024	PS
+4024	fn_build_monthly_impression_partner	0
+4024	fn_build_monthly_impression_partner_device	0
+4024	fn_build_monthly_impression_partner_portal	0
+6-11-2013 19:31:19 # process is runing
+6-11-2013 19:31:19 # Checked
+6-11-2013 19:36:19 # Check Param 7
+4024	PS
+4024	fn_build_monthly_impression_partner	0
+4024	fn_build_monthly_impression_partner_device	0
+4024	fn_build_monthly_impression_partner_portal	0
+6-11-2013 19:36:19 # process is runing
+6-11-2013 19:36:19 # Checked
+6-11-2013 19:41:19 # Check Param 7
+4024	PS
+4024	fn_build_monthly_impression_partner	0
+4024	fn_build_monthly_impression_partner_device	0
+4024	fn_build_monthly_impression_partner_portal	0
+6-11-2013 19:41:19 # process is runing
+6-11-2013 19:41:19 # Checked
+6-11-2013 19:46:19 # Check Param 7
+4024	PS
+4024	fn_build_monthly_impression_partner	0
+4024	fn_build_monthly_impression_partner_device	0
+4024	fn_build_monthly_impression_partner_portal	0
+6-11-2013 19:46:19 # process is runing
+6-11-2013 19:46:19 # Checked
+6-11-2013 19:51:19 # Check Param 7
+4024	PS
+4024	fn_build_monthly_impression_partner	0
+4024	fn_build_monthly_impression_partner_device	0
+4024	fn_build_monthly_impression_partner_portal	0
+6-11-2013 19:51:19 # process is runing
+6-11-2013 19:51:19 # Checked
+6-11-2013 19:56:19 # Check Param 7
+4024	PS
+4024	fn_build_monthly_impression_partner	0
+4024	fn_build_monthly_impression_partner_device	0
+4024	fn_build_monthly_impression_partner_portal	0
+6-11-2013 19:56:19 # process is runing
+6-11-2013 19:56:19 # Checked
+6-11-2013 20:1:19 # Check Param 7
+4024	PS
+4024	fn_build_monthly_impression_partner	0
+4024	fn_build_monthly_impression_partner_device	0
+4024	fn_build_monthly_impression_partner_portal	0
+6-11-2013 20:1:19 # process is runing
+6-11-2013 20:1:19 # Checked
+6-11-2013 20:6:19 # Check Param 7
+4024	PS
+4024	fn_build_monthly_impression_partner	1
+4024	fn_build_monthly_impression_partner_device	0
+4024	fn_build_monthly_impression_partner_portal	1
+6-11-2013 20:6:19 # process is runing
+6-11-2013 20:6:19 # Checked
+6-11-2013 20:11:19 # Check Param 7
+4024	PS
+4024	fn_build_monthly_impression_partner	1
+4024	fn_build_monthly_impression_partner_device	0
+4024	fn_build_monthly_impression_partner_portal	1
+6-11-2013 20:11:19 # process is runing
+6-11-2013 20:11:19 # Checked
+6-11-2013 20:16:19 # Check Param 7
+4024	PS
+4024	fn_build_monthly_impression_partner	1
+4024	fn_build_monthly_impression_partner_device	0
+4024	fn_build_monthly_impression_partner_portal	1
+6-11-2013 20:16:19 # process is runing
+6-11-2013 20:16:19 # Checked
+6-11-2013 20:21:19 # Check Param 7
+4024	PS
+4024	fn_build_monthly_impression_partner	1
+4024	fn_build_monthly_impression_partner_device	1
+4024	fn_build_monthly_impression_partner_portal	1
+6-11-2013 20:21:19 # Checked
+6-11-2013 20:21:19 # Param 7 finished
+6-11-2013 20:21:19 # Run Param 7 has finished
+V.5.0
+promote Monthly Impression inventory

@@ -1,0 +1,1374 @@
+***Check on 2012-04-01
+#Table 1: adm.daily_network_fct_request	Dw3: 1898	Dw0: 1898
+#Table 2: adm.daily_network_fct_channel	Dw3: 13378	Dw0: 13378
+#Table 3: adm.daily_agg_network_performance	Dw3: 13378	Dw0: 13378
+#Table 4: adm.daily_network_fct_performance	Dw3: 12745	Dw0: 12745
+#Table 5: adm.daily_network_fct_performance_by_portal	Dw3: 0	Dw0: 0
+#Table 6: adm.daily_agg_revenue_by_publisher	Dw3: 0	Dw0: 0
+#Table 7: adm.daily_agg_publisher_website_partner	Dw3: 622	Dw0: 622
+#Table 8: adm.daily_agg_local_revenue	Dw3: 0	Dw0: 0
+#Table 9: adm.daily_agg_order_placement_creative_flight	Dw3: 11646	Dw0: 11646
+#Table 10: adm.daily_agg_adm_data_feed	Dw3: 11647	Dw0: 11647
+#Table 11: adm.daily_agg_order_flight	Dw3: 2499	Dw0: 2499
+#Table 12: adm.daily_agg_revenue_by_order_yesterday	Dw3: 908	Dw0: 908
+#Table 13: adm.daily_agg_revenue_by_order	Dw3: 830	Dw0: 830
+#Table 14: adm.daily_agg_order_atc	Dw3: 11646	Dw0: 11646
+#Table 15: adnetwork.daily_sp_performance	Dw3: 0	Dw0: 0
+#Table 16: adnetwork.daily_cg_performance	Dw3: 69	Dw0: 69
+#Table 17: adnetwork.daily_mx_performance	Dw3: 396	Dw0: 396
+#Table 18: adnetwork.daily_jt_performance	Dw3: 332	Dw0: 332
+#Table 19: adnetwork.daily_it_performance	Dw3: 0	Dw0: 0
+#Table 20: adnetwork.daily_wh_performance	Dw3: 831	Dw0: 831
+#Table 21: adnetwork.daily_adsense_dbclk_channel	Dw3: 81	Dw0: 81
+#Table 22: adnetwork.daily_yp_sb_performance	Dw3: 889	Dw0: 889
+#Table 23: adnetwork.daily_sp_blue_performance	Dw3: 1226	Dw0: 1226
+#Table 24: adnetwork.daily_ga_performance	Dw3: 180	Dw0: 180
+#Table 25: adnetwork.daily_jt_summary	Dw3: 0	Dw0: 0
+#Table 26: adnetwork.daily_yp_no_performance	Dw3: 582	Dw0: 582
+#Table 27: adnetwork.daily_mm_performance	Dw3: 3462	Dw0: 3462
+#Table 28: adnetwork.daily_adnetwork_summary	Dw3: 9	Dw0: 9
+#Table 29: adstraffic.daily_db_sellthrough	Dw3: 0	Dw0: 0
+#Table 30: adstraffic.daily_db_sellthrough_by_metro	Dw3: 0	Dw0: 0
+#Table 31: adstraffic.daily_db_sellthrough_by_site	Dw3: 0	Dw0: 0
+#Table 32: adstraffic.daily_filled_stats	Dw3: 6291	Dw0: 6291
+#Table 33: adstraffic.daily_filled_stats_by_dma	Dw3: 135667	Dw0: 135667
+#Table 34: adstraffic.daily_filled_stats_by_device	Dw3: 36828	Dw0: 36828
+#Table 35: adstraffic.daily_filled_stats_by_content_category	Dw3: 22665	Dw0: 22665
+#Table 36: adstraffic.daily_olap_filled_by_portal	Dw3: 91762	Dw0: 91762
+#Table 37: adstraffic.daily_ad_serving_stats	Dw3: 10990	Dw0: 10990
+#Table 38: adstraffic.daily_ad_serving_stats_by_device	Dw3: 78992	Dw0: 78992
+#Table 39: adstraffic.daily_ad_serving_stats_by_content_category	Dw3: 42742	Dw0: 42742
+#Table 40: adstraffic.daily_adcel_stats	Dw3: 1	Dw0: 1
+#Table 41: adstraffic.daily_olap_trxids_by_content_category	Dw3: 185517	Dw0: 185517
+#Table 42: adstraffic.daily_olap_trxids_by_device	Dw3: 191292	Dw0: 191292
+#Table 43: adstraffic.daily_olap_trxids_by_portal	Dw3: 102311	Dw0: 102311
+#Table 44: adstraffic.daily_olap_unfilled_by_portal	Dw3: 39501	Dw0: 39501
+#Table 45: adstraffic.daily_unfilled_stats	Dw3: 1648	Dw0: 1648
+#Table 46: adstraffic.daily_unfilled_stats_by_dma	Dw3: 33589	Dw0: 33589
+#Table 47: adstraffic.daily_unfilled_stats_by_device	Dw3: 8730	Dw0: 8730
+#Table 48: adstraffic.daily_unfilled_stats_by_content_category	Dw3: 5841	Dw0: 5841
+#Table 49: evttracker.daily_event_stats_by_hour	Dw3: 402	Dw0: 402
+#Table 50: evttracker.daily_event_stats_adnet	Dw3: 41	Dw0: 41
+#Table 51: evttracker.daily_event_by_distance	Dw3: 40	Dw0: 40
+#Table 52: evttracker.daily_event_dma_by_hour	Dw3: 8094	Dw0: 8094
+#Table 53: evttracker.daily_event_stats	Dw3: 38	Dw0: 38
+#Table 54: evttracker.daily_event_dma	Dw3: 486	Dw0: 486
+#Table 55: evttracker.daily_event_x_value_report	Dw3: 7849	Dw0: 7849
+#Table 56: evttracker.daily_event_x_value_by_hour	Dw3: 8034	Dw0: 8034
+#Table 57: evttracker.daily_event_download	Dw3: 0	Dw0: 0
+#Table 58: evttracker.daily_event_x_value	Dw3: 5911	Dw0: 5911
+#Table 59: evttracker.daily_store_location_by_distance	Dw3: 0	Dw0: 0
+#Table 60: dbclk.daily_agg_site_campaign_day	Dw3: 6321	Dw0: 6321
+#Table 61: dbclk.daily_agg_site_day	Dw3: 1447	Dw0: 1447
+#Table 62: dbclk.daily_agg_site_order	Dw3: 3306	Dw0: 3306
+#Table 63: dbclk.daily_agg_publishers_day	Dw3: 93	Dw0: 93
+***Check on 2012-04-02
+#Table 1: adm.daily_network_fct_request	Dw3: 1955	Dw0: 1955
+#Table 2: adm.daily_network_fct_channel	Dw3: 13565	Dw0: 13565
+#Table 3: adm.daily_agg_network_performance	Dw3: 13565	Dw0: 13565
+#Table 4: adm.daily_network_fct_performance	Dw3: 12861	Dw0: 12861
+#Table 5: adm.daily_network_fct_performance_by_portal	Dw3: 0	Dw0: 0
+#Table 6: adm.daily_agg_revenue_by_publisher	Dw3: 0	Dw0: 0
+#Table 7: adm.daily_agg_publisher_website_partner	Dw3: 618	Dw0: 618
+#Table 8: adm.daily_agg_local_revenue	Dw3: 0	Dw0: 0
+#Table 9: adm.daily_agg_order_placement_creative_flight	Dw3: 11737	Dw0: 11737
+#Table 10: adm.daily_agg_adm_data_feed	Dw3: 11737	Dw0: 11737
+#Table 11: adm.daily_agg_order_flight	Dw3: 2367	Dw0: 2367
+#Table 12: adm.daily_agg_revenue_by_order_yesterday	Dw3: 830	Dw0: 830
+#Table 13: adm.daily_agg_revenue_by_order	Dw3: 822	Dw0: 822
+#Table 14: adm.daily_agg_order_atc	Dw3: 11737	Dw0: 11737
+#Table 15: adnetwork.daily_sp_performance	Dw3: 0	Dw0: 0
+#Table 16: adnetwork.daily_cg_performance	Dw3: 58	Dw0: 58
+#Table 17: adnetwork.daily_mx_performance	Dw3: 365	Dw0: 365
+#Table 18: adnetwork.daily_jt_performance	Dw3: 389	Dw0: 389
+#Table 19: adnetwork.daily_it_performance	Dw3: 40	Dw0: 40
+#Table 20: adnetwork.daily_wh_performance	Dw3: 858	Dw0: 858
+#Table 21: adnetwork.daily_adsense_dbclk_channel	Dw3: 84	Dw0: 84
+#Table 22: adnetwork.daily_yp_sb_performance	Dw3: 901	Dw0: 901
+#Table 23: adnetwork.daily_sp_blue_performance	Dw3: 1383	Dw0: 1383
+#Table 24: adnetwork.daily_ga_performance	Dw3: 179	Dw0: 179
+#Table 25: adnetwork.daily_jt_summary	Dw3: 0	Dw0: 0
+#Table 26: adnetwork.daily_yp_no_performance	Dw3: 631	Dw0: 631
+#Table 27: adnetwork.daily_mm_performance	Dw3: 3462	Dw0: 3462
+#Table 28: adnetwork.daily_adnetwork_summary	Dw3: 10	Dw0: 10
+#Table 29: adstraffic.daily_db_sellthrough	Dw3: 0	Dw0: 0
+#Table 30: adstraffic.daily_db_sellthrough_by_metro	Dw3: 0	Dw0: 0
+#Table 31: adstraffic.daily_db_sellthrough_by_site	Dw3: 0	Dw0: 0
+#Table 32: adstraffic.daily_filled_stats	Dw3: 6499	Dw0: 6499
+#Table 33: adstraffic.daily_filled_stats_by_dma	Dw3: 142351	Dw0: 142351
+#Table 34: adstraffic.daily_filled_stats_by_device	Dw3: 38597	Dw0: 38597
+#Table 35: adstraffic.daily_filled_stats_by_content_category	Dw3: 23057	Dw0: 23057
+#Table 36: adstraffic.daily_olap_filled_by_portal	Dw3: 91525	Dw0: 91525
+#Table 37: adstraffic.daily_ad_serving_stats	Dw3: 11692	Dw0: 11692
+#Table 38: adstraffic.daily_ad_serving_stats_by_device	Dw3: 88833	Dw0: 88833
+#Table 39: adstraffic.daily_ad_serving_stats_by_content_category	Dw3: 45473	Dw0: 45473
+#Table 40: adstraffic.daily_adcel_stats	Dw3: 1	Dw0: 1
+#Table 41: adstraffic.daily_olap_trxids_by_content_category	Dw3: 185323	Dw0: 185323
+#Table 42: adstraffic.daily_olap_trxids_by_device	Dw3: 193986	Dw0: 193986
+#Table 43: adstraffic.daily_olap_trxids_by_portal	Dw3: 103053	Dw0: 103053
+#Table 44: adstraffic.daily_olap_unfilled_by_portal	Dw3: 51831	Dw0: 51831
+#Table 45: adstraffic.daily_unfilled_stats	Dw3: 2353	Dw0: 2353
+#Table 46: adstraffic.daily_unfilled_stats_by_dma	Dw3: 44105	Dw0: 44105
+#Table 47: adstraffic.daily_unfilled_stats_by_device	Dw3: 12679	Dw0: 12679
+#Table 48: adstraffic.daily_unfilled_stats_by_content_category	Dw3: 7329	Dw0: 7329
+#Table 49: evttracker.daily_event_stats_by_hour	Dw3: 452	Dw0: 452
+#Table 50: evttracker.daily_event_stats_adnet	Dw3: 53	Dw0: 53
+#Table 51: evttracker.daily_event_by_distance	Dw3: 44	Dw0: 44
+#Table 52: evttracker.daily_event_dma_by_hour	Dw3: 9705	Dw0: 9705
+#Table 53: evttracker.daily_event_stats	Dw3: 50	Dw0: 50
+#Table 54: evttracker.daily_event_dma	Dw3: 642	Dw0: 642
+#Table 55: evttracker.daily_event_x_value_report	Dw3: 7003	Dw0: 7003
+#Table 56: evttracker.daily_event_x_value_by_hour	Dw3: 7146	Dw0: 7146
+#Table 57: evttracker.daily_event_download	Dw3: 0	Dw0: 0
+#Table 58: evttracker.daily_event_x_value	Dw3: 5111	Dw0: 5111
+#Table 59: evttracker.daily_store_location_by_distance	Dw3: 0	Dw0: 0
+#Table 60: dbclk.daily_agg_site_campaign_day	Dw3: 6495	Dw0: 6495
+#Table 61: dbclk.daily_agg_site_day	Dw3: 1483	Dw0: 1483
+#Table 62: dbclk.daily_agg_site_order	Dw3: 3179	Dw0: 3179
+#Table 63: dbclk.daily_agg_publishers_day	Dw3: 93	Dw0: 93
+***Check on 2012-04-03
+#Table 1: adm.daily_network_fct_request	Dw3: 1974	Dw0: 1974
+#Table 2: adm.daily_network_fct_channel	Dw3: 13735	Dw0: 13735
+#Table 3: adm.daily_agg_network_performance	Dw3: 13735	Dw0: 13735
+#Table 4: adm.daily_network_fct_performance	Dw3: 13018	Dw0: 13018
+#Table 5: adm.daily_network_fct_performance_by_portal	Dw3: 0	Dw0: 0
+#Table 6: adm.daily_agg_revenue_by_publisher	Dw3: 0	Dw0: 0
+#Table 7: adm.daily_agg_publisher_website_partner	Dw3: 655	Dw0: 655
+#Table 8: adm.daily_agg_local_revenue	Dw3: 0	Dw0: 0
+#Table 9: adm.daily_agg_order_placement_creative_flight	Dw3: 11892	Dw0: 11892
+#Table 10: adm.daily_agg_adm_data_feed	Dw3: 11892	Dw0: 11892
+#Table 11: adm.daily_agg_order_flight	Dw3: 2439	Dw0: 2439
+#Table 12: adm.daily_agg_revenue_by_order_yesterday	Dw3: 822	Dw0: 822
+#Table 13: adm.daily_agg_revenue_by_order	Dw3: 846	Dw0: 846
+#Table 14: adm.daily_agg_order_atc	Dw3: 11892	Dw0: 11892
+#Table 15: adnetwork.daily_sp_performance	Dw3: 0	Dw0: 0
+#Table 16: adnetwork.daily_cg_performance	Dw3: 65	Dw0: 65
+#Table 17: adnetwork.daily_mx_performance	Dw3: 330	Dw0: 330
+#Table 18: adnetwork.daily_jt_performance	Dw3: 317	Dw0: 317
+#Table 19: adnetwork.daily_it_performance	Dw3: 40	Dw0: 40
+#Table 20: adnetwork.daily_wh_performance	Dw3: 832	Dw0: 832
+#Table 21: adnetwork.daily_adsense_dbclk_channel	Dw3: 85	Dw0: 85
+#Table 22: adnetwork.daily_yp_sb_performance	Dw3: 1535	Dw0: 1535
+#Table 23: adnetwork.daily_sp_blue_performance	Dw3: 1463	Dw0: 1463
+#Table 24: adnetwork.daily_ga_performance	Dw3: 153	Dw0: 153
+#Table 25: adnetwork.daily_jt_summary	Dw3: 0	Dw0: 0
+#Table 26: adnetwork.daily_yp_no_performance	Dw3: 1037	Dw0: 1037
+#Table 27: adnetwork.daily_mm_performance	Dw3: 3462	Dw0: 3462
+#Table 28: adnetwork.daily_adnetwork_summary	Dw3: 10	Dw0: 10
+#Table 29: adstraffic.daily_db_sellthrough	Dw3: 0	Dw0: 0
+#Table 30: adstraffic.daily_db_sellthrough_by_metro	Dw3: 0	Dw0: 0
+#Table 31: adstraffic.daily_db_sellthrough_by_site	Dw3: 0	Dw0: 0
+#Table 32: adstraffic.daily_filled_stats	Dw3: 7035	Dw0: 7035
+#Table 33: adstraffic.daily_filled_stats_by_dma	Dw3: 148762	Dw0: 148762
+#Table 34: adstraffic.daily_filled_stats_by_device	Dw3: 39433	Dw0: 39433
+#Table 35: adstraffic.daily_filled_stats_by_content_category	Dw3: 24193	Dw0: 24193
+#Table 36: adstraffic.daily_olap_filled_by_portal	Dw3: 93853	Dw0: 93853
+#Table 37: adstraffic.daily_ad_serving_stats	Dw3: 12610	Dw0: 12610
+#Table 38: adstraffic.daily_ad_serving_stats_by_device	Dw3: 89456	Dw0: 89456
+#Table 39: adstraffic.daily_ad_serving_stats_by_content_category	Dw3: 47184	Dw0: 47184
+#Table 40: adstraffic.daily_adcel_stats	Dw3: 1	Dw0: 1
+#Table 41: adstraffic.daily_olap_trxids_by_content_category	Dw3: 189456	Dw0: 189456
+#Table 42: adstraffic.daily_olap_trxids_by_device	Dw3: 198565	Dw0: 198565
+#Table 43: adstraffic.daily_olap_trxids_by_portal	Dw3: 105563	Dw0: 105563
+#Table 44: adstraffic.daily_olap_unfilled_by_portal	Dw3: 55421	Dw0: 55421
+#Table 45: adstraffic.daily_unfilled_stats	Dw3: 1984	Dw0: 1984
+#Table 46: adstraffic.daily_unfilled_stats_by_dma	Dw3: 45434	Dw0: 45434
+#Table 47: adstraffic.daily_unfilled_stats_by_device	Dw3: 13063	Dw0: 13063
+#Table 48: adstraffic.daily_unfilled_stats_by_content_category	Dw3: 6829	Dw0: 6829
+#Table 49: evttracker.daily_event_stats_by_hour	Dw3: 544	Dw0: 544
+#Table 50: evttracker.daily_event_stats_adnet	Dw3: 64	Dw0: 64
+#Table 51: evttracker.daily_event_by_distance	Dw3: 42	Dw0: 42
+#Table 52: evttracker.daily_event_dma_by_hour	Dw3: 9313	Dw0: 9313
+#Table 53: evttracker.daily_event_stats	Dw3: 61	Dw0: 61
+#Table 54: evttracker.daily_event_dma	Dw3: 656	Dw0: 656
+#Table 55: evttracker.daily_event_x_value_report	Dw3: 8242	Dw0: 8242
+#Table 56: evttracker.daily_event_x_value_by_hour	Dw3: 8437	Dw0: 8437
+#Table 57: evttracker.daily_event_download	Dw3: 0	Dw0: 0
+#Table 58: evttracker.daily_event_x_value	Dw3: 6165	Dw0: 6165
+#Table 59: evttracker.daily_store_location_by_distance	Dw3: 0	Dw0: 0
+#Table 60: dbclk.daily_agg_site_campaign_day	Dw3: 7395	Dw0: 7395
+#Table 61: dbclk.daily_agg_site_day	Dw3: 1496	Dw0: 1496
+#Table 62: dbclk.daily_agg_site_order	Dw3: 3202	Dw0: 3202
+#Table 63: dbclk.daily_agg_publishers_day	Dw3: 92	Dw0: 92
+***Check on 2012-04-04
+#Table 1: adm.daily_network_fct_request	Dw3: 1659	Dw0: 1659
+#Table 2: adm.daily_network_fct_channel	Dw3: 1659	Dw0: 1659
+#Table 3: adm.daily_agg_network_performance	Dw3: 1659	Dw0: 1659
+#Table 4: adm.daily_network_fct_performance	Dw3: 1073	Dw0: 1073
+#Table 5: adm.daily_network_fct_performance_by_portal	Dw3: 0	Dw0: 0
+#Table 6: adm.daily_agg_revenue_by_publisher	Dw3: 0	Dw0: 0
+#Table 7: adm.daily_agg_publisher_website_partner	Dw3: 0	Dw0: 674
+#Table 8: adm.daily_agg_local_revenue	Dw3: 0	Dw0: 0
+#Table 9: adm.daily_agg_order_placement_creative_flight	Dw3: 0	Dw0: 12677
+#Table 10: adm.daily_agg_adm_data_feed	Dw3: 0	Dw0: 12677
+#Table 11: adm.daily_agg_order_flight	Dw3: 0	Dw0: 2463
+#Table 12: adm.daily_agg_revenue_by_order_yesterday	Dw3: 0	Dw0: 0
+#Table 13: adm.daily_agg_revenue_by_order	Dw3: 0	Dw0: 862
+#Table 14: adm.daily_agg_order_atc	Dw3: 0	Dw0: 12677
+#Table 15: adnetwork.daily_sp_performance	Dw3: 0	Dw0: 0
+#Table 16: adnetwork.daily_cg_performance	Dw3: 0	Dw0: 34
+#Table 17: adnetwork.daily_mx_performance	Dw3: 0	Dw0: 186
+#Table 18: adnetwork.daily_jt_performance	Dw3: 0	Dw0: 470
+#Table 19: adnetwork.daily_it_performance	Dw3: 0	Dw0: 40
+#Table 20: adnetwork.daily_wh_performance	Dw3: 0	Dw0: 827
+#Table 21: adnetwork.daily_adsense_dbclk_channel	Dw3: 0	Dw0: 85
+#Table 22: adnetwork.daily_yp_sb_performance	Dw3: 0	Dw0: 4166
+#Table 23: adnetwork.daily_sp_blue_performance	Dw3: 1677	Dw0: 1677
+#Table 24: adnetwork.daily_ga_performance	Dw3: 0	Dw0: 0
+#Table 25: adnetwork.daily_jt_summary	Dw3: 0	Dw0: 0
+#Table 26: adnetwork.daily_yp_no_performance	Dw3: 0	Dw0: 2506
+#Table 27: adnetwork.daily_mm_performance	Dw3: 0	Dw0: 3462
+#Table 28: adnetwork.daily_adnetwork_summary	Dw3: 1	Dw0: 1
+#Table 29: adstraffic.daily_db_sellthrough	Dw3: 0	Dw0: 0
+#Table 30: adstraffic.daily_db_sellthrough_by_metro	Dw3: 0	Dw0: 0
+#Table 31: adstraffic.daily_db_sellthrough_by_site	Dw3: 0	Dw0: 0
+#Table 32: adstraffic.daily_filled_stats	Dw3: 6573	Dw0: 6573
+#Table 33: adstraffic.daily_filled_stats_by_dma	Dw3: 126751	Dw0: 126751
+#Table 34: adstraffic.daily_filled_stats_by_device	Dw3: 34091	Dw0: 34091
+#Table 35: adstraffic.daily_filled_stats_by_content_category	Dw3: 23351	Dw0: 23351
+#Table 36: adstraffic.daily_olap_filled_by_portal	Dw3: 93037	Dw0: 93037
+#Table 37: adstraffic.daily_ad_serving_stats	Dw3: 14520	Dw0: 14520
+#Table 38: adstraffic.daily_ad_serving_stats_by_device	Dw3: 84464	Dw0: 84464
+#Table 39: adstraffic.daily_ad_serving_stats_by_content_category	Dw3: 59051	Dw0: 59051
+#Table 40: adstraffic.daily_adcel_stats	Dw3: 1	Dw0: 1
+#Table 41: adstraffic.daily_olap_trxids_by_content_category	Dw3: 190239	Dw0: 190239
+#Table 42: adstraffic.daily_olap_trxids_by_device	Dw3: 194056	Dw0: 194056
+#Table 43: adstraffic.daily_olap_trxids_by_portal	Dw3: 104965	Dw0: 104965
+#Table 44: adstraffic.daily_olap_unfilled_by_portal	Dw3: 48179	Dw0: 48179
+#Table 45: adstraffic.daily_unfilled_stats	Dw3: 2219	Dw0: 2219
+#Table 46: adstraffic.daily_unfilled_stats_by_dma	Dw3: 40096	Dw0: 40096
+#Table 47: adstraffic.daily_unfilled_stats_by_device	Dw3: 12119	Dw0: 12119
+#Table 48: adstraffic.daily_unfilled_stats_by_content_category	Dw3: 9102	Dw0: 9102
+#Table 49: evttracker.daily_event_stats_by_hour	Dw3: 627	Dw0: 627
+#Table 50: evttracker.daily_event_stats_adnet	Dw3: 78	Dw0: 78
+#Table 51: evttracker.daily_event_by_distance	Dw3: 53	Dw0: 53
+#Table 52: evttracker.daily_event_dma_by_hour	Dw3: 8503	Dw0: 8503
+#Table 53: evttracker.daily_event_stats	Dw3: 74	Dw0: 74
+#Table 54: evttracker.daily_event_dma	Dw3: 619	Dw0: 619
+#Table 55: evttracker.daily_event_x_value_report	Dw3: 8705	Dw0: 8705
+#Table 56: evttracker.daily_event_x_value_by_hour	Dw3: 8884	Dw0: 8884
+#Table 57: evttracker.daily_event_download	Dw3: 0	Dw0: 0
+#Table 58: evttracker.daily_event_x_value	Dw3: 6724	Dw0: 6724
+#Table 59: evttracker.daily_store_location_by_distance	Dw3: 0	Dw0: 0
+#Table 60: dbclk.daily_agg_site_campaign_day	Dw3: 0	Dw0: 7585
+#Table 61: dbclk.daily_agg_site_day	Dw3: 0	Dw0: 1557
+#Table 62: dbclk.daily_agg_site_order	Dw3: 0	Dw0: 3404
+#Table 63: dbclk.daily_agg_publishers_day	Dw3: 0	Dw0: 98
+***Check on 2012-04-05
+#Table 1: adm.daily_network_fct_request	Dw3: 1512	Dw0: 1512
+*Update data to dw0
+Starting : Get data form adm.daily_network_fct_request where full_date = 2012-04-05
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 7560
+Ending : Get data from adm.daily_network_fct_request where full_date = 2012-04-05
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adm.daily_network_fct_request where full_date = '2012-04-05'
+Ending : delete from adm.daily_network_fct_request where full_date = '2012-04-05'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 1512
+Time Transfer for adm.daily_network_fct_request : 0 Seconds
+#Table 2: adm.daily_network_fct_channel	Dw3: 1512	Dw0: 1512
+*Update data to dw0
+Starting : Get data form adm.daily_network_fct_channel where full_date = 2012-04-05
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 7560
+Ending : Get data from adm.daily_network_fct_channel where full_date = 2012-04-05
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adm.daily_network_fct_channel where full_date = '2012-04-05'
+Ending : delete from adm.daily_network_fct_channel where full_date = '2012-04-05'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 1512
+Time Transfer for adm.daily_network_fct_channel : 0 Seconds
+#Table 3: adm.daily_agg_network_performance	Dw3: 1512	Dw0: 1512
+*Update data to dw0
+Starting : Get data form adm.daily_agg_network_performance where full_date = 2012-04-05
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 7560
+Ending : Get data from adm.daily_agg_network_performance where full_date = 2012-04-05
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adm.daily_agg_network_performance where full_date = '2012-04-05'
+Ending : delete from adm.daily_agg_network_performance where full_date = '2012-04-05'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 1512
+Time Transfer for adm.daily_agg_network_performance : 0 Seconds
+#Table 4: adm.daily_network_fct_performance	Dw3: 1013	Dw0: 1013
+*Update data to dw0
+Starting : Get data form adm.daily_network_fct_performance where full_date = 2012-04-05
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 5065
+Ending : Get data from adm.daily_network_fct_performance where full_date = 2012-04-05
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adm.daily_network_fct_performance where full_date = '2012-04-05'
+Ending : delete from adm.daily_network_fct_performance where full_date = '2012-04-05'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 1013
+Time Transfer for adm.daily_network_fct_performance : 0 Seconds
+#Table 5: adm.daily_network_fct_performance_by_portal	Dw3: 0	Dw0: 0
+#Table 6: adm.daily_agg_revenue_by_publisher	Dw3: 0	Dw0: 0
+#Table 7: adm.daily_agg_publisher_website_partner	Dw3: 0	Dw0: 675
+#Table 8: adm.daily_agg_local_revenue	Dw3: 0	Dw0: 0
+#Table 9: adm.daily_agg_order_placement_creative_flight	Dw3: 0	Dw0: 12753
+#Table 10: adm.daily_agg_adm_data_feed	Dw3: 0	Dw0: 12753
+#Table 11: adm.daily_agg_order_flight	Dw3: 0	Dw0: 2524
+#Table 12: adm.daily_agg_revenue_by_order_yesterday	Dw3: 0	Dw0: 862
+#Table 13: adm.daily_agg_revenue_by_order	Dw3: 0	Dw0: 872
+#Table 14: adm.daily_agg_order_atc	Dw3: 0	Dw0: 12753
+#Table 15: adnetwork.daily_sp_performance	Dw3: 0	Dw0: 0
+#Table 16: adnetwork.daily_cg_performance	Dw3: 0	Dw0: 59
+#Table 17: adnetwork.daily_mx_performance	Dw3: 0	Dw0: 300
+#Table 18: adnetwork.daily_jt_performance	Dw3: 0	Dw0: 350
+#Table 19: adnetwork.daily_it_performance	Dw3: 0	Dw0: 40
+#Table 20: adnetwork.daily_wh_performance	Dw3: 0	Dw0: 941
+#Table 21: adnetwork.daily_adsense_dbclk_channel	Dw3: 0	Dw0: 87
+#Table 22: adnetwork.daily_yp_sb_performance	Dw3: 0	Dw0: 1453
+#Table 23: adnetwork.daily_sp_blue_performance	Dw3: 3036	Dw0: 1518
+*Transfer data to dw0
+Starting : Get data form adnetwork.daily_sp_blue_performance where full_date = 2012-04-05
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 13662
+Ending : Get data from adnetwork.daily_sp_blue_performance where full_date = 2012-04-05
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_sp_blue_performance where full_date = '2012-04-05'
+Ending : delete from adnetwork.daily_sp_blue_performance where full_date = '2012-04-05'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 3036
+Time Transfer for adnetwork.daily_sp_blue_performance : 0 Seconds
+#Table 24: adnetwork.daily_ga_performance	Dw3: 0	Dw0: 0
+#Table 25: adnetwork.daily_jt_summary	Dw3: 0	Dw0: 0
+#Table 26: adnetwork.daily_yp_no_performance	Dw3: 0	Dw0: 1265
+#Table 27: adnetwork.daily_mm_performance	Dw3: 0	Dw0: 3462
+#Table 28: adnetwork.daily_adnetwork_summary	Dw3: 1	Dw0: 1
+*Update data to dw0
+Starting : Get data form adnetwork.daily_adnetwork_summary where full_date = 2012-04-05
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 5
+Ending : Get data from adnetwork.daily_adnetwork_summary where full_date = 2012-04-05
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_adnetwork_summary where full_date = '2012-04-05'
+Ending : delete from adnetwork.daily_adnetwork_summary where full_date = '2012-04-05'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 1
+Time Transfer for adnetwork.daily_adnetwork_summary : 0 Seconds
+#Table 29: adstraffic.daily_db_sellthrough	Dw3: 0	Dw0: 0
+#Table 30: adstraffic.daily_db_sellthrough_by_metro	Dw3: 0	Dw0: 0
+#Table 31: adstraffic.daily_db_sellthrough_by_site	Dw3: 0	Dw0: 0
+#Table 32: adstraffic.daily_filled_stats	Dw3: 6946	Dw0: 6946
+#Table 33: adstraffic.daily_filled_stats_by_dma	Dw3: 150789	Dw0: 150789
+#Table 34: adstraffic.daily_filled_stats_by_device	Dw3: 37765	Dw0: 37765
+#Table 35: adstraffic.daily_filled_stats_by_content_category	Dw3: 24185	Dw0: 24185
+#Table 36: adstraffic.daily_olap_filled_by_portal	Dw3: 91913	Dw0: 91913
+#Table 37: adstraffic.daily_ad_serving_stats	Dw3: 13139	Dw0: 13139
+#Table 38: adstraffic.daily_ad_serving_stats_by_device	Dw3: 87868	Dw0: 87868
+#Table 39: adstraffic.daily_ad_serving_stats_by_content_category	Dw3: 48571	Dw0: 48571
+#Table 40: adstraffic.daily_adcel_stats	Dw3: 1	Dw0: 1
+#Table 41: adstraffic.daily_olap_trxids_by_content_category	Dw3: 183880	Dw0: 183880
+#Table 42: adstraffic.daily_olap_trxids_by_device	Dw3: 189318	Dw0: 189318
+#Table 43: adstraffic.daily_olap_trxids_by_portal	Dw3: 103047	Dw0: 103047
+#Table 44: adstraffic.daily_olap_unfilled_by_portal	Dw3: 51278	Dw0: 51278
+#Table 45: adstraffic.daily_unfilled_stats	Dw3: 1911	Dw0: 1911
+#Table 46: adstraffic.daily_unfilled_stats_by_dma	Dw3: 42736	Dw0: 42736
+#Table 47: adstraffic.daily_unfilled_stats_by_device	Dw3: 11911	Dw0: 11911
+#Table 48: adstraffic.daily_unfilled_stats_by_content_category	Dw3: 6733	Dw0: 6733
+#Table 49: evttracker.daily_event_stats_by_hour	Dw3: 710	Dw0: 710
+#Table 50: evttracker.daily_event_stats_adnet	Dw3: 70	Dw0: 70
+#Table 51: evttracker.daily_event_by_distance	Dw3: 58	Dw0: 58
+#Table 52: evttracker.daily_event_dma_by_hour	Dw3: 10271	Dw0: 10271
+#Table 53: evttracker.daily_event_stats	Dw3: 67	Dw0: 67
+#Table 54: evttracker.daily_event_dma	Dw3: 1002	Dw0: 1002
+#Table 55: evttracker.daily_event_x_value_report	Dw3: 15659	Dw0: 15659
+#Table 56: evttracker.daily_event_x_value_by_hour	Dw3: 15912	Dw0: 15912
+#Table 57: evttracker.daily_event_download	Dw3: 0	Dw0: 0
+#Table 58: evttracker.daily_event_x_value	Dw3: 11158	Dw0: 11158
+#Table 59: evttracker.daily_store_location_by_distance	Dw3: 0	Dw0: 0
+#Table 60: dbclk.daily_agg_site_campaign_day	Dw3: 0	Dw0: 7580
+#Table 61: dbclk.daily_agg_site_day	Dw3: 0	Dw0: 1509
+#Table 62: dbclk.daily_agg_site_order	Dw3: 0	Dw0: 3387
+#Table 63: dbclk.daily_agg_publishers_day	Dw3: 0	Dw0: 90
+***Check on 2012-04-06
+#Table 1: adm.daily_network_fct_request	Dw3: 2086	Dw0: 2086
+*Update data to dw0
+Starting : Get data form adm.daily_network_fct_request where full_date = 2012-04-06
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 12516
+Ending : Get data from adm.daily_network_fct_request where full_date = 2012-04-06
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adm.daily_network_fct_request where full_date = '2012-04-06'
+Ending : delete from adm.daily_network_fct_request where full_date = '2012-04-06'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 2086
+Time Transfer for adm.daily_network_fct_request : 0 Seconds
+#Table 2: adm.daily_network_fct_channel	Dw3: 15133	Dw0: 15133
+*Update data to dw0
+Starting : Get data form adm.daily_network_fct_channel where full_date = 2012-04-06
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 24523
+Ending : Get data from adm.daily_network_fct_channel where full_date = 2012-04-06
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adm.daily_network_fct_channel where full_date = '2012-04-06'
+Ending : delete from adm.daily_network_fct_channel where full_date = '2012-04-06'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 15133
+Time Transfer for adm.daily_network_fct_channel : 0 Seconds
+#Table 3: adm.daily_agg_network_performance	Dw3: 15133	Dw0: 15133
+*Update data to dw0
+Starting : Get data form adm.daily_agg_network_performance where full_date = 2012-04-06
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 24523
+Ending : Get data from adm.daily_agg_network_performance where full_date = 2012-04-06
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adm.daily_agg_network_performance where full_date = '2012-04-06'
+Ending : delete from adm.daily_agg_network_performance where full_date = '2012-04-06'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 15133
+Time Transfer for adm.daily_agg_network_performance : 0 Seconds
+#Table 4: adm.daily_network_fct_performance	Dw3: 14375	Dw0: 14375
+*Update data to dw0
+Starting : Get data form adm.daily_network_fct_performance where full_date = 2012-04-06
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 19975
+Ending : Get data from adm.daily_network_fct_performance where full_date = 2012-04-06
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adm.daily_network_fct_performance where full_date = '2012-04-06'
+Ending : delete from adm.daily_network_fct_performance where full_date = '2012-04-06'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 14375
+Time Transfer for adm.daily_network_fct_performance : 0 Seconds
+#Table 5: adm.daily_network_fct_performance_by_portal	Dw3: 0	Dw0: 0
+#Table 6: adm.daily_agg_revenue_by_publisher	Dw3: 0	Dw0: 0
+#Table 7: adm.daily_agg_publisher_website_partner	Dw3: 682	Dw0: 682
+#Table 8: adm.daily_agg_local_revenue	Dw3: 0	Dw0: 0
+#Table 9: adm.daily_agg_order_placement_creative_flight	Dw3: 13255	Dw0: 13255
+#Table 10: adm.daily_agg_adm_data_feed	Dw3: 13255	Dw0: 13255
+#Table 11: adm.daily_agg_order_flight	Dw3: 2596	Dw0: 2596
+#Table 12: adm.daily_agg_revenue_by_order_yesterday	Dw3: 0	Dw0: 0
+#Table 13: adm.daily_agg_revenue_by_order	Dw3: 893	Dw0: 893
+#Table 14: adm.daily_agg_order_atc	Dw3: 13255	Dw0: 13255
+#Table 15: adnetwork.daily_sp_performance	Dw3: 0	Dw0: 0
+#Table 16: adnetwork.daily_cg_performance	Dw3: 43	Dw0: 43
+#Table 17: adnetwork.daily_mx_performance	Dw3: 253	Dw0: 253
+#Table 18: adnetwork.daily_jt_performance	Dw3: 334	Dw0: 334
+#Table 19: adnetwork.daily_it_performance	Dw3: 40	Dw0: 40
+#Table 20: adnetwork.daily_wh_performance	Dw3: 927	Dw0: 927
+#Table 21: adnetwork.daily_adsense_dbclk_channel	Dw3: 84	Dw0: 84
+#Table 22: adnetwork.daily_yp_sb_performance	Dw3: 1420	Dw0: 1420
+#Table 23: adnetwork.daily_sp_blue_performance	Dw3: 3032	Dw0: 1516
+*Transfer data to dw0
+Starting : Get data form adnetwork.daily_sp_blue_performance where full_date = 2012-04-06
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 16676
+Ending : Get data from adnetwork.daily_sp_blue_performance where full_date = 2012-04-06
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_sp_blue_performance where full_date = '2012-04-06'
+Ending : delete from adnetwork.daily_sp_blue_performance where full_date = '2012-04-06'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 3032
+Time Transfer for adnetwork.daily_sp_blue_performance : 0 Seconds
+#Table 24: adnetwork.daily_ga_performance	Dw3: 0	Dw0: 0
+#Table 25: adnetwork.daily_jt_summary	Dw3: 0	Dw0: 0
+#Table 26: adnetwork.daily_yp_no_performance	Dw3: 1238	Dw0: 1238
+#Table 27: adnetwork.daily_mm_performance	Dw3: 3462	Dw0: 3462
+#Table 28: adnetwork.daily_adnetwork_summary	Dw3: 10	Dw0: 10
+*Update data to dw0
+Starting : Get data form adnetwork.daily_adnetwork_summary where full_date = 2012-04-06
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 59
+Ending : Get data from adnetwork.daily_adnetwork_summary where full_date = 2012-04-06
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_adnetwork_summary where full_date = '2012-04-06'
+Ending : delete from adnetwork.daily_adnetwork_summary where full_date = '2012-04-06'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 10
+Time Transfer for adnetwork.daily_adnetwork_summary : 0 Seconds
+#Table 29: adstraffic.daily_db_sellthrough	Dw3: 0	Dw0: 0
+#Table 30: adstraffic.daily_db_sellthrough_by_metro	Dw3: 0	Dw0: 0
+#Table 31: adstraffic.daily_db_sellthrough_by_site	Dw3: 0	Dw0: 0
+#Table 32: adstraffic.daily_filled_stats	Dw3: 6762	Dw0: 6762
+#Table 33: adstraffic.daily_filled_stats_by_dma	Dw3: 143861	Dw0: 143861
+#Table 34: adstraffic.daily_filled_stats_by_device	Dw3: 35342	Dw0: 35342
+#Table 35: adstraffic.daily_filled_stats_by_content_category	Dw3: 23696	Dw0: 23696
+#Table 36: adstraffic.daily_olap_filled_by_portal	Dw3: 90820	Dw0: 90820
+#Table 37: adstraffic.daily_ad_serving_stats	Dw3: 12937	Dw0: 12937
+#Table 38: adstraffic.daily_ad_serving_stats_by_device	Dw3: 86042	Dw0: 86042
+#Table 39: adstraffic.daily_ad_serving_stats_by_content_category	Dw3: 48579	Dw0: 48579
+#Table 40: adstraffic.daily_adcel_stats	Dw3: 1	Dw0: 1
+#Table 41: adstraffic.daily_olap_trxids_by_content_category	Dw3: 184294	Dw0: 184294
+#Table 42: adstraffic.daily_olap_trxids_by_device	Dw3: 188897	Dw0: 188897
+#Table 43: adstraffic.daily_olap_trxids_by_portal	Dw3: 103031	Dw0: 103031
+#Table 44: adstraffic.daily_olap_unfilled_by_portal	Dw3: 56657	Dw0: 56657
+#Table 45: adstraffic.daily_unfilled_stats	Dw3: 1886	Dw0: 1886
+#Table 46: adstraffic.daily_unfilled_stats_by_dma	Dw3: 46443	Dw0: 46443
+#Table 47: adstraffic.daily_unfilled_stats_by_device	Dw3: 12301	Dw0: 12301
+#Table 48: adstraffic.daily_unfilled_stats_by_content_category	Dw3: 6856	Dw0: 6856
+#Table 49: evttracker.daily_event_stats_by_hour	Dw3: 799	Dw0: 799
+#Table 50: evttracker.daily_event_stats_adnet	Dw3: 102	Dw0: 102
+#Table 51: evttracker.daily_event_by_distance	Dw3: 69	Dw0: 69
+#Table 52: evttracker.daily_event_dma_by_hour	Dw3: 10130	Dw0: 10130
+#Table 53: evttracker.daily_event_stats	Dw3: 98	Dw0: 98
+#Table 54: evttracker.daily_event_dma	Dw3: 857	Dw0: 857
+#Table 55: evttracker.daily_event_x_value_report	Dw3: 13132	Dw0: 13132
+#Table 56: evttracker.daily_event_x_value_by_hour	Dw3: 13418	Dw0: 13418
+#Table 57: evttracker.daily_event_download	Dw3: 0	Dw0: 0
+#Table 58: evttracker.daily_event_x_value	Dw3: 9554	Dw0: 9554
+#Table 59: evttracker.daily_store_location_by_distance	Dw3: 0	Dw0: 0
+#Table 60: dbclk.daily_agg_site_campaign_day	Dw3: 7865	Dw0: 7865
+#Table 61: dbclk.daily_agg_site_day	Dw3: 1507	Dw0: 1507
+#Table 62: dbclk.daily_agg_site_order	Dw3: 3470	Dw0: 3470
+#Table 63: dbclk.daily_agg_publishers_day	Dw3: 91	Dw0: 91
+***Check on 2012-04-07
+#Table 1: adm.daily_network_fct_request	Dw3: 2123	Dw0: 2123
+*Update data to dw0
+Starting : Get data form adm.daily_network_fct_request where full_date = 2012-04-07
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 10615
+Ending : Get data from adm.daily_network_fct_request where full_date = 2012-04-07
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adm.daily_network_fct_request where full_date = '2012-04-07'
+Ending : delete from adm.daily_network_fct_request where full_date = '2012-04-07'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 2123
+Time Transfer for adm.daily_network_fct_request : 0 Seconds
+#Table 2: adm.daily_network_fct_channel	Dw3: 16826	Dw0: 16826
+*Update data to dw0
+Starting : Get data form adm.daily_network_fct_channel where full_date = 2012-04-07
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 24530
+Ending : Get data from adm.daily_network_fct_channel where full_date = 2012-04-07
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adm.daily_network_fct_channel where full_date = '2012-04-07'
+Ending : delete from adm.daily_network_fct_channel where full_date = '2012-04-07'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 16826
+Time Transfer for adm.daily_network_fct_channel : 0 Seconds
+#Table 3: adm.daily_agg_network_performance	Dw3: 16826	Dw0: 16826
+*Update data to dw0
+Starting : Get data form adm.daily_agg_network_performance where full_date = 2012-04-07
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 24530
+Ending : Get data from adm.daily_agg_network_performance where full_date = 2012-04-07
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adm.daily_agg_network_performance where full_date = '2012-04-07'
+Ending : delete from adm.daily_agg_network_performance where full_date = '2012-04-07'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 16826
+Time Transfer for adm.daily_agg_network_performance : 0 Seconds
+#Table 4: adm.daily_network_fct_performance	Dw3: 16061	Dw0: 16061
+*Update data to dw0
+Starting : Get data form adm.daily_network_fct_performance where full_date = 2012-04-07
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 20705
+Ending : Get data from adm.daily_network_fct_performance where full_date = 2012-04-07
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adm.daily_network_fct_performance where full_date = '2012-04-07'
+Ending : delete from adm.daily_network_fct_performance where full_date = '2012-04-07'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 16061
+Time Transfer for adm.daily_network_fct_performance : 0 Seconds
+#Table 5: adm.daily_network_fct_performance_by_portal	Dw3: 0	Dw0: 0
+#Table 6: adm.daily_agg_revenue_by_publisher	Dw3: 0	Dw0: 0
+#Table 7: adm.daily_agg_publisher_website_partner	Dw3: 723	Dw0: 723
+#Table 8: adm.daily_agg_local_revenue	Dw3: 0	Dw0: 0
+#Table 9: adm.daily_agg_order_placement_creative_flight	Dw3: 14900	Dw0: 14900
+#Table 10: adm.daily_agg_adm_data_feed	Dw3: 14900	Dw0: 14900
+#Table 11: adm.daily_agg_order_flight	Dw3: 2603	Dw0: 2603
+#Table 12: adm.daily_agg_revenue_by_order_yesterday	Dw3: 893	Dw0: 893
+#Table 13: adm.daily_agg_revenue_by_order	Dw3: 885	Dw0: 885
+#Table 14: adm.daily_agg_order_atc	Dw3: 14900	Dw0: 14900
+#Table 15: adnetwork.daily_sp_performance	Dw3: 0	Dw0: 0
+#Table 16: adnetwork.daily_cg_performance	Dw3: 48	Dw0: 48
+#Table 17: adnetwork.daily_mx_performance	Dw3: 234	Dw0: 234
+#Table 18: adnetwork.daily_jt_performance	Dw3: 358	Dw0: 358
+#Table 19: adnetwork.daily_it_performance	Dw3: 40	Dw0: 40
+#Table 20: adnetwork.daily_wh_performance	Dw3: 922	Dw0: 922
+#Table 21: adnetwork.daily_adsense_dbclk_channel	Dw3: 85	Dw0: 85
+#Table 22: adnetwork.daily_yp_sb_performance	Dw3: 1519	Dw0: 1519
+#Table 23: adnetwork.daily_sp_blue_performance	Dw3: 2834	Dw0: 1417
+*Transfer data to dw0
+Starting : Get data form adnetwork.daily_sp_blue_performance where full_date = 2012-04-07
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 12753
+Ending : Get data from adnetwork.daily_sp_blue_performance where full_date = 2012-04-07
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_sp_blue_performance where full_date = '2012-04-07'
+Ending : delete from adnetwork.daily_sp_blue_performance where full_date = '2012-04-07'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 2834
+Time Transfer for adnetwork.daily_sp_blue_performance : 0 Seconds
+#Table 24: adnetwork.daily_ga_performance	Dw3: 0	Dw0: 0
+#Table 25: adnetwork.daily_jt_summary	Dw3: 0	Dw0: 0
+#Table 26: adnetwork.daily_yp_no_performance	Dw3: 1165	Dw0: 1165
+#Table 27: adnetwork.daily_mm_performance	Dw3: 3462	Dw0: 3462
+#Table 28: adnetwork.daily_adnetwork_summary	Dw3: 10	Dw0: 10
+*Update data to dw0
+Starting : Get data form adnetwork.daily_adnetwork_summary where full_date = 2012-04-07
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 49
+Ending : Get data from adnetwork.daily_adnetwork_summary where full_date = 2012-04-07
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_adnetwork_summary where full_date = '2012-04-07'
+Ending : delete from adnetwork.daily_adnetwork_summary where full_date = '2012-04-07'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 10
+Time Transfer for adnetwork.daily_adnetwork_summary : 0 Seconds
+#Table 29: adstraffic.daily_db_sellthrough	Dw3: 0	Dw0: 0
+#Table 30: adstraffic.daily_db_sellthrough_by_metro	Dw3: 0	Dw0: 0
+#Table 31: adstraffic.daily_db_sellthrough_by_site	Dw3: 0	Dw0: 0
+#Table 32: adstraffic.daily_filled_stats	Dw3: 6684	Dw0: 6684
+#Table 33: adstraffic.daily_filled_stats_by_dma	Dw3: 143015	Dw0: 143015
+#Table 34: adstraffic.daily_filled_stats_by_device	Dw3: 35602	Dw0: 35602
+#Table 35: adstraffic.daily_filled_stats_by_content_category	Dw3: 24024	Dw0: 24024
+#Table 36: adstraffic.daily_olap_filled_by_portal	Dw3: 89314	Dw0: 89314
+#Table 37: adstraffic.daily_ad_serving_stats	Dw3: 12961	Dw0: 12961
+#Table 38: adstraffic.daily_ad_serving_stats_by_device	Dw3: 82888	Dw0: 82888
+#Table 39: adstraffic.daily_ad_serving_stats_by_content_category	Dw3: 50090	Dw0: 50090
+#Table 40: adstraffic.daily_adcel_stats	Dw3: 1	Dw0: 1
+#Table 41: adstraffic.daily_olap_trxids_by_content_category	Dw3: 186051	Dw0: 186051
+#Table 42: adstraffic.daily_olap_trxids_by_device	Dw3: 185848	Dw0: 185848
+#Table 43: adstraffic.daily_olap_trxids_by_portal	Dw3: 102498	Dw0: 102498
+#Table 44: adstraffic.daily_olap_unfilled_by_portal	Dw3: 58253	Dw0: 58253
+#Table 45: adstraffic.daily_unfilled_stats	Dw3: 1917	Dw0: 1917
+#Table 46: adstraffic.daily_unfilled_stats_by_dma	Dw3: 47543	Dw0: 47543
+#Table 47: adstraffic.daily_unfilled_stats_by_device	Dw3: 12061	Dw0: 12061
+#Table 48: adstraffic.daily_unfilled_stats_by_content_category	Dw3: 7324	Dw0: 7324
+#Table 49: evttracker.daily_event_stats_by_hour	Dw3: 703	Dw0: 703
+#Table 50: evttracker.daily_event_stats_adnet	Dw3: 64	Dw0: 64
+#Table 51: evttracker.daily_event_by_distance	Dw3: 64	Dw0: 64
+#Table 52: evttracker.daily_event_dma_by_hour	Dw3: 11366	Dw0: 11366
+#Table 53: evttracker.daily_event_stats	Dw3: 62	Dw0: 62
+#Table 54: evttracker.daily_event_dma	Dw3: 1033	Dw0: 1033
+#Table 55: evttracker.daily_event_x_value_report	Dw3: 32726	Dw0: 32726
+#Table 56: evttracker.daily_event_x_value_by_hour	Dw3: 33328	Dw0: 33328
+#Table 57: evttracker.daily_event_download	Dw3: 0	Dw0: 0
+#Table 58: evttracker.daily_event_x_value	Dw3: 25509	Dw0: 25509
+#Table 59: evttracker.daily_store_location_by_distance	Dw3: 0	Dw0: 0
+#Table 60: dbclk.daily_agg_site_campaign_day	Dw3: 9103	Dw0: 9103
+#Table 61: dbclk.daily_agg_site_day	Dw3: 1503	Dw0: 1503
+#Table 62: dbclk.daily_agg_site_order	Dw3: 3736	Dw0: 3736
+#Table 63: dbclk.daily_agg_publishers_day	Dw3: 91	Dw0: 91
+***Check on 2012-04-08
+#Table 1: adm.daily_network_fct_request	Dw3: 1975	Dw0: 1975
+*Update data to dw0
+Starting : Get data form adm.daily_network_fct_request where full_date = 2012-04-08
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 7900
+Ending : Get data from adm.daily_network_fct_request where full_date = 2012-04-08
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adm.daily_network_fct_request where full_date = '2012-04-08'
+Ending : delete from adm.daily_network_fct_request where full_date = '2012-04-08'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 1975
+Time Transfer for adm.daily_network_fct_request : 0 Seconds
+#Table 2: adm.daily_network_fct_channel	Dw3: 16394	Dw0: 16394
+*Update data to dw0
+Starting : Get data form adm.daily_network_fct_channel where full_date = 2012-04-08
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 21686
+Ending : Get data from adm.daily_network_fct_channel where full_date = 2012-04-08
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adm.daily_network_fct_channel where full_date = '2012-04-08'
+Ending : delete from adm.daily_network_fct_channel where full_date = '2012-04-08'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 16394
+Time Transfer for adm.daily_network_fct_channel : 0 Seconds
+#Table 3: adm.daily_agg_network_performance	Dw3: 16394	Dw0: 16394
+*Update data to dw0
+Starting : Get data form adm.daily_agg_network_performance where full_date = 2012-04-08
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 21686
+Ending : Get data from adm.daily_agg_network_performance where full_date = 2012-04-08
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adm.daily_agg_network_performance where full_date = '2012-04-08'
+Ending : delete from adm.daily_agg_network_performance where full_date = '2012-04-08'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 16394
+Time Transfer for adm.daily_agg_network_performance : 0 Seconds
+#Table 4: adm.daily_network_fct_performance	Dw3: 15718	Dw0: 15718
+*Update data to dw0
+Starting : Get data form adm.daily_network_fct_performance where full_date = 2012-04-08
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 18982
+Ending : Get data from adm.daily_network_fct_performance where full_date = 2012-04-08
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adm.daily_network_fct_performance where full_date = '2012-04-08'
+Ending : delete from adm.daily_network_fct_performance where full_date = '2012-04-08'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 15718
+Time Transfer for adm.daily_network_fct_performance : 0 Seconds
+#Table 5: adm.daily_network_fct_performance_by_portal	Dw3: 0	Dw0: 0
+#Table 6: adm.daily_agg_revenue_by_publisher	Dw3: 0	Dw0: 0
+#Table 7: adm.daily_agg_publisher_website_partner	Dw3: 713	Dw0: 713
+#Table 8: adm.daily_agg_local_revenue	Dw3: 0	Dw0: 0
+#Table 9: adm.daily_agg_order_placement_creative_flight	Dw3: 14630	Dw0: 14630
+#Table 10: adm.daily_agg_adm_data_feed	Dw3: 14630	Dw0: 14630
+#Table 11: adm.daily_agg_order_flight	Dw3: 2577	Dw0: 2577
+#Table 12: adm.daily_agg_revenue_by_order_yesterday	Dw3: 885	Dw0: 885
+#Table 13: adm.daily_agg_revenue_by_order	Dw3: 872	Dw0: 872
+#Table 14: adm.daily_agg_order_atc	Dw3: 14630	Dw0: 14630
+#Table 15: adnetwork.daily_sp_performance	Dw3: 0	Dw0: 0
+#Table 16: adnetwork.daily_cg_performance	Dw3: 47	Dw0: 47
+#Table 17: adnetwork.daily_mx_performance	Dw3: 170	Dw0: 170
+#Table 18: adnetwork.daily_jt_performance	Dw3: 325	Dw0: 325
+#Table 19: adnetwork.daily_it_performance	Dw3: 40	Dw0: 40
+#Table 20: adnetwork.daily_wh_performance	Dw3: 903	Dw0: 903
+#Table 21: adnetwork.daily_adsense_dbclk_channel	Dw3: 84	Dw0: 84
+#Table 22: adnetwork.daily_yp_sb_performance	Dw3: 1350	Dw0: 1350
+#Table 23: adnetwork.daily_sp_blue_performance	Dw3: 2902	Dw0: 1451
+*Transfer data to dw0
+Starting : Get data form adnetwork.daily_sp_blue_performance where full_date = 2012-04-08
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 11608
+Ending : Get data from adnetwork.daily_sp_blue_performance where full_date = 2012-04-08
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_sp_blue_performance where full_date = '2012-04-08'
+Ending : delete from adnetwork.daily_sp_blue_performance where full_date = '2012-04-08'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 2902
+Time Transfer for adnetwork.daily_sp_blue_performance : 0 Seconds
+#Table 24: adnetwork.daily_ga_performance	Dw3: 0	Dw0: 0
+#Table 25: adnetwork.daily_jt_summary	Dw3: 0	Dw0: 0
+#Table 26: adnetwork.daily_yp_no_performance	Dw3: 1160	Dw0: 1160
+#Table 27: adnetwork.daily_mm_performance	Dw3: 3462	Dw0: 3462
+#Table 28: adnetwork.daily_adnetwork_summary	Dw3: 10	Dw0: 10
+*Update data to dw0
+Starting : Get data form adnetwork.daily_adnetwork_summary where full_date = 2012-04-08
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 39
+Ending : Get data from adnetwork.daily_adnetwork_summary where full_date = 2012-04-08
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_adnetwork_summary where full_date = '2012-04-08'
+Ending : delete from adnetwork.daily_adnetwork_summary where full_date = '2012-04-08'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 10
+Time Transfer for adnetwork.daily_adnetwork_summary : 0 Seconds
+#Table 29: adstraffic.daily_db_sellthrough	Dw3: 0	Dw0: 0
+#Table 30: adstraffic.daily_db_sellthrough_by_metro	Dw3: 0	Dw0: 0
+#Table 31: adstraffic.daily_db_sellthrough_by_site	Dw3: 0	Dw0: 0
+#Table 32: adstraffic.daily_filled_stats	Dw3: 6603	Dw0: 6603
+#Table 33: adstraffic.daily_filled_stats_by_dma	Dw3: 139926	Dw0: 139926
+#Table 34: adstraffic.daily_filled_stats_by_device	Dw3: 34506	Dw0: 34506
+#Table 35: adstraffic.daily_filled_stats_by_content_category	Dw3: 23684	Dw0: 23684
+#Table 36: adstraffic.daily_olap_filled_by_portal	Dw3: 88782	Dw0: 88782
+#Table 37: adstraffic.daily_ad_serving_stats	Dw3: 12415	Dw0: 12415
+#Table 38: adstraffic.daily_ad_serving_stats_by_device	Dw3: 81029	Dw0: 81029
+#Table 39: adstraffic.daily_ad_serving_stats_by_content_category	Dw3: 47416	Dw0: 47416
+#Table 40: adstraffic.daily_adcel_stats	Dw3: 1	Dw0: 1
+#Table 41: adstraffic.daily_olap_trxids_by_content_category	Dw3: 183207	Dw0: 183207
+#Table 42: adstraffic.daily_olap_trxids_by_device	Dw3: 184015	Dw0: 184015
+#Table 43: adstraffic.daily_olap_trxids_by_portal	Dw3: 101413	Dw0: 101413
+#Table 44: adstraffic.daily_olap_unfilled_by_portal	Dw3: 56840	Dw0: 56840
+#Table 45: adstraffic.daily_unfilled_stats	Dw3: 1792	Dw0: 1792
+#Table 46: adstraffic.daily_unfilled_stats_by_dma	Dw3: 46567	Dw0: 46567
+#Table 47: adstraffic.daily_unfilled_stats_by_device	Dw3: 11782	Dw0: 11782
+#Table 48: adstraffic.daily_unfilled_stats_by_content_category	Dw3: 6775	Dw0: 6775
+#Table 49: evttracker.daily_event_stats_by_hour	Dw3: 689	Dw0: 689
+#Table 50: evttracker.daily_event_stats_adnet	Dw3: 65	Dw0: 65
+#Table 51: evttracker.daily_event_by_distance	Dw3: 65	Dw0: 65
+#Table 52: evttracker.daily_event_dma_by_hour	Dw3: 11340	Dw0: 11340
+#Table 53: evttracker.daily_event_stats	Dw3: 62	Dw0: 62
+#Table 54: evttracker.daily_event_dma	Dw3: 1038	Dw0: 1038
+#Table 55: evttracker.daily_event_x_value_report	Dw3: 27856	Dw0: 27856
+#Table 56: evttracker.daily_event_x_value_by_hour	Dw3: 28351	Dw0: 28351
+#Table 57: evttracker.daily_event_download	Dw3: 0	Dw0: 0
+#Table 58: evttracker.daily_event_x_value	Dw3: 20916	Dw0: 20916
+#Table 59: evttracker.daily_store_location_by_distance	Dw3: 0	Dw0: 0
+#Table 60: dbclk.daily_agg_site_campaign_day	Dw3: 8817	Dw0: 8817
+#Table 61: dbclk.daily_agg_site_day	Dw3: 1487	Dw0: 1487
+#Table 62: dbclk.daily_agg_site_order	Dw3: 3744	Dw0: 3744
+#Table 63: dbclk.daily_agg_publishers_day	Dw3: 88	Dw0: 88
+***Check on 2012-04-09
+#Table 1: adm.daily_network_fct_request	Dw3: 2024	Dw0: 2024
+*Update data to dw0
+Starting : Get data form adm.daily_network_fct_request where full_date = 2012-04-09
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 6072
+Ending : Get data from adm.daily_network_fct_request where full_date = 2012-04-09
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adm.daily_network_fct_request where full_date = '2012-04-09'
+Ending : delete from adm.daily_network_fct_request where full_date = '2012-04-09'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 2024
+Time Transfer for adm.daily_network_fct_request : 0 Seconds
+#Table 2: adm.daily_network_fct_channel	Dw3: 16734	Dw0: 16734
+*Update data to dw0
+Starting : Get data form adm.daily_network_fct_channel where full_date = 2012-04-09
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 20358
+Ending : Get data from adm.daily_network_fct_channel where full_date = 2012-04-09
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adm.daily_network_fct_channel where full_date = '2012-04-09'
+Ending : delete from adm.daily_network_fct_channel where full_date = '2012-04-09'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 16734
+Time Transfer for adm.daily_network_fct_channel : 0 Seconds
+#Table 3: adm.daily_agg_network_performance	Dw3: 16734	Dw0: 16734
+*Update data to dw0
+Starting : Get data form adm.daily_agg_network_performance where full_date = 2012-04-09
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 20358
+Ending : Get data from adm.daily_agg_network_performance where full_date = 2012-04-09
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adm.daily_agg_network_performance where full_date = '2012-04-09'
+Ending : delete from adm.daily_agg_network_performance where full_date = '2012-04-09'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 16734
+Time Transfer for adm.daily_agg_network_performance : 0 Seconds
+#Table 4: adm.daily_network_fct_performance	Dw3: 16029	Dw0: 16029
+*Update data to dw0
+Starting : Get data form adm.daily_network_fct_performance where full_date = 2012-04-09
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 18243
+Ending : Get data from adm.daily_network_fct_performance where full_date = 2012-04-09
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adm.daily_network_fct_performance where full_date = '2012-04-09'
+Ending : delete from adm.daily_network_fct_performance where full_date = '2012-04-09'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 16029
+Time Transfer for adm.daily_network_fct_performance : 0 Seconds
+#Table 5: adm.daily_network_fct_performance_by_portal	Dw3: 0	Dw0: 0
+#Table 6: adm.daily_agg_revenue_by_publisher	Dw3: 0	Dw0: 0
+#Table 7: adm.daily_agg_publisher_website_partner	Dw3: 729	Dw0: 729
+#Table 8: adm.daily_agg_local_revenue	Dw3: 0	Dw0: 0
+#Table 9: adm.daily_agg_order_placement_creative_flight	Dw3: 14922	Dw0: 14922
+#Table 10: adm.daily_agg_adm_data_feed	Dw3: 14922	Dw0: 14922
+#Table 11: adm.daily_agg_order_flight	Dw3: 2587	Dw0: 2587
+#Table 12: adm.daily_agg_revenue_by_order_yesterday	Dw3: 872	Dw0: 872
+#Table 13: adm.daily_agg_revenue_by_order	Dw3: 886	Dw0: 886
+#Table 14: adm.daily_agg_order_atc	Dw3: 14922	Dw0: 14922
+#Table 15: adnetwork.daily_sp_performance	Dw3: 0	Dw0: 0
+#Table 16: adnetwork.daily_cg_performance	Dw3: 0	Dw0: 0
+#Table 17: adnetwork.daily_mx_performance	Dw3: 181	Dw0: 181
+#Table 18: adnetwork.daily_jt_performance	Dw3: 405	Dw0: 405
+#Table 19: adnetwork.daily_it_performance	Dw3: 40	Dw0: 40
+#Table 20: adnetwork.daily_wh_performance	Dw3: 1021	Dw0: 1021
+#Table 21: adnetwork.daily_adsense_dbclk_channel	Dw3: 85	Dw0: 85
+#Table 22: adnetwork.daily_yp_sb_performance	Dw3: 1354	Dw0: 1354
+#Table 23: adnetwork.daily_sp_blue_performance	Dw3: 2992	Dw0: 1496
+*Transfer data to dw0
+Starting : Get data form adnetwork.daily_sp_blue_performance where full_date = 2012-04-09
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 8976
+Ending : Get data from adnetwork.daily_sp_blue_performance where full_date = 2012-04-09
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_sp_blue_performance where full_date = '2012-04-09'
+Ending : delete from adnetwork.daily_sp_blue_performance where full_date = '2012-04-09'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 2992
+Time Transfer for adnetwork.daily_sp_blue_performance : 0 Seconds
+#Table 24: adnetwork.daily_ga_performance	Dw3: 0	Dw0: 0
+#Table 25: adnetwork.daily_jt_summary	Dw3: 0	Dw0: 0
+#Table 26: adnetwork.daily_yp_no_performance	Dw3: 1158	Dw0: 1158
+#Table 27: adnetwork.daily_mm_performance	Dw3: 3462	Dw0: 3462
+#Table 28: adnetwork.daily_adnetwork_summary	Dw3: 9	Dw0: 9
+*Update data to dw0
+Starting : Get data form adnetwork.daily_adnetwork_summary where full_date = 2012-04-09
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 27
+Ending : Get data from adnetwork.daily_adnetwork_summary where full_date = 2012-04-09
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_adnetwork_summary where full_date = '2012-04-09'
+Ending : delete from adnetwork.daily_adnetwork_summary where full_date = '2012-04-09'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 9
+Time Transfer for adnetwork.daily_adnetwork_summary : 0 Seconds
+#Table 29: adstraffic.daily_db_sellthrough	Dw3: 0	Dw0: 0
+#Table 30: adstraffic.daily_db_sellthrough_by_metro	Dw3: 0	Dw0: 0
+#Table 31: adstraffic.daily_db_sellthrough_by_site	Dw3: 0	Dw0: 0
+#Table 32: adstraffic.daily_filled_stats	Dw3: 6973	Dw0: 6973
+#Table 33: adstraffic.daily_filled_stats_by_dma	Dw3: 141590	Dw0: 141590
+#Table 34: adstraffic.daily_filled_stats_by_device	Dw3: 36329	Dw0: 36329
+#Table 35: adstraffic.daily_filled_stats_by_content_category	Dw3: 24205	Dw0: 24205
+#Table 36: adstraffic.daily_olap_filled_by_portal	Dw3: 88915	Dw0: 88915
+#Table 37: adstraffic.daily_ad_serving_stats	Dw3: 12994	Dw0: 12994
+#Table 38: adstraffic.daily_ad_serving_stats_by_device	Dw3: 88153	Dw0: 88153
+#Table 39: adstraffic.daily_ad_serving_stats_by_content_category	Dw3: 49533	Dw0: 49533
+#Table 40: adstraffic.daily_adcel_stats	Dw3: 1	Dw0: 1
+#Table 41: adstraffic.daily_olap_trxids_by_content_category	Dw3: 184833	Dw0: 184833
+#Table 42: adstraffic.daily_olap_trxids_by_device	Dw3: 188648	Dw0: 188648
+#Table 43: adstraffic.daily_olap_trxids_by_portal	Dw3: 103022	Dw0: 103022
+#Table 44: adstraffic.daily_olap_unfilled_by_portal	Dw3: 64372	Dw0: 64372
+#Table 45: adstraffic.daily_unfilled_stats	Dw3: 2096	Dw0: 2096
+#Table 46: adstraffic.daily_unfilled_stats_by_dma	Dw3: 52693	Dw0: 52693
+#Table 47: adstraffic.daily_unfilled_stats_by_device	Dw3: 13449	Dw0: 13449
+#Table 48: adstraffic.daily_unfilled_stats_by_content_category	Dw3: 7589	Dw0: 7589
+#Table 49: evttracker.daily_event_stats_by_hour	Dw3: 714	Dw0: 714
+#Table 50: evttracker.daily_event_stats_adnet	Dw3: 73	Dw0: 73
+#Table 51: evttracker.daily_event_by_distance	Dw3: 63	Dw0: 63
+#Table 52: evttracker.daily_event_dma_by_hour	Dw3: 11281	Dw0: 11281
+#Table 53: evttracker.daily_event_stats	Dw3: 70	Dw0: 70
+#Table 54: evttracker.daily_event_dma	Dw3: 1035	Dw0: 1035
+#Table 55: evttracker.daily_event_x_value_report	Dw3: 28684	Dw0: 28684
+#Table 56: evttracker.daily_event_x_value_by_hour	Dw3: 29176	Dw0: 29176
+#Table 57: evttracker.daily_event_download	Dw3: 0	Dw0: 0
+#Table 58: evttracker.daily_event_x_value	Dw3: 21861	Dw0: 21861
+#Table 59: evttracker.daily_store_location_by_distance	Dw3: 0	Dw0: 0
+#Table 60: dbclk.daily_agg_site_campaign_day	Dw3: 8687	Dw0: 8687
+#Table 61: dbclk.daily_agg_site_day	Dw3: 1503	Dw0: 1503
+#Table 62: dbclk.daily_agg_site_order	Dw3: 3755	Dw0: 3755
+#Table 63: dbclk.daily_agg_publishers_day	Dw3: 90	Dw0: 90
+***Check on 2012-04-10
+#Table 1: adm.daily_network_fct_request	Dw3: 2491	Dw0: 2491
+*Update data to dw0
+Starting : Get data form adm.daily_network_fct_request where full_date = 2012-04-10
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 4982
+Ending : Get data from adm.daily_network_fct_request where full_date = 2012-04-10
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adm.daily_network_fct_request where full_date = '2012-04-10'
+Ending : delete from adm.daily_network_fct_request where full_date = '2012-04-10'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 2491
+Time Transfer for adm.daily_network_fct_request : 0 Seconds
+#Table 2: adm.daily_network_fct_channel	Dw3: 17312	Dw0: 17312
+*Update data to dw0
+Starting : Get data form adm.daily_network_fct_channel where full_date = 2012-04-10
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 19594
+Ending : Get data from adm.daily_network_fct_channel where full_date = 2012-04-10
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adm.daily_network_fct_channel where full_date = '2012-04-10'
+Ending : delete from adm.daily_network_fct_channel where full_date = '2012-04-10'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 17312
+Time Transfer for adm.daily_network_fct_channel : 0 Seconds
+#Table 3: adm.daily_agg_network_performance	Dw3: 17312	Dw0: 17312
+*Update data to dw0
+Starting : Get data form adm.daily_agg_network_performance where full_date = 2012-04-10
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 19594
+Ending : Get data from adm.daily_agg_network_performance where full_date = 2012-04-10
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adm.daily_agg_network_performance where full_date = '2012-04-10'
+Ending : delete from adm.daily_agg_network_performance where full_date = '2012-04-10'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 17312
+Time Transfer for adm.daily_agg_network_performance : 0 Seconds
+#Table 4: adm.daily_network_fct_performance	Dw3: 16248	Dw0: 16248
+*Update data to dw0
+Starting : Get data form adm.daily_network_fct_performance where full_date = 2012-04-10
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 17466
+Ending : Get data from adm.daily_network_fct_performance where full_date = 2012-04-10
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adm.daily_network_fct_performance where full_date = '2012-04-10'
+Ending : delete from adm.daily_network_fct_performance where full_date = '2012-04-10'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 16248
+Time Transfer for adm.daily_network_fct_performance : 0 Seconds
+#Table 5: adm.daily_network_fct_performance_by_portal	Dw3: 0	Dw0: 0
+#Table 6: adm.daily_agg_revenue_by_publisher	Dw3: 0	Dw0: 0
+#Table 7: adm.daily_agg_publisher_website_partner	Dw3: 711	Dw0: 711
+#Table 8: adm.daily_agg_local_revenue	Dw3: 0	Dw0: 0
+#Table 9: adm.daily_agg_order_placement_creative_flight	Dw3: 15030	Dw0: 15030
+#Table 10: adm.daily_agg_adm_data_feed	Dw3: 15030	Dw0: 15030
+#Table 11: adm.daily_agg_order_flight	Dw3: 2649	Dw0: 2649
+#Table 12: adm.daily_agg_revenue_by_order_yesterday	Dw3: 886	Dw0: 886
+#Table 13: adm.daily_agg_revenue_by_order	Dw3: 902	Dw0: 902
+#Table 14: adm.daily_agg_order_atc	Dw3: 15030	Dw0: 15030
+#Table 15: adnetwork.daily_sp_performance	Dw3: 0	Dw0: 0
+#Table 16: adnetwork.daily_cg_performance	Dw3: 41	Dw0: 41
+#Table 17: adnetwork.daily_mx_performance	Dw3: 166	Dw0: 166
+#Table 18: adnetwork.daily_jt_performance	Dw3: 536	Dw0: 536
+#Table 19: adnetwork.daily_it_performance	Dw3: 40	Dw0: 40
+#Table 20: adnetwork.daily_wh_performance	Dw3: 997	Dw0: 997
+#Table 21: adnetwork.daily_adsense_dbclk_channel	Dw3: 84	Dw0: 84
+#Table 22: adnetwork.daily_yp_sb_performance	Dw3: 1824	Dw0: 1824
+#Table 23: adnetwork.daily_sp_blue_performance	Dw3: 3818	Dw0: 1909
+*Transfer data to dw0
+Starting : Get data form adnetwork.daily_sp_blue_performance where full_date = 2012-04-10
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 7636
+Ending : Get data from adnetwork.daily_sp_blue_performance where full_date = 2012-04-10
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_sp_blue_performance where full_date = '2012-04-10'
+Ending : delete from adnetwork.daily_sp_blue_performance where full_date = '2012-04-10'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 3818
+Time Transfer for adnetwork.daily_sp_blue_performance : 0 Seconds
+#Table 24: adnetwork.daily_ga_performance	Dw3: 0	Dw0: 0
+#Table 25: adnetwork.daily_jt_summary	Dw3: 0	Dw0: 0
+#Table 26: adnetwork.daily_yp_no_performance	Dw3: 1217	Dw0: 1217
+#Table 27: adnetwork.daily_mm_performance	Dw3: 1357	Dw0: 1357
+#Table 28: adnetwork.daily_adnetwork_summary	Dw3: 10	Dw0: 9
+*Transfer data to dw0
+Starting : Get data form adnetwork.daily_adnetwork_summary where full_date = 2012-04-10
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 19
+Ending : Get data from adnetwork.daily_adnetwork_summary where full_date = 2012-04-10
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_adnetwork_summary where full_date = '2012-04-10'
+Ending : delete from adnetwork.daily_adnetwork_summary where full_date = '2012-04-10'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 10
+Time Transfer for adnetwork.daily_adnetwork_summary : 0 Seconds
+#Table 29: adstraffic.daily_db_sellthrough	Dw3: 0	Dw0: 0
+#Table 30: adstraffic.daily_db_sellthrough_by_metro	Dw3: 0	Dw0: 0
+#Table 31: adstraffic.daily_db_sellthrough_by_site	Dw3: 0	Dw0: 0
+#Table 32: adstraffic.daily_filled_stats	Dw3: 7343	Dw0: 7343
+#Table 33: adstraffic.daily_filled_stats_by_dma	Dw3: 144897	Dw0: 144897
+#Table 34: adstraffic.daily_filled_stats_by_device	Dw3: 38400	Dw0: 38400
+#Table 35: adstraffic.daily_filled_stats_by_content_category	Dw3: 25416	Dw0: 25416
+#Table 36: adstraffic.daily_olap_filled_by_portal	Dw3: 89269	Dw0: 89269
+#Table 37: adstraffic.daily_ad_serving_stats	Dw3: 14954	Dw0: 14954
+#Table 38: adstraffic.daily_ad_serving_stats_by_device	Dw3: 91877	Dw0: 91877
+#Table 39: adstraffic.daily_ad_serving_stats_by_content_category	Dw3: 52376	Dw0: 52376
+#Table 40: adstraffic.daily_adcel_stats	Dw3: 1	Dw0: 1
+#Table 41: adstraffic.daily_olap_trxids_by_content_category	Dw3: 186049	Dw0: 186049
+#Table 42: adstraffic.daily_olap_trxids_by_device	Dw3: 189258	Dw0: 189258
+#Table 43: adstraffic.daily_olap_trxids_by_portal	Dw3: 104237	Dw0: 104237
+#Table 44: adstraffic.daily_olap_unfilled_by_portal	Dw3: 67126	Dw0: 67126
+#Table 45: adstraffic.daily_unfilled_stats	Dw3: 2421	Dw0: 2421
+#Table 46: adstraffic.daily_unfilled_stats_by_dma	Dw3: 54462	Dw0: 54462
+#Table 47: adstraffic.daily_unfilled_stats_by_device	Dw3: 14044	Dw0: 14044
+#Table 48: adstraffic.daily_unfilled_stats_by_content_category	Dw3: 8016	Dw0: 8016
+#Table 49: evttracker.daily_event_stats_by_hour	Dw3: 732	Dw0: 732
+#Table 50: evttracker.daily_event_stats_adnet	Dw3: 85	Dw0: 85
+#Table 51: evttracker.daily_event_by_distance	Dw3: 60	Dw0: 60
+#Table 52: evttracker.daily_event_dma_by_hour	Dw3: 11372	Dw0: 11372
+#Table 53: evttracker.daily_event_stats	Dw3: 75	Dw0: 75
+#Table 54: evttracker.daily_event_dma	Dw3: 1358	Dw0: 1358
+#Table 55: evttracker.daily_event_x_value_report	Dw3: 24476	Dw0: 24476
+#Table 56: evttracker.daily_event_x_value_by_hour	Dw3: 24816	Dw0: 24816
+#Table 57: evttracker.daily_event_download	Dw3: 0	Dw0: 0
+#Table 58: evttracker.daily_event_x_value	Dw3: 18266	Dw0: 18266
+#Table 59: evttracker.daily_store_location_by_distance	Dw3: 6053	Dw0: 6053
+#Table 60: dbclk.daily_agg_site_campaign_day	Dw3: 9609	Dw0: 9609
+#Table 61: dbclk.daily_agg_site_day	Dw3: 1539	Dw0: 1539
+#Table 62: dbclk.daily_agg_site_order	Dw3: 3812	Dw0: 3812
+#Table 63: dbclk.daily_agg_publishers_day	Dw3: 95	Dw0: 95
+***Check on 2012-04-11
+#Table 1: adm.daily_network_fct_request	Dw3: 2164	Dw0: 2164
+#Table 2: adm.daily_network_fct_channel	Dw3: 15546	Dw0: 15546
+#Table 3: adm.daily_agg_network_performance	Dw3: 15546	Dw0: 15546
+#Table 4: adm.daily_network_fct_performance	Dw3: 14764	Dw0: 14764
+#Table 5: adm.daily_network_fct_performance_by_portal	Dw3: 0	Dw0: 0
+#Table 6: adm.daily_agg_revenue_by_publisher	Dw3: 0	Dw0: 0
+#Table 7: adm.daily_agg_publisher_website_partner	Dw3: 707	Dw0: 707
+#Table 8: adm.daily_agg_local_revenue	Dw3: 0	Dw0: 0
+#Table 9: adm.daily_agg_order_placement_creative_flight	Dw3: 13593	Dw0: 13593
+#Table 10: adm.daily_agg_adm_data_feed	Dw3: 13593	Dw0: 13593
+#Table 11: adm.daily_agg_order_flight	Dw3: 2677	Dw0: 2677
+#Table 12: adm.daily_agg_revenue_by_order_yesterday	Dw3: 902	Dw0: 902
+#Table 13: adm.daily_agg_revenue_by_order	Dw3: 918	Dw0: 918
+#Table 14: adm.daily_agg_order_atc	Dw3: 13593	Dw0: 13593
+#Table 15: adnetwork.daily_sp_performance	Dw3: 0	Dw0: 0
+#Table 16: adnetwork.daily_cg_performance	Dw3: 47	Dw0: 47
+#Table 17: adnetwork.daily_mx_performance	Dw3: 190	Dw0: 190
+#Table 18: adnetwork.daily_jt_performance	Dw3: 445	Dw0: 445
+#Table 19: adnetwork.daily_it_performance	Dw3: 40	Dw0: 40
+#Table 20: adnetwork.daily_wh_performance	Dw3: 0	Dw0: 0
+#Table 21: adnetwork.daily_adsense_dbclk_channel	Dw3: 85	Dw0: 85
+#Table 22: adnetwork.daily_yp_sb_performance	Dw3: 1566	Dw0: 1566
+#Table 23: adnetwork.daily_sp_blue_performance	Dw3: 3364	Dw0: 3364
+#Table 24: adnetwork.daily_ga_performance	Dw3: 0	Dw0: 0
+#Table 25: adnetwork.daily_jt_summary	Dw3: 0	Dw0: 0
+#Table 26: adnetwork.daily_yp_no_performance	Dw3: 1204	Dw0: 1204
+#Table 27: adnetwork.daily_mm_performance	Dw3: 1139	Dw0: 1139
+#Table 28: adnetwork.daily_adnetwork_summary	Dw3: 8	Dw0: 8
+#Table 29: adstraffic.daily_db_sellthrough	Dw3: 0	Dw0: 0
+#Table 30: adstraffic.daily_db_sellthrough_by_metro	Dw3: 0	Dw0: 0
+#Table 31: adstraffic.daily_db_sellthrough_by_site	Dw3: 0	Dw0: 0
+#Table 32: adstraffic.daily_filled_stats	Dw3: 6179	Dw0: 6179
+#Table 33: adstraffic.daily_filled_stats_by_dma	Dw3: 114867	Dw0: 114867
+#Table 34: adstraffic.daily_filled_stats_by_device	Dw3: 30132	Dw0: 30132
+#Table 35: adstraffic.daily_filled_stats_by_content_category	Dw3: 20909	Dw0: 20909
+#Table 36: adstraffic.daily_olap_filled_by_portal	Dw3: 86703	Dw0: 86703
+#Table 37: adstraffic.daily_ad_serving_stats	Dw3: 12551	Dw0: 12551
+#Table 38: adstraffic.daily_ad_serving_stats_by_device	Dw3: 79864	Dw0: 79864
+#Table 39: adstraffic.daily_ad_serving_stats_by_content_category	Dw3: 49751	Dw0: 49751
+#Table 40: adstraffic.daily_adcel_stats	Dw3: 1	Dw0: 1
+#Table 41: adstraffic.daily_olap_trxids_by_content_category	Dw3: 189577	Dw0: 189577
+#Table 42: adstraffic.daily_olap_trxids_by_device	Dw3: 195948	Dw0: 195948
+#Table 43: adstraffic.daily_olap_trxids_by_portal	Dw3: 106365	Dw0: 106365
+#Table 44: adstraffic.daily_olap_unfilled_by_portal	Dw3: 72278	Dw0: 72278
+#Table 45: adstraffic.daily_unfilled_stats	Dw3: 2272	Dw0: 2272
+#Table 46: adstraffic.daily_unfilled_stats_by_dma	Dw3: 58174	Dw0: 58174
+#Table 47: adstraffic.daily_unfilled_stats_by_device	Dw3: 14561	Dw0: 14561
+#Table 48: adstraffic.daily_unfilled_stats_by_content_category	Dw3: 8912	Dw0: 8912
+#Table 49: evttracker.daily_event_stats_by_hour	Dw3: 802	Dw0: 802
+#Table 50: evttracker.daily_event_stats_adnet	Dw3: 91	Dw0: 91
+#Table 51: evttracker.daily_event_by_distance	Dw3: 52	Dw0: 52
+#Table 52: evttracker.daily_event_dma_by_hour	Dw3: 11656	Dw0: 11656
+#Table 53: evttracker.daily_event_stats	Dw3: 82	Dw0: 82
+#Table 54: evttracker.daily_event_dma	Dw3: 1308	Dw0: 1308
+#Table 55: evttracker.daily_event_x_value_report	Dw3: 24454	Dw0: 24454
+#Table 56: evttracker.daily_event_x_value_by_hour	Dw3: 24787	Dw0: 24787
+#Table 57: evttracker.daily_event_download	Dw3: 0	Dw0: 0
+#Table 58: evttracker.daily_event_x_value	Dw3: 18347	Dw0: 18347
+#Table 59: evttracker.daily_store_location_by_distance	Dw3: 7036	Dw0: 0
+*Transfer data to dw0
+Starting : Get data form evttracker.daily_store_location_by_distance where full_date = 2012-04-11
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 7036
+Ending : Get data from evttracker.daily_store_location_by_distance where full_date = 2012-04-11
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from evttracker.daily_store_location_by_distance where full_date = '2012-04-11'
+Ending : delete from evttracker.daily_store_location_by_distance where full_date = '2012-04-11'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 7036
+Time Transfer for evttracker.daily_store_location_by_distance : 0 Seconds
+#Table 60: dbclk.daily_agg_site_campaign_day	Dw3: 10010	Dw0: 10010
+#Table 61: dbclk.daily_agg_site_day	Dw3: 1532	Dw0: 1532
+#Table 62: dbclk.daily_agg_site_order	Dw3: 3533	Dw0: 3533
+#Table 63: dbclk.daily_agg_publishers_day	Dw3: 97	Dw0: 97
+
+**************************************************
+Total table transfered: 8
+adnetwork.daily_sp_blue_performance	2012-04-05	dw3: 3036	dw0: 1518
+adnetwork.daily_sp_blue_performance	2012-04-06	dw3: 3032	dw0: 1516
+adnetwork.daily_sp_blue_performance	2012-04-07	dw3: 2834	dw0: 1417
+adnetwork.daily_sp_blue_performance	2012-04-08	dw3: 2902	dw0: 1451
+adnetwork.daily_sp_blue_performance	2012-04-09	dw3: 2992	dw0: 1496
+adnetwork.daily_sp_blue_performance	2012-04-10	dw3: 3818	dw0: 1909
+adnetwork.daily_adnetwork_summary	2012-04-10	dw3: 10	dw0: 9
+evttracker.daily_store_location_by_distance	2012-04-11	dw3: 7036	dw0: 0
+Total table updated: 29
+adm.daily_network_fct_request	2012-04-05	dw3: 2012-04-12 08:08:00.192557	dw0: 2012-04-11 07:31:31.416309
+adm.daily_network_fct_channel	2012-04-05	dw3: 2012-04-12 07:31:28.463041	dw0: 2012-04-11 07:11:14.697173
+adm.daily_agg_network_performance	2012-04-05	dw3: 2012-04-12 07:31:26.491415	dw0: 2012-04-11 07:11:13.514067
+adm.daily_network_fct_performance	2012-04-05	dw3: 2012-04-12 07:31:19.948505	dw0: 2012-04-11 07:11:09.609085
+adnetwork.daily_adnetwork_summary	2012-04-05	dw3: 2012-04-12 07:31:17.485837	dw0: 2012-04-11 07:11:09.386924
+adm.daily_network_fct_request	2012-04-06	dw3: 2012-04-12 08:08:00.299283	dw0: 2012-04-11 07:31:31.464559
+adm.daily_network_fct_channel	2012-04-06	dw3: 2012-04-12 07:31:28.463147	dw0: 2012-04-11 07:11:14.697154
+adm.daily_agg_network_performance	2012-04-06	dw3: 2012-04-12 07:31:26.491549	dw0: 2012-04-11 07:11:13.514053
+adm.daily_network_fct_performance	2012-04-06	dw3: 2012-04-12 07:31:20.31592	dw0: 2012-04-11 07:11:09.625867
+adnetwork.daily_adnetwork_summary	2012-04-06	dw3: 2012-04-12 07:31:17.496381	dw0: 2012-04-11 07:11:09.396419
+adm.daily_network_fct_request	2012-04-07	dw3: 2012-04-12 08:08:00.374852	dw0: 2012-04-11 07:31:31.518687
+adm.daily_network_fct_channel	2012-04-07	dw3: 2012-04-12 07:31:28.463101	dw0: 2012-04-11 07:11:14.697305
+adm.daily_agg_network_performance	2012-04-07	dw3: 2012-04-12 07:31:26.491492	dw0: 2012-04-11 07:11:13.514159
+adm.daily_network_fct_performance	2012-04-07	dw3: 2012-04-12 07:31:20.485466	dw0: 2012-04-11 07:11:09.654394
+adnetwork.daily_adnetwork_summary	2012-04-07	dw3: 2012-04-12 07:31:17.507676	dw0: 2012-04-11 07:11:09.40813
+adm.daily_network_fct_request	2012-04-08	dw3: 2012-04-12 08:08:00.434759	dw0: 2012-04-11 07:31:31.602252
+adm.daily_network_fct_channel	2012-04-08	dw3: 2012-04-12 07:31:28.462946	dw0: 2012-04-11 07:11:14.697205
+adm.daily_agg_network_performance	2012-04-08	dw3: 2012-04-12 07:31:26.491213	dw0: 2012-04-11 07:11:13.514082
+adm.daily_network_fct_performance	2012-04-08	dw3: 2012-04-12 07:31:20.620824	dw0: 2012-04-11 07:11:09.683393
+adnetwork.daily_adnetwork_summary	2012-04-08	dw3: 2012-04-12 07:31:17.51025	dw0: 2012-04-11 07:11:09.408336
+adm.daily_network_fct_request	2012-04-09	dw3: 2012-04-12 08:08:00.486229	dw0: 2012-04-11 07:31:31.664509
+adm.daily_network_fct_channel	2012-04-09	dw3: 2012-04-12 07:31:28.462982	dw0: 2012-04-11 07:11:14.697055
+adm.daily_agg_network_performance	2012-04-09	dw3: 2012-04-12 07:31:26.491257	dw0: 2012-04-11 07:11:13.513976
+adm.daily_network_fct_performance	2012-04-09	dw3: 2012-04-12 07:31:20.702913	dw0: 2012-04-11 07:11:09.704788
+adnetwork.daily_adnetwork_summary	2012-04-09	dw3: 2012-04-12 07:31:17.510356	dw0: 2012-04-11 07:11:09.40843
+adm.daily_network_fct_request	2012-04-10	dw3: 2012-04-12 08:08:00.549569	dw0: 2012-04-11 07:31:31.705769
+adm.daily_network_fct_channel	2012-04-10	dw3: 2012-04-12 07:31:28.463029	dw0: 2012-04-11 07:11:14.697286
+adm.daily_agg_network_performance	2012-04-10	dw3: 2012-04-12 07:31:26.491399	dw0: 2012-04-11 07:11:13.514145
+adm.daily_network_fct_performance	2012-04-10	dw3: 2012-04-12 07:31:20.774391	dw0: 2012-04-11 07:11:09.726793

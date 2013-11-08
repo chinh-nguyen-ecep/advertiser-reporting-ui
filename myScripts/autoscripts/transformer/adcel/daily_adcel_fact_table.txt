@@ -1,0 +1,5 @@
+adstraffic.ad_response_fact_stats_01
+adstraffic.ad_response_fact_stats_unfilled
+adstraffic.ad_response_fact_stats_trxids
+adstraffic.ad_response_fact_stats_forecast
+adstraffic.ad_response_fact_stats_filled

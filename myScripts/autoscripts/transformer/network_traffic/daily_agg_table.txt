@@ -1,0 +1,17 @@
+dw.daily_agg_ap_module_breakdown
+dw.daily_agg_group_act_all
+dw.daily_agg_group_act_all_test
+dw.daily_agg_group_portal_act_all
+dw.daily_agg_network_act_all
+dw.daily_agg_partner_act_all
+dw.daily_agg_partner_act_cont_mod_type
+dw.daily_agg_partner_act_content_category
+dw.daily_agg_partner_act_content_module
+dw.daily_agg_partner_act_date
+dw.daily_agg_partner_act_day_of_week
+dw.daily_agg_partner_act_portal
+dw.daily_agg_partner_act_device
+dw.daily_agg_partner_act_hour
+dw.daily_agg_portal_act_all
+dw.daily_agg_site_traffic
+dw.daily_agg_site_traffic_historical
