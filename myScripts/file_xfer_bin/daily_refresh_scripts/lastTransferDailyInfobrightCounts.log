@@ -1,0 +1,41 @@
+7-11-2013 21:51:23 # Processing Transfer Aggregate Data ...
+Transfer mode: date_range 
+From: dw3 
+Database: warehouse
+To: dw0,dw6,dw10
+Table: adsops.daily_infobright_counts
+Date: 
+Date range: 2013-11-05 - 2013-11-07
+Month: 
+Week: 
+-------------------------------
+7-11-2013 21:51:24 # Data exporting...
+	Exported file:	date_range.adsops.daily_infobright_counts.export_date.md5.20131107T21512300000.dw3.warehouse.csv
+	Zipping export file ...
+	Export file:	date_range.adsops.daily_infobright_counts.2013-11-05.2013-11-07.79be95fe1648ccada1a8d6fb5ff04fe6.20131107T21512300000.dw3.warehouse.csv.zip
+	Exported file size:	12 K
+7-11-2013 21:51:29 # Transfer export file from dw3 to center!
+7-11-2013 21:51:29 # Transfer export file from dw3 to center completed!
+7-11-2013 21:51:29 # Transfer export file to client....
+	Transfer to client: dw0 
+	Database: warehouse
+	Data file config id: 1000 
+	Import to: /home/file_xfer/logs/warehouse_aggregate_files/
+	Transfer to client: dw6 
+	Database: warehouse
+	Data file config id: 1000 
+	Import to: /home/file_xfer/logs/warehouse_aggregate_files/
+	Transfer to client: dw10 
+	Database: warehouse
+	Data file config id: 1000 
+	Import to: /home/file_xfer/logs/warehouse_aggregate_files/
+7-11-2013 21:51:38 # Tracking....
+	Server: dw0	ER
+	Server: dw6	ER
+	Server: dw10	ER
+7-11-2013 21:52:38 # Tracking....
+	Server: dw0	SU
+	Server: dw6	SU
+	Server: dw10	SU
+7-11-2013 21:52:38 # All import process are completed
+------------------------------------------------

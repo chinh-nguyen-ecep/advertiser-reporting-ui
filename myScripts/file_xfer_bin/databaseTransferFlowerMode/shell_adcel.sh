@@ -1,0 +1,14 @@
+perl transferNoTracking.pl daily dw10:analyticsdb dw3,dw0,dw10,dw6,dw4 adstraffic.daily_adcel_stats $1
+perl transferNoTracking.pl daily dw10:analyticsdb dw3,dw0,dw10,dw6,dw4 adstraffic.daily_geo_quality $1
+perl transferNoTracking.pl daily dw10:analyticsdb dw3,dw0,dw10,dw6,dw4 adstraffic.daily_filled_stats_by_dma $1
+perl transferNoTracking.pl daily dw10:analyticsdb dw3,dw0,dw10,dw6,dw4 adstraffic.daily_filled_stats_by_content_category $1
+perl transferNoTracking.pl daily dw10:analyticsdb dw3,dw0,dw10,dw6,dw4 adstraffic.daily_filled_stats $1
+perl transferNoTracking.pl daily dw10:analyticsdb dw3,dw0,dw10,dw6,dw4 adstraffic.daily_olap_filled_by_portal $1
+perl transferNoTracking.pl daily dw10:analyticsdb dw3,dw0,dw10,dw6,dw4 adstraffic.daily_unfilled_stats_by_dma $1
+perl transferNoTracking.pl daily dw10:analyticsdb dw3,dw0,dw10,dw6,dw4 adstraffic.daily_unfilled_stats_by_content_category $1
+perl transferNoTracking.pl daily dw10:analyticsdb dw3,dw0,dw10,dw6,dw4 adstraffic.daily_unfilled_stats $1
+perl transferNoTracking.pl daily dw10:analyticsdb dw3,dw0,dw10,dw6,dw4 adstraffic.daily_olap_unfilled_by_portal $1
+perl transferNoTracking.pl daily dw10:analyticsdb dw3,dw0,dw10,dw6,dw4 adstraffic.daily_olap_trxids_by_content_category $1
+perl transferNoTracking.pl daily dw10:analyticsdb dw3,dw0,dw10,dw6,dw4 adstraffic.daily_olap_trxids_by_portal $1
+perl transferNoTracking.pl daily dw10:analyticsdb dw3,dw0,dw10,dw6,dw4 adstraffic.daily_attributed_request_stats $1
+perl transferNoTracking.pl daily dw10:analyticsdb dw3,dw0,dw10,dw6,dw4 adstraffic.daily_olap_attributed_request_by_uis $1
