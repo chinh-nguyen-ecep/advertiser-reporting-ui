@@ -1,0 +1,14 @@
+15-8-2013 22:22:17 # Processing Transfer Aggregate Data ...
+Transfer mode: date_range 
+From: dw3 
+Database: warehouse
+To: dw6
+Table: adm.daily_agg_revenue_statistics
+Date: 
+Date range: 2013-08-01 - 2013-08-14
+Month: 
+Week: 
+-------------------------------
+15-8-2013 22:22:18 # Data exporting...
+	Exported file:	date_range.adm.daily_agg_revenue_statistics.export_date.md5.20130815T22221700000.dw3.warehouse.csv
+	Zipping export file ...
