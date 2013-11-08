@@ -15,16 +15,17 @@ var series_impressions=[];
 var series_cta=[];
 var table_data=[];
 var myTable;
+var myDateRangeInput;
 $(document).ready(function(){ 
 	setTabActive('dailyAdvertiser');
-	generateDateRange({
+	myDateRangeInput=new generateDateRange({
 		stargetId:"date_range_dailyAdvertiser",
 		start_date: selectStartDate,
 		end_date: selectEndDate,
 		callback: function(start_date,end_date,value){
 			selectStartDate=start_date;
 			selectEndDate=end_date;
-			//loadChart();
+			loadChart();
 		}
 	});
 	 //$("#e2").select2();
@@ -35,6 +36,7 @@ $(document).ready(function(){
 
   	
 	function loadChart(){
+		myDateRangeInput.disable();
 		series_clicks=[];
 		series_impressions=[];
 		series_cta=[];
@@ -45,6 +47,7 @@ $(document).ready(function(){
 			chart.showLoading();
 		}
 		if(myAjaxStore.isLoading()){
+			console.log('Your request is loading...');
 			return;
 		}
 		var ajaxData=myAjaxStore.get(url);
@@ -101,7 +104,6 @@ $(document).ready(function(){
 		  			for(var j=0;j<series_clicks.length;j++){
 			  			var item=series_clicks[j];	
 			  			if(item.name==newName){
-			  				console.log("Locate: "+j);
 			  				series_clicks[j].data.push(parseFloat(value));
 			  				series_impressions[j].data.push(parseFloat(value_imp));
 			  				series_cta[j].data.push(parseFloat(value_cta));
@@ -150,6 +152,9 @@ $(document).ready(function(){
 		  			alert(row[0]);
 		  		}
 		  	});
+		  	
+		  	//unable date range input
+		  	myDateRangeInput.unable();
 		};
 	}
 
@@ -157,14 +162,17 @@ $(document).ready(function(){
 	function drawChart(categories,series,title,subtitle){
 		for(var i=0;i<series.length;i++){
 			var row=series[i];
-			console.log("Row "+i+": "+row.name);
-			console.log("Data: "+row.data.length+" - "+row.data.join());
+			//console.log("Row "+i+": "+row.name);
+			//console.log("Data: "+row.data.length+" - "+row.data.join());
 		}
 		console.log('Draw chart');
 		
 		 $('#container').highcharts({
-			 chart: {
+			 	chart: {
 				 type: 'spline'
+	            },
+	            exporting: {
+	                enabled: true
 	            },
 	            title: {
 	                text: title,

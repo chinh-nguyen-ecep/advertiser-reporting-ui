@@ -18,7 +18,18 @@
 						  <button type="button" class="btn btn-default" onclick="drawChart(categories,series_cta,'Advertiser Cta maps By Date',subtitle);">Cta maps</button>
 						</div>
 				  </div>
-		      		 <button type="button" onclick="loadChart()" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-upload"></span>Update</button>
+				  <div class="form-group">
+					<div class="btn-group btn-group-sm">
+					  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					    Break by Hour<span class="caret"></span>
+					  </button>
+					  <ul class="dropdown-menu" role="menu">
+					    <li><a href="#">Hour</a></li>
+					    <li><a href="#">Date</a></li>
+					  </ul>
+					</div>
+				  </div>
+<!--		      		 <button type="button" onclick="loadChart()" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-upload"></span>Update</button>-->
 			    </form>
 		</div>
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
