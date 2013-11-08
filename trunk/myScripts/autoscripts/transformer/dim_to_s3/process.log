@@ -1,0 +1,805 @@
+Transfer Dim of date 2013-09-17
+Checking dim: 'partner_dim','portal_dim','content_category_dim','ad_network_dim','partner_module_dim'
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('partner_dim','portal_dim','content_category_dim','ad_network_dim','partner_module_dim')
+**Dim loaded completed!
+1. refer.partner_dim 	 vrvdetails
+
+**************************************************
+ Transfer refer.partner_dim FROM dw3 To dw10 
+**************************************************
+SELECT  to_char(current_up_to, 'YYYY-MM-DD_HH24_MI_SS') FROM control.data_current_up_to_date WHERE table_name='partner_dim'
+Current_up_to_date: 2013-09-17_02_46_04
+*Exporting data to refer.partner_dim.2013_09_17.2013_09_17_02_46_04.csv ...
+*Remove the transfer file on dw3...
+2. refer.portal_dim 	 vrvdetails
+
+**************************************************
+ Transfer refer.portal_dim FROM dw3 To dw10 
+**************************************************
+SELECT  to_char(current_up_to, 'YYYY-MM-DD_HH24_MI_SS') FROM control.data_current_up_to_date WHERE table_name='portal_dim'
+Current_up_to_date: 2013-09-17_02_46_00
+*Exporting data to refer.portal_dim.2013_09_17.2013_09_17_02_46_00.csv ...
+*Remove the transfer file on dw3...
+3. refer.content_category_dim 	 vrvdetails
+
+**************************************************
+ Transfer refer.content_category_dim FROM dw3 To dw10 
+**************************************************
+SELECT  to_char(current_up_to, 'YYYY-MM-DD_HH24_MI_SS') FROM control.data_current_up_to_date WHERE table_name='content_category_dim'
+Current_up_to_date: 2013-09-17_02_45_01
+*Exporting data to refer.content_category_dim.2013_09_17.2013_09_17_02_45_01.csv ...
+*Remove the transfer file on dw3...
+4. refer.ad_network_dim 	 vrvdetails
+
+**************************************************
+ Transfer refer.ad_network_dim FROM dw3 To dw10 
+**************************************************
+SELECT  to_char(current_up_to, 'YYYY-MM-DD_HH24_MI_SS') FROM control.data_current_up_to_date WHERE table_name='ad_network_dim'
+Current_up_to_date: 2013-09-17_02_46_36
+*Exporting data to refer.ad_network_dim.2013_09_17.2013_09_17_02_46_36.csv ...
+*Remove the transfer file on dw3...
+5. refer.partner_module_dim 	 vrvdetails
+
+**************************************************
+ Transfer refer.partner_module_dim FROM dw3 To dw10 
+**************************************************
+SELECT  to_char(current_up_to, 'YYYY-MM-DD_HH24_MI_SS') FROM control.data_current_up_to_date WHERE table_name='partner_module_dim'
+Current_up_to_date: 2013-09-17_02_46_11
+*Exporting data to refer.partner_module_dim.2013_09_17.2013_09_17_02_46_11.csv ...
+*Remove the transfer file on dw3...
+Upload Dim 1 to S3
+List files on directory: dim
+List files on directory: vrvad
+List files on directory: adm1.0
+List files on directory: location
+List files on directory: dfp2.0
+List files on directory: control
+List files on directory: network_traffic
+List files on directory: event_tracker
+List files on directory: other
+List files on directory: salesfore
+List files on directory: tmp
+List files on directory: verveloc
+List files on directory: vlsm
+List files on directory: dw
+List files on directory: vrvdetails
+List files on directory: timer
+List files on directory: dfp1.0
+List files on directory: adcel
+List files on directory: adm2.0
+Uploading file: refer.portal_dim.2013_09_17.2013_09_17_02_46_00.csv - Size: 12377
+Upload completed: refer.portal_dim.2013_09_17.2013_09_17_02_46_00.csv
+
+Uploading file: refer.partner_module_dim.2013_09_17.2013_09_17_02_46_11.csv - Size: 23827019
+Upload completed: refer.partner_module_dim.2013_09_17.2013_09_17_02_46_11.csv
+
+Uploading file: refer.content_category_dim.2013_09_17.2013_09_17_02_45_01.csv - Size: 60354
+Upload completed: refer.content_category_dim.2013_09_17.2013_09_17_02_45_01.csv
+
+Uploading file: refer.partner_dim.2013_09_17.2013_09_17_02_46_04.csv - Size: 7656285
+Upload completed: refer.partner_dim.2013_09_17.2013_09_17_02_46_04.csv
+
+Uploading file: refer.ad_network_dim.2013_09_17.2013_09_17_02_46_36.csv - Size: 415783
+Upload completed: refer.ad_network_dim.2013_09_17.2013_09_17_02_46_36.csv
+
+Done.
+Checking dim: 'point_of_interest_dim','store_location_dim','event_dim'
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('point_of_interest_dim','store_location_dim','event_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('point_of_interest_dim','store_location_dim','event_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('point_of_interest_dim','store_location_dim','event_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('point_of_interest_dim','store_location_dim','event_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('point_of_interest_dim','store_location_dim','event_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('point_of_interest_dim','store_location_dim','event_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('point_of_interest_dim','store_location_dim','event_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('point_of_interest_dim','store_location_dim','event_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('point_of_interest_dim','store_location_dim','event_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('point_of_interest_dim','store_location_dim','event_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('point_of_interest_dim','store_location_dim','event_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('point_of_interest_dim','store_location_dim','event_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('point_of_interest_dim','store_location_dim','event_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('point_of_interest_dim','store_location_dim','event_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('point_of_interest_dim','store_location_dim','event_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('point_of_interest_dim','store_location_dim','event_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('point_of_interest_dim','store_location_dim','event_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('point_of_interest_dim','store_location_dim','event_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('point_of_interest_dim','store_location_dim','event_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('point_of_interest_dim','store_location_dim','event_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('point_of_interest_dim','store_location_dim','event_dim')
+**Dim loaded completed!
+1. refer.point_of_interest_dim 	 vlsm
+
+**************************************************
+ Transfer refer.point_of_interest_dim FROM dw3 To dw10 
+**************************************************
+SELECT  to_char(current_up_to, 'YYYY-MM-DD_HH24_MI_SS') FROM control.data_current_up_to_date WHERE table_name='point_of_interest_dim'
+Current_up_to_date: 2013-09-17_03_00_02
+*Exporting data to refer.point_of_interest_dim.2013_09_17.2013_09_17_03_00_02.csv ...
+*Remove the transfer file on dw3...
+2. refer.store_location_dim 	 vrvdetails
+
+**************************************************
+ Transfer refer.store_location_dim FROM dw3 To dw10 
+**************************************************
+SELECT  to_char(current_up_to, 'YYYY-MM-DD_HH24_MI_SS') FROM control.data_current_up_to_date WHERE table_name='store_location_dim'
+Current_up_to_date: 2013-09-17_02_45_01
+*Exporting data to refer.store_location_dim.2013_09_17.2013_09_17_02_45_01.csv ...
+*Remove the transfer file on dw3...
+3. refer.event_dim 	 event_tracker
+
+**************************************************
+ Transfer refer.event_dim FROM dw3 To dw10 
+**************************************************
+SELECT  to_char(current_up_to, 'YYYY-MM-DD_HH24_MI_SS') FROM control.data_current_up_to_date WHERE table_name='event_dim'
+Current_up_to_date: 2013-09-17_00_09_01
+*Exporting data to refer.event_dim.2013_09_17.2013_09_17_00_09_01.csv ...
+*Remove the transfer file on dw3...
+Upload Dim 2 to S3
+List files on directory: dim
+List files on directory: vrvad
+List files on directory: adm1.0
+List files on directory: location
+List files on directory: dfp2.0
+List files on directory: control
+List files on directory: network_traffic
+List files on directory: event_tracker
+List files on directory: other
+List files on directory: salesfore
+List files on directory: tmp
+List files on directory: verveloc
+List files on directory: vlsm
+List files on directory: dw
+List files on directory: vrvdetails
+List files on directory: timer
+List files on directory: dfp1.0
+List files on directory: adcel
+List files on directory: adm2.0
+Uploading file: refer.event_dim.2013_09_17.2013_09_17_00_09_01.csv - Size: 58693
+Upload completed: refer.event_dim.2013_09_17.2013_09_17_00_09_01.csv
+
+Uploading file: refer.point_of_interest_dim.2013_09_17.2013_09_17_03_00_02.csv - Size: 206570418
+Sep 17, 2013 12:22:29 AM com.amazonaws.http.AmazonHttpClient executeHelper
+INFO: Unable to execute HTTP request: Connection reset
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:168)
+	at com.sun.net.ssl.internal.ssl.InputRecord.readFully(InputRecord.java:422)
+	at com.sun.net.ssl.internal.ssl.InputRecord.read(InputRecord.java:460)
+	at com.sun.net.ssl.internal.ssl.SSLSocketImpl.readRecord(SSLSocketImpl.java:863)
+	at com.sun.net.ssl.internal.ssl.SSLSocketImpl.readDataRecord(SSLSocketImpl.java:820)
+	at com.sun.net.ssl.internal.ssl.AppInputStream.read(AppInputStream.java:75)
+	at org.apache.http.impl.io.AbstractSessionInputBuffer.fillBuffer(AbstractSessionInputBuffer.java:149)
+	at org.apache.http.impl.io.SocketInputBuffer.fillBuffer(SocketInputBuffer.java:110)
+	at org.apache.http.impl.io.AbstractSessionInputBuffer.readLine(AbstractSessionInputBuffer.java:260)
+	at org.apache.http.impl.conn.DefaultResponseParser.parseHead(DefaultResponseParser.java:98)
+	at org.apache.http.impl.io.AbstractMessageParser.parse(AbstractMessageParser.java:252)
+	at org.apache.http.impl.AbstractHttpClientConnection.receiveResponseHeader(AbstractHttpClientConnection.java:281)
+	at org.apache.http.impl.conn.DefaultClientConnection.receiveResponseHeader(DefaultClientConnection.java:247)
+	at org.apache.http.impl.conn.AbstractClientConnAdapter.receiveResponseHeader(AbstractClientConnAdapter.java:219)
+	at org.apache.http.protocol.HttpRequestExecutor.doReceiveResponse(HttpRequestExecutor.java:298)
+	at org.apache.http.protocol.HttpRequestExecutor.execute(HttpRequestExecutor.java:125)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryExecute(DefaultRequestDirector.java:633)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:454)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:820)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:754)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:732)
+	at com.amazonaws.http.AmazonHttpClient.executeHelper(AmazonHttpClient.java:280)
+	at com.amazonaws.http.AmazonHttpClient.execute(AmazonHttpClient.java:165)
+	at com.amazonaws.services.s3.AmazonS3Client.invoke(AmazonS3Client.java:2949)
+	at com.amazonaws.services.s3.AmazonS3Client.uploadPart(AmazonS3Client.java:2281)
+	at com.amazonaws.services.s3.transfer.internal.UploadPartCallable.call(UploadPartCallable.java:33)
+	at com.amazonaws.services.s3.transfer.internal.UploadPartCallable.call(UploadPartCallable.java:23)
+	at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:303)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:138)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:895)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:918)
+	at java.lang.Thread.run(Thread.java:662)
+Upload completed: refer.point_of_interest_dim.2013_09_17.2013_09_17_03_00_02.csv
+
+Uploading file: refer.store_location_dim.2013_09_17.2013_09_17_02_45_01.csv - Size: 749518319
+Sep 17, 2013 12:22:47 AM com.amazonaws.http.AmazonHttpClient executeHelper
+INFO: Unable to execute HTTP request: Connection reset
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:168)
+	at com.sun.net.ssl.internal.ssl.InputRecord.readFully(InputRecord.java:422)
+	at com.sun.net.ssl.internal.ssl.InputRecord.read(InputRecord.java:460)
+	at com.sun.net.ssl.internal.ssl.SSLSocketImpl.readRecord(SSLSocketImpl.java:863)
+	at com.sun.net.ssl.internal.ssl.SSLSocketImpl.readDataRecord(SSLSocketImpl.java:820)
+	at com.sun.net.ssl.internal.ssl.AppInputStream.read(AppInputStream.java:75)
+	at org.apache.http.impl.io.AbstractSessionInputBuffer.fillBuffer(AbstractSessionInputBuffer.java:149)
+	at org.apache.http.impl.io.SocketInputBuffer.fillBuffer(SocketInputBuffer.java:110)
+	at org.apache.http.impl.io.AbstractSessionInputBuffer.readLine(AbstractSessionInputBuffer.java:260)
+	at org.apache.http.impl.conn.DefaultResponseParser.parseHead(DefaultResponseParser.java:98)
+	at org.apache.http.impl.io.AbstractMessageParser.parse(AbstractMessageParser.java:252)
+	at org.apache.http.impl.AbstractHttpClientConnection.receiveResponseHeader(AbstractHttpClientConnection.java:281)
+	at org.apache.http.impl.conn.DefaultClientConnection.receiveResponseHeader(DefaultClientConnection.java:247)
+	at org.apache.http.impl.conn.AbstractClientConnAdapter.receiveResponseHeader(AbstractClientConnAdapter.java:219)
+	at org.apache.http.protocol.HttpRequestExecutor.doReceiveResponse(HttpRequestExecutor.java:298)
+	at org.apache.http.protocol.HttpRequestExecutor.execute(HttpRequestExecutor.java:125)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryExecute(DefaultRequestDirector.java:633)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:454)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:820)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:754)
+	at org.apache.http.impl.client.AbstractHttpClient.execute(AbstractHttpClient.java:732)
+	at com.amazonaws.http.AmazonHttpClient.executeHelper(AmazonHttpClient.java:280)
+	at com.amazonaws.http.AmazonHttpClient.execute(AmazonHttpClient.java:165)
+	at com.amazonaws.services.s3.AmazonS3Client.invoke(AmazonS3Client.java:2949)
+	at com.amazonaws.services.s3.AmazonS3Client.uploadPart(AmazonS3Client.java:2281)
+	at com.amazonaws.services.s3.transfer.internal.UploadPartCallable.call(UploadPartCallable.java:33)
+	at com.amazonaws.services.s3.transfer.internal.UploadPartCallable.call(UploadPartCallable.java:23)
+	at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:303)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:138)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:895)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:918)
+	at java.lang.Thread.run(Thread.java:662)
+Upload completed: refer.store_location_dim.2013_09_17.2013_09_17_02_45_01.csv
+
+Done.
+Checking dim: 'ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim'
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Checking Dim!
+SELECT MIN(current_up_to) as min_current_up_to, COUNT ( * ) as count_dim,(CASE WHEN MIN(current_up_to)<now()::date THEN 0 ELSE 1 END) as completed,now()::date as todaydate FROM control.data_current_up_to_date WHERE table_name IN('ga_channel_dim','revenue_share_dim','ad_network_param_dim','adm_dim_adsizes','adm_dim_advertisers','adm_dim_creatives','adm_dim_flights','adm_dim_orders','adm_dim_organizations','adm_dim_platforms','adm_dim_portals','adm_dim_properties','adm_dim_propertygroups','adm_dim_publishers','adm_mapping_channels','adm_mapping_portals','correction_factor_dim','dfp_dim_ad_units','dfp_dim_advertisers','dfp_dim_creatives','dfp_dim_line_items','dfp_dim_orders','dfp_dim_placements','display_block_dim','portal_host_dim','segment_dim')
+**Dim loaded completed!
+1. refer.ga_channel_dim 	 dfp1.0
+
+**************************************************
+ Transfer refer.ga_channel_dim FROM dw3 To dw10 
+**************************************************
+SELECT  to_char(current_up_to, 'YYYY-MM-DD_HH24_MI_SS') FROM control.data_current_up_to_date WHERE table_name='ga_channel_dim'
+Current_up_to_date: 9999-12-31_00_00_00
+*Exporting data to refer.ga_channel_dim.2013_09_17.9999_12_31_00_00_00.csv ...
+*Remove the transfer file on dw3...
+2. refer.revenue_share_dim 	 salesfore
+
+**************************************************
+ Transfer refer.revenue_share_dim FROM dw3 To dw10 
+**************************************************
+SELECT  to_char(current_up_to, 'YYYY-MM-DD_HH24_MI_SS') FROM control.data_current_up_to_date WHERE table_name='revenue_share_dim'
+Current_up_to_date: 2013-09-17_01_15_02
+*Exporting data to refer.revenue_share_dim.2013_09_17.2013_09_17_01_15_02.csv ...
+*Remove the transfer file on dw3...
+3. refer.ad_network_param_dim 	 vrvdetails
+
+**************************************************
+ Transfer refer.ad_network_param_dim FROM dw3 To dw10 
+**************************************************
+SELECT  to_char(current_up_to, 'YYYY-MM-DD_HH24_MI_SS') FROM control.data_current_up_to_date WHERE table_name='ad_network_param_dim'
+Current_up_to_date: 2013-09-17_02_46_40
+*Exporting data to refer.ad_network_param_dim.2013_09_17.2013_09_17_02_46_40.csv ...
+*Remove the transfer file on dw3...
+4. refer.adm_dim_adsizes 	 adm2.0
+
+**************************************************
+ Transfer refer.adm_dim_adsizes FROM dw3 To dw10 
+**************************************************
+SELECT  to_char(current_up_to, 'YYYY-MM-DD_HH24_MI_SS') FROM control.data_current_up_to_date WHERE table_name='adm_dim_adsizes'
+Current_up_to_date: 2013-09-17_00_40_01
+*Exporting data to refer.adm_dim_adsizes.2013_09_17.2013_09_17_00_40_01.csv ...
+*Remove the transfer file on dw3...
+5. refer.adm_dim_advertisers 	 adm2.0
+
+**************************************************
+ Transfer refer.adm_dim_advertisers FROM dw3 To dw10 
+**************************************************
+SELECT  to_char(current_up_to, 'YYYY-MM-DD_HH24_MI_SS') FROM control.data_current_up_to_date WHERE table_name='adm_dim_advertisers'
+Current_up_to_date: 2013-09-17_00_10_01
+*Exporting data to refer.adm_dim_advertisers.2013_09_17.2013_09_17_00_10_01.csv ...
+*Remove the transfer file on dw3...
+6. refer.adm_dim_creatives 	 adm2.0
+
+**************************************************
+ Transfer refer.adm_dim_creatives FROM dw3 To dw10 
+**************************************************
+SELECT  to_char(current_up_to, 'YYYY-MM-DD_HH24_MI_SS') FROM control.data_current_up_to_date WHERE table_name='adm_dim_creatives'
+Current_up_to_date: 2013-09-17_00_30_01
+*Exporting data to refer.adm_dim_creatives.2013_09_17.2013_09_17_00_30_01.csv ...
+*Remove the transfer file on dw3...
+7. refer.adm_dim_flights 	 adm2.0
+
+**************************************************
+ Transfer refer.adm_dim_flights FROM dw3 To dw10 
+**************************************************
+SELECT  to_char(current_up_to, 'YYYY-MM-DD_HH24_MI_SS') FROM control.data_current_up_to_date WHERE table_name='adm_dim_flights'
+Current_up_to_date: 2013-09-17_00_20_01
+*Exporting data to refer.adm_dim_flights.2013_09_17.2013_09_17_00_20_01.csv ...
+*Remove the transfer file on dw3...
+8. refer.adm_dim_orders 	 adm2.0
+
+**************************************************
+ Transfer refer.adm_dim_orders FROM dw3 To dw10 
+**************************************************
+SELECT  to_char(current_up_to, 'YYYY-MM-DD_HH24_MI_SS') FROM control.data_current_up_to_date WHERE table_name='adm_dim_orders'
+Current_up_to_date: 2013-09-17_00_10_01
+*Exporting data to refer.adm_dim_orders.2013_09_17.2013_09_17_00_10_01.csv ...
+*Remove the transfer file on dw3...
+9. refer.adm_dim_organizations 	 adm2.0
+
+**************************************************
+ Transfer refer.adm_dim_organizations FROM dw3 To dw10 
+**************************************************
+SELECT  to_char(current_up_to, 'YYYY-MM-DD_HH24_MI_SS') FROM control.data_current_up_to_date WHERE table_name='adm_dim_organizations'
+Current_up_to_date: 2013-09-17_00_10_01
+*Exporting data to refer.adm_dim_organizations.2013_09_17.2013_09_17_00_10_01.csv ...
+*Remove the transfer file on dw3...
+10. refer.adm_dim_platforms 	 adm2.0
+
+**************************************************
+ Transfer refer.adm_dim_platforms FROM dw3 To dw10 
+**************************************************
+SELECT  to_char(current_up_to, 'YYYY-MM-DD_HH24_MI_SS') FROM control.data_current_up_to_date WHERE table_name='adm_dim_platforms'
+Current_up_to_date: 2013-09-17_00_40_01
+*Exporting data to refer.adm_dim_platforms.2013_09_17.2013_09_17_00_40_01.csv ...
+*Remove the transfer file on dw3...
+11. refer.adm_dim_portals 	 adm2.0
+
+**************************************************
+ Transfer refer.adm_dim_portals FROM dw3 To dw10 
+**************************************************
+SELECT  to_char(current_up_to, 'YYYY-MM-DD_HH24_MI_SS') FROM control.data_current_up_to_date WHERE table_name='adm_dim_portals'
+Current_up_to_date: 2013-09-17_00_00_02
+*Exporting data to refer.adm_dim_portals.2013_09_17.2013_09_17_00_00_02.csv ...
+*Remove the transfer file on dw3...
+12. refer.adm_dim_properties 	 adm2.0
+
+**************************************************
+ Transfer refer.adm_dim_properties FROM dw3 To dw10 
+**************************************************
+SELECT  to_char(current_up_to, 'YYYY-MM-DD_HH24_MI_SS') FROM control.data_current_up_to_date WHERE table_name='adm_dim_properties'
+Current_up_to_date: 2013-09-17_00_10_01
+*Exporting data to refer.adm_dim_properties.2013_09_17.2013_09_17_00_10_01.csv ...
+*Remove the transfer file on dw3...
+13. refer.adm_dim_propertygroups 	 adm2.0
+
+**************************************************
+ Transfer refer.adm_dim_propertygroups FROM dw3 To dw10 
+**************************************************
+SELECT  to_char(current_up_to, 'YYYY-MM-DD_HH24_MI_SS') FROM control.data_current_up_to_date WHERE table_name='adm_dim_propertygroups'
+Current_up_to_date: 2013-09-17_00_40_01
+*Exporting data to refer.adm_dim_propertygroups.2013_09_17.2013_09_17_00_40_01.csv ...
+*Remove the transfer file on dw3...
+14. refer.adm_dim_publishers 	 adm2.0
+
+**************************************************
+ Transfer refer.adm_dim_publishers FROM dw3 To dw10 
+**************************************************
+SELECT  to_char(current_up_to, 'YYYY-MM-DD_HH24_MI_SS') FROM control.data_current_up_to_date WHERE table_name='adm_dim_publishers'
+Current_up_to_date: 2013-09-17_00_00_02
+*Exporting data to refer.adm_dim_publishers.2013_09_17.2013_09_17_00_00_02.csv ...
+*Remove the transfer file on dw3...
+15. refer.adm_mapping_channels 	 adm1.0
+
+**************************************************
+ Transfer refer.adm_mapping_channels FROM dw3 To dw10 
+**************************************************
+SELECT  to_char(current_up_to, 'YYYY-MM-DD_HH24_MI_SS') FROM control.data_current_up_to_date WHERE table_name='adm_mapping_channels'
+Current_up_to_date: 9999-12-31_00_00_00
+*Exporting data to refer.adm_mapping_channels.2013_09_17.9999_12_31_00_00_00.csv ...
+*Remove the transfer file on dw3...
+16. refer.adm_mapping_portals 	 adm1.0
+
+**************************************************
+ Transfer refer.adm_mapping_portals FROM dw3 To dw10 
+**************************************************
+SELECT  to_char(current_up_to, 'YYYY-MM-DD_HH24_MI_SS') FROM control.data_current_up_to_date WHERE table_name='adm_mapping_portals'
+Current_up_to_date: 9999-12-31_00_00_00
+*Exporting data to refer.adm_mapping_portals.2013_09_17.9999_12_31_00_00_00.csv ...
+*Remove the transfer file on dw3...
+17. refer.correction_factor_dim 	 dw
+
+**************************************************
+ Transfer refer.correction_factor_dim FROM dw3 To dw10 
+**************************************************
+SELECT  to_char(current_up_to, 'YYYY-MM-DD_HH24_MI_SS') FROM control.data_current_up_to_date WHERE table_name='correction_factor_dim'
+Current_up_to_date: 9999-12-31_00_00_00
+*Exporting data to refer.correction_factor_dim.2013_09_17.9999_12_31_00_00_00.csv ...
+*Remove the transfer file on dw3...
+18. refer.dfp_dim_ad_units 	 dfp2.0
+
+**************************************************
+ Transfer refer.dfp_dim_ad_units FROM dw3 To dw10 
+**************************************************
+SELECT  to_char(current_up_to, 'YYYY-MM-DD_HH24_MI_SS') FROM control.data_current_up_to_date WHERE table_name='dfp_dim_ad_units'
+Current_up_to_date: 2013-09-17_00_50_02
+*Exporting data to refer.dfp_dim_ad_units.2013_09_17.2013_09_17_00_50_02.csv ...
+*Remove the transfer file on dw3...
+19. refer.dfp_dim_advertisers 	 dfp2.0
+
+**************************************************
+ Transfer refer.dfp_dim_advertisers FROM dw3 To dw10 
+**************************************************
+SELECT  to_char(current_up_to, 'YYYY-MM-DD_HH24_MI_SS') FROM control.data_current_up_to_date WHERE table_name='dfp_dim_advertisers'
+Current_up_to_date: 2013-09-17_00_10_01
+*Exporting data to refer.dfp_dim_advertisers.2013_09_17.2013_09_17_00_10_01.csv ...
+*Remove the transfer file on dw3...
+20. refer.dfp_dim_creatives 	 dfp2.0
+
+**************************************************
+ Transfer refer.dfp_dim_creatives FROM dw3 To dw10 
+**************************************************
+SELECT  to_char(current_up_to, 'YYYY-MM-DD_HH24_MI_SS') FROM control.data_current_up_to_date WHERE table_name='dfp_dim_creatives'
+Current_up_to_date: 2013-09-17_02_00_02
+*Exporting data to refer.dfp_dim_creatives.2013_09_17.2013_09_17_02_00_02.csv ...
+*Remove the transfer file on dw3...
+21. refer.dfp_dim_line_items 	 dfp2.0
+
+**************************************************
+ Transfer refer.dfp_dim_line_items FROM dw3 To dw10 
+**************************************************
+SELECT  to_char(current_up_to, 'YYYY-MM-DD_HH24_MI_SS') FROM control.data_current_up_to_date WHERE table_name='dfp_dim_line_items'
+Current_up_to_date: 2013-09-17_00_20_01
+*Exporting data to refer.dfp_dim_line_items.2013_09_17.2013_09_17_00_20_01.csv ...
+*Remove the transfer file on dw3...
+22. refer.dfp_dim_orders 	 dfp2.0
+
+**************************************************
+ Transfer refer.dfp_dim_orders FROM dw3 To dw10 
+**************************************************
+SELECT  to_char(current_up_to, 'YYYY-MM-DD_HH24_MI_SS') FROM control.data_current_up_to_date WHERE table_name='dfp_dim_orders'
+Current_up_to_date: 2013-09-17_00_00_03
+*Exporting data to refer.dfp_dim_orders.2013_09_17.2013_09_17_00_00_03.csv ...
+*Remove the transfer file on dw3...
+23. refer.dfp_dim_placements 	 dfp2.0
+
+**************************************************
+ Transfer refer.dfp_dim_placements FROM dw3 To dw10 
+**************************************************
+SELECT  to_char(current_up_to, 'YYYY-MM-DD_HH24_MI_SS') FROM control.data_current_up_to_date WHERE table_name='dfp_dim_placements'
+Current_up_to_date: 2013-09-17_00_40_02
+*Exporting data to refer.dfp_dim_placements.2013_09_17.2013_09_17_00_40_02.csv ...
+*Remove the transfer file on dw3...
+24. refer.display_block_dim 	 vrvdetails
+
+**************************************************
+ Transfer refer.display_block_dim FROM dw3 To dw10 
+**************************************************
+SELECT  to_char(current_up_to, 'YYYY-MM-DD_HH24_MI_SS') FROM control.data_current_up_to_date WHERE table_name='display_block_dim'
+Current_up_to_date: 2013-09-17_02_45_14
+*Exporting data to refer.display_block_dim.2013_09_17.2013_09_17_02_45_14.csv ...
+*Remove the transfer file on dw3...
+25. refer.portal_host_dim 	 vrvdetails
+
+**************************************************
+ Transfer refer.portal_host_dim FROM dw3 To dw10 
+**************************************************
+SELECT  to_char(current_up_to, 'YYYY-MM-DD_HH24_MI_SS') FROM control.data_current_up_to_date WHERE table_name='portal_host_dim'
+Current_up_to_date: 2013-09-17_02_46_31
+*Exporting data to refer.portal_host_dim.2013_09_17.2013_09_17_02_46_31.csv ...
+*Remove the transfer file on dw3...
+26. refer.segment_dim 	 vlsm
+
+**************************************************
+ Transfer refer.segment_dim FROM dw3 To dw10 
+**************************************************
+SELECT  to_char(current_up_to, 'YYYY-MM-DD_HH24_MI_SS') FROM control.data_current_up_to_date WHERE table_name='segment_dim'
+Current_up_to_date: 2013-09-17_00_00_02
+*Exporting data to refer.segment_dim.2013_09_17.2013_09_17_00_00_02.csv ...
+*Remove the transfer file on dw3...
+Upload Dim 3 to S3
+List files on directory: dim
+List files on directory: vrvad
+List files on directory: adm1.0
+List files on directory: location
+List files on directory: dfp2.0
+List files on directory: control
+List files on directory: network_traffic
+List files on directory: event_tracker
+List files on directory: other
+List files on directory: salesfore
+List files on directory: tmp
+List files on directory: verveloc
+List files on directory: vlsm
+List files on directory: dw
+List files on directory: vrvdetails
+List files on directory: timer
+List files on directory: dfp1.0
+List files on directory: adcel
+List files on directory: adm2.0
+Uploading file: refer.adm_mapping_portals.2013_09_17.9999_12_31_00_00_00.csv - Size: 2937
+Upload completed: refer.adm_mapping_portals.2013_09_17.9999_12_31_00_00_00.csv
+
+Uploading file: refer.adm_mapping_channels.2013_09_17.9999_12_31_00_00_00.csv - Size: 757
+Upload completed: refer.adm_mapping_channels.2013_09_17.9999_12_31_00_00_00.csv
+
+Uploading file: refer.dfp_dim_placements.2013_09_17.2013_09_17_00_40_02.csv - Size: 117022
+Upload completed: refer.dfp_dim_placements.2013_09_17.2013_09_17_00_40_02.csv
+
+Uploading file: refer.dfp_dim_line_items.2013_09_17.2013_09_17_00_20_01.csv - Size: 6420494
+Upload completed: refer.dfp_dim_line_items.2013_09_17.2013_09_17_00_20_01.csv
+
+Uploading file: refer.dfp_dim_ad_units.2013_09_17.2013_09_17_00_50_02.csv - Size: 72358682
+Upload completed: refer.dfp_dim_ad_units.2013_09_17.2013_09_17_00_50_02.csv
+
+Uploading file: refer.dfp_dim_advertisers.2013_09_17.2013_09_17_00_10_01.csv - Size: 2016769
+Upload completed: refer.dfp_dim_advertisers.2013_09_17.2013_09_17_00_10_01.csv
+
+Uploading file: refer.dfp_dim_creatives.2013_09_17.2013_09_17_02_00_02.csv - Size: 13659189
+Upload completed: refer.dfp_dim_creatives.2013_09_17.2013_09_17_02_00_02.csv
+
+Uploading file: refer.dfp_dim_orders.2013_09_17.2013_09_17_00_00_03.csv - Size: 2415667
+Upload completed: refer.dfp_dim_orders.2013_09_17.2013_09_17_00_00_03.csv
+
+Uploading file: refer.revenue_share_dim.2013_09_17.2013_09_17_01_15_02.csv - Size: 2054459
+Upload completed: refer.revenue_share_dim.2013_09_17.2013_09_17_01_15_02.csv
+
+Uploading file: refer.segment_dim.2013_09_17.2013_09_17_00_00_02.csv - Size: 911542
+Upload completed: refer.segment_dim.2013_09_17.2013_09_17_00_00_02.csv
+
+Uploading file: refer.correction_factor_dim.2013_09_17.9999_12_31_00_00_00.csv - Size: 6469
+Upload completed: refer.correction_factor_dim.2013_09_17.9999_12_31_00_00_00.csv
+
+Uploading file: refer.display_block_dim.2013_09_17.2013_09_17_02_45_14.csv - Size: 124154956
+Upload completed: refer.display_block_dim.2013_09_17.2013_09_17_02_45_14.csv
+
+Uploading file: refer.ad_network_param_dim.2013_09_17.2013_09_17_02_46_40.csv - Size: 16500381
+Upload completed: refer.ad_network_param_dim.2013_09_17.2013_09_17_02_46_40.csv
+
+Uploading file: refer.portal_host_dim.2013_09_17.2013_09_17_02_46_31.csv - Size: 346082
+Upload completed: refer.portal_host_dim.2013_09_17.2013_09_17_02_46_31.csv
+
+Uploading file: refer.ga_channel_dim.2013_09_17.9999_12_31_00_00_00.csv - Size: 5214
+Upload completed: refer.ga_channel_dim.2013_09_17.9999_12_31_00_00_00.csv
+
+Uploading file: refer.adm_dim_organizations.2013_09_17.2013_09_17_00_10_01.csv - Size: 2302194
+Upload completed: refer.adm_dim_organizations.2013_09_17.2013_09_17_00_10_01.csv
+
+Uploading file: refer.adm_dim_properties.2013_09_17.2013_09_17_00_10_01.csv - Size: 4509650
+Upload completed: refer.adm_dim_properties.2013_09_17.2013_09_17_00_10_01.csv
+
+Uploading file: refer.adm_dim_portals.2013_09_17.2013_09_17_00_00_02.csv - Size: 13370
+Upload completed: refer.adm_dim_portals.2013_09_17.2013_09_17_00_00_02.csv
+
+Uploading file: refer.adm_dim_propertygroups.2013_09_17.2013_09_17_00_40_01.csv - Size: 10182
+Upload completed: refer.adm_dim_propertygroups.2013_09_17.2013_09_17_00_40_01.csv
+
+Uploading file: refer.adm_dim_flights.2013_09_17.2013_09_17_00_20_01.csv - Size: 254302810
+Upload completed: refer.adm_dim_flights.2013_09_17.2013_09_17_00_20_01.csv
+
+Uploading file: refer.adm_dim_orders.2013_09_17.2013_09_17_00_10_01.csv - Size: 11842458
+Upload completed: refer.adm_dim_orders.2013_09_17.2013_09_17_00_10_01.csv
+
+Uploading file: refer.adm_dim_advertisers.2013_09_17.2013_09_17_00_10_01.csv - Size: 1631268
+Upload completed: refer.adm_dim_advertisers.2013_09_17.2013_09_17_00_10_01.csv
+
+Uploading file: refer.adm_dim_publishers.2013_09_17.2013_09_17_00_00_02.csv - Size: 691084
+Upload completed: refer.adm_dim_publishers.2013_09_17.2013_09_17_00_00_02.csv
+
+Uploading file: refer.adm_dim_creatives.2013_09_17.2013_09_17_00_30_01.csv - Size: 15782744
+Upload completed: refer.adm_dim_creatives.2013_09_17.2013_09_17_00_30_01.csv
+
+Uploading file: refer.adm_dim_adsizes.2013_09_17.2013_09_17_00_40_01.csv - Size: 1915
+Upload completed: refer.adm_dim_adsizes.2013_09_17.2013_09_17_00_40_01.csv
+
+Uploading file: refer.adm_dim_platforms.2013_09_17.2013_09_17_00_40_01.csv - Size: 2076
+Upload completed: refer.adm_dim_platforms.2013_09_17.2013_09_17_00_40_01.csv
+
+Done.

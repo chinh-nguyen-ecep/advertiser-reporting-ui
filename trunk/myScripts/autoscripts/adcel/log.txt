@@ -1,0 +1,2598 @@
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 10
+false
+Result is: false
+recall param 10
+Process param 10 has been runing with ID 11760
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 44
+false
+Result is: false
+Process param 44 has been runing with ID 11761
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 51
+false
+Result is: false
+Process param 51 has been runing with ID 11762
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 52
+false
+Result is: false
+Process param 52 has been runing with ID 11763
+Run param program on dw3 v.3.7 06-04-2012
+Run param: 55
+false
+Result is: false
+Process param 55 has been runing with ID 11764
+25-10-2012 3:0:22 # Check Param 10
+11760	PS
+11760	fn_build_daily_ad_serving_stats	0
+11760	fn_build_daily_ad_serving_stats_by_content_category	0
+11760	fn_build_daily_ad_serving_stats_by_device	0
+25-10-2012 3:0:22 # process is runing
+25-10-2012 3:0:22 # Checked
+25-10-2012 3:2:22 # Check Param 10
+11760	PS
+11760	fn_build_daily_ad_serving_stats	0
+11760	fn_build_daily_ad_serving_stats_by_content_category	0
+11760	fn_build_daily_ad_serving_stats_by_device	0
+25-10-2012 3:2:22 # process is runing
+25-10-2012 3:2:22 # Checked
+25-10-2012 3:4:22 # Check Param 10
+11760	PS
+11760	fn_build_daily_ad_serving_stats	0
+11760	fn_build_daily_ad_serving_stats_by_content_category	0
+11760	fn_build_daily_ad_serving_stats_by_device	0
+25-10-2012 3:4:22 # process is runing
+25-10-2012 3:4:22 # Checked
+25-10-2012 3:6:22 # Check Param 10
+11760	PS
+11760	fn_build_daily_ad_serving_stats	0
+11760	fn_build_daily_ad_serving_stats_by_content_category	0
+11760	fn_build_daily_ad_serving_stats_by_device	0
+25-10-2012 3:6:22 # process is runing
+25-10-2012 3:6:22 # Checked
+25-10-2012 3:8:22 # Check Param 10
+11760	PS
+11760	fn_build_daily_ad_serving_stats	0
+11760	fn_build_daily_ad_serving_stats_by_content_category	0
+11760	fn_build_daily_ad_serving_stats_by_device	0
+25-10-2012 3:8:22 # process is runing
+25-10-2012 3:8:22 # Checked
+25-10-2012 3:10:22 # Check Param 10
+11760	PS
+11760	fn_build_daily_ad_serving_stats	1
+11760	fn_build_daily_ad_serving_stats_by_content_category	1
+11760	fn_build_daily_ad_serving_stats_by_device	0
+25-10-2012 3:10:22 # process is runing
+25-10-2012 3:10:22 # Checked
+25-10-2012 3:12:22 # Check Param 10
+11760	PS
+11760	fn_build_daily_ad_serving_stats	1
+11760	fn_build_daily_ad_serving_stats_by_content_category	1
+11760	fn_build_daily_ad_serving_stats_by_device	1
+25-10-2012 3:12:22 # Checked
+25-10-2012 3:12:22 # Param 10 finished
+Promoting 10
+Run param program on dw3 v.3.7 06-04-2012
+Promote daily ad response report
+**Transfer by: dw3_util
+*Start process with ID: 6914
+*Exporting data to dw3.adstraffic.daily_ad_serving_stats.csv ...
+*Verify export count...
+*Exported: 12715
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_ad_serving_stats.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 12715
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 6915
+*Exporting data to dw3.adstraffic.daily_ad_serving_stats.csv ...
+*Verify export count...
+*Exported: 12715
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_ad_serving_stats.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 12715
+*Finished!
+**Transfer by: dw3_util
+*Start process with ID: 6916
+*Exporting data to dw3.adstraffic.daily_ad_serving_stats_by_device.csv ...
+*Verify export count...
+*Exported: 77407
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_ad_serving_stats_by_device.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 77407
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 6917
+*Exporting data to dw3.adstraffic.daily_ad_serving_stats_by_device.csv ...
+*Verify export count...
+*Exported: 77407
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_ad_serving_stats_by_device.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 77407
+*Finished!
+**Transfer by: dw3_util
+*Start process with ID: 6918
+*Exporting data to dw3.adstraffic.daily_ad_serving_stats_by_content_category.csv ...
+*Verify export count...
+*Exported: 44237
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_ad_serving_stats_by_content_category.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 44237
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 6919
+*Exporting data to dw3.adstraffic.daily_ad_serving_stats_by_content_category.csv ...
+*Verify export count...
+*Exported: 44237
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_ad_serving_stats_by_content_category.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 44237
+*Finished!
+25-10-2012 3:18:2 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 3:18:2 # process is runing
+25-10-2012 3:18:2 # Checked
+25-10-2012 3:20:2 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 3:20:2 # process is runing
+25-10-2012 3:20:2 # Checked
+25-10-2012 3:22:2 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 3:22:2 # process is runing
+25-10-2012 3:22:2 # Checked
+25-10-2012 3:24:2 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 3:24:2 # process is runing
+25-10-2012 3:24:2 # Checked
+25-10-2012 3:26:2 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 3:26:2 # process is runing
+25-10-2012 3:26:2 # Checked
+25-10-2012 3:28:2 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 3:28:2 # process is runing
+25-10-2012 3:28:2 # Checked
+25-10-2012 3:30:2 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 3:30:2 # process is runing
+25-10-2012 3:30:2 # Checked
+25-10-2012 3:32:2 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 3:32:2 # process is runing
+25-10-2012 3:32:2 # Checked
+25-10-2012 3:34:2 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 3:34:2 # process is runing
+25-10-2012 3:34:2 # Checked
+25-10-2012 3:36:2 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 3:36:2 # process is runing
+25-10-2012 3:36:2 # Checked
+25-10-2012 3:38:2 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 3:38:2 # process is runing
+25-10-2012 3:38:2 # Checked
+25-10-2012 3:40:2 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 3:40:2 # process is runing
+25-10-2012 3:40:2 # Checked
+25-10-2012 3:42:2 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 3:42:2 # process is runing
+25-10-2012 3:42:2 # Checked
+25-10-2012 3:44:2 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 3:44:2 # process is runing
+25-10-2012 3:44:2 # Checked
+25-10-2012 3:46:2 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 3:46:2 # process is runing
+25-10-2012 3:46:2 # Checked
+25-10-2012 3:48:2 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 3:48:2 # process is runing
+25-10-2012 3:48:2 # Checked
+25-10-2012 3:50:2 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 3:50:2 # process is runing
+25-10-2012 3:50:2 # Checked
+25-10-2012 3:52:2 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 3:52:2 # process is runing
+25-10-2012 3:52:2 # Checked
+25-10-2012 3:54:2 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 3:54:2 # process is runing
+25-10-2012 3:54:2 # Checked
+25-10-2012 3:56:2 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 3:56:2 # process is runing
+25-10-2012 3:56:2 # Checked
+25-10-2012 3:58:2 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 3:58:2 # process is runing
+25-10-2012 3:58:2 # Checked
+25-10-2012 4:0:2 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 4:0:2 # process is runing
+25-10-2012 4:0:2 # Checked
+25-10-2012 4:2:2 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 4:2:2 # process is runing
+25-10-2012 4:2:2 # Checked
+25-10-2012 4:4:2 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 4:4:2 # process is runing
+25-10-2012 4:4:2 # Checked
+25-10-2012 4:6:2 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 4:6:2 # process is runing
+25-10-2012 4:6:2 # Checked
+25-10-2012 4:8:2 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 4:8:2 # process is runing
+25-10-2012 4:8:2 # Checked
+25-10-2012 4:10:2 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 4:10:2 # process is runing
+25-10-2012 4:10:2 # Checked
+25-10-2012 4:12:2 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 4:12:3 # process is runing
+25-10-2012 4:12:3 # Checked
+25-10-2012 4:14:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 4:14:3 # process is runing
+25-10-2012 4:14:3 # Checked
+25-10-2012 4:16:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 4:16:3 # process is runing
+25-10-2012 4:16:3 # Checked
+25-10-2012 4:18:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 4:18:3 # process is runing
+25-10-2012 4:18:3 # Checked
+25-10-2012 4:20:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 4:20:3 # process is runing
+25-10-2012 4:20:3 # Checked
+25-10-2012 4:22:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 4:22:3 # process is runing
+25-10-2012 4:22:3 # Checked
+25-10-2012 4:24:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 4:24:3 # process is runing
+25-10-2012 4:24:3 # Checked
+25-10-2012 4:26:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 4:26:3 # process is runing
+25-10-2012 4:26:3 # Checked
+25-10-2012 4:28:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 4:28:3 # process is runing
+25-10-2012 4:28:3 # Checked
+25-10-2012 4:30:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 4:30:3 # process is runing
+25-10-2012 4:30:3 # Checked
+25-10-2012 4:32:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 4:32:3 # process is runing
+25-10-2012 4:32:3 # Checked
+25-10-2012 4:34:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 4:34:3 # process is runing
+25-10-2012 4:34:3 # Checked
+25-10-2012 4:36:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 4:36:3 # process is runing
+25-10-2012 4:36:3 # Checked
+25-10-2012 4:38:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 4:38:3 # process is runing
+25-10-2012 4:38:3 # Checked
+25-10-2012 4:40:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 4:40:3 # process is runing
+25-10-2012 4:40:3 # Checked
+25-10-2012 4:42:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 4:42:3 # process is runing
+25-10-2012 4:42:3 # Checked
+25-10-2012 4:44:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 4:44:3 # process is runing
+25-10-2012 4:44:3 # Checked
+25-10-2012 4:46:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 4:46:3 # process is runing
+25-10-2012 4:46:3 # Checked
+25-10-2012 4:48:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 4:48:3 # process is runing
+25-10-2012 4:48:3 # Checked
+25-10-2012 4:50:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 4:50:3 # process is runing
+25-10-2012 4:50:3 # Checked
+25-10-2012 4:52:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 4:52:3 # process is runing
+25-10-2012 4:52:3 # Checked
+25-10-2012 4:54:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 4:54:3 # process is runing
+25-10-2012 4:54:3 # Checked
+25-10-2012 4:56:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 4:56:3 # process is runing
+25-10-2012 4:56:3 # Checked
+25-10-2012 4:58:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 4:58:3 # process is runing
+25-10-2012 4:58:3 # Checked
+25-10-2012 5:0:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 5:0:3 # process is runing
+25-10-2012 5:0:3 # Checked
+25-10-2012 5:2:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 5:2:3 # process is runing
+25-10-2012 5:2:3 # Checked
+25-10-2012 5:4:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 5:4:3 # process is runing
+25-10-2012 5:4:3 # Checked
+25-10-2012 5:6:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 5:6:3 # process is runing
+25-10-2012 5:6:3 # Checked
+25-10-2012 5:8:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 5:8:3 # process is runing
+25-10-2012 5:8:3 # Checked
+25-10-2012 5:10:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 5:10:3 # process is runing
+25-10-2012 5:10:3 # Checked
+25-10-2012 5:12:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 5:12:3 # process is runing
+25-10-2012 5:12:3 # Checked
+25-10-2012 5:14:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 5:14:3 # process is runing
+25-10-2012 5:14:3 # Checked
+25-10-2012 5:16:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 5:16:3 # process is runing
+25-10-2012 5:16:3 # Checked
+25-10-2012 5:18:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	0
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 5:18:3 # process is runing
+25-10-2012 5:18:3 # Checked
+25-10-2012 5:20:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	1
+11761	fn_build_daily_unfilled_stats_by_content_category	0
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 5:20:3 # process is runing
+25-10-2012 5:20:3 # Checked
+25-10-2012 5:22:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	0
+11761	fn_build_daily_unfilled_stats	1
+11761	fn_build_daily_unfilled_stats_by_content_category	1
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 5:22:3 # process is runing
+25-10-2012 5:22:3 # Checked
+25-10-2012 5:24:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	1
+11761	fn_build_daily_unfilled_stats	1
+11761	fn_build_daily_unfilled_stats_by_content_category	1
+11761	fn_build_daily_unfilled_stats_by_device	0
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 5:24:3 # process is runing
+25-10-2012 5:24:3 # Checked
+25-10-2012 5:26:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	1
+11761	fn_build_daily_unfilled_stats	1
+11761	fn_build_daily_unfilled_stats_by_content_category	1
+11761	fn_build_daily_unfilled_stats_by_device	1
+11761	fn_build_daily_unfilled_stats_by_dma	0
+25-10-2012 5:26:3 # process is runing
+25-10-2012 5:26:3 # Checked
+25-10-2012 5:28:3 # Check Param 44
+11761	PS
+11761	fn_build_daily_olap_unfilled_by_portal	1
+11761	fn_build_daily_unfilled_stats	1
+11761	fn_build_daily_unfilled_stats_by_content_category	1
+11761	fn_build_daily_unfilled_stats_by_device	1
+11761	fn_build_daily_unfilled_stats_by_dma	1
+25-10-2012 5:28:3 # Checked
+25-10-2012 5:28:3 # Param 44 finished
+Promoting 44
+Run param program on dw3 v.3.7 06-04-2012
+Call function: staging.fn_promote_daily_unfilled_report
+Called: true
+**Transfer by: dw3_util
+*Start process with ID: 7020
+*Exporting data to dw3.adstraffic.daily_olap_unfilled_by_portal.csv ...
+*Verify export count...
+*Exported: 90280
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_olap_unfilled_by_portal.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 90280
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 7024
+*Exporting data to dw3.adstraffic.daily_olap_unfilled_by_portal.csv ...
+*Verify export count...
+*Exported: 90280
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_olap_unfilled_by_portal.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 90280
+*Finished!
+**Transfer by: dw3_util
+*Start process with ID: 7060
+*Exporting data to dw3.adstraffic.daily_unfilled_stats.csv ...
+*Verify export count...
+*Exported: 2606
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_unfilled_stats.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 2606
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 7061
+*Exporting data to dw3.adstraffic.daily_unfilled_stats.csv ...
+*Verify export count...
+*Exported: 2606
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_unfilled_stats.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 2606
+*Finished!
+**Transfer by: dw3_util
+*Start process with ID: 7062
+*Exporting data to dw3.adstraffic.daily_unfilled_stats_by_dma.csv ...
+*Verify export count...
+*Exported: 68047
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_unfilled_stats_by_dma.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 68047
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 7064
+*Exporting data to dw3.adstraffic.daily_unfilled_stats_by_dma.csv ...
+*Verify export count...
+*Exported: 68047
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_unfilled_stats_by_dma.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 68047
+*Finished!
+**Transfer by: dw3_util
+*Start process with ID: 7068
+*Exporting data to dw3.adstraffic.daily_unfilled_stats_by_device.csv ...
+*Verify export count...
+*Exported: 11092
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_unfilled_stats_by_device.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 11092
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 7070
+*Exporting data to dw3.adstraffic.daily_unfilled_stats_by_device.csv ...
+*Verify export count...
+*Exported: 11092
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_unfilled_stats_by_device.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 11092
+*Finished!
+**Transfer by: dw3_util
+*Start process with ID: 7074
+*Exporting data to dw3.adstraffic.daily_unfilled_stats_by_content_category.csv ...
+*Verify export count...
+*Exported: 7404
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_unfilled_stats_by_content_category.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 7404
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 7075
+*Exporting data to dw3.adstraffic.daily_unfilled_stats_by_content_category.csv ...
+*Verify export count...
+*Exported: 7404
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_unfilled_stats_by_content_category.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 7404
+*Finished!
+25-10-2012 6:9:38 # Check Param 51
+11762	PS
+11762	fn_build_daily_filled_stats	0
+11762	fn_build_daily_filled_stats_by_content_category	0
+11762	fn_build_daily_filled_stats_by_device	0
+11762	fn_build_daily_filled_stats_by_dma	0
+11762	fn_build_daily_olap_filled_by_portal	0
+25-10-2012 6:9:38 # process is runing
+25-10-2012 6:9:38 # Checked
+25-10-2012 6:11:38 # Check Param 51
+11762	PS
+11762	fn_build_daily_filled_stats	0
+11762	fn_build_daily_filled_stats_by_content_category	0
+11762	fn_build_daily_filled_stats_by_device	0
+11762	fn_build_daily_filled_stats_by_dma	0
+11762	fn_build_daily_olap_filled_by_portal	0
+25-10-2012 6:11:38 # process is runing
+25-10-2012 6:11:38 # Checked
+25-10-2012 6:13:38 # Check Param 51
+11762	PS
+11762	fn_build_daily_filled_stats	1
+11762	fn_build_daily_filled_stats_by_content_category	0
+11762	fn_build_daily_filled_stats_by_device	0
+11762	fn_build_daily_filled_stats_by_dma	0
+11762	fn_build_daily_olap_filled_by_portal	0
+25-10-2012 6:13:38 # process is runing
+25-10-2012 6:13:38 # Checked
+25-10-2012 6:15:38 # Check Param 51
+11762	PS
+11762	fn_build_daily_filled_stats	1
+11762	fn_build_daily_filled_stats_by_content_category	1
+11762	fn_build_daily_filled_stats_by_device	0
+11762	fn_build_daily_filled_stats_by_dma	0
+11762	fn_build_daily_olap_filled_by_portal	0
+25-10-2012 6:15:38 # process is runing
+25-10-2012 6:15:38 # Checked
+25-10-2012 6:17:38 # Check Param 51
+11762	PS
+11762	fn_build_daily_filled_stats	1
+11762	fn_build_daily_filled_stats_by_content_category	1
+11762	fn_build_daily_filled_stats_by_device	0
+11762	fn_build_daily_filled_stats_by_dma	0
+11762	fn_build_daily_olap_filled_by_portal	0
+25-10-2012 6:17:38 # process is runing
+25-10-2012 6:17:38 # Checked
+25-10-2012 6:19:38 # Check Param 51
+11762	PS
+11762	fn_build_daily_filled_stats	1
+11762	fn_build_daily_filled_stats_by_content_category	1
+11762	fn_build_daily_filled_stats_by_device	0
+11762	fn_build_daily_filled_stats_by_dma	0
+11762	fn_build_daily_olap_filled_by_portal	0
+25-10-2012 6:19:38 # process is runing
+25-10-2012 6:19:38 # Checked
+25-10-2012 6:21:38 # Check Param 51
+11762	PS
+11762	fn_build_daily_filled_stats	1
+11762	fn_build_daily_filled_stats_by_content_category	1
+11762	fn_build_daily_filled_stats_by_device	0
+11762	fn_build_daily_filled_stats_by_dma	0
+11762	fn_build_daily_olap_filled_by_portal	1
+25-10-2012 6:21:38 # process is runing
+25-10-2012 6:21:38 # Checked
+25-10-2012 6:23:38 # Check Param 51
+11762	PS
+11762	fn_build_daily_filled_stats	1
+11762	fn_build_daily_filled_stats_by_content_category	1
+11762	fn_build_daily_filled_stats_by_device	1
+11762	fn_build_daily_filled_stats_by_dma	1
+11762	fn_build_daily_olap_filled_by_portal	1
+25-10-2012 6:23:38 # Checked
+25-10-2012 6:23:38 # Param 51 finished
+Promoting 51
+Run param program on dw3 v.3.7 06-04-2012
+Call function: staging.fn_promote_daily_filled_report
+Called: true
+**Transfer by: dw3_util
+*Start process with ID: 7080
+*Exporting data to dw3.adstraffic.daily_filled_stats.csv ...
+*Verify export count...
+*Exported: 10256
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_filled_stats.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 10256
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 7081
+*Exporting data to dw3.adstraffic.daily_filled_stats.csv ...
+*Verify export count...
+*Exported: 10256
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_filled_stats.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 10256
+*Finished!
+**Transfer by: dw3_util
+*Start process with ID: 7082
+*Exporting data to dw3.adstraffic.daily_filled_stats_by_dma.csv ...
+*Verify export count...
+*Exported: 228677
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_filled_stats_by_dma.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 228677
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 7083
+*Exporting data to dw3.adstraffic.daily_filled_stats_by_dma.csv ...
+*Verify export count...
+*Exported: 228677
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_filled_stats_by_dma.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 228677
+*Finished!
+**Transfer by: dw3_util
+*Start process with ID: 7084
+*Exporting data to dw3.adstraffic.daily_filled_stats_by_device.csv ...
+*Verify export count...
+*Exported: 45915
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_filled_stats_by_device.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 45915
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 7085
+*Exporting data to dw3.adstraffic.daily_filled_stats_by_device.csv ...
+*Verify export count...
+*Exported: 45915
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_filled_stats_by_device.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 45915
+*Finished!
+**Transfer by: dw3_util
+*Start process with ID: 7086
+*Exporting data to dw3.adstraffic.daily_filled_stats_by_content_category.csv ...
+*Verify export count...
+*Exported: 30908
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_filled_stats_by_content_category.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 30908
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 7087
+*Exporting data to dw3.adstraffic.daily_filled_stats_by_content_category.csv ...
+*Verify export count...
+*Exported: 30908
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_filled_stats_by_content_category.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 30908
+*Finished!
+**Transfer by: dw3_util
+*Start process with ID: 7088
+*Exporting data to dw3.adstraffic.daily_olap_filled_by_portal.csv ...
+*Verify export count...
+*Exported: 138881
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_olap_filled_by_portal.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 138881
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 7089
+*Exporting data to dw3.adstraffic.daily_olap_filled_by_portal.csv ...
+*Verify export count...
+*Exported: 138881
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_olap_filled_by_portal.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 138881
+*Finished!
+25-10-2012 7:5:35 # Check Param 52
+11763	PS
+11763	fn_build_daily_olap_trxids_by_content_category	1
+11763	fn_build_daily_olap_trxids_by_device	1
+11763	fn_build_daily_olap_trxids_by_portal	1
+25-10-2012 7:5:35 # Checked
+25-10-2012 7:5:35 # Param 52 finished
+Promoting 52
+Run param program on dw3 v.3.7 06-04-2012
+Call function: staging.fn_promote_daily_requests_report
+Called: true
+25-10-2012 7:5:55 # Check Param 55
+11764	PS
+11764	fn_build_daily_geo_quality	0
+25-10-2012 7:5:55 # process is runing
+25-10-2012 7:5:55 # Checked
+25-10-2012 7:7:55 # Check Param 55
+11764	PS
+11764	fn_build_daily_geo_quality	0
+25-10-2012 7:7:55 # process is runing
+25-10-2012 7:7:55 # Checked
+25-10-2012 7:9:55 # Check Param 55
+11764	PS
+11764	fn_build_daily_geo_quality	0
+25-10-2012 7:9:55 # process is runing
+25-10-2012 7:9:55 # Checked
+25-10-2012 7:11:55 # Check Param 55
+11764	PS
+11764	fn_build_daily_geo_quality	1
+25-10-2012 7:11:55 # Checked
+25-10-2012 7:11:55 # Param 55 finished
+Promoting 55
+Run param program on dw3 v.3.7 06-04-2012
+Call function: staging.fn_promote_daily_geo_report
+Called: true
+**Transfer by: dw3_util
+*Start process with ID: 7100
+*Exporting data to dw3.adstraffic.daily_geo_quality.csv ...
+*Verify export count...
+*Exported: 2133
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_geo_quality.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 2133
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 7101
+*Exporting data to dw3.adstraffic.daily_geo_quality.csv ...
+*Verify export count...
+*Exported: 2133
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_geo_quality.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 2133
+*Finished!
+**Transfer by: dw3_util
+*Start process with ID: 7102
+*Exporting data to dw3.adstraffic.daily_olap_trxids_by_content_category.csv ...
+*Verify export count...
+*Exported: 226467
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_olap_trxids_by_content_category.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 226467
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 7113
+*Exporting data to dw3.adstraffic.daily_olap_trxids_by_content_category.csv ...
+*Verify export count...
+*Exported: 226467
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_olap_trxids_by_content_category.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 226467
+*Finished!
+**Transfer by: dw3_util
+*Start process with ID: 7114
+*Exporting data to dw3.adstraffic.daily_olap_trxids_by_device.csv ...
+*Verify export count...
+*Exported: 276301
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_olap_trxids_by_device.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 276301
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 7115
+*Exporting data to dw3.adstraffic.daily_olap_trxids_by_device.csv ...
+*Verify export count...
+*Exported: 276301
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_olap_trxids_by_device.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 276301
+*Finished!
+**Transfer by: dw3_util
+*Start process with ID: 7116
+*Exporting data to dw3.adstraffic.daily_olap_trxids_by_portal.csv ...
+*Verify export count...
+*Exported: 160474
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_olap_trxids_by_portal.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 160474
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 7117
+*Exporting data to dw3.adstraffic.daily_olap_trxids_by_portal.csv ...
+*Verify export count...
+*Exported: 160474
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_olap_trxids_by_portal.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 160474
+*Finished!
+**Transfer by: dw3_util
+*Start process with ID: 7118
+*Exporting data to dw3.adstraffic.daily_db_sellthrough.csv ...
+*Verify export count...
+*Exported: 0
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_db_sellthrough.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 0
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 7119
+*Exporting data to dw3.adstraffic.daily_db_sellthrough.csv ...
+*Verify export count...
+*Exported: 0
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_db_sellthrough.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 0
+*Finished!
+**Transfer by: dw3_util
+*Start process with ID: 7120
+*Exporting data to dw3.adstraffic.daily_db_sellthrough_by_metro.csv ...
+*Verify export count...
+*Exported: 0
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_db_sellthrough_by_metro.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 0
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 7121
+*Exporting data to dw3.adstraffic.daily_db_sellthrough_by_metro.csv ...
+*Verify export count...
+*Exported: 0
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_db_sellthrough_by_metro.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 0
+*Finished!
+**Transfer by: dw3_util
+*Start process with ID: 7122
+*Exporting data to dw3.adstraffic.daily_db_sellthrough_by_site.csv ...
+*Verify export count...
+*Exported: 0
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_db_sellthrough_by_site.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 0
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 7123
+*Exporting data to dw3.adstraffic.daily_db_sellthrough_by_site.csv ...
+*Verify export count...
+*Exported: 0
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_db_sellthrough_by_site.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 0
+*Finished!
+**Transfer by: dw3_util
+*Start process with ID: 7124
+*Exporting data to dw3.adstraffic.daily_filled_stats.csv ...
+*Verify export count...
+*Exported: 10256
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_filled_stats.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 10256
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 7125
+*Exporting data to dw3.adstraffic.daily_filled_stats.csv ...
+*Verify export count...
+*Exported: 10256
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_filled_stats.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 10256
+*Finished!
+**Transfer by: dw3_util
+*Start process with ID: 7126
+*Exporting data to dw3.adstraffic.daily_filled_stats_by_dma.csv ...
+*Verify export count...
+*Exported: 228677
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_filled_stats_by_dma.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 228677
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 7127
+*Exporting data to dw3.adstraffic.daily_filled_stats_by_dma.csv ...
+*Verify export count...
+*Exported: 228677
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_filled_stats_by_dma.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 228677
+*Finished!
+**Transfer by: dw3_util
+*Start process with ID: 7128
+*Exporting data to dw3.adstraffic.daily_filled_stats_by_device.csv ...
+*Verify export count...
+*Exported: 45915
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_filled_stats_by_device.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 45915
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 7129
+*Exporting data to dw3.adstraffic.daily_filled_stats_by_device.csv ...
+*Verify export count...
+*Exported: 45915
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_filled_stats_by_device.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 45915
+*Finished!
+**Transfer by: dw3_util
+*Start process with ID: 7130
+*Exporting data to dw3.adstraffic.daily_filled_stats_by_content_category.csv ...
+*Verify export count...
+*Exported: 30908
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_filled_stats_by_content_category.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 30908
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 7131
+*Exporting data to dw3.adstraffic.daily_filled_stats_by_content_category.csv ...
+*Verify export count...
+*Exported: 30908
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_filled_stats_by_content_category.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 30908
+*Finished!
+**Transfer by: dw3_util
+*Start process with ID: 7132
+*Exporting data to dw3.adstraffic.daily_olap_filled_by_portal.csv ...
+*Verify export count...
+*Exported: 138881
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_olap_filled_by_portal.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 138881
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 7133
+*Exporting data to dw3.adstraffic.daily_olap_filled_by_portal.csv ...
+*Verify export count...
+*Exported: 138881
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_olap_filled_by_portal.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 138881
+*Finished!
+**Transfer by: dw3_util
+*Start process with ID: 7134
+*Exporting data to dw3.adstraffic.daily_ad_serving_stats.csv ...
+*Verify export count...
+*Exported: 12715
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_ad_serving_stats.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 12715
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 7136
+*Exporting data to dw3.adstraffic.daily_ad_serving_stats.csv ...
+*Verify export count...
+*Exported: 12715
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_ad_serving_stats.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 12715
+*Finished!
+**Transfer by: dw3_util
+*Start process with ID: 7137
+*Exporting data to dw3.adstraffic.daily_ad_serving_stats_by_device.csv ...
+*Verify export count...
+*Exported: 77407
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_ad_serving_stats_by_device.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 77407
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 7138
+*Exporting data to dw3.adstraffic.daily_ad_serving_stats_by_device.csv ...
+*Verify export count...
+*Exported: 77407
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_ad_serving_stats_by_device.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 77407
+*Finished!
+**Transfer by: dw3_util
+*Start process with ID: 7139
+*Exporting data to dw3.adstraffic.daily_ad_serving_stats_by_content_category.csv ...
+*Verify export count...
+*Exported: 44237
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_ad_serving_stats_by_content_category.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 44237
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 7144
+*Exporting data to dw3.adstraffic.daily_ad_serving_stats_by_content_category.csv ...
+*Verify export count...
+*Exported: 44237
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_ad_serving_stats_by_content_category.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 44237
+*Finished!
+**Transfer by: dw3_util
+*Start process with ID: 7148
+*Exporting data to dw3.adstraffic.daily_adcel_stats.csv ...
+*Verify export count...
+*Exported: 1
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_adcel_stats.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 1
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 7149
+*Exporting data to dw3.adstraffic.daily_adcel_stats.csv ...
+*Verify export count...
+*Exported: 1
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_adcel_stats.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 1
+*Finished!
+**Transfer by: dw3_util
+*Start process with ID: 7150
+*Exporting data to dw3.adstraffic.daily_olap_trxids_by_content_category.csv ...
+*Verify export count...
+*Exported: 226467
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_olap_trxids_by_content_category.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 226467
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 7156
+*Exporting data to dw3.adstraffic.daily_olap_trxids_by_content_category.csv ...
+*Verify export count...
+*Exported: 226467
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_olap_trxids_by_content_category.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 226467
+*Finished!
+**Transfer by: dw3_util
+*Start process with ID: 7157
+*Exporting data to dw3.adstraffic.daily_olap_trxids_by_device.csv ...
+*Verify export count...
+*Exported: 276301
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_olap_trxids_by_device.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 276301
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 7158
+*Exporting data to dw3.adstraffic.daily_olap_trxids_by_device.csv ...
+*Verify export count...
+*Exported: 276301
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_olap_trxids_by_device.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 276301
+*Finished!
+**Transfer by: dw3_util
+*Start process with ID: 7159
+*Exporting data to dw3.adstraffic.daily_olap_trxids_by_portal.csv ...
+*Verify export count...
+*Exported: 160474
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_olap_trxids_by_portal.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 160474
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 7160
+*Exporting data to dw3.adstraffic.daily_olap_trxids_by_portal.csv ...
+*Verify export count...
+*Exported: 160474
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_olap_trxids_by_portal.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 160474
+*Finished!
+**Transfer by: dw3_util
+*Start process with ID: 7161
+*Exporting data to dw3.adstraffic.daily_olap_unfilled_by_portal.csv ...
+*Verify export count...
+*Exported: 90280
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_olap_unfilled_by_portal.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 90280
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 7162
+*Exporting data to dw3.adstraffic.daily_olap_unfilled_by_portal.csv ...
+*Verify export count...
+*Exported: 90280
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_olap_unfilled_by_portal.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 90280
+*Finished!
+**Transfer by: dw3_util
+*Start process with ID: 7163
+*Exporting data to dw3.adstraffic.daily_unfilled_stats.csv ...
+*Verify export count...
+*Exported: 2606
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_unfilled_stats.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 2606
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 7164
+*Exporting data to dw3.adstraffic.daily_unfilled_stats.csv ...
+*Verify export count...
+*Exported: 2606
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_unfilled_stats.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 2606
+*Finished!
+**Transfer by: dw3_util
+*Start process with ID: 7165
+*Exporting data to dw3.adstraffic.daily_unfilled_stats_by_dma.csv ...
+*Verify export count...
+*Exported: 68047
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_unfilled_stats_by_dma.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 68047
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 7166
+*Exporting data to dw3.adstraffic.daily_unfilled_stats_by_dma.csv ...
+*Verify export count...
+*Exported: 68047
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_unfilled_stats_by_dma.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 68047
+*Finished!
+**Transfer by: dw3_util
+*Start process with ID: 7167
+*Exporting data to dw3.adstraffic.daily_unfilled_stats_by_device.csv ...
+*Verify export count...
+*Exported: 11092
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_unfilled_stats_by_device.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 11092
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 7168
+*Exporting data to dw3.adstraffic.daily_unfilled_stats_by_device.csv ...
+*Verify export count...
+*Exported: 11092
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_unfilled_stats_by_device.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 11092
+*Finished!
+**Transfer by: dw3_util
+*Start process with ID: 7169
+*Exporting data to dw3.adstraffic.daily_unfilled_stats_by_content_category.csv ...
+*Verify export count...
+*Exported: 7404
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_unfilled_stats_by_content_category.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 7404
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 7170
+*Exporting data to dw3.adstraffic.daily_unfilled_stats_by_content_category.csv ...
+*Verify export count...
+*Exported: 7404
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_unfilled_stats_by_content_category.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 7404
+*Finished!
+**Transfer by: dw3_util
+*Start process with ID: 7171
+*Exporting data to dw3.adstraffic.daily_geo_quality.csv ...
+*Verify export count...
+*Exported: 2133
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw3.adstraffic.daily_geo_quality.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 2133
+*Finished!
+***** Transfer to backup server of dw0 ********** 
+**Transfer by: dw3_util
+*Start process with ID: 7172
+*Exporting data to dw3.adstraffic.daily_geo_quality.csv ...
+*Verify export count...
+*Exported: 2133
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_geo_quality.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 2133
+*Finished!
+* Transfer adstraffic.daily_olap_filled_by_portal with partition mode
+**Transfer by: dw3_util
+*Start process with ID: 7173
+*Exporting data to file dw3.adstraffic.daily_olap_filled_by_portal.csv ...
+*Verify export count...
+*Exported: 138881
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_olap_filled_by_portal.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 138881
+*Finished!
+* Transfer adstraffic.daily_olap_trxids_by_portal with partition mode
+**Transfer by: dw3_util
+*Start process with ID: 7174
+*Exporting data to file dw3.adstraffic.daily_olap_trxids_by_portal.csv ...
+*Verify export count...
+*Exported: 160474
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_olap_trxids_by_portal.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 160474
+*Finished!
+* Transfer adstraffic.daily_unfilled_stats with partition mode
+**Transfer by: dw3_util
+*Start process with ID: 7175
+*Exporting data to file dw3.adstraffic.daily_unfilled_stats.csv ...
+*Verify export count...
+*Exported: 2606
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_unfilled_stats.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 2606
+*Finished!
+* Transfer adstraffic.daily_ad_serving_stats with partition mode
+**Transfer by: dw3_util
+*Start process with ID: 7176
+*Exporting data to file dw3.adstraffic.daily_ad_serving_stats.csv ...
+*Verify export count...
+*Exported: 12715
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy import file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_ad_serving_stats.csv ...!
+*Verify import count...
+*Remove the transfer file on dw10...
+*Remove the transfer file on transformer...
+*Imported: 12715
+*Finished!

@@ -1,0 +1,719 @@
+#2012-01-10: adnetwork.daily_yp_performance	Dw3: 1274	Dw0: 1274
+*Update data to dw0
+Starting : Get data form adnetwork.daily_yp_performance where full_date = 2012-01-10
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 1274
+Ending : Get data from adnetwork.daily_yp_performance where full_date = 2012-01-10
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_yp_performance where full_date = '2012-01-10'
+Ending : delete from adnetwork.daily_yp_performance where full_date = '2012-01-10'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 1274
+Time Transfer for adnetwork.daily_yp_performance : 0 Seconds
+#2012-01-11: adnetwork.daily_yp_performance	Dw3: 834	Dw0: 834
+*Update data to dw0
+Starting : Get data form adnetwork.daily_yp_performance where full_date = 2012-01-11
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 834
+Ending : Get data from adnetwork.daily_yp_performance where full_date = 2012-01-11
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_yp_performance where full_date = '2012-01-11'
+Ending : delete from adnetwork.daily_yp_performance where full_date = '2012-01-11'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 834
+Time Transfer for adnetwork.daily_yp_performance : 0 Seconds
+#2012-01-12: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-01-13: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-01-14: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-01-15: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-01-16: adnetwork.daily_yp_performance	Dw3: 236	Dw0: 236
+*Update data to dw0
+Starting : Get data form adnetwork.daily_yp_performance where full_date = 2012-01-16
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 236
+Ending : Get data from adnetwork.daily_yp_performance where full_date = 2012-01-16
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_yp_performance where full_date = '2012-01-16'
+Ending : delete from adnetwork.daily_yp_performance where full_date = '2012-01-16'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 236
+Time Transfer for adnetwork.daily_yp_performance : 0 Seconds
+#2012-01-17: adnetwork.daily_yp_performance	Dw3: 991	Dw0: 991
+*Update data to dw0
+Starting : Get data form adnetwork.daily_yp_performance where full_date = 2012-01-17
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 991
+Ending : Get data from adnetwork.daily_yp_performance where full_date = 2012-01-17
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_yp_performance where full_date = '2012-01-17'
+Ending : delete from adnetwork.daily_yp_performance where full_date = '2012-01-17'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 991
+Time Transfer for adnetwork.daily_yp_performance : 0 Seconds
+#2012-01-18: adnetwork.daily_yp_performance	Dw3: 1026	Dw0: 1026
+*Update data to dw0
+Starting : Get data form adnetwork.daily_yp_performance where full_date = 2012-01-18
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 1026
+Ending : Get data from adnetwork.daily_yp_performance where full_date = 2012-01-18
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_yp_performance where full_date = '2012-01-18'
+Ending : delete from adnetwork.daily_yp_performance where full_date = '2012-01-18'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 1026
+Time Transfer for adnetwork.daily_yp_performance : 0 Seconds
+#2012-01-19: adnetwork.daily_yp_performance	Dw3: 1023	Dw0: 1023
+*Update data to dw0
+Starting : Get data form adnetwork.daily_yp_performance where full_date = 2012-01-19
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 1023
+Ending : Get data from adnetwork.daily_yp_performance where full_date = 2012-01-19
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_yp_performance where full_date = '2012-01-19'
+Ending : delete from adnetwork.daily_yp_performance where full_date = '2012-01-19'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 1023
+Time Transfer for adnetwork.daily_yp_performance : 0 Seconds
+#2012-01-20: adnetwork.daily_yp_performance	Dw3: 1162	Dw0: 1162
+*Update data to dw0
+Starting : Get data form adnetwork.daily_yp_performance where full_date = 2012-01-20
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 1162
+Ending : Get data from adnetwork.daily_yp_performance where full_date = 2012-01-20
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_yp_performance where full_date = '2012-01-20'
+Ending : delete from adnetwork.daily_yp_performance where full_date = '2012-01-20'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 1162
+Time Transfer for adnetwork.daily_yp_performance : 0 Seconds
+#2012-01-21: adnetwork.daily_yp_performance	Dw3: 1165	Dw0: 1165
+*Update data to dw0
+Starting : Get data form adnetwork.daily_yp_performance where full_date = 2012-01-21
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 1165
+Ending : Get data from adnetwork.daily_yp_performance where full_date = 2012-01-21
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_yp_performance where full_date = '2012-01-21'
+Ending : delete from adnetwork.daily_yp_performance where full_date = '2012-01-21'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 1165
+Time Transfer for adnetwork.daily_yp_performance : 0 Seconds
+#2012-01-22: adnetwork.daily_yp_performance	Dw3: 1159	Dw0: 1159
+*Update data to dw0
+Starting : Get data form adnetwork.daily_yp_performance where full_date = 2012-01-22
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 1159
+Ending : Get data from adnetwork.daily_yp_performance where full_date = 2012-01-22
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_yp_performance where full_date = '2012-01-22'
+Ending : delete from adnetwork.daily_yp_performance where full_date = '2012-01-22'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 1159
+Time Transfer for adnetwork.daily_yp_performance : 0 Seconds
+#2012-01-23: adnetwork.daily_yp_performance	Dw3: 1143	Dw0: 1143
+*Update data to dw0
+Starting : Get data form adnetwork.daily_yp_performance where full_date = 2012-01-23
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 1143
+Ending : Get data from adnetwork.daily_yp_performance where full_date = 2012-01-23
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_yp_performance where full_date = '2012-01-23'
+Ending : delete from adnetwork.daily_yp_performance where full_date = '2012-01-23'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 1143
+Time Transfer for adnetwork.daily_yp_performance : 0 Seconds
+#2012-01-24: adnetwork.daily_yp_performance	Dw3: 1145	Dw0: 1145
+*Update data to dw0
+Starting : Get data form adnetwork.daily_yp_performance where full_date = 2012-01-24
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 1145
+Ending : Get data from adnetwork.daily_yp_performance where full_date = 2012-01-24
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_yp_performance where full_date = '2012-01-24'
+Ending : delete from adnetwork.daily_yp_performance where full_date = '2012-01-24'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 1145
+Time Transfer for adnetwork.daily_yp_performance : 0 Seconds
+#2012-01-25: adnetwork.daily_yp_performance	Dw3: 1185	Dw0: 1185
+*Update data to dw0
+Starting : Get data form adnetwork.daily_yp_performance where full_date = 2012-01-25
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 1185
+Ending : Get data from adnetwork.daily_yp_performance where full_date = 2012-01-25
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_yp_performance where full_date = '2012-01-25'
+Ending : delete from adnetwork.daily_yp_performance where full_date = '2012-01-25'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 1185
+Time Transfer for adnetwork.daily_yp_performance : 0 Seconds
+#2012-01-26: adnetwork.daily_yp_performance	Dw3: 1173	Dw0: 1173
+*Update data to dw0
+Starting : Get data form adnetwork.daily_yp_performance where full_date = 2012-01-26
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 1173
+Ending : Get data from adnetwork.daily_yp_performance where full_date = 2012-01-26
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_yp_performance where full_date = '2012-01-26'
+Ending : delete from adnetwork.daily_yp_performance where full_date = '2012-01-26'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 1173
+Time Transfer for adnetwork.daily_yp_performance : 0 Seconds
+#2012-01-27: adnetwork.daily_yp_performance	Dw3: 1180	Dw0: 1180
+*Update data to dw0
+Starting : Get data form adnetwork.daily_yp_performance where full_date = 2012-01-27
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 1180
+Ending : Get data from adnetwork.daily_yp_performance where full_date = 2012-01-27
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_yp_performance where full_date = '2012-01-27'
+Ending : delete from adnetwork.daily_yp_performance where full_date = '2012-01-27'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 1180
+Time Transfer for adnetwork.daily_yp_performance : 0 Seconds
+#2012-01-28: adnetwork.daily_yp_performance	Dw3: 1205	Dw0: 1205
+*Update data to dw0
+Starting : Get data form adnetwork.daily_yp_performance where full_date = 2012-01-28
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 1205
+Ending : Get data from adnetwork.daily_yp_performance where full_date = 2012-01-28
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_yp_performance where full_date = '2012-01-28'
+Ending : delete from adnetwork.daily_yp_performance where full_date = '2012-01-28'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 1205
+Time Transfer for adnetwork.daily_yp_performance : 0 Seconds
+#2012-01-29: adnetwork.daily_yp_performance	Dw3: 1165	Dw0: 1165
+*Update data to dw0
+Starting : Get data form adnetwork.daily_yp_performance where full_date = 2012-01-29
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 1165
+Ending : Get data from adnetwork.daily_yp_performance where full_date = 2012-01-29
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_yp_performance where full_date = '2012-01-29'
+Ending : delete from adnetwork.daily_yp_performance where full_date = '2012-01-29'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 1165
+Time Transfer for adnetwork.daily_yp_performance : 0 Seconds
+#2012-01-30: adnetwork.daily_yp_performance	Dw3: 1193	Dw0: 1193
+*Update data to dw0
+Starting : Get data form adnetwork.daily_yp_performance where full_date = 2012-01-30
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 1193
+Ending : Get data from adnetwork.daily_yp_performance where full_date = 2012-01-30
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_yp_performance where full_date = '2012-01-30'
+Ending : delete from adnetwork.daily_yp_performance where full_date = '2012-01-30'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 1193
+Time Transfer for adnetwork.daily_yp_performance : 0 Seconds
+#2012-01-31: adnetwork.daily_yp_performance	Dw3: 1246	Dw0: 1246
+*Update data to dw0
+Starting : Get data form adnetwork.daily_yp_performance where full_date = 2012-01-31
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 1246
+Ending : Get data from adnetwork.daily_yp_performance where full_date = 2012-01-31
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_yp_performance where full_date = '2012-01-31'
+Ending : delete from adnetwork.daily_yp_performance where full_date = '2012-01-31'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 1246
+Time Transfer for adnetwork.daily_yp_performance : 0 Seconds
+#2012-02-01: adnetwork.daily_yp_performance	Dw3: 1274	Dw0: 0
+*Transfer data to dw0
+Starting : Get data form adnetwork.daily_yp_performance where full_date = 2012-02-01
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 1274
+Ending : Get data from adnetwork.daily_yp_performance where full_date = 2012-02-01
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_yp_performance where full_date = '2012-02-01'
+Ending : delete from adnetwork.daily_yp_performance where full_date = '2012-02-01'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 1274
+Time Transfer for adnetwork.daily_yp_performance : 0 Seconds
+#2012-02-02: adnetwork.daily_yp_performance	Dw3: 1033	Dw0: 0
+*Transfer data to dw0
+Starting : Get data form adnetwork.daily_yp_performance where full_date = 2012-02-02
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 1033
+Ending : Get data from adnetwork.daily_yp_performance where full_date = 2012-02-02
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_yp_performance where full_date = '2012-02-02'
+Ending : delete from adnetwork.daily_yp_performance where full_date = '2012-02-02'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 1033
+Time Transfer for adnetwork.daily_yp_performance : 0 Seconds
+#2012-02-03: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-02-04: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-02-05: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-02-06: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-02-07: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-02-08: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-02-09: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-02-10: adnetwork.daily_yp_performance	Dw3: 10	Dw0: 10
+*Update data to dw0
+Starting : Get data form adnetwork.daily_yp_performance where full_date = 2012-02-10
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 10
+Ending : Get data from adnetwork.daily_yp_performance where full_date = 2012-02-10
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_yp_performance where full_date = '2012-02-10'
+Ending : delete from adnetwork.daily_yp_performance where full_date = '2012-02-10'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 10
+Time Transfer for adnetwork.daily_yp_performance : 0 Seconds
+#2012-02-11: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-02-12: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-02-13: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-02-14: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-02-15: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-02-16: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-02-17: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-02-18: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-02-19: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-02-20: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-02-21: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-02-22: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-02-23: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-02-24: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-02-25: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-02-26: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-02-27: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-02-28: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-03-01: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-03-02: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-03-03: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-03-04: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-03-05: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-03-06: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-03-07: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-03-08: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-03-09: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-03-10: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-03-11: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-03-12: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-03-13: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-03-14: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-03-15: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-03-16: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-03-17: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-03-18: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-03-19: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-03-20: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-03-21: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-03-22: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-03-23: adnetwork.daily_yp_performance	Dw3: 4	Dw0: 4
+*Update data to dw0
+Starting : Get data form adnetwork.daily_yp_performance where full_date = 2012-03-23
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 4
+Ending : Get data from adnetwork.daily_yp_performance where full_date = 2012-03-23
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_yp_performance where full_date = '2012-03-23'
+Ending : delete from adnetwork.daily_yp_performance where full_date = '2012-03-23'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 4
+Time Transfer for adnetwork.daily_yp_performance : 0 Seconds
+#2012-03-24: adnetwork.daily_yp_performance	Dw3: 4	Dw0: 4
+*Update data to dw0
+Starting : Get data form adnetwork.daily_yp_performance where full_date = 2012-03-24
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 4
+Ending : Get data from adnetwork.daily_yp_performance where full_date = 2012-03-24
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_yp_performance where full_date = '2012-03-24'
+Ending : delete from adnetwork.daily_yp_performance where full_date = '2012-03-24'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 4
+Time Transfer for adnetwork.daily_yp_performance : 0 Seconds
+#2012-03-25: adnetwork.daily_yp_performance	Dw3: 4	Dw0: 4
+*Update data to dw0
+Starting : Get data form adnetwork.daily_yp_performance where full_date = 2012-03-25
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 4
+Ending : Get data from adnetwork.daily_yp_performance where full_date = 2012-03-25
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_yp_performance where full_date = '2012-03-25'
+Ending : delete from adnetwork.daily_yp_performance where full_date = '2012-03-25'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 4
+Time Transfer for adnetwork.daily_yp_performance : 0 Seconds
+#2012-03-26: adnetwork.daily_yp_performance	Dw3: 4	Dw0: 4
+*Update data to dw0
+Starting : Get data form adnetwork.daily_yp_performance where full_date = 2012-03-26
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 4
+Ending : Get data from adnetwork.daily_yp_performance where full_date = 2012-03-26
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_yp_performance where full_date = '2012-03-26'
+Ending : delete from adnetwork.daily_yp_performance where full_date = '2012-03-26'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 4
+Time Transfer for adnetwork.daily_yp_performance : 0 Seconds
+#2012-03-27: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-03-28: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-03-29: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-03-30: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-03-31: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-04-01: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-04-02: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-04-03: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-04-04: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-04-05: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-04-06: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-04-07: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-04-08: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-04-09: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-04-10: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-04-11: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-04-12: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-04-13: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-04-14: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-04-15: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-04-16: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-04-17: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-04-18: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-04-19: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-04-20: adnetwork.daily_yp_performance	Dw3: 495	Dw0: 495
+*Update data to dw0
+Starting : Get data form adnetwork.daily_yp_performance where full_date = 2012-04-20
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 495
+Ending : Get data from adnetwork.daily_yp_performance where full_date = 2012-04-20
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_yp_performance where full_date = '2012-04-20'
+Ending : delete from adnetwork.daily_yp_performance where full_date = '2012-04-20'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 495
+Time Transfer for adnetwork.daily_yp_performance : 0 Seconds
+#2012-04-21: adnetwork.daily_yp_performance	Dw3: 581	Dw0: 0
+*Transfer data to dw0
+Starting : Get data form adnetwork.daily_yp_performance where full_date = 2012-04-21
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 581
+Ending : Get data from adnetwork.daily_yp_performance where full_date = 2012-04-21
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_yp_performance where full_date = '2012-04-21'
+Ending : delete from adnetwork.daily_yp_performance where full_date = '2012-04-21'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 581
+Time Transfer for adnetwork.daily_yp_performance : 0 Seconds
+#2012-04-22: adnetwork.daily_yp_performance	Dw3: 585	Dw0: 585
+*Update data to dw0
+Starting : Get data form adnetwork.daily_yp_performance where full_date = 2012-04-22
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 585
+Ending : Get data from adnetwork.daily_yp_performance where full_date = 2012-04-22
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_yp_performance where full_date = '2012-04-22'
+Ending : delete from adnetwork.daily_yp_performance where full_date = '2012-04-22'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 585
+Time Transfer for adnetwork.daily_yp_performance : 0 Seconds
+#2012-04-23: adnetwork.daily_yp_performance	Dw3: 564	Dw0: 564
+*Update data to dw0
+Starting : Get data form adnetwork.daily_yp_performance where full_date = 2012-04-23
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 564
+Ending : Get data from adnetwork.daily_yp_performance where full_date = 2012-04-23
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_yp_performance where full_date = '2012-04-23'
+Ending : delete from adnetwork.daily_yp_performance where full_date = '2012-04-23'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 564
+Time Transfer for adnetwork.daily_yp_performance : 0 Seconds
+#2012-04-24: adnetwork.daily_yp_performance	Dw3: 598	Dw0: 598
+*Update data to dw0
+Starting : Get data form adnetwork.daily_yp_performance where full_date = 2012-04-24
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 598
+Ending : Get data from adnetwork.daily_yp_performance where full_date = 2012-04-24
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_yp_performance where full_date = '2012-04-24'
+Ending : delete from adnetwork.daily_yp_performance where full_date = '2012-04-24'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 598
+Time Transfer for adnetwork.daily_yp_performance : 0 Seconds
+#2012-04-25: adnetwork.daily_yp_performance	Dw3: 1044	Dw0: 1044
+*Update data to dw0
+Starting : Get data form adnetwork.daily_yp_performance where full_date = 2012-04-25
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 1044
+Ending : Get data from adnetwork.daily_yp_performance where full_date = 2012-04-25
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_yp_performance where full_date = '2012-04-25'
+Ending : delete from adnetwork.daily_yp_performance where full_date = '2012-04-25'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 1044
+Time Transfer for adnetwork.daily_yp_performance : 0 Seconds
+#2012-04-26: adnetwork.daily_yp_performance	Dw3: 1062	Dw0: 0
+*Transfer data to dw0
+Starting : Get data form adnetwork.daily_yp_performance where full_date = 2012-04-26
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 1062
+Ending : Get data from adnetwork.daily_yp_performance where full_date = 2012-04-26
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_yp_performance where full_date = '2012-04-26'
+Ending : delete from adnetwork.daily_yp_performance where full_date = '2012-04-26'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 1062
+Time Transfer for adnetwork.daily_yp_performance : 0 Seconds
+#2012-04-27: adnetwork.daily_yp_performance	Dw3: 889	Dw0: 0
+*Transfer data to dw0
+Starting : Get data form adnetwork.daily_yp_performance where full_date = 2012-04-27
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 889
+Ending : Get data from adnetwork.daily_yp_performance where full_date = 2012-04-27
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from adnetwork.daily_yp_performance where full_date = '2012-04-27'
+Ending : delete from adnetwork.daily_yp_performance where full_date = '2012-04-27'
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 889
+Time Transfer for adnetwork.daily_yp_performance : 0 Seconds
+#2012-04-28: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-04-29: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-04-30: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-05-01: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-05-02: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-05-03: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-05-04: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-05-05: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-05-06: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-05-07: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-05-08: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-05-09: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+#2012-05-10: adnetwork.daily_yp_performance	Dw3: 0	Dw0: 0
+
+**************************************************
+Total table transfered: 5
+adnetwork.daily_yp_performance	dw3: 1274	dw0: 0
+adnetwork.daily_yp_performance	dw3: 1033	dw0: 0
+adnetwork.daily_yp_performance	dw3: 581	dw0: 0
+adnetwork.daily_yp_performance	dw3: 1062	dw0: 0
+adnetwork.daily_yp_performance	dw3: 889	dw0: 0
+Total table updated: 28
+adnetwork.daily_yp_performance	dw3: 2012-05-20 23:24:01.660021	dw0: 2012-01-30 01:56:35.301636
+adnetwork.daily_yp_performance	dw3: 2012-05-20 23:24:01.660021	dw0: 2012-01-30 01:56:35.301636
+adnetwork.daily_yp_performance	dw3: 2012-05-20 23:24:01.660021	dw0: 2012-01-30 01:56:35.301636
+adnetwork.daily_yp_performance	dw3: 2012-05-20 23:24:01.660021	dw0: 2012-01-30 01:56:35.301636
+adnetwork.daily_yp_performance	dw3: 2012-05-20 23:24:01.660021	dw0: 2012-01-30 01:56:35.301636
+adnetwork.daily_yp_performance	dw3: 2012-05-20 23:24:01.660021	dw0: 2012-01-30 01:56:35.301636
+adnetwork.daily_yp_performance	dw3: 2012-05-20 23:24:01.660021	dw0: 2012-01-30 01:56:35.301636
+adnetwork.daily_yp_performance	dw3: 2012-05-20 23:24:01.660021	dw0: 2012-01-30 01:56:35.301636
+adnetwork.daily_yp_performance	dw3: 2012-05-20 23:24:01.660021	dw0: 2012-01-30 01:56:35.301636
+adnetwork.daily_yp_performance	dw3: 2012-05-20 23:24:01.660021	dw0: 2012-01-30 01:56:35.301636
+adnetwork.daily_yp_performance	dw3: 2012-05-20 23:24:01.660021	dw0: 2012-01-30 01:56:35.301636
+adnetwork.daily_yp_performance	dw3: 2012-05-20 23:24:01.660021	dw0: 2012-01-30 01:56:35.301636
+adnetwork.daily_yp_performance	dw3: 2012-05-20 23:24:01.660021	dw0: 2012-01-30 01:56:35.301636
+adnetwork.daily_yp_performance	dw3: 2012-05-20 23:24:01.660021	dw0: 2012-01-30 01:56:35.301636
+adnetwork.daily_yp_performance	dw3: 2012-05-20 23:24:01.660021	dw0: 2012-01-30 01:56:35.301636
+adnetwork.daily_yp_performance	dw3: 2012-05-20 23:24:01.660021	dw0: 2012-01-30 17:56:45.778848
+adnetwork.daily_yp_performance	dw3: 2012-05-20 23:24:01.660021	dw0: 2012-01-31 04:22:20.696742
+adnetwork.daily_yp_performance	dw3: 2012-05-20 23:24:01.660021	dw0: 2012-02-01 15:38:56.008461
+adnetwork.daily_yp_performance	dw3: 2012-05-20 23:24:01.660021	dw0: 2012-02-11 04:27:19.888133
+adnetwork.daily_yp_performance	dw3: 2012-05-20 23:24:01.660021	dw0: 2012-03-24 10:49:47.381911
+adnetwork.daily_yp_performance	dw3: 2012-05-20 23:24:01.660021	dw0: 2012-03-25 07:07:21.30897
+adnetwork.daily_yp_performance	dw3: 2012-05-20 23:24:01.660021	dw0: 2012-03-26 12:12:28.469495
+adnetwork.daily_yp_performance	dw3: 2012-05-20 23:24:01.660021	dw0: 2012-03-27 07:06:45.314614
+adnetwork.daily_yp_performance	dw3: 2012-05-20 23:24:01.660021	dw0: 2012-04-21 07:06:22.238926
+adnetwork.daily_yp_performance	dw3: 2012-05-20 23:24:01.660021	dw0: 2012-04-23 16:54:27.859605
+adnetwork.daily_yp_performance	dw3: 2012-05-20 23:24:01.660021	dw0: 2012-04-24 07:06:08.427282
+adnetwork.daily_yp_performance	dw3: 2012-05-20 23:24:01.660021	dw0: 2012-04-25 07:06:05.947977
+adnetwork.daily_yp_performance	dw3: 2012-05-20 23:24:01.660021	dw0: 2012-04-26 07:07:07.340109

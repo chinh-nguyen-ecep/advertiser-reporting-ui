@@ -1,0 +1,1305 @@
+Transfer adm.daily_agg_network_performance	2013-09-25	2013-10-01
+
+**************************************************
+ # 2-10-2013 9:36:21 : Transfer adm.daily_agg_network_performance FROM dw3 To dw10
+**************************************************
+*Transfer by: utils_3rdAdNetwork
+*Start process with ID: 91789
+*Exporting data to dw3.adm.daily_agg_network_performance_20131002T09362100000.csv ...
+*Verify export count...
+*Exported: 0
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adm.daily_agg_network_performance_20131002T09362100000.csv ...! Partition mode
+*Verify import count...
+*Imported: 0
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 9:37:3 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+Transfer adm.daily_network_fct_request	2013-09-25	2013-10-01
+
+**************************************************
+ # 2-10-2013 9:37:14 : Transfer adm.daily_network_fct_request FROM dw3 To dw10
+**************************************************
+*Transfer by: utils_3rdAdNetwork
+*Start process with ID: 91792
+*Exporting data to dw3.adm.daily_network_fct_request_20131002T09371400000.csv ...
+*Verify export count...
+*Exported: 17396
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adm.daily_network_fct_request_20131002T09371400000.csv ...! Normal mode
+*Verify import count...
+*Imported: 17396
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 9:38:11 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+Transfer adm.daily_network_fct_channel	2013-09-25	2013-10-01
+
+**************************************************
+ # 2-10-2013 9:38:21 : Transfer adm.daily_network_fct_channel FROM dw3 To dw10
+**************************************************
+*Transfer by: utils_3rdAdNetwork
+*Start process with ID: 91795
+*Exporting data to dw3.adm.daily_network_fct_channel_20131002T09382100000.csv ...
+*Verify export count...
+*Exported: 0
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adm.daily_network_fct_channel_20131002T09382100000.csv ...! Normal mode
+*Verify import count...
+*Imported: 0
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 9:38:36 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+Transfer adnetwork.daily_adnetwork_summary	2013-09-25	2013-10-01
+
+**************************************************
+ # 2-10-2013 9:38:46 : Transfer adnetwork.daily_adnetwork_summary FROM dw3 To dw10
+**************************************************
+*Transfer by: utils_3rdAdNetwork
+*Start process with ID: 91798
+*Exporting data to dw3.adnetwork.daily_adnetwork_summary_20131002T09384600000.csv ...
+*Verify export count...
+*Exported: 63
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adnetwork.daily_adnetwork_summary_20131002T09384600000.csv ...! Normal mode
+*Verify import count...
+*Imported: 63
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 9:38:52 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+* Check estimate adnetwork.daily_cg_mobile_performance date 2013-10-01...
+** Today adnetwork.daily_cg_mobile_performance is estimated. Transfer this table...
+Transfer adnetwork.daily_cg_mobile_performance	2013-10-01	2013-10-01
+
+**************************************************
+ # 2-10-2013 9:39:20 : Transfer adnetwork.daily_cg_mobile_performance FROM dw3 To dw10
+**************************************************
+*Transfer by: utils_3rdAdNetwork
+*Start process with ID: 91801
+*Exporting data to dw3.adnetwork.daily_cg_mobile_performance_20131002T09392000000.csv ...
+*Verify export count...
+*Exported: 1047
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adnetwork.daily_cg_mobile_performance_20131002T09392000000.csv ...! Normal mode
+*Verify import count...
+*Imported: 1047
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 9:39:55 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+* Check estimate adnetwork.daily_cg_performance date 2013-10-01...
+** Today adnetwork.daily_cg_performance is estimated. Transfer this table...
+Transfer adnetwork.daily_cg_performance	2013-10-01	2013-10-01
+
+**************************************************
+ # 2-10-2013 9:40:50 : Transfer adnetwork.daily_cg_performance FROM dw3 To dw10
+**************************************************
+*Transfer by: utils_3rdAdNetwork
+*Start process with ID: 91804
+*Exporting data to dw3.adnetwork.daily_cg_performance_20131002T09405000000.csv ...
+*Verify export count...
+*Exported: 1371
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adnetwork.daily_cg_performance_20131002T09405000000.csv ...! Normal mode
+*Verify import count...
+*Imported: 1371
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 9:41:31 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+* Check estimate adnetwork.daily_jt_performance date 2013-10-01...
+adnetwork.daily_jt_performance has been have data today...
+* Check estimate adnetwork.daily_kt_performance date 2013-10-01...
+adnetwork.daily_kt_performance has been have data today...
+* Check estimate adnetwork.daily_mm_performance date 2013-10-01...
+adnetwork.daily_mm_performance has been have data today...
+* Check estimate adnetwork.daily_mx_performance date 2013-10-01...
+adnetwork.daily_mx_performance has been have data today...
+* Check estimate adnetwork.daily_sp_blue_performance date 2013-10-01...
+adnetwork.daily_sp_blue_performance has been have data today...
+* Check estimate adnetwork.daily_wh_performance date 2013-10-01...
+adnetwork.daily_wh_performance has been have data today...
+* Check estimate adnetwork.daily_yp_no_performance date 2013-10-01...
+adnetwork.daily_yp_no_performance has been have data today...
+* Check estimate adnetwork.daily_yp_performance date 2013-10-01...
+adnetwork.daily_yp_performance has been have data today...
+* Check estimate adnetwork.daily_yp_sb_performance date 2013-10-01...
+adnetwork.daily_yp_sb_performance has been have data today...
+Transfer adsops.daily_agg_delivery_adnetwork_publisher_beta	2013-09-25	2013-10-01
+
+**************************************************
+ # 2-10-2013 9:43:43 : Transfer adsops.daily_agg_delivery_adnetwork_publisher_beta FROM dw3 To dw10
+**************************************************
+*Transfer by: utils_3rdAdNetwork
+*Start process with ID: 91807
+*Exporting data to dw3.adsops.daily_agg_delivery_adnetwork_publisher_beta_20131002T09434300000.csv ...
+*Verify export count...
+*Exported: 80262
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adsops.daily_agg_delivery_adnetwork_publisher_beta_20131002T09434300000.csv ...! Partition mode
+*Verify import count...
+*Imported: 80262
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 9:52:52 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+Transfer adsops.daily_agg_delivery_publisher_property_beta	2013-09-25	2013-10-01
+
+**************************************************
+ # 2-10-2013 9:53:3 : Transfer adsops.daily_agg_delivery_publisher_property_beta FROM dw3 To dw10
+**************************************************
+*Transfer by: utils_3rdAdNetwork
+*Start process with ID: 91810
+*Exporting data to dw3.adsops.daily_agg_delivery_publisher_property_beta_20131002T09530300000.csv ...
+*Verify export count...
+*Exported: 17163
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adsops.daily_agg_delivery_publisher_property_beta_20131002T09530300000.csv ...! Partition mode
+*Verify import count...
+*Imported: 17163
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 9:53:37 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+Transfer adsops.daily_agg_delivery_adnetwork_publisher_v3	2013-09-25	2013-10-01
+
+**************************************************
+ # 2-10-2013 9:53:47 : Transfer adsops.daily_agg_delivery_adnetwork_publisher_v3 FROM dw3 To dw10
+**************************************************
+*Transfer by: utils_3rdAdNetwork
+*Start process with ID: 91813
+*Exporting data to dw3.adsops.daily_agg_delivery_adnetwork_publisher_v3_20131002T09534700000.csv ...
+*Verify export count...
+*Exported: 80262
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adsops.daily_agg_delivery_adnetwork_publisher_v3_20131002T09534700000.csv ...! Partition mode
+*Verify import count...
+*Imported: 80262
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 10:1:30 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+Transfer adsops.daily_agg_delivery_publisher_property_v3	2013-09-25	2013-10-01
+
+**************************************************
+ # 2-10-2013 10:1:40 : Transfer adsops.daily_agg_delivery_publisher_property_v3 FROM dw3 To dw10
+**************************************************
+*Transfer by: utils_3rdAdNetwork
+*Start process with ID: 91816
+*Exporting data to dw3.adsops.daily_agg_delivery_publisher_property_v3_20131002T10014000000.csv ...
+*Verify export count...
+*Exported: 17163
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adsops.daily_agg_delivery_publisher_property_v3_20131002T10014000000.csv ...! Partition mode
+*Verify import count...
+*Imported: 17163
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 10:2:15 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+Transfer adm.daily_agg_network_revenue	2013-09-25	2013-10-01
+
+**************************************************
+ # 2-10-2013 10:2:26 : Transfer adm.daily_agg_network_revenue FROM dw3 To dw10
+**************************************************
+*Transfer by: utils_3rdAdNetwork
+*Start process with ID: 91819
+*Exporting data to dw3.adm.daily_agg_network_revenue_20131002T10022500000.csv ...
+*Verify export count...
+*Exported: 1960065
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adm.daily_agg_network_revenue_20131002T10022500000.csv ...! Partition mode
+*Verify import count...
+*Imported: 1960065
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 10:13:40 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+Transfer adm.daily_agg_network_revenue_by_publisher	2013-09-25	2013-10-01
+
+**************************************************
+ # 2-10-2013 10:13:50 : Transfer adm.daily_agg_network_revenue_by_publisher FROM dw3 To dw10
+**************************************************
+*Transfer by: utils_3rdAdNetwork
+*Start process with ID: 91823
+*Exporting data to dw3.adm.daily_agg_network_revenue_by_publisher_20131002T10135000000.csv ...
+*Verify export count...
+*Exported: 604995
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adm.daily_agg_network_revenue_by_publisher_20131002T10135000000.csv ...! Partition mode
+*Verify import count...
+*Imported: 604995
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 10:15:44 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+Transfer adm.daily_agg_network_revenue_min	2013-09-25	2013-10-01
+
+**************************************************
+ # 2-10-2013 10:15:54 : Transfer adm.daily_agg_network_revenue_min FROM dw3 To dw10
+**************************************************
+*Transfer by: utils_3rdAdNetwork
+*Start process with ID: 91826
+*Exporting data to dw3.adm.daily_agg_network_revenue_min_20131002T10155400000.csv ...
+*Verify export count...
+*Exported: 37065
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adm.daily_agg_network_revenue_min_20131002T10155400000.csv ...! Normal mode
+*Verify import count...
+*Imported: 37065
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 10:16:2 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+Transfer adm.daily_network_fct_request_beta	2013-09-25	2013-10-01
+
+**************************************************
+ # 2-10-2013 10:16:13 : Transfer adm.daily_network_fct_request_beta FROM dw3 To dw10
+**************************************************
+*Transfer by: utils_3rdAdNetwork
+*Start process with ID: 91829
+*Exporting data to dw3.adm.daily_network_fct_request_beta_20131002T10161300000.csv ...
+*Verify export count...
+*Exported: 19231
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adm.daily_network_fct_request_beta_20131002T10161300000.csv ...! Normal mode
+*Verify import count...
+*Imported: 19231
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 10:16:19 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+Transfer adm.daily_agg_api_revenue_by_partner	2013-09-25	2013-10-01
+
+**************************************************
+ # 2-10-2013 10:16:29 : Transfer adm.daily_agg_api_revenue_by_partner FROM dw3 To dw10
+**************************************************
+*Transfer by: utils_3rdAdNetwork
+*Start process with ID: 91832
+*Exporting data to dw3.adm.daily_agg_api_revenue_by_partner_20131002T10162900000.csv ...
+*Verify export count...
+*Exported: 19231
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adm.daily_agg_api_revenue_by_partner_20131002T10162900000.csv ...! Normal mode
+*Verify import count...
+*Imported: 19231
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 10:16:48 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+Transfer adm.daily_agg_api_revenue_by_partner_v2	2013-09-25	2013-10-01
+
+**************************************************
+ # 2-10-2013 10:16:58 : Transfer adm.daily_agg_api_revenue_by_partner_v2 FROM dw3 To dw10
+**************************************************
+*Transfer by: utils_3rdAdNetwork
+*Start process with ID: 91835
+*Exporting data to dw3.adm.daily_agg_api_revenue_by_partner_v2_20131002T10165800000.csv ...
+*Verify export count...
+*Exported: 19231
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adm.daily_agg_api_revenue_by_partner_v2_20131002T10165800000.csv ...! Normal mode
+*Verify import count...
+*Imported: 19231
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 10:17:17 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+Transfer adsops.daily_agg_delivery_advertiser_beta	2013-09-25	2013-10-01
+
+**************************************************
+ # 2-10-2013 10:17:27 : Transfer adsops.daily_agg_delivery_advertiser_beta FROM dw3 To dw10
+**************************************************
+*Transfer by: utils_3rdAdNetwork
+*Start process with ID: 91838
+*Exporting data to dw3.adsops.daily_agg_delivery_advertiser_beta_20131002T10172700000.csv ...
+*Verify export count...
+*Exported: 67793
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adsops.daily_agg_delivery_advertiser_beta_20131002T10172700000.csv ...! Normal mode
+*Verify import count...
+*Imported: 67793
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 10:17:51 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+Transfer adm.daily_agg_revenue_statistics	2013-09-25	2013-10-01
+
+**************************************************
+ # 2-10-2013 10:18:1 : Transfer adm.daily_agg_revenue_statistics FROM dw3 To dw10
+**************************************************
+*Transfer by: utils_3rdAdNetwork
+*Start process with ID: 91841
+*Exporting data to dw3.adm.daily_agg_revenue_statistics_20131002T10180100000.csv ...
+*Verify export count...
+*Exported: 1942669
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adm.daily_agg_revenue_statistics_20131002T10180100000.csv ...! Normal mode
+*Verify import count...
+*Imported: 1942669
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 10:27:57 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+Transfer adm.ba_daily_flight	2013-09-25	2013-10-01
+
+**************************************************
+ # 2-10-2013 10:28:8 : Transfer adm.ba_daily_flight FROM dw3 To dw10
+**************************************************
+*Transfer by: utils_3rdAdNetwork
+*Start process with ID: 91844
+*Exporting data to dw3.adm.ba_daily_flight_20131002T10280800000.csv ...
+*Verify export count...
+*Exported: 863109
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adm.ba_daily_flight_20131002T10280800000.csv ...! Normal mode
+*Verify import count...
+*Imported: 863109
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 10:30:53 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+Transfer adm.ba_daily_flight_min	2013-09-25	2013-10-01
+
+**************************************************
+ # 2-10-2013 10:31:3 : Transfer adm.ba_daily_flight_min FROM dw3 To dw10
+**************************************************
+*Transfer by: utils_3rdAdNetwork
+*Start process with ID: 91847
+*Exporting data to dw3.adm.ba_daily_flight_min_20131002T10310300000.csv ...
+*Verify export count...
+*Exported: 36897
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adm.ba_daily_flight_min_20131002T10310300000.csv ...! Normal mode
+*Verify import count...
+*Imported: 36897
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 10:31:13 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+Transfer adm.ba_daily_flight_exception	2013-09-25	2013-10-01
+
+**************************************************
+ # 2-10-2013 10:31:23 : Transfer adm.ba_daily_flight_exception FROM dw3 To dw10
+**************************************************
+*Transfer by: utils_3rdAdNetwork
+*Start process with ID: 91850
+*Exporting data to dw3.adm.ba_daily_flight_exception_20131002T10312300000.csv ...
+*Verify export count...
+*Exported: 210994
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adm.ba_daily_flight_exception_20131002T10312300000.csv ...! Normal mode
+*Verify import count...
+*Imported: 210994
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 10:31:44 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+Transfer adm.daily_agg_api_revenue_by_partner_v3	2013-09-25	2013-10-01
+
+**************************************************
+ # 2-10-2013 10:31:54 : Transfer adm.daily_agg_api_revenue_by_partner_v3 FROM dw3 To dw10
+**************************************************
+*Transfer by: utils_3rdAdNetwork
+*Start process with ID: 91853
+*Exporting data to dw3.adm.daily_agg_api_revenue_by_partner_v3_20131002T10315400000.csv ...
+*Verify export count...
+*Exported: 19231
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adm.daily_agg_api_revenue_by_partner_v3_20131002T10315400000.csv ...! Normal mode
+*Verify import count...
+*Imported: 19231
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 10:32:15 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+
+**************************************************
+ # 2-10-2013 10:32:25 : Transfer adm.daily_network_fct_request FROM dw3 To dw10
+**************************************************
+*Transfer by: dw3_util
+*Start process with ID: 91856
+*Exporting data to dw3.adm.daily_network_fct_request_20131002T10322500000.csv ...
+*Verify export count...
+*Exported: 2140
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adm.daily_network_fct_request_20131002T10322500000.csv ...! Normal mode
+*Verify import count...
+*Imported: 2140
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 10:32:29 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+
+**************************************************
+ # 2-10-2013 10:32:39 : Transfer adm.daily_network_fct_channel FROM dw3 To dw10
+**************************************************
+*Transfer by: dw3_util
+*Start process with ID: 91859
+*Exporting data to dw3.adm.daily_network_fct_channel_20131002T10323900000.csv ...
+*Verify export count...
+*Exported: 0
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adm.daily_network_fct_channel_20131002T10323900000.csv ...! Normal mode
+*Verify import count...
+*Imported: 0
+*Finished!
+*Remove the transfer file on dw10...
+#Table 1: adm.monthly_agg_adm_data_feed	dw3: 0	dw10: 0
+#Table 2: adm.monthly_agg_adm_data_feed_v2	dw3: 0	dw10: 0
+#Table 3: adm.ba_monthly_local_revenue	dw3: 0	dw10: 0
+#Table 4: adm.ba_monthly_local_revenue_v3	dw3: 0	dw10: 0
+#Table 5: adm.ba_monthly_local_revenue_v4	dw3: 0	dw10: 0
+#Table 6: adm.ba_monthly_local_revenue_v5	dw3: 0	dw10: 0
+#Table 7: adm.ba_monthly_national_revenue_v4	dw3: 0	dw10: 0
+#Table 8: adm.ba_monthly_national_revenue_v5	dw3: 0	dw10: 0
+#Table 9: adm.ba_monthly_national_revenue_v3	dw3: 0	dw10: 0
+#Table 10: adm.ba_monthly_national_revenue_v2	dw3: 0	dw10: 0
+#Table 11: adm.ba_monthly_national_revenue	dw3: 0	dw10: 0
+#Table 12: adm.ba_monthly_vlm_revenue_v4	dw3: 0	dw10: 0
+#Table 13: adm.ba_monthly_vlm_revenue_v5	dw3: 0	dw10: 0
+#Table 14: adm.ba_monthly_publisher_revenue_v4	dw3: 0	dw10: 0
+#Table 15: adm.ba_monthly_publisher_revenue_v5	dw3: 0	dw10: 0
+#Table 16: adsops.monthly_agg_delivery_adnetwork_publisher_beta	dw3: 0	dw10: 0
+#Table 17: adsops.monthly_agg_delivery_publisher_property_beta	dw3: 0	dw10: 0
+#Table 18: adnetwork.monthly_sp_blue_performance	dw3: 2197	dw10: 2195
+*Transfer data to dw10
+
+**************************************************
+ # 2-10-2013 10:32:44 : Transfer adnetwork.monthly_sp_blue_performance FROM dw3 To dw10
+**************************************************
+*Transfer by: checkAddDw3_Dw0
+*Start process with ID: 91860
+*Exporting data to dw3.adnetwork.monthly_sp_blue_performance_20131002T10324400000.csv ...
+*Verify export count...
+*Exported: 2197
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adnetwork.monthly_sp_blue_performance_20131002T10324400000.csv ...! Normal mode
+*Verify import count...
+*Imported: 2197
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 10:32:43 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# 2-10-2013 10:32:45 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+# Backup To dw6 ######################
+#Table 19: adnetwork.monthly_yp_no_performance	dw3: 2490	dw10: 2478
+*Transfer data to dw10
+
+**************************************************
+ # 2-10-2013 10:32:55 : Transfer adnetwork.monthly_yp_no_performance FROM dw3 To dw10
+**************************************************
+*Transfer by: checkAddDw3_Dw0
+*Start process with ID: 91865
+*Exporting data to dw3.adnetwork.monthly_yp_no_performance_20131002T10325500000.csv ...
+*Verify export count...
+*Exported: 2490
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adnetwork.monthly_yp_no_performance_20131002T10325500000.csv ...! Normal mode
+*Verify import count...
+*Imported: 2490
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 10:32:56 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+#Table 20: adnetwork.monthly_yp_no_performance_by_date	dw3: 30	dw10: 30
+*Update data to dw10
+
+**************************************************
+ # 2-10-2013 10:33:7 : Transfer adnetwork.monthly_yp_no_performance_by_date FROM dw3 To dw10
+**************************************************
+*Transfer by: checkAddDw3_Dw0
+*Start process with ID: 91868
+*Exporting data to dw3.adnetwork.monthly_yp_no_performance_by_date_20131002T10330700000.csv ...
+*Verify export count...
+*Exported: 30
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adnetwork.monthly_yp_no_performance_by_date_20131002T10330700000.csv ...! Normal mode
+*Verify import count...
+*Imported: 30
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 10:33:7 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+#Table 21: adnetwork.monthly_cg_mobile_performance	dw3: 2038	dw10: 2031
+*Transfer data to dw10
+
+**************************************************
+ # 2-10-2013 10:33:18 : Transfer adnetwork.monthly_cg_mobile_performance FROM dw3 To dw10
+**************************************************
+*Transfer by: checkAddDw3_Dw0
+*Start process with ID: 91871
+*Exporting data to dw3.adnetwork.monthly_cg_mobile_performance_20131002T10331800000.csv ...
+*Verify export count...
+*Exported: 2038
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adnetwork.monthly_cg_mobile_performance_20131002T10331800000.csv ...! Normal mode
+*Verify import count...
+*Imported: 2038
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 10:33:19 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+#Table 22: adnetwork.monthly_cg_mobile_performance_by_date	dw3: 29	dw10: 28
+*Transfer data to dw10
+
+**************************************************
+ # 2-10-2013 10:33:30 : Transfer adnetwork.monthly_cg_mobile_performance_by_date FROM dw3 To dw10
+**************************************************
+*Transfer by: checkAddDw3_Dw0
+*Start process with ID: 91874
+*Exporting data to dw3.adnetwork.monthly_cg_mobile_performance_by_date_20131002T10333000000.csv ...
+*Verify export count...
+*Exported: 29
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adnetwork.monthly_cg_mobile_performance_by_date_20131002T10333000000.csv ...! Normal mode
+*Verify import count...
+*Imported: 29
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 10:33:30 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+#Table 23: adnetwork.monthly_cg_performance_by_date	dw3: 29	dw10: 28
+*Transfer data to dw10
+
+**************************************************
+ # 2-10-2013 10:33:40 : Transfer adnetwork.monthly_cg_performance_by_date FROM dw3 To dw10
+**************************************************
+*Transfer by: checkAddDw3_Dw0
+*Start process with ID: 91877
+*Exporting data to dw3.adnetwork.monthly_cg_performance_by_date_20131002T10334000000.csv ...
+*Verify export count...
+*Exported: 29
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adnetwork.monthly_cg_performance_by_date_20131002T10334000000.csv ...! Normal mode
+*Verify import count...
+*Imported: 29
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 10:33:41 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+#Table 24: adnetwork.monthly_yp_performance_by_date	dw3: 0	dw10: 0
+#Table 25: adnetwork.monthly_ga_performance	dw3: 0	dw10: 0
+#Table 26: adnetwork.monthly_mm_performance	dw3: 188	dw10: 187
+*Transfer data to dw10
+
+**************************************************
+ # 2-10-2013 10:33:52 : Transfer adnetwork.monthly_mm_performance FROM dw3 To dw10
+**************************************************
+*Transfer by: checkAddDw3_Dw0
+*Start process with ID: 91880
+*Exporting data to dw3.adnetwork.monthly_mm_performance_20131002T10335200000.csv ...
+*Verify export count...
+*Exported: 188
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adnetwork.monthly_mm_performance_20131002T10335200000.csv ...! Normal mode
+*Verify import count...
+*Imported: 188
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 10:33:53 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+#Table 27: adnetwork.monthly_sp_performance	dw3: 0	dw10: 0
+#Table 28: adnetwork.monthly_adnetwork_summary	dw3: 9	dw10: 9
+*Update data to dw10
+
+**************************************************
+ # 2-10-2013 10:34:4 : Transfer adnetwork.monthly_adnetwork_summary FROM dw3 To dw10
+**************************************************
+*Transfer by: checkAddDw3_Dw0
+*Start process with ID: 91883
+*Exporting data to dw3.adnetwork.monthly_adnetwork_summary_20131002T10340400000.csv ...
+*Verify export count...
+*Exported: 9
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adnetwork.monthly_adnetwork_summary_20131002T10340400000.csv ...! Normal mode
+*Verify import count...
+*Imported: 9
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 10:34:4 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+#Table 29: adnetwork.monthly_sp_performance_by_date	dw3: 0	dw10: 0
+#Table 30: adnetwork.monthly_yp_sb_performance_by_date	dw3: 30	dw10: 30
+*Update data to dw10
+
+**************************************************
+ # 2-10-2013 10:34:14 : Transfer adnetwork.monthly_yp_sb_performance_by_date FROM dw3 To dw10
+**************************************************
+*Transfer by: checkAddDw3_Dw0
+*Start process with ID: 91886
+*Exporting data to dw3.adnetwork.monthly_yp_sb_performance_by_date_20131002T10341400000.csv ...
+*Verify export count...
+*Exported: 30
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adnetwork.monthly_yp_sb_performance_by_date_20131002T10341400000.csv ...! Normal mode
+*Verify import count...
+*Imported: 30
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 10:34:15 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+#Table 31: adnetwork.monthly_cg_performance	dw3: 2217	dw10: 2205
+*Transfer data to dw10
+
+**************************************************
+ # 2-10-2013 10:34:26 : Transfer adnetwork.monthly_cg_performance FROM dw3 To dw10
+**************************************************
+*Transfer by: checkAddDw3_Dw0
+*Start process with ID: 91889
+*Exporting data to dw3.adnetwork.monthly_cg_performance_20131002T10342600000.csv ...
+*Verify export count...
+*Exported: 2217
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adnetwork.monthly_cg_performance_20131002T10342600000.csv ...! Normal mode
+*Verify import count...
+*Imported: 2217
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 10:34:27 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+#Table 32: adnetwork.monthly_adnetwork_summary_by_date	dw3: 30	dw10: 30
+*Update data to dw10
+
+**************************************************
+ # 2-10-2013 10:34:37 : Transfer adnetwork.monthly_adnetwork_summary_by_date FROM dw3 To dw10
+**************************************************
+*Transfer by: checkAddDw3_Dw0
+*Start process with ID: 91892
+*Exporting data to dw3.adnetwork.monthly_adnetwork_summary_by_date_20131002T10343700000.csv ...
+*Verify export count...
+*Exported: 30
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adnetwork.monthly_adnetwork_summary_by_date_20131002T10343700000.csv ...! Normal mode
+*Verify import count...
+*Imported: 30
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 10:34:38 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+#Table 33: adnetwork.monthly_jt_performance_by_date	dw3: 30	dw10: 30
+*Update data to dw10
+
+**************************************************
+ # 2-10-2013 10:34:48 : Transfer adnetwork.monthly_jt_performance_by_date FROM dw3 To dw10
+**************************************************
+*Transfer by: checkAddDw3_Dw0
+*Start process with ID: 91895
+*Exporting data to dw3.adnetwork.monthly_jt_performance_by_date_20131002T10344800000.csv ...
+*Verify export count...
+*Exported: 30
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adnetwork.monthly_jt_performance_by_date_20131002T10344800000.csv ...! Normal mode
+*Verify import count...
+*Imported: 30
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 10:34:49 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+#Table 34: adnetwork.monthly_it_performance	dw3: 40	dw10: 40
+*Update data to dw10
+
+**************************************************
+ # 2-10-2013 10:34:59 : Transfer adnetwork.monthly_it_performance FROM dw3 To dw10
+**************************************************
+*Transfer by: checkAddDw3_Dw0
+*Start process with ID: 91898
+*Exporting data to dw3.adnetwork.monthly_it_performance_20131002T10345900000.csv ...
+*Verify export count...
+*Exported: 40
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adnetwork.monthly_it_performance_20131002T10345900000.csv ...! Normal mode
+*Verify import count...
+*Imported: 40
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 10:35:0 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+#Table 35: adnetwork.monthly_it_performance_by_date	dw3: 30	dw10: 30
+*Update data to dw10
+
+**************************************************
+ # 2-10-2013 10:35:10 : Transfer adnetwork.monthly_it_performance_by_date FROM dw3 To dw10
+**************************************************
+*Transfer by: checkAddDw3_Dw0
+*Start process with ID: 91901
+*Exporting data to dw3.adnetwork.monthly_it_performance_by_date_20131002T10351000000.csv ...
+*Verify export count...
+*Exported: 30
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adnetwork.monthly_it_performance_by_date_20131002T10351000000.csv ...! Normal mode
+*Verify import count...
+*Imported: 30
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 10:35:11 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+#Table 36: adnetwork.monthly_mm_performance_by_date	dw3: 30	dw10: 30
+*Update data to dw10
+
+**************************************************
+ # 2-10-2013 10:35:21 : Transfer adnetwork.monthly_mm_performance_by_date FROM dw3 To dw10
+**************************************************
+*Transfer by: checkAddDw3_Dw0
+*Start process with ID: 91904
+*Exporting data to dw3.adnetwork.monthly_mm_performance_by_date_20131002T10352100000.csv ...
+*Verify export count...
+*Exported: 30
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adnetwork.monthly_mm_performance_by_date_20131002T10352100000.csv ...! Normal mode
+*Verify import count...
+*Imported: 30
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 10:35:22 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+#Table 37: adnetwork.monthly_jt_performance	dw3: 258	dw10: 258
+*Update data to dw10
+
+**************************************************
+ # 2-10-2013 10:35:32 : Transfer adnetwork.monthly_jt_performance FROM dw3 To dw10
+**************************************************
+*Transfer by: checkAddDw3_Dw0
+*Start process with ID: 91907
+*Exporting data to dw3.adnetwork.monthly_jt_performance_20131002T10353200000.csv ...
+*Verify export count...
+*Exported: 258
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adnetwork.monthly_jt_performance_20131002T10353200000.csv ...! Normal mode
+*Verify import count...
+*Imported: 258
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 10:35:33 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+#Table 38: adnetwork.monthly_mx_performance	dw3: 1275	dw10: 1278
+*Transfer data to dw10
+
+**************************************************
+ # 2-10-2013 10:35:44 : Transfer adnetwork.monthly_mx_performance FROM dw3 To dw10
+**************************************************
+*Transfer by: checkAddDw3_Dw0
+*Start process with ID: 91910
+*Exporting data to dw3.adnetwork.monthly_mx_performance_20131002T10354400000.csv ...
+*Verify export count...
+*Exported: 1275
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adnetwork.monthly_mx_performance_20131002T10354400000.csv ...! Normal mode
+*Verify import count...
+*Imported: 1275
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 10:35:45 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+#Table 39: adnetwork.monthly_wh_performance_by_date	dw3: 0	dw10: 1
+#Table 40: adnetwork.monthly_ga_performance_by_date	dw3: 0	dw10: 0
+#Table 41: adnetwork.monthly_mx_performance_by_date	dw3: 30	dw10: 30
+*Update data to dw10
+
+**************************************************
+ # 2-10-2013 10:35:55 : Transfer adnetwork.monthly_mx_performance_by_date FROM dw3 To dw10
+**************************************************
+*Transfer by: checkAddDw3_Dw0
+*Start process with ID: 91913
+*Exporting data to dw3.adnetwork.monthly_mx_performance_by_date_20131002T10355500000.csv ...
+*Verify export count...
+*Exported: 30
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adnetwork.monthly_mx_performance_by_date_20131002T10355500000.csv ...! Normal mode
+*Verify import count...
+*Imported: 30
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 10:35:56 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+#Table 42: adnetwork.monthly_yp_sb_performance	dw3: 1229	dw10: 1230
+*Transfer data to dw10
+
+**************************************************
+ # 2-10-2013 10:36:8 : Transfer adnetwork.monthly_yp_sb_performance FROM dw3 To dw10
+**************************************************
+*Transfer by: checkAddDw3_Dw0
+*Start process with ID: 91916
+*Exporting data to dw3.adnetwork.monthly_yp_sb_performance_20131002T10360800000.csv ...
+*Verify export count...
+*Exported: 1229
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adnetwork.monthly_yp_sb_performance_20131002T10360800000.csv ...! Normal mode
+*Verify import count...
+*Imported: 1229
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 10:36:9 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+#Table 43: adnetwork.monthly_adsense_dbclk_channel_by_date	dw3: 0	dw10: 1
+#Table 44: adnetwork.monthly_adsense_dbclk_channel	dw3: 0	dw10: 4
+#Table 45: adnetwork.monthly_sp_blue_performance_by_date	dw3: 30	dw10: 30
+*Update data to dw10
+
+**************************************************
+ # 2-10-2013 10:36:20 : Transfer adnetwork.monthly_sp_blue_performance_by_date FROM dw3 To dw10
+**************************************************
+*Transfer by: checkAddDw3_Dw0
+*Start process with ID: 91919
+*Exporting data to dw3.adnetwork.monthly_sp_blue_performance_by_date_20131002T10362000000.csv ...
+*Verify export count...
+*Exported: 30
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adnetwork.monthly_sp_blue_performance_by_date_20131002T10362000000.csv ...! Normal mode
+*Verify import count...
+*Imported: 30
+*Finished!
+*Remove the transfer file on dw10...
+# 2-10-2013 10:36:20 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To dw6 ######################
+#Table 46: adnetwork.monthly_wh_performance	dw3: 0	dw10: 45
+#Table 47: adnetwork.ba_monthly_adsense_dbclk_channel	dw3: 0	dw10: 0
+#Table 48: adnetwork.ba_monthly_cg_performance	dw3: 0	dw10: 0
+#Table 49: adnetwork.ba_monthly_cg_mobile_performance	dw3: 0	dw10: 0
+#Table 50: adnetwork.ba_monthly_yp_sb_performance	dw3: 0	dw10: 0
+#Table 51: adnetwork.ba_monthly_yp_performance	dw3: 0	dw10: 0
+#Table 52: adnetwork.ba_monthly_yp_no_performance	dw3: 0	dw10: 0
+#Table 53: adnetwork.ba_monthly_it_performance	dw3: 0	dw10: 0
+#Table 54: adnetwork.ba_monthly_sp_blue_performance	dw3: 0	dw10: 0
+#Table 55: adnetwork.ba_monthly_mx_performance	dw3: 0	dw10: 0
+#Table 56: adnetwork.ba_monthly_jt_performance	dw3: 0	dw10: 0
+#Table 57: adnetwork.ba_monthly_wh_performance	dw3: 0	dw10: 0
+#Table 58: adnetwork.ba_monthly_mm_performance	dw3: 0	dw10: 0
+#Table 59: adnetwork.ba_monthly_kt_performance	dw3: 0	dw10: 0
+#Table 60: adnetwork.ba_monthly_adnetwork_summary	dw3: 0	dw10: 0
+#Table 61: adstraffic.monthly_ad_serving_stats	dw3: 20172	dw10: 20172
+#Table 62: adstraffic.monthly_ad_serving_stats_by_date	dw3: 328	dw10: 328
+#Table 63: adstraffic.monthly_ad_serving_stats_by_device	dw3: 122208	dw10: 122208
+#Table 64: adstraffic.monthly_ad_serving_stats_by_content_category	dw3: 73398	dw10: 73398
+#Table 65: adstraffic.monthly_unfilled_stats	dw3: 6087	dw10: 6087
+#Table 66: adstraffic.monthly_unfilled_stats_by_content_category	dw3: 22915	dw10: 22915
+#Table 67: adstraffic.monthly_unfilled_stats_by_date	dw3: 323	dw10: 323
+#Table 68: adstraffic.monthly_unfilled_stats_by_device	dw3: 35849	dw10: 35849
+#Table 69: adstraffic.monthly_unfilled_stats_by_dma	dw3: 170069	dw10: 170069
+#Table 70: dbclk.monthly_agg_site	dw3: 1496	dw10: 1496
+#Table 71: evttracker.monthly_event_stats_by_hour	dw3: 2723	dw10: 2723
+#Table 72: evttracker.monthly_event_stats	dw3: 244	dw10: 244
+#Table 73: evttracker.monthly_event_stats_by_date	dw3: 1961	dw10: 1961
+
+**************************************************
+Total table transfered: 9
+adnetwork.monthly_sp_blue_performance	dw3: 2197	dw10: 2195
+adnetwork.monthly_yp_no_performance	dw3: 2490	dw10: 2478
+adnetwork.monthly_cg_mobile_performance	dw3: 2038	dw10: 2031
+adnetwork.monthly_cg_mobile_performance_by_date	dw3: 29	dw10: 28
+adnetwork.monthly_cg_performance_by_date	dw3: 29	dw10: 28
+adnetwork.monthly_mm_performance	dw3: 188	dw10: 187
+adnetwork.monthly_cg_performance	dw3: 2217	dw10: 2205
+adnetwork.monthly_mx_performance	dw3: 1275	dw10: 1278
+adnetwork.monthly_yp_sb_performance	dw3: 1229	dw10: 1230
+Total table updated: 11
+adnetwork.monthly_yp_no_performance_by_date	dw3: 2013-10-02 10:06:52.556629	dw10: 2013-10-01 11:06:33.200883
+adnetwork.monthly_adnetwork_summary	dw3: 2013-10-02 10:12:53.86569	dw10: 2013-10-01 11:10:39.145306
+adnetwork.monthly_yp_sb_performance_by_date	dw3: 2013-10-02 10:06:28.631177	dw10: 2013-10-01 11:06:26.272143
+adnetwork.monthly_adnetwork_summary_by_date	dw3: 2013-10-02 10:12:54.675814	dw10: 2013-10-01 11:10:39.876132
+adnetwork.monthly_jt_performance_by_date	dw3: 2013-10-02 10:04:19.10294	dw10: 2013-10-01 11:05:44.033425
+adnetwork.monthly_it_performance	dw3: 2013-10-02 10:03:54.351998	dw10: 2013-10-01 11:05:37.556353
+adnetwork.monthly_it_performance_by_date	dw3: 2013-10-02 10:03:55.2199	dw10: 2013-10-01 11:05:38.094673
+adnetwork.monthly_mm_performance_by_date	dw3: 2013-10-02 10:05:11.178099	dw10: 2013-10-01 11:05:59.910017
+adnetwork.monthly_jt_performance	dw3: 2013-10-02 10:04:17.969449	dw10: 2013-10-01 11:05:43.444511
+adnetwork.monthly_mx_performance_by_date	dw3: 2013-10-02 10:04:45.293334	dw10: 2013-10-01 11:05:50.66324
+adnetwork.monthly_sp_blue_performance_by_date	dw3: 2013-10-02 10:05:46.495434	dw10: 2013-10-01 11:06:10.793387

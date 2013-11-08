@@ -1,0 +1,9 @@
+refer.partner_dim|vrvdetails
+refer.portal_dim|vrvdetails
+refer.content_category_dim|vrvdetails
+refer.ad_network_dim|vrvdetails
+refer.partner_module_dim|vrvdetails
+#refer.uis_dim|vrvdetails
+#refer.point_of_interest_dim|vlsm
+#refer.store_location_dim|vrvad
+#refer.event_dim|adcel

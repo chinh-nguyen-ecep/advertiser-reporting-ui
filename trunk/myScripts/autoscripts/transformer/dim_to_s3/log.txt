@@ -1,0 +1,547 @@
+Transfer Dim of date 2013-02-01
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Checking Dim!
+**Dim loaded completed!
+1. refer.event_dim 	 adcel
+
+**************************************************
+ Transfer refer.event_dim FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.event_dim.csv ...
+*Remove the transfer file on dw3...
+2. refer.date_dim 	 timer
+
+**************************************************
+ Transfer refer.date_dim FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.date_dim.csv ...
+*Remove the transfer file on dw3...
+3. refer.month_dim 	 timer
+
+**************************************************
+ Transfer refer.month_dim FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.month_dim.csv ...
+*Remove the transfer file on dw3...
+4. refer.time_dim 	 timer
+
+**************************************************
+ Transfer refer.time_dim FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.time_dim.csv ...
+*Remove the transfer file on dw3...
+5. refer.ad_network_dim 	 vrvdetails
+
+**************************************************
+ Transfer refer.ad_network_dim FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.ad_network_dim.csv ...
+*Remove the transfer file on dw3...
+6. refer.adm_advertiser_dim 	 adm1.0
+
+**************************************************
+ Transfer refer.adm_advertiser_dim FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.adm_advertiser_dim.csv ...
+*Remove the transfer file on dw3...
+7. refer.adm_channel_dim 	 adm1.0
+
+**************************************************
+ Transfer refer.adm_channel_dim FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.adm_channel_dim.csv ...
+*Remove the transfer file on dw3...
+8. refer.adm_creative_dim 	 adm1.0
+
+**************************************************
+ Transfer refer.adm_creative_dim FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.adm_creative_dim.csv ...
+*Remove the transfer file on dw3...
+9. refer.adm_dim_adsizes 	 adm2.0
+
+**************************************************
+ Transfer refer.adm_dim_adsizes FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.adm_dim_adsizes.csv ...
+*Remove the transfer file on dw3...
+10. refer.adm_dim_advertisers 	 adm2.0
+
+**************************************************
+ Transfer refer.adm_dim_advertisers FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.adm_dim_advertisers.csv ...
+*Remove the transfer file on dw3...
+11. refer.adm_dim_creatives 	 adm2.0
+
+**************************************************
+ Transfer refer.adm_dim_creatives FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.adm_dim_creatives.csv ...
+*Remove the transfer file on dw3...
+12. refer.adm_dim_flights 	 adm2.0
+
+**************************************************
+ Transfer refer.adm_dim_flights FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.adm_dim_flights.csv ...
+*Remove the transfer file on dw3...
+13. refer.adm_dim_orders 	 adm2.0
+
+**************************************************
+ Transfer refer.adm_dim_orders FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.adm_dim_orders.csv ...
+*Remove the transfer file on dw3...
+14. refer.adm_dim_organizations 	 adm2.0
+
+**************************************************
+ Transfer refer.adm_dim_organizations FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.adm_dim_organizations.csv ...
+*Remove the transfer file on dw3...
+15. refer.adm_dim_platforms 	 adm2.0
+
+**************************************************
+ Transfer refer.adm_dim_platforms FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.adm_dim_platforms.csv ...
+*Remove the transfer file on dw3...
+16. refer.adm_dim_portals 	 adm2.0
+
+**************************************************
+ Transfer refer.adm_dim_portals FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.adm_dim_portals.csv ...
+*Remove the transfer file on dw3...
+17. refer.adm_dim_properties 	 adm2.0
+
+**************************************************
+ Transfer refer.adm_dim_properties FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.adm_dim_properties.csv ...
+*Remove the transfer file on dw3...
+18. refer.adm_dim_propertygroups 	 adm2.0
+
+**************************************************
+ Transfer refer.adm_dim_propertygroups FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.adm_dim_propertygroups.csv ...
+*Remove the transfer file on dw3...
+19. refer.adm_dim_publishers 	 adm2.0
+
+**************************************************
+ Transfer refer.adm_dim_publishers FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.adm_dim_publishers.csv ...
+*Remove the transfer file on dw3...
+20. refer.adm_flight_dim 	 adm1.0
+
+**************************************************
+ Transfer refer.adm_flight_dim FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.adm_flight_dim.csv ...
+*Remove the transfer file on dw3...
+21. refer.adm_network_dim 	 adm1.0
+
+**************************************************
+ Transfer refer.adm_network_dim FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.adm_network_dim.csv ...
+*Remove the transfer file on dw3...
+22. refer.adm_order_dim 	 adm1.0
+
+**************************************************
+ Transfer refer.adm_order_dim FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.adm_order_dim.csv ...
+*Remove the transfer file on dw3...
+23. refer.adm_organization_dim 	 adm1.0
+
+**************************************************
+ Transfer refer.adm_organization_dim FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.adm_organization_dim.csv ...
+*Remove the transfer file on dw3...
+24. refer.adm_placement_dim 	 adm1.0
+
+**************************************************
+ Transfer refer.adm_placement_dim FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.adm_placement_dim.csv ...
+*Remove the transfer file on dw3...
+25. refer.adm_portal_dim 	 adm1.0
+
+**************************************************
+ Transfer refer.adm_portal_dim FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.adm_portal_dim.csv ...
+*Remove the transfer file on dw3...
+26. refer.adm_publisher_dim 	 adm1.0
+
+**************************************************
+ Transfer refer.adm_publisher_dim FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.adm_publisher_dim.csv ...
+*Remove the transfer file on dw3...
+27. refer.adm_website_dim 	 adm1.0
+
+**************************************************
+ Transfer refer.adm_website_dim FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.adm_website_dim.csv ...
+*Remove the transfer file on dw3...
+28. refer.content_category_dim 	 vrvdetails
+
+**************************************************
+ Transfer refer.content_category_dim FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.content_category_dim.csv ...
+*Remove the transfer file on dw3...
+29. refer.dc_ad_dim 	 dfp1.0
+
+**************************************************
+ Transfer refer.dc_ad_dim FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.dc_ad_dim.csv ...
+*Remove the transfer file on dw3...
+30. refer.dc_order_dim 	 dfp1.0
+
+**************************************************
+ Transfer refer.dc_order_dim FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.dc_order_dim.csv ...
+*Remove the transfer file on dw3...
+31. refer.dc_site_dim 	 dfp1.0
+
+**************************************************
+ Transfer refer.dc_site_dim FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.dc_site_dim.csv ...
+*Remove the transfer file on dw3...
+32. refer.dfp_dim_ad_units 	 dfp2.0
+
+**************************************************
+ Transfer refer.dfp_dim_ad_units FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.dfp_dim_ad_units.csv ...
+*Remove the transfer file on dw3...
+33. refer.dfp_dim_creatives 	 dfp2.0
+
+**************************************************
+ Transfer refer.dfp_dim_creatives FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.dfp_dim_creatives.csv ...
+*Remove the transfer file on dw3...
+34. refer.dfp_dim_line_items 	 dfp2.0
+
+**************************************************
+ Transfer refer.dfp_dim_line_items FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.dfp_dim_line_items.csv ...
+*Remove the transfer file on dw3...
+35. refer.dfp_dim_orders 	 dfp2.0
+
+**************************************************
+ Transfer refer.dfp_dim_orders FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.dfp_dim_orders.csv ...
+*Remove the transfer file on dw3...
+36. refer.dfp_dim_placements 	 dfp2.0
+
+**************************************************
+ Transfer refer.dfp_dim_placements FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.dfp_dim_placements.csv ...
+*Remove the transfer file on dw3...
+37. refer.partner_dim 	 vrvdetails
+
+**************************************************
+ Transfer refer.partner_dim FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.partner_dim.csv ...
+*Remove the transfer file on dw3...
+38. refer.partner_module_dim 	 vrvdetails
+
+**************************************************
+ Transfer refer.partner_module_dim FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.partner_module_dim.csv ...
+*Remove the transfer file on dw3...
+39. refer.point_of_interest_dim 	 vrsm
+
+**************************************************
+ Transfer refer.point_of_interest_dim FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.point_of_interest_dim.csv ...
+*Remove the transfer file on dw3...
+40. refer.portal_dim 	 vrvdetails
+
+**************************************************
+ Transfer refer.portal_dim FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.portal_dim.csv ...
+*Remove the transfer file on dw3...
+41. refer.revenue_share_dim 	 salesfore
+
+**************************************************
+ Transfer refer.revenue_share_dim FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.revenue_share_dim.csv ...
+*Remove the transfer file on dw3...
+42. refer.store_location_dim 	 vrvad
+
+**************************************************
+ Transfer refer.store_location_dim FROM dw3 To dw10 
+**************************************************
+*Exporting data to refer.store_location_dim.csv ...
+*Remove the transfer file on dw3...
+Upload Dim to S3
+List files on directory: dim
+List files on directory: vrvad
+Uploading file: vrsm - Size: 104301895
+Upload completed: vrsm
+
+List files on directory: adm1.0
+List files on directory: location
+List files on directory: dfp2.0
+List files on directory: salesfore
+List files on directory: vlsm
+List files on directory: vrvdetails
+List files on directory: timer
+List files on directory: dfp1.0
+List files on directory: adcel
+List files on directory: adm2.0
+Uploading file: refer.store_location_dim.csv - Size: 749518319
+Upload completed: refer.store_location_dim.csv
+
+Uploading file: refer.adm_order_dim.csv - Size: 6704957
+Upload completed: refer.adm_order_dim.csv
+
+Uploading file: refer.adm_flight_dim.csv - Size: 2154861362
+Upload completed: refer.adm_flight_dim.csv
+
+Uploading file: refer.adm_network_dim.csv - Size: 420
+Upload completed: refer.adm_network_dim.csv
+
+Uploading file: refer.adm_organization_dim.csv - Size: 1199334
+Upload completed: refer.adm_organization_dim.csv
+
+Uploading file: refer.adm_creative_dim.csv - Size: 30406135
+Upload completed: refer.adm_creative_dim.csv
+
+Uploading file: refer.adm_advertiser_dim.csv - Size: 1008385
+Upload completed: refer.adm_advertiser_dim.csv
+
+Uploading file: refer.adm_placement_dim.csv - Size: 1921977
+Upload completed: refer.adm_placement_dim.csv
+
+Uploading file: refer.adm_website_dim.csv - Size: 6095733
+Upload completed: refer.adm_website_dim.csv
+
+Uploading file: refer.adm_portal_dim.csv - Size: 8185
+Upload completed: refer.adm_portal_dim.csv
+
+Uploading file: refer.adm_publisher_dim.csv - Size: 64121
+Upload completed: refer.adm_publisher_dim.csv
+
+Uploading file: refer.adm_channel_dim.csv - Size: 5394
+Upload completed: refer.adm_channel_dim.csv
+
+Uploading file: refer.dfp_dim_creatives.csv - Size: 832381
+Upload completed: refer.dfp_dim_creatives.csv
+
+Uploading file: refer.dfp_dim_orders.csv - Size: 269604
+Upload completed: refer.dfp_dim_orders.csv
+
+Uploading file: refer.dfp_dim_placements.csv - Size: 94656
+Upload completed: refer.dfp_dim_placements.csv
+
+Uploading file: refer.dfp_dim_ad_units.csv - Size: 69448297
+Upload completed: refer.dfp_dim_ad_units.csv
+
+Uploading file: refer.dfp_dim_line_items.csv - Size: 447160
+Upload completed: refer.dfp_dim_line_items.csv
+
+Uploading file: refer.revenue_share_dim.csv - Size: 1421082
+Upload completed: refer.revenue_share_dim.csv
+
+Uploading file: refer.point_of_interest_dim.csv - Size: 103720752
+Upload completed: refer.point_of_interest_dim.csv
+
+Uploading file: refer.partner_module_dim.csv - Size: 22577179
+Upload completed: refer.partner_module_dim.csv
+
+Uploading file: refer.partner_dim.csv - Size: 7049727
+Upload completed: refer.partner_dim.csv
+
+Uploading file: refer.portal_dim.csv - Size: 12377
+Upload completed: refer.portal_dim.csv
+
+Uploading file: refer.ad_network_dim.csv - Size: 315992
+Upload completed: refer.ad_network_dim.csv
+
+Uploading file: refer.content_category_dim.csv - Size: 60354
+Upload completed: refer.content_category_dim.csv
+
+Uploading file: refer.time_dim.csv - Size: 4566344
+Upload completed: refer.time_dim.csv
+
+Uploading file: refer.month_dim.csv - Size: 3275
+Upload completed: refer.month_dim.csv
+
+Uploading file: refer.date_dim.csv - Size: 502071
+Upload completed: refer.date_dim.csv
+
+Uploading file: refer.dc_order_dim.csv - Size: 3910819
+Upload completed: refer.dc_order_dim.csv
+
+Uploading file: refer.dc_ad_dim.csv - Size: 3222484
+Upload completed: refer.dc_ad_dim.csv
+
+Uploading file: refer.dc_site_dim.csv - Size: 1472259
+Upload completed: refer.dc_site_dim.csv
+
+Uploading file: refer.event_dim.csv - Size: 34940
+Upload completed: refer.event_dim.csv
+
+Uploading file: refer.adm_dim_creatives.csv - Size: 16590
+Upload completed: refer.adm_dim_creatives.csv
+
+Uploading file: refer.adm_dim_portals.csv - Size: 13243
+Upload completed: refer.adm_dim_portals.csv
+
+Uploading file: refer.adm_dim_propertygroups.csv - Size: 1040
+Upload completed: refer.adm_dim_propertygroups.csv
+
+Uploading file: refer.adm_dim_advertisers.csv - Size: 928914
+Upload completed: refer.adm_dim_advertisers.csv
+
+Uploading file: refer.adm_dim_orders.csv - Size: 78368
+Upload completed: refer.adm_dim_orders.csv
+
+Uploading file: refer.adm_dim_organizations.csv - Size: 1598193
+Upload completed: refer.adm_dim_organizations.csv
+
+Uploading file: refer.adm_dim_adsizes.csv - Size: 1119
+Upload completed: refer.adm_dim_adsizes.csv
+
+Uploading file: refer.adm_dim_publishers.csv - Size: 321975
+Upload completed: refer.adm_dim_publishers.csv
+
+Uploading file: refer.adm_dim_properties.csv - Size: 3600234
+Upload completed: refer.adm_dim_properties.csv
+
+Uploading file: refer.adm_dim_platforms.csv - Size: 2076
+Upload completed: refer.adm_dim_platforms.csv
+
+Uploading file: refer.adm_dim_flights.csv - Size: 30034
+Upload completed: refer.adm_dim_flights.csv
+
+Done.

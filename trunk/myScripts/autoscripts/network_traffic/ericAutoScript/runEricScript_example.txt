@@ -1,0 +1,43 @@
+
+warehouse=# \i /home/ejohnst/user_agents/00-classify-bots.sql
+
+[root@dw1 song]# /home/ejohnst/user_agents/01-client-agents.sh >> /home/song/tmp/client-agents_20120311.sql
+Enter password: morose-skunking
+
+warehouse=#\i /home/song/tmp/client-agents_20120311.sql
+
+[root@dw1 song]#/home/ejohnst/user_agents/02-procagents.pl >> /home/song/tmp/procagent_20120311.sql
+
+warehouse=# \i /home/song/tmp/procagent_20120311.sql
+warehouse=# SELECT min(date_sk),max(date_sk)  FROM dw.date_dim WHERE full_date BETWEEN '2012-03-01' AND '2012-03-31';
+[root@dw1 song]#vi /home/ejohnst/user_agents/03-agent_uniques.sql
+CREATE TABLE emj_agent_uniques AS
+SELECT pv.user_agent_sk, SUM(pv.page_view_count) AS views, COUNT(DISTINCT pv.uid) AS uniques
+FROM page_view_fact pv
+WHERE pv.request_type_sk = 1
+AND pv.eastern_date_sk BETWEEN 2588 AND 2616
+GROUP BY pv.user_agent_sk
+
+
+warehouse=# alter table emj_agent_uniques rename to emj_agent_uniques_bk20120311;
+warehouse=# \i /home/ejohnst/user_agents/03-agent_uniques.sql;
+warehouse=# \o /home/song/tmp/uniques_query_20120311.txt 
+warehouse=# \i /home/ejohnst/user_agents/04-uniques_query.sql
+warehouse=# \o
+warehouse=# \q
+[root@dw1 song]# scp /home/song/tmp/uniques_query_20120311.txt song@mgmt2:~/uniques_query20120311.txt
+-bash-3.2$ /home/ejohnst/report_scripts/partner_summary_new.sh 2012-Feb >> /home/song/tmp/partner_summary_20120311.txt
+Enter password: angry-horsing
+[root@dw1 song]# scp tmp/partner_summary_20120311.txt song@mgmt2:~/partner_summary_20120311.txt
+
+warehouse=# \o /home/song/tmp/Unique_UserAgent_20120311.txt
+warehouse=# SELECT pv.user_agent_sk as ua_sk, ua.user_agent_name, views, uniques, uniques::float / views as ratio FROM staging.emj_agent_uniques pv INNER JOIN dw.user_agent_dim ua ON pv.user_agent_sk = ua.user_agent_sk WHERE ua.organic = 'f' and ua.auto_generated = 't' AND views > 25000 ORDER BY views desc;
+warehouse=# \o
+[root@dw1 song]# scp tmp/Unique_UserAgent_20120311.txt song@mgmt2:~/
+
+#after param 7 finished
+[file_xfer@dw002 bin]$ perl admgmtdw1todw2.pl 2012-Feb partner
+[file_xfer@dw002 bin]$ perl admgmtdw1todw2.pl 2012-Feb partner_portal
+[file_xfer@dw002 bin]$ perl admgmtdw1todw2.pl 2012-Feb partner_device
+
+

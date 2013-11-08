@@ -1,0 +1,1040 @@
+*Today is 2012-08-25
+*Get report date_sk!
+**Report date_sk=2793
+**Report date=2012-08-24
+###### STEP 0: CHECK ADCEL AND EVENT FILES WAS LOADED #######
+###### STEP 1: RESOLVE MISSING USER AGENT AND EVENT #######
+################## STEP 2: COPY INDAY DATA ##################
+################## STEP 3: RUN DAILY FILTER #################
+Process param 58 has been runing with ID 9572
+25-8-2012 18:18:5 # Check Param 58
+9572	PS
+25-8-2012 18:20:5 # Check Param 58
+9572	PS
+25-8-2012 18:22:5 # Check Param 58
+9572	PS
+25-8-2012 18:24:5 # Check Param 58
+9572	PS
+25-8-2012 18:26:6 # Check Param 58
+9572	PS
+25-8-2012 18:26:6 # Param 58 finished
+################## STEP 4: RUN DAILY FACTS ##################
+Process param 59 has been runing with ID 9573
+25-8-2012 18:26:11 # Check Param 59
+9573	PS
+25-8-2012 18:28:11 # Check Param 59
+9573	PS
+25-8-2012 18:30:11 # Check Param 59
+9573	PS
+25-8-2012 18:30:11 # Param 59 finished
+################# STEP 5: RUN FINAL REPORTS #################
+Process param 25 has been runing with ID 9574
+25-8-2012 18:30:16 # Check Param 25
+9574	PS
+25-8-2012 18:32:16 # Check Param 25
+9574	PS
+25-8-2012 18:34:16 # Check Param 25
+9574	PS
+25-8-2012 18:36:16 # Check Param 25
+9574	PS
+25-8-2012 18:38:16 # Check Param 25
+9574	PS
+25-8-2012 18:38:16 # Param 25 finished
+############### STEP 6: TRANSFER FINAL REPORTS ##############
+*Exporting data to dw6.evttracker.daily_event_by_distance.csv ...
+*Verify export count...
+*Exported: 426
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw3
+*Delete old data on dw3
+*Importing dw6.evttracker.daily_event_by_distance.csv ...!
+*Verify import count...
+*Remove the transfer file on dw3...
+*Remove the transfer file on transformer...
+*Imported: 426
+*Finished!
+*Exporting data to dw6.evttracker.daily_event_dma.csv ...
+*Verify export count...
+*Exported: 2306
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw3
+*Delete old data on dw3
+*Importing dw6.evttracker.daily_event_dma.csv ...!
+*Verify import count...
+*Remove the transfer file on dw3...
+*Remove the transfer file on transformer...
+*Imported: 2306
+*Finished!
+*Exporting data to dw6.evttracker.daily_event_dma_by_hour.csv ...
+*Verify export count...
+*Exported: 5308
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw3
+*Delete old data on dw3
+*Importing dw6.evttracker.daily_event_dma_by_hour.csv ...!
+*Verify import count...
+*Remove the transfer file on dw3...
+*Remove the transfer file on transformer...
+*Imported: 5308
+*Finished!
+*Exporting data to dw6.evttracker.daily_event_download.csv ...
+*Verify export count...
+*Exported: 2
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw3
+*Delete old data on dw3
+*Importing dw6.evttracker.daily_event_download.csv ...!
+*Verify import count...
+*Remove the transfer file on dw3...
+*Remove the transfer file on transformer...
+*Imported: 2
+*Finished!
+*Exporting data to dw6.evttracker.daily_event_maps.csv ...
+*Verify export count...
+*Exported: 287745
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw3
+*Delete old data on dw3
+*Importing dw6.evttracker.daily_event_maps.csv ...!
+*Verify import count...
+*Remove the transfer file on dw3...
+*Remove the transfer file on transformer...
+*Imported: 287745
+*Finished!
+*Exporting data to dw6.evttracker.daily_event_stats.csv ...
+*Verify export count...
+*Exported: 398
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw3
+*Delete old data on dw3
+*Importing dw6.evttracker.daily_event_stats.csv ...!
+*Verify import count...
+*Remove the transfer file on dw3...
+*Remove the transfer file on transformer...
+*Imported: 398
+*Finished!
+*Exporting data to dw6.evttracker.daily_event_stats_adnet.csv ...
+*Verify export count...
+*Exported: 422
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw3
+*Delete old data on dw3
+*Importing dw6.evttracker.daily_event_stats_adnet.csv ...!
+*Verify import count...
+*Remove the transfer file on dw3...
+*Remove the transfer file on transformer...
+*Imported: 422
+*Finished!
+*Exporting data to dw6.evttracker.daily_event_stats_by_hour.csv ...
+*Verify export count...
+*Exported: 1088
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw3
+*Delete old data on dw3
+*Importing dw6.evttracker.daily_event_stats_by_hour.csv ...!
+*Verify import count...
+*Remove the transfer file on dw3...
+*Remove the transfer file on transformer...
+*Imported: 1088
+*Finished!
+*Exporting data to dw6.evttracker.daily_event_x_value.csv ...
+*Verify export count...
+*Exported: 30878
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw3
+*Delete old data on dw3
+*Importing dw6.evttracker.daily_event_x_value.csv ...!
+*Verify import count...
+*Remove the transfer file on dw3...
+*Remove the transfer file on transformer...
+*Imported: 30878
+*Finished!
+*Exporting data to dw6.evttracker.daily_event_x_value_by_hour.csv ...
+*Verify export count...
+*Exported: 43314
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw3
+*Delete old data on dw3
+*Importing dw6.evttracker.daily_event_x_value_by_hour.csv ...!
+*Verify import count...
+*Remove the transfer file on dw3...
+*Remove the transfer file on transformer...
+*Imported: 43314
+*Finished!
+*Exporting data to dw6.evttracker.daily_event_x_value_report.csv ...
+*Verify export count...
+*Exported: 42702
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw3
+*Delete old data on dw3
+*Importing dw6.evttracker.daily_event_x_value_report.csv ...!
+*Verify import count...
+*Remove the transfer file on dw3...
+*Remove the transfer file on transformer...
+*Imported: 42702
+*Finished!
+*Exporting data to dw6.evttracker.daily_store_location_by_distance.csv ...
+*Verify export count...
+*Exported: 11189
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw3
+*Delete old data on dw3
+*Importing dw6.evttracker.daily_store_location_by_distance.csv ...!
+*Verify import count...
+*Remove the transfer file on dw3...
+*Remove the transfer file on transformer...
+*Imported: 11189
+*Finished!
+*Exporting data to dw6.adstraffic.daily_event_stats.csv ...
+*Verify export count...
+*Exported: 4680
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw3
+*Delete old data on dw3
+*Importing dw6.adstraffic.daily_event_stats.csv ...!
+*Verify import count...
+*Remove the transfer file on dw3...
+*Remove the transfer file on transformer...
+*Imported: 4680
+*Finished!
+*Exporting data to dw6.adstraffic.daily_event_stats_by_adnet.csv ...
+*Verify export count...
+*Exported: 4680
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw3
+*Delete old data on dw3
+*Importing dw6.adstraffic.daily_event_stats_by_adnet.csv ...!
+*Verify import count...
+*Remove the transfer file on dw3...
+*Remove the transfer file on transformer...
+*Imported: 4680
+*Finished!
+*Exporting data to dw6.adstraffic.daily_event_stats_by_content_category.csv ...
+*Verify export count...
+*Exported: 11543
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw3
+*Delete old data on dw3
+*Importing dw6.adstraffic.daily_event_stats_by_content_category.csv ...!
+*Verify import count...
+*Remove the transfer file on dw3...
+*Remove the transfer file on transformer...
+*Imported: 11543
+*Finished!
+*Exporting data to dw6.adstraffic.daily_event_stats_by_device.csv ...
+*Verify export count...
+*Exported: 14675
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw3
+*Delete old data on dw3
+*Importing dw6.adstraffic.daily_event_stats_by_device.csv ...!
+*Verify import count...
+*Remove the transfer file on dw3...
+*Remove the transfer file on transformer...
+*Imported: 14675
+*Finished!
+*Exporting data to dw6.adstraffic.daily_event_stats_by_dma.csv ...
+*Verify export count...
+*Exported: 54417
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw3
+*Delete old data on dw3
+*Importing dw6.adstraffic.daily_event_stats_by_dma.csv ...!
+*Verify import count...
+*Remove the transfer file on dw3...
+*Remove the transfer file on transformer...
+*Imported: 54417
+*Finished!
+*Exporting data to dw6.adstraffic.daily_olap_event_by_portal.csv ...
+*Verify export count...
+*Exported: 44477
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw3
+*Delete old data on dw3
+*Importing dw6.adstraffic.daily_olap_event_by_portal.csv ...!
+*Verify import count...
+*Remove the transfer file on dw3...
+*Remove the transfer file on transformer...
+*Imported: 44477
+*Finished!
+*Exporting data to dw6.evttracker.daily_event_by_distance.csv ...
+*Verify export count...
+*Exported: 426
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw6.evttracker.daily_event_by_distance.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 426
+*Finished!
+*Exporting data to dw6.evttracker.daily_event_dma.csv ...
+*Verify export count...
+*Exported: 2306
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw6.evttracker.daily_event_dma.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 2306
+*Finished!
+*Exporting data to dw6.evttracker.daily_event_dma_by_hour.csv ...
+*Verify export count...
+*Exported: 5308
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw6.evttracker.daily_event_dma_by_hour.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 5308
+*Finished!
+*Exporting data to dw6.evttracker.daily_event_download.csv ...
+*Verify export count...
+*Exported: 2
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw6.evttracker.daily_event_download.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 2
+*Finished!
+*Exporting data to dw6.evttracker.daily_event_maps.csv ...
+*Verify export count...
+*Exported: 287745
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw6.evttracker.daily_event_maps.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 287745
+*Finished!
+*Exporting data to dw6.evttracker.daily_event_stats.csv ...
+*Verify export count...
+*Exported: 398
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw6.evttracker.daily_event_stats.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 398
+*Finished!
+*Exporting data to dw6.evttracker.daily_event_stats_adnet.csv ...
+*Verify export count...
+*Exported: 422
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw6.evttracker.daily_event_stats_adnet.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 422
+*Finished!
+*Exporting data to dw6.evttracker.daily_event_stats_by_hour.csv ...
+*Verify export count...
+*Exported: 1088
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw6.evttracker.daily_event_stats_by_hour.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 1088
+*Finished!
+*Exporting data to dw6.evttracker.daily_event_x_value.csv ...
+*Verify export count...
+*Exported: 30878
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw6.evttracker.daily_event_x_value.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 30878
+*Finished!
+*Exporting data to dw6.evttracker.daily_event_x_value_by_hour.csv ...
+*Verify export count...
+*Exported: 43314
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw6.evttracker.daily_event_x_value_by_hour.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 43314
+*Finished!
+*Exporting data to dw6.evttracker.daily_event_x_value_report.csv ...
+*Verify export count...
+*Exported: 42702
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw6.evttracker.daily_event_x_value_report.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 42702
+*Finished!
+*Exporting data to dw6.evttracker.daily_store_location_by_distance.csv ...
+*Verify export count...
+*Exported: 11189
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw6.evttracker.daily_store_location_by_distance.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 11189
+*Finished!
+*Exporting data to dw6.adstraffic.daily_event_stats.csv ...
+*Verify export count...
+*Exported: 4680
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw6.adstraffic.daily_event_stats.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 4680
+*Finished!
+*Exporting data to dw6.adstraffic.daily_event_stats_by_adnet.csv ...
+*Verify export count...
+*Exported: 4680
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw6.adstraffic.daily_event_stats_by_adnet.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 4680
+*Finished!
+*Exporting data to dw6.adstraffic.daily_event_stats_by_content_category.csv ...
+*Verify export count...
+*Exported: 11543
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw6.adstraffic.daily_event_stats_by_content_category.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 11543
+*Finished!
+*Exporting data to dw6.adstraffic.daily_event_stats_by_device.csv ...
+*Verify export count...
+*Exported: 14675
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw6.adstraffic.daily_event_stats_by_device.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 14675
+*Finished!
+*Exporting data to dw6.adstraffic.daily_event_stats_by_dma.csv ...
+*Verify export count...
+*Exported: 54417
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw6.adstraffic.daily_event_stats_by_dma.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 54417
+*Finished!
+*Exporting data to dw6.adstraffic.daily_olap_event_by_portal.csv ...
+*Verify export count...
+*Exported: 44477
+*Copy export file to transformer.
+*Remove the transfer file on dw6...
+*Begin Importing process...
+*Copy import file to dw0
+*Delete old data on dw0
+*Importing dw6.adstraffic.daily_olap_event_by_portal.csv ...!
+*Verify import count...
+*Remove the transfer file on dw0...
+*Remove the transfer file on transformer...
+*Imported: 44477
+*Finished!
+################ STEP 7: TRANSFER UPDATED DIM ###############
+Starting : Get data from refer.network_type_dim
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 205
+Ending : Get data from refer.network_type_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from refer.network_type_dim
+Ending : delete from refer.network_type_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 205
+Time Transfer for refer.network_type_dim : 2 Seconds
+Starting : Get data from refer.page_template_dim
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 3
+Ending : Get data from refer.page_template_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from refer.page_template_dim
+Ending : delete from refer.page_template_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 3
+Time Transfer for refer.page_template_dim : 0 Seconds
+Starting : Get data from refer.partner_dim
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 18519
+Ending : Get data from refer.partner_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from refer.partner_dim
+Ending : delete from refer.partner_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 18519
+Time Transfer for refer.partner_dim : 1 Seconds
+Starting : Get data from refer.partner_module_dim
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 96601
+Ending : Get data from refer.partner_module_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from refer.partner_module_dim
+Ending : delete from refer.partner_module_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 96601
+Time Transfer for refer.partner_module_dim : 4 Seconds
+Starting : Get data from refer.portal_dim
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 73
+Ending : Get data from refer.portal_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from refer.portal_dim
+Ending : delete from refer.portal_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 73
+Time Transfer for refer.portal_dim : 0 Seconds
+Starting : Get data from refer.portal_host_dim
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 2247
+Ending : Get data from refer.portal_host_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from refer.portal_host_dim
+Ending : delete from refer.portal_host_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 2247
+Time Transfer for refer.portal_host_dim : 0 Seconds
+Starting : Get data from refer.referrer_hostname_dim
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 216694
+Ending : Get data from refer.referrer_hostname_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from refer.referrer_hostname_dim
+Ending : delete from refer.referrer_hostname_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 216694
+Time Transfer for refer.referrer_hostname_dim : 6 Seconds
+Starting : Get data from refer.request_type_dim
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 18
+Ending : Get data from refer.request_type_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from refer.request_type_dim
+Ending : delete from refer.request_type_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 18
+Time Transfer for refer.request_type_dim : 0 Seconds
+Starting : Get data from refer.display_block_dim
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 526965
+Ending : Get data from refer.display_block_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from refer.display_block_dim
+Ending : delete from refer.display_block_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 526965
+Time Transfer for refer.display_block_dim : 14 Seconds
+Starting : Get data from refer.content_category_dim
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 530
+Ending : Get data from refer.content_category_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from refer.content_category_dim
+Ending : delete from refer.content_category_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 530
+Time Transfer for refer.content_category_dim : 0 Seconds
+Starting : Get data from refer.ad_network_dim
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 445
+Ending : Get data from refer.ad_network_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from refer.ad_network_dim
+Ending : delete from refer.ad_network_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 445
+Time Transfer for refer.ad_network_dim : 0 Seconds
+Starting : Get data from refer.ad_network_param_dim
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 88582
+Ending : Get data from refer.ad_network_param_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from refer.ad_network_param_dim
+Ending : delete from refer.ad_network_param_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 88582
+Time Transfer for refer.ad_network_param_dim : 2 Seconds
+Starting : Get data from refer.adm_advertiser_dim
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 3600
+Ending : Get data from refer.adm_advertiser_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from refer.adm_advertiser_dim
+Ending : delete from refer.adm_advertiser_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 3600
+Time Transfer for refer.adm_advertiser_dim : 0 Seconds
+Starting : Get data from refer.adm_channel_dim
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 39
+Ending : Get data from refer.adm_channel_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from refer.adm_channel_dim
+Ending : delete from refer.adm_channel_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 39
+Time Transfer for refer.adm_channel_dim : 1 Seconds
+Starting : Get data from refer.adm_creative_dim
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 48452
+Ending : Get data from refer.adm_creative_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from refer.adm_creative_dim
+Ending : delete from refer.adm_creative_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 48452
+Time Transfer for refer.adm_creative_dim : 1 Seconds
+Starting : Get data from refer.adm_placement_dim
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 8725
+Ending : Get data from refer.adm_placement_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from refer.adm_placement_dim
+Ending : delete from refer.adm_placement_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 8725
+Time Transfer for refer.adm_placement_dim : 1 Seconds
+Starting : Get data from refer.adm_flight_dim
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 528253
+Ending : Get data from refer.adm_flight_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from refer.adm_flight_dim
+Ending : delete from refer.adm_flight_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 528253
+Time Transfer for refer.adm_flight_dim : 170 Seconds
+Starting : Get data from refer.adm_network_dim
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 5
+Ending : Get data from refer.adm_network_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from refer.adm_network_dim
+Ending : delete from refer.adm_network_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 5
+Time Transfer for refer.adm_network_dim : 0 Seconds
+Starting : Get data from refer.adm_order_dim
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 12740
+Ending : Get data from refer.adm_order_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from refer.adm_order_dim
+Ending : delete from refer.adm_order_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 12740
+Time Transfer for refer.adm_order_dim : 1 Seconds
+Starting : Get data from refer.adm_organization_dim
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 4479
+Ending : Get data from refer.adm_organization_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from refer.adm_organization_dim
+Ending : delete from refer.adm_organization_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 4479
+Time Transfer for refer.adm_organization_dim : 0 Seconds
+Starting : Get data from refer.adm_portal_dim
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 77
+Ending : Get data from refer.adm_portal_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from refer.adm_portal_dim
+Ending : delete from refer.adm_portal_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 77
+Time Transfer for refer.adm_portal_dim : 0 Seconds
+Starting : Get data from refer.adm_publication_dim
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 4252
+Ending : Get data from refer.adm_publication_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from refer.adm_publication_dim
+Ending : delete from refer.adm_publication_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 4252
+Time Transfer for refer.adm_publication_dim : 0 Seconds
+Starting : Get data from refer.adm_publisher_dim
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 374
+Ending : Get data from refer.adm_publisher_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from refer.adm_publisher_dim
+Ending : delete from refer.adm_publisher_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 374
+Time Transfer for refer.adm_publisher_dim : 0 Seconds
+Starting : Get data from refer.adm_website_dim
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 31883
+Ending : Get data from refer.adm_website_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from refer.adm_website_dim
+Ending : delete from refer.adm_website_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 31883
+Time Transfer for refer.adm_website_dim : 1 Seconds
+Starting : Get data from refer.dc_ad_dim
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 3320
+Ending : Get data from refer.dc_ad_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from refer.dc_ad_dim
+Ending : delete from refer.dc_ad_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Time Transfer for refer.dc_ad_dim : 0 Seconds
+Starting : Get data from refer.dc_order_dim
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 10093
+Ending : Get data from refer.dc_order_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from refer.dc_order_dim
+Ending : delete from refer.dc_order_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 10093
+Time Transfer for refer.dc_order_dim : 1 Seconds
+Starting : Get data from refer.dc_site_dim
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 5076
+Ending : Get data from refer.dc_site_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from refer.dc_site_dim
+Ending : delete from refer.dc_site_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 5076
+Time Transfer for refer.dc_site_dim : 0 Seconds
+Starting : Get data from refer.ga_channel_dim
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 51
+Ending : Get data from refer.ga_channel_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from refer.ga_channel_dim
+Ending : delete from refer.ga_channel_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 51
+Time Transfer for refer.ga_channel_dim : 0 Seconds
+Starting : Get data from refer.revenue_share_dim
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 4909
+Ending : Get data from refer.revenue_share_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from refer.revenue_share_dim
+Ending : delete from refer.revenue_share_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 4909
+Time Transfer for refer.revenue_share_dim : 0 Seconds
+Starting : Get data from refer.time_dim
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 86400
+Ending : Get data from refer.time_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from refer.time_dim
+Ending : delete from refer.time_dim
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 86400
+Time Transfer for refer.time_dim : 2 Seconds
+Starting : Get data from control.data_current_up_to_date
+You made it, take control your database now!
+Connected to the database : warehouse
+Exporting : Number of Records : 24
+Ending : Get data from control.data_current_up_to_date
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Starting : delete from control.data_current_up_to_date
+Ending : delete from control.data_current_up_to_date
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import is working ok
+You made it, take control your database now!
+Connected to the database : warehouse on dw0
+Import Count : 24
+Time Transfer for control.data_current_up_to_date : 0 Seconds

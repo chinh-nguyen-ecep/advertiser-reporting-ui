@@ -1,0 +1,10 @@
+#refer.partner_dim|vrvdetails
+#refer.portal_dim|vrvdetails
+#refer.content_category_dim|vrvdetails
+#refer.ad_network_dim|vrvdetails
+refer.point_of_interest_dim|vlsm
+refer.store_location_dim|vrvdetails
+refer.event_dim|event_tracker
+#refer.date_dim|tmp
+#refer.month_dim|tmp
+#refer.time_dim|tmp

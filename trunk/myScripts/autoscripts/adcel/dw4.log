@@ -1,0 +1,798 @@
+*Today is 2013-05-01
+*Get report date_sk!
+**Report date_sk=3042
+**Report date=2013-04-30
+*Run param 32 on dw4!
+1-5-2013 0:49:9 # **Run param 32 with process ID=10866
+*Check to promote param 32!
+*********** 10 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 10 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 10 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 10 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 10 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 10 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 10 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 10 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 10 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 10 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 10 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 10 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 10 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 10 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 10 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 10 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 10 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 10 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 11 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 12 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 12 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 12 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 12 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 12 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 12 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 13 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 13 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 13 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 13 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 13 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 13 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 13 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 13 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 14 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 15 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 16 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 17 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 17 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 17 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 18 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 18 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 18 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 18 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 18 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 18 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 18 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 18 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 18 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 18 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 18 
+**Param 32 is not completed. Recheck after 60s
+*Check to promote param 32!
+*********** 19 
+**Param 32 is completed. Promote param 32
+**Check to make sure Param is promoted...
+1-5-2013 1:40:59 # **Param 32 is promoted!
+*Check the status to know we can start process or not!
+1-5-2013 1:41:3 # **We can start process 50 now!...
+*Run param 50 on dw4!
+1-5-2013 1:41:9 # **Run param 50 with process ID=10867
+*Run param 13 on dw4!
+1-5-2013 1:41:14 # **Run param 13 with process ID=10868
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+**Dw4 Daily stats_01 complete count true = 0. Recheck after 60s
+*Check Daily Stats 01!
+1-5-2013 2:35:3 # **Dw4 Daily stats_01 is completed. Tranfert data to dw3...
+1-5-2013 2:35:5 # *Transfer fact table: adstraffic.ad_response_fact_stats_01...
+*Begining transfer...
+
+**************************************************
+ # 1-5-2013 2:35:5 : Transfer adstraffic.ad_response_fact_stats_01 FROM dw4 To dw3
+**************************************************
+*Transfer by: adcelAutodaily_dw4.pl
+*Start process with ID: 41744
+*Exporting data to dw4.adstraffic.ad_response_fact_stats_01_20130501T02350500000.csv ...
+*Verify export count off...
+*Copy export file to transformer.
+*Remove the transfer file on dw4...
+*Begin Importing process...
+*Copy export file to dw3
+*Remove the transfer file on transformer dw10...
+*Delete old data on dw3
+*Importing dw4.adstraffic.ad_response_fact_stats_01_20130501T02350500000.csv ...! Normal mode
+*Verify import count off...
+*Remove the transfer file on dw3...
+# 1-5-2013 2:38:34 : Transfer completed!
+*Verify transfer fact table: adstraffic.ad_response_fact_stats_01...
+1-5-2013 2:39:8 # *Stransfer fact table: adstraffic.ad_response_fact_stats_01 2410021 Ok
+Update process_checkpoint of para 31 on Dw3
+...Update process_checkpoint_forecast of para 13 on Dw3
+...*Check Daily Filled!
+**Dw4 Daily Filled complete count true = 0. Recheck after 60s
+*Check Daily Filled!
+**Dw4 Daily Filled complete count true = 0. Recheck after 60s
+*Check Daily Filled!
+**Dw4 Daily Filled complete count true = 0. Recheck after 60s
+*Check Daily Filled!
+**Dw4 Daily Filled complete count true = 0. Recheck after 60s
+*Check Daily Filled!
+**Dw4 Daily Filled complete count true = 0. Recheck after 60s
+*Check Daily Filled!
+**Dw4 Daily Filled complete count true = 0. Recheck after 60s
+*Check Daily Filled!
+**Dw4 Daily Filled complete count true = 0. Recheck after 60s
+*Check Daily Filled!
+**Dw4 Daily Filled complete count true = 0. Recheck after 60s
+*Check Daily Filled!
+**Dw4 Daily Filled complete count true = 0. Recheck after 60s
+*Check Daily Filled!
+**Dw4 Daily Filled complete count true = 0. Recheck after 60s
+*Check Daily Filled!
+**Dw4 Daily Filled complete count true = 0. Recheck after 60s
+*Check Daily Filled!
+**Dw4 Daily Filled complete count true = 0. Recheck after 60s
+*Check Daily Filled!
+1-5-2013 2:51:36 # **Dw4 Daily Filled is completed. Tranfert filled data to dw3...
+1-5-2013 2:51:38 # *Transfer fact table: adstraffic.ad_response_fact_stats_filled...
+*Begining transfer...
+
+**************************************************
+ # 1-5-2013 2:51:38 : Transfer adstraffic.ad_response_fact_stats_filled FROM dw4 To dw3
+**************************************************
+*Transfer by: adcelAutodaily_dw4.pl
+*Start process with ID: 41747
+*Exporting data to dw4.adstraffic.ad_response_fact_stats_filled_20130501T02513800000.csv ...
+*Verify export count off...
+*Copy export file to transformer.
+*Remove the transfer file on dw4...
+*Begin Importing process...
+*Copy export file to dw3
+*Remove the transfer file on transformer dw10...
+*Delete old data on dw3
+*Importing dw4.adstraffic.ad_response_fact_stats_filled_20130501T02513800000.csv ...! Normal mode
+*Verify import count off...
+*Remove the transfer file on dw3...
+# 1-5-2013 3:25:20 : Transfer completed!
+*Verify transfer fact table: adstraffic.ad_response_fact_stats_filled...
+1-5-2013 3:52:10 # *Stransfer fact table: adstraffic.ad_response_fact_stats_filled 3344836 Ok
+*Check Daily Unfilled!
+1-5-2013 3:52:12 # **Dw4 Daily Unfilled is completed. Tranfert unfilled data to dw3...
+1-5-2013 3:52:14 # *Transfer fact table: adstraffic.ad_response_fact_stats_unfilled...
+*Begining transfer...
+
+**************************************************
+ # 1-5-2013 3:52:14 : Transfer adstraffic.ad_response_fact_stats_unfilled FROM dw4 To dw3
+**************************************************
+*Transfer by: adcelAutodaily_dw4.pl
+*Start process with ID: 41771
+*Exporting data to dw4.adstraffic.ad_response_fact_stats_unfilled_20130501T03521400000.csv ...
+*Verify export count off...
+*Copy export file to transformer.
+*Remove the transfer file on dw4...
+*Begin Importing process...
+*Copy export file to dw3
+*Remove the transfer file on transformer dw10...
+*Delete old data on dw3
+*Importing dw4.adstraffic.ad_response_fact_stats_unfilled_20130501T03521400000.csv ...! Normal mode
+*Verify import count off...
+*Remove the transfer file on dw3...
+# 1-5-2013 4:29:20 : Transfer completed!
+*Verify transfer fact table: adstraffic.ad_response_fact_stats_unfilled...
+1-5-2013 4:45:29 # *Stransfer fact table: adstraffic.ad_response_fact_stats_unfilled 4492373 Ok
+*Check Daily Trxids!
+1-5-2013 4:45:31 # **Dw4 Daily Trxids is completed. Tranfert trxids data to dw3...
+1-5-2013 4:45:33 # *Transfer fact table: adstraffic.ad_response_fact_stats_trxids...
+*Begining transfer...
+
+**************************************************
+ # 1-5-2013 4:45:33 : Transfer adstraffic.ad_response_fact_stats_trxids FROM dw4 To dw3
+**************************************************
+*Transfer by: adcelAutodaily_dw4.pl
+*Start process with ID: 41775
+*Exporting data to dw4.adstraffic.ad_response_fact_stats_trxids_20130501T04453300000.csv ...
+*Verify export count off...
+*Copy export file to transformer.
+*Remove the transfer file on dw4...
+*Begin Importing process...
+*Copy export file to dw3
+*Remove the transfer file on transformer dw10...
+*Delete old data on dw3
+*Importing dw4.adstraffic.ad_response_fact_stats_trxids_20130501T04453300000.csv ...! Normal mode
+*Verify import count off...
+*Remove the transfer file on dw3...
+# 1-5-2013 5:25:47 : Transfer completed!
+*Verify transfer fact table: adstraffic.ad_response_fact_stats_trxids...
+1-5-2013 5:42:10 # *Stransfer fact table: adstraffic.ad_response_fact_stats_trxids 19317710 Ok
+1-5-2013 5:42:10 # * Transfer dim from dw3 to dw4
+Strarting exported data ....
+refer.network_type_dim
+refer.page_template_dim
+refer.partner_dim
+refer.partner_module_dim
+refer.portal_dim
+refer.portal_host_dim
+refer.referrer_hostname_dim
+refer.request_type_dim
+refer.display_block_dim
+refer.content_category_dim
+refer.ad_network_dim
+refer.ad_network_param_dim
+refer.adm_advertiser_dim
+refer.adm_channel_dim
+refer.adm_creative_dim
+refer.adm_placement_dim
+refer.adm_flight_dim
+refer.adm_network_dim
+refer.adm_order_dim
+refer.adm_organization_dim
+refer.adm_portal_dim
+refer.adm_publication_dim
+refer.adm_publisher_dim
+refer.adm_website_dim
+refer.dc_ad_dim
+refer.dc_order_dim
+refer.dc_site_dim
+refer.event_dim
+refer.ga_channel_dim
+refer.revenue_share_dim
+refer.time_dim
+control.data_current_up_to_date
+starting exportes with refer.network_type_dim
+You made it, take control your database now!
+starting  truncate and loading data....
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+local =: 205 : remote = 205
+ compare rows true ..
+starting exportes with refer.page_template_dim
+You made it, take control your database now!
+starting  truncate and loading data....
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+local =: 3 : remote = 3
+ compare rows true ..
+starting exportes with refer.partner_dim
+You made it, take control your database now!
+starting  truncate and loading data....
+You made it, take control your database now!
+You made it, take control your database now!
+*Check Daily Forecast!
+1-5-2013 5:42:14 # **Dw4 Daily Forecast is completed. Tranfert forecast data to dw3...
+1-5-2013 5:42:16 # *Transfer fact table: adstraffic.ad_response_fact_stats_forecast...
+*Begining transfer...
+You made it, take control your database now!
+You made it, take control your database now!
+local =: 20370 : remote = 20370
+ compare rows true ..
+starting exportes with refer.partner_module_dim
+You made it, take control your database now!
+starting  truncate and loading data....
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+local =: 101880 : remote = 101880
+ compare rows true ..
+starting exportes with refer.portal_dim
+You made it, take control your database now!
+starting  truncate and loading data....
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+local =: 75 : remote = 75
+ compare rows true ..
+starting exportes with refer.portal_host_dim
+You made it, take control your database now!
+starting  truncate and loading data....
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+local =: 2388 : remote = 2388
+ compare rows true ..
+starting exportes with refer.referrer_hostname_dim
+You made it, take control your database now!
+starting  truncate and loading data....
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+local =: 216694 : remote = 216694
+ compare rows true ..
+starting exportes with refer.request_type_dim
+You made it, take control your database now!
+starting  truncate and loading data....
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+local =: 18 : remote = 18
+ compare rows true ..
+starting exportes with refer.display_block_dim
+You made it, take control your database now!
+starting  truncate and loading data....
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+local =: 588722 : remote = 588722
+ compare rows true ..
+starting exportes with refer.content_category_dim
+You made it, take control your database now!
+starting  truncate and loading data....
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+local =: 530 : remote = 530
+ compare rows true ..
+starting exportes with refer.ad_network_dim
+You made it, take control your database now!
+starting  truncate and loading data....
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+local =: 1365 : remote = 1365
+ compare rows true ..
+starting exportes with refer.ad_network_param_dim
+You made it, take control your database now!
+starting  truncate and loading data....
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+local =: 112895 : remote = 112895
+ compare rows true ..
+starting exportes with refer.adm_advertiser_dim
+You made it, take control your database now!
+starting  truncate and loading data....
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+local =: 6719 : remote = 6719
+ compare rows true ..
+starting exportes with refer.adm_channel_dim
+You made it, take control your database now!
+starting  truncate and loading data....
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+local =: 50 : remote = 50
+ compare rows true ..
+starting exportes with refer.adm_creative_dim
+You made it, take control your database now!
+starting  truncate and loading data....
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+local =: 109773 : remote = 109773
+ compare rows true ..
+starting exportes with refer.adm_placement_dim
+You made it, take control your database now!
+starting  truncate and loading data....
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+local =: 12525 : remote = 12525
+ compare rows true ..
+starting exportes with refer.adm_flight_dim
+You made it, take control your database now!
+starting  truncate and loading data....
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+local =: 1338326 : remote = 1338326
+ compare rows true ..
+starting exportes with refer.adm_network_dim
+You made it, take control your database now!
+starting  truncate and loading data....
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+local =: 5 : remote = 5
+ compare rows true ..
+starting exportes with refer.adm_order_dim
+You made it, take control your database now!
+starting  truncate and loading data....
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+local =: 27001 : remote = 27001
+ compare rows true ..
+starting exportes with refer.adm_organization_dim
+You made it, take control your database now!
+starting  truncate and loading data....
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+local =: 7643 : remote = 7643
+ compare rows true ..
+starting exportes with refer.adm_portal_dim
+You made it, take control your database now!
+starting  truncate and loading data....
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+local =: 82 : remote = 82
+ compare rows true ..
+starting exportes with refer.adm_publication_dim
+You made it, take control your database now!
+starting  truncate and loading data....
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+local =: 4252 : remote = 4252
+ compare rows true ..
+starting exportes with refer.adm_publisher_dim
+You made it, take control your database now!
+starting  truncate and loading data....
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+local =: 481 : remote = 481
+ compare rows true ..
+starting exportes with refer.adm_website_dim
+You made it, take control your database now!
+starting  truncate and loading data....
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+local =: 34615 : remote = 34615
+ compare rows true ..
+starting exportes with refer.dc_ad_dim
+You made it, take control your database now!
+starting  truncate and loading data....
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+local =: 25529 : remote = 25529
+ compare rows true ..
+starting exportes with refer.dc_order_dim
+You made it, take control your database now!
+starting  truncate and loading data....
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+local =: 19454 : remote = 19454
+ compare rows true ..
+starting exportes with refer.dc_site_dim
+You made it, take control your database now!
+starting  truncate and loading data....
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+local =: 8947 : remote = 8947
+ compare rows true ..
+starting exportes with refer.event_dim
+You made it, take control your database now!
+starting  truncate and loading data....
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+local =: 1070 : remote = 1070
+ compare rows true ..
+starting exportes with refer.ga_channel_dim
+You made it, take control your database now!
+starting  truncate and loading data....
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+local =: 53 : remote = 53
+ compare rows true ..
+starting exportes with refer.revenue_share_dim
+You made it, take control your database now!
+starting  truncate and loading data....
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+local =: 10710 : remote = 10710
+ compare rows true ..
+starting exportes with refer.time_dim
+You made it, take control your database now!
+starting  truncate and loading data....
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+local =: 86400 : remote = 86400
+ compare rows true ..
+starting exportes with control.data_current_up_to_date
+You made it, take control your database now!
+starting  truncate and loading data....
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+You made it, take control your database now!
+local =: 42 : remote = 42
+ compare rows true ..
+Sent message successfully....
+End...
+
+**************************************************
+ # 1-5-2013 5:42:16 : Transfer adstraffic.ad_response_fact_stats_forecast FROM dw4 To dw3
+**************************************************
+*Transfer by: adcelAutodaily_dw4.pl
+*Start process with ID: 41870
+*Exporting data to dw4.adstraffic.ad_response_fact_stats_forecast_20130501T05421600000.csv ...
+*Verify export count off...
+*Copy export file to transformer.
+*Remove the transfer file on dw4...
+*Begin Importing process...
+*Copy export file to dw3
+*Remove the transfer file on transformer dw10...
+*Delete old data on dw3
+*Importing dw4.adstraffic.ad_response_fact_stats_forecast_20130501T05421600000.csv ...! Normal mode
+*Verify import count off...
+*Remove the transfer file on dw3...
+# 1-5-2013 6:49:38 : Transfer completed!
+*Verify transfer fact table: adstraffic.ad_response_fact_stats_forecast...
+1-5-2013 7:1:11 # *Stransfer fact table: adstraffic.ad_response_fact_stats_forecast 17435144 Ok
+*Check to promote param 50!
+**Param 50 is completed. Promote param 50
+**Check to make sure Param is promoted...
+1-5-2013 7:1:17 # **Param 50 is promoted!
+*Check to promote param 13!
+**Param 13 is completed. Promote param 13
+**Check to make sure Param is promoted...
+1-5-2013 7:1:25 # **Param 13 is promoted!
+1-5-2013 7:1:27 # *Transfer adstraffic.daily_adcel_stats 3042
+
+**************************************************
+ # 1-5-2013 7:1:29 : Transfer adstraffic.daily_adcel_stats FROM dw4 To dw3
+**************************************************
+*Transfer by: adcelAutodaily_dw4.pl
+*Start process with ID: 41970
+*Exporting data to dw4.adstraffic.daily_adcel_stats_20130501T07012900000.csv ...
+*Verify export count...
+*Exported: 1
+*Copy export file to transformer.
+*Remove the transfer file on dw4...
+*Begin Importing process...
+*Copy export file to dw3
+*Remove the transfer file on transformer dw10...
+*Delete old data on dw3
+*Importing dw4.adstraffic.daily_adcel_stats_20130501T07012900000.csv ...! Normal mode
+*Verify import count...
+*Imported: 1
+*Finished!
+*Remove the transfer file on dw3...
+# 1-5-2013 7:1:31 : Transfer completed!
+*Transfer adstraffic.daily_adcel_stats 2013-04-30
+
+**************************************************
+ # 1-5-2013 7:1:33 : Transfer adstraffic.daily_adcel_stats FROM dw3 To dw10
+**************************************************
+*Transfer by: adcelAutodaily_dw4.pl
+*Start process with ID: 41971
+*Exporting data to dw3.adstraffic.daily_adcel_stats_20130501T07013300000.csv ...
+*Verify export count...
+*Exported: 1
+*Copy export file to transformer.
+*Remove the transfer file on dw3...
+*Begin Importing process...
+*Copy export file to dw10
+*Delete old data on dw10
+*Importing dw3.adstraffic.daily_adcel_stats_20130501T07013300000.csv ...! Partition mode
+*Verify import count...
+*Imported: 1
+*Finished!
+*Remove the transfer file on dw10...
+# 1-5-2013 7:1:36 : Transfer completed!
+
+*****************************************
+ Transfer to backup server of dw10 
+*****************************************
+# Backup To dw0 ######################
+# Backup To pentaho.ecepvn.org ######################
