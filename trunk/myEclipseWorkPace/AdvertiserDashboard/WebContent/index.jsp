@@ -14,8 +14,10 @@
       <script src="scripts/bootstrap-3.0.0/js/respond.min.js"></script>
     <![endif]-->
     <script src="scripts/jquery-1.8.2.js"></script>
+	<!--   Hight chart -->
     <script src="scripts/Highcharts-3.0.4/js/highcharts.js"></script>
     <script src="scripts/Highcharts-3.0.4/js/highcharts-more.js"></script>
+    <script src="scripts/Highcharts-3.0.4/js/modules/exporting.js"></script>
     <!-- Select 2 -->
     <link rel="stylesheet" type="text/css" media="screen" href="scripts/select2-3.4.3/select2.css"> 
     <script src="scripts/select2-3.4.3/select2.js"></script>

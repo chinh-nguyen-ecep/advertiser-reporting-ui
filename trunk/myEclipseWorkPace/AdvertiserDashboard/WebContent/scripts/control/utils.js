@@ -15,32 +15,51 @@ function setTabActive(tab_title){
 function generateDateRange(settings){
 	settings=$.extend({},{stargetId: '',start_date: thirtyDayBefore,end_date: yesterday,callback: function(start_date,end_date,value){}},settings);
  	//function generate date range
+
 		var html=settings.start_date.format('yyyy-mm-dd') + '..' + settings.end_date.format('yyyy-mm-dd');
 		 $('#'+settings.stargetId+' span').html(html);
 		 $('#'+settings.stargetId+' input').val('where[date.between]='+html);
- 		$('#'+settings.stargetId).daterangepicker({
-		      ranges: {
-		         'Today': [moment(), moment()],
-		         'Yesterday': [moment().subtract('days', 1), moment().subtract('days', 1)],
-		         'Last 7 Days': [moment().subtract('days', 6), moment()],
-		         'Last 30 Days': [moment().subtract('days', 29), moment()],
-		         'This Month': [moment().startOf('month'), moment().endOf('month')],
-		         'Last Month': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
-		      },
-		      startDate: moment().subtract('days', 29),
-		      endDate: moment(),
-		     format: 'YYYY-MM-DD'
-		    },
-		    function(start, end) {
-		    	var html=start.format('YYYY-MM-DD') + '..' + end.format('YYYY-MM-DD');
-		    	console.log(html);
-		        $('#'+settings.stargetId+' span').html(html);
-		        $('#'+settings.stargetId+' input').val('where[date.between]='+html);
-		        var startDate=new Date(start.format('YYYY-MM-DD'));
-		        var endDate=new Date(end.format('YYYY-MM-DD'));
-		        settings.callback(startDate, endDate,html);
-		    });	 		
-
+			console.log('Unable date range input');		
+ 	 		$('#'+settings.stargetId).daterangepicker({
+ 			      ranges: {
+// 				         'Today': [moment(), moment()],
+ 			         'Yesterday': [moment().subtract('days', 1), moment().subtract('days', 1)],
+ 			         'Last 7 Days': [moment().subtract('days', 6), moment()],
+ 			         'Last 30 Days': [moment().subtract('days', 29), moment()],
+ 			         'This Month': [moment().startOf('month'), moment().endOf('month')],
+ 			         'Last Month': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
+ 			      },
+ 			      startDate: moment(settings.start_date.format('yyyy-mm-dd'),'YYYY-MM-DD'),
+ 			      endDate: moment(settings.end_date.format('yyyy-mm-dd'),'YYYY-MM-DD'),
+ 			      format: 'YYYY-MM-DD',
+ 			      dateLimit: 31
+ 			    },
+ 			    function(start, end) {
+ 			    	var html=start.format('YYYY-MM-DD') + '..' + end.format('YYYY-MM-DD');
+ 			    	console.log(html);
+ 			        $('#'+settings.stargetId+' span').html(html);
+ 			        $('#'+settings.stargetId+' input').val('where[date.between]='+html);
+ 			        var startDate=new Date(start.format('YYYY-MM-DD'));
+ 			        var endDate=new Date(end.format('YYYY-MM-DD'));
+ 			        settings.callback(startDate, endDate,html);
+ 			    });				
+		this.disable=disable;
+ 		this.unable=unable;
+ 		//disable dom
+		var disableDom=$('<div class="glassOnTop form-control input-sm">sadasdasd</div>');
+		var left=$('#'+settings.stargetId).position().left;
+		var top=$('#'+settings.stargetId).position().top;
+		disableDom.css('left',left);
+		disableDom.css('top',top);
+		console.log(left+"-"+top);
+		$('body').append(disableDom);
+ 		function disable(){
+ 			console.log('Disable date range input ');
+ 			$('#'+settings.stargetId).hide();
+ 		}
+ 		function unable(){
+ 			$('#'+settings.stargetId).show();
+ 		}
 }
 
 function drawTableFromArray(settings){
@@ -241,10 +260,10 @@ function ajaxStore(){
 					data: data,
 					dateTime: new Date()
 			};
-			
+			console.log('Push data to ajax store: '+row.url);
+			store.push(row);
 		}
-		console.log('Push data to ajax store: '+url);
-		store.push(row);
+
 	}
 	function get(url){
 		var isInStore=false;

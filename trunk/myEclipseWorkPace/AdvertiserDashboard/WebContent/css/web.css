@@ -52,3 +52,12 @@ body {
 	background-repeat:no-repeat;
 	background-position:center;
 }
+.glassOnTop{
+	min-height: 40px;
+	min-width: 100px;
+	background-color: gray;
+	z-index: 1000;
+	position:absolute;
+	left:100px;
+	top:150px;
+}
