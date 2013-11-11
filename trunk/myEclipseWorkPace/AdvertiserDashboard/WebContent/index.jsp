@@ -29,6 +29,8 @@
 	<script type="text/javascript" src="scripts/date.format.js"></script>
 	<!-- Number format -->
 	<script type="text/javascript" src="scripts/accounting.min.js"></script>
+	<!-- font-awesome	-->
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 	<!--  control scripts -->
 	<script type="text/javascript" src="scripts/control/utils.js"></script>	
   </head>

@@ -123,7 +123,7 @@ function drawTableFromArray(settings){
 		var head=$("<thead></thead>");
 		var tr='<tr>';
 		for(var i=0;i<settings.table_colums.length;i++){
-			tr+='<th class="header" title="'+settings.table_colums[i]+'"><a href="#">'+settings.table_colums[i]+'</a><span class="glyphicon glyphicon-sort-by-attributes-alt"></span></th>';
+			tr+='<th class="header" title="'+settings.table_colums[i]+'"><a href="#">'+settings.table_colums[i]+'</a><i style="float: right"></i></th>';
 		}
 		tr+='</tr>';
 		head.append(tr);
@@ -164,6 +164,15 @@ function drawTableFromArray(settings){
 		//add class sort
 		if(settings.sort_by!=''){
 			var headArray=myTable.find("thead tr th.header[title='"+settings.sort_by+"']").addClass('sort');
+			if(settings.sort_type=='asc'){
+				myTable.find("thead tr th.header i").removeClass();
+				myTable.find("thead tr th.header[title='"+settings.sort_by+"'] i").addClass('fa fa-sort-alpha-asc');
+			}else{
+				myTable.find("thead tr th.header i").removeClass();
+				myTable.find("thead tr th.header[title='"+settings.sort_by+"'] i").addClass('fa fa-sort-alpha-desc');
+			}
+			
+			
 		}
 		//add sort event
 		if(settings.sortable){
@@ -220,8 +229,9 @@ function drawTableFromArray(settings){
 		console.log("Sort by column: "+columnName+" "+columnIndex);
 		settings.table_data = settings.table_data.sort(Comparator);
 		settings.page=1;
-		toogleSort();
+		
 		refreshData();
+		toogleSort();
 	}
 }
 
