@@ -70,19 +70,7 @@
         <request>p_mailTitle</request> 
       </sources>  
       <default-value><![CDATA[Report email]]></default-value> 
-    </p_mailTitle>  
-    <p_mailTextMessage type="string"> 
-      <sources> 
-        <request>p_mailTextMessage</request> 
-      </sources>  
-      <default-value><![CDATA[This email was sent from Pentaho system by scheduler.]]></default-value> 
-    </p_mailTextMessage>  
-    <p_emailReportName type="string">
-      <sources>
-        <request>p_emailReportName</request>
-      </sources>
-      <default-value><![CDATA[Report Name Here]]></default-value>
-    </p_emailReportName>
+    </p_mailTitle> 
   </inputs>
 
   <outputs/>
@@ -173,10 +161,7 @@ ORDER BY year_week desc]]></query>
         <action-inputs>
           <parameter_string type="string"/>
           <q_list_week type="result-set"/>
-          <p_mailTextMessage type="string"/>
-          <p_mailTitle type="string"/>
           <p_year_week type="string"/>
-          <p_emailReportName type="string"/>
         </action-inputs>
         <action-outputs>
           <reportName type="string"/>
@@ -184,7 +169,6 @@ ORDER BY year_week desc]]></query>
           <reportNameCsv type="string"/>
           <reportNamePdf type="string"/>
           <p_mailTextMessage type="string"/>
-          <p_mailTitle type="string"/>
         </action-outputs>
         <component-definition>
           <script><![CDATA[var reportName='';
@@ -199,13 +183,7 @@ reportName='Weekly_McClathy_Off.'+start_date_of_week+'.'+end_date_of_week;
 reportNameCsv=reportName+'.csv';
 reportNamePdf=reportName+'.pdf';
 
-p_mailTextMessage='Attached is the Weekly McClathy Off Report with start date from '+start_date_of_week+' to '+end_date_of_week;
-
-if(p_emailReportName=='Report Name Here'){
-p_mailTitle='Weekly McClathy Off Report';
-}else{
-p_mailTitle=p_emailReportName;
-}]]></script>
+var p_mailTextMessage='Attached is the Weekly McClathy Off Report with start date from '+start_date_of_week+' to '+end_date_of_week;]]></script>
         </component-definition>
       </action-definition>
 
