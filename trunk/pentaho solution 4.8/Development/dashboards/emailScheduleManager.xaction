@@ -84,12 +84,24 @@
       </sources>  
       <default-value><![CDATA[0]]></default-value> 
     </p_schedule_id>  
-    <p_is_active type="string">
+    <p_is_active type="string"> 
+      <sources> 
+        <request>p_is_active</request> 
+      </sources>  
+      <default-value><![CDATA[true]]></default-value> 
+    </p_is_active>  
+    <p_fire_date type="string">
       <sources>
-        <request>p_is_active</request>
+        <request>p_fire_date</request>
       </sources>
-      <default-value><![CDATA[true]]></default-value>
-    </p_is_active>
+      <default-value><![CDATA[2013-01-01]]></default-value>
+    </p_fire_date>
+    <p_schedule_type type="string">
+      <sources>
+        <request>p_schedule_type</request>
+      </sources>
+      <default-value><![CDATA[daily]]></default-value>
+    </p_schedule_type>
   </inputs>
 
   <outputs> 
@@ -180,6 +192,7 @@
 			<label for="name">Type:</label>
 			<select name="p_schedule_type" class="easyui-combobox" panelHeight="auto" style="width:100px">
                 <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
             </select>
 		</div>
 		<div>
@@ -210,6 +223,10 @@
 		<div>
 			<label for="name">Table source:</label>
 			<input name="p_table_source" value="refer.date_dim" class="easyui-validatebox" data-options="required:true" style="width:300px"/>
+		</div>
+		<div>
+			<label for="name">Fire Date:</label>
+			<input name="p_fire_date" class="easyui-datebox" style="width:150px"/>
 		</div>	
 		<div>
 			<label for="name">Fire Time:</label>
@@ -297,6 +314,23 @@
 		var d = date.getDate();
 		return y+'-'+m+'-'+d;
 	}
+	//
+	$('input[name=p_fire_date]').val(formatDate(new Date()));
+	$('input[name=p_fire_date]').datebox({
+		required:true,
+		currentText: formatDate(new Date()),
+		formatter: function(date){
+			return formatDate(date);
+		},
+		parser: function(s){
+			var t = Date.parse(s);
+			if (!isNaN(t)){
+				return new Date(t);
+			} else {
+				return new Date();
+			}
+		}
+	});
 	// end process start date , end date 
 	$( document ).ready(function() {
 		console.log( "ready!" );
@@ -662,7 +696,9 @@ var viewDetail=function(){
           <p_solution type="string"/>  
           <p_report_name type="string"/>  
           <p_email_to type="string"/>  
-          <p_path type="string"/> 
+          <p_path type="string"/>  
+          <p_fire_date type="string"/>
+          <p_schedule_type type="string"/>
         </action-inputs>
         <action-outputs> 
           <query-result type="result-set" mapping="query_result"/> 
@@ -672,7 +708,7 @@ var viewDetail=function(){
             schedule_type, email_to, report_file_type, report_name, 
             solution, path, xaction_file, parameter_string, next_fire_time, 
             last_fire_time, report_agg_table)
-    VALUES ('daily'
+    VALUES ('{p_schedule_type}'
 	,'{p_email_to}'
 	,'pdf'
 	,'{p_report_name}'
@@ -680,8 +716,8 @@ var viewDetail=function(){
 	,'{p_path}'
 	,'{p_xaction_file}'
 	,''
-	,now()::date + time '{p_fire_time}'
-	,now()::date - 1 + time '{p_fire_time}'
+	,'{p_fire_date}'::date + time '{p_fire_time}'
+	,'{p_fire_date}'::date - 1 + time '{p_fire_time}'
 	,'{p_table_source}') RETURNING schedule_id;]]></query>  
           <live><![CDATA[false]]></live> 
         </component-definition> 
@@ -710,60 +746,60 @@ var viewDetail=function(){
  
     </actions>
   
-    <actions>
-      <condition><![CDATA[actions=='activeSchedule']]></condition>
-      <action-definition>
+    <actions> 
+      <condition><![CDATA[actions=='activeSchedule']]></condition>  
+      <action-definition> 
         <component-name>SQLLookupRule</component-name>
         <action-type>Relational</action-type>
-        <action-inputs>
-          <jndi type="string" mapping="connectionName"/>
-          <p_schedule_id type="string"/>
-          <p_is_active type="string"/>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <p_schedule_id type="string"/>  
+          <p_is_active type="string"/> 
         </action-inputs>
-        <action-outputs>
-          <query-result type="result-set" mapping="query_result"/>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
         </action-outputs>
-        <component-definition>
+        <component-definition> 
           <query><![CDATA[UPDATE control.emaill_reports_schedule
 SET is_active={p_is_active}
- WHERE schedule_id={p_schedule_id};]]></query>
-          <live><![CDATA[false]]></live>
-        </component-definition>
+ WHERE schedule_id={p_schedule_id};]]></query>  
+          <live><![CDATA[false]]></live> 
+        </component-definition> 
       </action-definition>
-
+ 
     </actions>
-
-    <actions>
-      <condition><![CDATA[actions=='editSchedule']]></condition>
-      <action-definition>
+  
+    <actions> 
+      <condition><![CDATA[actions=='editSchedule']]></condition>  
+      <action-definition> 
         <component-name>SQLLookupRule</component-name>
         <action-type>Relational</action-type>
-        <action-inputs>
-          <jndi type="string" mapping="connectionName"/>
-          <p_schedule_id type="string"/>
-          <p_report_name type="string"/>
-          <p_solution type="string"/>
-          <p_path type="string"/>
-          <p_email_to type="string"/>
-          <p_table_source type="string"/>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <p_schedule_id type="string"/>  
+          <p_report_name type="string"/>  
+          <p_solution type="string"/>  
+          <p_path type="string"/>  
+          <p_email_to type="string"/>  
+          <p_table_source type="string"/> 
         </action-inputs>
-        <action-outputs>
-          <query-result type="result-set" mapping="query_result"/>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
         </action-outputs>
-        <component-definition>
+        <component-definition> 
           <query><![CDATA[UPDATE control.emaill_reports_schedule
 SET report_name='{p_report_name}'
 ,email_to='{p_email_to}'
 ,solution='{p_solution}'
 ,path='{p_path}'
 ,report_agg_table='{p_table_source}'
- WHERE schedule_id={p_schedule_id};]]></query>
-          <live><![CDATA[false]]></live>
-        </component-definition>
+ WHERE schedule_id={p_schedule_id};]]></query>  
+          <live><![CDATA[false]]></live> 
+        </component-definition> 
       </action-definition>
-
+ 
     </actions>
-
+  
     <action-definition> 
       <component-name>JavascriptRule</component-name>
       <action-type>Process data grid</action-type>
