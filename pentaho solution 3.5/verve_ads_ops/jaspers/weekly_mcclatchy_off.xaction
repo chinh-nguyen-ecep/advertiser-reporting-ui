@@ -109,9 +109,9 @@ SELECT year_week,start_week,end_week FROM adsops.weekly_agg_mcclatchy_off WHERE 
 ORDER BY year_week desc]]></query> 
       </component-definition> 
     </action-definition>
-
-    <actions>
-      <condition><![CDATA[p_emailMode == 'false']]></condition>
+  
+    <actions> 
+      <condition><![CDATA[p_emailMode == 'false']]></condition>  
       <action-definition> 
         <component-name>SecureFilterComponent</component-name>
         <action-type>Prompt/Secure Filter</action-type>
@@ -136,7 +136,7 @@ ORDER BY year_week desc]]></query>
           <xsl><![CDATA[pageTemplate]]></xsl> 
         </component-definition> 
       </action-definition>
-
+  
       <action-definition> 
         <component-name>JasperReportsComponent</component-name>
         <action-type>Jasper</action-type>
@@ -150,27 +150,26 @@ ORDER BY year_week desc]]></query>
         </action-resources>
         <component-definition/> 
       </action-definition>
-
+ 
     </actions>
-
-    <actions>
-      <condition><![CDATA[p_emailMode == 'true']]></condition>
-      <action-definition>
+  
+    <actions> 
+      <condition><![CDATA[p_emailMode == 'true']]></condition>  
+      <action-definition> 
         <component-name>JavascriptRule</component-name>
         <action-type>Process report input</action-type>
-        <action-inputs>
-          <parameter_string type="string"/>
-          <q_list_week type="result-set"/>
-          <p_year_week type="string"/>
+        <action-inputs> 
+          <parameter_string type="string"/>  
+          <q_list_week type="result-set"/>  
+          <p_year_week type="string"/> 
         </action-inputs>
-        <action-outputs>
-          <reportName type="string"/>
-          <p_year_week type="string"/>
-          <reportNameCsv type="string"/>
-          <reportNamePdf type="string"/>
-          <p_mailTextMessage type="string"/>
+        <action-outputs> 
+          <p_year_week type="string"/>  
+          <reportNameCsv type="string"/>  
+          <reportNamePdf type="string"/>  
+          <p_mailTextMessage type="string"/> 
         </action-outputs>
-        <component-definition>
+        <component-definition> 
           <script><![CDATA[var reportName='';
 var reportNameCsv='';
 var reportNamePdf='';
@@ -183,59 +182,59 @@ reportName='Weekly_McClathy_Off.'+start_date_of_week+'.'+end_date_of_week;
 reportNameCsv=reportName+'.csv';
 reportNamePdf=reportName+'.pdf';
 
-var p_mailTextMessage='Attached is the Weekly McClathy Off Report with start date from '+start_date_of_week+' to '+end_date_of_week;]]></script>
-        </component-definition>
+var p_mailTextMessage='Attached is the Weekly McClathy Off Report with start date from '+start_date_of_week+' to '+end_date_of_week;]]></script> 
+        </component-definition> 
       </action-definition>
-
-      <action-definition>
+  
+      <action-definition> 
         <component-name>JasperReportsComponent</component-name>
         <action-type>Jasper pdf</action-type>
-        <action-inputs>
-          <p_year_week type="string"/>
-          <jndi type="string" mapping="connection_name"/>
+        <action-inputs> 
+          <p_year_week type="string"/>  
+          <jndi type="string" mapping="connection_name"/> 
         </action-inputs>
-        <action-outputs>
-          <report-output type="content" mapping="reportPdf"/>
+        <action-outputs> 
+          <report-output type="content" mapping="reportPdf"/> 
         </action-outputs>
-        <component-definition>
-          <output-type><![CDATA[pdf]]></output-type>
-        </component-definition>
+        <component-definition> 
+          <output-type><![CDATA[pdf]]></output-type> 
+        </component-definition> 
       </action-definition>
-
-      <action-definition>
+  
+      <action-definition> 
         <component-name>JasperReportsComponent</component-name>
         <action-type>Jasper Csv</action-type>
-        <action-inputs>
-          <jndi type="string" mapping="connection_name"/>
-          <p_year_week type="string"/>
+        <action-inputs> 
+          <jndi type="string" mapping="connection_name"/>  
+          <p_year_week type="string"/> 
         </action-inputs>
-        <action-outputs>
-          <report-output type="content" mapping="reportCsv"/>
+        <action-outputs> 
+          <report-output type="content" mapping="reportCsv"/> 
         </action-outputs>
-        <component-definition>
-          <output-type><![CDATA[csv]]></output-type>
-        </component-definition>
+        <component-definition> 
+          <output-type><![CDATA[csv]]></output-type> 
+        </component-definition> 
       </action-definition>
-
-      <action-definition>
+  
+      <action-definition> 
         <component-name>EmailComponent</component-name>
         <action-type>E-Mail</action-type>
-        <action-inputs>
-          <to type="string" mapping="p_mailTo"/>
-          <subject type="string" mapping="p_mailTitle"/>
-          <message-html type="string" mapping="p_mailTextMessage"/>
-          <reportPdf type="content"/>
-          <reportCsv type="content"/>
-          <attach_name_1 type="string" mapping="reportNamePdf"/>
-          <attach_name_2 type="string" mapping="reportNameCsv"/>
+        <action-inputs> 
+          <to type="string" mapping="p_mailTo"/>  
+          <subject type="string" mapping="p_mailTitle"/>  
+          <message-html type="string" mapping="p_mailTextMessage"/>  
+          <reportPdf type="content"/>  
+          <reportCsv type="content"/>  
+          <attach_name_1 type="string" mapping="reportNamePdf"/>  
+          <attach_name_2 type="string" mapping="reportNameCsv"/> 
         </action-inputs>
-        <component-definition>
-          <attachment-ref name-param="attach_name_1" input-param="reportPdf"/>
-          <attachment-ref name-param="attach_name_2" input-param="reportCsv"/>
-        </component-definition>
+        <component-definition> 
+          <attachment-ref name-param="attach_name_1" input-param="reportPdf"/>  
+          <attachment-ref name-param="attach_name_2" input-param="reportCsv"/> 
+        </component-definition> 
       </action-definition>
-
+ 
     </actions>
-
+ 
   </actions> 
 </action-sequence>
