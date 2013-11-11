@@ -4,38 +4,43 @@
 	 			    <div class="form-group">			    	
 <!-- 		       			<input type="text" value="2013/10/01..2013/10/07" class="form-control input-sm " style="width: 200px;" id="date_range_dailyAdvertiser" placeholder=""></input> -->
 		      		</div>
- 			  	  <div class="form-group">			    	
-		       			<div id="date_range_dailyAdvertiser" class="form-control input-sm">
-					    <i class="icon-calendar icon-large"></i>
-					    <span></span> <b class="caret"></b>
-						<input type="hidden" value="" />
-						</div>
-		      		</div>
+
 				  <div class="form-group">
-						<div class="btn-group btn-group-sm">
+						<div id="measuresBt" class="btn-group btn-group-sm">
 						  <button type="button" class="btn btn-default" onclick="drawChart(categories,series_clicks,'Advertiser Clicks By Date',subtitle);">Clicks</button>
 						  <button type="button" class="btn btn-default" onclick="drawChart(categories,series_impressions,'Advertiser Impressions By Date',subtitle);">Impressions</button>
 						  <button type="button" class="btn btn-default" onclick="drawChart(categories,series_cta,'Advertiser Cta maps By Date',subtitle);">Cta maps</button>
 						</div>
 				  </div>
 				  <div class="form-group">
-					<div class="btn-group btn-group-sm">
+					<div id="breakBt" class="btn-group btn-group-sm">
 					  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 					    Break by Hour<span class="caret"></span>
 					  </button>
 					  <ul class="dropdown-menu" role="menu">
-					    <li><a href="#">Hour</a></li>
-					    <li><a href="#">Date</a></li>
+					    <li><a href="#" onclick="breakChart()">Hour</a></li>
+					    <li><a href="#" onclick="breakChart()">Date</a></li>
 					  </ul>
 					</div>
 				  </div>
 <!--		      		 <button type="button" onclick="loadChart()" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-upload"></span>Update</button>-->
 			    </form>
+
 		</div>
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
-			    <form class="navbar-form navbar-right" role="export">			    		   			     
+			    <!--<form class="navbar-form navbar-right" role="export">			    		   			     
 			      <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-download-alt"></span>XLS Export</button>			      		   
 			      <button type="button" class="btn btn-info"><span class="glyphicon glyphicon-download-alt"></span>CSV Export</button>
+			    </form>
+		-->
+			    <form class="navbar-form navbar-right" role="export">
+     			  	  <div class="form-group" style="float: right;">			    	
+		       			<div id="date_range_dailyAdvertiser" class="form-control input-sm">
+					    <i class="icon-calendar icon-large"></i>
+					    <span></span> <b class="caret"></b>
+						<input type="hidden" value="" />
+						</div>
+		      		</div>
 			    </form>
 		</div>
 	</nav>
@@ -46,12 +51,19 @@
 	</div>
 	<div class="row">
 	<div class="col-md-10">
+
  	 </div>
 	  <div class="col-md-2">
-			<ul class="pager">
-			  <li><a href="#" onclick="disabledEventPropagation(event);myTable.previous();">Previous</a></li>
-			  <li><a href="#" onclick="disabledEventPropagation(event);myTable.next();">Next</a></li>
-			</ul>	  	
+ 		<div id="exportBt" class="btn-group btn-group-sm" style="float: right;margin-bottom: 10px;">
+		  <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
+		    Export Data<span class="caret"></span>
+		  </button>
+		  <ul class="dropdown-menu" role="menu">
+		   <li><a href="#" onclick="">Review</a></li>
+		    <li><a href="#" onclick="">Xls</a></li>
+		    <li><a href="#" onclick="">Pdf</a></li>
+		  </ul>
+		</div> 	
 	  </div>
 	</div>
 	<div class="panel panel-default">

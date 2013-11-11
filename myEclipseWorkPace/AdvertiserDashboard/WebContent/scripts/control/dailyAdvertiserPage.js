@@ -2,20 +2,47 @@
  * 
  */
 // 
-//var selectStartDate=thirtyDayBefore;
-//var selectEndDate=yesterday;
-var selectStartDate=new Date('2013-10-01');
-var selectEndDate=new Date('2013-10-01');;
-var chart;
-var subtitle;
-var title;
-var categories=[-1,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23];				  	
-var series_clicks=[];
-var series_impressions=[];
-var series_cta=[];
-var table_data=[];
-var myTable;
-var myDateRangeInput;
+var selectStartDate=thirtyDayBefore;
+var selectEndDate=yesterday;
+//var selectStartDate=new Date('2013-10-01');
+//var selectEndDate=new Date('2013-10-07');
+var chart;// chart object
+var subtitle; // subtitle of chart
+var title; // titile of chart
+var categories=[-1,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23];	 //hour category of chart
+var categories_date=['2013-10-01','2013-10-02','2013-10-03'];// date category of chart
+var chart_date_data=[{
+		name:'Impressions',
+		color: '#4572A7',
+		type: 'column',
+		yAxis: 1,
+		data:[100,120,340]
+	},
+    {
+		name:'Cta map',
+		type: 'spline',
+        color: '#AA4643',
+        yAxis: 2,
+		data:[45,23,134],
+		marker: {
+            enabled: false
+        },
+        dashStyle: 'shortdot'
+	},
+	{
+		name:'Clicks',
+		color: '#89A54E',
+        type: 'spline',
+		data:[10,12,34]
+	}];
+var series_clicks=[]; // click data
+var series_impressions=[]; // impression data
+var series_cta=[]; // cta data
+var table_data=[]; // data to show by table
+var myTable; // table object
+var myDateRangeInput; // Date rang input object
+var breakBy='hour'; // The value status of break by hour or break by date
+
 $(document).ready(function(){ 
 	setTabActive('dailyAdvertiser');
 	myDateRangeInput=new generateDateRange({
@@ -33,8 +60,6 @@ $(document).ready(function(){
 
 });
 	//function load chart
-
-  	
 	function loadChart(){
 		myDateRangeInput.disable();
 		series_clicks=[];
@@ -69,7 +94,7 @@ $(document).ready(function(){
 		}
 
 		function processData(json){
-		  	title="Advertiser Clicks By Date";
+		  	title="Advertiser Clicks By Date Hour";
 		  	subtitle="From "+selectStartDate.format("yyyy-mm-dd")+" to "+selectEndDate.format("yyyy-mm-dd");
 		  	var responseStatus=json.responseStatus;
 		  	var page=json.page;
@@ -114,12 +139,9 @@ $(document).ready(function(){
 		  	}else{
 		  		return;
 		  	}
+
 		  	
-		  	if(chart){
-		  		chart.hideLoading();
-		  	}
-		  	drawChart(categories,series_clicks,title,subtitle);
-		  	//get table data
+		  	//generate table data
 		  	table_data=json.data;
 		  	var items = {}, base, key;
 		  	$.each(table_data, function(index, val) {
@@ -138,7 +160,7 @@ $(document).ready(function(){
 		  	    a=a.concat(key,["All"],val);
 		  	    table_data.push(a);
 		  	});
-		  	
+		  	//generate table
 		  	myTable=new drawTableFromArray({
 		  		table_id: 'mainDataTable',
 		  		table_colums: ['Date','Hour','Clicks','Impressions','Cta maps'],
@@ -149,16 +171,41 @@ $(document).ready(function(){
 		  		sort_by: 'Date',
 		  		sortable: true,
 		  		onClickRow: function(row){
-		  			alert(row[0]);
+		  			//alert(row[0]);
 		  		}
 		  	});
+		  	//generate chart data break by date
+		  	//add category
+		  	categories_date=[];
+		  	chart_date_data[0].data=[];
+		  	chart_date_data[1].data=[];
+		  	chart_date_data[2].data=[];
+		  	$.each(table_data,function(index,row){
+		  		var category_value=row[0];
+		  		categories_date.push(category_value);
+		  		var click_value=row[2];
+		  		var imp_value=row[3];
+		  		var cta_value=row[4];
+		  		chart_date_data[2].data.push(click_value);
+		  		chart_date_data[0].data.push(imp_value);
+			  	chart_date_data[1].data.push(cta_value);
+		  	});
 		  	
+		  	// draw chart
+		  	if(chart){
+		  		chart.hideLoading();
+		  	}
+		  	if(breakBy=='hour'){
+		  		drawChart(categories,series_clicks,title,subtitle);
+		  	}else{
+		  		drawDateChart(categories_date,chart_date_data,'Advertiser By Date',subtitle);
+		  	}		  	
 		  	//unable date range input
 		  	myDateRangeInput.unable();
 		};
 	}
 
-	//function generate chart 
+	//function generate chart . When options are changed, run this function to redraw the chart
 	function drawChart(categories,series,title,subtitle){
 		for(var i=0;i<series.length;i++){
 			var row=series[i];
@@ -229,5 +276,141 @@ $(document).ready(function(){
 	            series: series
 	        });
 		 chart=$('#container').highcharts();
+	}
+	//function generate chart . When options are changed, run this function to redraw the chart
+	function drawDateChart(categories,series,title,subtitle){
+		for(var i=0;i<series.length;i++){
+			var row=series[i];
+			//console.log("Row "+i+": "+row.name);
+			//console.log("Data: "+row.data.length+" - "+row.data.join());
+		}
+		console.log('Draw chart by date');
 		
+		 $('#container').highcharts({
+			 	chart: {
+			 		zoomType: 'xy'
+	            },
+	            exporting: {
+	                enabled: true
+	            },
+	            title: {
+	                text: title,
+	                x: -20 //center
+	            },
+	            subtitle: {
+	                text: subtitle,
+	                x: -20
+	            },
+	            credits:{
+	            	href: 'http://vervemobile.com',
+	            	text: 'vervemobile.com'
+	            },
+	            xAxis: {
+	                categories: categories,
+	                tickmarkPlacement: 'on',
+	                title: {
+	                    enabled: false
+	                },
+	                gridLineWidth: 1,
+	                labels:{
+	                	formatter: function(){
+	                		return new Date(this.value).format('mmm-dd');
+	                	},
+	                	rotation: -45
+	                }
+	            },
+	            yAxis:[{ // Primary yAxis
+	                labels: {
+	                    formatter: function() {
+	                        return accounting.formatNumber(this.value);
+	                    },
+	                    style: {
+	                        color: '#89A54E'
+	                    }
+	                },
+	                title: {
+	                    text: 'Clicks',
+	                    style: {
+	                        color: '#89A54E'
+	                    }
+	                },
+	                opposite: true
+	    
+	            }, { // Secondary yAxis
+	                gridLineWidth: 0,
+	                title: {
+	                    text: 'Impressions',
+	                    style: {
+	                        color: '#4572A7'
+	                    }
+	                },
+	                labels: {
+	                    formatter: function() {
+	                        return accounting.formatNumber(this.value) ;
+	                    },
+	                    style: {
+	                        color: '#4572A7'
+	                    }
+	                }
+	    
+	            }, { // Tertiary yAxis
+	                gridLineWidth: 0,
+	                title: {
+	                    text: 'Cta map',
+	                    style: {
+	                        color: '#AA4643'
+	                    }
+	                },
+	                labels: {
+	                    formatter: function() {
+	                        return accounting.formatNumber(this.value) ;
+	                    },
+	                    style: {
+	                        color: '#AA4643'
+	                    }
+	                },
+	                opposite: true
+	            }],
+	            legend: {
+	                layout: 'vertical',
+	                align: 'left',
+	                x: 120,
+	                verticalAlign: 'top',
+	                y: 10,
+	                floating: true,
+	                backgroundColor: '#FFFFFF'
+	            },
+	            tooltip: {
+	                shared: true
+	            },
+	            plotOptions: {
+	            	spline: {
+	            		lineWidth: 1,
+	            		 states: {
+	                         hover: {
+	                             lineWidth: 2
+	                         }
+	                     },
+	            		marker: {
+	                        enabled: false
+	                    }
+	            	}
+	            },
+	            series: series
+	        });
+		 chart=$('#container').highcharts();
+	}
+
+	function breakChart(){
+		if(breakBy=='hour'){
+			breakBy='date';
+			$('#measuresBt button').prop('disabled', true);
+			$('#breakBt button').html('Break by Date<span class="caret"></span>');
+		}else{
+			breakBy='hour';
+			$('#measuresBt button').prop('disabled', false);
+			$('#breakBt button').html('Break by Hour<span class="caret"></span>');
+		}
+		
+		loadChart();
 	}
