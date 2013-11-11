@@ -137,7 +137,7 @@ var next_fire_time=query_result_schedule_list.getValueAt(v_loop,9);]]></script>
           <live><![CDATA[false]]></live>  
           <query><![CDATA[SELECT
  (CASE 
-	WHEN '{report_agg_table}'!='refer.date_dim' AND max(full_date)::date >= now()::date-1 THEN 'vailable' 
+	WHEN '{report_agg_table}'!='refer.date_dim' AND max(end_week)::date >= now()::date-1 THEN 'vailable' 
 	WHEN '{report_agg_table}'='refer.date_dim' AND now()::date>= '{next_fire_time}'::date AND EXTRACT(HOUR FROM TIMESTAMP '{next_fire_time}') <= EXTRACT(HOUR FROM now()::TIMESTAMP) THEN 'vailable' 
 	ELSE 'non-vailable' END),
 	max(full_date)::date,
@@ -199,7 +199,8 @@ v_loop++]]></script>
             <p_emailMode type="string"/>  
             <trigger_name type="string"/>  
             <p_mailTitle type="string"/>  
-            <p_mailTextMessage type="string"/> 
+            <p_mailTextMessage type="string"/>  
+            <p_emailReportName type="string"/>
           </action-outputs>
           <component-definition> 
             <script><![CDATA[var job_name='';
@@ -209,7 +210,8 @@ var p_mailTitle='Pentaho Report System';
 var p_mailTextMessage=report_name+' '+report_date;
 job_name=report_name+'-'+schedule_id;
 p_mailTo=email_to;
-p_emailExportFileType=report_file_type;]]></script> 
+p_emailExportFileType=report_file_type;
+var p_emailReportName=report_name;]]></script> 
           </component-definition> 
         </action-definition>
   
@@ -227,7 +229,8 @@ p_emailExportFileType=report_file_type;]]></script>
             <p_emailExportFileType type="string"/>  
             <triggerName type="string" mapping="job_name"/>  
             <p_mailTitle type="string"/>  
-            <p_mailTextMessage type="string"/> 
+            <p_mailTextMessage type="string"/>  
+            <p_emailReportName type="string"/>
           </action-inputs>
           <component-definition> 
             <jobAction>startJob</jobAction>  

@@ -76,7 +76,13 @@
         <request>p_mailTextMessage</request> 
       </sources>  
       <default-value><![CDATA[This email was sent from Pentaho system by scheduler.]]></default-value> 
-    </p_mailTextMessage> 
+    </p_mailTextMessage>  
+    <p_emailReportName type="string">
+      <sources>
+        <request>p_emailReportName</request>
+      </sources>
+      <default-value><![CDATA[Report Name Here]]></default-value>
+    </p_emailReportName>
   </inputs>
 
   <outputs/>
@@ -170,6 +176,7 @@ ORDER BY year_week desc]]></query>
           <p_mailTextMessage type="string"/>
           <p_mailTitle type="string"/>
           <p_year_week type="string"/>
+          <p_emailReportName type="string"/>
         </action-inputs>
         <action-outputs>
           <reportName type="string"/>
@@ -193,7 +200,12 @@ reportNameCsv=reportName+'.csv';
 reportNamePdf=reportName+'.pdf';
 
 p_mailTextMessage='Attached is the Weekly McClathy Off Report with start date from '+start_date_of_week+' to '+end_date_of_week;
-p_mailTitle='Weekly McClathy Off Report';]]></script>
+
+if(p_emailReportName=='Report Name Here'){
+p_mailTitle='Weekly McClathy Off Report';
+}else{
+p_mailTitle=p_emailReportName;
+}]]></script>
         </component-definition>
       </action-definition>
 
