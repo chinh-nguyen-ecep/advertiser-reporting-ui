@@ -70,7 +70,13 @@
         <request>p_mailTitle</request> 
       </sources>  
       <default-value><![CDATA[Report email]]></default-value> 
-    </p_mailTitle> 
+    </p_mailTitle>  
+    <p_emailBcc type="string"> 
+      <sources> 
+        <request>p_emailBcc</request> 
+      </sources>  
+      <default-value><![CDATA[chinh.nguyen@vervemobile.com]]></default-value> 
+    </p_emailBcc> 
   </inputs>
 
   <outputs/>
@@ -104,8 +110,6 @@
       <component-definition> 
         <live><![CDATA[false]]></live>  
         <query><![CDATA[SELECT year_week,start_week,end_week FROM adsops.weekly_agg_mcclatchy_off WHERE is_active=true GROUP BY year_week,start_week,end_week
-UNION ALL
-SELECT year_week,start_week,end_week FROM adsops.weekly_agg_mcclatchy_off WHERE is_active=true GROUP BY year_week,start_week,end_week
 ORDER BY year_week desc]]></query> 
       </component-definition> 
     </action-definition>
@@ -226,7 +230,8 @@ var p_mailTextMessage='Attached is the Weekly McClathy Off Report with start dat
           <reportPdf type="content"/>  
           <reportCsv type="content"/>  
           <attach_name_1 type="string" mapping="reportNamePdf"/>  
-          <attach_name_2 type="string" mapping="reportNameCsv"/> 
+          <attach_name_2 type="string" mapping="reportNameCsv"/>  
+          <bcc type="string" mapping="p_emailBcc"/> 
         </action-inputs>
         <component-definition> 
           <attachment-ref name-param="attach_name_1" input-param="reportPdf"/>  
