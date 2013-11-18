@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Advertiser Dashboard</title>
     <!-- Bootstrap -->
-    <link href="css/web.css" rel="stylesheet" media="screen">
+    
     <link href="scripts/bootstrap-3.0.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -33,26 +33,42 @@
 	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 	<!--  control scripts -->
 	<script type="text/javascript" src="scripts/control/utils.js"></script>	
+	<link href="css/web.css" rel="stylesheet" media="screen">
   </head>
   <body >
-  <iframe style="display: none;" src="/advertiserapi"></iframe>
+  <iframe id="apipage" style="display: none;" src="/advertiserapi"></iframe>
 	<jsp:include page="/header.jsp" />
-    <div class="container theme-showcase">
-		<%
-		 String p="overview";
-		 if(request.getParameter("p")!=null)
-		 { 
-		   p = request.getParameter("p");		
-		 }
-		 String includePage="/"+p+".jsp";
-		%>
-		<jsp:include page="<%= includePage %>" flush="true"/>
+    <div id="index_container" class="container theme-showcase" style="min-height: 200px;">
+		
 	</div>
 	
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
    
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="scripts/bootstrap-3.0.0/js/bootstrap.min.js"></script>
-
+	<script type="text/javascript">
+	// Callback funtion when apipage are loaded by iframe
+	document.getElementById('apipage').contentWindow.callBackParent = doStuff();
+	function doStuff(){
+		console.log('Api page load completed...');
+		$(document).ready(function(){ 
+			changePage('overview');
+		});
+	}
+	function changePage(page){
+		$('#index_container').addClass('loadingDots');
+		var url=rootUrl+'/'+page+'.jsp';
+		$.ajax({
+			url: url,
+			dataType : 'html',
+			success: function(data){
+				$('#index_container').html(data);
+				$('#index_container').removeClass('loadingDots');
+			}
+		});
+		
+		
+	}
+	</script>
   </body>
 </html>

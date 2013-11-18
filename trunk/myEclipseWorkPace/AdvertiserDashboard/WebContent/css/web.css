@@ -18,32 +18,32 @@ body {
 	height: 350px;
 }
 
-#mainDataTable{
+.dataTable{
 	margin: 0px;
 	border: 0px;
 }
-#mainDataTable thead tr th{
+.dataTable thead tr th{
 	border-bottom: 0px;
 	border-right: 0px;
 }
-#mainDataTable thead tr th a{
+.dataTable thead tr th a{
 	color: #4572A7;
 }
-#mainDataTable thead tr th span{
+.dataTable thead tr th span{
 	float: right;
 }
-#mainDataTable thead tr th.sort,#mainDataTable thead tr th.sort a{
+.dataTable thead tr th.sort,.dataTable thead tr th.sort a{
 	background-color: #39b3d7;
 	color: white;
 }
-#mainDataTable thead tr:first-child th:first-child{
+.dataTable thead tr:first-child th:first-child{
 	border-left: 0px;
 }
-#mainDataTable tbody tr td{
+.dataTable tbody tr td{
 	border-left: 0px;
 	border-bottom: 0px;
 }
-#mainDataTable tbody tr td.right{
+.dataTable tbody tr td.right{
 	text-align: right;
 }
 
@@ -51,6 +51,14 @@ body {
 	background-image:url('../images/loading_bar.gif');
 	background-repeat:no-repeat;
 	background-position:center;
+}
+
+.loadingDots{
+	background-image:url('../images/loading-dots.gif');
+	background-repeat:no-repeat;
+	background-position:center;
+	min-width: 100px;
+	min-height: 30px;
 }
 .glassOnTop{
 	min-height: 40px;
