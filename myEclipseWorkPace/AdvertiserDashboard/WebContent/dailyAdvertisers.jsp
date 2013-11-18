@@ -18,8 +18,8 @@
 					    Break by Hour<span class="caret"></span>
 					  </button>
 					  <ul class="dropdown-menu" role="menu">
-					    <li><a href="#" onclick="breakChart()">Hour</a></li>
-					    <li><a href="#" onclick="breakChart()">Date</a></li>
+					    <li><a href="#" onclick="breakChart('hour')">Hour</a></li>
+					    <li><a href="#" onclick="breakChart('date')">Date</a></li>
 					  </ul>
 					</div>
 				  </div>
@@ -46,7 +46,7 @@
 	</nav>
 	<div class="panel panel-default">
 	  <div class="panel-body" >
-	    <div id="container" style="min-width: 310px; height: 350px; margin: 0 auto" class="loading"></div>
+	    <div id="daily-advertiser-chart-container" style="min-width: 310px; height: 350px; margin: 0 auto" class="loading"></div>
 	  </div>
 	</div>
 	<div class="row">
@@ -59,16 +59,17 @@
 		    Export Data<span class="caret"></span>
 		  </button>
 		  <ul class="dropdown-menu" role="menu">
-		   <li><a href="#" onclick="">Review</a></li>
-		    <li><a href="#" onclick="">Xls</a></li>
-		    <li><a href="#" onclick="">Pdf</a></li>
+		   <li><a href="#" onclick="reviewExportData();">Review</a></li>
+		    <li><a href="#" onclick="exportReport('xls')">Xls</a></li>
+		    <li><a href="#" onclick="exportReport('csv')">Csv</a></li>
+		    <li><a href="#" onclick="exportReport('pdf')">Pdf</a></li>
 		  </ul>
 		</div> 	
 	  </div>
 	</div>
 	<div class="panel panel-default">
 		  <div class="panel-body" style="padding: 0px;">
-   			<table  id="mainDataTable">
+   			<table  id="daily-advertiser-dataTable" class="dataTable">
 	        
 	      </table>
 		  </div>		  

@@ -1,9 +1,10 @@
 /**
  * 
  */
-// 
+//
 var selectStartDate=thirtyDayBefore;
 var selectEndDate=yesterday;
+
 //var selectStartDate=new Date('2013-10-01');
 //var selectEndDate=new Date('2013-10-07');
 var chart;// chart object
@@ -43,6 +44,10 @@ var myTable; // table object
 var myDateRangeInput; // Date rang input object
 var breakBy='hour'; // The value status of break by hour or break by date
 
+
+
+
+
 $(document).ready(function(){ 
 	setTabActive('dailyAdvertiser');
 	myDateRangeInput=new generateDateRange({
@@ -55,10 +60,9 @@ $(document).ready(function(){
 			loadChart();
 		}
 	});
-	 //$("#e2").select2();
-	 loadChart();
-
+	breakChart('date');
 });
+
 	//function load chart
 	function loadChart(){
 		myDateRangeInput.disable();
@@ -68,32 +72,33 @@ $(document).ready(function(){
 		var dateRange_value=$("#date_range_dailyAdvertiser input").val();
 		var measureValue=$("#e2").val();
 		var url=apiRootUrl+'/AdvertiserByHour?select=date|hour&limit=2000&'+dateRange_value+"&by=clicks|impressions|cta_maps";
-		if(chart !=null){
-			chart.showLoading();
-		}
-		if(myAjaxStore.isLoading()){
+		if(myAjaxStore.isLoading(url)){
 			console.log('Your request is loading...');
 			return;
 		}
+		if(chart !=null){
+			chart.showLoading();
+		}
+
 		var ajaxData=myAjaxStore.get(url);
 		if(ajaxData==null){
 			myAjaxStore.registe(url);
 			$.ajax({
-				  dataType: "json",
-				  url: url,
-				   xhrFields: {
+				dataType: "json",
+				url: url,
+				xhrFields: {
 					      withCredentials: true
 					   },
-				  success: function(json){
+				success: function(json){
 					  myAjaxStore.add(url,json);
-					  processData(json);
+					  loadChart();
 				  }
 				});			
 		}else{
 			processData(ajaxData);
 		}
 
-		function processData(json){
+		function processData(json){			
 		  	title="Advertiser Clicks By Date Hour";
 		  	subtitle="From "+selectStartDate.format("yyyy-mm-dd")+" to "+selectEndDate.format("yyyy-mm-dd");
 		  	var responseStatus=json.responseStatus;
@@ -106,7 +111,7 @@ $(document).ready(function(){
 		  			var row=data[i];
 		  			var newName=row[0];
 		  			if(newName!=name){
-		  				console.log("Add serie: "+newName);
+//		  				console.log("Add serie: "+newName);
 		  				var row={name: newName,data:[]};
 		  				var row2={name: newName,data:[]};
 		  				var row3={name: newName,data:[]};
@@ -125,7 +130,7 @@ $(document).ready(function(){
 		  			var value=row[2];
 		  			var value_imp=row[3];
 		  			var value_cta=row[4];
-		  			console.log("Add Value: "+newName+" ckl "+value+" im "+value_imp+" cta "+value_cta);
+//		  			console.log("Add Value: "+newName+" ckl "+value+" im "+value_imp+" cta "+value_cta);
 		  			for(var j=0;j<series_clicks.length;j++){
 			  			var item=series_clicks[j];	
 			  			if(item.name==newName){
@@ -140,33 +145,35 @@ $(document).ready(function(){
 		  		return;
 		  	}
 
-		  	
 		  	//generate table data
 		  	table_data=json.data;
-		  	var items = {}, base, key;
-		  	$.each(table_data, function(index, val) {
-		  	    key = [val[0]];
-		  	    if (!items[key]) {
-		  	        items[key] = [0,0,0];
-		  	    }
-		  	    items[key][0]+=parseFloat(val[2]);
-		  	    items[key][1]+=parseFloat(val[3]);
-		  	    items[key][2]+=parseFloat(val[4]);
-		  	});
+		  	if(breakBy=='date'){
+		  		var items = {}, base, key;
+			  	$.each(table_data, function(index, val) {
+			  	    key = [val[0]];
+			  	    if (!items[key]) {
+			  	        items[key] = [0,0,0];
+			  	    }
+			  	    items[key][0]+=parseFloat(val[2]);
+			  	    items[key][1]+=parseFloat(val[3]);
+			  	    items[key][2]+=parseFloat(val[4]);
+			  	});
 
-		  	var table_data = [];
-		  	$.each(items, function(key, val) {
-		  	    var a=[];
-		  	    a=a.concat(key,["All"],val);
-		  	    table_data.push(a);
-		  	});
+			  	table_data = [];
+			  	$.each(items, function(key, val) {
+			  	    var a=[];
+			  	    a=a.concat(key,["All"],val);
+			  	    table_data.push(a);
+			  	});
+		  	}
+		  	
 		  	//generate table
 		  	myTable=new drawTableFromArray({
-		  		table_id: 'mainDataTable',
+		  		table_id: 'daily-advertiser-dataTable',
 		  		table_colums: ['Date','Hour','Clicks','Impressions','Cta maps'],
 		  		columns_format:['','','number','number','number'],
 		  		table_data: table_data,
-		  		page_items: 20,
+		  		page_items: 25,
 		  		paging: true,
 		  		sort_by: 'Date',
 		  		sortable: true,
@@ -180,7 +187,9 @@ $(document).ready(function(){
 		  	chart_date_data[0].data=[];
 		  	chart_date_data[1].data=[];
 		  	chart_date_data[2].data=[];
-		  	$.each(table_data,function(index,row){
+		  	var temp_data=table_data;
+		  	temp_data.reverse();
+		  	$.each(temp_data,function(index,row){
 		  		var category_value=row[0];
 		  		categories_date.push(category_value);
 		  		var click_value=row[2];
@@ -207,14 +216,10 @@ $(document).ready(function(){
 
 	//function generate chart . When options are changed, run this function to redraw the chart
 	function drawChart(categories,series,title,subtitle){
-		for(var i=0;i<series.length;i++){
-			var row=series[i];
-			//console.log("Row "+i+": "+row.name);
-			//console.log("Data: "+row.data.length+" - "+row.data.join());
-		}
+
 		console.log('Draw chart');
 		
-		 $('#container').highcharts({
+		 $('#daily-advertiser-chart-container').highcharts({
 			 	chart: {
 				 type: 'spline'
 	            },
@@ -256,8 +261,7 @@ $(document).ready(function(){
 	            tooltip: {
 	                formatter: function() {
 	                    return '<b>'+ this.x +'</b><br/>'+
-	                        this.series.name +': '+ this.y +'<br/>'+
-	                        'Total: '+ this.point.stackTotal;
+	                        this.series.name +': '+  accounting.formatNumber(this.y)+'<br/>'
 	                }
 	            },
 	            plotOptions: {
@@ -275,18 +279,13 @@ $(document).ready(function(){
 	            },
 	            series: series
 	        });
-		 chart=$('#container').highcharts();
+		 chart=$('#daily-advertiser-chart-container').highcharts();
 	}
 	//function generate chart . When options are changed, run this function to redraw the chart
 	function drawDateChart(categories,series,title,subtitle){
-		for(var i=0;i<series.length;i++){
-			var row=series[i];
-			//console.log("Row "+i+": "+row.name);
-			//console.log("Data: "+row.data.length+" - "+row.data.join());
-		}
 		console.log('Draw chart by date');
 		
-		 $('#container').highcharts({
+		 $('#daily-advertiser-chart-container').highcharts({
 			 	chart: {
 			 		zoomType: 'xy'
 	            },
@@ -398,19 +397,64 @@ $(document).ready(function(){
 	            },
 	            series: series
 	        });
-		 chart=$('#container').highcharts();
+		 chart=$('#daily-advertiser-chart-container').highcharts();
 	}
 
-	function breakChart(){
-		if(breakBy=='hour'){
-			breakBy='date';
+	function breakChart(by){
+		if(by=='date'){
 			$('#measuresBt button').prop('disabled', true);
 			$('#breakBt button').html('Break by Date<span class="caret"></span>');
 		}else{
-			breakBy='hour';
 			$('#measuresBt button').prop('disabled', false);
 			$('#breakBt button').html('Break by Hour<span class="caret"></span>');
 		}
-		
+		breakBy=by;
 		loadChart();
+	}
+	
+	function reviewExportData(){
+		var mydialog=new contentDialog();
+		mydialog.setTitle('Daily Advertiser by Date Hour From '+selectStartDate.format('yyyy-mm-dd')+' To '+selectEndDate.format('yyyy-mm-dd'));
+		var randomID=new Date().valueOf();
+		mydialog.setContent('<div title="'+randomID+'" class="loadingDots" style=""></div>');
+		mydialog.setWidth(700);
+		mydialog.open();
+		
+		var loadingUrl=rootUrl+'/GenerateJasperReport'+'?export_type=html&jrxml=daily_advertiser_report_by_hour&p_end_date='+selectEndDate.format('yyyy-mm-dd')+'&p_start_date='+selectStartDate.format('yyyy-mm-dd')+'&path=dailyAdvertiser';
+		if(breakBy=='date'){
+			mydialog.setTitle('Daily Advertiser by Date From '+selectStartDate.format('yyyy-mm-dd')+' To '+selectEndDate.format('yyyy-mm-dd'));
+			loadingUrl=rootUrl+'/GenerateJasperReport'+'?export_type=html&jrxml=daily_advertiser_report&p_end_date='+selectEndDate.format('yyyy-mm-dd')+'&p_start_date='+selectStartDate.format('yyyy-mm-dd')+'&path=dailyAdvertiser';
+		}
+		var htmlResult;
+		
+		if(myAjaxStore.isLoading(loadingUrl)){
+			mydialog.setContent('Your request is being processed. Please come back later 30s!');
+		}else{
+			htmlResult=myAjaxStore.get(loadingUrl);
+			if(htmlResult==null){
+				myAjaxStore.registe(loadingUrl);
+				$.ajax({
+					url: loadingUrl,
+					dataType : 'html',
+					success: function(data){
+						myAjaxStore.add(loadingUrl,data);
+						mydialog.setContent(data);
+					},
+					complete: function(jqXHR,textStatus){
+						
+					}
+				});
+			}else{
+				console.log('Set content for div id title='+randomID);
+				mydialog.setContent(htmlResult);
+			}
+		}
+	}
+	
+	function exportReport(exportType){
+		var loadingUrl=rootUrl+'/GenerateJasperReport'+'?export_type='+exportType+'&jrxml=daily_advertiser_report_by_hour&p_end_date='+selectEndDate.format('yyyy-mm-dd')+'&p_start_date='+selectStartDate.format('yyyy-mm-dd')+'&path=dailyAdvertiser';
+		if(breakBy=='date'){
+			loadingUrl=rootUrl+'/GenerateJasperReport'+'?export_type='+exportType+'&jrxml=daily_advertiser_report&p_end_date='+selectEndDate.format('yyyy-mm-dd')+'&p_start_date='+selectStartDate.format('yyyy-mm-dd')+'&path=dailyAdvertiser';
+		}	
+		window.open(loadingUrl);
 	}

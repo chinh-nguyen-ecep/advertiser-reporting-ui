@@ -1,21 +1,23 @@
 /**
  * 
  */
+var currentSession=0;
 var loginUser;
 var today=new Date();
 var yesterday=new Date(new Date().setDate(new Date().getDate()-1));
+var rollBackSevenDay=new Date(new Date().setDate(new Date().getDate()-6));
 var thirtyDayBefore=new Date(new Date().setDate(new Date().getDate()-30));
-var apiRootUrl='http://'+window.location.hostname+':'+window.location.port +'/advertiserapi';
-
-
+var apiRootUrl=window.location.protocol+'//'+window.location.hostname+':'+window.location.port +'/advertiserapi';
+//var apiRootUrl=window.location.protocol+'//'+'reporting.vervemobile.com' +'/advertiserapi';
+var rootUrl=window.location.protocol+'//'+window.location.hostname+':'+window.location.port +'/AdvertiserDashboard';
 function setTabActive(tab_title){
+		$('#page-tab ul li').removeClass('active');
 		$('#page-tab ul li[title='+tab_title+']').attr('class','active');
 }
 
 function generateDateRange(settings){
 	settings=$.extend({},{stargetId: '',start_date: thirtyDayBefore,end_date: yesterday,callback: function(start_date,end_date,value){}},settings);
  	//function generate date range
-
 		var html=settings.start_date.format('yyyy-mm-dd') + '..' + settings.end_date.format('yyyy-mm-dd');
 		 $('#'+settings.stargetId+' span').html(html);
 		 $('#'+settings.stargetId+' input').val('where[date.between]='+html);
@@ -46,19 +48,21 @@ function generateDateRange(settings){
 		this.disable=disable;
  		this.unable=unable;
  		//disable dom
-		var disableDom=$('<div class="glassOnTop form-control input-sm">sadasdasd</div>');
-		var left=$('#'+settings.stargetId).position().left;
-		var top=$('#'+settings.stargetId).position().top;
-		disableDom.css('left',left);
-		disableDom.css('top',top);
-		console.log(left+"-"+top);
-		$('body').append(disableDom);
+		var disableDom=$('<div></div>');
+		disableDom.addClass('loadingDots');
+		disableDom.css('width','100px');
+		disableDom.css('height','30px');
+		disableDom.hide();
+		$('#'+settings.stargetId).before(disableDom);
  		function disable(){
  			console.log('Disable date range input ');
  			$('#'+settings.stargetId).hide();
+ 			disableDom.show();
+
  		}
  		function unable(){
  			$('#'+settings.stargetId).show();
+ 			disableDom.hide();
  		}
 }
 
@@ -220,8 +224,13 @@ function drawTableFromArray(settings){
 			 }
 			 	 
 			 var result=first > second?1:-1;
+
 			 if(settings.sort_type=='desc'){
 				 result=first < second?1:-1;
+			 }
+			 
+			 if(first == second){
+				 result=0;
 			 }
 //			 console.log(first+" and "+second+" is "+ result+" Comapair type: "+compairType);
 			 return result;
@@ -246,14 +255,19 @@ function IsNumeric(input){
 }
 
 // ajax cache manager
+//myAjaxStore.add(url,data);
+//myAjaxStore.registe(url);
+//myAjaxStore.isLoading(url);
+//myAjaxStore.get(url);
 var myAjaxStore=new ajaxStore();
 function ajaxStore(){
-	var expireTime=20;
+	var expireTime=360000;//60s
 	var store=[];
 	this.add=add;
 	this.get=get;
 	this.registe=registe;
 	this.isLoading=isLoading;
+	this.openDialogIsLoading=openDialogIsLoading;
 	function add(url,data){
 		var isInStore=false;
 		var indexData=-1;
@@ -262,6 +276,7 @@ function ajaxStore(){
 				isInStore=true;
 				indexData=index;
 				store[index].data=data;
+				store[index].dateTime=new Date();
 			}
 		});
 		if(!isInStore){
@@ -280,8 +295,12 @@ function ajaxStore(){
 		var result=null;
 		$.each(store,function(index,value){
 			if(value.url==url){
-				isInStore=true;
-				result=value.data;
+				if((new Date()-value.dateTime)<expireTime){
+					isInStore=true;
+					result=value.data;
+				}else{
+					
+				}
 				console.log("Got data: "+url);
 				console.log("Time expire: "+(new Date()-value.dateTime));
 				console.log("Data: "+value.data);
@@ -297,6 +316,7 @@ function ajaxStore(){
 				isInStore=true;
 				indexData=index;
 				store[index].data='isLoading';
+				store[index].dateTime=new Date();
 			}
 		});
 		if(!isInStore){
@@ -323,5 +343,36 @@ function ajaxStore(){
 		});
 		return isLoading;
 	}
+	function openDialogIsLoading(){
+		var myDialog=new contentDialog();
+		myDialog.setTitle("Your request is being processed!");
+		myDialog.setContent("Server is processing your request. Please select again later 30s.");
+		myDialog.open();
+	}
 };
+
+function contentDialog(){
+	var div=$('<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-dialog">  <div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title">Modal title</h4></div><div class="modal-body"></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div></div></div></div>');
+	$('body').append(div);
+	this.open=open;
+	this.setContent=setContent;
+	this.setTitle=setTitle;
+	this.setWidth=setWidth;
+	function setWidth(width){
+		div.find('div.modal-dialog').css('width',width+'px');
+	}
+	function setTitle(title){
+		div.find('h4.modal-title').first().html(title);
+	}
+	function setContent(newContent){
+		div.find('div.modal-body').first().html(newContent);
+	}
+	function open(){
+		div.modal({
+			  keyboard: false
+		});
+	}
+}
+
+
 

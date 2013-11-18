@@ -60,9 +60,9 @@
     <div class="container theme-showcase" id="page-tab">
        	<ul class="nav nav-tabs">
        	
-		  <li title="overview"><a href="?p=overview">Dashboard Overview</a></li>
-		  <li title="dailyAdvertiser"><a href="?p=dailyAdvertisers">Daily Advertiser</a></li>
-		  <li title="order"><a href="?p=order">Order Name</a></li>
+		  <li title="overview"><a href="#" onclick="changePage('overview')">Dashboard Overview</a></li>
+		  <li title="dailyAdvertiser"><a href="#" onclick="changePage('dailyAdvertisers')">Daily Advertiser</a></li>
+		  <li title="order"><a href="#" onclick="changePage('order')">Order Name</a></li>
 		</ul>   
     </div>
     <script>

@@ -84,7 +84,7 @@
 	  <div class="col-md-12">
 	  <div class="panel panel-default">
 		  <div class="panel-body" style="padding: 0px;">
-  			<table class="table table-bordered table-hover " id="mainDataTable">
+  			<table class="table table-bordered table-hover dataTable" id="mainDataTable">
 	        <thead>
 	          <tr>
 	            <th class="header sort"><a href="#">Date</a><span class="glyphicon glyphicon-sort-by-attributes-alt"></span></th>
