@@ -111,12 +111,12 @@ inv_mmyy;]]>
 				<text><![CDATA[Account]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="table1_CH" x="156" y="0" width="80" height="20"/>
+				<reportElement style="table1_CH" x="156" y="0" width="90" height="20"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[Type]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="table1_CH" x="236" y="0" width="161" height="20"/>
+				<reportElement style="table1_CH" x="246" y="0" width="151" height="20"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[Description]]></text>
 			</staticText>
@@ -140,12 +140,12 @@ inv_mmyy;]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{Account}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="table_cell" x="156" y="0" width="80" height="20"/>
+				<reportElement style="table_cell" x="156" y="0" width="90" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{Type}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="table_cell" x="236" y="0" width="161" height="20"/>
+				<reportElement style="table_cell" x="246" y="0" width="151" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{Description}]]></textFieldExpression>
 			</textField>

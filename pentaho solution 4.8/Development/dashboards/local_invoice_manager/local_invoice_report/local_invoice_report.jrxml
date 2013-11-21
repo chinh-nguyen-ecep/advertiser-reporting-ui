@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Local Invoice Report" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.8181818181818257"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="192"/>
+	<property name="ireport.y" value="205"/>
 	<style name="default" fontName="Calibri"/>
 	<style name="table1_CH" isDefault="true" mode="Opaque" forecolor="#333333" backcolor="#66CCFF" fill="Solid" vAlign="Middle" fontName="Calibri" isBold="true" isItalic="false">
 		<pen lineWidth="0.5" lineColor="#000000"/>
@@ -104,22 +104,22 @@ ORDER BY a.adm_partner_name]]>
 				<text><![CDATA[Verve Wireless, Inc.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="default" mode="Transparent" x="0" y="54" width="236" height="15" backcolor="#FFFFFF"/>
+				<reportElement style="default" mode="Transparent" x="0" y="54" width="246" height="15" backcolor="#FFFFFF"/>
 				<textElement/>
 				<text><![CDATA[5973 Avenida Encinas, Ste. 101]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="default" mode="Transparent" x="0" y="69" width="236" height="15" backcolor="#FFFFFF"/>
+				<reportElement style="default" mode="Transparent" x="0" y="69" width="246" height="15" backcolor="#FFFFFF"/>
 				<textElement/>
 				<text><![CDATA[Carlsbad, CA  92008]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="default" mode="Transparent" x="0" y="84" width="236" height="15" backcolor="#FFFFFF"/>
+				<reportElement style="default" mode="Transparent" x="0" y="84" width="246" height="15" backcolor="#FFFFFF"/>
 				<textElement/>
 				<text><![CDATA[Ph: (760) 565-3394]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="default" mode="Transparent" x="0" y="99" width="236" height="15" backcolor="#FFFFFF"/>
+				<reportElement style="default" mode="Transparent" x="0" y="99" width="246" height="15" backcolor="#FFFFFF"/>
 				<textElement/>
 				<text><![CDATA[Fx: (760) 479-0056]]></text>
 			</staticText>
@@ -129,28 +129,28 @@ ORDER BY a.adm_partner_name]]>
 				<text><![CDATA[billing@vervemobile.com]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="default" mode="Transparent" x="236" y="54" width="241" height="15" backcolor="#FFFFFF"/>
+				<reportElement style="default" mode="Transparent" x="246" y="54" width="231" height="15" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[DATE: ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="default" mode="Transparent" x="236" y="69" width="241" height="15" backcolor="#FFFFFF"/>
+				<reportElement style="default" mode="Transparent" x="246" y="69" width="231" height="15" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[INVOICE # ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="default" mode="Transparent" x="236" y="84" width="241" height="15" backcolor="#FFFFFF"/>
+				<reportElement style="default" mode="Transparent" x="246" y="84" width="231" height="15" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Run Period: ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="default" mode="Transparent" x="236" y="99" width="241" height="15" backcolor="#FFFFFF"/>
+				<reportElement style="default" mode="Transparent" x="246" y="99" width="231" height="15" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
