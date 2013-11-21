@@ -404,7 +404,7 @@ function delay_timeout(second_time,func){
 	}
 	</script>
 </body>
-</html>]]></template>
+</html>]]></template> 
         </component-definition> 
       </action-definition>
  
@@ -607,7 +607,8 @@ background: #F8F8F8;
 	}
 	// click button export invoice report
 	function exportInvoiceDetail(exportType, invoiceID) {
-		var urlLoadContentDetail = rootPath	+ '&actions=invoiceDetailExport&exportType=' + exportType+ '&p_inv_detail_id=' + invoiceID;
+		var monthYear = $('select[name=month-year]').val();
+		var urlLoadContentDetail = rootPath	+ '&actions=invoiceDetailExport&exportType=' + exportType+ '&p_inv_detail_id=' + invoiceID+'&p_month_year='+monthYear;
 // 		var strName = ("downloader" + (new Date()).getTime());
 // 		var jFrame = $("<iframe name=\"" + strName + "\" src=\"about:blank\" />");
 // 		jFrame.css("display", "none");
@@ -875,7 +876,7 @@ background: #F8F8F8;
         </action-outputs>
         <component-definition> 
           <live><![CDATA[false]]></live>  
-          <query><![CDATA[SELECT inv_mmyy as value,to_char(to_date(inv_mmyy, 'MMYY'),'Mon YYYY') as name FROM accounting.ba_inv_detail GROUP BY inv_mmyy ORDER BY name desc;]]></query> 
+          <query><![CDATA[SELECT inv_mmyy as value,to_char(to_date(inv_mmyy, 'MMYY'),'Mon YYYY') as name FROM accounting.ba_inv_detail GROUP BY inv_mmyy ORDER BY inv_mmyy desc;]]></query> 
         </component-definition> 
       </action-definition>
  
