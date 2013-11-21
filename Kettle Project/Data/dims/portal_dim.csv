@@ -1,0 +1,77 @@
+20|1|Verizon Wireless|Verizon Wireless local portal|2249|0|t|f|f|9328|2008-10-06 14:15:07.352749|2009-02-26 14:30:07.466028|Verizon Wireless|Verizon Wireless local portal|vrvz
+17|8|AP Client Applications|AP mobile client applications.|238|0|f|f|f|486|2008-08-01 00:00:00|2008-10-06 14:15:06.352749|AP iPhone Client|AP MNN native iPhone client.|apc
+24|8|AP Client Applications|AP mobile client applications|238|0|f|f|f|9328|2008-10-06 14:15:07.352749|2008-10-09 18:00:06.459016|AP iPhone Client|AP MNN native iPhone client.|apc
+33|1|Verizon Wireless|Verizon Wireless local portal|85|0|t|f|f|92491|2009-02-26 14:30:08.466028|9999-12-31 00:00:00|Verizon Wireless|Verizon Wireless local portal|vrvz
+1|1|Verizon Wireless|Default Verizon Deck|2249|0|t|f|f|3|2007-10-28 00:00:00|2008-08-22 18:06:01|Verizon Wireless|Verizon Wireless local portal|vrvz
+12|1|Verizon Wireless|Verizon Wireless local portal.|2249|0|t|f|f|441|2008-08-22 18:06:02|2008-10-06 14:15:06.352749|Verizon Wireless|Verizon Wireless local portal|vrvz
+2|2|Verve Wireless|Verve Wireless default deck|85|0|f|f|f|3|2007-10-28 00:00:00|2008-08-22 18:06:01|Verve Wireless|Verve Wireless local portal|def
+13|2|Verve Wireless|Verve Wireless default portal.|85|0|f|f|f|441|2008-08-22 18:06:02|2008-10-06 14:15:06.352749|Verve Wireless|Verve Wireless local portal|def
+21|2|Verve Wireless|Verve Wireless local portal|85|0|f|f|f|9328|2008-10-06 14:15:07.352749|9999-12-31 00:00:00|Verve Wireless|Verve Wireless local portal|def
+3|3|DiscoverOurTown.com|Discovery Our Town deck|194|0|f|f|f|3|2007-10-28 00:00:00|2008-08-22 18:06:01|DiscoverOurTown.com|Discover Our Town portal.|dot
+14|3|DiscoverOurTown.com|Discover Our Town portal.|194|0|f|f|f|441|2008-08-22 18:06:02|9999-12-31 00:00:00|DiscoverOurTown.com|Discover Our Town portal.|dot
+4|4|Partner Portal|Single partner portal.|85|1|f|f|f|3|2007-10-28 00:00:00|9999-12-31 00:00:00|Partner Portal|Single partner portal.|ptnr
+5|5|MEdia Net|AT&T MEdia Net.|85|0|t|f|f|3|2007-10-28 00:00:00|9999-12-31 00:00:00|MEdia Net|AT&T MEdia Net.|mnet
+6|6|CRMA|CRMA portal|2311|0|f|f|f|324|2008-08-08 00:00:00|2008-08-22 18:06:01|CRMA|CRMA portal|crma
+15|6|CRMA|CRMA portal.|2311|0|f|f|f|441|2008-08-22 18:06:02|2008-10-06 14:15:06.352749|CRMA|CRMA portal|crma
+22|6|CRMA|CRMA portal|2311|0|f|f|f|9328|2008-10-06 14:15:07.352749|9999-12-31 00:00:00|CRMA|CRMA portal|crma
+16|7|US Cellular MNN|US Cellular Mobile News Network portal.|238|0|f|f|f|441|2008-08-22 18:06:02|2008-10-06 14:15:06.352749|US Cellular MNN|US Cellular Mobile News Network portal|uscc
+23|7|US Cellular MNN|US Cellular Mobile News Network portal|238|0|f|f|f|9328|2008-10-06 14:15:07.352749|2008-10-15 14:15:06.75953|US Cellular MNN|US Cellular Mobile News Network portal|uscc
+18|9|Virgin Mobile AP applications|Virgin Mobile AP applications|2334|0|f|f|f|9220|2008-10-06 09:45:07.462088|2008-10-06 10:00:06.197454|Virgin Mobile AP|Virgin Mobile AP|vmap
+19|9|Virgin Mobile AP|Virgin Mobile AP|2334|0|f|f|f|9226|2008-10-06 10:00:07.197454|9999-12-31 00:00:00|Virgin Mobile AP|Virgin Mobile AP|vmap
+32|12|AP Web Run-Time Client|AP MNN Nokia widget.|238|0|f|f|f|76253|2009-01-28 20:00:08.585234|9999-12-31 00:00:00|AP Web Run-Time Client|AP MNN Nokia widget.|ap60
+34|13|AP Android Client|AP MNN Android client.|238|0|f|f|f|95470|2009-03-03 10:00:36.787375|9999-12-31 00:00:00|AP Android Client|AP MNN Android client.|apan
+35|14|AP WebOS Client|AP MNN Palm WebOS client.|238|0|f|f|f|95470|2009-03-03 10:00:36.787375|9999-12-31 00:00:00|AP WebOS Client|AP MNN Palm WebOS client.|apwo
+-1|-100|N/A|N/A|-100|-100|f|f|f|\N|2007-10-28 00:00:00|9999-12-31 00:00:00|N/A|N/A|N/A
+-2|-200|N/A (key)|N/A|-100|-100|f|f|f|\N|2007-10-28 00:00:00|9999-12-31 00:00:00|N/A (key)|N/A|N/A
+25|8|AP iPhone Client|AP MNN native iPhone client.|238|0|f|f|f|11152|2008-10-09 18:00:07.459016|2009-07-24 10:00:15.816754|AP iPhone Client|AP MNN native iPhone client.|apc
+27|7|US Cellular MNN|US Cellular Mobile News Network portal|238|1|f|f|f|14560|2008-10-15 14:15:07.75953|2008-10-15 14:30:06.664158|US Cellular MNN|US Cellular Mobile News Network portal|uscc
+28|7|US Cellular MNN|US Cellular Mobile News Network portal|85|1|f|f|f|14566|2008-10-15 14:30:07.664158|2008-10-16 10:45:06.551736|US Cellular MNN|US Cellular Mobile News Network portal|uscc
+40|11|AP J2ME Client|AP MNN native J2ME client.|238|0|f|f|f|117251|2009-04-09 23:15:09.83029|9999-12-31 00:00:00|AP J2ME Client|AP MNN native J2ME client.|apj2
+66|38|Android News Client|Native Android white label news client|85|0|f|f|f|368414|2010-09-22 12:00:37.929035|9999-12-31 00:00:00|Android News Client|Native Android white label news client|anap
+58|32|AP Windows Phone 7|AP MNN Windows Phone 7 client.|238|0|f|f|f|343146|2010-06-29 19:30:17.145252|9999-12-31 00:00:00|AP Windows Phone 7|AP MNN Windows Phone 7 client.|apwp
+59|34|wickedlocal.com|Wicked Local portal|85|0|f|f|f|346092|2010-07-09 15:00:17.449374|9999-12-31 00:00:00|wickedlocal.com|Wicked Local portal|wkd
+31|11|Freerange J2ME Client|AP MNN native J2ME client.|238|0|f|f|f|36474|2008-11-21 19:00:07.609|2009-04-09 23:15:08.83029|AP J2ME Client|AP MNN native J2ME client.|apj2
+60|35|MySuburbanLife.com|MySuburbanLife portal|85|0|f|f|f|346098|2010-07-09 15:30:22.857072|2010-07-27 22:31:19.409412|MySuburbanLife.com|MySuburbanLife portal|msl
+38|16|AP News|Associated Press portal.|238|0|f|f|f|112221|2009-04-01 10:45:25.887484|9999-12-31 00:00:00|AP News|Associated Press portal.|mnn
+37|16|AP Edition Selection|AP Edition Selection|238|0|f|f|f|111873|2009-03-31 20:30:09.068316|2009-04-01 10:45:24.887484|AP News|Associated Press portal.|mnn
+41|17|Test Portal|Testing traffic.|85|0|f|f|f|117251|2009-04-09 23:15:09.83029|9999-12-31 00:00:00|Test Portal|Testing traffic.|test
+45|18|Examiner.com|Examiner portal|2603|0|f|f|f|141449|2009-05-21 11:30:10.324622|2009-07-07 11:15:48.427972|Examiner.com|Examiner portal|xmnr
+49|18|Examiner.com|Examiner portal|2634|0|f|f|f|168908|2009-07-07 11:15:49.427972|9999-12-31 00:00:00|Examiner.com|Examiner portal|xmnr
+67|39|T-Mobile AP|T-Mobile AP|238|0|f|f|f|384097|2010-11-12 08:30:41.048537|2010-11-18 09:30:47.079616|T-Mobile AP|T-Mobile AP|tmap
+29|7|US Cellular MNN|US Cellular Mobile News Network portal|238|1|f|f|f|15052|2008-10-16 10:45:07.551736|2009-05-14 09:15:16.598036|US Cellular MNN|US Cellular Mobile News Network portal|uscc
+42|7|US Cellular MNN|US Cellular Mobile News Network portal|238|0|f|f|f|137321|2009-05-14 09:15:17.598036|2009-05-14 09:30:13.353752|US Cellular MNN|US Cellular Mobile News Network portal|uscc
+43|7|US Cellular MNN|US Cellular Mobile News Network portal|238|1|f|f|f|137327|2009-05-14 09:30:14.353752|2009-05-14 09:45:12.486662|US Cellular MNN|US Cellular Mobile News Network portal|uscc
+44|7|US Cellular MNN|US Cellular Mobile News Network portal|85|1|f|f|f|137333|2009-05-14 09:45:13.486662|9999-12-31 00:00:00|US Cellular MNN|US Cellular Mobile News Network portal|uscc
+47|20|Verve Web Run-Time Client|Verve Nokia widget.|85|0|f|f|f|161654|2009-06-25 01:30:10.439297|9999-12-31 00:00:00|Verve Web Run-Time Client|Verve Nokia widget.|vwrt
+48|21|AP Windows Mobile Client|AP MNN Windows Mobile client.|238|0|f|f|f|162551|2009-06-26 14:30:29.169396|9999-12-31 00:00:00|AP Windows Mobile Client|AP MNN Windows Mobile client.|apwm
+50|8|AP iPhone Client|AP MNN native iPhone client.|238|0|f|f|f|178851|2009-07-24 10:00:16.816754|9999-12-31 00:00:00|AP iPhone Client|AP MNN native iPhone client.|apcl
+51|22|Cox Wireless|Cox Wireless portal.|85|0|f|f|f|202004|2009-09-02 14:45:57.552147|9999-12-31 00:00:00|Cox Wireless|Cox Wireless portal.|cox
+52|23|iPhone News Client|Native iPhone news client.|85|0|f|f|f|211887|2009-09-19 07:45:14.110562|9999-12-31 00:00:00|iPhone News Client|Native iPhone news client.|iphn
+53|24|AP iPad Client|AP MNN iPad client.|238|0|f|f|f|314590|2010-03-26 15:00:17.236037|9999-12-31 00:00:00|AP iPad Client|AP MNN iPad client.|apid
+54|25|BlackBerry News Client|Native BlackBerry news client.|85|0|f|f|f|326592|2010-05-05 15:00:16.634034|9999-12-31 00:00:00|BlackBerry News Client|Native BlackBerry news client.|bapp
+55|15|Verve External|Traffic/advertising on external sites.|85|0|f|f|f|334944|2010-06-02 11:00:19.490878|9999-12-31 00:00:00|Verve External|Traffic/advertising on external sites.|ext
+36|15|Verve External|Traffic/advertising on sites external to Verve.|85|0|f|f|f|99685|2009-03-10 14:45:08.32058|2010-06-02 11:00:18.490878|Verve External|Traffic/advertising on external sites.|ext
+61|30|Advance Internet, Alabama|Alabama deck for Advance Internet|3191|0|f|f|f|348750|2010-07-19 17:00:17.820258|9999-12-31 00:00:00|Advance Internet, Alabama|Alabama deck for Advance Internet|aial
+56|30|Advanced Internet, Alabama|Alabama deck for Advance Internet|3191|0|f|f|f|338988|2010-06-15 23:00:17.282779|2010-07-19 17:00:16.820258|Advance Internet, Alabama|Alabama deck for Advance Internet|aial
+62|31|Advance Internet, Michigan|Michigan deck for Advance Internet|3192|0|f|f|f|348750|2010-07-19 17:00:17.820258|9999-12-31 00:00:00|Advance Internet, Michigan|Michigan deck for Advance Internet|aimi
+57|31|Advanced Internet, Michigan|Michigan deck for Advance Internet|3192|0|f|f|f|338988|2010-06-15 23:00:17.282779|2010-07-19 17:00:16.820258|Advance Internet, Michigan|Michigan deck for Advance Internet|aimi
+63|35|MySuburbanLife.com|MySuburbanLife portal|3372|0|f|f|f|351216|2010-07-27 22:31:20.409412|9999-12-31 00:00:00|MySuburbanLife.com|MySuburbanLife portal|msl
+64|36|iPad News Client|Native iPad news client.|85|0|f|f|f|355658|2010-08-11 13:00:17.973074|9999-12-31 00:00:00|iPad News Client|Native iPad news client.|ipad
+68|39|T-Mobile AP|T-Mobile AP|85|0|f|f|f|385945|2010-11-18 09:30:48.079616|9999-12-31 00:00:00|T-Mobile AP|T-Mobile AP|tmap
+70|37|AP MeeGo Client|AP MNN MeeGo client.|238|0|f|f|f|490445|2011-05-24 03:32:00.914052|9999-12-31 00:00:00|AP MeeGo Client|AP MNN MeeGo client.|apmg
+65|37|AP MeeGo|AP MNN MeeGo client.|238|0|f|f|f|356242|2010-08-13 11:00:17.60565|2011-05-24 03:31:59.914052|AP MeeGo Client|AP MNN MeeGo client.|apmg
+72|41|ASP Westward|ASP Westward portal|3833|0|f|f|f|665077|2011-12-13 05:30:54.074772|9999-12-31 00:00:00|ASP Westward|ASP Westward portal|aspw
+73|42|Southwest Iowa News|Southwest Iowa News portal|4052|1|f|f|f|924630|2012-04-09 00:46:01.396038|9999-12-31 00:00:00|Southwest Iowa News|Southwest Iowa News portal|swin
+74|10|AP FreeRange BlackBerry Client|AP FreeRange BlackBerry Client|238|0|f|f|f|1016799|2012-06-05 12:45:54.204247|9999-12-31 00:00:00|AP FreeRange BlackBerry Client|AP FreeRange BlackBerry Client|apfr
+39|10|AP BlackBerry Client|AP MNN native BlackBerry client.|238|0|f|f|f|117251|2009-04-09 23:15:09.83029|2012-06-05 12:45:53.204247|AP FreeRange BlackBerry Client|AP FreeRange BlackBerry Client|apfr
+26|10|AP Freerange Client|AP MNN native BlackBerry client.|238|0|f|f|f|11242|2008-10-09 21:45:07.096561|2008-11-21 19:00:06.609|AP FreeRange BlackBerry Client|AP FreeRange BlackBerry Client|apfr
+30|10|Freerange BB Client|AP MNN native BlackBerry client.|238|0|f|f|f|36474|2008-11-21 19:00:07.609|2009-04-09 23:15:08.83029|AP FreeRange BlackBerry Client|AP FreeRange BlackBerry Client|apfr
+75|19|AP BlackBerry Client|AP MNN BlackBerry Client|238|0|f|f|f|1016799|2012-06-05 12:45:54.204247|9999-12-31 00:00:00|AP BlackBerry Client|AP MNN BlackBerry Client|maem
+46|19|AP Maemo Client|AP MNN Nokia Maemo client.|238|0|f|f|f|145691|2009-05-28 18:30:09.683164|2012-06-05 12:45:53.204247|AP BlackBerry Client|AP MNN BlackBerry Client|maem
+76|40|Windows Phone News Client|Native Windows Phone news client|85|0|f|f|f|1114761|2012-07-17 00:31:12.928494|9999-12-31 00:00:00|Windows Phone News Client|Native Windows Phone news client|wp7
+71|40|Windows Phone 7 News Client|Native Windows Phone 7 news client.|85|0|f|f|f|616225|2011-10-24 05:31:42.921118|2012-07-17 00:31:11.928494|Windows Phone News Client|Native Windows Phone news client|wp7
+69|40|Windows Phone 7 News Client|Native Windows Phone 7 news client.|85|0|f|f|f|387487|2010-11-23 10:31:59.782518|2011-10-24 05:31:41.921118|Windows Phone News Client|Native Windows Phone news client|wapp
+77|43|Mobile Web Tablet|Mobile Web Tablet off platform|85|0|f|f|f|1166001|2012-09-20 00:46:00.872702|9999-12-31 00:00:00|Mobile Web Tablet|Mobile Web Tablet off platform|wtbt
+78|44|Advance Internet - NOLA|NOLA portal|5601|0|f|f|f|1174706|2012-12-03 12:45:56.921452|9999-12-31 00:00:00|Advance Internet - NOLA|NOLA portal|nola
+80|45|Android Tablet News Client|Native Android white label news client for tablets|85|0|f|f|f|1212664|2013-10-24 02:46:03.97868|9999-12-31 00:00:00|Android Tablet News Client|Native Android white label news client for tablets|apad
+79|45|Android Table News Client|Native Android white label news client for tablets|85|0|f|f|f|1212328|2013-10-22 02:45:58.976158|2013-10-24 02:46:02.97868|Android Tablet News Client|Native Android white label news client for tablets|apad
