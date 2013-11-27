@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_delivery_adnetwork_pub_prop_channel_subreport1" language="groovy" pageWidth="2680" pageHeight="802" columnWidth="2680" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_delivery_adnetwork_pub_prop_channel_subreport1" language="groovy" pageWidth="2830" pageHeight="802" columnWidth="2830" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="1.0000000000000033"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="756"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="p_adnetwork_id_list" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new String("0")]]></defaultValueExpression>
@@ -147,63 +147,63 @@ ORDER BY calendar_year_month,undisplayed_impressions desc,ctr desc;]]>
 	<detail>
 		<band height="20">
 			<textField pattern="$ #,##0.00">
-				<reportElement x="2465" y="0" width="85" height="20"/>
+				<reportElement x="2615" y="0" width="85" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{pub_revenue}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="1367" y="0" width="79" height="20"/>
+				<reportElement x="1397" y="0" width="109" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{adcel_requests}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="1804" y="0" width="57" height="20"/>
+				<reportElement x="1954" y="0" width="57" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{clicks}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %">
-				<reportElement x="1931" y="0" width="50" height="20"/>
+				<reportElement x="2081" y="0" width="50" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{ctr}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00">
-				<reportElement x="1981" y="0" width="60" height="20"/>
+				<reportElement x="2131" y="0" width="60" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{cpm}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00">
-				<reportElement x="2550" y="0" width="60" height="20"/>
+				<reportElement x="2700" y="0" width="60" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{pub_rpm}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="1065" y="0" width="80" height="20"/>
+				<reportElement x="1065" y="0" width="110" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{verve_impressions}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="1656" y="0" width="78" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="1776" y="0" width="108" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{adcel_response}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %">
-				<reportElement x="1285" y="0" width="82" height="20"/>
+				<reportElement x="1315" y="0" width="82" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
@@ -217,35 +217,35 @@ ORDER BY calendar_year_month,undisplayed_impressions desc,ctr desc;]]>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{undisplayed_impressions}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %">
-				<reportElement x="1225" y="0" width="60" height="20"/>
+				<reportElement x="1255" y="0" width="60" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{pub_fill_percentage}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00">
-				<reportElement x="2380" y="0" width="85" height="20"/>
+				<reportElement x="2530" y="0" width="85" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{verve_rpm}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="1145" y="0" width="80" height="20"/>
+				<reportElement x="1175" y="0" width="80" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{reported_impressions}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00">
-				<reportElement x="2125" y="0" width="85" height="20"/>
+				<reportElement x="2275" y="0" width="85" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{reported_revenue}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00">
-				<reportElement x="2210" y="0" width="85" height="20"/>
+				<reportElement x="2360" y="0" width="85" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
@@ -266,14 +266,14 @@ ORDER BY calendar_year_month,undisplayed_impressions desc,ctr desc;]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{calendar_year_month}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %">
-				<reportElement x="1734" y="0" width="70" height="20"/>
+				<reportElement x="1884" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{response_percentage}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %">
-				<reportElement x="2610" y="0" width="70" height="20"/>
+				<reportElement x="2760" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
@@ -287,42 +287,42 @@ ORDER BY calendar_year_month,undisplayed_impressions desc,ctr desc;]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{ad_network_name}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00">
-				<reportElement x="2295" y="0" width="85" height="20"/>
+				<reportElement x="2445" y="0" width="85" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{verve_revenue}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00">
-				<reportElement x="2041" y="0" width="84" height="20"/>
+				<reportElement x="2191" y="0" width="84" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{unreported_revenuem}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="1861" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="2011" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{bannerclick_events}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="1446" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="1506" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{ui_count}.doubleValue()/$F{adcel_requests}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="1516" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="1576" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{filled_requests}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="1586" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="1676" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
