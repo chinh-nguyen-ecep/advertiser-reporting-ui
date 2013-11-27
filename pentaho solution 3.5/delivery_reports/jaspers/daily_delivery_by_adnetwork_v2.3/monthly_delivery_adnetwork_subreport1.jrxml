@@ -23,8 +23,6 @@
 	calendar_year_month,
 	ad_network_id,
 	ad_network_name,
-	publisher_id,
-	publisher_name,
 	adcel_requests as adcel_requests,
 	SUM(fullfilled_code_count) as adcel_response,
 	SUM(bannerclick_events) as bannerclick_events,
@@ -54,12 +52,9 @@ FROM adsops.monthly_agg_delivery_adnetwork_publisher_v3
 WHERE is_active=true
 AND month_since_2005::int = $P{month_since_2005}::int
 AND (ad_network_id IN (select unnest(string_to_array($P{p_adnetwork_id_list}, ';'))::int) OR '0'=$P{p_adnetwork_id_list})
-AND (publisher_id IN (select unnest(string_to_array($P{p_publisher_id_list}, ';'))::int) OR '0'=$P{p_publisher_id_list})
 GROUP BY calendar_year_month,
 ad_network_id,
 ad_network_name,
-publisher_id,
-publisher_name,
 adcel_requests,
 ui_count,
 unfilled_requests
@@ -68,8 +63,6 @@ ORDER BY calendar_year_month,undisplayed_impressions desc,ctr desc]]>
 	<field name="calendar_year_month" class="java.lang.String"/>
 	<field name="ad_network_id" class="java.lang.Integer"/>
 	<field name="ad_network_name" class="java.lang.String"/>
-	<field name="publisher_id" class="java.lang.Integer"/>
-	<field name="publisher_name" class="java.lang.String"/>
 	<field name="adcel_requests" class="java.lang.Long"/>
 	<field name="adcel_response" class="java.lang.Long"/>
 	<field name="bannerclick_events" class="java.lang.Long"/>
