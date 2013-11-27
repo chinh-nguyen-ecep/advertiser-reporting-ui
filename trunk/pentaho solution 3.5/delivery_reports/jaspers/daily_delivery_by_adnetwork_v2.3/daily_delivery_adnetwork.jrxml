@@ -360,13 +360,6 @@ Filled Reqs]]></text>
 	<summary>
 		<band height="20">
 			<textField pattern="#,##0.00 %">
-				<reportElement x="1139" y="0" width="70" height="20"/>
-				<textElement textAlignment="Right">
-					<font isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.lang.Double"><![CDATA[( $V{adcel_requests_today_1}==0 ? 0 : $V{filled_requests_1}.doubleValue()/$V{adcel_requests_today_1} )]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00 %">
 				<reportElement x="510" y="0" width="60" height="20"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
@@ -540,6 +533,13 @@ Filled Reqs]]></text>
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$V{unfilled_requests_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="1139" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $V{adcel_requests_today_1}==0 ? 0 : $V{adcel_response_1}.doubleValue()/$V{adcel_requests_today_1} )]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

@@ -385,13 +385,6 @@ Unfilled Reqs]]></text>
 	<summary>
 		<band height="20">
 			<textField pattern="#,##0.00 %">
-				<reportElement x="1699" y="0" width="70" height="20"/>
-				<textElement textAlignment="Right">
-					<font isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.lang.Double"><![CDATA[( $V{adcel_requests_1}==0 ? 0 : $V{filled_requests_1}.doubleValue()/$V{adcel_requests_1} )]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00 %">
 				<reportElement x="1070" y="0" width="60" height="20"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
@@ -594,6 +587,13 @@ Unfilled Reqs]]></text>
 				</textElement>
 				<text><![CDATA[Total]]></text>
 			</staticText>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="1699" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $V{adcel_requests_1}==0 ? 0 : $V{adcel_response_1}.doubleValue()/$V{adcel_requests_1} )]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>

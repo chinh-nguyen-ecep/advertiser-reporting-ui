@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="By AdNetwork pub_prop" pageWidth="2625" pageHeight="1684" orientation="Landscape" columnWidth="2625" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="0.7009877989627847"/>
-	<property name="ireport.x" value="2"/>
+	<property name="ireport.x" value="206"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="p_end_date" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new String("2012-12-01")]]></defaultValueExpression>
@@ -403,13 +403,6 @@ Unfilled Reqs]]></text>
 	<summary>
 		<band height="20">
 			<textField pattern="#,##0.00 %">
-				<reportElement x="1679" y="0" width="70" height="20"/>
-				<textElement textAlignment="Right">
-					<font isBold="true"/>
-				</textElement>
-				<textFieldExpression class="java.lang.Double"><![CDATA[( $V{adcel_requests_today_1}==0 ? 0 : $V{filled_requests_1}.doubleValue()/$V{adcel_requests_today_1} )]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00 %">
 				<reportElement x="1050" y="0" width="60" height="20"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
@@ -612,6 +605,13 @@ Unfilled Reqs]]></text>
 				</textElement>
 				<text><![CDATA[Total]]></text>
 			</staticText>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="1679" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $V{adcel_requests_today_1}==0 ? 0 : $V{adcel_response_1}.doubleValue()/$V{adcel_requests_today_1} )]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>
