@@ -49,7 +49,13 @@
         <request>p_network</request> 
       </sources>  
       <default-value><![CDATA[Jumptap]]></default-value> 
-    </p_network> 
+    </p_network>  
+    <ConnectionName type="string">
+      <sources>
+        <request>ConnectionName</request>
+      </sources>
+      <default-value><![CDATA[LocalPostgres]]></default-value>
+    </ConnectionName>
   </inputs>
 
   <outputs/>
@@ -271,14 +277,13 @@ order by a.date_sk desc;]]></query>
         <action-type>Jasper</action-type>
         <action-inputs> 
           <output-type type="string" mapping="p_output"/>  
-          <eastern_date_sk type="string"/> 
+          <eastern_date_sk type="string"/>  
+          <jndi type="string" mapping="ConnectionName"/>
         </action-inputs>
         <action-resources> 
           <report-definition mapping="report-definition2"/> 
         </action-resources>
-        <component-definition> 
-          <jndi><![CDATA[verveReportConnection]]></jndi> 
-        </component-definition> 
+        <component-definition/> 
       </action-definition>
  
     </actions>
