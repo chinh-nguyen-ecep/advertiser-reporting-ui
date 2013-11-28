@@ -59,7 +59,7 @@ SELECT
 	(CASE WHEN channel_id=-100 THEN '-100' ELSE channel_name||'('||channel_id||')' END) as title, 
 	(CASE WHEN channel_id=-100 THEN '-100' ELSE channel_name||'('||channel_id||')' END) as name_view,
 	1 as row_order
-FROM adsops.daily_agg_delivery_adnetwork_publisher_beta
+FROM adsops.daily_agg_delivery_publisher_property_v3
 WHERE is_active=true
 GROUP BY "value",title
 ) a
@@ -89,7 +89,7 @@ SELECT
 	(CASE WHEN channel_id=-100 THEN '-100' ELSE channel_name||'('||channel_id||')' END) as title, 
 	(CASE WHEN channel_id=-100 THEN '-100' ELSE channel_name||'('||channel_id||')' END) as name_view,
 	1 as row_order
-FROM adsops.daily_agg_delivery_adnetwork_publisher_beta
+FROM adsops.daily_agg_delivery_publisher_property_v3
 WHERE is_active=true AND publisher_id={p_publisher_id}
 GROUP BY "value",title
 ) a

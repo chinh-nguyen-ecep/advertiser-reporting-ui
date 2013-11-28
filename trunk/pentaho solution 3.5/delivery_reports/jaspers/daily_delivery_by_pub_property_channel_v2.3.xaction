@@ -155,7 +155,7 @@ SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM a
         <jndi><![CDATA[verveReportConnection]]></jndi>  
         <live><![CDATA[false]]></live>  
         <query><![CDATA[SELECT calendar_year_month,month_since_2005 
-FROM adsops.monthly_agg_delivery_adnetwork_publisher_v3 a
+FROM adsops.monthly_agg_delivery_publisher_property_v3 a
 GROUP BY calendar_year_month,month_since_2005 
 UNION ALL
 SELECT '2013-Jun' as calendar_year_month,102 as month_since_2005 
