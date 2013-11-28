@@ -80,7 +80,7 @@ SELECT
 	(CASE WHEN property_id=-100 THEN '-100' ELSE property_name||'('||property_id||')' END) as name_view,
 	1 as row_order,
 	0 as checked
-FROM adsops.daily_agg_delivery_publisher_property_beta
+FROM adsops.daily_agg_delivery_publisher_property_v3
 WHERE is_active=true
 GROUP BY "value",title
 ) a
@@ -111,7 +111,7 @@ SELECT
 	(CASE WHEN portal_id=-100 THEN '-100' ELSE portal_name||'('||portal_id||')' END) as name_view,
 	1 as row_order,
 	0 as checked
-FROM adsops.daily_agg_delivery_publisher_property_beta
+FROM adsops.daily_agg_delivery_publisher_property_v3
 WHERE is_active=true AND publisher_id={p_publisher_id}
 GROUP BY "value",title
 ) a
@@ -163,7 +163,7 @@ SELECT
 	(CASE 
 		WHEN property_id IN (select unnest(string_to_array('{p_property_id_string}', ','))::int) THEN 1
 		ELSE 0 END) as checked
-FROM adsops.daily_agg_delivery_publisher_property_beta
+FROM adsops.daily_agg_delivery_publisher_property_v3
 WHERE is_active=true 
 AND (publisher_id IN (select unnest(string_to_array( '{p_selected_publisher_id_string}' , ','))::int) OR '0'='{p_selected_publisher_id_string}')
 GROUP BY "value",title
