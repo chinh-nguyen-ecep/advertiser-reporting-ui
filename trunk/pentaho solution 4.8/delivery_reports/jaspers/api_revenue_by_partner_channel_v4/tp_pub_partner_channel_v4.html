@@ -9,55 +9,47 @@
 	  {xform-header}
    </head>
    <body class="pentaho">
-      <div name="dialog-form" title="Control Panel" style="width: 460px;overflow: auto;">
+      <div name="dialog-form" title="Control Panel" style="width: 460px;height: 520px;">		
          <form name="parameter-form" id="parameter-form" method="GET">
          <table class="tableForm">
          <tbody>	         
-			 <tr>
-		         <th>Date mode:</th>
-		         <td><div style="float: left;">{p_date_mode}</div>
-		         </td>
-	         </tr>
 	         <tr>
 		         <th>Range from:</th>
 		         <td>
-					<div id="datemode" style="float: left;">
-						 <label style="margin-left: 0px;"></label> {p_start_date}
-						 <label style="margin-left: 0px;">To:</label> {p_end_date}
-					</div>
-		             <div id="monthmode" style="display: none;float: left;">
-		             <label style="margin-left: 0px;"></label> {p_start_month_since_2005}
-		             <label style="margin-left: 0px;">To:</label> {p_end_month_since_2005}
-		             </div>	             
+				 <div id="datemode" style="float: left;">
+		             <label style="margin-left: 0px;"></label> {p_start_date}
+		             <label style="margin-left: 0px;">To:</label> {p_end_date}
+		             </div>
+		             
 		        </td>
 	         </tr> 
 			<tr>
-				 <th>Publisher:</th>
+				 <th>Group Filter:</th>
 				 <td>
-					<input name="dimension_fillter" type="text" class="dimension"/>
-					<div name="dimension" class="dimension">
+					<input name="dimension_fillter" type="text" class="dimesion"/>
+					<div name="dimension" class="dimesion">
+					Loading....
+					</div>
+				 </td>
+			 </tr>	
+			<tr>
+				 <th>Partner Filter:</th>
+				 <td>
+					<input name="dimension_fillter3" type="text" class="dimesion"/>
+					<div name="dimension3" class="dimesion">
 					Loading....
 					</div>
 				 </td>
 			 </tr>
 			<tr>
-				 <th>Property:</th>
+				 <th>Channel Filter:</th>
 				 <td>
-					<input name="dimension_fillter2" type="text" class="dimension"/>
-					<div name="dimension2" class="dimension">
+					<input class="dimesion" name="dimension_fillter2" type="text" />
+					<div class="dimesion" name="dimension2">
 					Loading....
 					</div>
 				 </td>
-			 </tr>
-			<tr>
-				 <th>Channel:</th>
-				 <td>
-					<input name="dimension_fillter3" type="text" class="dimension"/>
-					<div name="dimension3" class="dimension">
-					Loading....
-					</div>
-				 </td>
-			 </tr>
+			 </tr>				 
          </tbody>
          </table>			
 		 <div id="hide_in_form" style="display:none">
@@ -66,17 +58,18 @@
 			{solution}
 			{action}
 			{path}
-		 </div>
-	    </form>
-      </div>    
+		 </div> 
+	    </form>		
+      </div>  
 	<script> <![CDATA[		 
 			$(document).ready(function(){
 				initJasperPageTemplate({
 					controlPanle_width: 460,
-					//controlPanle_height: 300,
+					//controlPanle_height: 530,
 					generateFormContent: generateFormContent,
 					formValidation:formValidation,
-					reportName:'Daily Delivery by Publisher Property Channel - v2.3'
+					reportName:'API Revenue by Partner Channel V4',
+					iframeMode:true
 				});
 			});
 			
@@ -124,125 +117,115 @@
 					onSelect: function(dateText, inst) { 
 						input_start_date.datepicker( "option", "maxDate", dateText );
 					}
-				});
-				
-				//Date mode
-				$('#p_date_mode_month').click(function(){
-					$('#datemode').hide();
-					$('#monthmode').show();
-					//$('#p_date_mode_month').attr('checked',false);
-					//$('#p_date_mode_date').attr('checked',true);
-					//alert('Monthly report have no data!');
-				});
-				$('#p_date_mode_date').click(function(){
-					$('#datemode').show();
-					$('#monthmode').hide();				
-				});
-				//load Channel
+				});	
 				var loadChannel=function(){
 					loadParam({
 						text:'Loading Channels',
-						p_table:'adsops.daily_agg_delivery_publisher_property_v3',
+						p_table:'adm.daily_agg_api_revenue_by_partner_v3',
 						p_value_field:'channel_id',
 						p_name_field:'channel_name',
-						p_condition:'is_active=true',
+						//p_condition:condition,
 						p_all_name:'All Channels',
 						p_all_value:'0', //default 0
 						p_prompt_stype:'Scrolling Check List', //pulldown or Scrolling Check List
 						p_param_name:'p_channel_ids',
-						dom_content_result:$('div[name=dimension3]'),
-						success: function(){
-							createFillter({
-								box_filter:$('input[name=dimension_fillter3]'),
-								check_box_list:$('div[name=dimension3]'),
-								fillter_by:'name',//option name,title,value
-								select_type:'check_all'//option check_all,single_mode or null
-							});
-							firstRun=false;
-						}
-					});						
-				}
-				//load Property
-				var loadProperty=function(){					
-					var listPublisherIdSelected=checkBoxSelected('p_publisher_ids');
-					var condition='is_active=true AND (publisher_id IN('+listPublisherIdSelected+') OR \'0\'=\''+listPublisherIdSelected+'\')';
-					if(listPublisherIdSelected==''){
-						return false;
-					}
-					//alert(condition);
-					loadParam({
-						text:'Loading Properties',
-						p_table:'adsops.daily_agg_delivery_publisher_property_v3',
-						p_value_field:'property_id',
-						p_name_field:'property_name',
-						p_condition:condition,
-						p_all_name:'All Properties',
-						p_all_value:'0', //default 0
-						p_prompt_stype:'Scrolling Check List', //pulldown or Scrolling Check List
-						p_param_name:'p_property_ids',
 						dom_content_result:$('div[name=dimension2]'),
 						success: function(){
 							createFillter({
 								box_filter:$('input[name=dimension_fillter2]'),
 								check_box_list:$('div[name=dimension2]'),
 								fillter_by:'name',//option name,title,value
-								select_type:'check_all'//option check_all,single_mode or null
+								select_type:'check_all'//option check_all,single_mode
 							});
-							if(firstRun==true){
-								loadChannel();
-							};
+							firstRun=false;
 						}
-					});						
+					});					
 				}
-				//Load Publisher
-				var loadPublisher=function(){
+				var loadPartner=function(){
+					//get list parent1_id
+					var array_parent1_id=new Array();
+					$('input[name=p_parent1_ids]:checked').each(function(index){
+						array_parent1_id[index]=$(this).attr('value');
+					});
+					if(array_parent1_id.join(',')==''){
+						return false;
+					};
+					var condition='is_active=true AND (parent1_id IN ('+array_parent1_id.join(',')+') OR \'0\'=\''+array_parent1_id.join(',')+'\')';
+					//alert(condition);					
 					loadParam({
-						text:'Loading Publishers',
-						p_table:'adsops.daily_agg_delivery_publisher_property_v3',
-						p_value_field:'publisher_id',
-						p_name_field:'publisher_name',
-						p_condition:'is_active=true',
-						p_all_name:'All Publishers',
+						text:'Loading Partners',
+						p_table:'adm.daily_agg_api_revenue_by_partner_v3',
+						p_value_field:'partner_id',
+						p_name_field:'partner_name',
+						p_condition:condition,
+						p_all_name:'All Partners',
 						p_all_value:'0', //default 0
 						p_prompt_stype:'Scrolling Check List', //pulldown or Scrolling Check List
-						p_param_name:'p_publisher_ids',
+						p_param_name:'p_partner_ids',
+						dom_content_result:$('div[name=dimension3]'),
+						success: function(){
+							createFillter({
+								box_filter:$('input[name=dimension_fillter3]'),
+								check_box_list:$('div[name=dimension3]'),
+								fillter_by:'name',//option name,title,value
+								select_type:'check_all'//option check_all,single_mode
+							});
+							if(firstRun==true){
+								loadChannel();								
+							}							
+						}
+					});				
+				
+				}
+				var loadGroup= function(){
+					loadParam({
+						text:'Loading Group',
+						p_table:'adm.daily_agg_api_revenue_by_partner_v3',
+						p_value_field:'parent1_id',
+						p_name_field:'parent1_name',
+						//p_condition:condition,
+						p_all_name:'All Groups',
+						p_all_value:'0', //default 0
+						p_prompt_stype:'Scrolling Check List', //pulldown or Scrolling Check List
+						p_param_name:'p_parent1_ids',
 						dom_content_result:$('div[name=dimension]'),
 						success: function(){
 							createFillter({
 								box_filter:$('input[name=dimension_fillter]'),
 								check_box_list:$('div[name=dimension]'),
 								fillter_by:'name',//option name,title,value
-								select_type:'check_all'//option check_all,single_mode or null
-							});
-							loadProperty();
-							$('input[name=p_publisher_ids]').change(function(){
+								select_type:'check_all'//option check_all,single_mode
+							});							
+							loadPartner();
+							//add listerning when select group
+							$('input[name=p_parent1_ids]').change(function(){
 								delay_timeout(1000,function(){
-									loadProperty();
-								});
+									loadPartner();
+								});								
 							});
 						}
-					});						
+					});
 				}
-				loadPublisher();
+				loadGroup();
 			}
 			
 			var formValidation=function(domContentForm,divResult){
 				var form=domContentForm.children('form');
 				var validate=true;
-				//check select Publisher
+				//check select group
 				var dimesion=form.find('div[name=dimension] input:checked');
 				if(dimesion.length==0){
-					alertText('Please select Publisher!');
+					alertText('Please select Group!');
 					return false;
 				}
-				//check select Property
-				var dimesion=form.find('div[name=dimension2] input:checked');
-				if(dimesion.length==0){
-					alertText('Please select Property!');
-					return false;
-				}
-				//check select Channel
+				//check select group
 				var dimesion=form.find('div[name=dimension3] input:checked');
+				if(dimesion.length==0){
+					alertText('Please select Partner!');
+					return false;
+				}
+				//check select channel
+				var dimesion=form.find('div[name=dimension2] input:checked');
 				if(dimesion.length==0){
 					alertText('Please select Channel!');
 					return false;

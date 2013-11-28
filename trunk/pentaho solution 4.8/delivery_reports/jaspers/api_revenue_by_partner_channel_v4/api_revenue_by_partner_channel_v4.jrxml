@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="api_revenue_by_partner_channel" pageWidth="3290" pageHeight="1684" orientation="Landscape" columnWidth="3290" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
-	<property name="ireport.zoom" value="3.0"/>
-	<property name="ireport.x" value="0"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="api_revenue_by_partner_channel" pageWidth="3920" pageHeight="1684" orientation="Landscape" columnWidth="3920" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="0.9558924531310711"/>
+	<property name="ireport.x" value="1860"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
@@ -27,23 +27,36 @@
      , a.total_requests, a.total_filled_requests, a.total_revenue, a.total_net_revenue
      , CASE WHEN a.total_filled_requests > 0 THEN a.total_revenue*1000/a.total_filled_requests ELSE 0 END AS total_ecpm
      , CASE WHEN a.total_filled_requests > 0 THEN a.total_net_revenue*1000/a.total_filled_requests ELSE 0 END AS total_net_ecpm
+	 --local
      , a.local_impressions, a.local_revenue, a.local_net_revenue
      , CASE WHEN a.local_impressions > 0 THEN a.local_revenue*1000/a.local_impressions ELSE 0 END AS local_ecpm
      , CASE WHEN a.local_impressions > 0 THEN a.local_net_revenue*1000/a.local_impressions ELSE 0 END AS local_net_ecpm
      , CASE WHEN a.local_revenue > 0 THEN a.local_net_revenue/a.local_revenue ELSE 0 END AS local_rev_share
+	 --vlm
      , a.vlm_impressions, a.vlm_revenue, a.vlm_net_revenue
      , CASE WHEN a.vlm_impressions > 0 THEN a.vlm_revenue*1000/a.vlm_impressions ELSE 0 END AS vlm_ecpm
      , CASE WHEN a.vlm_impressions > 0 THEN a.vlm_net_revenue*1000/a.vlm_impressions ELSE 0 END AS vlm_net_ecpm
      , CASE WHEN a.vlm_revenue > 0 THEN a.vlm_net_revenue/a.vlm_revenue ELSE 0 END AS vlm_rev_share
+	 --national
      , a.national_impressions, a.national_revenue, a.national_net_revenue
      , CASE WHEN a.national_impressions > 0 THEN a.national_revenue*1000/a.national_impressions ELSE 0 END AS national_ecpm
      , CASE WHEN a.national_impressions > 0 THEN a.national_net_revenue*1000/a.national_impressions ELSE 0 END AS national_net_ecpm
      , CASE WHEN a.national_revenue > 0 THEN a.national_net_revenue/a.national_revenue ELSE 0 END AS national_rev_share
+	 --remnant
      , a.remnant_impressions, a.remnant_revenue, a.remnant_net_revenue
      , CASE WHEN a.remnant_impressions > 0 THEN a.remnant_revenue*1000/a.remnant_impressions ELSE 0 END AS remnant_ecpm
      , CASE WHEN a.remnant_impressions > 0 THEN a.remnant_net_revenue*1000/a.remnant_impressions ELSE 0 END AS remnant_net_ecpm
      , CASE WHEN a.remnant_revenue > 0 THEN a.remnant_net_revenue/a.remnant_revenue ELSE 0 END AS remnant_rev_share
+	 -- vpc
+     , a.vpc_impressions, a.vpc_revenue, a.vpc_net_revenue
+     , CASE WHEN a.vpc_impressions > 0 THEN a.vpc_revenue*1000/a.vpc_impressions ELSE 0 END AS vpc_ecpm
+     , CASE WHEN a.vpc_impressions > 0 THEN a.vpc_net_revenue*1000/a.vpc_impressions ELSE 0 END AS vpc_net_ecpm
+     , CASE WHEN a.vpc_revenue > 0 THEN a.vpc_net_revenue/a.vpc_revenue ELSE 0 END AS vpc_rev_share
+	--	 fill rate
      , CASE WHEN a.total_requests > 0 THEN a.local_impressions::float/a.total_requests ELSE 0 END AS local_fill_rate
+	 , CASE WHEN a.total_requests > 0 THEN a.vlm_impressions::float/a.total_requests ELSE 0 END AS vlm_fill_rate
+	 , CASE WHEN a.total_requests > 0 THEN a.national_impressions::float/a.total_requests ELSE 0 END AS national_fill_rate
+	 , CASE WHEN a.total_requests > 0 THEN a.vpc_impressions::float/a.total_requests ELSE 0 END AS vpc_fill_rate
      , CASE WHEN a.total_requests > 0 THEN a.total_filled_requests::float/a.total_requests ELSE 0 END AS total_fill_rate
      , CASE WHEN a.verve_impressions > 0 THEN a.total_clicks::float/a.verve_impressions ELSE 0 END as CTR
     ,total_clicks
@@ -61,9 +74,9 @@ SELECT parent1_id
      , channel_id
      , channel_name
      , SUM(COALESCE(total_requests,0)) AS total_requests
-     , SUM(COALESCE(local_impressions,0)) + SUM(COALESCE(vlm_impressions,0)) + SUM(COALESCE(national_impressions,0)) + SUM(COALESCE(remnant_impressions,0)) AS total_filled_requests
-     , SUM(COALESCE(local_revenue,0)) + SUM(COALESCE(vlm_revenue,0)) + SUM(COALESCE(national_revenue,0)) + SUM(COALESCE(remnant_revenue,0)) AS total_revenue
-     , SUM(COALESCE(local_net_revenue,0)) + SUM(COALESCE(vlm_net_revenue,0)) + SUM(COALESCE(national_net_revenue,0)) + SUM(COALESCE(remnant_net_revenue,0)) AS total_net_revenue
+     , SUM(COALESCE(local_impressions,0)) + SUM(COALESCE(vlm_impressions,0)) + SUM(COALESCE(national_impressions,0)) + SUM(COALESCE(remnant_impressions,0))+SUM(COALESCE(vpc_impressions,0)) AS total_filled_requests
+     , SUM(COALESCE(local_revenue,0)) + SUM(COALESCE(vlm_revenue,0)) + SUM(COALESCE(national_revenue,0)) + SUM(COALESCE(remnant_revenue,0))+ SUM(COALESCE(vpc_revenue,0)) AS total_revenue
+     , SUM(COALESCE(local_net_revenue,0)) + SUM(COALESCE(vlm_net_revenue,0)) + SUM(COALESCE(national_net_revenue,0)) + SUM(COALESCE(remnant_net_revenue,0))+ SUM(COALESCE(vpc_net_revenue,0)) AS total_net_revenue
      , SUM(COALESCE(local_impressions,0)) AS local_impressions
      , SUM(COALESCE(local_revenue,0)) AS local_revenue
      , SUM(COALESCE(local_net_revenue,0)) AS local_net_revenue
@@ -76,9 +89,12 @@ SELECT parent1_id
      , SUM(COALESCE(remnant_impressions,0)) AS remnant_impressions
      , SUM(COALESCE(remnant_revenue,0)) AS remnant_revenue
      , SUM(COALESCE(remnant_net_revenue,0)) AS remnant_net_revenue
-     ,SUM(COALESCE(local_clicks,0)) + SUM(COALESCE(vlm_clicks,0)) + SUM(COALESCE(national_clicks,0)) + SUM(COALESCE(remnant_clicks,0))::float AS total_clicks
+     , SUM(COALESCE(vpc_impressions,0)) AS vpc_impressions
+     , SUM(COALESCE(vpc_revenue,0)) AS vpc_revenue
+     , SUM(COALESCE(vpc_net_revenue,0)) AS vpc_net_revenue
+     ,SUM(COALESCE(local_clicks,0)) + SUM(COALESCE(vlm_clicks,0)) + SUM(COALESCE(national_clicks,0)) + SUM(COALESCE(remnant_clicks,0))::float+SUM(COALESCE(vpc_clicks,0))::float AS total_clicks
      ,SUM(COALESCE(verve_impressions,0))::float AS verve_impressions
-FROM adm.daily_agg_api_revenue_by_partner_v3 a
+FROM adm.daily_agg_api_revenue_by_partner_v4 a
 WHERE a.is_active = true
   AND a.full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
   AND (parent1_id IN (select unnest(string_to_array($P{p_parent1_id_list}, ','))::int) OR '0'=$P{p_parent1_id_list})
@@ -91,7 +107,7 @@ LEFT JOIN (
 SELECT metro_id, SUM(dma_avails) AS dma_avails
 FROM (
 SELECT full_date, metro_id, dma_avails
-FROM adm.daily_agg_api_revenue_by_partner_v3 a
+FROM adm.daily_agg_api_revenue_by_partner_v4 a
 WHERE a.is_active = true
   AND a.full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
   AND a.metro_id > 0
@@ -140,7 +156,16 @@ ON a.metro_id = b.metro_id]]>
 	<field name="remnant_ecpm" class="java.lang.Double"/>
 	<field name="remnant_net_ecpm" class="java.lang.Double"/>
 	<field name="remnant_rev_share" class="java.lang.Double"/>
+	<field name="vpc_impressions" class="java.lang.Long"/>
+	<field name="vpc_revenue" class="java.lang.Double"/>
+	<field name="vpc_net_revenue" class="java.lang.Double"/>
+	<field name="vpc_ecpm" class="java.lang.Double"/>
+	<field name="vpc_net_ecpm" class="java.lang.Double"/>
+	<field name="vpc_rev_share" class="java.lang.Double"/>
 	<field name="local_fill_rate" class="java.lang.Double"/>
+	<field name="vlm_fill_rate" class="java.lang.Double"/>
+	<field name="national_fill_rate" class="java.lang.Double"/>
+	<field name="vpc_fill_rate" class="java.lang.Double"/>
 	<field name="total_fill_rate" class="java.lang.Double"/>
 	<field name="ctr" class="java.lang.Double"/>
 	<field name="total_clicks" class="java.lang.Double"/>
@@ -199,11 +224,20 @@ ON a.metro_id = b.metro_id]]>
 	<variable name="v_verve_impressions" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{verve_impressions}]]></variableExpression>
 	</variable>
+	<variable name="vpc_impressions_1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{vpc_impressions}]]></variableExpression>
+	</variable>
+	<variable name="vpc_revenue_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{vpc_revenue}]]></variableExpression>
+	</variable>
+	<variable name="vpc_net_revenue_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{vpc_net_revenue}]]></variableExpression>
+	</variable>
 	<background>
 		<band/>
 	</background>
 	<columnHeader>
-		<band height="33">
+		<band height="34">
 			<staticText>
 				<reportElement x="0" y="0" width="200" height="30"/>
 				<textElement verticalAlignment="Bottom">
@@ -376,7 +410,7 @@ Rev Share %]]></text>
 Net Revenue]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="2520" y="0" width="70" height="30"/>
+				<reportElement x="2940" y="0" width="70" height="30"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
@@ -384,7 +418,7 @@ Net Revenue]]></text>
 Net ECPM]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="2240" y="0" width="70" height="30"/>
+				<reportElement x="2660" y="0" width="70" height="30"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
@@ -392,7 +426,7 @@ Net ECPM]]></text>
 Impressions]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="2450" y="0" width="70" height="30"/>
+				<reportElement x="2870" y="0" width="70" height="30"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
@@ -400,51 +434,11 @@ Impressions]]></text>
 ECPM]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="2380" y="0" width="70" height="30"/>
-				<textElement textAlignment="Right" verticalAlignment="Bottom">
-					<font fontName="Arial" isBold="true"/>
-				</textElement>
-				<text><![CDATA[National
-Net Revenue]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="2590" y="0" width="70" height="30"/>
-				<textElement textAlignment="Right" verticalAlignment="Bottom">
-					<font fontName="Arial" isBold="true"/>
-				</textElement>
-				<text><![CDATA[National
-Rev Share %]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="2310" y="0" width="70" height="30"/>
-				<textElement textAlignment="Right" verticalAlignment="Bottom">
-					<font fontName="Arial" isBold="true"/>
-				</textElement>
-				<text><![CDATA[National
-Revenue]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="2940" y="0" width="70" height="30"/>
-				<textElement textAlignment="Right" verticalAlignment="Bottom">
-					<font fontName="Arial" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Remnant
-Net ECPM]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="2730" y="0" width="70" height="30"/>
-				<textElement textAlignment="Right" verticalAlignment="Bottom">
-					<font fontName="Arial" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Remnant
-Revenue]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="2800" y="0" width="70" height="30"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Remnant
+				<text><![CDATA[National
 Net Revenue]]></text>
 			</staticText>
 			<staticText>
@@ -452,11 +446,51 @@ Net Revenue]]></text>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
+				<text><![CDATA[National
+Rev Share %]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2730" y="0" width="70" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[National
+Revenue]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3360" y="0" width="70" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Remnant
+Net ECPM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3150" y="0" width="70" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Remnant
+Revenue]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3220" y="0" width="70" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Remnant
+Net Revenue]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3430" y="0" width="70" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
 				<text><![CDATA[Remnant
 Rev Share %]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="2660" y="0" width="70" height="30"/>
+				<reportElement x="3080" y="0" width="70" height="30"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
@@ -464,7 +498,7 @@ Rev Share %]]></text>
 Impressions]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="2870" y="0" width="70" height="30"/>
+				<reportElement x="3290" y="0" width="70" height="30"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
@@ -480,7 +514,7 @@ ECPM]]></text>
 Impressions]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="3080" y="0" width="70" height="30"/>
+				<reportElement x="3500" y="0" width="70" height="30"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
@@ -488,7 +522,7 @@ Impressions]]></text>
 Fill Rate]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="3150" y="0" width="70" height="30"/>
+				<reportElement x="3780" y="0" width="70" height="30"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
@@ -528,11 +562,83 @@ ECPM]]></text>
 Net ECPM]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="3220" y="0" width="70" height="30"/>
+				<reportElement x="3850" y="0" width="70" height="30"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[CTR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3710" y="0" width="70" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[National
+Fill Rate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3570" y="0" width="70" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VLM
+Fill Rate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3640" y="0" width="70" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VPC
+Fill Rate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2310" y="0" width="70" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VPC
+Revenue]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2380" y="0" width="70" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VPC
+Net Revenue]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2240" y="0" width="70" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VPC
+Impressions]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2450" y="0" width="70" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VPC
+ECPM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2520" y="0" width="70" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VPC
+Net ECPM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2590" y="0" width="70" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VPC
+Rev Share %]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -649,62 +755,62 @@ Net ECPM]]></text>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{vlm_impressions}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="2450" y="0" width="70" height="20"/>
+				<reportElement x="2870" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{national_ecpm}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %">
-				<reportElement x="2590" y="0" width="70" height="20"/>
+				<reportElement x="3010" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{national_rev_share}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="2380" y="0" width="70" height="20"/>
+				<reportElement x="2800" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{national_net_revenue}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="2520" y="0" width="70" height="20"/>
+				<reportElement x="2940" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{national_net_ecpm}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="2310" y="0" width="70" height="20"/>
+				<reportElement x="2730" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{national_revenue}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="2240" y="0" width="70" height="20"/>
+				<reportElement x="2660" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{national_impressions}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %">
-				<reportElement x="3010" y="0" width="70" height="20"/>
+				<reportElement x="3430" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{remnant_rev_share}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="2870" y="0" width="70" height="20"/>
+				<reportElement x="3290" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{remnant_ecpm}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="2800" y="0" width="70" height="20"/>
+				<reportElement x="3220" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{remnant_net_revenue}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="2730" y="0" width="70" height="20"/>
+				<reportElement x="3150" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{remnant_revenue}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="2660" y="0" width="70" height="20"/>
+				<reportElement x="3080" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{remnant_impressions}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="2940" y="0" width="70" height="20"/>
+				<reportElement x="3360" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{remnant_net_ecpm}]]></textFieldExpression>
 			</textField>
@@ -714,12 +820,12 @@ Net ECPM]]></text>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{total_filled_requests}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %">
-				<reportElement x="3080" y="0" width="70" height="20"/>
+				<reportElement x="3500" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{local_fill_rate}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %">
-				<reportElement x="3150" y="0" width="70" height="20"/>
+				<reportElement x="3780" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{total_fill_rate}]]></textFieldExpression>
 			</textField>
@@ -744,9 +850,72 @@ Net ECPM]]></text>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{total_ecpm}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %">
-				<reportElement x="3220" y="0" width="70" height="20"/>
+				<reportElement x="3850" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{ctr}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="3570" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{vlm_fill_rate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="3710" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{national_fill_rate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="3640" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{vpc_fill_rate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="2240" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{vpc_impressions}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="2520" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{vpc_net_ecpm}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="2590" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{vpc_rev_share}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="2310" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{vpc_revenue}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="2380" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{vpc_net_revenue}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="2450" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{vpc_ecpm}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -865,42 +1034,42 @@ Net ECPM]]></text>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_vlm_revenue}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="2240" y="0" width="70" height="20"/>
+				<reportElement x="2660" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$V{v_national_impressions}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="2310" y="0" width="70" height="20"/>
+				<reportElement x="2730" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_national_revenue}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="2380" y="0" width="70" height="20"/>
+				<reportElement x="2800" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_national_net_revenue}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="2800" y="0" width="70" height="20"/>
+				<reportElement x="3220" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_remnant_net_revenue}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="2730" y="0" width="70" height="20"/>
+				<reportElement x="3150" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_remnant_revenue}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="2660" y="0" width="70" height="20"/>
+				<reportElement x="3080" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
@@ -914,14 +1083,14 @@ Net ECPM]]></text>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$V{v_total_filled_requests}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %">
-				<reportElement x="3080" y="0" width="70" height="20"/>
+				<reportElement x="3500" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_total_requests} == 0 ? 0 : $V{v_local_impressions}.doubleValue() / $V{v_total_requests}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %">
-				<reportElement x="3150" y="0" width="70" height="20"/>
+				<reportElement x="3780" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
@@ -998,53 +1167,116 @@ Net ECPM]]></text>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_vlm_impressions} == 0 ? 0 : $V{v_vlm_net_revenue} * 1000 / $V{v_vlm_impressions}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %">
-				<reportElement x="2590" y="0" width="70" height="20"/>
+				<reportElement x="3010" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_national_revenue} == 0 ? 0 : $V{v_national_net_revenue} / $V{v_national_revenue}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="2450" y="0" width="70" height="20"/>
+				<reportElement x="2870" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_national_impressions} == 0 ? 0 : $V{v_national_revenue} * 1000 / $V{v_national_impressions}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="2520" y="0" width="70" height="20"/>
+				<reportElement x="2940" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_national_impressions} == 0 ? 0 : $V{v_national_net_revenue} * 1000 / $V{v_national_impressions}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="2940" y="0" width="70" height="20"/>
+				<reportElement x="3360" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_remnant_impressions} == 0 ? 0 : $V{v_remnant_net_revenue} * 1000 / $V{v_remnant_impressions}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="2870" y="0" width="70" height="20"/>
+				<reportElement x="3290" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_remnant_impressions} == 0 ? 0 : $V{v_remnant_revenue} * 1000 / $V{v_remnant_impressions}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %">
-				<reportElement x="3010" y="0" width="70" height="20"/>
+				<reportElement x="3430" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_remnant_revenue} == 0 ? 0 : $V{v_remnant_net_revenue} / $V{v_remnant_revenue}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %">
-				<reportElement x="3220" y="0" width="70" height="20"/>
+				<reportElement x="3850" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[($V{v_verve_impressions}==0 ? 0 : $V{v_total_click}.doubleValue()/$V{v_verve_impressions}.doubleValue())]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="3570" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_total_requests} == 0 ? 0 : $V{v_vlm_impressions}.doubleValue() / $V{v_total_requests}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="3710" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_total_requests} == 0 ? 0 : $V{v_national_impressions}.doubleValue() / $V{v_total_requests}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="3640" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{v_total_requests} == 0 ? 0 : $V{vpc_impressions_1}.doubleValue() / $V{v_total_requests}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="2240" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{vpc_impressions_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="2310" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{vpc_revenue_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="2380" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{vpc_net_revenue_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="2520" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{vpc_impressions_1} == 0 ? 0 : $V{vpc_net_revenue_1} * 1000 / $V{vpc_impressions_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="2450" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{vpc_impressions_1} == 0 ? 0 : $V{vpc_revenue_1} * 1000 / $V{vpc_impressions_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="2590" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{vpc_revenue_1} == 0 ? 0 : $V{vpc_net_revenue_1} / $V{vpc_revenue_1}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>
