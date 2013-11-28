@@ -9,7 +9,7 @@
 	  {xform-header}
    </head>
    <body class="pentaho">
-      <div name="dialog-form" title="Control Panel" style="width: 460px;overflow: auto;">	
+      <div name="dialog-form" title="Control Panel" style="width: 460px;overflow: auto;">
          <form name="parameter-form" id="parameter-form" method="GET">
          <table class="tableForm">
          <tbody>	         
@@ -30,7 +30,7 @@
 		             <label style="margin-left: 0px;">To:</label> {p_end_month_since_2005}
 		             </div>	             
 		        </td>
-	         </tr>  
+	         </tr> 
 			<tr>
 				 <th>Publisher:</th>
 				 <td>
@@ -40,8 +40,17 @@
 					</div>
 				 </td>
 			 </tr>
+			<tr>
+				 <th>Property:</th>
+				 <td>
+					<input name="dimension_fillter2" type="text" class="dimension"/>
+					<div name="dimension2" class="dimension">
+					Loading....
+					</div>
+				 </td>
+			 </tr>
          </tbody>
-         </table>
+         </table>			
 		 <div id="hide_in_form" style="display:none">
 			{v_max_date}
 			{v_min_date} 
@@ -58,8 +67,7 @@
 					//controlPanle_height: 300,
 					generateFormContent: generateFormContent,
 					formValidation:formValidation,
-					reportName:'Daily Delivery by Publisher - v2.1',
-					iframeMode:true
+					reportName:'Daily Delivery by Publisher Property - v2.4'
 				});
 			});
 			
@@ -113,16 +121,50 @@
 				$('#p_date_mode_month').click(function(){
 					$('#datemode').hide();
 					$('#monthmode').show();
+					//$('#p_date_mode_month').attr('checked',false);
+					//$('#p_date_mode_date').attr('checked',true);
+					//alert('Monthly report have no data!');
 				});
 				$('#p_date_mode_date').click(function(){
 					$('#datemode').show();
 					$('#monthmode').hide();				
 				});
+				//load Property
+				var loadProperty=function(){
+					
+					var listPublisherIdSelected=checkBoxSelected('p_publisher_ids');
+					var condition='is_active=true AND (publisher_id IN('+listPublisherIdSelected+') OR \'0\'=\''+listPublisherIdSelected+'\')';
+					if(listPublisherIdSelected==''){
+						return false;
+					}
+					//alert(condition);
+					loadParam({
+						text:'Loading Properties',
+						p_table:'adsops.daily_agg_delivery_publisher_property_v3',
+						p_value_field:'property_id',
+						p_name_field:'property_name',
+						p_condition:condition,
+						p_all_name:'All Properties',
+						p_all_value:'0', //default 0
+						p_prompt_stype:'Scrolling Check List', //pulldown or Scrolling Check List
+						p_param_name:'p_property_ids',
+						dom_content_result:$('div[name=dimension2]'),
+						success: function(){
+							createFillter({
+								box_filter:$('input[name=dimension_fillter2]'),
+								check_box_list:$('div[name=dimension2]'),
+								fillter_by:'name',//option name,title,value
+								select_type:'check_all'//option check_all,single_mode or null
+							});
+							firstRun=false;
+						}
+					});						
+				}
 				//Load Publisher
 				var loadPublisher=function(){
 					loadParam({
 						text:'Loading Publishers',
-						p_table:'adsops.daily_agg_delivery_publisher_property_beta',
+						p_table:'adsops.daily_agg_delivery_publisher_property_v3',
 						p_value_field:'publisher_id',
 						p_name_field:'publisher_name',
 						p_condition:'is_active=true',
@@ -138,7 +180,12 @@
 								fillter_by:'name',//option name,title,value
 								select_type:'check_all'//option check_all,single_mode or null
 							});
-							firstRun=false;
+							loadProperty();
+							$('input[name=p_publisher_ids]').change(function(){
+								delay_timeout(1000,function(){
+									loadProperty();
+								});
+							});
 						}
 					});						
 				}
@@ -154,10 +201,16 @@
 					alertText('Please select Publisher!');
 					return false;
 				}
+				//check select Property
+				var dimesion=form.find('div[name=dimension2] input:checked');
+				if(dimesion.length==0){
+					alertText('Please select Property!');
+					return false;
+				}
 				return true;
 			}
 	]]>
 	</script>
-</body>
+   </body>
      
 </html>
