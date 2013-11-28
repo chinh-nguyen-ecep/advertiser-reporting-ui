@@ -29,33 +29,35 @@ $master_data_source='dw10:analyticsdb';
 $table_list_file_name='listTables.txt';
 $transfered_file_name='transfered.txt';
 $transfered_failed_file_name='transferFailed.txt';
+$sendEmailComleted=0;
+$sendEmailNotice=0;
 require "$binfd/utils/ConnectionDB.pl";
 require "$binfd/utils/date_utils.pl";
 require "$binfd/utils/sql_utils.pl";
 require "$binfd/utils/log_utils.pl";
 
 $init=@ARGV[0];
-	loadCurrentDate();
-	if($init eq 'init'){
-		note("Backup transfered log!");
-		my $backupFile_name="$current_date.$transfered_file_name";		
-		$cmd="cp $transfered_file_name logs/$backupFile_name ; echo '' > $transfered_file_name";
-		print "cmd: $cmd \n";
-		system($cmd);
-		note("Backup transfered Failed log!");
-		my $backupFile_name="$current_date.$transfered_failed_file_name";		
-		$cmd="cp $transfered_failed_file_name logs/$backupFile_name ; echo '' > $transfered_failed_file_name";
-		print "cmd: $cmd \n";
-		system($cmd);
-		
-		note("Backup process log!");
-		$cmd="cp process.log logs/process.$current_date.log ; echo '' > process.log";
-		print "cmd: $cmd \n";
-		system($cmd);
-		reloadListTableTransfered();
-	}else{
-		reloadListTableTransfered();
-	}
+loadCurrentDate();
+if($init eq 'init'){
+	note("Backup transfered log!");
+	my $backupFile_name="$current_date.$transfered_file_name";		
+	$cmd="cp $transfered_file_name logs/$backupFile_name ; echo '' > $transfered_file_name";
+	print "cmd: $cmd \n";
+	system($cmd);
+	note("Backup transfered Failed log!");
+	my $backupFile_name="$current_date.$transfered_failed_file_name";		
+	$cmd="cp $transfered_failed_file_name logs/$backupFile_name ; echo '' > $transfered_failed_file_name";
+	print "cmd: $cmd \n";
+	system($cmd);
+	
+	note("Backup process log!");
+	$cmd="cp process.log logs/process.$current_date.log ; echo '' > process.log";
+	print "cmd: $cmd \n";
+	system($cmd);
+	reloadListTableTransfered();
+}else{
+	reloadListTableTransfered();
+}
 
 while(1){
 	init();
@@ -83,6 +85,8 @@ while(1){
 		
 		note("Set current date to file!");
 		$cmd=`echo '$today_date' > current_date.txt`;
+		$sendEmailComleted=0;
+		$sendEmailNotice=0;
 	}	
 	main();
 }
@@ -194,6 +198,77 @@ sub main{
 	}
 	@tables=();
 	@tables=@resetArray;
+	# Check status to  email to Ecep
+	my ($sec,$min,$hour,$day,$month,$yr19,@rest) =   localtime(time);
+	if(@transfered==0 && $hour>2){
+		my $mailAddress="chinh.nguyen\@ecepvn.org,song.nguyen\@ecepvn.org,tho.hoang\@ecepvn.org";
+		##my $mailAddress="chinh.nguyen\@ecepvn.org";
+		my $title="Transfer daily aggregate data notice!";
+		my $mailContent="Dear all,<br/> Don't see any aggregates data downloaded from S3 to AIS. Please call for ChinhNguyen about this email! Thanks you.";
+		sendMail($mailAddress,$title,$mailContent);
+	}
+	if(@tables>0 && $hour>4 && $sendEmailNotice<3){
+		my $mailAddress="chinh.nguyen\@ecepvn.org,song.nguyen\@ecepvn.org,tho.hoang\@ecepvn.org";
+		##my $mailAddress="chinh.nguyen\@ecepvn.org";
+		my $transferCount=0;
+		$transferCount=checkIsTransfered('adstraffic.daily_ad_serving_stats')+checkIsTransfered('adstraffic.daily_filled_stats')+checkIsTransfered('adstraffic.daily_unfilled_stats')+checkIsTransfered('adstraffic.daily_event_stats')+checkIsTransfered('adstraffic.daily_event_stats')+checkIsTransfered('evttracker.daily_event_adcel_stats')+checkIsTransfered('evttracker.daily_event_stats');
+		my $listTableNotTransfered='<ul>';
+		foreach $temp(@tables){
+			my $row="<li>$temp</li>";
+			$listTableNotTransfered=$listTableNotTransfered.$row;
+		}
+		
+		$listTableNotTransfered=$listTableNotTransfered.'</ul>';
+		my $title="Transfer daily aggregate data notice!";
+		my $mailContent="Dear all,<br/> until now, some important tables from S3 are not available on AIS. 
+		<p/><b>List tables are not available on AIS:</b><br/>
+		$listTableNotTransfered
+		<p/><b>To check the status:</b><br/>
+		<ul>
+		<li>
+			ssh to dw10
+		</li>
+		<li>
+			sudo to file_xfer user
+		</li>
+		<li>
+			cd /home/file_xfer/bin/transferAggregateFromAnalyticsdbToDw
+		</li>
+		<li>
+			cat transfered.txt
+		</li>
+		</ul>
+		<p/><b>To check the current process:</b><br/>
+		<ul>
+		<li>
+			ssh to dw10
+		</li>
+		<li>
+			sudo to file_xfer user
+		</li>
+		<li>
+			cd /home/file_xfer/bin/transferAggregateFromAnalyticsdbToDw
+		</li>
+		<li>
+			tail -n 200 process.log
+		</li>
+		</ul>		
+		<p/>Thanks
+		";
+		if($transferCount<7){
+			sendMail($mailAddress,$title,$mailContent);	
+			$sendEmailNotice++;		
+		}
+
+	}
+	if(@tables==0 && $sendEmailComleted==0){
+		my $mailAddress="chinh.nguyen\@ecepvn.org,song.nguyen\@ecepvn.org,tho.hoang\@ecepvn.org";
+		##my $mailAddress="chinh.nguyen\@ecepvn.org";
+		my $title="Transfer daily aggregate data completed!";
+		my $mailContent="Dear all,<br/> All data from S3 are available on AIS! Thanks you.";
+		sendMail($mailAddress,$title,$mailContent);	
+		$sendEmailComleted++;
+	}
 	sleep(300);
 }
 
