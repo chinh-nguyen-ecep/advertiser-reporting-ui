@@ -207,7 +207,7 @@ sub main{
 		my $mailContent="Dear all,<br/> Don't see any aggregates data downloaded from S3 to AIS. Please call for ChinhNguyen about this email! Thanks you.";
 		sendMail($mailAddress,$title,$mailContent);
 	}
-	if(@tables>0 && $hour>4 && $sendEmailNotice<3){
+	if(@tables>0 && $hour>4 ){
 		my $mailAddress="chinh.nguyen\@ecepvn.org,song.nguyen\@ecepvn.org,tho.hoang\@ecepvn.org";
 		##my $mailAddress="chinh.nguyen\@ecepvn.org";
 		my $transferCount=0;
@@ -255,8 +255,10 @@ sub main{
 		</ul>		
 		<p/>Thanks
 		";
-		if($transferCount<7){
+		if($transferCount<7 && ($sendEmailNotice==0 ||$sendEmailNotice==10||$sendEmailNotice==20)){
 			sendMail($mailAddress,$title,$mailContent);	
+			$sendEmailNotice++;		
+		}else{
 			$sendEmailNotice++;		
 		}
 
