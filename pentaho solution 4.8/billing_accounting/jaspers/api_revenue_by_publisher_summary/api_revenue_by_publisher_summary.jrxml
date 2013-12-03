@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="API Revenue by Publisher Summary" pageWidth="842" pageHeight="1190" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.366026910730141"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="boder">
+		<box>
+			<topPen lineWidth="0.75" lineStyle="Solid"/>
+			<leftPen lineWidth="0.75" lineStyle="Solid"/>
+			<bottomPen lineWidth="0.75" lineStyle="Solid"/>
+			<rightPen lineWidth="0.75" lineStyle="Solid"/>
+		</box>
+	</style>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="parameter1" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/opt/pentaho/biserver-ce/pentaho-solutions/third_party_reports/jaspers/daily_performance_report/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="calendar_year_month" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT calendar_year_month
+, (max (a.dt_lastchange)::timestamp with time zone AT TIME ZONE 'America/Los_Angeles')::timestamp with time zone AT TIME ZONE 'America/New_York' as dt_lastchange,
+parent1_id,
+parent1_name,
+SUM(impressions) as total_impressions,
+SUM(revenue) as total_revenues,
+SUM(net_revenue) as total_net_revenues
+FROM billing.ba_monthly_api_revenue_by_publisher a
+WHERE calendar_year_month=$P{calendar_year_month}::text
+AND is_active=true
+GROUP BY calendar_year_month,parent1_id,parent1_name
+ORDER BY parent1_name]]>
+	</queryString>
+	<field name="calendar_year_month" class="java.lang.String"/>
+	<field name="dt_lastchange" class="java.sql.Timestamp"/>
+	<field name="parent1_id" class="java.lang.Integer"/>
+	<field name="parent1_name" class="java.lang.String"/>
+	<field name="total_impressions" class="java.lang.Long"/>
+	<field name="total_revenues" class="java.lang.Double"/>
+	<field name="total_net_revenues" class="java.lang.Double"/>
+	<variable name="total_impressions_1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{total_impressions}]]></variableExpression>
+	</variable>
+	<variable name="total_revenues_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{total_revenues}]]></variableExpression>
+	</variable>
+	<variable name="total_net_revenues_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{total_net_revenues}]]></variableExpression>
+	</variable>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="160">
+			<image>
+				<reportElement x="0" y="0" width="128" height="40"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"../vervelogo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="128" y="0" width="674" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[API Revenue by Publisher Summary]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="128" y="20" width="674" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Month: " + $F{calendar_year_month}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="60" width="802" height="20" forecolor="#FF0000"/>
+				<textElement/>
+				<text><![CDATA[Notes:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="80" width="802" height="15" forecolor="#FF0000"/>
+				<textElement/>
+				<text><![CDATA[1.total_impressions = vlm_impressions + vpc_impressions + national_impressions + remnant_impressions]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="95" width="802" height="15" forecolor="#FF0000"/>
+				<textElement/>
+				<text><![CDATA[2.total_revenue = vlm_revenue + vpc_revenue + national_revenue + remnant_revenue]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="110" width="802" height="15" forecolor="#FF0000"/>
+				<textElement/>
+				<text><![CDATA[3.total_net_revenue = vlm_net_revenue + vpc_net_revenue + national_net_revenue + remnant_net_revenue]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="125" width="802" height="15" forecolor="#FF0000"/>
+				<textElement/>
+				<text><![CDATA[4.Exclude LOCAL from the calculation ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="140" width="802" height="20"/>
+				<textElement/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="40" width="802" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Refresh Date (ET): " + new SimpleDateFormat("yyyy-MM-dd").format($F{dt_lastchange})]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20">
+			<staticText>
+				<reportElement style="boder" x="0" y="0" width="128" height="20"/>
+				<box leftPadding="5" rightPadding="6"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[report_month]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="128" y="0" width="83" height="20"/>
+				<box leftPadding="5" rightPadding="6"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[group_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="211" y="0" width="261" height="20"/>
+				<box leftPadding="5" rightPadding="6"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[group_name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="472" y="0" width="110" height="20"/>
+				<box leftPadding="5" rightPadding="6"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[total_impressions]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="582" y="0" width="110" height="20"/>
+				<box leftPadding="5" rightPadding="6"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[total_revenue]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="692" y="0" width="110" height="20"/>
+				<box leftPadding="5" rightPadding="6"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[total_Net_revenue]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<textField pattern="yyyy-MM">
+				<reportElement style="boder" x="0" y="0" width="128" height="20"/>
+				<box leftPadding="5" rightPadding="6"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[new SimpleDateFormat("yyyy-MMM").parse($F{calendar_year_month})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="boder" x="128" y="0" width="83" height="20"/>
+				<box leftPadding="5" rightPadding="6"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{parent1_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="boder" x="211" y="0" width="261" height="20"/>
+				<box leftPadding="5" rightPadding="6"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{parent1_name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="boder" x="472" y="0" width="110" height="20"/>
+				<box leftPadding="5" rightPadding="6"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{total_impressions}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00">
+				<reportElement style="boder" x="582" y="0" width="110" height="20"/>
+				<box leftPadding="5" rightPadding="6"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{total_revenues}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$#,##0.00">
+				<reportElement style="boder" x="692" y="0" width="110" height="20"/>
+				<box leftPadding="5" rightPadding="6"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{total_net_revenues}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="24">
+			<textField pattern="yyyy-MM-dd hh:mm:ss">
+				<reportElement x="0" y="4" width="692" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="692" y="4" width="110" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="20"/>
+	</summary>
+</jasperReport>
