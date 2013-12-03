@@ -29,7 +29,8 @@ SUM(net_revenue) as total_net_revenues
 FROM billing.ba_monthly_api_revenue_by_publisher a
 WHERE calendar_year_month=$P{calendar_year_month}::text
 AND is_active=true
-GROUP BY calendar_year_month,parent1_id,parent1_name]]>
+GROUP BY calendar_year_month,parent1_id,parent1_name
+ORDER BY parent1_name]]>
 	</queryString>
 	<field name="calendar_year_month" class="java.lang.String"/>
 	<field name="dt_lastchange" class="java.sql.Timestamp"/>
@@ -103,7 +104,7 @@ GROUP BY calendar_year_month,parent1_id,parent1_name]]>
 			<textField>
 				<reportElement x="0" y="40" width="802" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA["Refresh Date (ET):" + new SimpleDateFormat("yyyy-MM-dd").format($F{dt_lastchange})]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["Refresh Date (ET): " + new SimpleDateFormat("yyyy-MM-dd").format($F{dt_lastchange})]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -201,7 +202,7 @@ GROUP BY calendar_year_month,parent1_id,parent1_name]]>
 	</detail>
 	<pageFooter>
 		<band height="24">
-			<textField>
+			<textField pattern="yyyy-MM-dd hh:mm:ss">
 				<reportElement x="0" y="4" width="692" height="20"/>
 				<textElement>
 					<font fontName="Arial"/>
