@@ -261,7 +261,7 @@ function IsNumeric(input){
 //myAjaxStore.get(url);
 var myAjaxStore=new ajaxStore();
 function ajaxStore(){
-	var expireTime=360000;//60s
+	var expireTime=360000;//5min
 	var store=[];
 	this.add=add;
 	this.get=get;
