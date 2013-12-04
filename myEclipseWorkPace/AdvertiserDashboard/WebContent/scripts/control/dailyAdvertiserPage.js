@@ -15,7 +15,7 @@ var categories_date=['2013-10-01','2013-10-02','2013-10-03'];// date category of
 var chart_date_data=[{
 		name:'Impressions',
 		color: '#4572A7',
-		type: 'column',
+		type: 'areaspline',
 		yAxis: 1,
 		data:[100,120,340]
 	},
@@ -27,8 +27,7 @@ var chart_date_data=[{
 		data:[45,23,134],
 		marker: {
             enabled: false
-        },
-        dashStyle: 'shortdot'
+        }
 	},
 	{
 		name:'Clicks',
@@ -44,10 +43,6 @@ var myTable; // table object
 var myDateRangeInput; // Date rang input object
 var breakBy='hour'; // The value status of break by hour or break by date
 
-
-
-
-
 $(document).ready(function(){ 
 	setTabActive('dailyAdvertiser');
 	myDateRangeInput=new generateDateRange({
@@ -60,7 +55,7 @@ $(document).ready(function(){
 			loadChart();
 		}
 	});
-	breakChart('date');
+	loadChart();
 });
 
 	//function load chart
@@ -384,6 +379,17 @@ $(document).ready(function(){
 	            },
 	            plotOptions: {
 	            	spline: {
+	            		lineWidth: 2,
+	            		 states: {
+	                         hover: {
+	                             lineWidth: 3
+	                         }
+	                     },
+	            		marker: {
+	                        enabled: false
+	                    }
+	            	},
+	            	areaspline: {
 	            		lineWidth: 1,
 	            		 states: {
 	                         hover: {
