@@ -79,17 +79,17 @@ ORDER BY parent1_name]]>
 			<staticText>
 				<reportElement x="0" y="80" width="802" height="15" forecolor="#FF0000"/>
 				<textElement/>
-				<text><![CDATA[1.total_impressions = vlm_impressions + vpc_impressions + national_impressions + remnant_impressions]]></text>
+				<text><![CDATA[1.Total_impressions = vlm_impressions + vpc_impressions + national_impressions + remnant_impressions]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="95" width="802" height="15" forecolor="#FF0000"/>
 				<textElement/>
-				<text><![CDATA[2.total_revenue = vlm_revenue + vpc_revenue + national_revenue + remnant_revenue]]></text>
+				<text><![CDATA[2.Total_revenue = vlm_revenue + vpc_revenue + national_revenue + remnant_revenue]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="110" width="802" height="15" forecolor="#FF0000"/>
 				<textElement/>
-				<text><![CDATA[3.total_net_revenue = vlm_net_revenue + vpc_net_revenue + national_net_revenue + remnant_net_revenue]]></text>
+				<text><![CDATA[3.Total_net_revenue = vlm_net_revenue + vpc_net_revenue + national_net_revenue + remnant_net_revenue]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="125" width="802" height="15" forecolor="#FF0000"/>
@@ -116,7 +116,7 @@ ORDER BY parent1_name]]>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[report_month]]></text>
+				<text><![CDATA[Report_month]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="boder" x="128" y="0" width="83" height="20"/>
@@ -124,7 +124,7 @@ ORDER BY parent1_name]]>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[group_id]]></text>
+				<text><![CDATA[Group_id]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="boder" x="211" y="0" width="261" height="20"/>
@@ -132,7 +132,7 @@ ORDER BY parent1_name]]>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[group_name]]></text>
+				<text><![CDATA[Group_name]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="boder" x="472" y="0" width="110" height="20"/>
@@ -140,7 +140,7 @@ ORDER BY parent1_name]]>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[total_impressions]]></text>
+				<text><![CDATA[Total_impressions]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="boder" x="582" y="0" width="110" height="20"/>
@@ -148,7 +148,7 @@ ORDER BY parent1_name]]>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[total_revenue]]></text>
+				<text><![CDATA[Total_revenue]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="boder" x="692" y="0" width="110" height="20"/>
@@ -156,7 +156,7 @@ ORDER BY parent1_name]]>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[total_Net_revenue]]></text>
+				<text><![CDATA[Total_net_revenue]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
