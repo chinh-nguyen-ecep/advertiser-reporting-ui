@@ -124,6 +124,10 @@ sub runAgg{
 	#advance digital
 	runPostgresComand("select billing.fn_build_ba_monthly_advance_digital($month_sk,$process_id,'PS')");
 	runPostgresComand("update billing.ba_monthly_advance_digital set is_active=true where month_since_2005=$month_sk");
+	
+	# API revenue by publisher
+	runPostgresComand("select billing.fn_build_ba_monthly_api_revenue_by_publisher($month_sk,$process_id,'PS')");
+	runPostgresComand("update billing.ba_monthly_api_revenue_by_publisher set is_active=true where month_since_2005=$month_sk");
 }
 
 sub transferFinalData{
