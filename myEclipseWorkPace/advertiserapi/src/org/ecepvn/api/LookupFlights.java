@@ -56,6 +56,7 @@ public class LookupFlights extends MainApiLookup{
 		info.addConstraint(new String[] { "adm_flight_id.in", "integer", "4,8,9" });
 		info.addConstraint(new String[] { "adm_billing_line_item_id.in", "integer", "3,7,2" });
 		info.addConstraint(new String[] { "adm_flight_name", "string", "abc" });
+		info.addConstraint(new String[] { "adm_flight_name.like", "string", "abc" });
 
 		// add select example
 		info.addSelectExample("GET " + rootUrl + "?select=dfp_flight_id");
@@ -64,6 +65,7 @@ public class LookupFlights extends MainApiLookup{
 		info.addWhereExample("GET " + rootUrl + "?where[start_date]="+ currentDateExample);
 		info.addWhereExample("GET " + rootUrl + "?where[start_date.between]="+ reportDateExample + ".." + currentDateExample);
 		info.addWhereExample("GET " + rootUrl + "?where[adm_order_id.in]=1,2,3,4");
+		info.addWhereExample("GET " + rootUrl + "?where[adm_flight_name.like]=abc");
 		// add order example
 		info.addOrderExample("GET " + rootUrl + "?order=adm_order_id.desc");
 		info.addOrderExample("GET " + rootUrl + "?order=adm_order_id.desc|adm_flight_name");
