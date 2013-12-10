@@ -160,6 +160,8 @@ public class RequestProcessing {
 				result+=dimension+"="+"'"+value+"'";
 			}else if(operator.equals("in")){
 				result+=dimension +" IN "+"("+inValueTrueType(value)+")";
+			}else if(operator.equals("like")){
+				result+="LOWER("+dimension +") LIKE "+"'%"+value.toLowerCase()+"%'";
 			}else if(operator.equals("between")){
 				String[] values=value.split("\\..", -1);
 				if(values.length!=2){
