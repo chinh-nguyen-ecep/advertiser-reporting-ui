@@ -50,6 +50,7 @@ public class LookupCreatives extends MainApiLookup{
 		info.addConstraint(new String[] { "adm_creative_id.in", "integer", "4,8,9" });
 		info.addConstraint(new String[] { "adm_flight_id.in", "integer", "3,7,2" });
 		info.addConstraint(new String[] { "adm_creative_name", "string", "abc" });
+		info.addConstraint(new String[] { "adm_creative_name.like", "string", "abc" });
 
 		// add select example
 		info.addSelectExample("GET " + rootUrl + "?select=dfp_creative_id");
@@ -57,6 +58,7 @@ public class LookupCreatives extends MainApiLookup{
 		// add where example
 		info.addWhereExample("GET " + rootUrl + "?where[adm_creative_name]="+"abc");
 		info.addWhereExample("GET " + rootUrl + "?where[dfp_creative_id.in]=1,2,3,4");
+		info.addWhereExample("GET " + rootUrl + "?where[adm_creative_name.like]="+"abc");
 		// add order example
 		info.addOrderExample("GET " + rootUrl + "?order=adm_creative_name.desc");
 		info.addOrderExample("GET " + rootUrl + "?order=dfp_creative_id.desc|adm_creative_name");
