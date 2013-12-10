@@ -2,8 +2,19 @@
  * 
  */
 //
-var selectStartDate=thirtyDayBefore;
-var selectEndDate=yesterday;
+	
+	// config var for this page
+	var selectStartDate=thirtyDayBefore;
+	var selectEndDate=yesterday;
+	if(urlMaster.getParam('where[date.between]')==''){
+		var dateRange=selectStartDate.format('yyyy-mm-dd')+'..'+selectEndDate.format('yyyy-mm-dd');
+		urlMaster.replaceParam('where[date.between]',dateRange);
+	}else{
+		var dateRange=urlMaster.getParam('where[date.between]');
+		var dateRangeArray=dateRange.split("..");
+		selectStartDate=new Date(dateRangeArray[0]);
+		selectEndDate=new Date(dateRangeArray[1]);
+	}
 
 //var selectStartDate=new Date('2013-10-01');
 //var selectEndDate=new Date('2013-10-07');
@@ -52,6 +63,8 @@ $(document).ready(function(){
 		callback: function(start_date,end_date,value){
 			selectStartDate=start_date;
 			selectEndDate=end_date;
+			var dateRange=selectStartDate.format('yyyy-mm-dd')+'..'+selectEndDate.format('yyyy-mm-dd');
+			urlMaster.replaceParam('where[date.between]', dateRange);
 			loadChart();
 		}
 	});
@@ -64,11 +77,15 @@ $(document).ready(function(){
 		series_clicks=[];
 		series_impressions=[];
 		series_cta=[];
-		var dateRange_value=$("#date_range_dailyAdvertiser input").val();
+		var dateRange_value='where[date.between]='+urlMaster.getParam('where[date.between]');
 		var measureValue=$("#e2").val();
 		var url=apiRootUrl+'/AdvertiserByHour?select=date|hour&limit=2000&'+dateRange_value+"&by=clicks|impressions|cta_maps";
 		if(myAjaxStore.isLoading(url)){
 			console.log('Your request is loading...');
+			console.log('Callback after 30s...');
+			delayTimeout(loadingCallback,function(){
+				loadChart();
+			});
 			return;
 		}
 		if(chart !=null){
@@ -81,13 +98,29 @@ $(document).ready(function(){
 			$.ajax({
 				dataType: "json",
 				url: url,
+				timeout: ajaxRequestTimeout,
 				xhrFields: {
 					      withCredentials: true
-					   },
+		   		},
 				success: function(json){
 					  myAjaxStore.add(url,json);
 					  loadChart();
-				  }
+				},
+				error: function(xhr,status,error){
+					myAjaxStore.remove(url);
+					console.log('Request url error: '+url);
+					console.log('Status:  '+status);
+					console.log('Error:  '+error);
+					console.log('Reload chart!');
+					if(error=='timeout'){
+						loadChart();
+					}else{
+						location.reload();
+					}
+				},
+				complete: function(){
+					
+				}
 				});			
 		}else{
 			processData(ajaxData);
@@ -409,10 +442,10 @@ $(document).ready(function(){
 	function breakChart(by){
 		if(by=='date'){
 			$('#measuresBt button').prop('disabled', true);
-			$('#breakBt button').html('Break by Date<span class="caret"></span>');
+			$('#breakBt button').html('by date<span class="caret"></span>');
 		}else{
 			$('#measuresBt button').prop('disabled', false);
-			$('#breakBt button').html('Break by Hour<span class="caret"></span>');
+			$('#breakBt button').html('by hour<span class="caret"></span>');
 		}
 		breakBy=by;
 		loadChart();
@@ -445,6 +478,11 @@ $(document).ready(function(){
 					success: function(data){
 						myAjaxStore.add(loadingUrl,data);
 						mydialog.setContent(data);
+					},
+					error: function(xhr,status,error){
+						myAjaxStore.remove(loadingUrl);
+						console.log('Generate report fail! ');
+						console.log('Url: '+loadingUrl);
 					},
 					complete: function(jqXHR,textStatus){
 						

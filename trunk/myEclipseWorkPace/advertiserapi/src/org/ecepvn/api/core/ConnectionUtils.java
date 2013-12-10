@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 public class ConnectionUtils {
 
@@ -26,8 +27,32 @@ public class ConnectionUtils {
 			}
 			query+="LIMIT "+itemPerPage+" OFFSET "+(page-1)*itemPerPage;
 			System.out.println("Query: "+query);
+			long startTime = System.currentTimeMillis();
 			PreparedStatement ps=connectionDB.prepareStatement(query);
 			result=ps.executeQuery();
+			long endTime = System.currentTimeMillis();
+			System.out.println("Query: "+query+"; "+(endTime - startTime) + " milliseconds");
+		}
+		return result;
+	}
+	public static ResultSet queryDimTable(Connection connectionDB,String tableName,String dimensions,String wheres,String orders,int itemPerPage,int page) throws SQLException{
+		ResultSet result=null;
+		if(connectionDB!=null){
+			String query="SELECT "+dimensions+" FROM " +tableName+" " ;
+										
+			if(!wheres.equals("")){
+				query+=wheres+" ";
+			}			
+			if(!orders.equals("")){
+				query+=orders+" ";
+			}
+			query+="LIMIT "+itemPerPage+" OFFSET "+(page-1)*itemPerPage;
+			System.out.println("Query: "+query);
+			long startTime = System.currentTimeMillis();
+			PreparedStatement ps=connectionDB.prepareStatement(query);
+			result=ps.executeQuery();
+			long endTime = System.currentTimeMillis();
+			System.out.println("Query: "+query+"; "+(endTime - startTime) + " milliseconds");
 		}
 		return result;
 	}

@@ -15,7 +15,7 @@
 				  <div class="form-group">
 					<div id="breakBt" class="btn-group btn-group-sm">
 					  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-					    Break by Hour<span class="caret"></span>
+					    by hour<span class="caret"></span>
 					  </button>
 					  <ul class="dropdown-menu" role="menu">
 					    <li><a href="#" onclick="breakChart('hour')">Hour</a></li>

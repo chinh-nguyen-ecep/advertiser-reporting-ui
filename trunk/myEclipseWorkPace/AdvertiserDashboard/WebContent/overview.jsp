@@ -23,7 +23,7 @@
 	  		<p>Infomation from Joel. Write something about summary section....</p>
 	  		<ul class="list-group">
 	  			<li class="list-group-item">Clicks/Day<span class="badge av-cli">0</span></li>
-			  	<li class="list-group-item">Impressions/Day<span class="badge av-imp">0</span></li>
+			  	<li class="list-group-item">Imps/Day<span class="badge av-imp">0</span></li>
 			  	<li class="list-group-item">Cta map/Day<span class="badge av-cta">0</span></li>
 			</ul>
 	  	</div>

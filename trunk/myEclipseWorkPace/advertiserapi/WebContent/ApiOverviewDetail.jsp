@@ -415,8 +415,16 @@
 				url+="AdCel?info";
 			}if(api=='advertiserByHour'){
 				url+="AdvertiserByHour?info";
+			}if(api=='advertiserByDate'){
+				url+="AdvertiserByDate?info";
 			}if(api=='advertiserByDistance'){
 				url+="AdvertiserByDistance?info";
+			}if(api=='lookup_orders'){
+				url+="LookupOrders?info";
+			}if(api=='lookup_flights'){
+				url+="LookupFlights?info";
+			}if(api=='lookup_creatives'){
+				url+="LookupCreatives?info";
 			}
 			$.ajax({
 			  dataType: "json",

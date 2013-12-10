@@ -52,10 +52,18 @@
 	function doStuff(){
 		console.log('Api page load completed...');
 		$(document).ready(function(){ 
-			changePage('overview');
+			var page=urlMaster.getParam('p');
+			if(page==''){
+				page='overview';
+				urlMaster.clear();
+				urlMaster.addParam('p',page);
+			}
+			loadPage(page);
 		});
 	}
 	function changePage(page){
+		urlMaster.clear();
+		urlMaster.addParam('p',page);
 		$('#index_container').addClass('loadingDots');
 		var url=rootUrl+'/'+page+'.jsp';
 		$.ajax({
@@ -64,10 +72,26 @@
 			success: function(data){
 				$('#index_container').html(data);
 				$('#index_container').removeClass('loadingDots');
+			},
+			error: function(){
+				changePage('pageNotFound');
 			}
 		});
-		
-		
+	}
+	function loadPage(page){
+		$('#index_container').addClass('loadingDots');
+		var url=rootUrl+'/'+page+'.jsp';
+		$.ajax({
+			url: url,
+			dataType : 'html',
+			success: function(data){
+				$('#index_container').html(data);
+				$('#index_container').removeClass('loadingDots');
+			},
+			error: function(){
+				changePage('pageNotFound');
+			}
+		});	
 	}
 	</script>
   </body>
