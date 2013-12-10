@@ -58,15 +58,26 @@ portal_keyword STRING
 STORED AS TEXTFILE
 LOCATION 'hdfs://ecep1:9000/user/hive/warehouse/staging/gen_millenial_performance/';
 
+-- table update date_sk
 DROP TABLE IF EXISTS gen_millenial_performance_1;
 CREATE TABLE gen_millenial_performance_1
 LIKE gen_millenial_performance
 LOCATION 'hdfs://ecep1:9000/user/hive/warehouse/staging/gen_millenial_performance_1/';
+-- table update partner_sk
+DROP TABLE IF EXISTS gen_millenial_performance_2;
+CREATE TABLE gen_millenial_performance_2
+LIKE gen_millenial_performance
+LOCATION 'hdfs://ecep1:9000/user/hive/warehouse/staging/gen_millenial_performance_2/';
+-- table update portal_sk
+DROP TABLE IF EXISTS gen_millenial_performance_3;
+CREATE TABLE gen_millenial_performance_3
+LIKE gen_millenial_performance
+LOCATION 'hdfs://ecep1:9000/user/hive/warehouse/staging/gen_millenial_performance_3/';
 
 -- Load data from log file to staging gen_millenial_performance
 INSERT OVERWRITE TABLE gen_millenial_performance 
 SELECT 
--100,
+unix_timestamp(`date`, "yyyy-MM-dd HH:mm:ss.S"),
 id,
 name,
 `date`,
@@ -79,8 +90,8 @@ net_revenue,
 net_ecpm,
 -100,
 unix_timestamp(), 
-from_unixtime(unix_timestamp(from_utc_timestamp(to_utc_timestamp(from_unixtime(unix_timestamp(`date`, "yyyy-MM-dd HH:mm:ss.S"), 'yyyy-MM-dd HH:00:00'), 'GMT'), 'America/New_York')), 'yyyy-MM-dd') AS eastern_date, 
-from_unixtime(unix_timestamp(from_utc_timestamp(to_utc_timestamp(from_unixtime(unix_timestamp(`date`, "yyyy-MM-dd HH:mm:ss.S"), 'yyyy-MM-dd HH:00:00'), 'GMT'), 'America/New_York')), 'HH:mm:ss') AS eastern_time, 
+from_unixtime(unix_timestamp(`date`, "yyyy-MM-dd HH:mm:ss.S"), 'yyyy-MM-dd') AS eastern_date, 
+from_unixtime(unix_timestamp(`date`, "yyyy-MM-dd HH:mm:ss.S"), 'HH:mm:ss') AS eastern_time, 
 from_unixtime(unix_timestamp(`date`, "yyyy-MM-dd HH:mm:ss.S"), 'yyyy-MM-dd') AS local_date,
 from_unixtime(unix_timestamp(`date`, "yyyy-MM-dd HH:mm:ss.S"), 'HH:mm:ss') AS local_time,
 from_unixtime(unix_timestamp(from_utc_timestamp(to_utc_timestamp(from_unixtime(unix_timestamp(`date`, "yyyy-MM-dd HH:mm:ss.S"), 'yyyy-MM-dd HH:00:00'), 'GMT'), 'UTC')), 'yyyy-MM-dd') AS gmt_date, 
@@ -105,7 +116,7 @@ LEFT OUTER JOIN
    INNER JOIN portal_dim cc ON cc.portal_id = aa.portal_id AND to_date(cc.dt_expire)>=to_date('9999-12-31')
 )b ON (a.name=b.current_millennial_media_name);
 
--- Load to gen_millenial_performance_1
+-- Load to gen_millenial_performance_1 update date_sk
 INSERT OVERWRITE TABLE gen_millenial_performance_1 
 SELECT 
 a.gen_millenial_performance_id,
@@ -134,33 +145,137 @@ local_date_sk,
 local_time_sk,
 gmt_date_sk,
 gmt_time_sk,
-COALESCE(c.partner_sk,-2) AS partner_sk,
-COALESCE(d.portal_sk,-2) AS portal_sk,
+partner_sk,
+portal_sk,
 a.partner_keyword,
 a.portal_keyword
 FROM gen_millenial_performance a
-JOIN date_dim b JOIN partner_dim c JOIN portal_dim d
-WHERE a.eastern_date=b.full_date
-AND a.partner_keyword=c.keyword 
-AND a.portal_keyword=d.keyword
-AND to_date(a.response_date_pacific) >= COALESCE(to_date(c.dt_effective),to_date('2007-10-28')) 
-AND to_date(a.response_date_pacific)<=COALESCE(to_date(c.dt_expire),to_date('9999-12-31'))
-AND to_date(a.response_date_pacific) >= COALESCE(to_date(d.dt_effective),to_date('2007-10-28')) 
-AND to_date(a.response_date_pacific)<=COALESCE(to_date(d.dt_expire),to_date('9999-12-31'))
-
+LEFT OUTER JOIN date_dim b ON (a.eastern_date=b.full_date);
+-- Load to gen_millenial_performance_2 update partner_sk
+INSERT OVERWRITE TABLE gen_millenial_performance_2 
 SELECT 
-date_dim.date_sk AS eastern_date_sk,
+a.gen_millenial_performance_id,
+a.id,
+a.name,
+report_date,
+requests,
+ads_served,
+fill_rate_percentage,
+clicks,
+click_thru_rate_percentage,
+net_revenue,
+net_ecpm,
+a.data_file_id,
+dt_lastchanged,
+a.eastern_date,
+a.eastern_time,
+local_date,
+local_time,
+gmt_date,
+gmt_time,
+a.response_date_pacific,
+eastern_date_sk,
 eastern_time_sk,
 local_date_sk,
 local_time_sk,
 gmt_date_sk,
 gmt_time_sk,
-COALESCE(partner_dim.partner_sk,-2) AS partner_sk,
--100 AS portal_sk,
-gen_millenial_performance.partner_keyword,
-gen_millenial_performance.portal_keyword
-FROM gen_millenial_performance 
-JOIN date_dim JOIN partner_dim 
-WHERE (gen_millenial_performance.eastern_date=date_dim.full_date)
-AND (to_date(gen_millenial_performance.response_date_pacific) > to_date(partner_dim.dt_effective) AND gen_millenial_performance.partner_keyword=partner_dim.keyword)
+COALESCE(b.partner_sk,-2) AS partner_sk,
+portal_sk,
+a.partner_keyword,
+a.portal_keyword
+FROM gen_millenial_performance_1 a
+LEFT OUTER JOIN partner_dim b ON (a.partner_keyword=b.keyword)
+WHERE 
+to_date(a.response_date_pacific) >= COALESCE(to_date(b.dt_effective),to_date('2007-10-28'))  
+AND to_date(a.response_date_pacific)<=COALESCE(to_date(b.dt_expire),to_date('9999-12-31'));
 
+-- Load to gen_millenial_performance_3 update portal_sk
+
+INSERT OVERWRITE TABLE gen_millenial_performance_3
+SELECT 
+a.gen_millenial_performance_id,
+a.id,
+a.name,
+report_date,
+requests,
+ads_served,
+fill_rate_percentage,
+clicks,
+click_thru_rate_percentage,
+net_revenue,
+net_ecpm,
+a.data_file_id,
+dt_lastchanged,
+a.eastern_date,
+a.eastern_time,
+local_date,
+local_time,
+gmt_date,
+gmt_time,
+a.response_date_pacific,
+eastern_date_sk,
+eastern_time_sk,
+local_date_sk,
+local_time_sk,
+gmt_date_sk,
+gmt_time_sk,
+partner_sk,
+COALESCE(b.portal_sk,-2) AS portal_sk,
+a.partner_keyword,
+a.portal_keyword
+FROM gen_millenial_performance_2 a
+LEFT OUTER JOIN portal_dim b ON (a.portal_keyword=b.keyword)
+WHERE 
+to_date(a.response_date_pacific) >= COALESCE(to_date(b.dt_effective),to_date('2007-10-28'))  
+AND to_date(a.response_date_pacific)<=COALESCE(to_date(b.dt_expire),to_date('9999-12-31'));
+
+-- fact table
+DROP TABLE IF EXISTS fact_mm_performance;
+CREATE EXTERNAL TABLE IF NOT EXISTS fact_mm_performance(
+  eastern_date_sk INT,
+  eastern_time_sk INT,
+  local_date_sk INT,
+  local_time_sk INT,
+  gmt_date_sk INT,
+  gmt_time_sk INT,
+  partner_sk INT,
+  portal_sk INT,
+  id INT,
+  name STRING,
+  requests INT,
+  ads_served INT,
+  fill_rate DOUBLE,
+  clicks INT,
+  click_thru_rate DOUBLE,
+  net_revenue DOUBLE,
+  net_ecpm DOUBLE,
+  gen_adnetwork_performance_id INT,
+  data_file_id INT
+)
+STORED AS TEXTFILE
+LOCATION 'hdfs://ecep1:9000/user/hive/warehouse/staging/fact_mm_performance/';
+
+-- Load to fact
+INSERT OVERWRITE TABLE fact_mm_performance
+SELECT 
+COALESCE(eastern_date_sk,-2),
+COALESCE(eastern_time_sk,-2),
+COALESCE(local_date_sk,-2),
+COALESCE(local_time_sk,-2),
+COALESCE(gmt_date_sk,-2),
+COALESCE(gmt_time_sk,-2),
+COALESCE(partner_sk,-2),
+COALESCE(portal_sk,-2),
+CAST(id AS INT) as id,
+name, 
+CAST(requests AS INT) as requests,
+CAST(ads_served AS INT) as ads_served,
+CAST(fill_rate_percentage AS DOUBLE) as fill_rate,
+CAST(clicks AS INT) as clicks,
+CAST(click_thru_rate_percentage AS DOUBLE) as click_thru_rate,
+CAST(net_revenue AS DOUBLE) as net_revenue,
+CAST(net_ecpm AS DOUBLE) as net_ecpm,
+gen_millenial_performance_id,
+data_file_id
+FROM gen_millenial_performance_3;

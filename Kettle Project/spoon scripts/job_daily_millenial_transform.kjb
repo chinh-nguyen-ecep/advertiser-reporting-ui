@@ -1,0 +1,694 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job>
+  <name>job_daily_millenial_transform</name>
+    <description/>
+    <extended_description/>
+    <job_version/>
+    <job_status>0</job_status>
+  <directory>&#47;</directory>
+  <created_user>-</created_user>
+  <created_date>2013&#47;11&#47;21 17:32:31.643</created_date>
+  <modified_user>-</modified_user>
+  <modified_date>2013&#47;11&#47;21 17:32:31.643</modified_date>
+    <parameters>
+        <parameter>
+            <name>hadoop_root_dir_content_logs</name>
+            <default_value>&#47;user&#47;hive&#47;warehouse&#47;logs</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>local_root_dir_content_logs</name>
+            <default_value>D:&#47;Pentaho&#47;Kettle Project&#47;Data</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>report_end_date</name>
+            <default_value>2013-10-01</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>report_start_date</name>
+            <default_value>2013-10-01</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>schema_log</name>
+            <default_value>control</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>table_log_job</name>
+            <default_value>kettle_job_log</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>table_log_job_entry</name>
+            <default_value>kettle_job_entry_log</default_value>
+            <description/>
+        </parameter>
+    </parameters>
+  <connection>
+    <name>Hadoop ecep</name>
+    <server>ecep1</server>
+    <type>HIVE</type>
+    <access>Native</access>
+    <database>default</database>
+    <port>10000</port>
+    <username/>
+    <password>Encrypted </password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>10000</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>Postgres</name>
+    <server>localhost</server>
+    <type>POSTGRESQL</type>
+    <access>JNDI</access>
+    <database>LocalPostgres</database>
+    <port>5432</port>
+    <username/>
+    <password>Encrypted </password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>5432</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+    <slaveservers>
+    </slaveservers>
+<job-log-table><connection>Postgres</connection>
+<schema>${schema_log}</schema>
+<table>${table_log_job}</table>
+<size_limit_lines/>
+<interval>5</interval>
+<timeout_days/>
+<field><id>ID_JOB</id><enabled>Y</enabled><name>ID_JOB</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>JOBNAME</id><enabled>Y</enabled><name>JOBNAME</name></field><field><id>STATUS</id><enabled>Y</enabled><name>STATUS</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>STARTDATE</id><enabled>Y</enabled><name>STARTDATE</name></field><field><id>ENDDATE</id><enabled>Y</enabled><name>ENDDATE</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>DEPDATE</id><enabled>Y</enabled><name>DEPDATE</name></field><field><id>REPLAYDATE</id><enabled>Y</enabled><name>REPLAYDATE</name></field><field><id>LOG_FIELD</id><enabled>Y</enabled><name>LOG_FIELD</name></field></job-log-table>
+<jobentry-log-table><connection>Postgres</connection>
+<schema>${schema_log}</schema>
+<table>${table_log_job_entry}</table>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>JOBNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>JOBENTRYNAME</id><enabled>Y</enabled><name>STEPNAME</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>RESULT</id><enabled>Y</enabled><name>RESULT</name></field><field><id>NR_RESULT_ROWS</id><enabled>Y</enabled><name>NR_RESULT_ROWS</name></field><field><id>NR_RESULT_FILES</id><enabled>Y</enabled><name>NR_RESULT_FILES</name></field><field><id>LOG_FIELD</id><enabled>N</enabled><name>LOG_FIELD</name></field><field><id>COPY_NR</id><enabled>N</enabled><name>COPY_NR</name></field></jobentry-log-table>
+<channel-log-table><connection/>
+<schema/>
+<table/>
+<timeout_days/>
+<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>LOGGING_OBJECT_TYPE</id><enabled>Y</enabled><name>LOGGING_OBJECT_TYPE</name></field><field><id>OBJECT_NAME</id><enabled>Y</enabled><name>OBJECT_NAME</name></field><field><id>OBJECT_COPY</id><enabled>Y</enabled><name>OBJECT_COPY</name></field><field><id>REPOSITORY_DIRECTORY</id><enabled>Y</enabled><name>REPOSITORY_DIRECTORY</name></field><field><id>FILENAME</id><enabled>Y</enabled><name>FILENAME</name></field><field><id>OBJECT_ID</id><enabled>Y</enabled><name>OBJECT_ID</name></field><field><id>OBJECT_REVISION</id><enabled>Y</enabled><name>OBJECT_REVISION</name></field><field><id>PARENT_CHANNEL_ID</id><enabled>Y</enabled><name>PARENT_CHANNEL_ID</name></field><field><id>ROOT_CHANNEL_ID</id><enabled>Y</enabled><name>ROOT_CHANNEL_ID</name></field></channel-log-table>
+   <pass_batchid>N</pass_batchid>
+   <shared_objects_file/>
+  <entries>
+    <entry>
+      <name>START</name>
+      <description/>
+      <type>SPECIAL</type>
+      <start>Y</start>
+      <dummy>N</dummy>
+      <repeat>N</repeat>
+      <schedulerType>0</schedulerType>
+      <intervalSeconds>0</intervalSeconds>
+      <intervalMinutes>60</intervalMinutes>
+      <hour>12</hour>
+      <minutes>0</minutes>
+      <weekDay>1</weekDay>
+      <DayOfMonth>1</DayOfMonth>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>65</xloc>
+      <yloc>118</yloc>
+      </entry>
+    <entry>
+      <name>Install Tables</name>
+      <description/>
+      <type>SQL</type>
+      <sql>add jar &#47;usr&#47;local&#47;hive&#47;lib&#47;csv-serde-1.1.2.jar;
+add jar &#47;usr&#47;local&#47;hive&#47;lib&#47;jackson-core-asl-1.8.8.jar;
+add jar &#47;usr&#47;local&#47;hive&#47;lib&#47;jackson-jaxrs-1.8.8.jar;
+add jar &#47;usr&#47;local&#47;hive&#47;lib&#47;jackson-mapper-asl-1.8.8.jar;
+add jar &#47;usr&#47;local&#47;hive&#47;lib&#47;jackson-xc-1.8.8.jar;
+
+DROP TABLE IF EXISTS daily_millenial_log;
+CREATE EXTERNAL TABLE IF NOT EXISTS daily_millenial_log(
+id BIGINT,
+name STRING,
+`date` STRING,
+requests BIGINT,
+ads_served BIGINT,
+fill_rate_percentage DOUBLE,
+clicks INT,
+click_thru_rate_percentage DOUBLE,
+net_revenue DOUBLE,
+net_ecpm DOUBLE
+)
+row format serde &apos;com.bizo.hive.serde.csv.CSVSerde&apos;
+STORED AS TEXTFILE
+LOCATION &apos;hdfs:&#47;&#47;ecep1:9000&#47;user&#47;hive&#47;warehouse&#47;logs&#47;daily_millenial_log_${report_start_date}-${report_end_date}&apos;;
+
+DROP TABLE IF EXISTS gen_millenial_performance;
+CREATE EXTERNAL TABLE IF NOT EXISTS gen_millenial_performance(
+gen_millenial_performance_id INT,
+id STRING,
+name STRING,
+report_date STRING,
+requests STRING,
+ads_served STRING,
+fill_rate_percentage STRING,
+clicks STRING,
+click_thru_rate_percentage STRING,
+net_revenue STRING,
+net_ecpm STRING,
+data_file_id INT,
+dt_lastchanged STRING,
+eastern_date STRING,
+eastern_time STRING,
+local_date STRING,
+local_time STRING,
+gmt_date STRING,
+gmt_time STRING,
+response_date_pacific STRING,
+eastern_date_sk INT,
+eastern_time_sk INT,
+local_date_sk INT,
+local_time_sk INT,
+gmt_date_sk INT,
+gmt_time_sk INT,
+partner_sk INT,
+portal_sk INT,
+partner_keyword STRING,
+portal_keyword STRING
+)
+STORED AS TEXTFILE
+LOCATION &apos;hdfs:&#47;&#47;ecep1:9000&#47;user&#47;hive&#47;warehouse&#47;staging&#47;gen_millenial_performance&#47;&apos;;
+
+DROP TABLE IF EXISTS gen_millenial_performance_1;
+CREATE TABLE gen_millenial_performance_1
+LIKE gen_millenial_performance
+LOCATION &apos;hdfs:&#47;&#47;ecep1:9000&#47;user&#47;hive&#47;warehouse&#47;staging&#47;gen_millenial_performance_1&#47;&apos;;
+
+DROP TABLE IF EXISTS gen_millenial_performance_2;
+CREATE TABLE gen_millenial_performance_2
+LIKE gen_millenial_performance
+LOCATION &apos;hdfs:&#47;&#47;ecep1:9000&#47;user&#47;hive&#47;warehouse&#47;staging&#47;gen_millenial_performance_2&#47;&apos;;
+
+DROP TABLE IF EXISTS gen_millenial_performance_3;
+CREATE TABLE gen_millenial_performance_3
+LIKE gen_millenial_performance
+LOCATION &apos;hdfs:&#47;&#47;ecep1:9000&#47;user&#47;hive&#47;warehouse&#47;staging&#47;gen_millenial_performance_3&#47;&apos;;
+
+DROP TABLE IF EXISTS fact_mm_performance;
+CREATE EXTERNAL TABLE IF NOT EXISTS fact_mm_performance(
+  eastern_date_sk INT,
+  eastern_time_sk INT,
+  local_date_sk INT,
+  local_time_sk INT,
+  gmt_date_sk INT,
+  gmt_time_sk INT,
+  partner_sk INT,
+  portal_sk INT,
+  id INT,
+  name STRING,
+  requests INT,
+  ads_served INT,
+  fill_rate DOUBLE,
+  clicks INT,
+  click_thru_rate DOUBLE,
+  net_revenue DOUBLE,
+  net_ecpm DOUBLE,
+  gen_adnetwork_performance_id INT,
+  data_file_id INT
+)
+STORED AS TEXTFILE
+LOCATION &apos;hdfs:&#47;&#47;ecep1:9000&#47;user&#47;hive&#47;warehouse&#47;staging&#47;fact_mm_performance&#47;&apos;;</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>Hadoop ecep</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>749</xloc>
+      <yloc>75</yloc>
+      </entry>
+    <entry>
+      <name>Insert log data to staging</name>
+      <description/>
+      <type>SQL</type>
+      <sql>add jar &#47;usr&#47;local&#47;hive&#47;lib&#47;csv-serde-1.1.2.jar;
+add jar &#47;usr&#47;local&#47;hive&#47;lib&#47;jackson-core-asl-1.8.8.jar;
+add jar &#47;usr&#47;local&#47;hive&#47;lib&#47;jackson-jaxrs-1.8.8.jar;
+add jar &#47;usr&#47;local&#47;hive&#47;lib&#47;jackson-mapper-asl-1.8.8.jar;
+add jar &#47;usr&#47;local&#47;hive&#47;lib&#47;jackson-xc-1.8.8.jar;
+
+INSERT OVERWRITE TABLE gen_millenial_performance 
+SELECT 
+unix_timestamp(`date`, &quot;yyyy-MM-dd HH:mm:ss.S&quot;),
+id,
+name,
+`date`,
+requests,
+ads_served,
+fill_rate_percentage,
+clicks,
+click_thru_rate_percentage,
+net_revenue,
+net_ecpm,
+-100,
+unix_timestamp(), 
+from_unixtime(unix_timestamp(`date`, &quot;yyyy-MM-dd HH:mm:ss.S&quot;), &apos;yyyy-MM-dd&apos;) AS eastern_date, 
+from_unixtime(unix_timestamp(`date`, &quot;yyyy-MM-dd HH:mm:ss.S&quot;), &apos;HH:mm:ss&apos;) AS eastern_time, 
+from_unixtime(unix_timestamp(`date`, &quot;yyyy-MM-dd HH:mm:ss.S&quot;), &apos;yyyy-MM-dd&apos;) AS local_date,
+from_unixtime(unix_timestamp(`date`, &quot;yyyy-MM-dd HH:mm:ss.S&quot;), &apos;HH:mm:ss&apos;) AS local_time,
+from_unixtime(unix_timestamp(from_utc_timestamp(to_utc_timestamp(from_unixtime(unix_timestamp(`date`, &quot;yyyy-MM-dd HH:mm:ss.S&quot;), &apos;yyyy-MM-dd HH:00:00&apos;), &apos;GMT&apos;), &apos;UTC&apos;)), &apos;yyyy-MM-dd&apos;) AS gmt_date, 
+from_unixtime(unix_timestamp(from_utc_timestamp(to_utc_timestamp(from_unixtime(unix_timestamp(`date`, &quot;yyyy-MM-dd HH:mm:ss.S&quot;), &apos;yyyy-MM-dd HH:00:00&apos;), &apos;GMT&apos;), &apos;UTC&apos;)), &apos;HH:mm:ss&apos;) AS gmt_time,
+from_unixtime(unix_timestamp(from_utc_timestamp(to_utc_timestamp(from_unixtime(unix_timestamp(`date`, &quot;yyyy-MM-dd HH:mm:ss.S&quot;), &apos;yyyy-MM-dd HH:00:00&apos;), &apos;GMT&apos;), &apos;America&#47;Los_Angeles&apos;)), &apos;yyyy-MM-dd&apos;) AS response_date_pacific, 
+-100,
+-100,
+-100,
+-100,
+-100,
+-100,
+b.partner_sk,
+b.portal_sk,
+split(name,&apos;_&apos;)[0] AS partner_keyword,
+split(name,&apos;_&apos;)[1] AS portal_keyword
+FROM daily_millenial_log a
+LEFT OUTER JOIN
+(
+   SELECT aa.current_millennial_media_name, bb.partner_sk, cc.portal_sk
+   FROM mapping_mm aa
+   INNER JOIN partner_dim bb ON bb.partner_id = aa.partner_id AND to_date(bb.dt_expire)&gt;=to_date(&apos;9999-12-31&apos;)
+   INNER JOIN portal_dim cc ON cc.portal_id = aa.portal_id AND to_date(cc.dt_expire)&gt;=to_date(&apos;9999-12-31&apos;)
+)b ON (a.name=b.current_millennial_media_name);
+</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>Hadoop ecep</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>605</xloc>
+      <yloc>169</yloc>
+      </entry>
+    <entry>
+      <name>Update date sk</name>
+      <description/>
+      <type>SQL</type>
+      <sql>INSERT OVERWRITE TABLE gen_millenial_performance_1 
+SELECT 
+a.gen_millenial_performance_id,
+a.id,
+a.name,
+report_date,
+requests,
+ads_served,
+fill_rate_percentage,
+clicks,
+click_thru_rate_percentage,
+net_revenue,
+net_ecpm,
+a.data_file_id,
+dt_lastchanged,
+a.eastern_date,
+a.eastern_time,
+local_date,
+local_time,
+gmt_date,
+gmt_time,
+a.response_date_pacific,
+b.date_sk AS eastern_date_sk,
+eastern_time_sk,
+local_date_sk,
+local_time_sk,
+gmt_date_sk,
+gmt_time_sk,
+partner_sk,
+portal_sk,
+a.partner_keyword,
+a.portal_keyword
+FROM gen_millenial_performance a
+LEFT OUTER JOIN date_dim b ON (a.eastern_date=b.full_date);</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>Hadoop ecep</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>378</xloc>
+      <yloc>207</yloc>
+      </entry>
+    <entry>
+      <name>Update partner sk </name>
+      <description/>
+      <type>SQL</type>
+      <sql>add jar &#47;usr&#47;local&#47;hive&#47;lib&#47;csv-serde-1.1.2.jar;
+add jar &#47;usr&#47;local&#47;hive&#47;lib&#47;jackson-core-asl-1.8.8.jar;
+add jar &#47;usr&#47;local&#47;hive&#47;lib&#47;jackson-jaxrs-1.8.8.jar;
+add jar &#47;usr&#47;local&#47;hive&#47;lib&#47;jackson-mapper-asl-1.8.8.jar;
+add jar &#47;usr&#47;local&#47;hive&#47;lib&#47;jackson-xc-1.8.8.jar;
+
+INSERT OVERWRITE TABLE gen_millenial_performance_2 
+SELECT 
+a.gen_millenial_performance_id,
+a.id,
+a.name,
+report_date,
+requests,
+ads_served,
+fill_rate_percentage,
+clicks,
+click_thru_rate_percentage,
+net_revenue,
+net_ecpm,
+a.data_file_id,
+dt_lastchanged,
+a.eastern_date,
+a.eastern_time,
+local_date,
+local_time,
+gmt_date,
+gmt_time,
+a.response_date_pacific,
+eastern_date_sk,
+eastern_time_sk,
+local_date_sk,
+local_time_sk,
+gmt_date_sk,
+gmt_time_sk,
+COALESCE(b.partner_sk,-2) AS partner_sk,
+portal_sk,
+a.partner_keyword,
+a.portal_keyword
+FROM gen_millenial_performance_1 a
+LEFT OUTER JOIN partner_dim b ON (a.partner_keyword=b.keyword)
+WHERE 
+to_date(a.response_date_pacific) &gt;= COALESCE(to_date(b.dt_effective),to_date(&apos;2007-10-28&apos;))  
+AND to_date(a.response_date_pacific)&lt;=COALESCE(to_date(b.dt_expire),to_date(&apos;9999-12-31&apos;));</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>Hadoop ecep</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>190</xloc>
+      <yloc>322</yloc>
+      </entry>
+    <entry>
+      <name>Update portal_sk</name>
+      <description/>
+      <type>SQL</type>
+      <sql>add jar &#47;usr&#47;local&#47;hive&#47;lib&#47;csv-serde-1.1.2.jar;
+add jar &#47;usr&#47;local&#47;hive&#47;lib&#47;jackson-core-asl-1.8.8.jar;
+add jar &#47;usr&#47;local&#47;hive&#47;lib&#47;jackson-jaxrs-1.8.8.jar;
+add jar &#47;usr&#47;local&#47;hive&#47;lib&#47;jackson-mapper-asl-1.8.8.jar;
+add jar &#47;usr&#47;local&#47;hive&#47;lib&#47;jackson-xc-1.8.8.jar;
+
+INSERT OVERWRITE TABLE gen_millenial_performance_3
+SELECT 
+a.gen_millenial_performance_id,
+a.id,
+a.name,
+report_date,
+requests,
+ads_served,
+fill_rate_percentage,
+clicks,
+click_thru_rate_percentage,
+net_revenue,
+net_ecpm,
+a.data_file_id,
+dt_lastchanged,
+a.eastern_date,
+a.eastern_time,
+local_date,
+local_time,
+gmt_date,
+gmt_time,
+a.response_date_pacific,
+eastern_date_sk,
+eastern_time_sk,
+local_date_sk,
+local_time_sk,
+gmt_date_sk,
+gmt_time_sk,
+partner_sk,
+COALESCE(b.portal_sk,-2) AS portal_sk,
+a.partner_keyword,
+a.portal_keyword
+FROM gen_millenial_performance_2 a
+LEFT OUTER JOIN portal_dim b ON (a.portal_keyword=b.keyword)
+WHERE 
+to_date(a.response_date_pacific) &gt;= COALESCE(to_date(b.dt_effective),to_date(&apos;2007-10-28&apos;))  
+AND to_date(a.response_date_pacific)&lt;=COALESCE(to_date(b.dt_expire),to_date(&apos;9999-12-31&apos;));</sql>
+      <useVariableSubstitution>F</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>Hadoop ecep</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>507</xloc>
+      <yloc>326</yloc>
+      </entry>
+    <entry>
+      <name>Fact load</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Job.Filename.Directory}&#47;daily_millenial_fact_load.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>966</xloc>
+      <yloc>310</yloc>
+      </entry>
+    <entry>
+      <name>Set variables</name>
+      <description/>
+      <type>SET_VARIABLES</type>
+      <replacevars>Y</replacevars>
+      <filename>${Internal.Job.Filename.Directory}&#47;config.properties</filename>
+      <file_variable_type>JVM</file_variable_type>
+      <fields>
+      </fields>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>395</xloc>
+      <yloc>93</yloc>
+      </entry>
+    <entry>
+      <name>Hadoop Copy Files</name>
+      <description/>
+      <type>HadoopCopyFilesPlugin</type>
+      <copy_empty_folders>N</copy_empty_folders>
+      <arg_from_previous>N</arg_from_previous>
+      <overwrite_files>Y</overwrite_files>
+      <include_subfolders>N</include_subfolders>
+      <remove_source_files>N</remove_source_files>
+      <add_result_filesname>N</add_result_filesname>
+      <destination_is_a_file>N</destination_is_a_file>
+      <create_destination_folder>Y</create_destination_folder>
+      <fields>
+        <field>
+          <source_filefolder>file:&#47;&#47;&#47;${local_root_dir_content_logs}&#47;daily_millenial_log_${report_start_date}-${report_end_date}&#47;</source_filefolder>
+          <destination_filefolder>hdfs:&#47;&#47;ecep1&#47;user&#47;hive&#47;warehouse&#47;logs&#47;daily_millenial_log_${report_start_date}-${report_end_date}&#47;</destination_filefolder>
+          <wildcard>.*\.csv</wildcard>
+        </field>
+      </fields>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>536</xloc>
+      <yloc>49</yloc>
+      </entry>
+    <entry>
+      <name>Delete data in fact</name>
+      <description/>
+      <type>SQL</type>
+      <sql>DELETE FROM adnetwork.fact_mm_performance WHERE eastern_date_sk BETWEEN ${report_start_date_sk} AND ${report_end_date_sk}</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename/>
+      <sendOneStatement>F</sendOneStatement>
+      <connection>Postgres</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>780</xloc>
+      <yloc>336</yloc>
+      </entry>
+    <entry>
+      <name>Load property from input</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Job.Filename.Directory}&#47;load_config_property_from_database.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+            <parameter>            <name>report_date</name>
+            <stream_name/>
+            <value>${report_date}</value>
+            </parameter>      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>197</xloc>
+      <yloc>80</yloc>
+      </entry>
+  </entries>
+  <hops>
+    <hop>
+      <from>Install Tables</from>
+      <to>Insert log data to staging</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Insert log data to staging</from>
+      <to>Update date sk</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Update date sk</from>
+      <to>Update partner sk </to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Update partner sk </from>
+      <to>Update portal_sk</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Set variables</from>
+      <to>Hadoop Copy Files</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Hadoop Copy Files</from>
+      <to>Install Tables</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Update portal_sk</from>
+      <to>Delete data in fact</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Delete data in fact</from>
+      <to>Fact load</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>START</from>
+      <to>Load property from input</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Load property from input</from>
+      <to>Set variables</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+  </hops>
+  <notepads>
+  </notepads>
+</job>
