@@ -72,7 +72,7 @@
     <description></description>
     <display-name>GenerateJasperReport</display-name>
     <servlet-name>GenerateJasperReport</servlet-name>
-    <servlet-class>servlets.GenerateJasperReport</servlet-class>
+    <servlet-class>advertiserui.servlets.GenerateJasperReport</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>GenerateJasperReport</servlet-name>

@@ -68,7 +68,6 @@ public class AdvertiserByHour extends MainApi{
 		info.addWhereExample("GET " + rootUrl + "?where[date]="+ currentDateExample);
 		info.addWhereExample("GET " + rootUrl + "?where[date.between]="+ reportDateExample + ".." + currentDateExample);
 		info.addWhereExample("GET " + rootUrl + "?where[hour.in]=1,2,3,4");
-		info.addWhereExample("GET " + rootUrl + "?where[date]="	+ currentDateExample + "&where[hour.in]=1,2,3,4,5");
 		// add order example
 		info.addOrderExample("GET " + rootUrl + "?order=date.desc");
 		info.addOrderExample("GET " + rootUrl + "?order=date.desc|hour");

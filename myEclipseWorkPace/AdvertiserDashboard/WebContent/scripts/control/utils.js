@@ -1,7 +1,10 @@
 /**
  * 
  */
+var globalTimeout;
 var currentSession=0;
+var ajaxRequestTimeout=30000; // the timeout for a ajax request
+var loadingCallback=30000; // The time to call back function when got a loading event
 var loginUser;
 var today=new Date();
 var yesterday=new Date(new Date().setDate(new Date().getDate()-1));
@@ -47,6 +50,7 @@ function generateDateRange(settings){
  			    });				
 		this.disable=disable;
  		this.unable=unable;
+ 		this.getValue=getValue;
  		//disable dom
 		var disableDom=$('<div></div>');
 		disableDom.addClass('loadingDots');
@@ -63,6 +67,9 @@ function generateDateRange(settings){
  		function unable(){
  			$('#'+settings.stargetId).show();
  			disableDom.hide();
+ 		}
+ 		function getValue(){
+ 			return $('#'+settings.stargetId+' input').val();
  		}
 }
 
@@ -261,13 +268,14 @@ function IsNumeric(input){
 //myAjaxStore.get(url);
 var myAjaxStore=new ajaxStore();
 function ajaxStore(){
-	var expireTime=360000;//5min
+	var expireTime=3600000000000;//5min
 	var store=[];
 	this.add=add;
 	this.get=get;
 	this.registe=registe;
 	this.isLoading=isLoading;
 	this.openDialogIsLoading=openDialogIsLoading;
+	this.remove=remove;
 	function add(url,data){
 		var isInStore=false;
 		var indexData=-1;
@@ -290,6 +298,13 @@ function ajaxStore(){
 		}
 
 	}
+	function remove(url){
+		$.each(store,function(index,item){
+			if(item.url==url){
+				store.splice(index, 1);
+			}
+		});
+	}
 	function get(url){
 		var isInStore=false;
 		var result=null;
@@ -301,9 +316,8 @@ function ajaxStore(){
 				}else{
 					
 				}
-				console.log("Got data: "+url);
+				console.log("Got data from ajaxStore center: "+url);
 				console.log("Time expire: "+(new Date()-value.dateTime));
-				console.log("Data: "+value.data);
 			}
 		});
 		return result;
@@ -374,5 +388,49 @@ function contentDialog(){
 	}
 }
 
+function delayTimeout(second_time,func){
+	if(globalTimeout != null) clearTimeout(globalTimeout); 
+	globalTimeout =setTimeout(function(){func();},second_time);
+}
+var urlMaster=new urlMaster();
+function urlMaster(){
+	var local=0;
+	this.clear=clear;
+	this.addParam=addParam;
+	this.getParam=getParam;
+	this.replaceParam=replaceParam;
+	function clear(){
+		window.history.replaceState('local '+local, 'Title '+local, rootUrl+"/?f=1");
+		local++;
+	}
+	function addParam(name,value){
+		var currentUrl=window.location.href;
+		currentUrl=currentUrl.replace("\#", "");
+		window.history.replaceState('local '+local, 'Title '+local, currentUrl+"&"+name+"="+value);
+		local++;
+	}
+	function getParam(name){
+		  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+		  var regexS = "[\\?&]"+name+"=([^&#]*)";
+		  var regex = new RegExp( regexS );
+		  var results = regex.exec( window.location.href );
+		  if( results == null )
+		    return "";
+		  else
+		    return results[1];
+	}
+	function replaceParam(name,value){
+		var currentValue=this.getParam(name);
+		if(currentValue==''){
+			this.addParam(name,value);
+		}else{
+			var currentUrl=window.location.href;
+			currentUrl=currentUrl.replace("\#", "");
+			currentUrl=currentUrl.replace(name+'='+currentValue, name+'='+value);
+			window.history.replaceState('local '+local, 'Title '+local, currentUrl);
+			local++;
+		}
+	}
+}
 
 

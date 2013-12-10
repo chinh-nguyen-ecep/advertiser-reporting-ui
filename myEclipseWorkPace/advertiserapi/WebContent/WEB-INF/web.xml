@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
   <display-name>API</display-name>
   <filter>
     <filter-name>CAS Authentication Filter</filter-name>
@@ -10,7 +10,7 @@
     </init-param>
     <init-param>
       <param-name>serverName</param-name>
-      <param-value>localhost:8080</param-value>
+      <param-value>localhost:8081</param-value>
     </init-param>
     <init-param>
       <param-name>renew</param-name>
@@ -30,7 +30,7 @@
     </init-param>
     <init-param>
       <param-name>serverName</param-name>
-      <param-value>localhost:8080</param-value>
+      <param-value>localhost:8081</param-value>
     </init-param>
   </filter>
   <filter>
@@ -105,6 +105,16 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>ApiAdvertiserByDate</display-name>
+    <servlet-name>ApiAdvertiserByDate</servlet-name>
+    <servlet-class>org.ecepvn.api.servlet.ApiAdvertiserByDate</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ApiAdvertiserByDate</servlet-name>
+    <url-pattern>/AdvertiserByDate</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>ApiAdvertiserByDistance</display-name>
     <servlet-name>ApiAdvertiserByDistance</servlet-name>
     <servlet-class>org.ecepvn.api.servlet.ApiAdvertiserByDistance</servlet-class>
@@ -112,5 +122,35 @@
   <servlet-mapping>
     <servlet-name>ApiAdvertiserByDistance</servlet-name>
     <url-pattern>/AdvertiserByDistance</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LookupOrders</display-name>
+    <servlet-name>LookupOrders</servlet-name>
+    <servlet-class>org.ecepvn.api.servlet.ApiLookupOrders</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LookupOrders</servlet-name>
+    <url-pattern>/LookupOrders</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LookupFlights</display-name>
+    <servlet-name>LookupFlights</servlet-name>
+    <servlet-class>org.ecepvn.api.servlet.ApiLookupFlights</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LookupFlights</servlet-name>
+    <url-pattern>/LookupFlights</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LookupCreatives</display-name>
+    <servlet-name>LookupCreatives</servlet-name>
+    <servlet-class>org.ecepvn.api.servlet.ApiLookupCreatives</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LookupCreatives</servlet-name>
+    <url-pattern>/LookupCreatives</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -7,6 +7,5 @@ import org.ecepvn.bean.ApiResponseResultSetInfo;
 
 public interface QueryApi {
 	public ApiResponseResultSet processApiRequest(HttpServletRequest request);
-
 	public ApiResponseResultSetInfo getInfo(HttpServletRequest request);
 }

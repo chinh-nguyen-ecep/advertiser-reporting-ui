@@ -130,7 +130,7 @@ public class MainApi implements QueryApi{
 			 
 			int totalPageNumber = 0;
 			if (Integer.parseInt(page) == 1) {
-				totalPageNumber = ConnectionUtils.getTotalPageNumber(connectionDB, dataSourceTableName, dimensions,	measures, wheres, orders,Integer.parseInt(unitsPerPage));
+				//totalPageNumber = ConnectionUtils.getTotalPageNumber(connectionDB, dataSourceTableName, dimensions,	measures, wheres, orders,Integer.parseInt(unitsPerPage));
 			} else {
 				totalPageNumber = -1;
 			}
