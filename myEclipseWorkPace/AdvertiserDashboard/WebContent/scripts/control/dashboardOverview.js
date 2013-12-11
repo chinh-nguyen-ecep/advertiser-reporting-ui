@@ -50,7 +50,7 @@
  		console.log('Url: '+url);
 		if(myAjaxStore.isLoading(url)){
 			console.log('Your request is loading...');
-			console.log('Callback after 30s...');
+			console.log('Callback after '+loadingCallback+'s...');
 			delayTimeout(loadingCallback,function(){
 				loadChart();
 			});
@@ -65,14 +65,16 @@
 			$.ajax({
 				dataType: "json",
 				url: url,
-				timeout: ajaxRequestTimeout,
+				timeout: 10000,
 				xhrFields: {
 					      withCredentials: true
 				},
 				success: function(json){
+					  loadDataForByHour();
 					  myAjaxStore.add(url,json);
 					  console.log('Load ajax request successfull with url: '+url);
 					  loadChart();
+					  
 				},
 				error: function(xhr,status,error){
 					myAjaxStore.remove(url);
@@ -83,7 +85,9 @@
 					if(error=='timeout'){
 						loadChart();
 					}else{
-						location.reload();
+						delayTimeout(2000,function(){
+							location.reload(false);
+						});
 					}
 				},
 				complete: function(){
@@ -306,6 +310,37 @@
             }]
         });
  		chart=$('#container').highcharts();
+ 	}
+ 	//function load data for hour level
+ 	function loadDataForByHour(){
+ 		var dateRange_value='where[date.between]='+urlMaster.getParam('where[date.between]');
+ 		var url=apiRootUrl+'/AdvertiserByHour?select=date|hour&limit=2000&'+dateRange_value+"&by=clicks|impressions|cta_maps";
+ 		if(myAjaxStore.isLoading(url)){
+			return;
+		}
+ 		var ajaxData=myAjaxStore.get(url);
+		if(ajaxData==null){
+			myAjaxStore.registe(url);
+			$.ajax({
+				dataType: "json",
+				url: url,
+				timeout: ajaxRequestTimeout,
+				xhrFields: {
+					      withCredentials: true
+				},
+				success: function(json){
+					  myAjaxStore.add(url,json);
+				},
+				error: function(xhr,status,error){
+					myAjaxStore.remove(url);
+				},
+				complete: function(){
+					
+				}
+				  
+				});			
+		}else{
+		}
  	}
 	function reviewExportData(){
 		var mydialog=new contentDialog();

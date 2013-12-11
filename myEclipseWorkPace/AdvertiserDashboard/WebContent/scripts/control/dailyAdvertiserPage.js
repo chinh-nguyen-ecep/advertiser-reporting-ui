@@ -82,7 +82,7 @@ $(document).ready(function(){
 		var url=apiRootUrl+'/AdvertiserByHour?select=date|hour&limit=2000&'+dateRange_value+"&by=clicks|impressions|cta_maps";
 		if(myAjaxStore.isLoading(url)){
 			console.log('Your request is loading...');
-			console.log('Callback after 30s...');
+			console.log('Callback after '+loadingCallback+'s...');
 			delayTimeout(loadingCallback,function(){
 				loadChart();
 			});
@@ -115,7 +115,9 @@ $(document).ready(function(){
 					if(error=='timeout'){
 						loadChart();
 					}else{
-						location.reload();
+						delayTimeout(2000,function(){
+							location.reload(false);
+						});
 					}
 				},
 				complete: function(){
