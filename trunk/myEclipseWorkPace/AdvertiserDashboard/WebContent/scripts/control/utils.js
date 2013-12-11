@@ -4,7 +4,7 @@
 var globalTimeout;
 var currentSession=0;
 var ajaxRequestTimeout=30000; // the timeout for a ajax request
-var loadingCallback=30000; // The time to call back function when got a loading event
+var loadingCallback=15000; // The time to call back function when got a loading event
 var loginUser;
 var today=new Date();
 var yesterday=new Date(new Date().setDate(new Date().getDate()-1));
