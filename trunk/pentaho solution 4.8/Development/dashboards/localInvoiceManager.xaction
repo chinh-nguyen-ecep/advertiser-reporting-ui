@@ -567,8 +567,9 @@ background: #F8F8F8;
 	//click and view invoice report
 	function viewInvoiceReportDetail(invoiceID) {
 		var monthYear = $('select[name=month-year]').val();
+		var ajaxUrl=rootPath + '&actions=invoiceDetail&p_inv_detail_id='+ invoiceID+'&p_month_year='+monthYear;
 		console.log('View detail report id: ' + invoiceID);
-		$('#myModal h4.modal-title').html('Invoice Detail <small>('+invoiceID+')</small>');
+		$('#myModal h4.modal-title').html('Invoice Detail <a target="_blank" href="'+ajaxUrl+'"><small style="color: blue" >('+invoiceID+')</small></a>');
 		
 		$('#myModal div.modal-body').empty();
 		$('#myModal div.modal-body').attr('title',invoiceID);
@@ -578,7 +579,7 @@ background: #F8F8F8;
 		if(html!=null){
 			$('#myModal div.modal-body').html(html);
 		}else{
-			$.ajax(rootPath + '&actions=invoiceDetail&p_inv_detail_id='+ invoiceID+'&p_month_year='+monthYear,{
+			$.ajax(ajaxUrl,{
 				success: function(data){				
 					addContentOfInvoideToDataDetail(invoiceID,data);
 					//Set content to modal
