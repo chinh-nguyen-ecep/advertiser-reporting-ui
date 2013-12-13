@@ -25,7 +25,7 @@ public class MainApiLookup implements QueryApi{
 	private String dataSourceTableName;
 	private String dataSourceJNDIConn;
 	private	String[] defaultDimensions;
-	private String defaultUnitsPerPage="100";
+	private String defaultUnitsPerPage="10";
 	private String defaultPage="1";
 	public String getDataSourceTableName() {
 		return dataSourceTableName;
