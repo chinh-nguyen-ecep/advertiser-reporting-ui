@@ -7,62 +7,29 @@
 			    </form>
 		</div>
 		<div class="collapse navbar-collapse navbar-ex1-collapse">
-			    <form class="navbar-form navbar-right" role="export">			    		   			     
+			  <!--   <form class="navbar-form navbar-right" role="export">			    		   			     
 			    	<button type="button" class="btn btn-success"><span class="glyphicon glyphicon-share"></span>Build Report</button>
 			     	<button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-download-alt"></span>XLS Export</button>			      		   
 			     	<button type="button" class="btn btn-info"><span class="glyphicon glyphicon-download-alt"></span>CSV Export</button>
-			    </form>
+			    </form> -->
 		</div>
 	</nav>
 	<div class="row">
 	  <div class="col-md-3">
 			    <form class="" role="form">	
 				  <div class="form-group">
-						<select id="e1" class="populate placeholder" style="width:100%">
-							<option></option>	
-							<option value="All Order">---All Order---</option>	
-					        <option value="Order">Order 1</option>					       
-					        <option value="Order">Order 2</option>
-					        <option value="Order">Order 3</option>
-					    </select>
+				 		<label for="order_id">Order name</label>
+					    <input class="input-xlarge" id="selectbox-order" type="hidden" name="order_id" data-placeholder="All Order..." style="width: 100%"/>
 				  </div>
 				  <div class="form-group">
-						<select id="e2" class="populate placeholder" style="width:100%">
-							<option></option>	
-							<option value="All Flight">---All Flight---</option>	
-					        <option value="Flight 1">Flight 1</option>					       
-					        <option value="Flight 2">Flight 2</option>
-					        <option value="Flight 3">Flight 3</option>
-					    </select>
+				 		<label for="flight_id">Flight name</label>
+						<input disabled="disabled" class="input-xlarge" id="selectbox-flight" type="hidden" name="flight_id" data-placeholder="All Flight..." style="width: 100%"/>
 				  </div>
   				  <div class="form-group">
-						<select id="e3" class="populate placeholder" style="width:100%">
-							<option></option>	
-							<option value="All Creative">---All Creative---</option>	
-					        <option value="Creative 1">Creative 1</option>					       
-					        <option value="Creative 2">Creative 2</option>
-					        <option value="Creative 3">Creative 3</option>
-					    </select>
+  				  		<label for="creative-id">Creative name</label>
+					    <input disabled="disabled" class="input-xlarge" id="selectbox-creative" type="hidden" name="creative-id" data-placeholder="All Creative..." style="width: 100%"/>
 				  </div>
-  				  <div class="form-group">
-  				  		<input type="hidden" id="e4" style="width: 100%" value=""/>
-				  </div>
-  				  <div class="form-group">
-						<select id="e5" class="populate placeholder" style="width:100%">
-							<option></option>	
-					        <option value="Order">Order</option>					       
-					        <option value="Property">Property</option>
-					    </select>
-				  </div>
-  				  <div class="form-group">
-						<select id="e6" class="populate placeholder" style="width:100%">
-							<option></option>	
-							<option></option>	
-					        <option value="Order">Order</option>					       
-					        <option value="Property">Property</option>
-					    </select>
-				  </div>
-				  <button type="button" class="btn btn-info" style="float: right"><span class="glyphicon glyphicon-upload"></span>Update</button>
+				  <button onclick="updateReport();" type="button" class="btn btn-info" style="float: right"><span class="glyphicon glyphicon-upload"></span>Update</button>
 			    </form>	  	
 	  </div>
 	  <div class="col-md-6">
@@ -79,6 +46,24 @@
 			</ul>
 	  	</div>
 	  </div>	 
+	</div>
+	<div class="row">
+	<div class="col-md-10">
+
+ 	 </div>
+	  <div class="col-md-2">
+ 		<div id="exportBt" class="btn-group btn-group-sm" style="float: right;margin-bottom: 10px;">
+		  <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
+		    Export Data<span class="caret"></span>
+		  </button>
+		  <ul class="dropdown-menu" role="menu">
+		   <li><a href="#" onclick="reviewExportData();">Review</a></li>
+		    <li><a href="#" onclick="exportReport('xls')">xls</a></li>
+		    <li><a href="#" onclick="exportReport('csv')">csv</a></li>
+		    <li><a href="#" onclick="exportReport('pdf')">pdf</a></li>
+		  </ul>
+		</div> 	
+	  </div>
 	</div>
 	<div class="row">
 	  <div class="col-md-12">

@@ -3,12 +3,12 @@
  */
 var globalTimeout;
 var currentSession=0;
-var ajaxRequestTimeout=30000; // the timeout for a ajax request
-var loadingCallback=15000; // The time to call back function when got a loading event
+var ajaxRequestTimeout=20000; // the timeout for a ajax request
+var loadingCallback=5000; // The time to call back function when got a loading event
 var loginUser;
 var today=new Date();
 var yesterday=new Date(new Date().setDate(new Date().getDate()-1));
-var rollBackSevenDay=new Date(new Date().setDate(new Date().getDate()-6));
+var rollBackSevenDay=new Date(new Date().setDate(new Date().getDate()-7));
 var thirtyDayBefore=new Date(new Date().setDate(new Date().getDate()-30));
 var apiRootUrl=window.location.protocol+'//'+window.location.hostname+':'+window.location.port +'/advertiserapi';
 //var apiRootUrl=window.location.protocol+'//'+'reporting.vervemobile.com' +'/advertiserapi';

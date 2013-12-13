@@ -60,9 +60,9 @@
 		  </button>
 		  <ul class="dropdown-menu" role="menu">
 		   <li><a href="#" onclick="reviewExportData();">Review</a></li>
-		    <li><a href="#" onclick="exportReport('xls')">Xls</a></li>
-		    <li><a href="#" onclick="exportReport('csv')">Csv</a></li>
-		    <li><a href="#" onclick="exportReport('pdf')">Pdf</a></li>
+		    <li><a href="#" onclick="exportReport('xls')">xls</a></li>
+		    <li><a href="#" onclick="exportReport('csv')">csv</a></li>
+		    <li><a href="#" onclick="exportReport('pdf')">pdf</a></li>
 		  </ul>
 		</div> 	
 	  </div>
