@@ -6,7 +6,7 @@
  */
 	
 	// config var for this page
-	var selectStartDate=thirtyDayBefore;
+	var selectStartDate=rollBackSevenDay;
 	var selectEndDate=yesterday;
 	if(urlMaster.getParam('where[date.between]')==''){
 		var dateRange=selectStartDate.format('yyyy-mm-dd')+'..'+selectEndDate.format('yyyy-mm-dd');
@@ -41,34 +41,124 @@
 	 		getChart(categories,revenueData,impressionsData);
     });
 	//function generate left select dimention
-	function leftbar(){
-		 $("#e1").select2({
-			 placeholder: "Select Order",
-			 allowClear: true
-		 });
-		 $("#e2").select2({
-			 placeholder: "Select Flight",
-			 allowClear: true
-		 });
-		 $("#e3").select2({
-			 placeholder: "Select Creative",
-			 allowClear: true
-		 });
-		 $("#e4").select2({
-             tags:["CLick", "Impressions", "Revenue"],
-             tokenSeparators: [",", " "],
-             placeholder: "Select Metric(s)"
-		 });
-		 $("#e5").select2({
-			 placeholder: "Primary Dimension",
-			 allowClear: true
-		 });
-		 $("#e6").select2({
-			 placeholder: "Secondary Dimension",
-			 allowClear: true
-		 });
+	function leftbar(){		 
+		 $('#selectbox-order').select2({
+			    minimumInputLength: 4,
+			    ajax: {
+			      url: apiRootUrl+"/LookupOrders?select=adm_order_id|adm_order_name&limit=20&order=adm_order_name",
+			      quietMillis: 1000,
+			      dataType: 'json',
+			      data: function (term, page) {
+			        return {
+			          'where[adm_order_name.like]': term,
+			          page: page,
+			          'where[dfp_version]': 2
+			        };
+			      },
+			      results: function (data, page) {
+			    	  var resultData=data.data;
+			    	  var myData= [];
+			    	  var more=false;
+			    	  if(resultData.length==20){
+			    		  more=true;
+			    	  }
+			    	  $.each(resultData,function(index,item){
+			    		  var row={
+			    			id: item[0],
+			    			text: item[0]+' - '+item[1]
+			    		  };
+			    		  myData.push(row);
+			    	  });
+			        return { results: myData ,  more: more};
+			      }
+			    }
+			  }).change(function(e){
+				 $('#selectbox-flight').select2('data',{id: 0,text: 'All Flights'});
+				 $('#selectbox-creative').select2('data',{id: 0,text: 'All Creatives'});
+				  $('#selectbox-creative').select2('enable', false);
+				  $('#selectbox-flight').select2('enable', true);
+			  });
+		 // flight select
+		 $('#selectbox-flight').select2({
+			    minimumInputLength: 1,
+			    ajax: {
+			      url: apiRootUrl+"/LookupFlights?select=adm_flight_id|adm_flight_name&limit=20&order=adm_flight_name",
+			      quietMillis: 1000,
+			      dataType: 'json',
+			      data: function (term, page) {
+			        return {
+			          'where[adm_flight_name.like]': term,
+			          page: page,
+			          'where[adm_order_id]':  $('#selectbox-order').select2('val'),
+			          'where[dfp_version]': 2
+			        };
+			      },
+			      results: function (data, page) {
+			    	  var resultData=data.data;
+			    	  var myData= [];
+			    	  var more=false;
+			    	  if(resultData.length==20){
+			    		  more=true;
+			    	  }
+			    	  $.each(resultData,function(index,item){
+			    		  var row={
+			    			id: item[0],
+			    			text: item[0]+' - '+item[1]
+			    		  };
+			    		  myData.push(row);
+			    	  });
+			        return { results: myData,more: more };
+			      }
+			    }
+			  }).change(function(e){
+				  $('#selectbox-creative').select2('enable', true);
+				  $('#selectbox-creative').select2('data',{id: 0,text: 'All Creatives'});
+			  });
+		 // creative select
+		 $('#selectbox-creative').select2({
+			    minimumInputLength: 1,
+			    ajax: {
+			      url: apiRootUrl+"/LookupCreatives?select=adm_creative_id|adm_creative_name&limit=20&order=adm_creative_name",
+			      quietMillis: 1000,
+			      dataType: 'json',
+			      data: function (term, page) {
+			        return {
+			          'where[adm_creative_name.like]': term,
+			          page: page,
+			          'where[adm_flight_id]': $('#selectbox-flight').select2('val'),
+			          'where[dfp_version]':2
+			        };
+			      },
+			      results: function (data, page) {
+			    	  var resultData=data.data;
+			    	  var myData= [];
+			    	  var more=false;
+			    	  if(resultData.length==20){
+			    		  more=true;
+			    	  }
+			    	  $.each(resultData,function(index,item){
+			    		  var row={
+			    			id: item[0],
+			    			text: item[0]+' - '+item[1]
+			    		  };
+			    		  myData.push(row);
+			    	  });
+			        return { results: myData, more:more };
+			      }
+			    }
+			  });
+		 $('#selectbox-order').select2('data',{id: 0,text: 'All Orders'});
+		 $('#selectbox-flight').select2('data',{id: 0,text: 'All Flights'});
+		 $('#selectbox-creative').select2('data',{id: 0,text: 'All Creatives'});
+		 
 	}
-
+	// function update report
+	function updateReport(){
+		var orderID= $('#selectbox-order').select2('val');
+		var flightID= $('#selectbox-flight').select2('val');
+		var creativeID= $('#selectbox-creative').select2('val');
+		alert(orderID+' - '+flightID+' - '+creativeID);
+	}
  	//function generate chart 
  	function getChart(categories,revenueData,impressionsData){
  		$('#container').highcharts({

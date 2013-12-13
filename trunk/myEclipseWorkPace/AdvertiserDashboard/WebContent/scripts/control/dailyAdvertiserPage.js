@@ -4,7 +4,7 @@
 //
 	
 	// config var for this page
-	var selectStartDate=thirtyDayBefore;
+	var selectStartDate=rollBackSevenDay;
 	var selectEndDate=yesterday;
 	if(urlMaster.getParam('where[date.between]')==''){
 		var dateRange=selectStartDate.format('yyyy-mm-dd')+'..'+selectEndDate.format('yyyy-mm-dd');
@@ -126,6 +126,12 @@ $(document).ready(function(){
 				});			
 		}else{
 			processData(ajaxData);
+			if(ajaxData.data.length==0){
+				var mydialog=new contentDialog();
+				mydialog.setTitle("Daily Advertiser Message!");
+				mydialog.setContent("Your data from "+selectStartDate.format('yyyy-mm-dd')+" to "+selectEndDate.format('yyyy-mm-dd')+" is not available.");
+				mydialog.open();
+			}
 		}
 
 		function processData(json){			

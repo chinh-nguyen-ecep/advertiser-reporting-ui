@@ -20,7 +20,7 @@
 	  <div class="col-md-3">
 	  	<div class="well well-sm summary_well" >
 	  		<h2 style="margin-top: 0px;">Summary</h2>
-	  		<p>Infomation from Joel. Write something about summary section....</p>
+<!-- 	  		<p>The average values </p> -->
 	  		<ul class="list-group">
 	  			<li class="list-group-item">Clicks/Day<span class="badge av-cli">0</span></li>
 			  	<li class="list-group-item">Imps/Day<span class="badge av-imp">0</span></li>
@@ -40,9 +40,9 @@
 		  </button>
 		  <ul class="dropdown-menu" role="menu">
 		   <li><a href="#" onclick="reviewExportData();">Review</a></li>
-		    <li><a href="#" onclick="exportReport('xls')">Xls</a></li>
-		    <li><a href="#" onclick="exportReport('csv')">Csv</a></li>
-		    <li><a href="#" onclick="exportReport('pdf')">Pdf</a></li>
+		    <li><a href="#" onclick="exportReport('xls')">xls</a></li>
+		    <li><a href="#" onclick="exportReport('csv')">csv</a></li>
+		    <li><a href="#" onclick="exportReport('pdf')">pdf</a></li>
 		  </ul>
 		</div> 	
 	  </div>
@@ -79,7 +79,7 @@
 		</ul>
 	 	</div>	 
 	</div>
-	<p>Copyright Verve 2012. All rights reserved.</p>
+	<p>Copyright Verve 2013. All rights reserved.</p>
 	<script src="scripts/control/dashboardOverview.js"></script>
 	<script>
 
