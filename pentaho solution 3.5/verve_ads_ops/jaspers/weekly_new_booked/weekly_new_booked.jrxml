@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Weekly local booked low rate" pageWidth="2635" pageHeight="842" orientation="Landscape" columnWidth="2595" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.6528925619834767"/>
-	<property name="ireport.x" value="3090"/>
+	<property name="ireport.x" value="3632"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
@@ -30,7 +30,7 @@ start_week
 ,flight_name
 ,flight_start_date
 ,flight_end_date
-,(CASE WHEN network_id=1 THEN 'Local' WHEN network_id=4 THEN 'VLM' ELSE 'N/A' END) as flight_network
+,(CASE WHEN network_id = 1 THEN 'Local' WHEN network_id = 4 THEN 'VLM' WHEN network_id = 6 THEN 'VPC' ELSE 'N/A' END) as flight_network
 ,max(dt_lastchange) as dt_lastchange
 FROM adsops.weekly_new_booked
 WHERE is_active=true AND year_week=$P{p_year_week}
