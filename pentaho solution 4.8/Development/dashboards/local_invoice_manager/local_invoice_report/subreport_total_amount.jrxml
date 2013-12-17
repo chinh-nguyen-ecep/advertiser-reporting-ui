@@ -38,7 +38,7 @@ order by inv_detail_id, account_name;]]>
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
-				<reportElement style="style1" mode="Opaque" x="0" y="0" width="158" height="20" forecolor="#0099FF" backcolor="#FFFFFF"/>
+				<reportElement style="style1" mode="Opaque" x="0" y="0" width="158" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineColor="#000000"/>
 				</box>
