@@ -18,8 +18,12 @@
 	  <div class="col-md-3">
 			    <form class="" role="form">	
 				  <div class="form-group">
-				 		<label for="order_id">Order name</label>
-					    <input class="input-xlarge" id="selectbox-order" type="hidden" name="order_id" data-placeholder="All Order..." style="width: 100%"/>
+				 		<label for="order_id">Campaign name</label>
+					    <input class="input-xlarge" id="selectbox-campaign" type="hidden" name="campaign _id" data-placeholder="All Campaign..." style="width: 100%"/>
+				  </div>
+  				  <div class="form-group">
+				 		<label for="io_line_id">Io line items</label>
+						<input disabled="disabled" class="input-xlarge" id="selectbox-io-line" type="hidden" name="line_id" data-placeholder="All Io Line Items..." style="width: 100%"/>
 				  </div>
 				  <div class="form-group">
 				 		<label for="flight_id">Flight name</label>
@@ -29,23 +33,48 @@
   				  		<label for="creative-id">Creative name</label>
 					    <input disabled="disabled" class="input-xlarge" id="selectbox-creative" type="hidden" name="creative-id" data-placeholder="All Creative..." style="width: 100%"/>
 				  </div>
+  				  <div class="form-group">
+  				  		<label for="metrics">Metrics</label>
+					        <select id="metrics" style="width: 100%">
+						        <option value="impression">Impression</option>
+						        <option value="clicks">Clicks</option>
+						        <option value="cta_event">Cta events</option>
+						        <option value="all">All</option>
+						    </select>
+				  </div>
+  				  <div class="form-group">
+  				  		<label for="primary-dimension">Primary dimension</label>
+					        <select id="primary-dimension" style="width: 100%">
+						        <option value="hour">Hour</option>
+						        <option value="date">Date</option>
+						        <option value="week">Week</option>
+						        <option value="month">Month</option>
+						    </select>
+				  </div>
+  				  <div class="form-group">
+  				  		<label for="secondary-dimension">Secondary dimension</label>
+					        <select id="secondary-dimension" style="width: 100%">
+						        <option value="devices">Devices</option>
+						        <option value="dma">DMA</option>
+						    </select>
+				  </div>
 				  <button onclick="updateReport();" type="button" class="btn btn-info" style="float: right"><span class="glyphicon glyphicon-upload"></span>Update</button>
 			    </form>	  	
 	  </div>
-	  <div class="col-md-6">
-	  	<div id="container" style="min-width: 310px; height: 350px; margin: 0 auto"></div>
-	  </div>
-	  <div class="col-md-3"> 
+	  <div class="col-md-9">
+	  	
 	  	<div class="well well-sm summary_well" >
 	  		<h2 style="margin-top: 0px;">Summary</h2>
-	  		<p>Infomation from Joel. Write something about summary section....</p>
+<!--	  		<p>Write something about summary section....</p>-->
 	  		<ul class="list-group">
-			  <li class="list-group-item">Average CTR<span class="badge">45</span></li>
-			  <li class="list-group-item">Average Impressions/Day<span class="badge">670</span></li>
-			  <li class="list-group-item">Average Clicks/Day<span class="badge">99</span></li>
+			  <li class="list-group-item">Imps/Day<span class="badge">34,456,45</span></li>
+			  <li class="list-group-item">Clicks/Day<span class="badge">478</span></li>
+			  <li class="list-group-item">Cta events/Day<span class="badge">3,495</span></li>
 			</ul>
 	  	</div>
-	  </div>	 
+	  	<div id="container" style="min-width: 310px; height: 295px; margin: 0 auto"></div>
+	  </div>
+	 
 	</div>
 	<div class="row">
 	<div class="col-md-10">
@@ -73,54 +102,62 @@
 	        <thead>
 	          <tr>
 	            <th class="header sort"><a href="#">Date</a><span class="glyphicon glyphicon-sort-by-attributes-alt"></span></th>
-	            <th class="header"><a href="#">Clicks</a><span class="glyphicon glyphicon-sort"></span></th>
+	            <th class="header"><a href="#">DMA</a><span class="glyphicon glyphicon-sort-by-attributes-alt"></span></th>
 	            <th class="header"><a href="#">Impressions</a><span class="glyphicon glyphicon-sort"></span></th>
-	            <th class="header"><a href="#">Revenue</a><span class="glyphicon glyphicon-sort"></span></th>
+	            <th class="header"><a href="#">Clicks</a><span class="glyphicon glyphicon-sort"></span></th>
+	            <th class="header"><a href="#">Cta events</a><span class="glyphicon glyphicon-sort"></span></th>
 	          </tr>
 	        </thead>
 	        <tbody>   
    	          	 <tr>
 		            <td>2013-10-07</td>
-		            <td class="right">450</td>
+		            <td>Portland-Auburn</td>
 		            <td class="right">74,791,664</td>
-		            <td class="right">$76,140.97</td>
+		            <td class="right">450</td>
+		            <td class="right">1,234</td>
 	          	</tr>	
-	         	 <tr>
+ 				<tr>
 		            <td>2013-10-06</td>
-		            <td class="right">567</td>
-		            <td class="right">81,620,436</td>
-		            <td class="right">$75,413.57</td>
+		            <td>New York </td>
+		            <td class="right">60,691,064</td>
+		            <td class="right">340</td>
+		            <td class="right">4,534</td>
 	          	</tr>	
-	          	<tr>
+ 				<tr>
 		            <td>2013-10-05</td>
-		            <td class="right">139</td>
-		            <td class="right">53,020,304</td>
-		            <td class="right">$77,542.50</td>
-	         	 </tr>	 
-	        	<tr>
-		            <td>2013-10-04</td>
-		            <td class="right">128</td>
-		            <td class="right">73,158,140</td>
-		            <td class="right">$48,817.37</td>
-	          	</tr>	
-	         	 <tr>
-		            <td>2013-10-03</td>
-		            <td class="right">735</td>
-		            <td class="right">60,724,855</td>
-		            <td class="right">$59,711.42</td>
-	          	</tr>	
+		            <td>Boston</td>
+		            <td class="right">34,191,764</td>
+		            <td class="right">897</td>
+		            <td class="right">5,534</td>
+	          	</tr>
 	          	<tr>
+		            <td>2013-10-04</td>
+		            <td>Philadelphia</td>
+		            <td class="right">78,091,234</td>
+		            <td class="right">567</td>
+		            <td class="right">8,034</td>
+	          	</tr>
+	          	<tr>
+		            <td>2013-10-03</td>
+		            <td>Detroit</td>
+		            <td class="right">57,897,234</td>
+		            <td class="right">455</td>
+		            <td class="right">8,034</td>
+	          	</tr>   
+     	 		<tr>
 		            <td>2013-10-02</td>
-		            <td class="right">812</td>
-		            <td class="right">69,571,356</td>
-		            <td class="right">$60,458.54</td>
-	         	 </tr>	
-	        	<tr>
+		            <td>Binghamton</td>
+		            <td class="right">67,786,345</td>
+		            <td class="right">567</td>
+		            <td class="right">7,012</td>
+	          	</tr>   
+	          	<tr>
 		            <td>2013-10-01</td>
-		            <td class="right">565</td>
-		            <td class="right">49,077,790</td>
-		            <td class="right">$75,210.53</td>
-	          	</tr>	         	           	          	         	          	          	
+		            <td>Macon</td>
+		            <td class="right">76,231,998</td>
+		            <td class="right">657</td>
+		            <td class="right">3,934</td>
+	          	</tr>    	           	          	         	          	          	
 	          </tbody>
 	      </table>
 		  </div>		  
@@ -151,7 +188,7 @@
 	 	</div>	 
 	</div>
 	<p>Copyright Verve 2012. All rights reserved.</p>
-	<script src="scripts/control/orderNames.js"></script>
+	<script src="scripts/control/campaignNames.js"></script>
 	<script>
 
 	</script>

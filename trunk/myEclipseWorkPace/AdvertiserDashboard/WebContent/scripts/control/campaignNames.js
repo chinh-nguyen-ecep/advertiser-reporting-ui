@@ -36,13 +36,13 @@
 	 		});
 			setTabActive("order");
 	 		var categories=['2013/10/01', '2013/10/02', '2013/10/03', '2013/10/04', '2013/10/05', '2013/10/06', '2013/10/07'];
-	 		var revenueData=[75210.53, 60458.54, 59711.42, 48817.37, 77542.50, 75413.57, 76140.97];
+	 		var ClicksData=[345, 456, 345, 675, 489, 612, 467];
 	 		var impressionsData=[49077790, 69571356, 60724855, 73158140, 53020304, 81620436, 74791664];
-	 		getChart(categories,revenueData,impressionsData);
+	 		getChart(categories,ClicksData,impressionsData);
     });
 	//function generate left select dimention
 	function leftbar(){		 
-		 $('#selectbox-order').select2({
+		 $('#selectbox-campaign').select2({
 			    minimumInputLength: 4,
 			    ajax: {
 			      url: apiRootUrl+"/LookupOrders?select=adm_order_id|adm_order_name&limit=20&order=adm_order_name",
@@ -79,6 +79,42 @@
 				  $('#selectbox-flight').select2('enable', true);
 			  });
 		 // flight select
+		 $('#selectbox-io-line').select2({
+			    minimumInputLength: 1,
+			    ajax: {
+			      url: apiRootUrl+"/LookupFlights?select=adm_flight_id|adm_flight_name&limit=20&order=adm_flight_name",
+			      quietMillis: 1000,
+			      dataType: 'json',
+			      data: function (term, page) {
+			        return {
+			          'where[adm_flight_name.like]': term,
+			          page: page,
+			          //'where[adm_order_id]':  $('#selectbox-campaign').select2('val'),
+			          'where[dfp_version]': 2
+			        };
+			      },
+			      results: function (data, page) {
+			    	  var resultData=data.data;
+			    	  var myData= [];
+			    	  var more=false;
+			    	  if(resultData.length==20){
+			    		  more=true;
+			    	  }
+			    	  $.each(resultData,function(index,item){
+			    		  var row={
+			    			id: item[0],
+			    			text: item[0]+' - '+item[1]
+			    		  };
+			    		  myData.push(row);
+			    	  });
+			        return { results: myData,more: more };
+			      }
+			    }
+			  }).change(function(e){
+				  $('#selectbox-creative').select2('enable', true);
+				  $('#selectbox-creative').select2('data',{id: 0,text: 'All Creatives'});
+			  });
+		 // flight select
 		 $('#selectbox-flight').select2({
 			    minimumInputLength: 1,
 			    ajax: {
@@ -89,7 +125,7 @@
 			        return {
 			          'where[adm_flight_name.like]': term,
 			          page: page,
-			          'where[adm_order_id]':  $('#selectbox-order').select2('val'),
+			          'where[adm_order_id]':  $('#selectbox-campaign').select2('val'),
 			          'where[dfp_version]': 2
 			        };
 			      },
@@ -147,20 +183,25 @@
 			      }
 			    }
 			  });
-		 $('#selectbox-order').select2('data',{id: 0,text: 'All Orders'});
+		 //metrics
+		 $('#metrics').select2();
+		 $('#primary-dimension').select2();
+		 $('#secondary-dimension').select2();
+		 $('#selectbox-campaign').select2('data',{id: 0,text: 'All Campaign'});
+		 $('#selectbox-io-line').select2('data',{id: 0,text: 'All Io Line Items'});
 		 $('#selectbox-flight').select2('data',{id: 0,text: 'All Flights'});
 		 $('#selectbox-creative').select2('data',{id: 0,text: 'All Creatives'});
 		 
 	}
 	// function update report
 	function updateReport(){
-		var orderID= $('#selectbox-order').select2('val');
+		var orderID= $('#selectbox-campaign').select2('val');
 		var flightID= $('#selectbox-flight').select2('val');
 		var creativeID= $('#selectbox-creative').select2('val');
 		alert(orderID+' - '+flightID+' - '+creativeID);
 	}
  	//function generate chart 
- 	function getChart(categories,revenueData,impressionsData){
+ 	function getChart(categories,ClicksData,impressionsData){
  		$('#container').highcharts({
             chart: {
                 zoomType: 'xy'
@@ -190,11 +231,11 @@
                     },
                     formatter: function() {
                     	var value=this.value;                    	
-                        return accounting.formatMoney(value);
+                        return accounting.formatNumber(value);
                     }
                 },
                 title: {
-                    text: 'Revenue',
+                    text: 'Clicks',
                     style: {
                         color: '#89A54E'
                     }
@@ -237,16 +278,16 @@
                 yAxis: 1,
                 data: impressionsData,
                 tooltip: {
-                    valueSuffix: ' '
+                    valueSuffix: ''
                 }
     
             }, {
-                name: 'Revenue',
+                name: 'Clicks',
                 color: '#89A54E',
                 type: 'areaspline',
-                data: revenueData,
+                data: ClicksData,
                 tooltip: {
-                    valueSuffix: '$'
+                    valueSuffix: ''
                 }
             }]
         }); 

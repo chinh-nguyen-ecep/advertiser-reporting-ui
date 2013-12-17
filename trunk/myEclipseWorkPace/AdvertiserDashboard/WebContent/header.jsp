@@ -62,7 +62,7 @@
        	
 		  <li title="overview"><a href="#" onclick="changePage('overview')">Dashboard Overview</a></li>
 		  <li title="dailyAdvertiser"><a href="#" onclick="changePage('dailyAdvertisers')">Daily Advertiser</a></li>
-		  <li title="order"><a href="#" onclick="changePage('order')">Order Name</a></li>
+		  <li title="order"><a href="#" onclick="changePage('campaign')">Campaign Name</a></li>
 		</ul>   
     </div>
     <script>
