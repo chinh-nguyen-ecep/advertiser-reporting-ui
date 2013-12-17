@@ -20,6 +20,7 @@
 					  <ul class="dropdown-menu" role="menu">
 					    <li><a href="#" onclick="breakChart('hour')">Hour</a></li>
 					    <li><a href="#" onclick="breakChart('date')">Date</a></li>
+					    <li><a href="#" onclick="breakChart('distance')">Distance</a></li>
 					  </ul>
 					</div>
 				  </div>

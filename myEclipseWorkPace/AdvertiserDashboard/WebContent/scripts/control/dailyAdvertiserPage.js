@@ -73,13 +73,18 @@ $(document).ready(function(){
 
 	//function load chart
 	function loadChart(){
+		//if break chart by distance then 
+		if(breakBy=='distance'){
+			loadChartByDistance();
+			return;
+		}
 		myDateRangeInput.disable();
 		series_clicks=[];
 		series_impressions=[];
 		series_cta=[];
 		var dateRange_value='where[date.between]='+urlMaster.getParam('where[date.between]');
 		var measureValue=$("#e2").val();
-		var url=apiRootUrl+'/AdvertiserByHour?select=date|hour&limit=2000&'+dateRange_value+"&by=clicks|impressions|cta_maps";
+		var url=apiRootUrl+'/AdvertiserByHour?select=date|hour&limit=2000&'+dateRange_value+"&by=impressions|clicks|cta_maps";
 		if(myAjaxStore.isLoading(url)){
 			console.log('Your request is loading...');
 			console.log('Callback after '+loadingCallback+'s...');
@@ -163,8 +168,8 @@ $(document).ready(function(){
 		  		for(var i=0;i<data.length;i++){
 		  			var row=data[i];
 		  			var newName=row[0];
-		  			var value=row[2];
-		  			var value_imp=row[3];
+		  			var value=row[3];
+		  			var value_imp=row[2];
 		  			var value_cta=row[4];
 //		  			console.log("Add Value: "+newName+" ckl "+value+" im "+value_imp+" cta "+value_cta);
 		  			for(var j=0;j<series_clicks.length;j++){
@@ -206,7 +211,7 @@ $(document).ready(function(){
 		  	//generate table
 		  	myTable=new drawTableFromArray({
 		  		table_id: 'daily-advertiser-dataTable',
-		  		table_colums: ['Date','Hour','Clicks','Impressions','Cta maps'],
+		  		table_colums: ['Date','Hour','Impressions','Clicks','Cta maps'],
 		  		columns_format:['','','number','number','number'],
 		  		table_data: table_data,
 		  		page_items: 25,
@@ -228,8 +233,8 @@ $(document).ready(function(){
 		  	$.each(temp_data,function(index,row){
 		  		var category_value=row[0];
 		  		categories_date.push(category_value);
-		  		var click_value=row[2];
-		  		var imp_value=row[3];
+		  		var click_value=row[3];
+		  		var imp_value=row[2];
 		  		var cta_value=row[4];
 		  		chart_date_data[2].data.push(click_value);
 		  		chart_date_data[0].data.push(imp_value);
@@ -458,7 +463,9 @@ $(document).ready(function(){
 		breakBy=by;
 		loadChart();
 	}
-	
+	function loadChartByDistance(){
+		
+	}
 	function reviewExportData(){
 		var mydialog=new contentDialog();
 		mydialog.setTitle('Daily Advertiser by Date Hour From '+selectStartDate.format('yyyy-mm-dd')+' To '+selectEndDate.format('yyyy-mm-dd'));

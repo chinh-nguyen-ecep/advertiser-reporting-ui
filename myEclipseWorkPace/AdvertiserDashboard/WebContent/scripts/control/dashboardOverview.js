@@ -46,7 +46,7 @@
  		console.log('Load overview chart group by Date');
  		myDateRangeInput.disable();
  		var dateRange_value='where[date.between]='+urlMaster.getParam('where[date.between]');
- 		var url=apiRootUrl+'/AdvertiserByDate?select=date&limit=2000&'+dateRange_value+"&by=clicks|impressions|cta_maps";
+ 		var url=apiRootUrl+'/AdvertiserByDate?select=date&limit=2000&'+dateRange_value+"&by=impressions|clicks|cta_maps";
  		console.log('Url: '+url);
 		if(myAjaxStore.isLoading(url)){
 			console.log('Your request is loading...');
@@ -114,7 +114,7 @@
 		
 			  	myTable=new drawTableFromArray({
 			  		table_id: 'dashboard-overview-dataTable',
-			  		table_colums: ['Date','Clicks','Impressions','Cta maps'],
+			  		table_colums: ['Date','Impressions','Clicks','Cta maps'],
 			  		columns_format:['','number','number','number'],
 			  		table_data: table_data,
 			  		page_items: 31,
@@ -136,8 +136,8 @@
 			  	$.each(temp_data,function(index,row){
 			  		var category_value=row[0];
 			  		categories.push(category_value);
-			  		var click_value=parseFloat(row[1]);
-			  		var imp_value=parseFloat(row[2]);
+			  		var click_value=parseFloat(row[2]);
+			  		var imp_value=parseFloat(row[1]);
 			  		var cta_value=parseFloat(row[3]);
 			  		clicksData.push(click_value);
 			  		impressionsData.push(imp_value);
@@ -156,8 +156,8 @@
 			  	var total_imp_value=0;
 			  	var total_cta_value=0;
 			  	$.each(temp_data,function(index,row){
-			  		var click_value=row[1];
-			  		var imp_value=row[2];
+			  		var click_value=row[2];
+			  		var imp_value=row[1];
 			  		var cta_value=row[3];
 			  		total_click_value=total_click_value+parseFloat(click_value);
 			  		total_imp_value=total_imp_value+parseFloat(imp_value);
@@ -320,7 +320,7 @@
  	//function load data for hour level
  	function loadDataForByHour(){
  		var dateRange_value='where[date.between]='+urlMaster.getParam('where[date.between]');
- 		var url=apiRootUrl+'/AdvertiserByHour?select=date|hour&limit=2000&'+dateRange_value+"&by=clicks|impressions|cta_maps";
+ 		var url=apiRootUrl+'/AdvertiserByHour?select=date|hour&limit=2000&'+dateRange_value+"&by=impressions|clicks|cta_maps";
  		if(myAjaxStore.isLoading(url)){
 			return;
 		}
