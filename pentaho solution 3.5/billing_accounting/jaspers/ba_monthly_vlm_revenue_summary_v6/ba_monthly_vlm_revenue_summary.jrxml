@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Billing Monthly National Revenue Summary " pageWidth="1140" pageHeight="842" orientation="Landscape" columnWidth="1100" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Billing Monthly National Revenue Summary " pageWidth="1050" pageHeight="842" orientation="Landscape" columnWidth="1010" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="267"/>
-	<property name="ireport.y" value="6"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="473"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
@@ -99,7 +99,7 @@ GROUP BY calendar_year_month]]>
 	<title>
 		<band height="344">
 			<staticText>
-				<reportElement x="64" y="9" width="1036" height="20"/>
+				<reportElement x="64" y="9" width="946" height="20"/>
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="14" isBold="true"/>
 				</textElement>
@@ -107,7 +107,7 @@ GROUP BY calendar_year_month]]>
 ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="64" y="29" width="1036" height="20"/>
+				<reportElement x="64" y="29" width="946" height="20"/>
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
@@ -149,21 +149,21 @@ GROUP BY calendar_year_month]]>
 				<text><![CDATA[Total Billable Units:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="200" width="1100" height="20"/>
+				<reportElement x="0" y="200" width="1010" height="20"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Notes:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="235" width="1100" height="15" forecolor="#FF0000"/>
+				<reportElement x="0" y="235" width="1010" height="15" forecolor="#FF0000"/>
 				<textElement>
 					<font fontName="Arial" size="10"/>
 				</textElement>
 				<text><![CDATA[*Billable Rate - This will be the same as the Booked Rate, except for VLM campaigns, where it will be set to $5.00 for CPM and $1.0 for CPC.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="220" width="1100" height="15" forecolor="#FF0000"/>
+				<reportElement x="0" y="220" width="1010" height="15" forecolor="#FF0000"/>
 				<textElement>
 					<font fontName="Arial" size="10"/>
 				</textElement>
@@ -184,14 +184,14 @@ GROUP BY calendar_year_month]]>
 				<text><![CDATA[Estimated Gross Revenue:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="265" width="1100" height="15" forecolor="#FF0000"/>
+				<reportElement x="0" y="265" width="1010" height="15" forecolor="#FF0000"/>
 				<textElement>
 					<font fontName="Arial" size="10"/>
 				</textElement>
 				<text><![CDATA[*Gross Revenue is calculated from Billable Units * Booked Rate]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="250" width="1100" height="15" forecolor="#FF0000"/>
+				<reportElement x="0" y="250" width="1010" height="15" forecolor="#FF0000"/>
 				<textElement>
 					<font fontName="Arial" size="10"/>
 				</textElement>
@@ -230,21 +230,21 @@ GROUP BY calendar_year_month]]>
 				<imageExpression class="java.lang.String"><![CDATA["../vervelogo.jpg"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="0" y="280" width="1100" height="15" forecolor="#FF0000"/>
+				<reportElement x="0" y="280" width="1010" height="15" forecolor="#FF0000"/>
 				<textElement>
 					<font fontName="Arial" size="10"/>
 				</textElement>
 				<text><![CDATA[*Billable Revenue is calculated from Billable Units * Billable Rate]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="295" width="1100" height="15" forecolor="#FF0000"/>
+				<reportElement x="0" y="295" width="1010" height="15" forecolor="#FF0000"/>
 				<textElement>
 					<font fontName="Arial" size="10"/>
 				</textElement>
 				<text><![CDATA[*When Flight Metric is SPONSORSHIP run on both ADM 1.0 & ADM 2.0, we will manual set Flight Budget is 0 (zero) on ADM 2.0]]></text>
 			</staticText>
 			<subreport>
-				<reportElement x="0" y="310" width="1100" height="34"/>
+				<reportElement x="0" y="310" width="1010" height="34"/>
 				<subreportParameter name="calendar_year_month">
 					<subreportParameterExpression><![CDATA[$P{calendar_year_month}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -263,14 +263,14 @@ GROUP BY calendar_year_month]]>
 				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="260" y="4" width="840" height="20"/>
+				<reportElement x="260" y="4" width="750" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA["Page " + $V{PAGE_NUMBER} + " of " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="0" y="3" width="1100" height="1"/>
+				<reportElement x="0" y="3" width="1010" height="1"/>
 			</line>
 		</band>
 	</pageFooter>

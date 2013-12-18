@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dail_ad_network_summary_subreport1" language="groovy" pageWidth="1100" pageHeight="842" orientation="Landscape" columnWidth="1100" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
-	<property name="ireport.zoom" value="1.3660269107301433"/>
-	<property name="ireport.x" value="197"/>
-	<property name="ireport.y" value="0"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dail_ad_network_summary_subreport1" language="groovy" pageWidth="1010" pageHeight="842" orientation="Landscape" columnWidth="1010" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="72"/>
 	<parameter name="calendar_year_month" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new String("")]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT
-publisher_name
-,advertiser_name
+		<![CDATA[SELECT publisher_name
+, advertiser_name
 , booked_rate
 , billable_rate
-, sum(booked_units) as booked_units
-,sum(billable_units) as billable_units
-,sum(gross_revenue) as gross_revenue
+, sum(billable_units) as billable_units
+, sum(gross_revenue) as gross_revenue
 , sum(delivered_units) as delivered_units
 , sum(billable_revenue) as billable_revenue
 FROM
@@ -86,14 +84,12 @@ publisher_name
 , advertiser_name
 , booked_rate
 , billable_rate
-, booked_units
 ORDER BY publisher_name,advertiser_name]]>
 	</queryString>
 	<field name="publisher_name" class="java.lang.String"/>
 	<field name="advertiser_name" class="java.lang.String"/>
 	<field name="booked_rate" class="java.lang.Double"/>
 	<field name="billable_rate" class="java.lang.Double"/>
-	<field name="booked_units" class="java.lang.Double"/>
 	<field name="billable_units" class="java.lang.Double"/>
 	<field name="gross_revenue" class="java.lang.Double"/>
 	<field name="delivered_units" class="java.math.BigDecimal"/>
@@ -110,16 +106,13 @@ ORDER BY publisher_name,advertiser_name]]>
 	<variable name="billable_units_1" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{billable_units}]]></variableExpression>
 	</variable>
-	<variable name="booked_units_1" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{booked_units}]]></variableExpression>
-	</variable>
 	<columnHeader>
 		<band height="76" splitType="Stretch">
 			<line>
-				<reportElement x="0" y="68" width="1100" height="1"/>
+				<reportElement x="0" y="68" width="1010" height="1"/>
 			</line>
 			<staticText>
-				<reportElement x="0" y="0" width="1100" height="38"/>
+				<reportElement x="0" y="0" width="1010" height="38"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
@@ -144,31 +137,24 @@ ORDER BY publisher_name,advertiser_name]]>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Booked Units]]></text>
+				<text><![CDATA[Delivered Units]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="740" y="38" width="90" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Delivered Units]]></text>
+				<text><![CDATA[Billable Units]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="830" y="38" width="90" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Billable Units]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="920" y="38" width="90" height="20"/>
-				<textElement textAlignment="Right">
-					<font fontName="Arial" isBold="true"/>
-				</textElement>
 				<text><![CDATA[Gross Revenue]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1010" y="38" width="90" height="20"/>
+				<reportElement x="920" y="38" width="90" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
@@ -225,31 +211,24 @@ ORDER BY publisher_name,advertiser_name]]>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{booked_units}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{delivered_units}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
 				<reportElement x="740" y="0" width="90" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Long"><![CDATA[$F{delivered_units}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0">
-				<reportElement x="830" y="0" width="90" height="20"/>
-				<textElement textAlignment="Right">
-					<font fontName="Arial"/>
-				</textElement>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{billable_units}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00">
-				<reportElement x="920" y="0" width="90" height="20"/>
+				<reportElement x="830" y="0" width="90" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{gross_revenue}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00">
-				<reportElement x="1010" y="0" width="90" height="20"/>
+				<reportElement x="920" y="0" width="90" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
@@ -260,42 +239,35 @@ ORDER BY publisher_name,advertiser_name]]>
 	<summary>
 		<band height="21">
 			<line>
-				<reportElement x="0" y="0" width="1100" height="1"/>
+				<reportElement x="0" y="0" width="1010" height="1"/>
 			</line>
 			<textField pattern="$#,##0.00">
-				<reportElement x="920" y="1" width="90" height="20"/>
+				<reportElement x="830" y="1" width="90" height="20"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{gross_revenue_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="740" y="1" width="90" height="20"/>
+				<reportElement x="650" y="1" width="90" height="20"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{delivered_units_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$#,##0.00">
-				<reportElement x="1010" y="1" width="90" height="20"/>
+				<reportElement x="920" y="1" width="90" height="20"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{billable_revenue_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="830" y="1" width="90" height="20"/>
+				<reportElement x="740" y="1" width="90" height="20"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{billable_units_1}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="650" y="1" width="90" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
-				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
-					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-				</textElement>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$V{booked_units_1}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>
