@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dail_ad_network_summary_subreport1" language="groovy" pageWidth="1310" pageHeight="842" orientation="Landscape" columnWidth="1310" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
-	<property name="ireport.zoom" value="1.5026296018031573"/>
-	<property name="ireport.x" value="120"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dail_ad_network_summary_subreport1" language="groovy" pageWidth="1220" pageHeight="842" orientation="Landscape" columnWidth="1220" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="12"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="calendar_year_month" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new String("")]]></defaultValueExpression>
@@ -45,6 +45,7 @@ SELECT publisher_name
       WHEN 2 THEN 'National'
       WHEN 3 THEN 'Remnant'
       WHEN 4 THEN 'VLM'
+      WHEN 6 THEN 'VPC'
       ELSE 'N/A'
   END AS flight_network
 , booked_rate AS booked_rate
@@ -101,10 +102,10 @@ ORDER BY publisher_name, advertiser_name, adm_order_id, flight_network]]>
 	<columnHeader>
 		<band height="76" splitType="Stretch">
 			<line>
-				<reportElement x="0" y="68" width="1310" height="1"/>
+				<reportElement x="0" y="68" width="1220" height="1"/>
 			</line>
 			<staticText>
-				<reportElement x="0" y="0" width="1310" height="38"/>
+				<reportElement x="0" y="0" width="1220" height="38"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
@@ -150,31 +151,24 @@ ORDER BY publisher_name, advertiser_name, adm_order_id, flight_network]]>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Booked Units]]></text>
+				<text><![CDATA[Delivered Units]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="950" y="38" width="90" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Delivered Units]]></text>
+				<text><![CDATA[Billable Units]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="1040" y="38" width="90" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Billable Units]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="1130" y="38" width="90" height="20"/>
-				<textElement textAlignment="Right">
-					<font fontName="Arial" isBold="true"/>
-				</textElement>
 				<text><![CDATA[Gross Revenue]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1220" y="38" width="90" height="20"/>
+				<reportElement x="1130" y="38" width="90" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
@@ -259,31 +253,24 @@ ORDER BY publisher_name, advertiser_name, adm_order_id, flight_network]]>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{booked_units}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{delivered_units}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
 				<reportElement x="950" y="0" width="90" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Long"><![CDATA[$F{delivered_units}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0">
-				<reportElement x="1040" y="0" width="90" height="20"/>
-				<textElement textAlignment="Right">
-					<font fontName="Arial"/>
-				</textElement>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{billable_units}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00">
-				<reportElement x="1130" y="0" width="90" height="20"/>
+				<reportElement x="1040" y="0" width="90" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{gross_revenue}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00">
-				<reportElement x="1220" y="0" width="90" height="20"/>
+				<reportElement x="1130" y="0" width="90" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
@@ -301,38 +288,31 @@ ORDER BY publisher_name, advertiser_name, adm_order_id, flight_network]]>
 	<summary>
 		<band height="21">
 			<line>
-				<reportElement x="0" y="0" width="1310" height="1"/>
+				<reportElement x="0" y="0" width="1220" height="1"/>
 			</line>
 			<textField pattern="#,##0">
 				<reportElement x="860" y="1" width="90" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$V{booked_units_1}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{delivered_units_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
 				<reportElement x="950" y="1" width="90" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Long"><![CDATA[$V{delivered_units_1}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0">
-				<reportElement x="1040" y="1" width="90" height="20"/>
-				<textElement textAlignment="Right">
-					<font fontName="Arial" isBold="true"/>
-				</textElement>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$V{billable_units_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00">
-				<reportElement x="1130" y="1" width="90" height="20"/>
+				<reportElement x="1040" y="1" width="90" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{gross_revenue_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00">
-				<reportElement x="1220" y="1" width="90" height="20"/>
+				<reportElement x="1130" y="1" width="90" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
