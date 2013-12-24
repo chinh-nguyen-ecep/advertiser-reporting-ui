@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_ad_serving_statistics" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.6105100000000008"/>
+	<property name="ireport.x" value="246"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="eastern_date_sk" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("1")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+eastern_date_sk,
+full_date,
+sum(impressions) as total_impressions,
+sum(clicks) as total_clicks,
+sum(gross_revenue) as total_gross_revenue,
+(max(dt_lastchange)::timestamp with time zone AT TIME ZONE 'America/Los_Angeles')::timestamp with time zone AT TIME ZONE 'America/New_York'as dt_lastchange
+FROM vlmo_dw.daily_agg_demand_by_metro
+WHERE is_active = true
+AND eastern_date_sk = $P{eastern_date_sk}::INTEGER
+GROUP BY
+eastern_date_sk,
+full_date]]>
+	</queryString>
+	<field name="eastern_date_sk" class="java.lang.Integer"/>
+	<field name="full_date" class="java.sql.Date"/>
+	<field name="total_impressions" class="java.lang.Long"/>
+	<field name="total_clicks" class="java.lang.Long"/>
+	<field name="total_gross_revenue" class="java.lang.Double"/>
+	<field name="dt_lastchange" class="java.sql.Timestamp"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="154">
+			<image>
+				<reportElement x="0" y="9" width="292" height="20"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"../vervelogo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="292" y="9" width="510" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Daily VLMO Statistics Summary]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="40" width="292" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Date: " + $F{full_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="292" y="40" width="388" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Refresh Date (ET):]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="680" y="40" width="122" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{dt_lastchange}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="0" y="76" width="802" height="26"/>
+				<subreportParameter name="eastern_date_sk">
+					<subreportParameterExpression><![CDATA[$F{eastern_date_sk}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_clicks">
+					<subreportParameterExpression><![CDATA[$F{total_clicks}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_gross_revenue">
+					<subreportParameterExpression><![CDATA[$F{total_gross_revenue}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_impressions">
+					<subreportParameterExpression><![CDATA[$F{total_impressions}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_vlmo_statistics_sumary_sub_by_network.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="102" width="802" height="26"/>
+				<subreportParameter name="eastern_date_sk">
+					<subreportParameterExpression><![CDATA[$F{eastern_date_sk}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_clicks">
+					<subreportParameterExpression><![CDATA[$F{total_clicks}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_gross_revenue">
+					<subreportParameterExpression><![CDATA[$F{total_gross_revenue}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_impressions">
+					<subreportParameterExpression><![CDATA[$F{total_impressions}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_vlmo_statistics_sumary_sub_by_metro.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="128" width="802" height="26"/>
+				<subreportParameter name="eastern_date_sk">
+					<subreportParameterExpression><![CDATA[$F{eastern_date_sk}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_clicks">
+					<subreportParameterExpression><![CDATA[$F{total_clicks}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_gross_revenue">
+					<subreportParameterExpression><![CDATA[$F{total_gross_revenue}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="total_impressions">
+					<subreportParameterExpression><![CDATA[$F{total_impressions}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_vlmo_statistics_sumary_sub_by_merchant.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="26">
+			<textField>
+				<reportElement x="0" y="4" width="732" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="732" y="4" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="2" width="802" height="1"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>
