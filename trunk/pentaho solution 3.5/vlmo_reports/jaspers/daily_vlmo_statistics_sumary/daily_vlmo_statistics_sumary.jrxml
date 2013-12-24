@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_ad_serving_statistics" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.6105100000000008"/>
-	<property name="ireport.x" value="246"/>
+	<property name="ireport.x" value="304"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="eastern_date_sk" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new String("1")]]></defaultValueExpression>
@@ -123,18 +123,18 @@ full_date]]>
 	<pageFooter>
 		<band height="26">
 			<textField>
-				<reportElement x="0" y="4" width="732" height="20"/>
+				<reportElement x="0" y="4" width="292" height="20"/>
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement x="732" y="4" width="70" height="20"/>
+				<reportElement x="292" y="4" width="510" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page " + $V{PAGE_NUMBER} + " of " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="0" y="2" width="802" height="1"/>
