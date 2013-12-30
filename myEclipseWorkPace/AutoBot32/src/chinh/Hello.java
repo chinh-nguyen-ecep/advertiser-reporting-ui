@@ -30,7 +30,7 @@ public class Hello {
 	    	System.out.println("Login faile");
 	    }else{
 	    	System.out.println("Login successful");
-	    	int start=18;
+	    	int start=1;
 	    	int end=26;
 	    	for(int i=start;i<=end;i++){
 			    spec.open("http://bux.to/ads.php");
