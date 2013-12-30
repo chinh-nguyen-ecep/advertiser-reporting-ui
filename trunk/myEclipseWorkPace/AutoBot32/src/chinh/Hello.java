@@ -54,6 +54,9 @@ public class Hello {
 						processBarWidth=0;
 					}
 					j++;
+					if(processBarWidth==0 && j>120){
+						break;
+					}
 				}
 				System.out.println(i+". Ads loaded");
 				spec.open("http://bux.to/ads.php");	    		
