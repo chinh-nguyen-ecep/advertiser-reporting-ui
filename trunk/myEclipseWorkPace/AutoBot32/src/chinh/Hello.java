@@ -1,15 +1,10 @@
 package chinh;
 
-import java.io.IOException;
 
 import org.watij.webspec.dsl.Tag;
 import org.watij.webspec.dsl.WebSpec;
 
-import com.DeathByCaptcha.AccessDeniedException;
 import com.DeathByCaptcha.Captcha;
-import com.DeathByCaptcha.Client;
-import com.DeathByCaptcha.Exception;
-import com.DeathByCaptcha.SocketClient;
 
 public class Hello {
 	public static void main(String[] args) {
@@ -35,24 +30,32 @@ public class Hello {
 	    	System.out.println("Login faile");
 	    }else{
 	    	System.out.println("Login successful");
-	    	int start=23;
+	    	int start=18;
 	    	int end=26;
 	    	for(int i=start;i<=end;i++){
 			    spec.open("http://bux.to/ads.php");
 			    spec.pauseUntilReady();
-				spec.eval("clt('"+i+"')");
-				spec.eval("clr('"+i+"')");
 				spec.pauseUntilReady();
 				String url=spec.find("span").with("id", "da"+i+"c").child("a").get("href");
 				spec.open(url);	 
 				spec.pauseUntilReady();
 				spec.pauseUntilReady(true);
-				System.out.println("Waiting for view...");
-//				Tag processBar;
-//				processBar=spec.findWithId("progress");
-//				String widthOfProcessBar=spec.execute("document.getElementById('progress').style.width");
-//				System.out.println(widthOfProcessBar);
-				spec.pause(30000);
+				System.out.println("Waiting for view ads ID:"+i);
+				int processBarWidth=0;
+				int j=0;
+				while(processBarWidth<120){
+					spec.pause(1000);
+					try {
+						String getexe=spec.execute("document.getElementById('progress').offsetWidth");
+						System.out.println("Get ProcessBar: "+getexe);
+						processBarWidth=Integer.parseInt(getexe);
+					} catch (java.lang.NumberFormatException e) {
+						// TODO: handle exception
+						processBarWidth=0;
+					}
+					j++;
+				}
+				System.out.println(i+". Ads loaded");
 				spec.open("http://bux.to/ads.php");	    		
 	    	}
 
