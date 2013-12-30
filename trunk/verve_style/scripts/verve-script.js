@@ -184,7 +184,14 @@ function gup( name )
     return results[1];
 }				
 										
-					
+function select(){
+	var id;
+	this.id=id;
+	this.hello=hello;
+	function hello(){
+		alert(this.id);
+	}
+}				
 					
 					
 						
