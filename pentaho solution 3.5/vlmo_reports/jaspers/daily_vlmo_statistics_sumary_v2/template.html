@@ -16,10 +16,6 @@
 	  <script src="/verve_style/scripts2/datetimepicker/jquery.datetimepicker.js"></script>
 	  <script src="/verve_style/scripts2/checkbox/jquery.checkbox.min.js"></script>
 	  <script src="/verve_style/scripts2/utils.js"></script>			  
-      			<script><![CDATA[
-				
-      			]]>
-				</script>
       		
 	{xform-header}
 
@@ -118,16 +114,23 @@
 			maxDate: $('#v_max_date').val()
 		});
 		$('input:checkbox').checkbox({cls:'jquery-safari-checkbox',empty: '/verve_style/scripts2/checkbox/empty.png'});
-		
+		var mySearch=new generateSelect({
+			inputID: 'dimesion_fillter',
+			divID: 'dimesion',
+			ajaxUrl: 'http://localhost:8080/pentaho/ViewAction',
+			data: function(term,page){
+				return {
+					solution: solution,
+					path: path,
+					action: 'daily_vlmo_statistics_sumary_v2.xaction',
+					search: term, //search term
+					page_limit: 10, // page size
+					page: page // page number
+				};
+			}
+		});
 	});      
-	function getDataTest(page,temp,limit){
-		var result=[];
-		for(int i=0;i<limit;i++){
-			var row={id: page+'_'+i,text: page+'_text_'+i};
-			result.push(row);
-		}
-		return result;
-	}
+
     </script>
    </body>
      
