@@ -16,7 +16,11 @@ public class BigTimeBux {
 		myCaptcha=null;
 		spec = new WebSpec().ie();	
 		this.login();
-		this.viewAds(55);
+    	int start=10;
+    	int end=32;
+    	for(int i=start;i<=end;i++){
+    		this.viewAds(i);
+    	}
     	this.logout();
 	}
 	private void login(){
