@@ -457,7 +457,21 @@ public class WebSpec extends Base implements Finder, NavigationListener, Dispose
     public WebSpec snap(String fileName) {
         return snap(fileName,false);
     }
-    public WebSpec snapCapChart(String fileName) {
+    public WebSpec snapBigtimebuxCapChart(String fileName) {
+   	 BufferedImage image = (BufferedImage) browser.toImage(false);
+   	 BufferedImage dest = image.getSubimage(359, 596, 120, 35);
+   	 File newFile=new File(fileName);
+   	 if(newFile.exists()){
+   		 newFile.delete();
+   	 }
+        try {
+            ImageIO.write(dest, "png", newFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return this;
+   }
+    public WebSpec snapBuxToCapChart(String fileName) {
     	 BufferedImage image = (BufferedImage) browser.toImage(false);
     	 BufferedImage dest = image.getSubimage(259, 361, 130, 30);
     	 File newFile=new File(fileName);

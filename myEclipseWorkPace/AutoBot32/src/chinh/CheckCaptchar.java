@@ -21,7 +21,7 @@ public class CheckCaptchar {
 			e.printStackTrace();
 		}
 	}
-	public static Captcha getValue(){
+	public static Captcha getValue(String image){
 		Captcha result=null;
 		 Client client = (Client)new SocketClient("chinhbot", "mylove230988");
 		    try {
@@ -29,7 +29,7 @@ public class CheckCaptchar {
 
 		        /* Put your CAPTCHA file name, or file object, or arbitrary input stream,
 		           or an array of bytes, and optional solving timeout (in seconds) here: */
-		        Captcha captcha = client.decode("capchar.png", 15);
+		        Captcha captcha = client.decode(image, 15);
 		        if (null != captcha) {
 		            /* The CAPTCHA was solved; captcha.id property holds its numeric ID,
 		               and captcha.text holds its text. */
