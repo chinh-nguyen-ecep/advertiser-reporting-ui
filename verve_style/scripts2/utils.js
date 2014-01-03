@@ -47,9 +47,10 @@ function getDataTest(page,temp,lm){
 }
 	
 function generateSelect(options){
-	$.extend({}, {
+	$.extend({},{
 		inputID:'',
 		divID: '',
+		name: 'name',
 		ajaxUrl: '',
 		data: function(term, page){
 			return {
@@ -59,9 +60,9 @@ function generateSelect(options){
             };
 		},
 		result: function(data, page){
-			return {results: [],more: false}
+			return {results: data,more: false}
 		}
-	}, options);
+	},options);
 	var drawArea=$('#'+options.divID);
 	var inputArea=$('#'+options.inputID);
 	var page=1;
@@ -88,16 +89,63 @@ function generateSelect(options){
 		page=1;
 		ajaxObject=$.ajax({
 			type: "POST",
+			dataType: "json",
 			url: options.ajaxUrl,
 			data: options.data(term,page),
-			success: function(msg){
-			   
+			success: function(ajaxData){
+			   var result=options.result(ajaxData,page);
+			   var data=result.results;
+			   var more=result.more;
+			   rawData(data,more);
 			}
 		})
 		
 	}
-	function loadMore(){
+	function rawData(data,more){
+		if(page==1){
+			drawArea.empty();
+			if(data.length==0){
+				var row="Don't have results....";
+				drawArea.append(row);
+			}
+		}
+		$.each(data,function(index,temp){
+			var id=temp[0];
+			var text=temp[1];
+			var row='<input id="checkbox_'+id+'" value="'+id+'" type="checkbox" name="'+options.name+'" safari="1"/> <label for="checkbox_'+id+'">'+text+'</label><br/>';
+			drawArea.append(row);
+		});
+		$('#'+options.divID+' input:checkbox').checkbox({cls:'jquery-safari-checkbox',empty: '/verve_style/scripts2/checkbox/empty.png'});
+		addMoreButton(more);
+		
+	}
 	
+	function addMoreButton(more){
+		if(more){
+			var button=$('<input type="button" value="Load more..." />');
+			drawArea.append(button);
+			button.click(function(){
+				loadMore(inputArea.val());
+			});
+		}
+	}
+	function loadMore(term){
+		ajaxObject.abort();
+		term=term;
+		page=page+1;
+		ajaxObject=$.ajax({
+			type: "POST",
+			dataType: "json",
+			url: options.ajaxUrl,
+			data: options.data(term,page),
+			success: function(ajaxData){
+			   var result=options.result(ajaxData,page);
+			   var data=result.results;
+			   var more=result.more;
+			   $('#'+options.divID+' input:button').remove();
+			   rawData(data,more);
+			}
+		})
 	}
 	
 }
