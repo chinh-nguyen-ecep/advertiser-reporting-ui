@@ -16,8 +16,8 @@ public class BuxTo {
 		myCaptcha=null;
 		spec = new WebSpec().ie();	
 		this.login();
-    	int start=10;
-    	int end=32;
+    	int start=1;
+    	int end=31;
     	for(int i=start;i<=end;i++){
     		this.viewAds(i);
     	}
@@ -27,11 +27,12 @@ public class BuxTo {
 		spec.pauseUntilReady();
 		spec.findWithId("name").set("chinhnguyen");
 		spec.findWithId("email").set("adminsanchikaro");
-		spec.pauseUntilReady();
-		spec.snapBuxToCapChart("capchar.png");
-		myCaptcha=CheckCaptchar.getValue("capchar.png");
-		Tag input=spec.find("input").with("name", "verify");
-	    input.set("value",myCaptcha.text.toUpperCase());
+//		spec.pauseUntilReady();
+//		spec.snapBuxToCapChart("capchar.png");
+//		myCaptcha=CheckCaptchar.getValue("capchar.png");
+//		Tag input=spec.find("input").with("name", "verify");
+//	    input.set("value",myCaptcha.text.toUpperCase());
+		spec.pauseUntilDone();
 	    spec.findWithId("send").click();
 	    System.out.println("Login successful");
 	}
