@@ -15,7 +15,7 @@ public class BigTimeBux {
 		myCaptcha=null;
 		spec = new WebSpec().ie();	
 		this.login();
-    	int start=1;
+    	int start=15;
     	int end=80;
     	for(int i=start;i<=end;i++){
     		this.viewAds(i);
