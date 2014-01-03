@@ -3,6 +3,7 @@ package chinh;
 
 import java.util.ArrayList;
 
+import org.watij.webspec.dsl.All;
 import org.watij.webspec.dsl.Tag;
 import org.watij.webspec.dsl.WebSpec;
 
@@ -37,8 +38,7 @@ public class Donkeymails {
 		spec.open("http://www.donkeymails.com/pages/ptc.php");
 		String url;
 		
-		Tag a=spec.find("a").with("target", "_ptc");
-		url=a.get("href");
+		url=this.findTrueUrl();
 		if(url==null){
 			this.nullCount++;
 		}else{
@@ -51,15 +51,39 @@ public class Donkeymails {
 			}
 		}
 		System.out.println(url);
-		spec.browser(1).open(url);
+		if(url.equals("http://www.donkeymails.com/pages/advertise.php")){
+			
+		}else{
+			spec.browser(1).open(url);
+		}
+		
 		spec.browser(0).pause(15000);
 		if(this.nullCount>10){
 			spec.closeAll();
-		}if(this.error>3){
+		}if(this.error>2){
 			spec.closeAll();
 		}else{
 			viewAds();
 		}
+	}
+	
+	private String findTrueUrl(){
+		String url="";
+		Tag a=spec.find("a").with("target", "_ptc");
+		url=a.get("href");
+		if(url==null){
+			url="http://www.donkeymails.com/pages/ptc.php";
+		}if(url.equals("http://www.donkeymails.com/pages/advertise.php")){
+			a=spec.find("a").with("target", "_ptc").at(3);
+			url=a.get("href");
+			if(url==null){
+				url="http://www.donkeymails.com/pages/ptc.php";
+			}
+		}else{
+			
+		}
+
+		return url;
 	}
 	public static void main(String[] args) {
 		Donkeymails buxTo=new Donkeymails();
