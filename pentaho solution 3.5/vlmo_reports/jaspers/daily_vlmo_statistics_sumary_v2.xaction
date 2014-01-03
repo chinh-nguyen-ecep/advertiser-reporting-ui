@@ -256,7 +256,7 @@ if(p_publisher_ids!= ''){
           <output-message type="string" mapping="result"/> 
         </action-outputs>
         <component-definition> 
-          <template><![CDATA[{"errorMessage":"","columnType":["BIGINT","BIGINT","VARCHAR"],"page":1,"unitsPerPage":10,"responseStatus":"OK","data":[["-1","-1","Undefined Order"],["2120001","3832430","KB_O_1024_325"],["12568","3958799","AL - UofAContinuingStudies - 02 RoS"],["12569","3958799","AL - UofAContinuingStudies - 02 iPad"],["12974","3642557","Schweigert, Klemin & McBride"],["2130832","2123291","Bulk 167"],["2123391","2120022","OR - TownandCountryHonda - 01 RoS"],["12289","4080505","Fury Motors"],["10257","3970466","Washington University Tablet"],["2130959","2122310","AL - JoeBullardInfiniti - 23 RoS"]],"columnName":["adm_order_id","adm_organization_id","adm_order_name"],"totalPage":0}]]></template> 
+          <template><![CDATA[{"errorMessage":"","columnType":["BIGINT","VARCHAR"],"page":1,"unitsPerPage":10,"responseStatus":"OK","data":[["-1","Undefined Order"],["2120001","KB_O_1024_325"],["12568","AL - UofAContinuingStudies - 02 RoS"],["12569","AL - UofAContinuingStudies - 02 iPad"],["12974","Schweigert, Klemin & McBride"],["2123391","OR - TownandCountryHonda - 01 RoS"],["10257","Washington University Tablet"],["2125868","OR - Les Schwab - 01 Sports"],["2127852","McDonalds Mobile Breakfast"],["2125096","FTW 130729 Foremans mobile IMPLOC"]],"columnName":["adm_order_id","adm_order_name"],"totalPage":0}]]></template>
         </component-definition> 
       </action-definition>
  
