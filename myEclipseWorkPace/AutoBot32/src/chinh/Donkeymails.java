@@ -1,6 +1,8 @@
 package chinh;
 
 
+import java.util.ArrayList;
+
 import org.watij.webspec.dsl.Tag;
 import org.watij.webspec.dsl.WebSpec;
 
@@ -10,8 +12,8 @@ public class Donkeymails {
 	private Captcha myCaptcha;
 	private WebSpec spec;
 	private int nullCount=0;
-	private int totalClickAdd=0;
-	private String currentUrl="";
+	private ArrayList<String> urlsClicked=new ArrayList<String>();
+	private int error=0;
 	public Donkeymails() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -20,7 +22,9 @@ public class Donkeymails {
 		this.login();
     	spec.pauseUntilDone();
     	this.viewAds();
-    	System.out.println("Total Click Add: "+this.totalClickAdd);
+    	System.out.println("Total Click Add: "+this.urlsClicked.size());
+    	System.out.println("Total Click error: "+this.error);
+    	System.out.println("Total Click null: "+this.nullCount);
 	}
 	private void login(){
 		spec.open("http://www.donkeymails.com/pages/enter.php"); 
@@ -38,19 +42,20 @@ public class Donkeymails {
 		if(url==null){
 			this.nullCount++;
 		}else{
-			if(!url.equals(currentUrl)){
-				this.currentUrl=url;
-				this.totalClickAdd++;
+			if(urlsClicked.indexOf(url)<0){
+				urlsClicked.add(url);
 				this.nullCount=0;
 			}else{
 				System.out.println("Please enter the Captchar.....");
-				this.nullCount++;
+				this.error++;
 			}
 		}
 		System.out.println(url);
 		spec.browser(1).open(url);
 		spec.browser(0).pause(15000);
 		if(this.nullCount>10){
+			spec.closeAll();
+		}if(this.error>3){
 			spec.closeAll();
 		}else{
 			viewAds();
