@@ -11,78 +11,134 @@
     <icon/> 
   </documentation>
 
-  <inputs>
-    <result type="string">
+  <inputs> 
+    <result type="string"> 
+      <sources> 
+        <request>result</request> 
+      </sources>  
+      <default-value/> 
+    </result>  
+    <page type="string"> 
+      <sources> 
+        <request>page</request> 
+      </sources>  
+      <default-value/> 
+    </page>  
+    <term type="string"> 
+      <sources> 
+        <request>term</request> 
+      </sources>  
+      <default-value/> 
+    </term>  
+    <limit type="string"> 
+      <sources> 
+        <request>limit</request> 
+      </sources>  
+      <default-value><![CDATA[10]]></default-value> 
+    </limit>  
+    <mode type="string">
       <sources>
-        <request>result</request>
+        <request>mode</request>
       </sources>
       <default-value/>
-    </result>
-    <page type="string">
+    </mode>
+    <query_result type="result-set">
       <sources>
-        <request>page</request>
+        <request>query_result</request>
       </sources>
       <default-value/>
-    </page>
-    <term type="string">
+    </query_result>
+    <ConnectionName type="string">
       <sources>
-        <request>term</request>
+        <request>ConnectionName</request>
       </sources>
-      <default-value/>
-    </term>
-    <limit type="string">
+      <default-value><![CDATA[dw3dw3]]></default-value>
+    </ConnectionName>
+    <network_id type="string">
       <sources>
-        <request>limit</request>
+        <request>network_id</request>
       </sources>
-      <default-value><![CDATA[10]]></default-value>
-    </limit>
+      <default-value><![CDATA[-100]]></default-value>
+    </network_id>
   </inputs>
 
-  <outputs>
-    <result type="string">
-      <destinations>
-        <response>content</response>
-      </destinations>
-    </result>
+  <outputs> 
+    <result type="string"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </result> 
   </outputs>
 
   <resources/>
   
   <actions> 
-    <action-definition>
-      <component-name>SQLLookupRule</component-name>
-      <action-type>Relational</action-type>
-      <action-inputs>
-        <page type="string"/>
-        <limit type="string"/>
-        <term type="string"/>
-      </action-inputs>
-      <action-outputs>
-        <query-result type="result-set" mapping="query_result"/>
-      </action-outputs>
-      <component-definition>
-        <jndi><![CDATA[dw3dw3]]></jndi>
-        <live><![CDATA[false]]></live>
-        <query><![CDATA[SELECT metros_id,name 
-FROM vlmo_dw.vlmo_dim_metros 
-WHERE dt_expire='9999-12-31' AND lower(name) LIKE lower('%{term}%') ORDER BY name LIMIT {limit} OFFSET ({page}-1)*10 ;]]></query>
-      </component-definition>
-    </action-definition>
+    <actions>
+      <condition><![CDATA[mode=='agency']]></condition>
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <page type="string"/>  
+          <limit type="string"/>  
+          <term type="string"/>  
+          <jndi type="string" mapping="ConnectionName"/>
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
+        </action-outputs>
+        <component-definition> 
+          <live><![CDATA[false]]></live>  
+          <query><![CDATA[SELECT network_id,title as name 
+FROM vlmo_dw.vlmo_dim_networks
+WHERE dt_expire='9999-12-31' AND lower(title) LIKE lower('%{term}%') ORDER BY title LIMIT {limit} OFFSET ({page}-1)*10 ;]]></query> 
+        </component-definition> 
+      </action-definition>
 
-    <action-definition>
+    </actions>
+
+    <actions>
+      <condition><![CDATA[mode=='merchant']]></condition>
+      <action-definition>
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs>
+          <limit type="string"/>
+          <page type="string"/>
+          <term type="string"/>
+          <jndi type="string" mapping="ConnectionName"/>
+          <network_id type="string"/>
+        </action-inputs>
+        <action-outputs>
+          <query-result type="result-set" mapping="query_result"/>
+        </action-outputs>
+        <component-definition>
+          <query><![CDATA[SELECT merchant_id,name
+FROM vlmo_dw.vlmo_dim_merchants
+WHERE dt_expire='9999-12-31' 
+AND lower(name) LIKE lower('%{term}%') 
+AND network_id={network_id}
+ORDER BY name LIMIT {limit} OFFSET ({page}-1)*10 ;]]></query>
+          <live><![CDATA[false]]></live>
+        </component-definition>
+      </action-definition>
+
+    </actions>
+
+    <action-definition> 
       <component-name>JavascriptRule</component-name>
       <action-type>convert data set to jsoin</action-type>
-      <action-inputs>
-        <query_result type="result-set"/>
-        <result type="string"/>
-        <limit type="string"/>
-        <page type="string"/>
-        <term type="string"/>
+      <action-inputs> 
+        <query_result type="result-set"/>  
+        <result type="string"/>  
+        <limit type="string"/>  
+        <page type="string"/>  
+        <term type="string"/> 
       </action-inputs>
-      <action-outputs>
-        <result type="string"/>
+      <action-outputs> 
+        <result type="string"/> 
       </action-outputs>
-      <component-definition>
+      <component-definition> 
         <script><![CDATA[result='{"data":[';
 for(var i=0;i<query_result.getRowCount();i++){
 	var item='';
@@ -100,9 +156,9 @@ for(var i=0;i<query_result.getRowCount();i++){
 	item+=']';
 	result+=item;
 }
-result+='],"limit": '+limit+',"page": '+page+',"term":"'+term+'"}';]]></script>
-      </component-definition>
+result+='],"limit": '+limit+',"page": '+page+',"term":"'+term+'"}';]]></script> 
+      </component-definition> 
     </action-definition>
-
+ 
   </actions> 
 </action-sequence>
