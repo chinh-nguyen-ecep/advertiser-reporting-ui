@@ -46,12 +46,13 @@ function getDataTest(page,temp,lm){
 	return result;
 }
 	
-function generateSelect(options){
-	$.extend({},{
+function generateSelect2(options){
+	options=$.extend({},{
 		inputID:'',
 		divID: '',
 		name: 'name',
 		ajaxUrl: '',
+		multi: true,
 		data: function(term, page){
 			return {
                 q: term, //search term
@@ -61,22 +62,30 @@ function generateSelect(options){
 		},
 		result: function(data, page){
 			return {results: data,more: false}
+		},
+		success: function(){
+		
+		},
+		clickEvent: function(id){
+		 console.log("Click on: "+id);
 		}
 	},options);
 	var drawArea=$('#'+options.divID);
 	var inputArea=$('#'+options.inputID);
 	var page=1;
 	var term='';
+	this.getID=getID;
+	this.action=action;
 	var ajaxObject=$.ajax({
 		type: "POST",
 		url: "some.php",
 		data: "name=John&location=Boston",
-		success: function(msg){
-		   
-		}
 	});
 	
-	load(inputArea.val());
+	function action(){
+		load(inputArea.val());	
+	}
+
 	inputArea.keyup(function(event){
 		delay_timeout(1000,function(){
 			load(inputArea.val());
@@ -97,13 +106,15 @@ function generateSelect(options){
 			   var data=result.results;
 			   var more=result.more;
 			   rawData(data,more);
+			   options.success();
 			}
 		})
 		
 	}
-	function rawData(data,more){
+	function rawData(data,more,isLoadMore){
 		if(page==1){
-			drawArea.empty();
+			//drawArea.empty();
+			$('#'+options.divID+' input:checked').remove();
 			if(data.length==0){
 				var row="Don't have results....";
 				drawArea.append(row);
@@ -113,9 +124,31 @@ function generateSelect(options){
 			var id=temp[0];
 			var text=temp[1];
 			var row='<input id="checkbox_'+id+'" value="'+id+'" type="checkbox" name="'+options.name+'" safari="1"/> <label for="checkbox_'+id+'">'+text+'</label><br/>';
+			if(index==0 && !isLoadMore){
+				row='<input id="checkbox_'+id+'" value="'+id+'" type="checkbox" name="'+options.name+'" safari="1" checked/> <label for="checkbox_'+id+'">'+text+'</label><br/>';
+			}
+			if(index==0 && !options.multi && !isLoadMore){
+				row='<input id="radio_'+id+'" value="'+id+'" type="radio" name="'+options.name+'" safari="1" checked/> <label for="radio_'+id+'">'+text+'</label><br/>';
+			}
+			if(index>0 && !options.multi){
+				row='<input id="radio_'+id+'" value="'+id+'" type="radio" name="'+options.name+'" safari="1"/> <label for="radio_'+id+'">'+text+'</label><br/>';
+			}
 			drawArea.append(row);
 		});
-		$('#'+options.divID+' input:checkbox').checkbox({cls:'jquery-safari-checkbox',empty: '/verve_style/scripts2/checkbox/empty.png'});
+		if(!options.multi){
+			$('#'+options.divID+' input:radio').checkbox({cls:'jquery-safari-checkbox',empty: '/verve_style/scripts2/checkbox/empty.png'});
+			$('#'+options.divID+' input:radio').change(function(event){
+				var value=$(this).val();
+				options.clickEvent(value);
+			});
+		}else{
+			$('#'+options.divID+' input:checkbox').checkbox({cls:'jquery-safari-checkbox',empty: '/verve_style/scripts2/checkbox/empty.png'});
+			$('#'+options.divID+' input:checkbox').change(function(event){
+				var value=$(this).val();
+				options.clickEvent(value);
+			});
+		}
+
 		addMoreButton(more);
 		
 	}
@@ -130,6 +163,7 @@ function generateSelect(options){
 		}
 	}
 	function loadMore(term){
+		$('#'+options.divID+' input:button').val("Loading...");
 		ajaxObject.abort();
 		term=term;
 		page=page+1;
@@ -143,9 +177,22 @@ function generateSelect(options){
 			   var data=result.results;
 			   var more=result.more;
 			   $('#'+options.divID+' input:button').remove();
-			   rawData(data,more);
+			   rawData(data,more,true);
 			}
 		})
+	}
+	
+	function getID(){
+		var multi=options.multi;
+		var result=[];
+		if(true){
+			var array=$('#'+options.divID+' input:checked');
+			$.each(array,function(index,item){
+				var value=item.value;
+				result.push(value);
+			});
+		}
+		return result;
 	}
 	
 }
