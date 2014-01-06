@@ -246,21 +246,6 @@ if(p_publisher_ids!= ''){
       </actions>
  
     </actions>
-  
-    <actions> 
-      <condition><![CDATA[mode=='loadDimensions']]></condition>  
-      <action-definition> 
-        <component-name>TemplateComponent</component-name>
-        <action-type>Message Template</action-type>
-        <action-outputs> 
-          <output-message type="string" mapping="result"/> 
-        </action-outputs>
-        <component-definition> 
-          <template><![CDATA[{"errorMessage":"","columnType":["BIGINT","VARCHAR"],"page":1,"unitsPerPage":10,"responseStatus":"OK","data":[["-1","Undefined Order"],["2120001","KB_O_1024_325"],["12568","AL - UofAContinuingStudies - 02 RoS"],["12569","AL - UofAContinuingStudies - 02 iPad"],["12974","Schweigert, Klemin & McBride"],["2123391","OR - TownandCountryHonda - 01 RoS"],["10257","Washington University Tablet"],["2125868","OR - Les Schwab - 01 Sports"],["2127852","McDonalds Mobile Breakfast"],["2125096","FTW 130729 Foremans mobile IMPLOC"]],"columnName":["adm_order_id","adm_order_name"],"totalPage":0}]]></template>
-        </component-definition> 
-      </action-definition>
- 
-    </actions>
  
   </actions> 
 </action-sequence>

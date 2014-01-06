@@ -56,12 +56,18 @@
 			<table class="tableForm">
 			 <tbody>		 
 					<tr>
-						 <th>Metros:</th>
+						 <th>Agency:</th>
 						 <td>
 							<input id="dimesion_fillter" type="text" style="width: 300px;"/>
 							<div id="dimesion" style="width: 290px;border: 1px solid gray;overflow: auto;height: 100px;padding: 5px;">
-							<input id="checkbox1" type="checkbox" name="publisher_id" safari="1"/> <label for="checkbox1">All</label><br/>
-							<input id="checkbox2" type="checkbox" name="publisher_id" safari="1" disable="disable"/> <label for="checkbox2">sadasdasd</label><br/>
+							</div>
+						 </td>
+					 </tr>	
+					<tr>
+						 <th>Merchant:</th>
+						 <td>
+							<input id="dimesion_merchant" type="text" style="width: 300px;"/>
+							<div id="merchant" style="width: 290px;border: 1px solid gray;overflow: auto;height: 100px;padding: 5px;">
 							</div>
 						 </td>
 					 </tr>	
@@ -116,11 +122,12 @@
 			minDate: $('#v_min_date').val(),
 			maxDate: $('#v_max_date').val()
 		});
-		$('input:checkbox').checkbox({cls:'jquery-safari-checkbox',empty: '/verve_style/scripts2/checkbox/empty.png'});
-		var mySearch=new generateSelect({
+		
+		var mySearch=new generateSelect2({
 			inputID: 'dimesion_fillter',
 			divID: 'dimesion',
 			name: 'metro_ids',
+			multi: false,
 			ajaxUrl: 'http://localhost:8080/pentaho/ViewAction',
 			data: function(term,page){
 				return {
@@ -130,7 +137,43 @@
 					action: 'loadDimension.xaction',
 					term: term, //search term
 					limit: 10, // page size
-					page: page // page number
+					page: page, // page number
+					mode: 'agency'
+				};
+			},
+			result: function(data, page){
+				var results=data.data;
+				var more=false;
+				if(results.length==data.limit){
+					more=true
+				}
+				return {results: results,more: more}
+			},
+			success: function(){
+				mySearch2.action();
+			},
+			clickEvent: function(id){
+				mySearch2.action();
+			}
+		});
+		mySearch.action();
+		var mySearch2=new generateSelect2({
+			inputID: 'dimesion_merchant',
+			divID: 'merchant',
+			name: 'merchant_ids',
+			multi: true,
+			ajaxUrl: 'http://localhost:8080/pentaho/ViewAction',
+			data: function(term,page){
+				return {
+					solution: solution,
+					path: path+'/daily_vlmo_statistics_sumary_v2',
+					mode: 'loadDimensions',
+					action: 'loadDimension.xaction',
+					term: term, //search term
+					limit: 10, // page size
+					page: page, // page number
+					mode: 'merchant',
+					network_id: mySearch.getID()[0]
 				};
 			},
 			result: function(data, page){
