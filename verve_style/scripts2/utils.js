@@ -113,18 +113,7 @@ function generateSelect2(options){
 	}
 	function rawData(data,more,isLoadMore){
 		if(page==1){
-			var array=$('#'+options.divID+' input:checkbox:checked');
-			var arrayLabel=[];
-			$.each(array,function(index,item){
-				var label=item.next("label");
-				arrayLabel.push(label);
-			});
 			drawArea.empty();
-			$.each(array,function(index,item){
-				drawArea.append(item);
-				drawArea.append(arrayLabel[index]);
-			});
-
 			if(data.length==0){
 				var row="Don't have results....";
 				drawArea.append(row);
