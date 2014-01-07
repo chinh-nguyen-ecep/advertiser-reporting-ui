@@ -71,6 +71,14 @@
 							</div>
 						 </td>
 					 </tr>	
+					<tr>
+						 <th>Offer:</th>
+						 <td>
+							<input id="dimesion_offer" type="text" style="width: 300px;"/>
+							<div id="offer" style="width: 290px;border: 1px solid gray;overflow: auto;height: 100px;padding: 5px;">
+							</div>
+						 </td>
+					 </tr>	
 			</tbody>
 		 </table>
 		</div>
@@ -183,10 +191,43 @@
 					more=true
 				}
 				return {results: results,more: more}
+			},
+			success: function(){
+				mySearch3.action();
+			},
+			clickEvent: function(id){
+				mySearch3.action();
+			}
+		});    
+		var mySearch3=new generateSelect2({
+			inputID: 'dimesion_offer',
+			divID: 'offer',
+			name: 'offer_ids',
+			multi: true,
+			ajaxUrl: 'http://localhost:8080/pentaho/ViewAction',
+			data: function(term,page){
+				return {
+					solution: solution,
+					path: path+'/daily_vlmo_statistics_sumary_v2',
+					mode: 'loadDimensions',
+					action: 'loadDimension.xaction',
+					term: term, //search term
+					limit: 10, // page size
+					page: page, // page number
+					mode: 'offer',
+					merchant_ids: mySearch2.getID().join(",")
+				};
+			},
+			result: function(data, page){
+				var results=data.data;
+				var more=false;
+				if(results.length==data.limit){
+					more=true
+				}
+				return {results: results,more: more}
 			}
 		});
-	});      
-
+	}); 
     </script>
    </body>
      
