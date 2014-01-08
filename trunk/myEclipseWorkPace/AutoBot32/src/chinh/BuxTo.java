@@ -1,8 +1,9 @@
 package chinh;
 
 
-import org.watij.webspec.dsl.Tag;
 import org.watij.webspec.dsl.WebSpec;
+
+import chinh.gui.MainWindow;
 
 import com.DeathByCaptcha.Captcha;
 
@@ -10,23 +11,34 @@ public class BuxTo {
 	private Captcha myCaptcha;
 	private WebSpec spec;
 	
-	public BuxTo() {
+	public BuxTo(String proxy,int port) {
 		super();
 		// TODO Auto-generated constructor stub
-		myCaptcha=null;
-		spec = new WebSpec().ie();	
-		this.login();
-    	int start=1;
-    	int end=33;
-    	for(int i=start;i<=end;i++){
-    		this.viewAds(i);
-    	}
+		spec=new WebSpec();
+		spec.silent_mode(false);
+		if(proxy!=null || !proxy.equals("")){
+			spec.http_proxy(proxy);
+			spec.http_proxy_port(port);			
+		}
+		spec.show_navigation_bar(false);
+		spec.ie();
+//		spec.hide();
+//		initUI();
+//		login();
 	}
-	private void login(){
+	public void show(){
+		spec.show();
+	}
+	public void hide(){
+		spec.hide();
+	}
+	
+	public boolean login(String userName,String pass){
+		boolean result=false;
 		spec.open("http://bux.to/login.php"); 
 		spec.pauseUntilReady();
-		spec.findWithId("name").set("crossjewelry");
-		spec.findWithId("email").set("adminsanchikaro");
+		spec.findWithId("name").set(userName);
+		spec.findWithId("email").set(pass);
 //		spec.pauseUntilReady();
 //		spec.snapBuxToCapChart("capchar.png");
 //		myCaptcha=CheckCaptchar.getValue("capchar.png");
@@ -34,6 +46,7 @@ public class BuxTo {
 //	    input.set("value",myCaptcha.text.toUpperCase());
 		spec.pauseUntilDone();
 	    System.out.println("Login successful");
+	    return result;
 	}
 	private void viewAds(int adID){
 		try {
@@ -67,13 +80,18 @@ public class BuxTo {
 			spec.pause(5000);			
 		} catch (Exception e) {
 			// TODO: handle exception
+			System.err.println(e.getMessage());
+			spec.pause(2000);
 			viewAds(adID);
 		}
 
 	}
-	public static void main(String[] args) {
-		BuxTo buxTo=new BuxTo();
+	
+	public final void initUI(){
+		MainWindow main=new MainWindow();
 		
-
+	}
+	public static void main(String[] args) {
+		
 	    }
 }

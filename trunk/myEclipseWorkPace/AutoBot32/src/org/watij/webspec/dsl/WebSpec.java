@@ -2,6 +2,11 @@ package org.watij.webspec.dsl;
 
 import com.teamdev.jxbrowser.*;
 import com.teamdev.jxbrowser.events.*;
+import com.teamdev.jxbrowser.proxy.AuthenticationHandler;
+import com.teamdev.jxbrowser.proxy.ProxyConfig;
+import com.teamdev.jxbrowser.proxy.ProxyServer;
+import com.teamdev.jxbrowser.proxy.ProxyServerLogin;
+import com.teamdev.jxbrowser.proxy.ServerType;
 import com.teamdev.jxbrowser.script.ScriptErrorEvent;
 import com.teamdev.jxbrowser.script.ScriptErrorListener;
 import com.teamdev.jxbrowser.security.*;
@@ -45,6 +50,7 @@ public class WebSpec extends Base implements Finder, NavigationListener, Dispose
     private static long count = 0;
     private long lastStatusChange;
     private boolean busy = false;
+    private JFrame jframe;
     boolean done = false;
     public Record record;
     public Find find;
@@ -95,16 +101,26 @@ public class WebSpec extends Base implements Finder, NavigationListener, Dispose
         browser.getServices().setPromptService(spec.record.handler);
 
         if (http_proxy != null) {
-            Xpcom.initialize();
-            ProxyConfiguration proxyConf = Services.getProxyConfiguration();
-            proxyConf.setType(ProxyConfiguration.MANUAL);
-            proxyConf.setHttpHost(http_proxy);
-            proxyConf.setHttpPort(http_proxy_port);
-            proxyConf.setPoxyAuthenticationHandler(ProxyServerType.HTTP, new PoxyAuthenticationHandler() {
-                public ProxyServerAuthInfo authenticationRequired() {
-                    return new ProxyServerAuthInfo(http_proxy_username, http_proxy_password);
-                }
-            });
+//            Xpcom.initialize();
+//            ProxyConfiguration proxyConf = Services.getProxyConfiguration();
+//            proxyConf.setType(ProxyConfiguration.MANUAL);
+//            proxyConf.setHttpHost(http_proxy);
+//            proxyConf.setHttpPort(http_proxy_port);
+//            proxyConf.setPoxyAuthenticationHandler(ProxyServerType.HTTP, new PoxyAuthenticationHandler() {
+//                public ProxyServerAuthInfo authenticationRequired() {
+//                    return new ProxyServerAuthInfo(http_proxy_username, http_proxy_password);
+//                }
+//            });
+        	ProxyConfig proxyConfig=BrowserServices.getInstance().getProxyConfig();
+       	 // Set proxy for HTTP Server type 
+           proxyConfig.setProxy(ServerType.HTTP, new ProxyServer(http_proxy, http_proxy_port)); 
+
+           // Register authentication handler for HTTP Server type if required 
+           proxyConfig.setAuthenticationHandler(ServerType.HTTP, new AuthenticationHandler() { 
+               public ProxyServerLogin authenticationRequired(ServerType type) { 
+                   return new ProxyServerLogin(http_proxy_username, http_proxy_username); 
+               } 
+           }); 
         }
 //        browser.getServices().setWebPolicyDelegate(this);
 //        browser.getServices().getScriptErrorWatcher().addScriptErrorListener(this);
@@ -268,7 +284,10 @@ public class WebSpec extends Base implements Finder, NavigationListener, Dispose
     }
 
     public WebSpec ie() {
-        return initBrowser(BrowserFactory.createBrowser(BrowserType.IE));
+    	BrowserFactory.createBrowser();
+    	browser=BrowserFactory.createBrowser(BrowserType.IE);
+
+        return initBrowser(browser);
     }
 
     public boolean isSafari() {

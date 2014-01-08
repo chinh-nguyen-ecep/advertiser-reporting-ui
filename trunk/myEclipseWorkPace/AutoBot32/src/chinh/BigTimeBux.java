@@ -63,8 +63,12 @@ public class BigTimeBux {
 		spec.open("http://bigtimebux.com/ads.php");	 		
 	}
 	public static void main(String[] args) {
-		BigTimeBux buxTo=new BigTimeBux();
-		
-
-	    }
+		WebSpec spec=new WebSpec();
+		spec.silent_mode(false);
+		spec.http_proxy("219.150.204.30");
+		spec.http_proxy_port(8080);
+		spec.show_navigation_bar(true);
+		spec.ie();
+		spec.open("http://whatsmyip.net/");
+	}
 }
