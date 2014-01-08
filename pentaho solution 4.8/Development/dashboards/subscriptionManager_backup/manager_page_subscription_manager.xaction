@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Manager Page - Subscription Manager</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>Chinh Nguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <actions type="string"> 
+      <sources> 
+        <request>actions</request> 
+      </sources>  
+      <default-value><![CDATA[template]]></default-value> 
+    </actions>  
+    <connection_name type="string"> 
+      <sources> 
+        <request>connection_name</request> 
+      </sources>  
+      <default-value><![CDATA[pentaho-backup]]></default-value> 
+    </connection_name>  
+    <returnResult type="string"> 
+      <sources> 
+        <request>returnResult</request> 
+      </sources>  
+      <default-value/> 
+    </returnResult>  
+    <query_result type="result-set"> 
+      <sources> 
+        <request>query_result</request> 
+      </sources>  
+      <default-value/> 
+    </query_result>  
+    <p_customer_key type="string"> 
+      <sources> 
+        <request>p_customer_key</request> 
+      </sources>  
+      <default-value><![CDATA[0]]></default-value> 
+    </p_customer_key>  
+    <p_sub_key type="string"> 
+      <sources> 
+        <request>p_sub_key</request> 
+      </sources>  
+      <default-value><![CDATA[0]]></default-value> 
+    </p_sub_key> 
+  </inputs>
+
+  <outputs> 
+    <returnResult type="string"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </returnResult> 
+  </outputs>
+
+  <resources/>
+  
+  <actions> 
+    <actions> 
+      <condition><![CDATA[actions=='template']]></condition>  
+      <action-definition> 
+        <component-name>TemplateComponent</component-name>
+        <action-type>Message Template</action-type>
+        <action-outputs> 
+          <output-message type="string" mapping="returnResult"/> 
+        </action-outputs>
+        <component-definition> 
+          <template><![CDATA[<div  id="sm_layout2" class="easyui-layout" style="" data-options="fit:true" >
+        <div data-options="region:'south',split:true,title:'Data sources',collapsible:false" style="height:250px;padding:1px">
+			<table id="sm_dataSources"></table>
+		</div>
+        <div  data-options="region:'west',split:true,title:'Customer',collapsible:false" style="width:250px;padding:0px">
+			<table id="sm_customer"></table>
+        </div>
+        <div data-options="region:'center',title:'Subscriptions'" style="padding:1px">
+			<table id="sm_subscriptions"></table>
+        </div>
+    </div>
+
+<script>
+//Set title of sub page
+$('#manager_page_item_title').html('Subscription Manager');
+
+//Load customer
+var cutomersDataGrid=$('#sm_customer');
+cutomersDataGrid.datagrid({
+			url:rootPath+'&actions=listCustomers',
+			fit: true,
+			columns:[[
+				{field:'customer_key',title:'ID'},
+				{field:'customer_name',title:'Name'}
+				
+			]],
+			//rownumbers:true,
+			singleSelect:true,
+			collapsible:true,
+			fitColumns:true,
+			border: false,
+			fitColumns: true,
+			onSelect: function(rowIndex, rowData){
+				subscriptionLoader(rowData.customer_key);
+			}
+		});
+		
+//function load subscriptions
+var subscriptionLoader=function(customerID){
+	var subDataGrid=$('#sm_subscriptions');
+	subDataGrid.datagrid({
+			url:rootSubPath+'&action=manager_page_subscription_manager.xaction&actions=listSubscriptionsByCustomerID&p_customer_key='+customerID,
+			fit:true,
+			columns:[[
+				{field:'ck',checkbox:true},
+				{field:'subscription_key',title:'Key'},
+				{field:'subscription_name',title:'Name'},
+				{field:'subscription_status',title:'Status'},
+				{field:'frequence',title:'Frequence'},
+				{field:'zip_before_transfer',title:'Zip'},
+				{field:'auto_public',title:'Auto public'}
+			]],
+			//rownumbers:true,
+			singleSelect:true,
+			collapsible:true,
+			fitColumns:true,
+			onSelect: function(rowIndex, rowData){
+				dataSourceLoader(rowData.subscription_key);
+			}
+		});
+}
+
+//add subscription button
+console.log('sdfsdfsf');
+$('#sm_layout2').layout();
+var a=$('#sm_layout2').layout('panel','center');
+a.panel({
+	tools:[
+		{
+			iconCls:'icon-play',
+			handler:function(){
+				publicSubscriptions();
+			}
+		},
+		{
+			iconCls:'icon-add',
+			handler:function(){alert('add')}
+		},{
+			iconCls:'icon-edit',
+			handler:function(){alert('edit')}
+		}
+	]
+});
+
+//function public selected subacription
+var publicSubscriptions=function(){
+	var subDataGrid=$('#sm_subscriptions');
+	var rowsSelected=subDataGrid.datagrid('getChecked');
+	if(rowsSelected.length==0){
+		$.messager.alert('Public subscription to customer','Please select a subscription!',function(r){
+			if (r){
+					alert('ok');
+				}
+			}
+		);
+	}else{		
+		var subscriptionKey=rowsSelected[0].subscription_key;
+		var subscriptionName=rowsSelected[0].subscription_name;
+		var customerName=$('#sm_customer').datagrid('getSelected').customer_name;
+
+            $.ajax({
+                    url: rootSubPath+'&action=manager_page_subscription_manager.xaction&actions=publicSubscription&p_sub_key='+subscriptionKey,
+                    dataType: 'json',
+                    success: function(result){
+                        var value=result[0].fn_spctl_insert_subscription_to_process;
+						if(value>0){
+							$.messager.show({
+								title:'Public subscription',
+								msg:'Publication process ID: '+value,
+								timeout:5000,
+								showType:'fade'			
+							});		
+						}else{
+							$.messager.alert('Public subscription','Has another process has registed or run!');		
+						}	
+                    },
+					error: function( jqXHR, textStatus, errorThrown ){
+						$.messager.progress('close');
+						$.messager.alert('Public subscription','Request error!');				
+					},
+					beforeSend: function(){						
+						$.messager.progress({
+							title: 'Public subscription',
+							msg: 'Public subscription "'+subscriptionName+'" to "'+customerName+'"',
+							interval: 150
+						});						
+					},
+					complete: function(){
+						$.messager.progress('close');
+					}
+                });		
+		
+	}
+}
+//function load data source
+var dataSourceLoader=function(subKey){
+	var dataSourceDataGrid=$('#sm_dataSources');
+	dataSourceDataGrid.datagrid({
+			url:rootSubPath+'&action=manager_page_subscription_manager.xaction&actions=listDataSourceBySubKey&p_sub_key='+subKey,
+			fit:true,
+			columns:[[
+				{field:'df_config_id',title:'Key'},
+				{field:'df_config_name',title:'Name'},
+				{field:'dt_desc',title:'Description',width: 100},	
+				{field:'df_config_format',title:'Format'},
+				{field:'df_source_file',title:'Data source file',width:100},
+				{field:'table_name',title:'Data source table'},
+				{field:'articel_status',title:'Article Status'},
+				{field:'df_status',title:'Data source status'}
+				
+			]],
+			//rownumbers:true,
+			singleSelect:true,
+			collapsible:true,
+			//fitColumns:true,
+			onSelect: function(rowIndex, rowData){
+				
+			}
+		});
+}
+</script>]]></template> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='listSubscriptionsByCustomerID']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connection_name"/>  
+          <p_customer_key type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
+        </action-outputs>
+        <component-definition> 
+          <query><![CDATA[SELECT subscription_key, subscription_name, subscription_desc, subscription_status, 
+       subscription_attribute, frequence, zip_before_transfer, start_time, 
+       delay_time, day_of_week, date_of_month, auto_public
+FROM control.spctl_pub_customer_subscription
+WHERE customer_key={p_customer_key}]]></query>  
+          <live><![CDATA[false]]></live> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='listDataSourceBySubKey']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connection_name"/>  
+          <p_sub_key type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
+        </action-outputs>
+        <component-definition> 
+          <query><![CDATA[SELECT d.table_name,
+d.table_type,
+a.df_config_name,
+a.df_status,
+a.df_source_file,
+a.df_config_id,
+b.articel_status,
+a.dt_desc,
+a.df_config_format
+FROM control.spctl_data_file_config a,control.spctl_pub_customer_article b,control.spctl_pub_customer_subscription c,control.spctl_data_source_tables d
+WHERE a.df_config_id=b.df_config_id 
+AND b.subscription_key=c.subscription_key 
+AND c.subscription_key={p_sub_key}
+AND d.data_source_table_id=a.data_source_table_id]]></query>  
+          <live><![CDATA[false]]></live> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='publicSubscription']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connection_name"/>  
+          <p_sub_key type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
+        </action-outputs>
+        <component-definition> 
+          <query><![CDATA[SELECT * FROM control.fn_spctl_insert_subscription_to_process({p_sub_key},'',true);]]></query>  
+          <live><![CDATA[false]]></live> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>Process data grid</action-type>
+      <action-inputs> 
+        <returnResult type="string"/>  
+        <query_result type="result-set"/>  
+        <actions type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <returnResult type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var result_set=query_result;
+var rowCount=query_result.getRowCount();
+var meta = result_set.getMetaData();      // Returns an IPentahoMetaData object
+var colCount = meta.getColumnCount();
+var colHeaders = meta.getColumnHeaders(); //getColumnHeaders() returns object[][]
+var rowHeaders = meta.getRowHeaders(); 
+
+if(actions=='template'){
+	returnResult=returnResult;
+}else{
+	returnResult='[';
+	//process data item
+	for(var i=0;i<result_set.getRowCount();i++){
+		var item='';
+		if(i>0){
+			item+=',';
+		}
+		item+='{';
+			for(var j=0;j<result_set.getColumnCount();j++){ 		
+				var value=result_set.getValueAt(i,j);
+				var columnValue=colHeaders[0][j];
+				if(j>0){
+					item+=',';
+				}
+				item+='"'+columnValue+'":"'+value+'"';
+			}
+		item+='}';	
+
+	returnResult+=item;
+	}
+	//end
+
+	returnResult+=']';
+}]]></script> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>
