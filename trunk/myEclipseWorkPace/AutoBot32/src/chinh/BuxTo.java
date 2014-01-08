@@ -16,15 +16,24 @@ public class BuxTo {
 		// TODO Auto-generated constructor stub
 		spec=new WebSpec();
 		spec.silent_mode(false);
-		if(proxy!=null || !proxy.equals("")){
+		if(proxy==null ){
+			
+		}else if(proxy.equals("")){
+			
+		}else{
 			spec.http_proxy(proxy);
-			spec.http_proxy_port(port);			
+			spec.http_proxy_port(port);
 		}
-		spec.show_navigation_bar(false);
+		spec.show_navigation_bar(true);
 		spec.ie();
 //		spec.hide();
 //		initUI();
-//		login();
+		login("crossjewelry","adminsanchikaro");
+		int start=1;
+		int end=33;
+		for(int i=start;i<=end;i++){
+			viewAds(i);
+		}
 	}
 	public void show(){
 		spec.show();
@@ -92,6 +101,6 @@ public class BuxTo {
 		
 	}
 	public static void main(String[] args) {
-		
+			BuxTo buxTo=new BuxTo("", 0);
 	    }
 }
