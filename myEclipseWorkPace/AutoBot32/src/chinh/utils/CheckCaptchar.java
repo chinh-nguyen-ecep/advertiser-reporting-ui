@@ -1,4 +1,4 @@
-package chinh;
+package chinh.utils;
 
 import java.io.IOException;
 
