@@ -1,6 +1,20 @@
 package chinh.utils;
 
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import org.watij.webspec.dsl.Tag;
+import org.watij.webspec.dsl.WebSpec;
 
 import com.DeathByCaptcha.AccessDeniedException;
 import com.DeathByCaptcha.Captcha;
@@ -54,5 +68,37 @@ public class CheckCaptchar {
 				e.printStackTrace();
 			}
 		return result;
+	}
+	public static void getCaptchaManual(String image,final WebSpec spec){
+		final JFrame frame=new JFrame();
+		JButton enterCaptcha=new JButton("Enter");
+		ImageIcon icon = new ImageIcon(image);
+		JLabel label = new JLabel(icon);
+		final JTextField textField=new JTextField(10);
+		JPanel mainJPanel=new JPanel();
+		mainJPanel.setLayout(new FlowLayout());
+		mainJPanel.add(label);
+		mainJPanel.add(textField);
+		mainJPanel.add(enterCaptcha);
+		frame.getContentPane().add(BorderLayout.CENTER,mainJPanel);
+		enterCaptcha.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				Tag input=spec.find("input").with("name", "verify");
+			    input.set("value",textField.getText());
+				frame.setVisible(false);
+				spec.setDone(true);
+			}
+		});
+		frame.pack();
+		frame.setResizable(false);
+		frame.setVisible(true);
+		spec.pauseUntilDone();
+	}
+	public static void main(String[] args) {
+		WebSpec spec=new WebSpec().ie();
+		CheckCaptchar.getCaptchaManual("capchar.png", spec);
 	}
 }

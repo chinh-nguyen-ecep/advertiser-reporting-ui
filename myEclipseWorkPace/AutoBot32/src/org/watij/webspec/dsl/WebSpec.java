@@ -55,7 +55,11 @@ public class WebSpec extends Base implements Finder, NavigationListener, Dispose
     public Record record;
     public Find find;
 
-    private ArrayList<Browser> browsers;
+    public void setDone(boolean done) {
+		this.done = done;
+	}
+
+	private ArrayList<Browser> browsers;
 
     public WebSpec() {
         super(null, null, default_timeout, null);
