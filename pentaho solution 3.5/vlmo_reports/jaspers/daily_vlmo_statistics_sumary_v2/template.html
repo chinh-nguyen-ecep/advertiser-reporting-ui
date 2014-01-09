@@ -2,7 +2,7 @@
    <head>
 	<!-- do not include a <meta> tag -->
       <link rel="stylesheet" type="text/css" href="/pentaho-style/active/default.css"></link>
-      <title>Daily Delivery by Publisher v2.4</title>
+      <title id="exportFileName">Daily VLMO Static Summary V2</title>
 	  <link  href="/verve_style/css/tableInForm.css" rel="stylesheet" type="text/css" media="screen" />
 	  <link  href="/verve_style/css/charttool.css" rel="stylesheet" type="text/css" media="screen" />
 	  <link rel="stylesheet" type="text/css" href="/verve_style/scripts2/easyui/themes/metro/easyui.css" />
@@ -108,6 +108,9 @@
 
 	
 	<script> 
+	var mySearch;
+	var mySearch2;
+	var mySearch3;
 	$( document ).ready(function() {
 		console.log(  $().jquery );
 		$('option[value=]').remove();
@@ -131,12 +134,12 @@
 			maxDate: $('#v_max_date').val()
 		});
 		
-		var mySearch=new generateSelect2({
+		mySearch=new generateSelect2({
 			inputID: 'dimesion_fillter',
 			divID: 'dimesion',
-			name: 'metro_ids',
+			name: 'p_agency_id',
 			multi: false,
-			ajaxUrl: 'http://localhost:8080/pentaho/ViewAction',
+			ajaxUrl: '/pentaho/ViewAction',
 			data: function(term,page){
 				return {
 					solution: solution,
@@ -165,12 +168,13 @@
 			}
 		});
 		mySearch.action();
-		var mySearch2=new generateSelect2({
+		mySearch2=new generateSelect2({
 			inputID: 'dimesion_merchant',
 			divID: 'merchant',
-			name: 'merchant_ids',
+			name: 'merchant_id',
 			multi: true,
-			ajaxUrl: 'http://localhost:8080/pentaho/ViewAction',
+			selectAll: true,
+			ajaxUrl: '/pentaho/ViewAction',
 			data: function(term,page){
 				return {
 					solution: solution,
@@ -199,12 +203,13 @@
 				mySearch3.action();
 			}
 		});    
-		var mySearch3=new generateSelect2({
+		mySearch3=new generateSelect2({
 			inputID: 'dimesion_offer',
 			divID: 'offer',
-			name: 'offer_ids',
+			name: 'offer_id',
 			multi: true,
-			ajaxUrl: 'http://localhost:8080/pentaho/ViewAction',
+			selectAll: true,
+			ajaxUrl: '/pentaho/ViewAction',
 			data: function(term,page){
 				return {
 					solution: solution,
@@ -215,7 +220,8 @@
 					limit: 10, // page size
 					page: page, // page number
 					mode: 'offer',
-					merchant_ids: mySearch2.getID().join(",")
+					merchant_ids: mySearch2.getID().join(","),
+					network_id: mySearch.getID()[0]
 				};
 			},
 			result: function(data, page){
@@ -228,6 +234,29 @@
 			}
 		});
 	}); 
+	function validation(){
+		var agency_id=mySearch.getID().join();
+		var merchant_ids=mySearch2.getID().join(",");
+		var offer_ids=mySearch3.getID().join(",");
+		var start_date=$('#p_start_date').val();
+		var end_date=$('#p_end_date').val();
+		if(start_date==''||end_date==''||agency_id==''||merchant_ids==''||offer_ids==''){
+			return false;
+		}
+		
+		var urlData={			
+			p_agency_id: agency_id,
+			p_merchant_ids: merchant_ids,
+			p_offer_ids: offer_ids			
+		}
+		//set title page
+		$('#exportFileName').html('Daily VLMO Static Summary V2 '+start_date+' '+end_date);
+		urlData=$.extend({},$( "#parameter-form" ).serializeObject(),urlData); 
+		var url='/pentaho/ViewAction?'+$.param(urlData);
+		$('#mydiv').dialog('close');
+		$('#mainFrame').attr('src',url);
+		return true;
+	}
     </script>
    </body>
      

@@ -60,12 +60,12 @@
       </sources>  
       <default-value><![CDATA[-100]]></default-value> 
     </network_id>  
-    <merchant_ids type="string">
-      <sources>
-        <request>merchant_ids</request>
-      </sources>
-      <default-value><![CDATA[0]]></default-value>
-    </merchant_ids>
+    <merchant_ids type="string"> 
+      <sources> 
+        <request>merchant_ids</request> 
+      </sources>  
+      <default-value><![CDATA[0]]></default-value> 
+    </merchant_ids> 
   </inputs>
 
   <outputs> 
@@ -95,11 +95,12 @@
         </action-outputs>
         <component-definition> 
           <live><![CDATA[false]]></live>  
-          <query><![CDATA[SELECT network_id,title as name 
+          <query><![CDATA[SELECT network_id,title||' ('||network_id||')' as name 
 FROM vlmo_dw.vlmo_dim_networks
-WHERE dt_expire='9999-12-31' AND lower(title) LIKE lower('%{term}%') 
+WHERE dt_expire='9999-12-31' AND lower(title||' ('||network_id||')') LIKE lower('%{term}%') 
 GROUP BY network_id,title
-ORDER BY title LIMIT {limit} OFFSET ({page}-1)*10 ;]]></query> 
+ORDER BY network_id
+LIMIT {limit} OFFSET ({page}-1)*10 ;]]></query> 
         </component-definition> 
       </action-definition>
  
@@ -121,10 +122,10 @@ ORDER BY title LIMIT {limit} OFFSET ({page}-1)*10 ;]]></query>
           <query-result type="result-set" mapping="query_result"/> 
         </action-outputs>
         <component-definition> 
-          <query><![CDATA[SELECT merchant_id,name
+          <query><![CDATA[SELECT merchant_id,name||' ('||merchant_id||')' as name
 FROM vlmo_dw.vlmo_dim_merchants
 WHERE dt_expire='9999-12-31' 
-AND lower(name) LIKE lower('%{term}%') 
+AND lower(name||' ('||merchant_id||')') LIKE lower('%{term}%') 
 AND network_id={network_id}
 GROUP BY merchant_id,name
 ORDER BY name LIMIT {limit} OFFSET ({page}-1)*10 ;]]></query>  
@@ -134,35 +135,37 @@ ORDER BY name LIMIT {limit} OFFSET ({page}-1)*10 ;]]></query>
  
     </actions>
   
-    <actions>
-      <condition><![CDATA[mode=='offer']]></condition>
-      <action-definition>
+    <actions> 
+      <condition><![CDATA[mode=='offer']]></condition>  
+      <action-definition> 
         <component-name>SQLLookupRule</component-name>
         <action-type>Relational</action-type>
-        <action-inputs>
+        <action-inputs> 
+          <jndi type="string" mapping="ConnectionName"/>  
           <limit type="string"/>
+          <network_id type="string"/>
           <page type="string"/>
           <term type="string"/>
-          <jndi type="string" mapping="ConnectionName"/>
           <merchant_ids type="string"/>
         </action-inputs>
-        <action-outputs>
-          <query-result type="result-set" mapping="query_result"/>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
         </action-outputs>
-        <component-definition>
-          <query><![CDATA[SELECT offer_id,title
+        <component-definition> 
+          <live><![CDATA[true]]></live>  
+          <query><![CDATA[SELECT offer_id,title||' ('||offer_id||')' as titlte
 FROM vlmo_dw.vlmo_dim_offers
 WHERE dt_expire='9999-12-31' 
-AND lower(title) LIKE lower('%{term}%') 
-AND merchant_id IN ({merchant_ids})
+AND lower(title||' ('||offer_id||')') LIKE lower('%{term}%') 
+AND (merchant_id IN ({merchant_ids}) OR '0'='{merchant_ids}')
+AND merchant_id IN (SELECT DISTINCT merchant_id FROM vlmo_dw.vlmo_dim_merchants WHERE dt_expire='9999-12-31'  AND network_id={network_id})
 GROUP BY offer_id,title
 ORDER BY title LIMIT {limit} OFFSET ({page}-1)*10 ;]]></query>
-          <live><![CDATA[true]]></live>
-        </component-definition>
+        </component-definition> 
       </action-definition>
-
+ 
     </actions>
-
+  
     <action-definition> 
       <component-name>JavascriptRule</component-name>
       <action-type>convert data set to jsoin</action-type>
