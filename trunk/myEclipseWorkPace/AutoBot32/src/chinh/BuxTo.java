@@ -1,71 +1,108 @@
 package chinh;
 
 
-import org.watij.webspec.dsl.Tag;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Random;
+
+
 import org.watij.webspec.dsl.WebSpec;
-
-import chinh.gui.MainWindow;
 import chinh.utils.CheckCaptchar;
-
-import com.DeathByCaptcha.Captcha;
-import com.jniwrapper.win32.bu;
+import chinh.utils.ConfigLoader;
+//import com.DeathByCaptcha.Captcha;
 
 public class BuxTo {
-	private Captcha myCaptcha;
+//	private Captcha myCaptcha;
 	private WebSpec spec;
-	private int startAds=1;
-	private int maxAds=1;
 	private boolean loginSuccess=false;
-	public BuxTo(String proxy,int port) {
+	private String userName="";
+	private String password="";
+	private String proxy="";
+	private int port=0;
+	
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public void setProxy(String proxy) {
+		this.proxy = proxy;
+	}
+	public void setPort(int port) {
+		this.port = port;
+	}
+	public BuxTo() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+
+	public void initConfig() throws FileNotFoundException, IOException{
 		spec=new WebSpec();
-		spec.silent_mode(false);
-		if(proxy==null ){
-			
-		}else if(proxy.equals("")){
-			
-		}else{
+		if(!proxy.equals("")){
 			spec.http_proxy(proxy);
-			spec.http_proxy_port(port);
+			spec.http_proxy_port(port);	
 		}
-		spec.show_navigation_bar(true);
-		spec.ie();
+		saveConfig();
+		spec.show_navigation_bar(false);
+		spec.ie();		
+	}
+	private void saveConfig() throws FileNotFoundException, IOException{
+		ConfigLoader.save("username", userName);
+		ConfigLoader.save("pass", password);
+		ConfigLoader.save("proxy", proxy);
+		ConfigLoader.save("port", ""+port);
+		
+	}
+	public void login() throws FileNotFoundException, IOException{
+		initConfig();
 //		spec.hide();
-//		initUI();
-		login("chinhnguyen","adminsanchikaro");
-//		int start=1;
-//		int end=32;
-//		for(int i=start;i<=end;i++){
-//			viewAds(i);
-//		}
-	}
-	public void show(){
-		spec.show();
-	}
-	public void hide(){
-		spec.hide();
-	}
-	
-	public void login(String userName,String pass){
 		spec.open("http://bux.to/login.php"); 
 		spec.pauseUntilReady();
-		spec.findWithId("name").set(userName);
-		spec.findWithId("email").set(pass);
+//		spec.findWithId("name").set("disabled","true");
+//		spec.findWithId("email").set("disabled","true");
+		spec.findWithId("name").set("value",userName);
+		spec.findWithId("email").set("value",password);
 		spec.snapBuxToCapChart("capchar.png");
-		CheckCaptchar.getCaptchaManual("capchar.png",spec);
+		CheckCaptchar captchartChecker=new CheckCaptchar(spec);
+		captchartChecker.getCaptchaManual("capchar.png");
 		spec.findWithId("send").click(true);
 		String urlAfterLogin=spec.url();
 		if(urlAfterLogin.equals("http://bux.to/login.php")){
 			System.err.println("Login Failed");
-			login(userName,pass);			
+			login();			
 		}else{
 			loginSuccess=true;
 			System.out.println("Login successful");
-			logout();			
+			spec.show();
+			viewAds();
+			spec.open("http://bux.to/ads.php");
+//			logout();			
 		}
 	}
-	private void viewAds(int adID){
+	private void viewAds(){
+		spec.open("http://bux.to/ads.php");
+		spec.eval("alert(jQuery.fn.jquery)");
+		int start=1;
+		int end=1;
+		try {
+			start=Integer.parseInt(spec.execute("$('s').length"))+1;
+			end=Integer.parseInt(spec.execute("$('a[href^=cks.php]').length"));
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.err.println(e.getMessage());
+			spec.pause(2000);
+			viewAds();
+		}
+		System.out.println("View ads from : "+start+" to "+end);
+		for(int i=start;i<=end;i++){
+			viewAd(i);
+		}
+	}
+	private void viewAd(int adID){
 		try {
 		    spec.open("http://bux.to/ads.php");
 		    spec.pauseUntilReady();
@@ -93,13 +130,17 @@ public class BuxTo {
 					break;
 				}
 			}
-			System.out.println(adID+". Ads loaded");
-			spec.pause(5000);			
+			
+			Random rand = new Random(); 
+			int pickedNumber = rand.nextInt(30000) + 5000; 
+			System.out.println(adID+" - Ads loaded "+pickedNumber);
+			spec.pause(pickedNumber);			
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.err.println(e.getMessage());
 			spec.pause(2000);
-			viewAds(adID);
+			viewAd(adID);
 		}
 
 	}
@@ -112,12 +153,36 @@ public class BuxTo {
 		spec.pauseUntilReady();
 		System.exit(0);
 	}
-	public final void initUI(){
-		MainWindow main=new MainWindow();
-		
-	}
-	public static void main(String[] args) {
-			BuxTo buxTo=new BuxTo("", 0);
-			buxTo.login("chinhnguyen", "adminsanchikaro");
+	public static void main(String[] args) throws IOException {
+			BuxTo buxTo=new BuxTo();
+			String proxy=ConfigLoader.get("proxy");
+			String proxyPort=ConfigLoader.get("port");
+			int port=8080;
+			if(proxyPort.equals("")){
+			}else{
+				try
+				 {
+				      NumberFormat.getInstance().parse(proxyPort);
+				      port=Integer.parseInt(proxyPort);
+				 }
+				 catch(ParseException e)
+				 {
+				     //Not a number.
+				 }
+			}
+				buxTo.setUserName(ConfigLoader.get("username"));
+				buxTo.setPassword(ConfigLoader.get("pass"));
+				buxTo.setProxy(proxy);
+				buxTo.setPort(port);
+				try {
+					buxTo.saveConfig();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				buxTo.login();
 	    }
 }

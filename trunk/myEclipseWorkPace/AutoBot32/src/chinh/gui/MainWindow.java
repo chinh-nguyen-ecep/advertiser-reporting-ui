@@ -1,13 +1,14 @@
 package chinh.gui;
 
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.NumberFormat;
+import java.text.ParseException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -24,13 +26,19 @@ import javax.swing.SpringLayout;
 import chinh.BuxTo;
 import chinh.utils.ConfigLoader;
 
-public class MainWindow extends JFrame {
-	private BuxTo buxTo;
+public class MainWindow{
+	private JPanel messagePanel = new JPanel();
+	private JTextField usernameTxt = new JTextField(25);
+	private JTextField proxyTxt = new JTextField(25);
+	private JTextField proxyportTxt = new JTextField(25);
+	private JPasswordField passwordTxt = new JPasswordField(25);  
+	private BuxTo buxTo=new BuxTo();
 	public MainWindow() throws HeadlessException {
 		super();
+		JFrame mainFrame=new JFrame("Autobox");
 		// TODO Auto-generated constructor stub
-		setTitle("Bux.to autobot");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainFrame.setTitle("Bux.to autobot");
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JMenuBar menubar = new JMenuBar();
 		ImageIcon icon = new ImageIcon(getClass().getResource("").getPath()+"exit.png");
@@ -64,38 +72,48 @@ public class MainWindow extends JFrame {
 		});
         help.add(aboutMenuItem);
         menubar.add(help);
-        setJMenuBar(menubar);
+        mainFrame.setJMenuBar(menubar);
         //end menubar
         
         //Login pannel
         JPanel mainPanel = new JPanel();  
         
-        JTextField usernameTxt = new JTextField(25);  
-        final JTextField proxyTxt = new JTextField(25);     
-        final JTextField proxyportTxt = new JTextField(25);     
-        JPasswordField passwordTxt = new JPasswordField(25);  
         JLabel usernameLbl = new JLabel("Username: ");  
         JLabel passwordLbl = new JLabel("Password: ");  
         JLabel proxyLbl = new JLabel("Proxy: ");  
         JLabel portLbl = new JLabel("Port: ");
         JButton loginButton = new JButton("Start bot");  
         loginButton.addActionListener(new ActionListener() {
-			
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				String proxy=proxyTxt.getText();
 				String proxyPort=proxyportTxt.getText();
-				int port=0;
-				if(!proxyPort.equals("")){
-					port=Integer.parseInt(proxyPort);
-				}
-				if(buxTo==null){
-					buxTo=new BuxTo(proxy,port);
+				int port=8080;
+				if(proxyPort.equals("")){
 				}else{
-					buxTo.show();
+					try
+					 {
+					      NumberFormat.getInstance().parse(proxyPort);
+					      port=Integer.parseInt(proxyPort);
+					 }
+					 catch(ParseException e)
+					 {
+					     //Not a number.
+					 }
 				}
-				
+					buxTo.setUserName(usernameTxt.getText());
+					buxTo.setPassword(passwordTxt.getText());
+					buxTo.setProxy(proxy);
+					buxTo.setPort(port);
+					try {
+						buxTo.login();
+					} catch (FileNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 			}
 		});  
         mainPanel.setLayout(new SpringLayout());   
@@ -111,13 +129,9 @@ public class MainWindow extends JFrame {
         //set value
         try {
 			usernameTxt.setText(ConfigLoader.get("username"));
-			usernameTxt.disable();
 			passwordTxt.setText(ConfigLoader.get("pass"));
-			passwordTxt.disable();
 			proxyTxt.setText(ConfigLoader.get("proxy"));
-			proxyTxt.disable();
 			proxyportTxt.setText(ConfigLoader.get("port"));
-			proxyportTxt.disable();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -125,16 +139,26 @@ public class MainWindow extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        getContentPane().add(BorderLayout.CENTER,mainPanel);
-        getContentPane().add(BorderLayout.SOUTH,loginButton);
+		mainFrame.getContentPane().add(BorderLayout.CENTER,mainPanel);
+		mainFrame.getContentPane().add(BorderLayout.SOUTH,loginButton);
         
         SpringUtilities.makeCompactGrid(mainPanel,4,2,6,6,6,6);
-        pack();
-        setResizable(false);
-        setLocationRelativeTo(null);
-		setVisible(true);
+        mainFrame.pack();
+        mainFrame.setResizable(false);
+        mainFrame.setLocationRelativeTo(null);
+        mainFrame.setVisible(true);
 	}
-	public static void main(String[] args) {
-		MainWindow a=new MainWindow();
+	public void showMessage(String type,String message){
+		if(type.equals("Warning")){
+			JOptionPane.showMessageDialog(messagePanel, message,"Warning", JOptionPane.WARNING_MESSAGE);
+		}else if(type.equals("Error")){
+			 JOptionPane.showMessageDialog(messagePanel, "Could not open file","Error", JOptionPane.ERROR_MESSAGE);
+		}else if(type.equals("Information")){
+			JOptionPane.showMessageDialog(messagePanel, "Download completed","Question", JOptionPane.INFORMATION_MESSAGE);
+		}
+	}
+	public static void main(String[] args) {	
+		MainWindow mainWindow=new MainWindow();
+		
 	}
 }

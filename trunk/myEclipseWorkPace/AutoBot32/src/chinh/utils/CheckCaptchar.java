@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,6 +24,14 @@ import com.DeathByCaptcha.Exception;
 import com.DeathByCaptcha.SocketClient;
 
 public class CheckCaptchar {
+	private JFrame captchaFrame;
+	private WebSpec spec;
+	private JTextField textField;
+	
+	public CheckCaptchar(WebSpec spec) {
+		super();
+		this.spec = spec;
+	}
 	public static void report(Captcha a){
 		Client client = (Client)new SocketClient("chinhbot", "mylove230988");
 		try {
@@ -69,36 +78,50 @@ public class CheckCaptchar {
 			}
 		return result;
 	}
-	public static void getCaptchaManual(String image,final WebSpec spec){
-		final JFrame frame=new JFrame();
+	public void getCaptchaManual(String image){
+		captchaFrame=new JFrame("Enter Captcha");
 		JButton enterCaptcha=new JButton("Enter");
+		JButton exit=new JButton("Exit");
 		ImageIcon icon = new ImageIcon(image);
 		JLabel label = new JLabel(icon);
-		final JTextField textField=new JTextField(10);
+		textField=new JTextField(10);
 		JPanel mainJPanel=new JPanel();
 		mainJPanel.setLayout(new FlowLayout());
 		mainJPanel.add(label);
 		mainJPanel.add(textField);
 		mainJPanel.add(enterCaptcha);
-		frame.getContentPane().add(BorderLayout.CENTER,mainJPanel);
-		enterCaptcha.addActionListener(new ActionListener() {
+		mainJPanel.add(exit);
+		exit.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				Tag input=spec.find("input").with("name", "verify");
-			    input.set("value",textField.getText());
-				frame.setVisible(false);
-				spec.setDone(true);
+				System.exit(0);
 			}
 		});
-		frame.pack();
-		frame.setResizable(false);
-		frame.setVisible(true);
+		captchaFrame.getContentPane().add(BorderLayout.CENTER,mainJPanel);
+        AbstractAction enterKey = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	Tag input=spec.find("input").with("name", "verify");
+			    input.set("value",textField.getText());
+				captchaFrame.setVisible(false);
+				spec.setDone(true);
+            }
+        };
+		enterCaptcha.addActionListener(enterKey);
+		enterCaptcha.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW).put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ENTER,0), "ENTER_pressed");
+		enterCaptcha.getActionMap().put("ENTER_pressed", enterKey);
+		captchaFrame.pack();
+		captchaFrame.setResizable(false);
+		captchaFrame.setLocationRelativeTo(null);
+		captchaFrame.setVisible(true);
 		spec.pauseUntilDone();
 	}
 	public static void main(String[] args) {
 		WebSpec spec=new WebSpec().ie();
-		CheckCaptchar.getCaptchaManual("capchar.png", spec);
+		spec.open("google.com");
+		CheckCaptchar checkCaptchar=new CheckCaptchar(spec);
+		checkCaptchar.getCaptchaManual("capchar.png");
 	}
 }
