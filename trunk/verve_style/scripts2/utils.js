@@ -34,7 +34,21 @@ function gup( name )
   else
     return results[1];
 }				
-		
+$.fn.serializeObject = function() {
+	var o = {};
+	var a = this.serializeArray();
+	$.each(a, function() {
+		if (o[this.name]) {
+			if (!o[this.name].push) {
+				o[this.name] = [o[this.name]];
+			}
+			o[this.name].push(this.value || '');
+		} else {
+			o[this.name] = this.value || '';
+		}
+	});
+	return o;
+};		
 function getDataTest(page,temp,lm){
 	var result=[];
 	for(var i=0;i < 10;i++){
@@ -53,6 +67,7 @@ function generateSelect2(options){
 		name: 'name',
 		ajaxUrl: '',
 		multi: true,
+		selectAll: false,
 		data: function(term, page){
 			return {
                 q: term, //search term
@@ -118,6 +133,11 @@ function generateSelect2(options){
 				var row="Don't have results....";
 				drawArea.append(row);
 			}
+			
+			if(options.selectAll){
+				var row=[0,'All'];
+				data.unshift(row);
+			}
 		}
 		$.each(data,function(index,temp){
 			var id=temp[0];
@@ -134,6 +154,25 @@ function generateSelect2(options){
 			}
 			drawArea.append(row);
 		});
+		//check all event
+		if(options.selectAll){
+			var allCheckbox=$('#'+options.divID+' input:not(:button)').first();
+			$('#'+options.divID+' input:not(:button)').change(function(){				
+				var isChecked=$(this).is(':checked');
+				if(isChecked){
+					allCheckbox.prop('checked',false);
+				}
+				
+			});
+			allCheckbox.change(function(){
+				var isChecked=$(this).is(':checked');
+				console.log(isChecked);
+				if(!isChecked){
+					$('#'+options.divID+' input:not(:button)').prop('checked',false);
+					allCheckbox.prop('checked',true);
+				}
+			});
+		}
 		if(!options.multi){
 			$('#'+options.divID+' input:radio').checkbox({cls:'jquery-safari-checkbox',empty: '/verve_style/scripts2/checkbox/empty.png'});
 			$('#'+options.divID+' input:radio').change(function(event){
@@ -149,6 +188,7 @@ function generateSelect2(options){
 		}
 
 		addMoreButton(more);
+
 		
 	}
 	
