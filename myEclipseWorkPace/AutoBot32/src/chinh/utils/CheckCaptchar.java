@@ -115,6 +115,7 @@ public class CheckCaptchar {
 		captchaFrame.pack();
 		captchaFrame.setResizable(false);
 		captchaFrame.setLocationRelativeTo(null);
+		captchaFrame.repaint();
 		captchaFrame.setVisible(true);
 		spec.pauseUntilDone();
 	}

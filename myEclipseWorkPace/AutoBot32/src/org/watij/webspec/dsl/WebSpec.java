@@ -11,6 +11,7 @@ import com.teamdev.jxbrowser.script.ScriptErrorEvent;
 import com.teamdev.jxbrowser.script.ScriptErrorListener;
 import com.teamdev.jxbrowser.security.*;
 import com.teamdev.xpcom.*;
+
 import org.watij.webspec.dsl.cookie.Cookie;
 
 import java.awt.event.ActionEvent;
@@ -18,6 +19,7 @@ import java.awt.event.ActionListener;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -261,6 +263,7 @@ public class WebSpec extends Base implements Finder, NavigationListener, Dispose
         addNavigationBarIfNeeded(frame,this);
         frame.setSize(window_width, window_height);
         frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(!silent_mode);
         browser.addDisposeListener(new DisposeListener() {
             public void browserDisposed(DisposeEvent event) {
