@@ -133,7 +133,6 @@ function generateSelect2(options){
 				var row="Don't have results....";
 				drawArea.append(row);
 			}
-			
 			if(options.selectAll){
 				var row=[0,'All'];
 				data.unshift(row);
@@ -157,19 +156,26 @@ function generateSelect2(options){
 		//check all event
 		if(options.selectAll){
 			var allCheckbox=$('#'+options.divID+' input:not(:button)').first();
-			$('#'+options.divID+' input:not(:button)').change(function(){				
-				var isChecked=$(this).is(':checked');
+			var isChecked=allCheckbox.is(':checked');
+				console.log(isChecked);
 				if(isChecked){
-					allCheckbox.prop('checked',false);
+					$('#'+options.divID+' input:not(:button)').prop('checked',false);
+					$('#'+options.divID+' input:not(:button)').prop('disabled',true);
+					allCheckbox.prop('checked',true);
+					allCheckbox.prop('disabled',false);					
+				}else{
+					$('#'+options.divID+' input:not(:button)').prop('disabled',false);
 				}
-				
-			});
 			allCheckbox.change(function(){
 				var isChecked=$(this).is(':checked');
 				console.log(isChecked);
-				if(!isChecked){
+				if(isChecked){
 					$('#'+options.divID+' input:not(:button)').prop('checked',false);
+					$('#'+options.divID+' input:not(:button)').prop('disabled',true);
 					allCheckbox.prop('checked',true);
+					allCheckbox.prop('disabled',false);					
+				}else{
+					$('#'+options.divID+' input:not(:button)').prop('disabled',false);
 				}
 			});
 		}
