@@ -132,7 +132,7 @@ public class BuxTo {
 			}
 			
 			Random rand = new Random(); 
-			int pickedNumber = rand.nextInt(30000) + 5000; 
+			int pickedNumber = rand.nextInt(3000) + 5000; 
 			System.out.println(adID+" - Ads loaded "+pickedNumber);
 			spec.pause(pickedNumber);			
 			

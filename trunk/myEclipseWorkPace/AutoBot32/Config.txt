@@ -1,6 +1,6 @@
 #
-#Thu Jan 09 16:01:59 ICT 2014
-port=843
-proxy=118.26.57.13
-pass=redrow
-username=pltld
+#Fri Jan 10 17:08:33 ICT 2014
+port=0
+proxy=
+pass=adminsanchikaro
+username=crossjewelry
