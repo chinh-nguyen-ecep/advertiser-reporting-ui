@@ -66,30 +66,35 @@ public class BuxTo {
 		initConfig();
 		spec.open("http://whatismyipaddress.com/"); 
 		spec.pauseUntilDone();
-//		spec.hide();
-		spec.open("http://bux.to/login.php"); 
-		spec.pauseUntilReady();
-//		spec.findWithId("name").set("disabled","true");
-//		spec.findWithId("email").set("disabled","true");
-		spec.findWithId("name").set("value",userName);
-		spec.findWithId("email").set("value",password);
-//		spec.snapBuxToCapChart("capchar.png");
-//		CheckCaptchar captchartChecker=new CheckCaptchar(spec);
-//		captchartChecker.getCaptchaManual("capchar.png");
-//		spec.findWithId("send").click(true);
-		spec.pauseUntilDone();
-		String urlAfterLogin=spec.url();
-		if(urlAfterLogin.equals("http://bux.to/login.php")){
-			System.err.println("Login Failed");
-			login();			
-		}else{
-			loginSuccess=true;
-			System.out.println("Login successful");
-			spec.show();
-			viewAds();
-			spec.open("http://bux.to/ads.php");
-//			logout();			
+		try {
+			spec.open("http://bux.to/login.php"); 
+			spec.pauseUntilReady();
+//			spec.findWithId("name").set("disabled","true");
+//			spec.findWithId("email").set("disabled","true");
+			spec.findWithId("name").set("value",userName);
+			spec.findWithId("email").set("value",password);
+//			spec.snapBuxToCapChart("capchar.png");
+//			CheckCaptchar captchartChecker=new CheckCaptchar(spec);
+//			captchartChecker.getCaptchaManual("capchar.png");
+//			spec.findWithId("send").click(true);
+			spec.pauseUntilDone();
+			String urlAfterLogin=spec.url();
+			if(urlAfterLogin.equals("http://bux.to/login.php")){
+				System.err.println("Login Failed");
+				login();			
+			}else{
+				loginSuccess=true;
+				System.out.println("Login successful");
+				spec.show();
+				viewAds();
+				spec.open("http://bux.to/ads.php");
+				logout();			
+			}			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.err.println(e.getMessage());
 		}
+
 	}
 	private void viewAds(){
 		spec.open("http://bux.to/ads.php");
