@@ -20,11 +20,18 @@ public class ConfigLoader {
 			prop.setProperty("pass", "123");
 			prop.setProperty("proxy", "");
 			prop.setProperty("port", "");
+			prop.setProperty("email", "");
+			prop.setProperty("country", "");
 			prop.store(new FileWriter(configFile), "");
 		}
 		
 		String result;
 		result=prop.getProperty(key);
+		if(result==null){
+			prop.setProperty(key, "");
+			prop.store(new FileWriter(configFile), "");
+			result="";
+		}
 		return result;
 	}
 	public static void save(String key,String value) throws FileNotFoundException, IOException{
@@ -41,7 +48,8 @@ public class ConfigLoader {
 	}
 	public static void main(String[] args) throws IOException {
 		System.out.println(ConfigLoader.get("username"));
-		ConfigLoader.save("username", "chinhnguyen");
+//		ConfigLoader.save("username", "chinhnguyen");
 		System.out.println(ConfigLoader.get("username"));
+		System.out.println(ConfigLoader.get("country"));
 	}
 }
