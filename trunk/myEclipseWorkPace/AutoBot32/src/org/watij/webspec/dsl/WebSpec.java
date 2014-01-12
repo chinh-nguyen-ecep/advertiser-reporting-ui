@@ -234,6 +234,16 @@ public class WebSpec extends Base implements Finder, NavigationListener, Dispose
                     spec.done = true;
                 }
             });
+            final JButton exitButton=new JButton("Exit");
+            exitButton.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					// TODO Auto-generated method stub
+					spec.closeAll();
+					System.exit(0);
+				}
+			});
             JLabel sep = new JLabel("  |  ");
             JLabel urlLabel = new JLabel("Url:");
             JPanel panel = new JPanel();
@@ -243,6 +253,7 @@ public class WebSpec extends Base implements Finder, NavigationListener, Dispose
             panel.add(sep);
             panel.add(new JLabel("pauseUntil"));
             panel.add(doneButton);
+            panel.add(exitButton);
             frame.add(panel, BorderLayout.NORTH);
         }
     }
@@ -263,7 +274,6 @@ public class WebSpec extends Base implements Finder, NavigationListener, Dispose
         addNavigationBarIfNeeded(frame,this);
         frame.setSize(window_width, window_height);
         frame.setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(!silent_mode);
         browser.addDisposeListener(new DisposeListener() {
             public void browserDisposed(DisposeEvent event) {
@@ -672,5 +682,8 @@ public class WebSpec extends Base implements Finder, NavigationListener, Dispose
             popupFrame.setSize(size);
         }
     }
+    public static void main(String[] args) {
+		WebSpec spec=new WebSpec().ie();
+	}
 
 }

@@ -5,10 +5,15 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 
+
+
 import org.watij.webspec.dsl.WebSpec;
+
 import chinh.utils.CheckCaptchar;
 import chinh.utils.ConfigLoader;
 //import com.DeathByCaptcha.Captcha;
@@ -47,7 +52,7 @@ public class BuxTo {
 			spec.http_proxy_port(port);	
 		}
 		saveConfig();
-		spec.show_navigation_bar(false);
+//		spec.show_navigation_bar(false);
 		spec.ie();		
 	}
 	private void saveConfig() throws FileNotFoundException, IOException{
@@ -59,6 +64,8 @@ public class BuxTo {
 	}
 	public void login() throws FileNotFoundException, IOException{
 		initConfig();
+		spec.open("http://whatismyipaddress.com/"); 
+		spec.pauseUntilDone();
 //		spec.hide();
 		spec.open("http://bux.to/login.php"); 
 		spec.pauseUntilReady();
@@ -66,10 +73,11 @@ public class BuxTo {
 //		spec.findWithId("email").set("disabled","true");
 		spec.findWithId("name").set("value",userName);
 		spec.findWithId("email").set("value",password);
-		spec.snapBuxToCapChart("capchar.png");
-		CheckCaptchar captchartChecker=new CheckCaptchar(spec);
-		captchartChecker.getCaptchaManual("capchar.png");
-		spec.findWithId("send").click(true);
+//		spec.snapBuxToCapChart("capchar.png");
+//		CheckCaptchar captchartChecker=new CheckCaptchar(spec);
+//		captchartChecker.getCaptchaManual("capchar.png");
+//		spec.findWithId("send").click(true);
+		spec.pauseUntilDone();
 		String urlAfterLogin=spec.url();
 		if(urlAfterLogin.equals("http://bux.to/login.php")){
 			System.err.println("Login Failed");
@@ -85,7 +93,6 @@ public class BuxTo {
 	}
 	private void viewAds(){
 		spec.open("http://bux.to/ads.php");
-		spec.eval("alert(jQuery.fn.jquery)");
 		int start=1;
 		int end=1;
 		try {
@@ -98,8 +105,13 @@ public class BuxTo {
 			viewAds();
 		}
 		System.out.println("View ads from : "+start+" to "+end);
+		ArrayList<Integer> list=new ArrayList<Integer>();
 		for(int i=start;i<=end;i++){
-			viewAd(i);
+			list.add(i);
+		}
+		Collections.shuffle(list);
+		for(int i=0;i<=list.size();i++){
+			viewAd(list.get(i));
 		}
 	}
 	private void viewAd(int adID){
@@ -153,6 +165,19 @@ public class BuxTo {
 		spec.pauseUntilReady();
 		System.exit(0);
 	}
+	  // Implementing Fisher–Yates shuffle
+	  static void shuffleArray(int[] ar)
+	  {
+	    Random rnd = new Random();
+	    for (int i = ar.length - 1; i > 0; i--)
+	    {
+	      int index = rnd.nextInt(i + 1);
+	      // Simple swap
+	      int a = ar[index];
+	      ar[index] = ar[i];
+	      ar[i] = a;
+	    }
+	  }
 	public static void main(String[] args) throws IOException {
 			BuxTo buxTo=new BuxTo();
 			String proxy=ConfigLoader.get("proxy");
