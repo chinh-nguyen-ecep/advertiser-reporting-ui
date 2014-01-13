@@ -52,7 +52,6 @@ public class BuxTo {
 			spec.http_proxy_port(port);	
 		}
 		saveConfig();
-//		spec.show_navigation_bar(false);
 		spec.ie();		
 	}
 	private void saveConfig() throws FileNotFoundException, IOException{
@@ -98,6 +97,7 @@ public class BuxTo {
 	}
 	private void viewAds(){
 		spec.open("http://bux.to/ads.php");
+		spec.pauseUntilReady();
 		int start=1;
 		int end=1;
 		try {
@@ -106,7 +106,7 @@ public class BuxTo {
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.err.println(e.getMessage());
-			spec.pause(2000);
+			spec.pause(5000);
 			viewAds();
 		}
 		System.out.println("View ads from : "+start+" to "+end);
@@ -114,8 +114,8 @@ public class BuxTo {
 		for(int i=start;i<=end;i++){
 			list.add(i);
 		}
-		Collections.shuffle(list);
-		for(int i=0;i<=list.size();i++){
+//		Collections.shuffle(list);
+		for(int i=0;i<list.size();i++){
 			viewAd(list.get(i));
 		}
 	}
