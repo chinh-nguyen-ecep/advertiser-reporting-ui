@@ -127,8 +127,17 @@ function generateSelect2(options){
 		
 	}
 	function rawData(data,more,isLoadMore){
+		var checkedList;
 		if(page==1){
+			checkedList=$('#'+options.divID+' input:checked');
 			drawArea.empty();
+			$.each(checkedList,function(index,item){
+				var it=$(this);
+				drawArea.append(it);
+				var text=it.attr('title');
+				var id=it.val();				
+				drawArea.append('<label for="checkbox_'+id+'">'+text+'</label><br/>');
+			})
 			if(data.length==0){
 				var row="Don't have results....";
 				drawArea.append(row);
@@ -137,19 +146,20 @@ function generateSelect2(options){
 				var row=[0,'All'];
 				data.unshift(row);
 			}
+			
 		}
 		$.each(data,function(index,temp){
 			var id=temp[0];
 			var text=temp[1];
-			var row='<input id="checkbox_'+id+'" value="'+id+'" type="checkbox" name="'+options.name+'" safari="1"/> <label for="checkbox_'+id+'">'+text+'</label><br/>';
+			var row='<input id="checkbox_'+id+'" value="'+id+'" type="checkbox" name="'+options.name+'" safari="1" title="'+text+'"/> <label for="checkbox_'+id+'">'+text+'</label><br/>';
 			if(index==0 && !isLoadMore){
-				row='<input id="checkbox_'+id+'" value="'+id+'" type="checkbox" name="'+options.name+'" safari="1" checked/> <label for="checkbox_'+id+'">'+text+'</label><br/>';
+				row='<input id="checkbox_'+id+'" value="'+id+'" type="checkbox" name="'+options.name+'" safari="1" title="'+text+'" checked/> <label for="checkbox_'+id+'">'+text+'</label><br/>';
 			}
 			if(index==0 && !options.multi && !isLoadMore){
-				row='<input id="radio_'+id+'" value="'+id+'" type="radio" name="'+options.name+'" safari="1" checked/> <label for="radio_'+id+'">'+text+'</label><br/>';
+				row='<input id="radio_'+id+'" value="'+id+'" type="radio" name="'+options.name+'" safari="1" title="'+text+'" checked/> <label for="radio_'+id+'">'+text+'</label><br/>';
 			}
 			if(index>0 && !options.multi){
-				row='<input id="radio_'+id+'" value="'+id+'" type="radio" name="'+options.name+'" safari="1"/> <label for="radio_'+id+'">'+text+'</label><br/>';
+				row='<input id="radio_'+id+'" value="'+id+'" type="radio" name="'+options.name+'" safari="1" title="'+text+'"/> <label for="radio_'+id+'">'+text+'</label><br/>';
 			}
 			drawArea.append(row);
 		});
