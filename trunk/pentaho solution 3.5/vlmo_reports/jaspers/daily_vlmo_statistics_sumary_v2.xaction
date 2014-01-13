@@ -161,7 +161,11 @@ SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM v
       <component-definition> 
         <live><![CDATA[false]]></live>  
         <query><![CDATA[SELECT calendar_year_month,month_since_2005 
-FROM vlmo_dw.daily_agg_demand_by_merchant a
+FROM vlmo_dw.daily_agg_demand_by_merchant 
+GROUP BY calendar_year_month,month_since_2005
+UNION ALL
+SELECT calendar_year_month,month_since_2005 
+FROM vlmo_dw.daily_agg_demand_by_merchant 
 GROUP BY calendar_year_month,month_since_2005]]></query> 
       </component-definition> 
     </action-definition>
