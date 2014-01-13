@@ -131,13 +131,13 @@ function generateSelect2(options){
 		if(page==1){
 			checkedList=$('#'+options.divID+' input:checked');
 			drawArea.empty();
-			$.each(checkedList,function(index,item){
-				var it=$(this);
-				drawArea.append(it);
-				var text=it.attr('title');
-				var id=it.val();				
-				drawArea.append('<label for="checkbox_'+id+'">'+text+'</label><br/>');
-			})
+			//$.each(checkedList,function(index,item){
+			//	var it=$(this);
+			//	drawArea.append(it);
+			//	var text=it.attr('title');
+			//	var id=it.val();				
+			//	drawArea.append('<label for="checkbox_'+id+'">'+text+'</label><br/>');
+			//})
 			if(data.length==0){
 				var row="Don't have results....";
 				drawArea.append(row);
