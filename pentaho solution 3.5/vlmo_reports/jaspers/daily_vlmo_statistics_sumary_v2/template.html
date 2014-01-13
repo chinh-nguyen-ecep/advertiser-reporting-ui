@@ -113,10 +113,12 @@
 	var mySearch3;
 	$( document ).ready(function() {
 		console.log(  $().jquery );
+		//Remove all Choose value of select 
 		$('option[value=]').remove();
 		$('#open').click(function(){
 			$('#mydiv').dialog('open');
-		})
+		});
+		//Init date picker
 		$('input[name=p_start_date]').datetimepicker({
 			timepicker:false,
 			format: 'Y-m-d',
@@ -133,7 +135,24 @@
 			minDate: $('#v_min_date').val(),
 			maxDate: $('#v_max_date').val()
 		});
+		//Month select
+		$('input[name=p_date_mode]').change(function(){
 		
+			var isChecked=$(this).is(':checked');
+			console.log(isChecked);
+			if(isChecked){
+				var dateMode=$(this).val();
+				if(dateMode=='date'){
+					$('#datemode').show();
+					$('#monthmode').hide();
+				}else{
+					$('#datemode').hide();
+					$('#monthmode').show();
+				}
+			}
+			
+		});
+		//Agency check box
 		mySearch=new generateSelect2({
 			inputID: 'dimesion_fillter',
 			divID: 'dimesion',
@@ -168,6 +187,7 @@
 			}
 		});
 		mySearch.action();
+		//Merchant check box
 		mySearch2=new generateSelect2({
 			inputID: 'dimesion_merchant',
 			divID: 'merchant',
@@ -203,6 +223,7 @@
 				mySearch3.action();
 			}
 		});    
+		//offer check box
 		mySearch3=new generateSelect2({
 			inputID: 'dimesion_offer',
 			divID: 'offer',
