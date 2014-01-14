@@ -64,7 +64,7 @@ public class BuxTo {
 	public void login() throws FileNotFoundException, IOException{
 		initConfig();
 		spec.open("http://whatismyipaddress.com/"); 
-		spec.pauseUntilDone();
+		spec.pause(5000);
 		try {
 			spec.open("http://bux.to/login.php"); 
 			spec.pauseUntilReady();
@@ -84,9 +84,17 @@ public class BuxTo {
 			}else{
 				loginSuccess=true;
 				System.out.println("Login successful");
-				spec.show();
+				//got user login
+				spec.open("http://bux.to/acc.php");
+				spec.pauseUntilReady();
+				String loginUser="N/A";
+				try {
+					loginUser=spec.find("strong").at(0).get("innerHTML").split("=")[1];
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				System.out.println("Login user: "+loginUser);
 				viewAds();
-				spec.open("http://bux.to/ads.php");
 				logout();			
 			}			
 		} catch (Exception e) {
@@ -166,6 +174,16 @@ public class BuxTo {
 		return loginSuccess;
 	}
 	public void logout(){
+		spec.open("http://bux.to/acc.php");
+		spec.pauseUntilReady();
+		String websiteVisits="-100";
+		try {
+			websiteVisits=spec.jquery("div.statmargin").at(0).find("strong").get("innerHTML");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		System.out.println("websiteVisits : "+websiteVisits);
+		
 		spec.open("http://bux.to/logout.php");
 		spec.pauseUntilReady();
 		spec.closeAll();
