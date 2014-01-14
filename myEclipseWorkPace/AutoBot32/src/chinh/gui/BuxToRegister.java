@@ -8,6 +8,7 @@ import org.watij.webspec.dsl.Tag;
 import org.watij.webspec.dsl.WebSpec;
 
 import chinh.utils.ConfigLoader;
+import chinh.utils.DatabaseConnection;
 
 public class BuxToRegister {
 	public static void main(String[] args) throws IOException {
@@ -34,6 +35,12 @@ public class BuxToRegister {
 		spec.ie();
 		//load referralName from server
 		String referralName="chinhnguyen";
+		try {
+			referralName=DatabaseConnection.getText("http://deplao.org/autobots/refername.php");
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		try {
 			spec.open("http://whatismyipaddress.com");
 			spec.pause(5000);
