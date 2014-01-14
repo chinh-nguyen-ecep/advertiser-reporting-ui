@@ -168,6 +168,7 @@ public class BuxTo {
 	public void logout(){
 		spec.open("http://bux.to/logout.php");
 		spec.pauseUntilReady();
+		spec.closeAll();
 		System.exit(0);
 	}
 	  // Implementing Fisher–Yates shuffle
