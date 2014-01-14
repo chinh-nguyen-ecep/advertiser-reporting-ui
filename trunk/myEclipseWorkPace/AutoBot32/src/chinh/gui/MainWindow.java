@@ -23,7 +23,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
-import chinh.BuxTo;
+import chinh.BuxToPublic;
 import chinh.utils.ConfigLoader;
 
 public class MainWindow{
@@ -32,7 +32,7 @@ public class MainWindow{
 	private JTextField proxyTxt = new JTextField(25);
 	private JTextField proxyportTxt = new JTextField(25);
 	private JPasswordField passwordTxt = new JPasswordField(25);  
-	private BuxTo buxTo=new BuxTo();
+	private BuxToPublic buxTo=new BuxToPublic();
 	public MainWindow() throws HeadlessException {
 		super();
 		JFrame mainFrame=new JFrame("Autobox");
