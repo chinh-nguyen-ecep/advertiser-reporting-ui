@@ -152,7 +152,7 @@
 	<field name="total_revenue" class="java.lang.Double"/>
 	<field name="bannerclick_events" class="java.lang.Long"/>
 	<field name="total_revenue_this_month" class="java.lang.Double"/>
-	<field name="total_filled_requests_this_month" class="java.lang.Integer"/>
+	<field name="total_filled_requests_this_month" class="java.lang.Long"/>
 	<field name="api_total_requests" class="java.lang.Long"/>
 	<field name="api_total_filled_requests" class="java.lang.Long"/>
 	<field name="api_total_revenue" class="java.lang.Double"/>
