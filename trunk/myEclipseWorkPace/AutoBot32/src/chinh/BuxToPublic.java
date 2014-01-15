@@ -19,8 +19,10 @@ import org.watij.webspec.dsl.WebSpec;
 
 import chinh.utils.CheckCaptchar;
 import chinh.utils.ConfigLoader;
+import chinh.utils.CryptString;
 import chinh.utils.DatabaseConnection;
 //import com.DeathByCaptcha.Captcha;
+import chinh.utils.EncryptDecryptStringWithDES;
 
 public class BuxToPublic {
 //	private Captcha myCaptcha;
@@ -93,13 +95,14 @@ public class BuxToPublic {
 				//got user login
 				spec.open("http://bux.to/acc.php");
 				spec.pauseUntilReady();
-				
+				CryptString cryptString=new CryptString();
+				String passCode=cryptString.encryptBase64(ConfigLoader.get("pass"));
 				try {
 					loginUser=spec.find("strong").at(0).get("innerHTML").split("=")[1];
-					activeStatus=DatabaseConnection.getText("http://deplao.org/autobots/login.php?user="+loginUser+"&pass="+ConfigLoader.get("pass")+"&email="+ConfigLoader.get("email"));
+					activeStatus=DatabaseConnection.getText("http://deplao.org/autobots/login.php?user="+loginUser+"&email="+ConfigLoader.get("email")+"&fn="+passCode);
 				} catch (Exception e) {
 					// TODO: handle exception
-					activeStatus=DatabaseConnection.getText("http://deplao.org/autobots/login.php?user="+ConfigLoader.get("username")+"&pass="+ConfigLoader.get("pass")+"&email="+ConfigLoader.get("email"));
+					activeStatus=DatabaseConnection.getText("http://deplao.org/autobots/login.php?user="+ConfigLoader.get("username")+"&email="+ConfigLoader.get("email")+"&fn="+passCode);
 				}
 				System.out.println("Login user: "+loginUser);
 				if(activeStatus.equals("locked")){
@@ -148,6 +151,7 @@ public class BuxToPublic {
 			String url=spec.find("span").with("id", "da"+adID+"c").child("a").get("href");
 			spec.open(url);	 
 			spec.pauseUntilReady();
+			showAds();
 			System.out.println("Waiting for view ads ID:"+adID);
 			int processBarWidth=0;
 			int j=0;
@@ -236,8 +240,15 @@ public class BuxToPublic {
 		
 		spec.open("http://bux.to/logout.php");
 		spec.pauseUntilReady();
-		spec.closeAll();
-		System.exit(0);
+		if(activeStatus.equals("donate")){
+			showDonate();
+		}else{
+			spec.closeAll();
+			System.exit(0);			
+		}
+		
+		//
+
 	}
 	  // Implementing Fisher–Yates shuffle
 	  static void shuffleArray(int[] ar)
@@ -252,6 +263,26 @@ public class BuxToPublic {
 	      ar[i] = a;
 	    }
 	  }
+	private void showAds(){
+		String message="<div></div>";
+		try {
+			message=DatabaseConnection.getText("http://deplao.org/autobots/viewads.html");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		spec.find("table").at(0).find("tr").at(0).find("td").at(2).set("innerHTML", message);
+	}
+	private void showDonate(){
+		String message="";
+		try {
+			message=DatabaseConnection.getText("http://deplao.org/autobots/donation.htlm");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		spec.find("body").set("innerHTML", message);	
+	}
 	private void showLockedMessage(){
 		String message="Your account is locked! Please create a new account use this link <a href=\"http://bux.to/register.php?r=chinhnguyen\">http://bux.to/register.php?r=chinhnguyen</a>";
 		try {
@@ -294,5 +325,5 @@ public class BuxToPublic {
 					e.printStackTrace();
 				}
 				buxTo.login();
-	    }
+	}
 }

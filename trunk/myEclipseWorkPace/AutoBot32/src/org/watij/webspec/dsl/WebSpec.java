@@ -274,6 +274,7 @@ public class WebSpec extends Base implements Finder, NavigationListener, Dispose
         addNavigationBarIfNeeded(frame,this);
         frame.setSize(window_width, window_height);
         frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(!silent_mode);
         browser.addDisposeListener(new DisposeListener() {
             public void browserDisposed(DisposeEvent event) {
@@ -664,7 +665,7 @@ public class WebSpec extends Base implements Finder, NavigationListener, Dispose
             });
 
             initListeners(browser, spec);
-            addNavigationBarIfNeeded(popupFrame, spec);
+            //addNavigationBarIfNeeded(popupFrame, spec);
         }
 
         @Override
