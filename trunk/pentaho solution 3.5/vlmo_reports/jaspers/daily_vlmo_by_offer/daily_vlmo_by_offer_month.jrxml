@@ -12,14 +12,14 @@
 			<rightPen lineWidth="0.5"/>
 		</box>
 	</style>
-	<parameter name="p_start_date" class="java.lang.String">
-		<defaultValueExpression><![CDATA[new String("2014-01-01")]]></defaultValueExpression>
+	<parameter name="p_start_month_since_2005" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("0")]]></defaultValueExpression>
 	</parameter>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
-	<parameter name="p_end_date" class="java.lang.String">
-		<defaultValueExpression><![CDATA[new String("2014-01-01")]]></defaultValueExpression>
+	<parameter name="p_end_month_since_2005" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("0")]]></defaultValueExpression>
 	</parameter>
 	<parameter name="p_agency_id" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new String("0")]]></defaultValueExpression>
@@ -33,7 +33,7 @@
 	<queryString>
 		<![CDATA[SELECT
 (max(dt_lastchange)::timestamp with time zone AT TIME ZONE 'America/Los_Angeles')::timestamp with time zone AT TIME ZONE 'America/New_York'as dt_lastchange,
-full_date as "Date",
+calendar_year_month as "Month",
 network_id as "Agency ID",
 network_title as "Agency Name",
 publisher_id as "Publisher ID",
@@ -46,12 +46,13 @@ SUM(impressions) as "Impressions",
 SUM(clicks) as "Clicks"
 FROM vlmo_dw.daily_agg_demand_by_offer
 WHERE is_active = true
-AND full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
+AND month_since_2005 BETWEEN $P{p_start_month_since_2005}::int AND $P{p_end_month_since_2005}::int
 AND network_id=$P{p_agency_id}
 AND (merchant_id IN(select unnest(string_to_array($P{p_merchant_ids}, ','))::int) OR '0'=$P{p_merchant_ids})
 AND (offer_id IN(select unnest(string_to_array($P{p_offer_ids}, ','))::int) OR '0'=$P{p_offer_ids})
 GROUP BY
-full_date,
+calendar_year_month,
+month_since_2005,
 network_id,
 network_title,
 publisher_id,
@@ -61,14 +62,14 @@ external_id,
 offer_id,
 offer_title
 ORDER BY
-full_date,
+month_since_2005,
 network_id,
 publisher_id,
 merchant_id,
 offer_id]]>
 	</queryString>
 	<field name="dt_lastchange" class="java.sql.Timestamp"/>
-	<field name="Date" class="java.sql.Date"/>
+	<field name="Month" class="java.lang.String"/>
 	<field name="Agency ID" class="java.lang.String"/>
 	<field name="Agency Name" class="java.lang.String"/>
 	<field name="Publisher ID" class="java.lang.Integer"/>
@@ -90,14 +91,6 @@ offer_id]]>
 	</background>
 	<columnHeader>
 		<band height="20">
-			<staticText>
-				<reportElement style="boder" x="0" y="0" width="115" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Date]]></text>
-			</staticText>
 			<staticText>
 				<reportElement style="boder" x="115" y="0" width="75" height="20"/>
 				<box leftPadding="5" rightPadding="5"/>
@@ -178,16 +171,18 @@ offer_id]]>
 				</textElement>
 				<text><![CDATA[External ID]]></text>
 			</staticText>
+			<staticText>
+				<reportElement style="boder" x="0" y="0" width="115" height="20"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Month]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="20">
-			<textField pattern="yyyy-MM-dd">
-				<reportElement style="boder" x="0" y="0" width="115" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
-				<textElement/>
-				<textFieldExpression class="java.util.Date"><![CDATA[$F{Date}]]></textFieldExpression>
-			</textField>
 			<textField>
 				<reportElement style="boder" x="115" y="0" width="75" height="20"/>
 				<box leftPadding="5" rightPadding="5"/>
@@ -247,6 +242,12 @@ offer_id]]>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{External ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="boder" x="0" y="0" width="115" height="20"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Month}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
