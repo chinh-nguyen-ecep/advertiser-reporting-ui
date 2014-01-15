@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_ad_serving_statistics" pageWidth="1190" pageHeight="842" orientation="Landscape" columnWidth="1150" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0000000000000004"/>
+	<property name="ireport.x" value="116"/>
+	<property name="ireport.y" value="0"/>
+	<style name="boder">
+		<box>
+			<pen lineWidth="0.5"/>
+			<topPen lineWidth="0.5"/>
+			<leftPen lineWidth="0.5"/>
+			<bottomPen lineWidth="0.5"/>
+			<rightPen lineWidth="0.5"/>
+		</box>
+	</style>
+	<parameter name="p_start_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("2014-01-01")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_end_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("2014-01-01")]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT full_date,calendar_year_month FROM adsops.daily_agg_verve_ads_by_remnant
+WHERE is_active=true
+AND full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
+GROUP BY full_date,calendar_year_month
+ORDER BY full_date]]>
+	</queryString>
+	<field name="full_date" class="java.sql.Date"/>
+	<field name="calendar_year_month" class="java.lang.String"/>
+	<variable name="Impressions_1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{Impressions}]]></variableExpression>
+	</variable>
+	<variable name="Clicks_1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{Clicks}]]></variableExpression>
+	</variable>
+	<background>
+		<band/>
+	</background>
+	<columnHeader>
+		<band height="50"/>
+	</columnHeader>
+	<detail>
+		<band height="50">
+			<subreport>
+				<reportElement x="0" y="0" width="1150" height="50"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_verve_ads_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<summary>
+		<band height="50"/>
+	</summary>
+</jasperReport>

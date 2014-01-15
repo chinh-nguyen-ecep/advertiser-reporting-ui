@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <action-sequence> 
-  <title>Daily VLMO by Offer</title>
+  <title>Daily verve ads</title>
   <version>1</version>
   <logging-level>ERROR</logging-level>
   <documentation> 
@@ -83,25 +83,7 @@
         <request>connectionName</request> 
       </sources>  
       <default-value><![CDATA[verveReportConnection]]></default-value> 
-    </connectionName>  
-    <p_agency_id type="string"> 
-      <sources> 
-        <request>p_agency_id</request> 
-      </sources>  
-      <default-value/> 
-    </p_agency_id>  
-    <p_merchant_ids type="string"> 
-      <sources> 
-        <request>p_merchant_ids</request> 
-      </sources>  
-      <default-value/> 
-    </p_merchant_ids>  
-    <p_offer_ids type="string"> 
-      <sources> 
-        <request>p_offer_ids</request> 
-      </sources>  
-      <default-value/> 
-    </p_offer_ids> 
+    </connectionName> 
   </inputs>
 
   <outputs> 
@@ -115,22 +97,16 @@
   <resources> 
     <pageTemplate1> 
       <solution-file> 
-        <location>daily_vlmo_by_offer/template.html</location>  
+        <location>daily_verve_ads/template.html</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </pageTemplate1>  
     <report-definition> 
       <solution-file> 
-        <location>daily_vlmo_by_offer/daily_vlmo_by_offer.jasper</location>  
+        <location>daily_verve_ads/daily_vlmo_statistics_sumary.jasper</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
-    </report-definition>  
-    <report-definition1>
-      <solution-file>
-        <location>daily_vlmo_by_offer/daily_vlmo_by_offer_month.jasper</location>
-        <mime-type>text/plain</mime-type>
-      </solution-file>
-    </report-definition1>
+    </report-definition> 
   </resources>
   
   <actions> 
@@ -147,9 +123,9 @@
       </action-outputs>
       <component-definition> 
         <live><![CDATA[false]]></live>  
-        <query><![CDATA[SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM vlmo_dw.daily_agg_demand_by_offer WHERE is_active=true
+        <query><![CDATA[SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM vlmo_dw.daily_agg_demand_by_merchant WHERE is_active=true
 UNION ALL
-SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM vlmo_dw.daily_agg_demand_by_offer WHERE is_active=true]]></query> 
+SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM vlmo_dw.daily_agg_demand_by_merchant WHERE is_active=true]]></query> 
       </component-definition> 
     </action-definition>
   
@@ -167,11 +143,11 @@ SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM v
       <component-definition> 
         <live><![CDATA[false]]></live>  
         <query><![CDATA[SELECT calendar_year_month,month_since_2005 
-FROM vlmo_dw.daily_agg_demand_by_offer 
+FROM vlmo_dw.daily_agg_demand_by_merchant 
 GROUP BY calendar_year_month,month_since_2005
 UNION ALL
 SELECT calendar_year_month,month_since_2005 
-FROM vlmo_dw.daily_agg_demand_by_offer 
+FROM vlmo_dw.daily_agg_demand_by_merchant 
 GROUP BY calendar_year_month,month_since_2005]]></query> 
       </component-definition> 
     </action-definition>
@@ -224,48 +200,11 @@ GROUP BY calendar_year_month,month_since_2005]]></query>
     </action-definition>
   
     <actions> 
-      <condition><![CDATA[p_date_mode=='date']]></condition>  
-      <action-definition> 
-        <component-name>JasperReportsComponent</component-name>
-        <action-type>Jasper</action-type>
-        <action-inputs> 
-          <jndi type="string" mapping="connectionName"/>  
-          <p_start_date type="string"/>  
-          <p_end_date type="string"/>  
-          <p_agency_id type="string"/>  
-          <p_merchant_ids type="string"/>  
-          <p_offer_ids type="string"/>  
-          <output-type type="string" mapping="p_output"/> 
-        </action-inputs>
-        <action-resources> 
-          <report-definition type="resource"/> 
-        </action-resources>
-        <component-definition/> 
-      </action-definition>
- 
+      <condition><![CDATA[p_date_mode=='date']]></condition> 
     </actions>
   
     <actions> 
-      <condition><![CDATA[p_date_mode=='month']]></condition>  
-      <action-definition>
-        <component-name>JasperReportsComponent</component-name>
-        <action-type>Jasper</action-type>
-        <action-inputs>
-          <p_start_month_since_2005 type="string"/>
-          <p_end_month_since_2005 type="string"/>
-          <jndi type="string" mapping="connectionName"/>
-          <p_agency_id type="string"/>
-          <p_merchant_ids type="string"/>
-          <p_offer_ids type="string"/>
-        </action-inputs>
-        <action-resources>
-          <report-definition mapping="report-definition1"/>
-        </action-resources>
-        <component-definition>
-          <output-type>html</output-type>
-        </component-definition>
-      </action-definition>
-
+      <condition><![CDATA[p_date_mode=='month']]></condition> 
     </actions>
  
   </actions> 

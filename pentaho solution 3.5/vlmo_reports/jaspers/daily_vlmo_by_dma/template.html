@@ -2,7 +2,7 @@
    <head>
 	<!-- do not include a <meta> tag -->
       <link rel="stylesheet" type="text/css" href="/pentaho-style/active/default.css"></link>
-      <title id="exportFileName">Daily VLMO by Offer</title>
+      <title id="exportFileName">Daily VLMO by DMA</title>
 	  <link  href="/verve_style/css/tableInForm.css" rel="stylesheet" type="text/css" media="screen" />
 	  <link  href="/verve_style/css/charttool.css" rel="stylesheet" type="text/css" media="screen" />
 	  <link rel="stylesheet" type="text/css" href="/verve_style/scripts2/easyui/themes/metro/easyui.css" />
@@ -26,7 +26,7 @@
 		   <img id="open" title="Open control panel" src="/verve_style/images/preferences_system_windows_actions.png"/>		   
 		   </div>	  
    </div>
-      <div class="easyui-dialog" title="Daily VLMO by Offer" data-options="iconCls:'icon-tip',resizable:false,modal:true,deltaX: 10" id="mydiv">
+      <div class="easyui-dialog" title="Daily VLMO by DMA" data-options="iconCls:'icon-tip',resizable:false,modal:true,deltaX: 10" id="mydiv">
          <form name="parameter-form" id="parameter-form" method="GET">
          <table class="tableForm">
          <tbody>	         
@@ -72,10 +72,10 @@
 						 </td>
 					 </tr>	
 					<tr>
-						 <th>Offer:</th>
+						 <th>Metro:</th>
 						 <td>
-							<input id="dimesion_offer" type="text" style="width: 300px;"/>
-							<div id="offer" style="width: 290px;border: 1px solid gray;overflow: auto;height: 100px;padding: 5px;">
+							<input id="dimesion_metro" type="text" style="width: 300px;"/>
+							<div id="metro" style="width: 290px;border: 1px solid gray;overflow: auto;height: 100px;padding: 5px;">
 							</div>
 						 </td>
 					 </tr>	
@@ -167,7 +167,7 @@
 			data: function(term,page){
 				return {
 					solution: solution,
-					path: path+'/daily_vlmo_by_offer',
+					path: path+'/daily_vlmo_by_dma',
 					mode: 'loadDimensions',
 					action: 'loadDimension.xaction',
 					term: term, //search term
@@ -189,6 +189,7 @@
 			},
 			clickEvent: function(id){
 				mySearch2.action();
+				mySearch3.action();
 			}
 		});
 		mySearch.action();
@@ -198,12 +199,12 @@
 			divID: 'merchant',
 			name: 'merchant_id',
 			multi: true,
-			selectAll: false,
+			selectAll: true,
 			ajaxUrl: '/pentaho/ViewAction',
 			data: function(term,page){
 				return {
 					solution: solution,
-					path: path+'/daily_vlmo_by_offer',
+					path: path+'/daily_vlmo_by_dma',
 					mode: 'loadDimensions',
 					action: 'loadDimension.xaction',
 					term: term, //search term
@@ -225,27 +226,27 @@
 				mySearch3.action();
 			},
 			clickEvent: function(id){
-				mySearch3.action();
+				
 			}
 		});    
-		//offer check box
+		//metro check box
 		mySearch3=new generateSelect2({
-			inputID: 'dimesion_offer',
-			divID: 'offer',
-			name: 'offer_id',
+			inputID: 'dimesion_metro',
+			divID: 'metro',
+			name: 'metros_id',
 			multi: true,
 			selectAll: true,
 			ajaxUrl: '/pentaho/ViewAction',
 			data: function(term,page){
 				return {
 					solution: solution,
-					path: path+'/daily_vlmo_by_offer',
+					path: path+'/daily_vlmo_by_dma',
 					mode: 'loadDimensions',
 					action: 'loadDimension.xaction',
 					term: term, //search term
 					limit: 10, // page size
 					page: page, // page number
-					mode: 'offer',
+					mode: 'metro',
 					merchant_ids: mySearch2.getID().join(","),
 					network_id: mySearch.getID()[0]
 				};
@@ -264,16 +265,16 @@
 		var dateMode=$('input[name=p_date_mode]:checked').val();
 		var agency_id=mySearch.getID().join();
 		var merchant_ids=mySearch2.getID().join(",");
-		var offer_ids=mySearch3.getID().join(",");
+		var metros_ids=mySearch3.getID().join(",");
 		var start_date=$('#p_start_date').val();
 		var end_date=$('#p_end_date').val();
 		
 		if(dateMode=='date'){
-			if(start_date==''||end_date==''||agency_id==''||merchant_ids==''||offer_ids==''){
+			if(start_date==''||end_date==''||agency_id==''||merchant_ids==''||metros_ids==''){
 				return false;
 			}
 		}else{
-			if(agency_id==''||merchant_ids==''||offer_ids==''){
+			if(agency_id==''||merchant_ids==''||metros_ids==''){
 				return false;
 			}
 		}
@@ -282,10 +283,10 @@
 		var urlData={			
 			p_agency_id: agency_id,
 			p_merchant_ids: merchant_ids,
-			p_offer_ids: offer_ids			
+			p_metros_ids: metros_ids			
 		}
 		//set title page
-		$('#exportFileName').html('Daily VLMO by Offer '+start_date+' '+end_date);
+		$('#exportFileName').html('Daily VLMO by DMA '+start_date+' '+end_date);
 		urlData=$.extend({},$( "#parameter-form" ).serializeObject(),urlData); 
 		var url='/pentaho/ViewAction?'+$.param(urlData);
 		$('#mydiv').dialog('close');
