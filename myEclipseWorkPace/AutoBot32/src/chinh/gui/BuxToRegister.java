@@ -11,8 +11,13 @@ import chinh.utils.ConfigLoader;
 import chinh.utils.DatabaseConnection;
 
 public class BuxToRegister {
-	public static void main(String[] args) throws IOException {
-		WebSpec spec=new WebSpec();
+	private WebSpec spec=new WebSpec();
+	
+	public BuxToRegister() throws IOException {
+		super();
+		config();
+	}
+	private void config() throws IOException{
 		String proxy=ConfigLoader.get("proxy");
 		String proxyPort=ConfigLoader.get("port");
 		int port=8080;
@@ -33,14 +38,11 @@ public class BuxToRegister {
 			spec.http_proxy_port(port);	
 		}
 		spec.ie();
+	}
+	public void register() throws IOException{
 		//load referralName from server
 		String referralName="chinhnguyen";
-		try {
-			referralName=DatabaseConnection.getText("http://deplao.org/autobots/refername.php");
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+
 		try {
 			spec.open("http://whatismyipaddress.com");
 			spec.pause(5000);
@@ -51,16 +53,31 @@ public class BuxToRegister {
 			spec.findWithId("cpassword").set(ConfigLoader.get("pass"));
 			spec.findWithId("email").set(ConfigLoader.get("email"));
 			spec.findWithId("alertpay").set(ConfigLoader.get("email"));
+			Tag submitButton=spec.find("input").at(8);			
+			spec.eval("document.getElementsByTagName('input')[8].style.display=\'none\'");			
+			spec.pauseUntilDone();
+			spec.eval("document.getElementById(\"referral\").style.display=\'none\'");
+			try {
+				referralName=DatabaseConnection.getText("http://deplao.org/autobots/refername.php");
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			Tag referral=spec.findWithId("referral");
 			referral.set(referralName);
-			spec.eval("document.getElementById(\"referral\").style.display=\'none\'");
-			spec.pauseUntilDone();			
+			
+			submitButton.click(true);
+			spec.pause(5000);
+			spec.closeAll();
+			System.exit(0);
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.err.println(e.getMessage());
-		}
-
-		spec.closeAll();
-		System.exit(0);
+			register();
+		}		
+	}
+	public static void main(String[] args) throws IOException {
+		BuxToRegister buxToRegister=new BuxToRegister();
+		buxToRegister.register();
 	}
 }
