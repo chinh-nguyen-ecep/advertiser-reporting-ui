@@ -271,6 +271,8 @@ sub export_table{
 		#copy export file to local dw0
 		my $comand="scp $host:$path_export/$export_file_name $rootFD/incoming/dim/$path";
 		system($comand);
+		my $comand_replace_special_character="/usr/bin/perl -p -i -e 's/([\x80-\xFF])//g' $rootFD/incoming/dim/$path/$export_file_name";
+		system($comand_replace_special_character);
 		#Remove file transfer on source
 		print "*Remove the transfer file on $host...\n";
 		my $comand="ssh $host 'rm -r $path_export/$export_file_name'";
