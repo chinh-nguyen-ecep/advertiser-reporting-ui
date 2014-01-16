@@ -90,7 +90,10 @@
 			$('#mydiv').dialog('open');
 		});
 		//Init date picker
+		var start_date=new Date(new Date($('#v_max_date').val()).setDate(new Date($('#v_max_date').val()).getDate()-2));;
+		var start_date=myformatter(start_date);
 		$('input[name=p_start_date]').datetimepicker({
+			value: start_date,
 			timepicker:false,
 			format: 'Y-m-d',
 			validateOnBlur: false,
@@ -99,6 +102,7 @@
 			maxDate: $('#v_max_date').val()
 		});
 		$('input[name=p_end_date]').datetimepicker({
+			value: $('#v_max_date').val(),
 			timepicker:false,
 			format: 'Y-m-d',
 			formatDate:'Y-m-d',
