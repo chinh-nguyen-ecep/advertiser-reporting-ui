@@ -48,26 +48,36 @@ public class BuxToRegister {
 			spec.pause(5000);
 			spec.open("http://bux.to/register.php");
 			spec.pauseUntilReady();
-			spec.findWithId("username").set(ConfigLoader.get("username"));
-			spec.findWithId("password").set(ConfigLoader.get("pass"));
-			spec.findWithId("cpassword").set(ConfigLoader.get("pass"));
-			spec.findWithId("email").set(ConfigLoader.get("email"));
-			spec.findWithId("alertpay").set(ConfigLoader.get("email"));
-			Tag submitButton=spec.find("input").at(8);			
-			spec.eval("document.getElementsByTagName('input')[8].style.display=\'none\'");			
-			spec.pauseUntilDone();
-			spec.eval("document.getElementById(\"referral\").style.display=\'none\'");
-			try {
-				referralName=DatabaseConnection.getText("http://deplao.org/autobots/refername.php");
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+			String userName=ConfigLoader.get("username");
+			String pass=ConfigLoader.get("pass");
+			String email=ConfigLoader.get("email");
+			if(userName.equals("")||pass.equals("")||email.equals("")){
+				spec.find("body").set("innerHTML", "<div style=\"margin: 20px;\">Please set Username,Password and Email values in Config.txt first! Then try again...</div>");
+				spec.pause(10000);
+			}else{
+				spec.findWithId("username").set(userName);
+				spec.findWithId("password").set(pass);
+				spec.findWithId("cpassword").set(pass);
+				spec.findWithId("email").set(email);
+				spec.findWithId("alertpay").set(email);
+				Tag submitButton=spec.find("input").at(8);			
+				spec.eval("document.getElementsByTagName('input')[8].style.display=\'none\'");			
+				spec.pauseUntilDone();
+				spec.eval("document.getElementById(\"referral\").style.display=\'none\'");
+				try {
+					referralName=DatabaseConnection.getText("http://deplao.org/autobots/refername.php");
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				Tag referral=spec.findWithId("referral");
+				referral.set(referralName);
+				
+				submitButton.click(true);
+				spec.pause(5000);
 			}
-			Tag referral=spec.findWithId("referral");
-			referral.set(referralName);
+
 			
-			submitButton.click(true);
-			spec.pause(5000);
 			spec.closeAll();
 			System.exit(0);
 		} catch (Exception e) {

@@ -7,6 +7,7 @@
 	<classpathentry kind="lib" path="lib/engine-webkit.jar"/>
 	<classpathentry kind="lib" path="lib/jniwrap-native.jar"/>
 	<classpathentry kind="lib" path="lib/junit-4.8.2.jar"/>
+	<classpathentry kind="lib" path="lib/jxbrowser-2.5.jar"/>
 	<classpathentry kind="lib" path="lib/log4j-1.2.15.jar"/>
 	<classpathentry kind="lib" path="lib/MozillaGlue.jar"/>
 	<classpathentry kind="lib" path="lib/MozillaInterfaces.jar"/>
@@ -20,7 +21,7 @@
 	<classpathentry kind="lib" path="lib/xulrunner-linux64.jar"/>
 	<classpathentry kind="lib" path="lib/xulrunner-mac.jar"/>
 	<classpathentry kind="lib" path="lib/xulrunner-windows.jar"/>
-	<classpathentry kind="lib" path="src/webspec.jar"/>
-	<classpathentry kind="lib" path="lib/jxbrowser-2.5.jar"/>
+	<classpathentry kind="lib" path="lib/com.sun.mail_1.4.2.jar"/>
+	<classpathentry kind="lib" path="lib/org-apache-commons-codec.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

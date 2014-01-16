@@ -1,8 +1,0 @@
-#
-#Sun Jan 12 21:52:35 ICT 2014
-port=80
-email=efcc.nigeria1@financier.com
-proxy=
-pass=adminsanchikaro
-country=us
-username=chinhnguyen

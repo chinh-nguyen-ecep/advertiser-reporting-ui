@@ -6,23 +6,16 @@ import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Random;
-
-
-
-
-
-
 
 import org.watij.webspec.dsl.WebSpec;
 
-import chinh.utils.CheckCaptchar;
+//import chinh.utils.CheckCaptchar;
 import chinh.utils.ConfigLoader;
 import chinh.utils.CryptString;
 import chinh.utils.DatabaseConnection;
 //import com.DeathByCaptcha.Captcha;
-import chinh.utils.EncryptDecryptStringWithDES;
+//import chinh.utils.EncryptDecryptStringWithDES;
 
 public class BuxToPublic {
 //	private Captcha myCaptcha;
@@ -34,6 +27,7 @@ public class BuxToPublic {
 	private int port=0;
 	private String activeStatus="NA";
 	private String loginUser="N/A";
+	private int version=1;
 	
 	public void setUserName(String userName) {
 		this.userName = userName;
@@ -73,9 +67,16 @@ public class BuxToPublic {
 		initConfig();
 		spec.open("http://whatismyipaddress.com/"); 
 		spec.pause(5000);
+		checkingVersion();
 		try {
 			spec.open("http://bux.to/login.php"); 
 			spec.pauseUntilReady();
+			if(userName.equals("") || password.equals("")){
+				spec.find("body").set("innerHTML", "<div style=\"margin-top: 20px;margin-left: 10px\">Please set <b>username</b> and <b>password</b> in <b>Config.txt</b> first! Then try again.</div>");
+				spec.pause(10000);
+				spec.closeAll();
+				System.exit(0);
+			}
 //			spec.findWithId("name").set("disabled","true");
 //			spec.findWithId("email").set("disabled","true");
 			spec.findWithId("name").set("value",userName);
@@ -293,6 +294,23 @@ public class BuxToPublic {
 		}
 		spec.find("body").set("innerHTML", message);
 		spec.pause(30000);
+	}
+	private void checkingVersion(){
+		String message="1|abc";
+		try {
+			message=DatabaseConnection.getText("http://deplao.org/autobots/version.html");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(message);
+		int checkVersion=Integer.parseInt(message.split("\\|")[0]);
+		System.out.println(checkVersion);
+		if(checkVersion>this.version){
+			spec.find("body").set("innerHTML", "<div style=\"margin: 20px\">"+message.split("\\|")[1]+"<p/>Or click \"Done\" button to continue...</div>");
+			spec.pauseUntilDone();
+		}
+		
 	}
 	public static void main(String[] args) throws IOException {
 			BuxToPublic buxTo=new BuxToPublic();
