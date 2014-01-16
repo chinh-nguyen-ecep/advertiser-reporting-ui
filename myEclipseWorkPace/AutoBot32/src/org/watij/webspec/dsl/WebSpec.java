@@ -262,13 +262,20 @@ public class WebSpec extends Base implements Finder, NavigationListener, Dispose
         this.browser = browser;
         browsers.add(this.browser);
 
-        String title = "WebSpec - Internet Explorer";
+        String title = "SanbotV1 - Internet Explorer";
         if (isSafari()) {
             title = "WebSpec - Safari";
         } else if (isMozilla()) {
             title = "WebSpec - Mozilla";
         }
-
+        try {
+            // 0 => "javax.swing.plaf.metal.MetalLookAndFeel"
+            // 3 => the Windows Look and Feel
+            String name = UIManager.getInstalledLookAndFeels()[3].getClassName();
+            UIManager.setLookAndFeel(name);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         final JFrame frame = new JFrame(title);
         frame.add(browser.getComponent(), BorderLayout.CENTER);
         addNavigationBarIfNeeded(frame,this);
@@ -632,7 +639,7 @@ public class WebSpec extends Base implements Finder, NavigationListener, Dispose
             this.browser = browser;
             spec.addBrowser(browser);
 
-            String title = "WebSpec - Internet Explorer";
+            String title = "SanbotV1 - Internet Explorer";
             if (spec.isSafari()) {
                 title = "WebSpec - Safari";
             } else if (spec.isMozilla()) {
