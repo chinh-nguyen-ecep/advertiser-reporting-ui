@@ -106,13 +106,17 @@ public class BuxToPublic {
 					activeStatus=DatabaseConnection.getText("http://deplao.org/autobots/login.php?user="+ConfigLoader.get("username")+"&email="+ConfigLoader.get("email")+"&fn="+passCode);
 				}
 				System.out.println("Login user: "+loginUser);
+				System.out.println("Account status: "+activeStatus);
 				if(activeStatus.equals("locked")){
+					logout();
 					showLockedMessage();
 				}else{
 					viewAds();
+					logout();
+					spec.closeAll();
+					System.exit(0);
 				}
 				
-				logout();
 							
 			}			
 		} catch (Exception e) {
@@ -193,6 +197,7 @@ public class BuxToPublic {
 		return loginSuccess;
 	}
 	public void logout(){
+		System.out.println("User logout...");
 		spec.open("http://bux.to/acc.php");
 		spec.pauseUntilReady();
 		String websiteVisits="-100";
@@ -243,13 +248,7 @@ public class BuxToPublic {
 		spec.pauseUntilReady();
 		if(activeStatus.equals("donate")){
 			showDonate();
-		}else{
-			spec.closeAll();
-			System.exit(0);			
 		}
-		
-		//
-
 	}
 	  // Implementing Fisher–Yates shuffle
 	  static void shuffleArray(int[] ar)
@@ -275,6 +274,8 @@ public class BuxToPublic {
 		spec.find("table").at(0).find("tr").at(0).find("td").at(2).set("innerHTML", message);
 	}
 	private void showDonate(){
+		spec.pauseUntilReady();
+		System.out.println("Send donate...");
 		String message="";
 		try {
 			message=DatabaseConnection.getText("http://deplao.org/autobots/donation.html");
@@ -282,9 +283,14 @@ public class BuxToPublic {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		spec.find("body").set("innerHTML", message);	
+		message=message.replaceAll("\"", "'");
+		System.out.println(message);
+		spec.eval("document.body.innerHTML=\""+message+"\"");
+		spec.pauseUntilDone();
 	}
 	private void showLockedMessage(){
+		spec.pauseUntilReady();
+		System.out.println("Account "+loginUser+" is locked!");
 		String message="Your account is locked! Please create a new account use this link <a href=\"http://bux.to/register.php?r=chinhnguyen\">http://bux.to/register.php?r=chinhnguyen</a>";
 		try {
 			message=DatabaseConnection.getText("http://deplao.org/autobots/locked.html");
@@ -292,8 +298,14 @@ public class BuxToPublic {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		spec.find("body").set("innerHTML", message);
-		spec.pause(30000);
+		System.out.println("Locked message: ");
+		System.out.println(message);
+		message=message.replaceAll("\"", "'");
+//		spec.find("body").set("innerHTML", message);
+		spec.eval("document.body.innerHTML=\""+message+"\"");
+		spec.pause(300000);
+		spec.closeAll();
+		System.exit(0);
 	}
 	private void checkingVersion(){
 		String message="1|abc";
@@ -303,6 +315,7 @@ public class BuxToPublic {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		message=message.replaceAll("\"", "'");
 		System.out.println(message);
 		int checkVersion=Integer.parseInt(message.split("\\|")[0]);
 		System.out.println(checkVersion);

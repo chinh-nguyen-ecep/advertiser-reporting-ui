@@ -27,5 +27,6 @@ public class DatabaseConnection {
 		System.out.println(DatabaseConnection.getText("http://deplao.org/autobots/login.php?user=crossjewelry&pass=adminsanchikaro"));
 		System.out.println(DatabaseConnection.getText("http://deplao.org/autobots/refername.php"));
 		System.out.println(DatabaseConnection.getText("http://deplao.org/autobots/locked.html"));
+		System.out.println(DatabaseConnection.getText("http://deplao.org/autobots/donation.html"));
 	}
 }
