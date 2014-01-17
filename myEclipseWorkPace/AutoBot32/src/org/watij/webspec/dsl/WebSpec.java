@@ -691,7 +691,9 @@ public class WebSpec extends Base implements Finder, NavigationListener, Dispose
         }
     }
     public static void main(String[] args) {
-		WebSpec spec=new WebSpec().ie();
+//		WebSpec spec=new WebSpec().ie();
+    	String a="<div style=\"width: 100%; background-color: whilte;margin: 30px;border: 3px solid gray;padding: 10px;\"><h1>Your account is locked!</h1> Your account don't have permission to use this tool.<br/>To continue using <b>Sanbot</b>, please use <b>sanbot.v1.register.jar</b> to register a new account.<p/>Any question (in English or Vietnamese), please contact to sanchikaro@gmail.com <br/>The program will be auto close after 300s.<p/>Thanks for your using this tool!<p/></div>";
+    	System.out.println(a.replaceAll("\"", "'"));
 	}
 
 }
