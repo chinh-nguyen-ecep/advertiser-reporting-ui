@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <action-sequence> 
-  <title>Daily verve ads</title>
+  <title>Daily Verve Ads</title>
   <version>1</version>
   <logging-level>ERROR</logging-level>
   <documentation> 
@@ -101,12 +101,18 @@
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </pageTemplate1>  
-    <report-definition1>
+    <report-definition1> 
+      <solution-file> 
+        <location>daily_verve_ads/daily_verve_ads.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition1>  
+    <report-definition>
       <solution-file>
-        <location>daily_verve_ads/daily_verve_ads.jasper</location>
+        <location>daily_verve_ads/monthly_verve_ads.jasper</location>
         <mime-type>text/plain</mime-type>
       </solution-file>
-    </report-definition1>
+    </report-definition>
   </resources>
   
   <actions> 
@@ -145,10 +151,7 @@ SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM a
         <query><![CDATA[SELECT calendar_year_month,month_since_2005 
 FROM adsops.daily_agg_verve_ads_by_remnant 
 GROUP BY calendar_year_month,month_since_2005
-UNION ALL
-SELECT calendar_year_month,month_since_2005 
-FROM adsops.daily_agg_verve_ads_by_remnant 
-GROUP BY calendar_year_month,month_since_2005]]></query> 
+ORDER BY month_since_2005 desc]]></query> 
       </component-definition> 
     </action-definition>
   
@@ -201,26 +204,41 @@ GROUP BY calendar_year_month,month_since_2005]]></query>
   
     <actions> 
       <condition><![CDATA[p_date_mode=='date']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <p_start_date type="string"/>  
+          <p_end_date type="string"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition1"/> 
+        </action-resources>
+        <component-definition> 
+          <output-type>html</output-type> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_date_mode=='month']]></condition>  
       <action-definition>
         <component-name>JasperReportsComponent</component-name>
         <action-type>Jasper</action-type>
         <action-inputs>
+          <p_start_month_since_2005 type="string"/>
           <jndi type="string" mapping="connectionName"/>
-          <p_start_date type="string"/>
-          <p_end_date type="string"/>
+          <p_end_month_since_2005 type="string"/>
+          <output-type type="string" mapping="p_output"/>
         </action-inputs>
         <action-resources>
-          <report-definition mapping="report-definition1"/>
+          <report-definition type="resource"/>
         </action-resources>
-        <component-definition>
-          <output-type>html</output-type>
-        </component-definition>
+        <component-definition/>
       </action-definition>
 
-    </actions>
-  
-    <actions> 
-      <condition><![CDATA[p_date_mode=='month']]></condition> 
     </actions>
  
   </actions> 

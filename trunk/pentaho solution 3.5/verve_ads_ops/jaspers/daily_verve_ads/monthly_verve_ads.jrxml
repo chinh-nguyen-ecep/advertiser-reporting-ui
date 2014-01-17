@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Daily verve Ads" pageWidth="1684" pageHeight="1190" orientation="Landscape" columnWidth="1644" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="0.9982500000000003"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Monthly Verve Ads" pageWidth="1684" pageHeight="1190" orientation="Landscape" columnWidth="1644" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.3286707500000006"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="boder">
@@ -12,55 +12,56 @@
 			<rightPen lineWidth="0.5"/>
 		</box>
 	</style>
-	<parameter name="p_start_date" class="java.lang.String">
-		<defaultValueExpression><![CDATA[new String("2014-01-01")]]></defaultValueExpression>
+	<parameter name="p_start_month_since_2005" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("0")]]></defaultValueExpression>
 	</parameter>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
-	<parameter name="p_end_date" class="java.lang.String">
-		<defaultValueExpression><![CDATA[new String("2014-01-01")]]></defaultValueExpression>
+	<parameter name="p_end_month_since_2005" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("0")]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[SELECT
-full_date as "Date"
+calendar_year_month as "Month"
 ,adnetwork_id
 ,adnetwork_name as "Ad Network"
-,adnetwork_reports_ad_calls as "Ad requests"
-,adnetwork_reports_ads_filled
-,(CASE WHEN adnetwork_reports_ad_calls>0 THEN adnetwork_reports_ads_filled::float/adnetwork_reports_ad_calls ELSE null END) as "Ad Fill Rate"
-,((CASE WHEN adnetwork_reports_ad_calls>0 THEN adnetwork_reports_ads_filled::float/adnetwork_reports_ad_calls ELSE null END)-(CASE WHEN adnetwork_reports_ad_calls_yesterday>0 THEN adnetwork_reports_ads_filled_yesterday::float/adnetwork_reports_ad_calls_yesterday ELSE null END)) AS "Ad Delta"
-,verve_reports_ad_calls as "Verve Ad Requests"
-,verve_reports_ads_filled
-,(CASE WHEN verve_reports_ad_calls>0 THEN verve_reports_ads_filled::float/verve_reports_ad_calls ELSE null END) as "Verve Fill Rate"
-,(adnetwork_reports_ad_calls-verve_reports_ad_calls) as "Discrepancy Ad Requests"
-,(adnetwork_reports_ads_filled-verve_reports_ads_filled) as "Discrepancy Ad Filled"
-,((CASE WHEN adnetwork_reports_ad_calls>0 THEN adnetwork_reports_ads_filled::float/adnetwork_reports_ad_calls ELSE null END)-(CASE WHEN verve_reports_ad_calls>0 THEN verve_reports_ads_filled::float/verve_reports_ad_calls ELSE null END)) as "Discrepancy Ad Fill Rate"
-,adnetwork_reports_clicks
-,adnetwork_reports_gross
-,(adnetwork_reports_gross-adnetwork_reports_gross_yesterday) as "Daily Delta Gross"
-,(CASE WHEN adnetwork_reports_clicks>0 THEN adnetwork_reports_gross::float/adnetwork_reports_clicks ELSE null END) as "CPC"
-,(CASE WHEN adnetwork_reports_ads_filled>0 THEN adnetwork_reports_clicks::float/adnetwork_reports_ads_filled ELSE null END) as "CTR"
-,(CASE WHEN adnetwork_reports_ads_filled>0 THEN adnetwork_reports_gross::float*1000/adnetwork_reports_ads_filled ELSE null END) as "CPM"
+,SUM(adnetwork_reports_ad_calls) as "Ad requests"
+,SUM(adnetwork_reports_ads_filled) as adnetwork_reports_ads_filled
+,(CASE WHEN SUM(adnetwork_reports_ad_calls)>0 THEN SUM(adnetwork_reports_ads_filled)::float/SUM(adnetwork_reports_ad_calls) ELSE null END) as "Ad Fill Rate"
+,((CASE WHEN SUM(adnetwork_reports_ad_calls)>0 THEN SUM(adnetwork_reports_ads_filled)::float/SUM(adnetwork_reports_ad_calls) ELSE null END)-(CASE WHEN SUM(adnetwork_reports_ad_calls_yesterday)>0 THEN SUM(adnetwork_reports_ads_filled_yesterday)::float/SUM(adnetwork_reports_ad_calls_yesterday) ELSE null END)) AS "Ad Delta"
+,SUM(verve_reports_ad_calls) as "Verve Ad Requests"
+,SUM(verve_reports_ads_filled) as verve_reports_ads_filled
+,(CASE WHEN SUM(verve_reports_ad_calls)>0 THEN SUM(verve_reports_ads_filled)::float/SUM(verve_reports_ad_calls) ELSE null END) as "Verve Fill Rate"
+,(SUM(adnetwork_reports_ad_calls)-SUM(verve_reports_ad_calls)) as "Discrepancy Ad Requests"
+,(SUM(adnetwork_reports_ads_filled)-SUM(verve_reports_ads_filled)) as "Discrepancy Ad Filled"
+,((CASE WHEN SUM(adnetwork_reports_ad_calls)>0 THEN SUM(adnetwork_reports_ads_filled)::float/SUM(adnetwork_reports_ad_calls) ELSE null END)-(CASE WHEN SUM(verve_reports_ad_calls)>0 THEN SUM(verve_reports_ads_filled)::float/SUM(verve_reports_ad_calls) ELSE null END)) as "Discrepancy Ad Fill Rate"
+,SUM(adnetwork_reports_clicks) as adnetwork_reports_clicks
+,SUM(adnetwork_reports_gross) as adnetwork_reports_gross
+,(SUM(adnetwork_reports_gross)-SUM(adnetwork_reports_gross_yesterday)) as "Daily Delta Gross"
+,(CASE WHEN SUM(adnetwork_reports_clicks)>0 THEN SUM(adnetwork_reports_gross)::float/SUM(adnetwork_reports_clicks) ELSE null END) as "CPC"
+,(CASE WHEN SUM(adnetwork_reports_ads_filled)>0 THEN SUM(adnetwork_reports_clicks)::float/SUM(adnetwork_reports_ads_filled) ELSE null END) as "CTR"
+,(CASE WHEN SUM(adnetwork_reports_ads_filled)>0 THEN SUM(adnetwork_reports_gross)::float*1000/SUM(adnetwork_reports_ads_filled) ELSE null END) as "CPM"
 FROM adsops.daily_agg_verve_ads_by_remnant
 WHERE is_active=true
-AND full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
-ORDER BY full_date,adnetwork_name]]>
+AND month_since_2005  BETWEEN $P{p_start_month_since_2005}::int AND $P{p_end_month_since_2005}::int
+GROUP BY calendar_year_month,month_since_2005,adnetwork_id,adnetwork_name
+ORDER BY month_since_2005]]>
 	</queryString>
-	<field name="Date" class="java.sql.Date"/>
+	<field name="Month" class="java.lang.String"/>
 	<field name="adnetwork_id" class="java.lang.Integer"/>
 	<field name="Ad Network" class="java.lang.String"/>
-	<field name="Ad requests" class="java.lang.Double"/>
-	<field name="adnetwork_reports_ads_filled" class="java.lang.Double"/>
+	<field name="Ad requests" class="java.lang.Long"/>
+	<field name="adnetwork_reports_ads_filled" class="java.lang.Long"/>
 	<field name="Ad Fill Rate" class="java.lang.Double"/>
 	<field name="Ad Delta" class="java.lang.Double"/>
-	<field name="Verve Ad Requests" class="java.lang.Double"/>
-	<field name="verve_reports_ads_filled" class="java.lang.Double"/>
+	<field name="Verve Ad Requests" class="java.lang.Long"/>
+	<field name="verve_reports_ads_filled" class="java.lang.Long"/>
 	<field name="Verve Fill Rate" class="java.lang.Double"/>
-	<field name="Discrepancy Ad Requests" class="java.lang.Double"/>
-	<field name="Discrepancy Ad Filled" class="java.lang.Double"/>
+	<field name="Discrepancy Ad Requests" class="java.lang.Long"/>
+	<field name="Discrepancy Ad Filled" class="java.lang.Long"/>
 	<field name="Discrepancy Ad Fill Rate" class="java.lang.Double"/>
-	<field name="adnetwork_reports_clicks" class="java.lang.Double"/>
+	<field name="adnetwork_reports_clicks" class="java.lang.Long"/>
 	<field name="adnetwork_reports_gross" class="java.lang.Double"/>
 	<field name="Daily Delta Gross" class="java.lang.Double"/>
 	<field name="CPC" class="java.lang.Double"/>
@@ -76,7 +77,7 @@ ORDER BY full_date,adnetwork_name]]>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Date]]></text>
+				<text><![CDATA[Month]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="boder" x="91" y="20" width="150" height="20" backcolor="#006600"/>
@@ -289,12 +290,12 @@ ORDER BY full_date,adnetwork_name]]>
 	</columnHeader>
 	<detail>
 		<band height="20">
-			<textField pattern="yyyy-MM-dd">
-				<reportElement style="boder" x="0" y="0" width="91" height="20"/>
-				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.util.Date"><![CDATA[$F{Date}]]></textFieldExpression>
-			</textField>
 			<textField>
+				<reportElement style="boder" x="0" y="0" width="91" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Month}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
 				<reportElement style="boder" x="91" y="0" width="150" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{Ad Network}]]></textFieldExpression>
@@ -305,12 +306,12 @@ ORDER BY full_date,adnetwork_name]]>
 					<leftPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Ad requests}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{Ad requests}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0" isBlankWhenNull="true">
 				<reportElement style="boder" x="332" y="0" width="91" height="20"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{adnetwork_reports_ads_filled}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{adnetwork_reports_ads_filled}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %" isBlankWhenNull="true">
 				<reportElement style="boder" x="423" y="0" width="91" height="20"/>
@@ -331,12 +332,12 @@ ORDER BY full_date,adnetwork_name]]>
 					<leftPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Verve Ad Requests}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{Verve Ad Requests}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0" isBlankWhenNull="true">
 				<reportElement style="boder" x="696" y="0" width="91" height="20"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{verve_reports_ads_filled}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{verve_reports_ads_filled}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %" isBlankWhenNull="true">
 				<reportElement style="boder" x="787" y="0" width="91" height="20"/>
@@ -349,12 +350,12 @@ ORDER BY full_date,adnetwork_name]]>
 					<leftPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Discrepancy Ad Requests}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{Discrepancy Ad Requests}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0" isBlankWhenNull="true">
 				<reportElement style="boder" x="969" y="0" width="91" height="20"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Discrepancy Ad Filled}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{Discrepancy Ad Filled}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %" isBlankWhenNull="true">
 				<reportElement style="boder" x="1060" y="0" width="91" height="20"/>
@@ -367,7 +368,7 @@ ORDER BY full_date,adnetwork_name]]>
 					<leftPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{adnetwork_reports_clicks}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{adnetwork_reports_clicks}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement style="boder" x="1242" y="0" width="91" height="20"/>
