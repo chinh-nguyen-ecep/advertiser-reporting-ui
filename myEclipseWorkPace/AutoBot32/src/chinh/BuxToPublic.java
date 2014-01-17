@@ -277,7 +277,7 @@ public class BuxToPublic {
 	private void showDonate(){
 		String message="";
 		try {
-			message=DatabaseConnection.getText("http://deplao.org/autobots/donation.htlm");
+			message=DatabaseConnection.getText("http://deplao.org/autobots/donation.html");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
