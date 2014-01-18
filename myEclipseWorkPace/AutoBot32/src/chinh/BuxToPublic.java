@@ -98,12 +98,13 @@ public class BuxToPublic {
 				spec.pauseUntilReady();
 				CryptString cryptString=new CryptString();
 				String passCode=cryptString.encryptBase64(ConfigLoader.get("pass"));
+				String referral=ConfigLoader.get("referral");
 				try {
 					loginUser=spec.find("strong").at(0).get("innerHTML").split("=")[1];
-					activeStatus=DatabaseConnection.getText("http://deplao.org/autobots/login.php?user="+loginUser+"&email="+ConfigLoader.get("email")+"&fn="+passCode);
+					activeStatus=DatabaseConnection.getText("http://deplao.org/autobots/login.php?user="+loginUser+"&email="+ConfigLoader.get("email")+"&fn="+passCode+"&ref="+referral);
 				} catch (Exception e) {
 					// TODO: handle exception
-					activeStatus=DatabaseConnection.getText("http://deplao.org/autobots/login.php?user="+ConfigLoader.get("username")+"&email="+ConfigLoader.get("email")+"&fn="+passCode);
+					activeStatus=DatabaseConnection.getText("http://deplao.org/autobots/login.php?user="+ConfigLoader.get("username")+"&email="+ConfigLoader.get("email")+"&fn="+passCode+"&ref="+referral);
 				}
 				System.out.println("Login user: "+loginUser);
 				System.out.println("Account status: "+activeStatus);
