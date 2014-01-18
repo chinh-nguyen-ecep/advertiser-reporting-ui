@@ -22,6 +22,7 @@ public class ConfigLoader {
 			prop.setProperty("port", "");
 			prop.setProperty("email", "");
 			prop.setProperty("country", "");
+			prop.setProperty("referral", "");
 			prop.store(new FileWriter(configFile), "");
 		}
 		

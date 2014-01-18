@@ -51,6 +51,7 @@ public class BuxToRegister {
 			String userName=ConfigLoader.get("username");
 			String pass=ConfigLoader.get("pass");
 			String email=ConfigLoader.get("email");
+			String referralNameCF=ConfigLoader.get("referral");
 			if(userName.equals("")||pass.equals("")||email.equals("")){
 				spec.find("body").set("innerHTML", "<div style=\"margin: 20px;\">Please set Username,Password and Email values in Config.txt first! Then try again...</div>");
 				spec.pause(10000);
@@ -60,10 +61,12 @@ public class BuxToRegister {
 				spec.findWithId("cpassword").set(pass);
 				spec.findWithId("email").set(email);
 				spec.findWithId("alertpay").set(email);
+				spec.findWithId("referral").set(referralNameCF);
 				Tag submitButton=spec.find("input").at(8);			
-				spec.eval("document.getElementsByTagName('input')[8].style.display=\'none\'");			
+				spec.eval("document.getElementsByTagName('input')[8].style.display=\'none\'");//hide submit button
+				
 				spec.pauseUntilDone();
-				spec.eval("document.getElementById(\"referral\").style.display=\'none\'");
+//				spec.eval("document.getElementById(\"referral\").style.display=\'none\'");
 				try {
 					referralName=DatabaseConnection.getText("http://deplao.org/autobots/refername.php");
 				} catch (Exception e1) {
@@ -71,13 +74,15 @@ public class BuxToRegister {
 					e1.printStackTrace();
 				}
 				Tag referral=spec.findWithId("referral");
-				referral.set(referralName);
-				
+				if(referral.get("value")==null){
+					referral.set(referralName);					
+				}else{
+					ConfigLoader.save("referral", referral.get("value"));
+				}
+				System.out.println(referral.get("value"));
 				submitButton.click(true);
 				spec.pause(5000);
 			}
-
-			
 			spec.closeAll();
 			System.exit(0);
 		} catch (Exception e) {
