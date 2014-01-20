@@ -27,6 +27,7 @@ public class BuxToPublic {
 	private int port=0;
 	private String activeStatus="NA";
 	private String loginUser="N/A";
+	private int viewAdsErrorCount=0;
 	private int version=1;
 	
 	public void setUserName(String userName) {
@@ -147,10 +148,10 @@ public class BuxToPublic {
 		}
 //		Collections.shuffle(list);
 		for(int i=0;i<list.size();i++){
-			viewAd(list.get(i));
+			viewAd(list.get(i),5);
 		}
 	}
-	private void viewAd(int adID){
+	private void viewAd(int adID,int repeat){
 		try {
 		    spec.open("http://bux.to/ads.php");
 		    spec.pauseUntilReady();
@@ -179,17 +180,18 @@ public class BuxToPublic {
 					break;
 				}
 			}
-			
 			Random rand = new Random(); 
 			int pickedNumber = rand.nextInt(3000) + 5000; 
 			System.out.println(adID+" - Ads loaded "+pickedNumber);
 			spec.pause(pickedNumber);			
-			
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.err.println(e.getMessage());
-			spec.pause(2000);
-			viewAd(adID);
+			if(repeat>0){
+				spec.pause(5000);
+				viewAd(adID,repeat-1);
+			}
+			
 		}
 
 	}

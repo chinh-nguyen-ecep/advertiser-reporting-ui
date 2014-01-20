@@ -137,7 +137,7 @@ public class CryptString {
             String pass="adminsanchikaro";
 //            String encryptedString2=crypt2.encryptBase64(pass);
 //            System.out.println("Encrypted String:"+encryptedString2);
-            String unencryptedString2=crypt2.decryptBase64("K8OHBq8pP18VN2BPWn2vHA==");
+            String unencryptedString2=crypt2.decryptBase64("lTGYA86aJ+0=");
             System.out.println("UnEncrypted String:"+unencryptedString2);
 
         } catch (Exception e) {
