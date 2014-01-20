@@ -379,7 +379,7 @@ ORDER BY full_date,adnetwork_name]]>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Daily Delta Gross}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00 %" isBlankWhenNull="true">
+			<textField pattern="#,##0.00 $" isBlankWhenNull="true">
 				<reportElement style="boder" x="1446" y="0" width="64" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{CPC}]]></textFieldExpression>
@@ -389,7 +389,7 @@ ORDER BY full_date,adnetwork_name]]>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{CTR}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00 %" isBlankWhenNull="true">
+			<textField pattern="#,##0.00 $" isBlankWhenNull="true">
 				<reportElement style="boder" x="1574" y="0" width="64" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{CPM}]]></textFieldExpression>
