@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Daily verve Ads" pageWidth="1684" pageHeight="1190" orientation="Landscape" columnWidth="1644" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="0.9982500000000003"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="612"/>
 	<property name="ireport.y" value="0"/>
 	<style name="boder">
 		<box leftPadding="5" rightPadding="5">
@@ -35,13 +35,13 @@ full_date as "Date"
 ,(CASE WHEN verve_reports_ad_calls>0 THEN verve_reports_ads_filled::float/verve_reports_ad_calls ELSE null END) as "Verve Fill Rate"
 ,(adnetwork_reports_ad_calls-verve_reports_ad_calls) as "Discrepancy Ad Requests"
 ,(adnetwork_reports_ads_filled-verve_reports_ads_filled) as "Discrepancy Ad Filled"
-,((CASE WHEN adnetwork_reports_ad_calls>0 THEN adnetwork_reports_ads_filled::float/adnetwork_reports_ad_calls ELSE null END)-(CASE WHEN verve_reports_ad_calls>0 THEN verve_reports_ads_filled::float/verve_reports_ad_calls ELSE null END)) as "Discrepancy Ad Fill Rate"
+,(CASE WHEN verve_reports_ads_filled>0 THEN 1-(adnetwork_reports_ads_filled::float/verve_reports_ads_filled) ELSE null END) as "Filled Impressions Discrepancy"
 ,adnetwork_reports_clicks
 ,adnetwork_reports_gross
 ,(adnetwork_reports_gross-adnetwork_reports_gross_yesterday) as "Daily Delta Gross"
 ,(CASE WHEN adnetwork_reports_clicks>0 THEN adnetwork_reports_gross::float/adnetwork_reports_clicks ELSE null END) as "CPC"
-,(CASE WHEN adnetwork_reports_ads_filled>0 THEN adnetwork_reports_clicks::float/adnetwork_reports_ads_filled ELSE null END) as "CTR"
-,(CASE WHEN adnetwork_reports_ads_filled>0 THEN adnetwork_reports_gross::float*1000/adnetwork_reports_ads_filled ELSE null END) as "CPM"
+,(CASE WHEN adnetwork_reports_ads_filled>0 THEN adnetwork_reports_clicks::float/verve_reports_ads_filled ELSE null END) as "CTR"
+,(CASE WHEN adnetwork_reports_ads_filled>0 THEN adnetwork_reports_gross::float/(verve_reports_ads_filled::float/1000) ELSE null END) as "CPM"
 FROM adsops.daily_agg_verve_ads_by_remnant
 WHERE is_active=true
 AND full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
@@ -50,17 +50,17 @@ ORDER BY full_date,adnetwork_name]]>
 	<field name="Date" class="java.sql.Date"/>
 	<field name="adnetwork_id" class="java.lang.Integer"/>
 	<field name="Ad Network" class="java.lang.String"/>
-	<field name="Ad requests" class="java.lang.Double"/>
-	<field name="adnetwork_reports_ads_filled" class="java.lang.Double"/>
+	<field name="Ad requests" class="java.lang.Integer"/>
+	<field name="adnetwork_reports_ads_filled" class="java.lang.Integer"/>
 	<field name="Ad Fill Rate" class="java.lang.Double"/>
 	<field name="Ad Delta" class="java.lang.Double"/>
-	<field name="Verve Ad Requests" class="java.lang.Double"/>
-	<field name="verve_reports_ads_filled" class="java.lang.Double"/>
+	<field name="Verve Ad Requests" class="java.lang.Integer"/>
+	<field name="verve_reports_ads_filled" class="java.lang.Integer"/>
 	<field name="Verve Fill Rate" class="java.lang.Double"/>
-	<field name="Discrepancy Ad Requests" class="java.lang.Double"/>
-	<field name="Discrepancy Ad Filled" class="java.lang.Double"/>
-	<field name="Discrepancy Ad Fill Rate" class="java.lang.Double"/>
-	<field name="adnetwork_reports_clicks" class="java.lang.Double"/>
+	<field name="Discrepancy Ad Requests" class="java.lang.Integer"/>
+	<field name="Discrepancy Ad Filled" class="java.lang.Integer"/>
+	<field name="Filled Impressions Discrepancy" class="java.lang.Double"/>
+	<field name="adnetwork_reports_clicks" class="java.lang.Integer"/>
 	<field name="adnetwork_reports_gross" class="java.lang.Double"/>
 	<field name="Daily Delta Gross" class="java.lang.Double"/>
 	<field name="CPC" class="java.lang.Double"/>
@@ -121,13 +121,6 @@ ORDER BY full_date,adnetwork_name]]>
 			</staticText>
 			<staticText>
 				<reportElement style="boder" x="514" y="20" width="91" height="20" backcolor="#006600"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Delta]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="boder" x="605" y="20" width="91" height="20" backcolor="#006600"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="1.0"/>
@@ -140,14 +133,14 @@ ORDER BY full_date,adnetwork_name]]>
 				<text><![CDATA[Ad Requests]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="696" y="20" width="91" height="20" backcolor="#006600"/>
+				<reportElement style="boder" x="605" y="20" width="91" height="20" backcolor="#006600"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Ads Filled]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="787" y="20" width="91" height="20" backcolor="#006600"/>
+				<reportElement style="boder" x="696" y="20" width="91" height="20" backcolor="#006600"/>
 				<box>
 					<rightPen lineWidth="1.0"/>
 				</box>
@@ -157,66 +150,66 @@ ORDER BY full_date,adnetwork_name]]>
 				<text><![CDATA[Fill Rate]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="878" y="20" width="91" height="20" backcolor="#006600"/>
+				<reportElement style="boder" x="787" y="20" width="91" height="20" backcolor="#006600"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Ad Requests]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="969" y="20" width="91" height="20" backcolor="#006600"/>
+				<reportElement style="boder" x="878" y="20" width="91" height="20" backcolor="#006600"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Ads Filled]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="1060" y="20" width="91" height="20" backcolor="#009900"/>
+				<reportElement style="boder" x="969" y="20" width="188" height="20" backcolor="#009900"/>
 				<box>
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Fill Rate]]></text>
+				<text><![CDATA[Filled Impressions Discrepancy]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="1151" y="20" width="91" height="20" backcolor="#006600"/>
+				<reportElement style="boder" x="1157" y="20" width="91" height="20" backcolor="#006600"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Clicks/Requests]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="1242" y="20" width="91" height="20" backcolor="#006600"/>
+				<reportElement style="boder" x="1248" y="20" width="91" height="20" backcolor="#006600"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Gross $]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="1333" y="20" width="113" height="20" backcolor="#006600"/>
+				<reportElement style="boder" x="1339" y="20" width="113" height="20" backcolor="#006600"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Daily Delta Gross $]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="1446" y="20" width="64" height="20" backcolor="#006600"/>
+				<reportElement style="boder" x="1452" y="20" width="64" height="20" backcolor="#006600"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[CPC]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="1510" y="20" width="64" height="20" backcolor="#006600"/>
+				<reportElement style="boder" x="1516" y="20" width="64" height="20" backcolor="#006600"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[CTR]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="1574" y="20" width="64" height="20" backcolor="#006600"/>
+				<reportElement style="boder" x="1580" y="20" width="64" height="20" backcolor="#006600"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -237,14 +230,7 @@ ORDER BY full_date,adnetwork_name]]>
 				<text><![CDATA[Ad Network Report]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="514" y="0" width="91" height="20" backcolor="#006600"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="boder" x="605" y="0" width="273" height="20" backcolor="#006600"/>
+				<reportElement style="boder" x="514" y="0" width="273" height="20" backcolor="#006600"/>
 				<box leftPadding="5" rightPadding="5">
 					<leftPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
@@ -255,7 +241,7 @@ ORDER BY full_date,adnetwork_name]]>
 				<text><![CDATA[Verve Report]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="878" y="0" width="273" height="20" backcolor="#006600"/>
+				<reportElement style="boder" x="787" y="0" width="370" height="20" backcolor="#006600"/>
 				<box>
 					<rightPen lineWidth="1.0"/>
 				</box>
@@ -265,7 +251,7 @@ ORDER BY full_date,adnetwork_name]]>
 				<text><![CDATA[Discrepancy]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="1151" y="0" width="487" height="20" backcolor="#006600"/>
+				<reportElement style="boder" x="1157" y="0" width="487" height="20" backcolor="#006600"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -299,100 +285,95 @@ ORDER BY full_date,adnetwork_name]]>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{Ad Network}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0" isBlankWhenNull="true">
+			<textField pattern="" isBlankWhenNull="true">
 				<reportElement style="boder" x="241" y="0" width="91" height="20"/>
 				<box>
 					<leftPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Ad requests}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Ad requests}==null ? "N/A" : new DecimalFormat("###,##0").format($F{Ad requests}) )]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0" isBlankWhenNull="true">
+			<textField pattern="" isBlankWhenNull="true">
 				<reportElement style="boder" x="332" y="0" width="91" height="20"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{adnetwork_reports_ads_filled}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $F{adnetwork_reports_ads_filled}==null ? "N/A" : new DecimalFormat("###,##0").format($F{adnetwork_reports_ads_filled}) )]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00 %" isBlankWhenNull="true">
+			<textField pattern="" isBlankWhenNull="true">
 				<reportElement style="boder" x="423" y="0" width="91" height="20"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Ad Fill Rate}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[
+( $F{Ad Fill Rate}==null ? "N/A" : new DecimalFormat("###,##0.00 %").format($F{Ad Fill Rate}) )]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00 %" isBlankWhenNull="true">
+			<textField pattern="" isBlankWhenNull="true">
 				<reportElement style="boder" x="514" y="0" width="91" height="20"/>
 				<box>
 					<leftPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Ad Delta}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Verve Ad Requests}==null ? "N/A" : new DecimalFormat("###,##0").format($F{Verve Ad Requests}) )]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0" isBlankWhenNull="true">
+			<textField pattern="" isBlankWhenNull="true">
 				<reportElement style="boder" x="605" y="0" width="91" height="20"/>
-				<box>
-					<leftPen lineWidth="1.0"/>
-				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Verve Ad Requests}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $F{verve_reports_ads_filled}==null ? "N/A" : new DecimalFormat("###,##0").format($F{verve_reports_ads_filled}) )]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0" isBlankWhenNull="true">
+			<textField pattern="" isBlankWhenNull="true">
 				<reportElement style="boder" x="696" y="0" width="91" height="20"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{verve_reports_ads_filled}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Verve Fill Rate}==null ? "N/A" : new DecimalFormat("###,##0.00 %").format($F{Verve Fill Rate}) )]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00 %" isBlankWhenNull="true">
+			<textField pattern="" isBlankWhenNull="true">
 				<reportElement style="boder" x="787" y="0" width="91" height="20"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Verve Fill Rate}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Discrepancy Ad Requests}==null ? "N/A" : new DecimalFormat("###,##0").format($F{Discrepancy Ad Requests}) )]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0" isBlankWhenNull="true">
+			<textField pattern="" isBlankWhenNull="true">
 				<reportElement style="boder" x="878" y="0" width="91" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Discrepancy Ad Filled}==null ? "N/A" : new DecimalFormat("###,##0").format($F{Discrepancy Ad Filled}) )]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement style="boder" x="969" y="0" width="188" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[
+( $F{Filled Impressions Discrepancy}==null ? "N/A" : new DecimalFormat("###,##0.00 %").format($F{Filled Impressions Discrepancy}) )]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement style="boder" x="1157" y="0" width="91" height="20"/>
 				<box>
 					<leftPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Discrepancy Ad Requests}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $F{adnetwork_reports_clicks}==null ? "N/A" : new DecimalFormat("###,##0").format($F{adnetwork_reports_clicks}) )]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0" isBlankWhenNull="true">
-				<reportElement style="boder" x="969" y="0" width="91" height="20"/>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement style="boder" x="1248" y="0" width="91" height="20"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Discrepancy Ad Filled}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[
+($F{adnetwork_reports_gross}==null ? "N/A" : new DecimalFormat("$ ###,##0.00").format($F{adnetwork_reports_gross}) )]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00 %" isBlankWhenNull="true">
-				<reportElement style="boder" x="1060" y="0" width="91" height="20"/>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement style="boder" x="1339" y="0" width="113" height="20"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Discrepancy Ad Fill Rate}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{Daily Delta Gross}==null ? "N/A" : new DecimalFormat("$ #,##0.00;$ -#,##0.00").format($F{Daily Delta Gross}) )]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0" isBlankWhenNull="true">
-				<reportElement style="boder" x="1151" y="0" width="91" height="20"/>
-				<box>
-					<leftPen lineWidth="1.0"/>
-				</box>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement style="boder" x="1452" y="0" width="64" height="20"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{adnetwork_reports_clicks}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{CPC}==null ? "N/A" : new DecimalFormat("$ ###,##0.00").format($F{CPC}) )]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,##0.00" isBlankWhenNull="true">
-				<reportElement style="boder" x="1242" y="0" width="91" height="20"/>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement style="boder" x="1516" y="0" width="64" height="20"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{adnetwork_reports_gross}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $F{CTR}==null ? "N/A" : new DecimalFormat("###,##0.00 %").format($F{CTR}) )]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,##0.00" isBlankWhenNull="true">
-				<reportElement style="boder" x="1333" y="0" width="113" height="20"/>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement style="boder" x="1580" y="0" width="64" height="20"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Daily Delta Gross}]]></textFieldExpression>
-			</textField>
-			<textField pattern="$ #,##0.00" isBlankWhenNull="true">
-				<reportElement style="boder" x="1446" y="0" width="64" height="20"/>
-				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{CPC}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00 %" isBlankWhenNull="true">
-				<reportElement style="boder" x="1510" y="0" width="64" height="20"/>
-				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{CTR}]]></textFieldExpression>
-			</textField>
-			<textField pattern="$ #,##0.00" isBlankWhenNull="true">
-				<reportElement style="boder" x="1574" y="0" width="64" height="20"/>
-				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{CPM}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{CPM}==null ? "N/A" : new DecimalFormat("$ ###,##0.00").format($F{CPM}) )]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
