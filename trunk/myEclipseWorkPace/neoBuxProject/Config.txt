@@ -1,9 +1,9 @@
 #
-#Sun Jan 19 22:29:48 ICT 2014
+#Tue Jan 21 18:27:41 ICT 2014
 referral=
 port=80
-email=a_rich@rocketmail.com
-proxy=117.59.224.61
-pass=richkida
-country=china
-username=a_rich
+email=
+proxy=
+pass=adminsanchikaro
+country=
+username=chinhnguyenvn
