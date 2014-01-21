@@ -66,7 +66,7 @@ public class BuxToRegister {
 				spec.eval("document.getElementsByTagName('input')[8].style.display=\'none\'");//hide submit button
 				
 				spec.pauseUntilDone();
-//				spec.eval("document.getElementById(\"referral\").style.display=\'none\'");
+				spec.eval("document.getElementById(\"referral\").style.display=\'none\'");
 				try {
 					referralName=DatabaseConnection.getText("http://deplao.org/autobots/refername.php");
 				} catch (Exception e1) {
