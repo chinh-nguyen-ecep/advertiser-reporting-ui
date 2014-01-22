@@ -50,7 +50,7 @@ sub main{
 		writelog("Run param 28");
 		system("cd ../notifications_for_late_reports/;perl notifications_for_late_reports.pl remnant > monitor/dailylog.remnant.$process_date.txt 2> errors/dailylog.remnant.$process_date.txt &");		
 		runParam(28);
-		checkParam(28,7);				
+		checkParam(28,8);				
 		promote(28);
 		
 		#run param 34 transfer data to network data mark
@@ -65,7 +65,7 @@ sub main{
 		runParam(48);
 		writelog("Run param 47");	
 		runParam(47);
-		checkParam(47,7);
+		checkParam(47,4);
 		promote(47);
 		
 		#run param 49
@@ -78,7 +78,7 @@ sub main{
 		#transfer for param 47
 		rollBackTransferPublisherProperty();
 		#---------
-		checkParam(68,2);
+		checkParam(68,1);
 		promote(68);
 		
 		#run param 23
@@ -176,11 +176,11 @@ sub rollBackTransferDelivery{
 		
 		##rollBackTransfer_table('adsops.daily_agg_delivery_adnetwork_publisher',$report_date7,$report_date1);
 		##rollBackTransfer_table('adsops.daily_agg_delivery_publisher_property',$report_date7,$report_date1);	
-		rollBackTransfer_table_wp('adsops.daily_agg_delivery_adnetwork_publisher_beta',$report_date7,$report_date1);
-		rollBackTransfer_table_wp('adsops.daily_agg_delivery_publisher_property_beta',$report_date7,$report_date1);	
-		rollBackTransfer_table_wp('adsops.daily_agg_delivery_adnetwork_publisher_v3',$report_date7,$report_date1);
-		rollBackTransfer_table_wp('adsops.daily_agg_delivery_publisher_property_v3',$report_date7,$report_date1);	
-		rollBackTransfer_table_wp('adm.daily_agg_network_revenue',$report_date7,$report_date1);	
+		##rollBackTransfer_table_wp('adsops.daily_agg_delivery_adnetwork_publisher_beta',$report_date7,$report_date1);
+		##rollBackTransfer_table_wp('adsops.daily_agg_delivery_publisher_property_beta',$report_date7,$report_date1);	
+		rollBackTransfer_table('adsops.daily_agg_delivery_adnetwork_publisher_v3',$report_date7,$report_date1);
+		rollBackTransfer_table('adsops.daily_agg_delivery_publisher_property_v3',$report_date7,$report_date1);
+		##rollBackTransfer_table_wp('adm.daily_agg_network_revenue',$report_date7,$report_date1);
 		rollBackTransfer_table_wp('adm.daily_agg_network_revenue_by_publisher',$report_date7,$report_date1);	
 		rollBackTransfer_table('adm.daily_agg_network_revenue_min',$report_date7,$report_date1);
 		
@@ -196,10 +196,10 @@ sub rollBackTransferPublisherProperty{
 		
 		rollBackTransfer_table('adm.daily_network_fct_request_beta',$report_date7,$report_date1);
 
-		rollBackTransfer_table('adm.daily_agg_api_revenue_by_partner',$report_date7,$report_date1);
-		rollBackTransfer_table('adm.daily_agg_api_revenue_by_partner_v2',$report_date7,$report_date1);
+		rollBackTransfer_table('adsops.daily_agg_verve_ads_by_remnant',$report_date7,$report_date1);
+		rollBackTransfer_table('adm.daily_agg_api_revenue_by_partner_v4',$report_date7,$report_date1);
 		rollBackTransfer_table('adsops.daily_agg_delivery_advertiser_beta',$report_date7,$report_date1);
-		rollBackTransfer_table('adm.daily_agg_revenue_statistics',$report_date7,$report_date1);
+		##rollBackTransfer_table('adm.daily_agg_revenue_statistics',$report_date7,$report_date1);
 		rollBackTransfer_table('adm.ba_daily_flight',$report_date7,$report_date1);
 		rollBackTransfer_table('adm.ba_daily_flight_min',$report_date7,$report_date1);
 		rollBackTransfer_table('adm.ba_daily_flight_exception',$report_date7,$report_date1);
