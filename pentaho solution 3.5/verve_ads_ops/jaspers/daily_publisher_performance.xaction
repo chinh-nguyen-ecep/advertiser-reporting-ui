@@ -82,7 +82,7 @@
       <sources> 
         <request>connectionName</request> 
       </sources>  
-      <default-value><![CDATA[dw3dw3]]></default-value> 
+      <default-value><![CDATA[verveReportConnection]]></default-value> 
     </connectionName> 
   </inputs>
 
