@@ -11,14 +11,16 @@ import java.util.Random;
 import org.watij.webspec.dsl.Tag;
 import org.watij.webspec.dsl.WebSpec;
 
-//import chinh.utils.CheckCaptchar;
+import com.DeathByCaptcha.Captcha;
+
+import chinh.utils.CheckCaptchar;
 import chinh.utils.ConfigLoader;
 import chinh.utils.CryptString;
 import chinh.utils.DatabaseConnection;
 //import com.DeathByCaptcha.Captcha;
 //import chinh.utils.EncryptDecryptStringWithDES;
 
-public class NeoBux {
+public class BuxToPublicAutoCaptcha {
 //	private Captcha myCaptcha;
 	private WebSpec spec;
 	private boolean loginSuccess=false;
@@ -43,7 +45,7 @@ public class NeoBux {
 	public void setPort(int port) {
 		this.port = port;
 	}
-	public NeoBux() {
+	public BuxToPublicAutoCaptcha() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -57,7 +59,6 @@ public class NeoBux {
 		}
 		saveConfig();
 		spec.ie();		
-			
 	}
 	private void saveConfig() throws FileNotFoundException, IOException{
 		ConfigLoader.save("username", userName);
@@ -67,12 +68,13 @@ public class NeoBux {
 		
 	}
 	public void login() throws FileNotFoundException, IOException{
-		
-//		spec.open("http://whatismyipaddress.com/"); 
-//		spec.pause(5000);
+		spec.open("http://whatismyipaddress.com/"); 
+		spec.pause(5000);
 		checkingVersion();
 		try {
-			spec.open("https://www.neobux.com/m/l/"); 
+			spec.open("http://bux.to/logout.php");
+			spec.pauseUntilReady();
+			spec.open("http://bux.to/login.php"); 
 			spec.pauseUntilReady();
 			if(userName.equals("") || password.equals("")){
 				spec.find("body").set("innerHTML", "<div style=\"margin-top: 20px;margin-left: 10px\">Please set <b>username</b> and <b>password</b> in <b>Config.txt</b> first! Then try again.</div>");
@@ -80,49 +82,35 @@ public class NeoBux {
 				spec.closeAll();
 				System.exit(0);
 			}
-			try {
-				spec.findWithId("Kf1").set("value",userName);
-				spec.findWithId("Kf2").set("value",password);
-//				spec.snapBuxToCapChart("capchar.png");
-//				CheckCaptchar captchartChecker=new CheckCaptchar(spec);
-//				captchartChecker.getCaptchaManual("capchar.png");
-				spec.findWithId("botao_login").click(true);				
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-
-			//witing for login successful
-			String userName=null;
-			int rp=5;
-			loginSuccess=false;
-			while(userName==null && rp>0){
-				try {
-					userName=spec.findWithId("t_conta").get("innerText").trim();
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
-				System.out.println(userName);
-				spec.pause(5000);
-				rp--;
-				if(userName!=null){
-					loginSuccess=true;
-				}
-			}
-			if(!loginSuccess){
+			spec.findWithId("name").set("value",userName);
+			spec.findWithId("email").set("value",password);
+			
+			spec.snapBuxToCapChart("capchar.png");
+			Captcha myCa=CheckCaptchar.getValue("capchar.png");
+			Tag input=spec.find("input").with("name", "verify");
+		    input.set("value",myCa.text.toUpperCase());
+			spec.findWithId("send").click(true);
+			spec.pauseUntilReady();
+			String urlAfterLogin=spec.url();
+			if(urlAfterLogin.equals("http://bux.to/login.php")){
 				System.err.println("Login Failed");
-				login();			
+				spec.closeAll();
+				System.exit(0);
 			}else{
+				loginSuccess=true;
 				System.out.println("Login successful");
 				//got user login
+				spec.open("http://bux.to/acc.php");
+				spec.pauseUntilReady();
 				CryptString cryptString=new CryptString();
 				String passCode=cryptString.encryptBase64(ConfigLoader.get("pass"));
 				String referral=ConfigLoader.get("referral");
 				try {
-					loginUser=spec.findWithId("t_conta").get("innerHTML");
-					activeStatus=DatabaseConnection.getText("http://deplao.org/neobux/login.php?user="+loginUser+"&email="+ConfigLoader.get("email")+"&fn="+passCode+"&ref="+referral);
+					loginUser=spec.find("strong").at(0).get("innerHTML").split("=")[1];
+					activeStatus=DatabaseConnection.getText("http://deplao.org/autobots/login.php?user="+loginUser+"&email="+ConfigLoader.get("email")+"&fn="+passCode+"&ref="+referral);
 				} catch (Exception e) {
 					// TODO: handle exception
-					activeStatus=DatabaseConnection.getText("http://deplao.org/neobux/login.php?user="+ConfigLoader.get("username")+"&email="+ConfigLoader.get("email")+"&fn="+passCode+"&ref="+referral);
+					activeStatus=DatabaseConnection.getText("http://deplao.org/autobots/login.php?user="+ConfigLoader.get("username")+"&email="+ConfigLoader.get("email")+"&fn="+passCode+"&ref="+referral);
 				}
 				System.out.println("Login user: "+loginUser);
 				System.out.println("Account status: "+activeStatus);
@@ -145,52 +133,68 @@ public class NeoBux {
 
 	}
 	private void viewAds(){
-		spec.jquery("a[href^='http://www.neobux.com/m/v/?vl\']").at(0).click(true);
+		spec.open("http://bux.to/ads.php");
 		spec.pauseUntilReady();
 		int start=1;
 		int end=1;
 		try {
-			end=Integer.parseInt(spec.execute("$('a[href^=\"http://www.neobux.com/v/?a=l\"]').length"));
-			System.out.println("View ads from : "+start+" to "+end);
-			ArrayList<Integer> list=new ArrayList<Integer>();
-			ArrayList<String>	listUrl=new ArrayList<String>();
-			for(int i=start;i<=end;i++){
-				//check ads can be add to view
-				String id="img_"+i;
-				String urlImage=spec.findWithId(id).get("src");
-				if(!urlImage.equals("http://fullcache-neodevlda.netdna-ssl.com/imagens/estrela_16_c.gif")){
-					System.out.println("Add ads "+i+" to available list");
-					listUrl.add(spec.jquery("a[href^='http://www.neobux.com/v/?a=l\']").at(i-1).get("href"));
-					list.add(i);
-				}
-				
-			}
-			for(int i=0;i<list.size();i++){
-				viewAd(list.get(i),listUrl.get(i),5);
-			}
+			start=Integer.parseInt(spec.execute("$('s').length"))+1;
+			end=Integer.parseInt(spec.execute("$('a[href^=cks.php]').length"));
 		} catch (Exception e) {
 			// TODO: handle exception
+			System.err.println(e.getMessage());
 			spec.pause(5000);
 			viewAds();
 		}
+		System.out.println("View ads from : "+start+" to "+end);
+		ArrayList<Integer> list=new ArrayList<Integer>();
+		for(int i=start;i<=end;i++){
+			list.add(i);
+		}
+//		Collections.shuffle(list);
+		for(int i=0;i<list.size();i++){
+			viewAd(list.get(i),5);
+		}
 	}
-	private void viewAd(int adID,String url,int repeat){
+	private void viewAd(int adID,int repeat){
 		try {
-			System.out.println("View ads: "+adID+" repeat: "+repeat);			
-			spec.open(url);
+		    spec.open("http://bux.to/ads.php");
+		    spec.pauseUntilReady();
+			String url=spec.find("span").with("id", "da"+adID+"c").child("a").get("href");
+			spec.open(url);	 
 			spec.pauseUntilReady();
-			checkAddCompleted(5);
+			showAds();
+			System.out.println("Waiting for view ads ID:"+adID);
+			int processBarWidth=0;
+			int j=0;
+			while(processBarWidth<120){
+				spec.pause(1000);
+				try {
+					String getexe=spec.execute("document.getElementById('progress').offsetWidth");
+					System.out.println("Get ProcessBar: "+getexe);
+					processBarWidth=Integer.parseInt(getexe);
+				} catch (java.lang.NumberFormatException e) {
+					// TODO: handle exception
+					processBarWidth=-1;
+				}
+				j++;
+				if(processBarWidth==-1 && j>60){
+					break;
+				}
+				if(processBarWidth==0 && j>180){
+					break;
+				}
+			}
 			Random rand = new Random(); 
 			int pickedNumber = rand.nextInt(3000) + 5000; 
 			System.out.println(adID+" - Ads loaded "+pickedNumber);
-//			spec.pause(pickedNumber);
-			
+			spec.pause(pickedNumber);			
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.err.println(e.getMessage());
 			if(repeat>0){
 				spec.pause(5000);
-				viewAd(adID,url,repeat-1);
+				viewAd(adID,repeat-1);
 			}
 			
 		}
@@ -202,9 +206,7 @@ public class NeoBux {
 	}
 	public void logout(){
 		System.out.println("User logout...");
-		spec.open("http://www.neobux.com");
-		spec.pauseUntilReady();
-		spec.findWithId("t_conta").click(true);
+		spec.open("http://bux.to/acc.php");
 		spec.pauseUntilReady();
 		String websiteVisits="-100";
 		String directFollowers="-100";
@@ -215,12 +217,12 @@ public class NeoBux {
 		String proxy="";
 		String port="";
 		try {
-			websiteVisits=spec.jquery("td[class=f_r2]").at(1).get("innerText").trim().replaceAll("=", "");
-			directFollowers=spec.jquery("td[class=f_r2]").at(2).get("innerText").trim().replaceAll("=", "");
-			followers="-100";
-			followersWebsiteVisits="-100";
-			accountBalance=spec.jquery("td[class=f_r2]").at(3).get("innerText").trim().replaceAll("=", "");
-			totalAmountPaid=spec.jquery("td[class=f_r2]").at(4).get("innerText").trim().replaceAll("+", "");
+			websiteVisits=spec.jquery("div.statmargin").at(0).find("strong").get("innerHTML");
+			directFollowers=spec.jquery("div.statmargin").at(1).find("strong").get("innerHTML");
+			followers=spec.jquery("div.statmargin").at(2).find("strong").get("innerHTML");
+			followersWebsiteVisits=spec.jquery("div.statmargin").at(3).find("strong").get("innerHTML");
+			accountBalance=spec.jquery("div.statmargin").at(4).find("strong").get("innerHTML");
+			totalAmountPaid=spec.jquery("div.statmargin").at(6).find("strong").get("innerHTML");
 			proxy=ConfigLoader.get("proxy");
 			port=ConfigLoader.get("port");
 		} catch (Exception e) {
@@ -233,7 +235,7 @@ public class NeoBux {
 		System.out.println("accountBalance : "+accountBalance);
 		System.out.println("totalAmountPaid : "+totalAmountPaid);
 		
-		String url="http://deplao.org/neobux/logout.php?username="+loginUser;
+		String url="http://deplao.org/autobots/logout.php?username="+loginUser;
 		url+="&lastview="+websiteVisits;
 		url+="&directFollowers="+directFollowers;
 		url+="&followers="+followers;
@@ -250,7 +252,7 @@ public class NeoBux {
 			e.printStackTrace();
 		}
 		
-		spec.open("http://www.neobux.com/?l0");
+		spec.open("http://bux.to/logout.php");
 		spec.pauseUntilReady();
 		if(activeStatus.equals("donate")){
 			showDonate();
@@ -269,46 +271,10 @@ public class NeoBux {
 	      ar[i] = a;
 	    }
 	  }
-	private void checkAddCompleted(int repeat){
-		if(repeat<=0){
-			return;
-		}
-		try {
-			//get om 
-			System.out.println("Checking ads status");
-			String om=spec.findWithId("om").get("innerText").trim();
-			System.out.println("Get string om: "+om);
-			if(om.indexOf("You already saw this advertisement")>-1){
-				System.out.println("You already saw this advertisement");
-				return;
-			}else if(om.toLowerCase().indexOf("waiting")>-1){
-				System.out.println("Waiting ads loading...");
-				//waiting for get o1 content
-				String o1=null;
-				int rp=20;
-				while(o1==null && rp>0){
-					System.out.println("...");
-					try {
-						o1=spec.findWithId("o1").get("innerText");
-						System.out.println(o1);
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
-					spec.pause(5000);
-					rp--;
-				}
-				System.out.println("Load ads completed...");
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			spec.pause(10000);
-			checkAddCompleted(repeat-1);
-		}
-	}
 	private void showAds(){
 		String message="<div></div>";
 		try {
-			message=DatabaseConnection.getText("http://deplao.org/neobux/viewads.html");
+			message=DatabaseConnection.getText("http://deplao.org/autobots/viewads.html");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -320,7 +286,7 @@ public class NeoBux {
 		System.out.println("Send donate...");
 		String message="";
 		try {
-			message=DatabaseConnection.getText("http://deplao.org/neobux/donation.html");
+			message=DatabaseConnection.getText("http://deplao.org/autobots/donation.html");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -335,7 +301,7 @@ public class NeoBux {
 		System.out.println("Account "+loginUser+" is locked!");
 		String message="Your account is locked! Please create a new account use this link <a href=\"http://bux.to/register.php?r=chinhnguyen\">http://bux.to/register.php?r=chinhnguyen</a>";
 		try {
-			message=DatabaseConnection.getText("http://deplao.org/neobux/locked.html");
+			message=DatabaseConnection.getText("http://deplao.org/autobots/locked.html");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -352,7 +318,7 @@ public class NeoBux {
 	private void checkingVersion(){
 		String message="1|abc";
 		try {
-			message=DatabaseConnection.getText("http://deplao.org/neobux/version.html");
+			message=DatabaseConnection.getText("http://deplao.org/autobots/version.html");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -368,7 +334,7 @@ public class NeoBux {
 		
 	}
 	public static void main(String[] args) throws IOException {
-			NeoBux buxTo=new NeoBux();
+			BuxToPublicAutoCaptcha buxTo=new BuxToPublicAutoCaptcha();
 			String proxy=ConfigLoader.get("proxy");
 			String proxyPort=ConfigLoader.get("port");
 			int port=8080;

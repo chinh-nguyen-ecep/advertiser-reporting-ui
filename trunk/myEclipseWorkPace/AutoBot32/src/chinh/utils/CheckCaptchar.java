@@ -63,18 +63,18 @@ public class CheckCaptchar {
 //		                client.report(captcha);
 //		            }
 		        }
-		    } catch (AccessDeniedException e) {
-		        /* Access to DBC API denied, check your credentials and/or balance */
-		    	System.out.println(e.getMessage());
-		    } catch (IOException e) {
+		    }  catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} catch (Exception e) {
+				result=getValue(image);
+			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				result=getValue(image);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				result=getValue(image);
 			}
 		return result;
 	}
