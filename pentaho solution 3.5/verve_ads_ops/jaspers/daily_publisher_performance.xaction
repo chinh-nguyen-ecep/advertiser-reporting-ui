@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <action-sequence> 
-  <title>Daily Verve Ads</title>
+  <title>Daily Publisher Performance</title>
   <version>1</version>
   <logging-level>ERROR</logging-level>
   <documentation> 
@@ -82,7 +82,7 @@
       <sources> 
         <request>connectionName</request> 
       </sources>  
-      <default-value><![CDATA[verveReportConnection]]></default-value> 
+      <default-value><![CDATA[dw3dw3]]></default-value> 
     </connectionName> 
   </inputs>
 
@@ -97,22 +97,22 @@
   <resources> 
     <pageTemplate1> 
       <solution-file> 
-        <location>daily_verve_ads/template.html</location>  
+        <location>daily_publisher_performance/template.html</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </pageTemplate1>  
     <report-definition1> 
       <solution-file> 
-        <location>daily_verve_ads/daily_verve_ads.jasper</location>  
+        <location>daily_publisher_performance/daily_publisher_performance.jasper</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </report-definition1>  
-    <report-definition> 
-      <solution-file> 
-        <location>daily_verve_ads/monthly_verve_ads.jasper</location>  
-        <mime-type>text/plain</mime-type> 
-      </solution-file> 
-    </report-definition> 
+    <report-definition>
+      <solution-file>
+        <location>daily_publisher_performance/monthly_publisher_performance.jasper</location>
+        <mime-type>text/plain</mime-type>
+      </solution-file>
+    </report-definition>
   </resources>
   
   <actions> 
@@ -129,9 +129,9 @@
       </action-outputs>
       <component-definition> 
         <live><![CDATA[false]]></live>  
-        <query><![CDATA[SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM adsops.daily_agg_verve_ads_by_remnant WHERE is_active=true
+        <query><![CDATA[SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM adsops.daily_agg_publisher_performance WHERE is_active=true
 UNION ALL
-SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM adsops.daily_agg_verve_ads_by_remnant WHERE is_active=true]]></query> 
+SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM adsops.daily_agg_publisher_performance WHERE is_active=true]]></query> 
       </component-definition> 
     </action-definition>
   
@@ -149,7 +149,7 @@ SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM a
       <component-definition> 
         <live><![CDATA[false]]></live>  
         <query><![CDATA[SELECT calendar_year_month,month_since_2005 
-FROM adsops.daily_agg_verve_ads_by_remnant 
+FROM adsops.daily_agg_publisher_performance
 GROUP BY calendar_year_month,month_since_2005
 ORDER BY month_since_2005 desc]]></query> 
       </component-definition> 
@@ -210,35 +210,34 @@ ORDER BY month_since_2005 desc]]></query>
         <action-inputs> 
           <jndi type="string" mapping="connectionName"/>  
           <p_start_date type="string"/>  
-          <p_end_date type="string"/> 
+          <p_end_date type="string"/>  
+          <output-type type="string" mapping="p_output"/>
         </action-inputs>
         <action-resources> 
           <report-definition mapping="report-definition1"/> 
         </action-resources>
-        <component-definition> 
-          <output-type>html</output-type> 
-        </component-definition> 
+        <component-definition/> 
       </action-definition>
  
     </actions>
   
     <actions> 
       <condition><![CDATA[p_date_mode=='month']]></condition>  
-      <action-definition> 
+      <action-definition>
         <component-name>JasperReportsComponent</component-name>
         <action-type>Jasper</action-type>
-        <action-inputs> 
-          <p_start_month_since_2005 type="string"/>  
-          <jndi type="string" mapping="connectionName"/>  
-          <p_end_month_since_2005 type="string"/>  
-          <output-type type="string" mapping="p_output"/> 
+        <action-inputs>
+          <p_start_month_since_2005 type="string"/>
+          <p_end_month_since_2005 type="string"/>
+          <jndi type="string" mapping="connectionName"/>
+          <output-type type="string" mapping="p_output"/>
         </action-inputs>
-        <action-resources> 
-          <report-definition type="resource"/> 
+        <action-resources>
+          <report-definition type="resource"/>
         </action-resources>
-        <component-definition/> 
+        <component-definition/>
       </action-definition>
- 
+
     </actions>
  
   </actions> 

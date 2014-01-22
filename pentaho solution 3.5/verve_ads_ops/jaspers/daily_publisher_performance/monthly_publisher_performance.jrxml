@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Daily publisher performance" pageWidth="2650" pageHeight="1684" orientation="Landscape" columnWidth="2610" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.3286707500000021"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="boder">
+		<box leftPadding="5" rightPadding="5">
+			<pen lineWidth="0.5"/>
+			<topPen lineWidth="0.5"/>
+			<leftPen lineWidth="0.5"/>
+			<bottomPen lineWidth="0.5"/>
+			<rightPen lineWidth="0.5"/>
+		</box>
+	</style>
+	<parameter name="p_start_month_since_2005" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("0")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_end_month_since_2005" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("0")]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT calendar_year_month as "Month",
+       publisher_id as "Publisher ID"
+	   , publisher_name as "Publisher Name"
+       , property_id as "Property ID"
+	   , property_name as "Property Name"
+       , channel_id as "Channel ID"
+	   , channel_name as "Channel Name"
+       , SUM(impressions) as "Impressions"
+       , SUM(clicks) as "Clicks"
+       , SUM(cta_any) as "Cta Any"
+       , SUM(e_refresh) as "E Refresh"
+       , SUM(e_cta_tap_refresh) as "E Cta Tap Refresh"
+	   , SUM(e_cta_map) as "E Cta Map"
+       , SUM(e_cta_lp) as "E Cta Lp"
+       , SUM(e_cta_call) as "E Cta Call"
+       , SUM(e_cta_cal) as "E Cta Cal"
+       , SUM(e_cta_video) as "E Cta Video"
+       , SUM(e_cta_face) as "E Cta Face"
+       , SUM(e_cta_twit) as "E Cta Twit"
+       , SUM(e_cta_email) as "E Cta Email"
+       , SUM(e_cta_txt) as "E Cta Txt"
+       , SUM(e_cta_tap) as "E Cta Tap"
+       , SUM(e_cta_swipe) as "E Cta Swipe"
+       , SUM(e_cta_save_coupon) as "E Cta Save Coupon"
+       , SUM(e_cta_send_coupon) as "E Cta send Coupon"
+       , SUM(e_duration) as "E Duration"
+       , SUM(e_error) as "E Error"
+       , SUM(e_video0) as "E Video0"
+       , SUM(e_video25) as "E Video25"
+       , SUM(e_video50) as "E Video50"
+       , SUM(e_video75) as "E Video75"
+       , SUM(e_video100) as "E Video100"
+       , max(dt_lastchange) as dt_lastchange
+  FROM adsops.monthly_agg_publisher_performance
+  WHERE is_active =true
+  AND month_since_2005 BETWEEN $P{p_start_month_since_2005}::int AND $P{p_end_month_since_2005}::int
+  GROUP BY
+  calendar_year_month,
+month_since_2005,
+       publisher_id, publisher_name
+       , property_id, property_name
+       , channel_id, channel_name
+  ORDER BY month_since_2005,publisher_name,property_name ,channel_name ;]]>
+	</queryString>
+	<field name="Month" class="java.lang.String"/>
+	<field name="Publisher ID" class="java.lang.Integer"/>
+	<field name="Publisher Name" class="java.lang.String"/>
+	<field name="Property ID" class="java.lang.Integer"/>
+	<field name="Property Name" class="java.lang.String"/>
+	<field name="Channel ID" class="java.lang.Integer"/>
+	<field name="Channel Name" class="java.lang.String"/>
+	<field name="Impressions" class="java.math.BigDecimal"/>
+	<field name="Clicks" class="java.math.BigDecimal"/>
+	<field name="Cta Any" class="java.math.BigDecimal"/>
+	<field name="E Refresh" class="java.math.BigDecimal"/>
+	<field name="E Cta Tap Refresh" class="java.math.BigDecimal"/>
+	<field name="E Cta Map" class="java.math.BigDecimal"/>
+	<field name="E Cta Lp" class="java.math.BigDecimal"/>
+	<field name="E Cta Call" class="java.math.BigDecimal"/>
+	<field name="E Cta Cal" class="java.math.BigDecimal"/>
+	<field name="E Cta Video" class="java.math.BigDecimal"/>
+	<field name="E Cta Face" class="java.math.BigDecimal"/>
+	<field name="E Cta Twit" class="java.math.BigDecimal"/>
+	<field name="E Cta Email" class="java.math.BigDecimal"/>
+	<field name="E Cta Txt" class="java.math.BigDecimal"/>
+	<field name="E Cta Tap" class="java.math.BigDecimal"/>
+	<field name="E Cta Swipe" class="java.math.BigDecimal"/>
+	<field name="E Cta Save Coupon" class="java.math.BigDecimal"/>
+	<field name="E Cta send Coupon" class="java.math.BigDecimal"/>
+	<field name="E Duration" class="java.math.BigDecimal"/>
+	<field name="E Error" class="java.math.BigDecimal"/>
+	<field name="E Video0" class="java.math.BigDecimal"/>
+	<field name="E Video25" class="java.math.BigDecimal"/>
+	<field name="E Video50" class="java.math.BigDecimal"/>
+	<field name="E Video75" class="java.math.BigDecimal"/>
+	<field name="E Video100" class="java.math.BigDecimal"/>
+	<field name="dt_lastchange" class="java.sql.Timestamp"/>
+	<background>
+		<band/>
+	</background>
+	<columnHeader>
+		<band height="20">
+			<staticText>
+				<reportElement style="boder" x="0" y="0" width="73" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Month]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="73" y="0" width="73" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Publisher ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="146" y="0" width="233" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Publisher Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="379" y="0" width="73" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Property ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="452" y="0" width="207" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Property Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="659" y="0" width="73" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Channel ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="732" y="0" width="116" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Channel Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="848" y="0" width="82" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Impressions]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="930" y="0" width="70" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Clicks]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="1000" y="0" width="70" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cta Any]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="1070" y="0" width="70" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[E Refresh]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="1140" y="0" width="70" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[E Cta Tap Refresh]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="1210" y="0" width="70" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[E Cta Map]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="1280" y="0" width="70" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[E Cta Lp]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="1350" y="0" width="70" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[E Cta Call]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="1420" y="0" width="70" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[E Cta Cal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="1490" y="0" width="70" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[E Cta Video]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="1560" y="0" width="70" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[E Cta Face]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="1630" y="0" width="70" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[E Cta Twit]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="1700" y="0" width="70" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[E Cta Email]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="1770" y="0" width="70" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[E Cta Txt]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="1840" y="0" width="70" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[E Cta Tap]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="1910" y="0" width="70" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[E Cta Swipe]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="1980" y="0" width="70" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[E Cta Save Coupon]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="2050" y="0" width="70" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[E Cta send Coupon]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="2120" y="0" width="70" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[E Duration]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="2190" y="0" width="70" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[E Error]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="2260" y="0" width="70" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[E Video0]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="2330" y="0" width="70" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[E Video25]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="2400" y="0" width="70" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[E Video50]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="2470" y="0" width="70" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[E Video75]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="2540" y="0" width="70" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[E Video100]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<textField>
+				<reportElement style="boder" x="73" y="0" width="73" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{Publisher ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="boder" x="146" y="0" width="233" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Publisher Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="boder" x="379" y="0" width="73" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{Property ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="boder" x="452" y="0" width="207" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Property Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="boder" x="659" y="0" width="73" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{Channel ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="boder" x="732" y="0" width="116" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Channel Name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="boder" x="848" y="0" width="82" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{Impressions}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="boder" x="930" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{Clicks}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="boder" x="1000" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{Cta Any}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="boder" x="1070" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{E Refresh}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="boder" x="1140" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{E Cta Tap Refresh}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="boder" x="1210" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{E Cta Map}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="boder" x="1280" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{E Cta Lp}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="boder" x="1350" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{E Cta Call}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="boder" x="1420" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{E Cta Cal}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="boder" x="1490" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{E Cta Video}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="boder" x="1560" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{E Cta Face}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="boder" x="1630" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{E Cta Twit}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="boder" x="1700" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{E Cta Email}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="boder" x="1770" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{E Cta Txt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="boder" x="1840" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{E Cta Tap}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="boder" x="1910" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{E Cta Swipe}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="boder" x="1980" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{E Cta Save Coupon}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="boder" x="2050" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{E Cta send Coupon}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="boder" x="2120" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{E Duration}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="boder" x="2190" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{E Error}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="boder" x="2260" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{E Video0}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="boder" x="2330" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{E Video25}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="boder" x="2400" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{E Video50}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="boder" x="2470" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{E Video75}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="boder" x="2540" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{E Video100}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="boder" x="0" y="0" width="73" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Month}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
