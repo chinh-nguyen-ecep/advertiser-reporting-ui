@@ -234,17 +234,19 @@ public class NeoBux {
 		System.out.println("totalAmountPaid : "+totalAmountPaid);
 		
 		String url="http://deplao.org/neobux/logout.php?username="+loginUser;
-		url+="&lastview="+websiteVisits;
-		url+="&directFollowers="+directFollowers;
-		url+="&followers="+followers;
-		url+="&followersWebsiteVisits="+followersWebsiteVisits;
-		url+="&accountBalance="+accountBalance;
-		url+="&totalAmountPaid="+totalAmountPaid;
+		url+="&lastview="+websiteVisits.trim();
+		url+="&directFollowers="+directFollowers.trim();
+		url+="&followers="+followers.trim();
+		url+="&followersWebsiteVisits="+followersWebsiteVisits.trim();
+		url+="&accountBalance="+accountBalance.trim();
+		url+="&totalAmountPaid="+totalAmountPaid.trim();
 		url+="&ip="+"";
-		url+="&proxy="+proxy;
-		url+="&port="+port;
+		url+="&proxy="+proxy.trim();
+		url+="&port="+port.trim();
+		
 		try {
 			DatabaseConnection.getText(url);
+			System.out.println(url);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
