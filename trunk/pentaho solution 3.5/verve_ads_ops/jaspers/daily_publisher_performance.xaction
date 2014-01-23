@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <action-sequence> 
-  <title>Daily Publisher Performance</title>
+  <title>Publisher Performance Report</title>
   <version>1</version>
   <logging-level>ERROR</logging-level>
   <documentation> 
@@ -107,12 +107,12 @@
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </report-definition1>  
-    <report-definition>
-      <solution-file>
-        <location>daily_publisher_performance/monthly_publisher_performance.jasper</location>
-        <mime-type>text/plain</mime-type>
-      </solution-file>
-    </report-definition>
+    <report-definition> 
+      <solution-file> 
+        <location>daily_publisher_performance/monthly_publisher_performance.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition> 
   </resources>
   
   <actions> 
@@ -149,7 +149,7 @@ SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM a
       <component-definition> 
         <live><![CDATA[false]]></live>  
         <query><![CDATA[SELECT calendar_year_month,month_since_2005 
-FROM adsops.daily_agg_publisher_performance
+FROM adsops.monthly_agg_publisher_performance
 GROUP BY calendar_year_month,month_since_2005
 ORDER BY month_since_2005 desc]]></query> 
       </component-definition> 
@@ -211,7 +211,7 @@ ORDER BY month_since_2005 desc]]></query>
           <jndi type="string" mapping="connectionName"/>  
           <p_start_date type="string"/>  
           <p_end_date type="string"/>  
-          <output-type type="string" mapping="p_output"/>
+          <output-type type="string" mapping="p_output"/> 
         </action-inputs>
         <action-resources> 
           <report-definition mapping="report-definition1"/> 
@@ -223,21 +223,21 @@ ORDER BY month_since_2005 desc]]></query>
   
     <actions> 
       <condition><![CDATA[p_date_mode=='month']]></condition>  
-      <action-definition>
+      <action-definition> 
         <component-name>JasperReportsComponent</component-name>
         <action-type>Jasper</action-type>
-        <action-inputs>
-          <p_start_month_since_2005 type="string"/>
-          <p_end_month_since_2005 type="string"/>
-          <jndi type="string" mapping="connectionName"/>
-          <output-type type="string" mapping="p_output"/>
+        <action-inputs> 
+          <p_start_month_since_2005 type="string"/>  
+          <p_end_month_since_2005 type="string"/>  
+          <jndi type="string" mapping="connectionName"/>  
+          <output-type type="string" mapping="p_output"/> 
         </action-inputs>
-        <action-resources>
-          <report-definition type="resource"/>
+        <action-resources> 
+          <report-definition type="resource"/> 
         </action-resources>
-        <component-definition/>
+        <component-definition/> 
       </action-definition>
-
+ 
     </actions>
  
   </actions> 
