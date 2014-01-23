@@ -139,10 +139,10 @@ function generateSelect2(options){
 			//	drawArea.append('<label for="checkbox_'+id+'">'+text+'</label><br/>');
 			//})
 			if(data.length==0){
-				var row="Don't have results....";
-				drawArea.append(row);
+				//var row="Don't have results....";
+				//drawArea.append(row);
 			}
-			if(options.selectAll){
+			if(options.selectAll&&data.length>0){
 				var row=[0,'All'];
 				data.unshift(row);
 			}
