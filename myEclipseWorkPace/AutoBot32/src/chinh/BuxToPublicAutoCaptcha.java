@@ -161,7 +161,7 @@ public class BuxToPublicAutoCaptcha {
 		    spec.open("http://bux.to/ads.php");
 		    spec.pauseUntilReady();
 			String url=spec.find("span").with("id", "da"+adID+"c").child("a").get("href");
-			spec.open(url);	 
+			spec.open(url);	
 			spec.pauseUntilReady();
 			showAds();
 			System.out.println("Waiting for view ads ID:"+adID);
@@ -278,8 +278,13 @@ public class BuxToPublicAutoCaptcha {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
-		spec.find("table").at(0).find("tr").at(0).find("td").at(2).set("innerHTML", message);
+		}
+		System.out.println("Show ads from 3rd");
+		String scriptCode="document.getElementsByTagName('table')[0].getElementsByTagName('td')[2].innerHTML=\""+message+"\"";
+		System.out.println(scriptCode);
+		spec.eval(scriptCode);
+		spec.pause(15000);
+		
 	}
 	private void showDonate(){
 		spec.pauseUntilReady();
