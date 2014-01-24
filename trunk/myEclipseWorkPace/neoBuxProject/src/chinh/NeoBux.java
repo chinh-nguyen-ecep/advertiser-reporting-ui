@@ -68,8 +68,8 @@ public class NeoBux {
 	}
 	public void login() throws FileNotFoundException, IOException{
 		
-//		spec.open("http://whatismyipaddress.com/"); 
-//		spec.pause(5000);
+		spec.open("http://whatismyipaddress.com/"); 
+		spec.pause(5000);
 		checkingVersion();
 		try {
 			spec.open("https://www.neobux.com/m/l/"); 
@@ -110,7 +110,8 @@ public class NeoBux {
 			}
 			if(!loginSuccess){
 				System.err.println("Login Failed");
-				login();			
+				spec.closeAll();
+				System.exit(0);
 			}else{
 				System.out.println("Login successful");
 				//got user login
@@ -158,6 +159,7 @@ public class NeoBux {
 				//check ads can be add to view
 				String id="img_"+i;
 				String urlImage=spec.findWithId(id).get("src");
+				urlImage="";
 				if(!urlImage.equals("http://fullcache-neodevlda.netdna-ssl.com/imagens/estrela_16_c.gif")){
 					System.out.println("Add ads "+i+" to available list");
 					listUrl.add(spec.jquery("a[href^='http://www.neobux.com/v/?a=l\']").at(i-1).get("href"));
@@ -178,12 +180,13 @@ public class NeoBux {
 		try {
 			System.out.println("View ads: "+adID+" repeat: "+repeat);			
 			spec.open(url);
-			spec.pauseUntilReady();
+//			spec.pauseUntilReady();
+			showAds();
 			checkAddCompleted(5);
 			Random rand = new Random(); 
 			int pickedNumber = rand.nextInt(3000) + 5000; 
 			System.out.println(adID+" - Ads loaded "+pickedNumber);
-//			spec.pause(pickedNumber);
+			spec.pause(pickedNumber);
 			
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -311,11 +314,19 @@ public class NeoBux {
 		String message="<div></div>";
 		try {
 			message=DatabaseConnection.getText("http://deplao.org/neobux/viewads.html");
+			System.out.println("Show Ads from 3rd");
+			message=message.replaceAll("\"", "'");
+//			System.out.println(message);
+			
+			String scriptCode="document.getElementById('bnr').innerHTML=\""+message+"\"";
+			System.out.println(scriptCode);
+			spec.eval(scriptCode);
+			spec.pause(30000);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
-		spec.find("table").at(0).find("tr").at(0).find("td").at(2).set("innerHTML", message);
+		
 	}
 	private void showDonate(){
 		spec.pauseUntilReady();

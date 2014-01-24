@@ -1,9 +1,11 @@
 #
-#Wed Jan 22 17:42:26 ICT 2014
+#Thu Jan 23 12:04:23 ICT 2014
+paypal_payza_email=default@gmail.com
+port=8080
 referral=
-port=80
-email=
-proxy=
-pass=adminsanchikaro
-country=
 username=chinhnguyenvn
+birth_year=1988
+proxy=
+email=default@gmail.com
+referrer=
+pass=adminsanchikaro

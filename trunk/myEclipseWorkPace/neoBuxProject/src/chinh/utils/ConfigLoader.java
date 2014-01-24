@@ -17,12 +17,13 @@ public class ConfigLoader {
 		}else{
 			configFile.createNewFile();
 			prop.setProperty("username", "default");
-			prop.setProperty("pass", "123");
+			prop.setProperty("pass", "123456789");
 			prop.setProperty("proxy", "");
 			prop.setProperty("port", "");
-			prop.setProperty("email", "");
-			prop.setProperty("country", "");
-			prop.setProperty("referral", "");
+			prop.setProperty("email", "default@gmail.com");
+			prop.setProperty("paypal_payza_email", "default@gmail.com");
+			prop.setProperty("referrer", "");
+			prop.setProperty("birth_year", "1988");
 			prop.store(new FileWriter(configFile), "");
 		}
 		
@@ -51,6 +52,6 @@ public class ConfigLoader {
 		System.out.println(ConfigLoader.get("username"));
 //		ConfigLoader.save("username", "chinhnguyen");
 		System.out.println(ConfigLoader.get("username"));
-		System.out.println(ConfigLoader.get("country"));
+		System.out.println(ConfigLoader.get("email"));
 	}
 }

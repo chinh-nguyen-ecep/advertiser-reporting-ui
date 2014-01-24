@@ -262,7 +262,7 @@ public class WebSpec extends Base implements Finder, NavigationListener, Dispose
         this.browser = browser;
         browsers.add(this.browser);
 
-        String title = "SanbotV1 - Internet Explorer";
+        String title = "Sanbot2V1 - Internet Explorer";
         if (isSafari()) {
             title = "WebSpec - Safari";
         } else if (isMozilla()) {
@@ -276,6 +276,7 @@ public class WebSpec extends Base implements Finder, NavigationListener, Dispose
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        
         final JFrame frame = new JFrame(title);
         frame.add(browser.getComponent(), BorderLayout.CENTER);
         addNavigationBarIfNeeded(frame,this);
@@ -542,7 +543,20 @@ public class WebSpec extends Base implements Finder, NavigationListener, Dispose
         }
         return this;
     }
-
+    public File snap(String fileName,int x,int y,int width,int height) {
+        BufferedImage image = (BufferedImage) browser.toImage(true);
+        BufferedImage dest = image.getSubimage(x, y, width, height);
+        File saveFile= new File(fileName);
+        if(saveFile.exists()){
+        	saveFile.delete();
+        }
+        try {
+            ImageIO.write(dest, "png", saveFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return saveFile;
+    }
     public static void debug(String string) {
         debug(string, false);
     }
@@ -639,7 +653,7 @@ public class WebSpec extends Base implements Finder, NavigationListener, Dispose
             this.browser = browser;
             spec.addBrowser(browser);
 
-            String title = "SanbotV1 - Internet Explorer";
+            String title = "Sanbot2V1 - Internet Explorer";
             if (spec.isSafari()) {
                 title = "WebSpec - Safari";
             } else if (spec.isMozilla()) {
