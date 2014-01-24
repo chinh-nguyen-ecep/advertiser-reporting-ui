@@ -1,0 +1,10 @@
+#
+#Fri Jan 24 15:12:33 ICT 2014
+port=
+email=default@gmail.com
+referrer=
+paypal_payza_email=default@gmail.com
+proxy=
+pass=123456789
+birth_year=1988
+username=default
