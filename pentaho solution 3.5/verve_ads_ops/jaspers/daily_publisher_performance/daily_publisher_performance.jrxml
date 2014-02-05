@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Daily publisher performance" pageWidth="3100" pageHeight="1684" orientation="Landscape" columnWidth="3060" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Daily publisher performance" pageWidth="3400" pageHeight="1684" orientation="Landscape" columnWidth="3360" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.3286707500000021"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="1671"/>
 	<property name="ireport.y" value="0"/>
 	<style name="boder">
 		<box leftPadding="5" rightPadding="5">
@@ -29,12 +29,13 @@
 	   , property_name as "Property Name"
        , channel_id as "Channel ID"
 	   , channel_name as "Channel Name"
-       , SUM(impressions) as "Impressions"
+       , SUM(adimpinternal_impressions) as "Adimpinternal_impressions"
+       , SUM(imp_impressions) as "Imp_impressions"
        , SUM(clicks) as "Clicks"
        , SUM(cta_any) as "cta_any"
-	   , (CASE WHEN SUM(impressions)>0 THEN SUM(cta_any)/SUM(impressions) ELSE 0 END) as "cta_events per impressions"
-	   , (CASE WHEN SUM(clicks)>0 THEN SUM(cta_any)/SUM(clicks) ELSE 0 END) as "cta_events per clicks"
-      -- , SUM(e_refresh) as "E Refresh"
+	   , (CASE WHEN SUM(adimpinternal_impressions)>0 THEN SUM(cta_any)/(SUM(adimpinternal_impressions)/1000) ELSE 0 END) as "cta_any per 1000_impressions"
+	   , (CASE WHEN SUM(clicks)>0 THEN SUM(cta_any)/SUM(clicks) ELSE 0 END) as "cta_any per clicks"
+       , SUM(e_refresh) as "refresh"
        , SUM(e_cta_tap_refresh) as "cta_tap_refresh"
 	   , SUM(e_cta_map) as "cta_map"
        , SUM(e_cta_lp) as "cta_lp"
@@ -74,11 +75,13 @@
 	<field name="Property Name" class="java.lang.String"/>
 	<field name="Channel ID" class="java.lang.Integer"/>
 	<field name="Channel Name" class="java.lang.String"/>
-	<field name="Impressions" class="java.math.BigDecimal"/>
+	<field name="Adimpinternal_impressions" class="java.math.BigDecimal"/>
+	<field name="Imp_impressions" class="java.math.BigDecimal"/>
 	<field name="Clicks" class="java.math.BigDecimal"/>
 	<field name="cta_any" class="java.math.BigDecimal"/>
-	<field name="cta_events per impressions" class="java.math.BigDecimal"/>
-	<field name="cta_events per clicks" class="java.math.BigDecimal"/>
+	<field name="cta_any per 1000_impressions" class="java.math.BigDecimal"/>
+	<field name="cta_any per clicks" class="java.math.BigDecimal"/>
+	<field name="refresh" class="java.math.BigDecimal"/>
 	<field name="cta_tap_refresh" class="java.math.BigDecimal"/>
 	<field name="cta_map" class="java.math.BigDecimal"/>
 	<field name="cta_lp" class="java.math.BigDecimal"/>
@@ -155,179 +158,193 @@
 				<text><![CDATA[Channel Name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="961" y="0" width="81" height="20"/>
+				<reportElement style="boder" x="1117" y="0" width="105" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Impressions]]></text>
+				<text><![CDATA[Imp_impressions]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="1042" y="0" width="81" height="20"/>
+				<reportElement style="boder" x="1222" y="0" width="81" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Clicks]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="1123" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="1303" y="0" width="75" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[cta_any]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="1198" y="0" width="162" height="20"/>
+				<reportElement style="boder" x="1378" y="0" width="182" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[cta_events per impressions]]></text>
+				<text><![CDATA[cta_any per 1000_impressions]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="1360" y="0" width="131" height="20"/>
+				<reportElement style="boder" x="1560" y="0" width="131" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[cta_events per clicks]]></text>
+				<text><![CDATA[cta_any per clicks]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="1491" y="0" width="102" height="20"/>
+				<reportElement style="boder" x="1791" y="0" width="102" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[cta_tap_refresh]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="1593" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="1893" y="0" width="75" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[cta_map]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="1668" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="1968" y="0" width="75" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[cta_lp]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="1743" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="2043" y="0" width="75" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[cta_call]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="1818" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="2118" y="0" width="75" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[cta_cal]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="1893" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="2193" y="0" width="75" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[cta_video]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="1968" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="2268" y="0" width="75" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[cta_face]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="2043" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="2343" y="0" width="75" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[cta_twit]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="2118" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="2418" y="0" width="75" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[cta_email]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="2193" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="2493" y="0" width="75" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[cta_txt]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="2268" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="2568" y="0" width="75" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[cta_tap]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="2343" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="2643" y="0" width="75" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[cta_swipe]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="2418" y="0" width="117" height="20"/>
+				<reportElement style="boder" x="2718" y="0" width="117" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[cta_save_coupon]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="2535" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="2835" y="0" width="75" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[duration]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="2610" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="2910" y="0" width="75" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[error]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="2685" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="2985" y="0" width="75" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[video0]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="2760" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="3060" y="0" width="75" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[video25]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="2835" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="3135" y="0" width="75" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[video50]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="2910" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="3210" y="0" width="75" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[video75]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="2985" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="3285" y="0" width="75" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[video100]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" mode="Transparent" x="1691" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[refresh]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" mode="Transparent" x="961" y="0" width="156" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Adimpinternal_impressions]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -369,129 +386,143 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{Channel Name}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement style="boder" x="961" y="0" width="81" height="20"/>
+				<reportElement style="boder" x="1117" y="0" width="105" height="20"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{Impressions}]]></textFieldExpression>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{Imp_impressions}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement style="boder" x="1042" y="0" width="81" height="20"/>
+				<reportElement style="boder" x="1222" y="0" width="81" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{Clicks}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement style="boder" x="1123" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="1303" y="0" width="75" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{cta_any}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement style="boder" x="1198" y="0" width="162" height="20"/>
+				<reportElement style="boder" x="1378" y="0" width="182" height="20"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{cta_events per impressions}]]></textFieldExpression>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{cta_any per 1000_impressions}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement style="boder" x="1360" y="0" width="131" height="20"/>
+				<reportElement style="boder" x="1560" y="0" width="131" height="20"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{cta_events per clicks}]]></textFieldExpression>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{cta_any per clicks}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement style="boder" x="1491" y="0" width="102" height="20"/>
+				<reportElement style="boder" x="1791" y="0" width="102" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{cta_tap_refresh}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement style="boder" x="1593" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="1893" y="0" width="75" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{cta_map}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement style="boder" x="1668" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="1968" y="0" width="75" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{cta_lp}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement style="boder" x="1743" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="2043" y="0" width="75" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{cta_call}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement style="boder" x="1818" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="2118" y="0" width="75" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{cta_cal}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement style="boder" x="1893" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="2193" y="0" width="75" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{cta_video}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement style="boder" x="1968" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="2268" y="0" width="75" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{cta_face}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement style="boder" x="2043" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="2343" y="0" width="75" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{cta_twit}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement style="boder" x="2118" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="2418" y="0" width="75" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{cta_email}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement style="boder" x="2193" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="2493" y="0" width="75" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{cta_txt}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement style="boder" x="2268" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="2568" y="0" width="75" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{cta_tap}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement style="boder" x="2343" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="2643" y="0" width="75" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{cta_swipe}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement style="boder" x="2418" y="0" width="117" height="20"/>
+				<reportElement style="boder" x="2718" y="0" width="117" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{cta_save_coupon}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement style="boder" x="2535" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="2835" y="0" width="75" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{duration}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement style="boder" x="2610" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="2910" y="0" width="75" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{error}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement style="boder" x="2685" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="2985" y="0" width="75" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{video0}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement style="boder" x="2760" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="3060" y="0" width="75" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{video25}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement style="boder" x="2835" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="3135" y="0" width="75" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{video50}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement style="boder" x="2910" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="3210" y="0" width="75" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{video75}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement style="boder" x="2985" y="0" width="75" height="20"/>
+				<reportElement style="boder" x="3285" y="0" width="75" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{video100}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement style="boder" mode="Transparent" x="1691" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{refresh}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement style="boder" mode="Transparent" x="961" y="0" width="156" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{Adimpinternal_impressions}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
