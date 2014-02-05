@@ -145,3 +145,4 @@ sub runPostgresComand{
 	sqlRunQuery($dbh,$query);
 	sqlDisconnect($dbh);
 }
+

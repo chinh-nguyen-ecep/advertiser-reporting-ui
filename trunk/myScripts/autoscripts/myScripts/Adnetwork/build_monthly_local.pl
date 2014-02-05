@@ -79,7 +79,7 @@ sub runAgg{
 
         ##runPostgresComand("select staging.fn_build_ba_monthly_national_revenue_v4($month_sk,$month_sk,'PS')");
         ##runPostgresComand("update adm.ba_monthly_national_revenue_v4 set is_active=true where month_since_2005=$month_sk");
-                #version 5
+        #version 5
         runPostgresComand("select billing.fn_build_ba_monthly_national_revenue_v5($month_sk,$month_sk,'PS')");
         runPostgresComand("update billing.ba_monthly_national_revenue_v5 set is_active=true where month_since_2005=$month_sk");
 
@@ -94,6 +94,10 @@ sub runAgg{
 
         runPostgresComand("SELECT staging.fn_build_monthly_agg_delivery_publisher_property_v3($month_sk,$month_sk,'PS')");
         runPostgresComand("UPDATE adsops.monthly_agg_delivery_publisher_property_v3 SET is_active=true WHERE month_since_2005=$month_sk");
+		
+		#VLM V6
+		runPostgresComand("SELECT billing.fn_build_ba_monthly_vlm_revenue_v6($month_sk,$month_sk,'PS')");
+		runPostgresComand("UPDATE billing.ba_monthly_vlm_revenue_v6 SET is_active=true WHERE month_since_2005=$month_sk");
 }
 
 sub transferFinalData{
