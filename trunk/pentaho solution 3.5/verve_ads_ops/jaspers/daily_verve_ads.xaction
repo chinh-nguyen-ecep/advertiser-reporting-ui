@@ -150,16 +150,16 @@
         <query-result type="result-set" mapping="q_max_min_date"/>  
         <max_full_date type="string"/>  
         <min_full_date type="string"/>  
-        <back_30_date type="string"/>
+        <back_30_date type="string"/> 
       </action-outputs>
       <component-definition> 
         <live><![CDATA[false]]></live>  
-        <query><![CDATA[SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date,MAX (full_date)-30 as back_30_date FROM adsops.daily_agg_verve_ads_by_remnant WHERE is_active=true
+        <query><![CDATA[SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date,MAX (full_date)-29 as back_30_date FROM adsops.daily_agg_verve_ads_by_remnant WHERE is_active=true
 UNION ALL
-SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date,MAX (full_date)-30 as back_30_date FROM adsops.daily_agg_verve_ads_by_remnant WHERE is_active=true]]></query>
+SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date,MAX (full_date)-29 as back_30_date FROM adsops.daily_agg_verve_ads_by_remnant WHERE is_active=true]]></query> 
       </component-definition> 
     </action-definition>
-
+  
     <actions> 
       <condition><![CDATA[p_emailMode=='false']]></condition>  
       <action-definition> 
@@ -278,8 +278,8 @@ ORDER BY month_since_2005 desc]]></query>
           <p_emailExportFileType type="string"/>  
           <parameter_string type="string"/>  
           <q_max_min_date type="result-set"/>  
-          <p_start_date type="string"/>
-          <p_end_date type="string"/>
+          <p_start_date type="string"/>  
+          <p_end_date type="string"/> 
         </action-inputs>
         <action-outputs> 
           <reportName type="string"/>  
@@ -288,7 +288,7 @@ ORDER BY month_since_2005 desc]]></query>
           <p_mailTextMessage type="string"/>  
           <p_mailTitle type="string"/>  
           <reportNamePdf type="string"/>  
-          <p_end_date type="string"/>
+          <p_end_date type="string"/> 
         </action-outputs>
         <component-definition> 
           <script><![CDATA[var reportName='';
@@ -307,8 +307,8 @@ var p_mailTitle='Daily Verve Ads Report - '+p_end_date;]]></script>
         <action-type>Jasper CSV</action-type>
         <action-inputs> 
           <jndi type="string" mapping="connectionName"/>  
-          <p_start_date type="string"/>
-          <p_end_date type="string"/>
+          <p_start_date type="string"/>  
+          <p_end_date type="string"/> 
         </action-inputs>
         <action-resources> 
           <report-definition mapping="report-definition1"/> 
@@ -321,25 +321,25 @@ var p_mailTitle='Daily Verve Ads Report - '+p_end_date;]]></script>
         </component-definition> 
       </action-definition>
   
-      <action-definition>
+      <action-definition> 
         <component-name>JasperReportsComponent</component-name>
         <action-type>Jasper PDF</action-type>
-        <action-inputs>
-          <jndi type="string" mapping="connectionName"/>
-          <p_start_date type="string"/>
-          <p_end_date type="string"/>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <p_start_date type="string"/>  
+          <p_end_date type="string"/> 
         </action-inputs>
-        <action-resources>
-          <report-definition type="resource" mapping="report-definition1"/>
+        <action-resources> 
+          <report-definition type="resource" mapping="report-definition1"/> 
         </action-resources>
-        <action-outputs>
-          <report-output type="content" mapping="report_ou_pdf"/>
+        <action-outputs> 
+          <report-output type="content" mapping="report_ou_pdf"/> 
         </action-outputs>
-        <component-definition>
-          <output-type><![CDATA[pdf]]></output-type>
-        </component-definition>
+        <component-definition> 
+          <output-type><![CDATA[pdf]]></output-type> 
+        </component-definition> 
       </action-definition>
-
+  
       <action-definition> 
         <component-name>EmailComponent</component-name>
         <action-type>E-Mail</action-type>
@@ -349,12 +349,12 @@ var p_mailTitle='Daily Verve Ads Report - '+p_end_date;]]></script>
           <message-plain type="string" mapping="p_mailTextMessage"/>  
           <report_ou_csv type="content"/>  
           <attach_name_2 type="string" mapping="reportNameCsv"/>  
-          <report_ou_pdf type="content"/>
-          <attach_name_3 type="string" mapping="reportNamePdf"/>
+          <report_ou_pdf type="content"/>  
+          <attach_name_3 type="string" mapping="reportNamePdf"/> 
         </action-inputs>
         <component-definition> 
           <attachment-ref name-param="attach_name_2" input-param="report_ou_csv"/>  
-          <attachment-ref name-param="attach_name_3" input-param="report_ou_pdf"/>
+          <attachment-ref name-param="attach_name_3" input-param="report_ou_pdf"/> 
         </component-definition> 
       </action-definition>
  
