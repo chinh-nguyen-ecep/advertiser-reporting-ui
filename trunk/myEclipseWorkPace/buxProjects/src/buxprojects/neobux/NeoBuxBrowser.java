@@ -21,7 +21,6 @@ import com.jniwrapper.win32.ie.proxy.ProxyConfiguration;
 
 public class NeoBuxBrowser {
 	private Browser browser;
-	private Browser adsBrowser;
 	private String userName="";
 	private String password="";
 	private String proxy="";
@@ -47,17 +46,16 @@ public class NeoBuxBrowser {
         JFrame frame = new JFrame("Neobux auto clicker 2014 - Sanbot2");
         Container contentPane = frame.getContentPane();
         contentPane.setLayout(new BorderLayout());
+        contentPane.add(browser,BorderLayout.CENTER);
         
-        contentPane.add(adsBrowser);
-        
-        frame.setSize(1200, 800);
+        frame.setSize(1200, 700);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+        
 	}
 	public void init(){
 		browser=new Browser();
-		adsBrowser=new Browser();
 		//init ui
 		this.initUI();
         //config proxy
@@ -66,14 +64,13 @@ public class NeoBuxBrowser {
             configuration.setConnectionType(ProxyConfiguration.ConnectionType.PROXY);
             configuration.setProxy(this.proxy+":"+this.port, ProxyConfiguration.ServerType.HTTP);
             browser.setProxy(configuration); 
-            adsBrowser.setProxy(configuration);
         }
-        //Checking the ip
-        browser.navigate("http://whatismyipaddress.com/");
-        browser.waitReady();
-        browser.navigate("https://www.neobux.com/m/l/");
-        browser.waitReady();
-        adsBrowser.navigate("http://deplao.org");
+	}
+	public void login(){
+		browser.navigate("https://www.neobux.com/m/l/");
+		browser.waitReady();
+		//check user logined or no login
+		browser.close();
 	}
 	public static void main(String[] args) {
 		NeoBuxBrowser neoBuxBrowser=new NeoBuxBrowser();
@@ -93,11 +90,14 @@ public class NeoBuxBrowser {
 				     //Not a number.
 				 }
 			}
-			neoBuxBrowser.setUserName(ConfigLoader.get("username"));
-			neoBuxBrowser.setPassword(ConfigLoader.get("pass"));
-			neoBuxBrowser.setProxy(proxy);
-			neoBuxBrowser.setPort(port);	
+//			neoBuxBrowser.setUserName(ConfigLoader.get("username"));
+//			neoBuxBrowser.setPassword(ConfigLoader.get("pass"));
+//			neoBuxBrowser.setProxy(proxy);
+//			neoBuxBrowser.setPort(port);	
+			neoBuxBrowser.setUserName("chinhnguyenvn");
+			neoBuxBrowser.setPassword("adminsanchikaro");
 			neoBuxBrowser.init();
+			neoBuxBrowser.login();
 			
 		} catch (Exception e) {
 			// TODO: handle exception

@@ -23,5 +23,7 @@
 	<classpathentry kind="lib" path="lib/xulrunner-windows.jar"/>
 	<classpathentry kind="lib" path="lib/com.sun.mail_1.4.2.jar"/>
 	<classpathentry kind="lib" path="lib/org-apache-commons-codec.jar"/>
+	<classpathentry kind="lib" path="lib/com.sun.mail_1.4.2.jar"/>
+	<classpathentry kind="lib" path="lib/org-apache-commons-codec.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

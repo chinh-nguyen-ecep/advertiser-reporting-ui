@@ -125,19 +125,19 @@ public class CryptString {
 
             //Instantiate the encrypter/decrypter
             CryptString crypt = new CryptString(keyFactory.generateSecret(key));
-            String unencryptedString = "This is a test.";
-            String encryptedString = crypt.encryptBase64(unencryptedString);
-            System.out.println("Encrypted String:"+encryptedString);
+//            String unencryptedString = "123456789";
+//            String encryptedString = crypt.encryptBase64(unencryptedString);
+//            System.out.println("Encrypted String:"+encryptedString);
 
             //Decrypt the string
-            unencryptedString = crypt.decryptBase64(encryptedString);
-            System.out.println("UnEncrypted String:"+unencryptedString);
+//            unencryptedString = crypt.decryptBase64(encryptedString);
+//            System.out.println("UnEncrypted String:"+unencryptedString);
             
             CryptString crypt2=new CryptString();
-            String pass="adminsanchikaro";
-//            String encryptedString2=crypt2.encryptBase64(pass);
-//            System.out.println("Encrypted String:"+encryptedString2);
-            String unencryptedString2=crypt2.decryptBase64("lTGYA86aJ+0=");
+            String pass="123456789";
+            String encryptedString2=crypt2.encryptBase64(pass);
+            System.out.println("Encrypted String:"+encryptedString2);
+            String unencryptedString2=crypt2.decryptBase64("C9o5TsnOPJHWkWjp9FE5mA==");
             System.out.println("UnEncrypted String:"+unencryptedString2);
 
         } catch (Exception e) {
