@@ -1,78 +1,68 @@
 package buxprojects.neobux;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.text.NumberFormat;
 import java.text.ParseException;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
 
+
+
+
+
+
+
+
+
+
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.html.HTMLElement;
+
+import com.jniwrapper.win32.ie.dom.DOMUtils;
+import com.sun.org.apache.bcel.internal.generic.ALOAD;
+
+import buxprojects.abstractClass.MainBux;
 import buxprojects.utils.ConfigLoader;
 
-import com.jniwrapper.win32.ie.Browser;
-import com.jniwrapper.win32.ie.proxy.ProxyConfiguration;
 
-public class NeoBuxBrowser {
-	private Browser browser;
-	private String userName="";
-	private String password="";
-	private String proxy="";
-	private int port=0;
-	private String activeStatus="NA";
-	private String loginUser="N/A";
-	private int version=1;	
-	
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public void setProxy(String proxy) {
-		this.proxy = proxy;
-	}
-	public void setPort(int port) {
-		this.port = port;
-	}
-	
-	private void initUI(){
-        JFrame frame = new JFrame("Neobux auto clicker 2014 - Sanbot2");
-        Container contentPane = frame.getContentPane();
-        contentPane.setLayout(new BorderLayout());
-        contentPane.add(browser,BorderLayout.CENTER);
-        
-        frame.setSize(1200, 700);
-        frame.setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-        
-	}
-	public void init(){
-		browser=new Browser();
-		//init ui
-		this.initUI();
-        //config proxy
-        if(this.proxy.equals("")){
-            ProxyConfiguration configuration = browser.getProxy();
-            configuration.setConnectionType(ProxyConfiguration.ConnectionType.PROXY);
-            configuration.setProxy(this.proxy+":"+this.port, ProxyConfiguration.ServerType.HTTP);
-            browser.setProxy(configuration); 
-        }
-	}
+public class NeoBuxBrowser extends MainBux{
+
 	public void login(){
 		browser.navigate("https://www.neobux.com/m/l/");
 		browser.waitReady();
 		//check user logined or no login
-		browser.close();
+		System.out.println("Checking login");
+		HTMLElement a_login=(HTMLElement) browser.getDocument().getElementById("t_conta");
+		System.out.println(a_login);
+		if(a_login==null){
+			//get login form
+			Element userNameInput=(Element) browser.getDocument().getElementsByTagName("input").item(1);
+			userNameInput.setAttribute("value", userName);
+			Element passwordInput=(Element) browser.getDocument().getElementsByTagName("input").item(2);
+			passwordInput.setAttribute("value", password);			
+			HTMLElement submit=(HTMLElement) browser.getDocument().getElementById("botao_login");
+			DOMUtils.click(submit);
+			browser.waitReady();
+			int wait=10;
+			while(a_login==null && wait>0){
+				wait--;
+				browser.pause(2000);
+				a_login=(HTMLElement) browser.getDocument().getElementById("t_conta");
+				System.out.println(wait);
+			}
+		}
+		
+		if(a_login==null){
+			this.showMessageDialog("Login Fail");
+			this.close();
+		}else{
+			System.out.println("Login Successful...");
+		}
+		
+
 	}
 	public static void main(String[] args) {
+		MainBux.clearCache();
 		NeoBuxBrowser neoBuxBrowser=new NeoBuxBrowser();
 		try {
 			String proxy=ConfigLoader.get("proxy");
@@ -90,18 +80,29 @@ public class NeoBuxBrowser {
 				     //Not a number.
 				 }
 			}
-//			neoBuxBrowser.setUserName(ConfigLoader.get("username"));
-//			neoBuxBrowser.setPassword(ConfigLoader.get("pass"));
-//			neoBuxBrowser.setProxy(proxy);
-//			neoBuxBrowser.setPort(port);	
 			neoBuxBrowser.setUserName("chinhnguyenvn");
 			neoBuxBrowser.setPassword("adminsanchikaro");
 			neoBuxBrowser.init();
 			neoBuxBrowser.login();
-			
+			neoBuxBrowser.viewAds();
+			neoBuxBrowser.logout();
+			neoBuxBrowser.close();
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 
+	}
+	@Override
+	public void logout() {
+		// TODO Auto-generated method stub
+		browser.navigate("http://www.neobux.com");
+		browser.waitReady();
+		HTMLElement a_login=(HTMLElement) browser.getDocument().getElementById("t_conta");
+		DOMUtils.click(a_login);
+	}
+	@Override
+	public void viewAds() {
+		// TODO Auto-generated method stub
+		
 	}
 }
