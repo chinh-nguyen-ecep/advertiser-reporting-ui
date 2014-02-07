@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Daily verve Ads" pageWidth="1684" pageHeight="1190" orientation="Landscape" columnWidth="1644" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="0.9982500000000003"/>
-	<property name="ireport.x" value="366"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="boder">
 		<box leftPadding="5" rightPadding="5">
@@ -66,8 +66,8 @@ ORDER BY full_date,adnetwork_name]]>
 	<field name="CPC" class="java.lang.Double"/>
 	<field name="CTR" class="java.lang.Double"/>
 	<field name="CPM" class="java.lang.Double"/>
-	<variable name="Ad requests" class="java.lang.Integer" calculation="Sum">
-		<variableExpression><![CDATA[$F{Ad requests}]]></variableExpression>
+	<variable name="Ad requests" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{Ad requests}.longValue()]]></variableExpression>
 	</variable>
 	<variable name="adnetwork_reports_ads_filled" class="java.lang.Integer" calculation="Sum">
 		<variableExpression><![CDATA[$F{adnetwork_reports_ads_filled}]]></variableExpression>
@@ -75,8 +75,8 @@ ORDER BY full_date,adnetwork_name]]>
 	<variable name="Ad Fill Rate" class="java.lang.Double">
 		<variableExpression><![CDATA[( $V{Ad requests}==0 ? null : $V{adnetwork_reports_ads_filled}.doubleValue()/$V{Ad requests} )]]></variableExpression>
 	</variable>
-	<variable name="Verve Ad Requests" class="java.lang.Integer" calculation="Sum">
-		<variableExpression><![CDATA[$F{Verve Ad Requests}]]></variableExpression>
+	<variable name="Verve Ad Requests" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{Verve Ad Requests}.longValue()]]></variableExpression>
 	</variable>
 	<variable name="verve_reports_ads_filled" class="java.lang.Integer" calculation="Sum">
 		<variableExpression><![CDATA[$F{verve_reports_ads_filled}]]></variableExpression>
@@ -84,8 +84,8 @@ ORDER BY full_date,adnetwork_name]]>
 	<variable name="Verve Fill Rate" class="java.lang.Double">
 		<variableExpression><![CDATA[( $V{Verve Ad Requests}==0 ? null : $V{verve_reports_ads_filled}.doubleValue()/$V{Verve Ad Requests} )]]></variableExpression>
 	</variable>
-	<variable name="Discrepancy Ad Requests" class="java.lang.Integer" calculation="Sum">
-		<variableExpression><![CDATA[$F{Discrepancy Ad Requests}]]></variableExpression>
+	<variable name="Discrepancy Ad Requests" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{Discrepancy Ad Requests}.longValue()]]></variableExpression>
 	</variable>
 	<variable name="Discrepancy Ad Filled" class="java.lang.Integer" calculation="Sum">
 		<variableExpression><![CDATA[$F{Discrepancy Ad Filled}]]></variableExpression>
@@ -93,8 +93,8 @@ ORDER BY full_date,adnetwork_name]]>
 	<variable name="Filled Impressions Discrepancy" class="java.lang.Double">
 		<variableExpression><![CDATA[( $V{verve_reports_ads_filled}==0 ? null : 1-($V{adnetwork_reports_ads_filled}.doubleValue()/$V{verve_reports_ads_filled}) )]]></variableExpression>
 	</variable>
-	<variable name="adnetwork_reports_clicks" class="java.lang.Integer" calculation="Sum">
-		<variableExpression><![CDATA[$F{adnetwork_reports_clicks}]]></variableExpression>
+	<variable name="adnetwork_reports_clicks" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{adnetwork_reports_clicks}.longValue()]]></variableExpression>
 	</variable>
 	<variable name="adnetwork_reports_gross" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{adnetwork_reports_gross}]]></variableExpression>
