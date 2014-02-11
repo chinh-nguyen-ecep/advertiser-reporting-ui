@@ -28,7 +28,7 @@ FROM
 	sum(p_net_revenue) as p_net_revenue,
 	sum(v_net_revenue) as v_net_revenue,
 	sum(fullfilled_code_y) as fullfilled_code_y,
-	sum(total_billable_impressions) as total_billable_impressions
+	sum(fullfilled_code_y) as total_billable_impressions
 	FROM billing.ba_monthly_yp_performance
 	WHERE is_active = true
 	AND $P{adname}='AT&T (32,33,27)'
@@ -43,7 +43,7 @@ FROM
 	sum(p_net_revenue) as p_net_revenue,
 	sum(v_net_revenue) as v_net_revenue,
 	sum(fullfilled_code_y) as fullfilled_code_y,
-	sum(total_billable_impressions) as total_billable_impressions
+	sum(fullfilled_code_y) as total_billable_impressions
 	FROM billing.ba_monthly_yp_sb_performance
 	WHERE is_active = true
 	AND $P{adname}='AT&T (32,33,27)'
@@ -58,7 +58,7 @@ FROM
 	sum(p_net_revenue) as p_net_revenue,
 	sum(v_net_revenue) as v_net_revenue,
 	sum(fullfilled_code_y) as fullfilled_code_y,
-	sum(total_billable_impressions) as total_billable_impressions
+	sum(fullfilled_code_y) as total_billable_impressions
 	FROM billing.ba_monthly_yp_no_performance
 	WHERE  is_active = true
 	AND $P{adname}='AT&T (32,33,27)'

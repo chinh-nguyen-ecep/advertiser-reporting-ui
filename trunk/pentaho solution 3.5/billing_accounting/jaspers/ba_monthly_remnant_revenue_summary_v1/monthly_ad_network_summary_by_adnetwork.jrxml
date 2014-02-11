@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dail_ad_network_summary_subreport1" language="groovy" pageWidth="1002" pageHeight="842" orientation="Landscape" columnWidth="1002" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="1.542173157718132"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="211"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="calendar_year_month" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -12,13 +12,13 @@
 	<queryString>
 		<![CDATA[SELECT
 a.adname
-,a.paid_impressions
+,a.paid_impressions::bigint
 ,a.gross_revenue
 ,a.p_net_revenue
 ,(case when a.gross_revenue>0 then a.p_net_revenue/a.gross_revenue else 0 end) as p_share
 ,a.v_net_revenue
-,a.fullfilled_code_y as adcel_y_ad_responses
-,a.total_billable_impressions
+,a.fullfilled_code_y::bigint as adcel_y_ad_responses
+,a.total_billable_impressions::bigint
 FROM (
 /* City Grid mobile*/
 SELECT
@@ -28,7 +28,7 @@ sum(gross_revenue) as gross_revenue,
 sum(p_net_revenue) as p_net_revenue,
 sum(v_net_revenue) as v_net_revenue,
 sum(fullfilled_code_y) as fullfilled_code_y,
-sum(total_billable_impressions) as total_billable_impressions
+sum(fullfilled_code_y) as total_billable_impressions
 FROM billing.ba_monthly_cg_mobile_performance
 WHERE  is_active = true
 AND calendar_year_month=$P{calendar_year_month}::text
@@ -42,7 +42,7 @@ sum(gross_revenue) as gross_revenue,
 sum(p_net_revenue) as p_net_revenue,
 sum(v_net_revenue) as v_net_revenue,
 sum(fullfilled_code_y) as fullfilled_code_y,
-sum(total_billable_impressions) as total_billable_impressions
+sum(fullfilled_code_y) as total_billable_impressions
 FROM billing.ba_monthly_cg_performance
 WHERE  is_active = true
 AND calendar_year_month=$P{calendar_year_month}::text
@@ -70,7 +70,7 @@ sum(gross_revenue) as gross_revenue,
 sum(p_net_revenue) as p_net_revenue,
 sum(v_net_revenue) as v_net_revenue,
 sum(fullfilled_code_y) as fullfilled_code_y,
-sum(total_billable_impressions) as total_billable_impressions
+sum(fullfilled_code_y) as total_billable_impressions
 FROM billing.ba_monthly_jt_performance
 WHERE  is_active = true
 AND calendar_year_month=$P{calendar_year_month}::text
@@ -84,7 +84,7 @@ sum(gross_revenue) as gross_revenue,
 sum(p_net_revenue) as p_net_revenue,
 sum(v_net_revenue) as v_net_revenue,
 sum(fullfilled_code_y) as fullfilled_code_y,
-sum(total_billable_impressions) as total_billable_impressions
+sum(fullfilled_code_y) as total_billable_impressions
 FROM billing.ba_monthly_mm_performance
 WHERE  is_active = true
 AND calendar_year_month=$P{calendar_year_month}::text AND requests > 0
@@ -98,7 +98,7 @@ sum(gross_revenue) as gross_revenue,
 sum(p_net_revenue) as p_net_revenue,
 sum(v_net_revenue) as v_net_revenue,
 sum(fullfilled_code_y) as fullfilled_code_y,
-sum(total_billable_impressions) as total_billable_impressions
+sum(fullfilled_code_y) as total_billable_impressions
 FROM billing.ba_monthly_mx_performance
 WHERE  is_active = true
 AND calendar_year_month=$P{calendar_year_month}::text
@@ -112,7 +112,7 @@ sum(gross_revenue) as gross_revenue,
 sum(p_net_revenue) as p_net_revenue,
 sum(v_net_revenue) as v_net_revenue,
 sum(fullfilled_code_y) as fullfilled_code_y,
-sum(total_billable_impressions) as total_billable_impressions
+sum(fullfilled_code_y) as total_billable_impressions
 FROM billing.ba_monthly_sp_blue_performance
 WHERE  is_active = true
 AND calendar_year_month=$P{calendar_year_month}::text
@@ -125,7 +125,7 @@ SELECT 'AT&T (32,33,27)' as adname
 ,sum(aa.p_net_revenue) as p_net_revenue
 ,sum(aa.v_net_revenue) as v_net_revenue
 ,sum(aa.fullfilled_code_y) as fullfilled_code_y
-,sum(total_billable_impressions) as total_billable_impressions
+,sum(fullfilled_code_y) as total_billable_impressions
 	FROM
 	(
 	/* AT&T Yellowpages */
@@ -136,7 +136,7 @@ SELECT 'AT&T (32,33,27)' as adname
 	sum(p_net_revenue) as p_net_revenue,
 	sum(v_net_revenue) as v_net_revenue,
 	sum(fullfilled_code_y) as fullfilled_code_y,
-	sum(total_billable_impressions) as total_billable_impressions
+	sum(fullfilled_code_y) as total_billable_impressions
 	FROM billing.ba_monthly_yp_performance
 	WHERE  is_active = true
 	AND calendar_year_month=$P{calendar_year_month}::text
@@ -150,7 +150,7 @@ SELECT 'AT&T (32,33,27)' as adname
 	sum(p_net_revenue) as p_net_revenue,
 	sum(v_net_revenue) as v_net_revenue,
 	sum(fullfilled_code_y) as fullfilled_code_y,
-	sum(total_billable_impressions) as total_billable_impressions
+	sum(fullfilled_code_y) as total_billable_impressions
 	FROM billing.ba_monthly_yp_sb_performance
 	WHERE  is_active = true
 	AND calendar_year_month=$P{calendar_year_month}::text
@@ -164,7 +164,7 @@ SELECT 'AT&T (32,33,27)' as adname
 	sum(p_net_revenue) as p_net_revenue,
 	sum(v_net_revenue) as v_net_revenue,
 	sum(fullfilled_code_y) as fullfilled_code_y,
-	sum(total_billable_impressions) as total_billable_impressions
+	sum(fullfilled_code_y) as total_billable_impressions
 	FROM billing.ba_monthly_yp_no_performance
 	WHERE  is_active = true
 	AND calendar_year_month=$P{calendar_year_month}::text
@@ -175,17 +175,17 @@ WHERE a.paid_impressions>0 OR gross_revenue>0 OR a.p_net_revenue>0 OR a.v_net_re
 ORDER BY adname]]>
 	</queryString>
 	<field name="adname" class="java.lang.String"/>
-	<field name="paid_impressions" class="java.lang.Double"/>
+	<field name="paid_impressions" class="java.lang.Long"/>
 	<field name="gross_revenue" class="java.lang.Double"/>
 	<field name="p_net_revenue" class="java.lang.Double"/>
 	<field name="p_share" class="java.lang.Double"/>
 	<field name="v_net_revenue" class="java.lang.Double"/>
-	<field name="adcel_y_ad_responses" class="java.math.BigDecimal"/>
-	<field name="total_billable_impressions" class="java.lang.Double"/>
-	<variable name="Paid Impressions" class="java.lang.Integer" calculation="Sum">
+	<field name="adcel_y_ad_responses" class="java.lang.Long"/>
+	<field name="total_billable_impressions" class="java.lang.Long"/>
+	<variable name="Paid Impressions" class="java.lang.Long" calculation="Sum">
 		<variableExpression><![CDATA[$F{paid_impressions}]]></variableExpression>
 	</variable>
-	<variable name="Adcel_Yes" class="java.lang.Integer" calculation="Sum">
+	<variable name="Adcel_Yes" class="java.lang.Long" calculation="Sum">
 		<variableExpression><![CDATA[$F{adcel_y_ad_responses}]]></variableExpression>
 	</variable>
 	<variable name="total_gross_rev" class="java.lang.Double" calculation="Sum">
@@ -197,7 +197,7 @@ ORDER BY adname]]>
 	<variable name="total_v_net_rev" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{v_net_revenue}]]></variableExpression>
 	</variable>
-	<variable name="total_billable_impressions_1" class="java.lang.Double" calculation="Sum">
+	<variable name="total_billable_impressions_1" class="java.lang.Long" calculation="Sum">
 		<variableExpression><![CDATA[$F{total_billable_impressions}]]></variableExpression>
 	</variable>
 	<columnHeader>
@@ -305,14 +305,14 @@ Impressions]]></text>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{adcel_y_ad_responses}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{adcel_y_ad_responses}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
 				<reportElement x="295" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{paid_impressions}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{paid_impressions}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="522" y="0" width="80" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
@@ -372,7 +372,7 @@ Impressions]]></text>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{total_billable_impressions}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{total_billable_impressions}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -407,7 +407,7 @@ Impressions]]></text>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{Adcel_Yes}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{Adcel_Yes}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="842" y="2" width="80" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
@@ -428,7 +428,7 @@ Impressions]]></text>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{Paid Impressions}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{Paid Impressions}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="682" y="2" width="80" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
@@ -442,7 +442,7 @@ Impressions]]></text>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total_billable_impressions_1}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{total_billable_impressions_1}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>
