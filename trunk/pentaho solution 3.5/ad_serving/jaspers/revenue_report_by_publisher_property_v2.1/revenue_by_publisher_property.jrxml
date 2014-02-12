@@ -30,7 +30,7 @@ sum(a.p_rev_share)::Decimal as p_rev_share,
 sum(a.api_revenue)::Decimal as api_revenue,
 sum(a.v_rev_share)::Decimal as v_rev_share,
 c.requests
-FROM adm.daily_agg_network_revenue a
+FROM adm.daily_agg_network_revenue_by_publisher a
 INNER JOIN refer.date_dim b ON a.eastern_date_sk=b.date_sk
 LEFT JOIN
 	(
@@ -67,7 +67,7 @@ GROUP BY a.publisher_name,c.requests]]>
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Revenue by Publisher Property (DFP1.0+DFP2.0)]]></text>
+				<text><![CDATA[Revenue by Publisher Property V2 (DFP1.0+DFP2.0)]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="111" width="300" height="20"/>

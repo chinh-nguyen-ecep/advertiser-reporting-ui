@@ -38,7 +38,7 @@ sum(total_paid_impressions) as total_paid_impressions,
 sum(total_net_revenue) as total_net_revenue,
 sum(total_p_rev_share) as total_p_rev_share,
 sum(total_v_rev_share) as total_v_rev_share
-FROM adm.daily_agg_network_revenue a
+FROM adm.daily_agg_network_revenue_by_publisher a
 INNER JOIN refer.date_dim b ON a.eastern_date_sk=b.date_sk
 WHERE is_active=true
 AND b.full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
