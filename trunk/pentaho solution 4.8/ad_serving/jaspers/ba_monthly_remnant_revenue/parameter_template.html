@@ -1,45 +1,48 @@
 <html xmlns:xf="http://www.w3.org/2002/xforms">
    <head>
 	<!-- do not include a <meta> tag -->
-      <link rel="stylesheet" type="text/css" href="/pentaho-style/active/default.css"></link>
-      <link rel="stylesheet" type="text/css" href="/pentaho-style/chinhnd/css/default.css"></link>
-      <title>Monthly Remnant Revenue</title>
-            			
-						<script src="js/parameters.js" type="text/javascript"></script>
-						<script src="/pentaho-style/chinhnd/scripts/doform.js" type="text/javascript"></script>
-      			<script><![CDATA[      			  
-      			  function setDefaultValue() {
-      			  	var obj = document.getElementById('p_network');
-      			  	obj.selectedIndex = 1;
- 
-      			  	var curdate = document.getElementById('calendar_year_month');
-      			  	curdate.selectedIndex = 1;
-      			  }
-      			]]></script>
-      		
-	{xform-header}
-
+	<title></title>
+      <link rel="stylesheet" type="text/css" href="/verve-lib/css/jasperReportCommonScript.css"></link>
+	  <script src="/verve-lib/scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+	  <script src="/verve-lib/scripts/verve-script-jquery.js" type="text/javascript"></script>
+      <script src="/verve-lib/scripts/jasperReportCommonScript.js" type="text/javascript"></script>
+	  {xform-header}
    </head>
-   <body>
-      <div class="divform">      
-      <div class="title">Monthly Remnant Revenue</div>
+   <body class="pentaho">
+      <div name="dialog-form" title="Control Panel" style="width: 460px;height: 520px;">
          <form name="parameter-form" id="parameter-form" method="GET">
-             <label style="margin-left: 0px;">Month:</label> {calendar_year_month}
-             <label>Network:</label> {p_network}
-             <input type="button" name="go" class="portlet-form-button" value="Run..." onClick="doForm('html')"/>
-             <input type="button" name="go" class="portlet-form-button" value="Get PDF" onClick="doForm('pdf')"/>
-			 <input type="button" name="go" class="portlet-form-button" value="Get XLS" onClick="doForm('xls')"/>
-			 <input type="button" name="go" class="portlet-form-button" value="Get CSV" onClick="doForm('csv')"/>
-			 <input type="button" name="go" class="portlet-form-button" value="Get XML" onClick="doForm('xml')"/>
+             <label style="margin-left: 0px;">Month:</label> <br/>{calendar_year_month} <br/>
+             <label>Network:</label> <br/>{p_network}
 		{solution}
 		{action}
 		{path}
 	    </form>
-      </div>    
-   <div>
-   <iframe width="100%" height="85%" name="theoutput" frameborder="0" scrolling="yes" style=""></iframe>
-   </div>
-	<script>setDefaultValue();</script>
+      </div>  
+	<script> <![CDATA[		 
+			$(document).ready(function(){
+				initJasperPageTemplate({
+					controlPanle_width: 300,
+					//controlPanle_height: 530,
+					generateFormContent: generateFormContent,
+					formValidation:formValidation,
+					reportName:'Monthly Remnant Revenue',
+					miniMode: true,
+					iframeMode:true
+				});
+			});
+			
+			var generateFormContent=function(domContentForm,completedFn){
+				$('option[value=]').remove();
+				var firstRun=true;
+			}
+			
+			var formValidation=function(domContentForm,divResult){
+				var form=domContentForm.children('form');
+				var validate=true;
+				return true;
+			}
+	]]>
+	</script>
    </body>
      
 </html>

@@ -16,17 +16,17 @@
       <sources> 
         <request>listPublisherID</request> 
       </sources>  
-      <default-value type="result-set"> 
-        <row> 
-          <id>10</id> 
-        </row>  
-        <row> 
-          <id>11</id> 
-        </row> 
+      <default-value type="result-set">
+        <row>
+          <id>10</id>
+        </row>
+        <row>
+          <id>11</id>
+        </row>
       </default-value>  
-      <columns> 
-        <id type="string"/> 
-      </columns> 
+      <columns>
+        <id type="string"/>
+      </columns>
     </listPublisherID>  
     <result type="string"> 
       <sources> 
@@ -43,71 +43,83 @@
   </inputs>
 
   <outputs> 
-    <report_output type="content">
-      <destinations>
-        <file>D:\report_output.csv</file>
-      </destinations>
-    </report_output>
+    <result type="string"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </result> 
   </outputs>
 
-  <resources> 
-    <report-definition> 
-      <solution-file> 
-        <location>blank.jasper</location>  
-        <mime-type>text/plain</mime-type> 
-      </solution-file> 
-    </report-definition> 
+  <resources>
+    <report-definition>
+      <solution-file>
+        <location>revenue_report_by_publisher_property/revenue_by_publisher_property.jasper</location>
+        <mime-type>text/plain</mime-type>
+      </solution-file>
+    </report-definition>
   </resources>
   
   <actions> 
-    <action-definition> 
-      <component-name>JavascriptRule</component-name>
-      <action-type>JavaScript</action-type>
-      <action-inputs/>
-      <action-outputs> 
-        <p_publisher_id type="string"/>  
-        <p_output type="string"/>  
-        <p_start_date type="string"/>  
-        <p_end_date type="string"/>  
-        <p_network_id type="string"/>  
-        <website_names_string type="string"/>  
-        <file_name type="string"/>  
-        <show_remnant type="string"/> 
-      </action-outputs>
-      <component-definition> 
-        <script><![CDATA[var p_publisher_id=10;
+    <actions loop-on="listPublisherID"> 
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>JavaScript</action-type>
+        <action-inputs> 
+          <listPublisherID type="result-set"/>  
+          <init type="integer"/> 
+        </action-inputs>
+        <action-outputs> 
+          <p_publisher_id type="string"/>  
+          <p_output type="string"/>  
+          <p_start_date type="string"/>  
+          <p_end_date type="string"/>  
+          <p_network_id type="string"/>  
+          <init type="string"/>  
+          <website_names_string type="string"/>
+          <file_name type="string"/>
+          <show_remnant type="string"/>
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var p_publisher_id=listPublisherID.getValueAt(init,0);
 var p_output='csv';
 var p_start_date='2013-05-01';
 var p_end_date='2013-05-01';
 var p_network_id="0";
 var website_names_string="-1000";
 var show_remnant="true";
-var file_name="Revenue by publisher property."+".PublisherID."+p_publisher_id+"."+p_start_date+".csv";]]></script> 
-      </component-definition> 
-    </action-definition>
+var file_name="Revenue by publisher property."+".PublisherID."+p_publisher_id+"."+p_start_date+".csv";
+init++;]]></script> 
+        </component-definition> 
+      </action-definition>
   
-    <action-definition> 
-      <component-name>JasperReportsComponent</component-name>
-      <action-type>Jasper</action-type>
-      <action-inputs> 
-        <p_publisher_id type="string"/>  
-        <p_start_date type="string"/>  
-        <p_end_date type="string"/>  
-        <p_network_id type="string"/>  
-        <website_names_string type="string"/>  
-        <show_remnant type="string"/> 
-      </action-inputs>
-      <action-resources> 
-        <report-definition type="resource"/> 
-      </action-resources>
-      <action-outputs> 
-        <report-output type="content" mapping="report_output"/>
-      </action-outputs>
-      <component-definition> 
-        <jndi><![CDATA[verveReportConnection]]></jndi>  
-        <output-type><![CDATA[html]]></output-type>
-      </component-definition> 
-    </action-definition>
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs>
+          <output-type type="string" mapping="p_output"/>
+          <p_publisher_id type="string"/>
+          <p_start_date type="string"/>
+          <p_end_date type="string"/>
+          <p_network_id type="string"/>
+          <website_names_string type="string"/>
+          <show_remnant type="string"/>
+        </action-inputs>
+        <action-resources>
+          <report-definition type="resource"/>
+        </action-resources>
+        <action-outputs> 
+          <report-output type="content" >
+                <destinations> 
+        			<file>/opt/pentaho/biserver-ce/pentaho-solutions/ad_serving/{file_name}</file> 
+      			</destinations> 
+          </report-output> 
+        </action-outputs>
+        <component-definition> 
+          <jndi><![CDATA[verveReportConnection]]></jndi>
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
  
   </actions> 
 </action-sequence>
