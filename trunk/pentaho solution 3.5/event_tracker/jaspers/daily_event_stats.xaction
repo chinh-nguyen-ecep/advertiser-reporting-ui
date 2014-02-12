@@ -134,15 +134,13 @@
       <action-definition> 
         <component-name>SQLLookupRule</component-name>
         <action-type>Get max min date data</action-type>
-        <action-inputs>
-          <jndi type="string" mapping="connectionName"/>
-        </action-inputs>
         <action-outputs> 
           <query-result type="result-set" mapping="q_max_min_date"/>  
           <max_full_date type="string"/>  
           <min_full_date type="string"/> 
         </action-outputs>
         <component-definition> 
+          <jndi><![CDATA[dw3]]></jndi>  
           <live><![CDATA[false]]></live>  
           <query><![CDATA[SELECT b.min_full_date, b.max_full_date
 FROM refer.date_dim a,
@@ -193,13 +191,14 @@ WHERE a.full_date = b.min_full_date OR a.full_date = b.max_full_date;]]></query>
             <p_start_date type="string"/>  
             <p_end_date type="string"/>  
             <p_flight_id type="string"/>  
-            <output-type type="string" mapping="p_output"/>  
-            <jndi type="string" mapping="connectionName"/>
+            <output-type type="string" mapping="p_output"/> 
           </action-inputs>
           <action-resources> 
             <report-definition type="resource"/> 
           </action-resources>
-          <component-definition/> 
+          <component-definition> 
+            <jndi><![CDATA[dw3]]></jndi> 
+          </component-definition> 
         </action-definition>
  
       </actions>
@@ -212,13 +211,14 @@ WHERE a.full_date = b.min_full_date OR a.full_date = b.max_full_date;]]></query>
           <action-inputs> 
             <p_start_date type="string"/>  
             <p_flight_id type="string"/>  
-            <output-type type="string" mapping="p_output"/>  
-            <jndi type="string" mapping="connectionName"/>
+            <output-type type="string" mapping="p_output"/> 
           </action-inputs>
           <action-resources> 
             <report-definition mapping="report-definition1"/> 
           </action-resources>
-          <component-definition/> 
+          <component-definition> 
+            <jndi><![CDATA[dw3]]></jndi> 
+          </component-definition> 
         </action-definition>
  
       </actions>
