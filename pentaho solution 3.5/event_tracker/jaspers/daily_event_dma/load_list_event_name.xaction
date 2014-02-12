@@ -87,7 +87,7 @@ ORDER BY row_order, name;]]></template>
           <query-result type="result-set" mapping="query_result_event_name"/> 
         </action-outputs>
         <component-definition> 
-          <jndi><![CDATA[dw3]]></jndi>  
+          <jndi><![CDATA[verveReportConnection]]></jndi>  
           <live><![CDATA[true]]></live> 
         </component-definition> 
       </action-definition>
@@ -161,7 +161,7 @@ ORDER BY row_order, name;]]></template>
           <query-result type="result-set" mapping="query_result_event_name"/> 
         </action-outputs>
         <component-definition> 
-          <jndi><![CDATA[dw3]]></jndi>  
+          <jndi><![CDATA[verveReportConnection]]></jndi>  
           <live><![CDATA[false]]></live> 
         </component-definition> 
       </action-definition>
