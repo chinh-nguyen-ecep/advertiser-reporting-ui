@@ -68,6 +68,7 @@ function generateSelect2(options){
 		ajaxUrl: '',
 		multi: true,
 		selectAll: false,
+		selectAllValue: 0,
 		data: function(term, page){
 			return {
                 q: term, //search term
@@ -97,6 +98,8 @@ function generateSelect2(options){
 		data: "name=John&location=Boston",
 	});
 	
+
+	
 	function action(){
 		load(inputArea.val());	
 	}
@@ -111,6 +114,8 @@ function generateSelect2(options){
 		ajaxObject.abort();
 		term=term;
 		page=1;
+		//Add Loading comanet
+		drawArea.html('Loading...');
 		ajaxObject=$.ajax({
 			type: "POST",
 			dataType: "json",
@@ -143,7 +148,7 @@ function generateSelect2(options){
 				//drawArea.append(row);
 			}
 			if(options.selectAll&&data.length>0){
-				var row=[0,'All'];
+				var row=[options.selectAllValue,'All'];
 				data.unshift(row);
 			}
 			
@@ -151,15 +156,9 @@ function generateSelect2(options){
 		$.each(data,function(index,temp){
 			var id=temp[0];
 			var text=temp[1];
-			var row='<input id="checkbox_'+id+'" value="'+id+'" type="checkbox" name="'+options.name+'" safari="1" title="'+text+'"/> <label for="checkbox_'+id+'">'+text+'</label><br/>';
-			if(index==0 && !isLoadMore){
-				row='<input id="checkbox_'+id+'" value="'+id+'" type="checkbox" name="'+options.name+'" safari="1" title="'+text+'" checked/> <label for="checkbox_'+id+'">'+text+'</label><br/>';
-			}
-			if(index==0 && !options.multi && !isLoadMore){
-				row='<input id="radio_'+id+'" value="'+id+'" type="radio" name="'+options.name+'" safari="1" title="'+text+'" checked/> <label for="radio_'+id+'">'+text+'</label><br/>';
-			}
-			if(index>0 && !options.multi){
-				row='<input id="radio_'+id+'" value="'+id+'" type="radio" name="'+options.name+'" safari="1" title="'+text+'"/> <label for="radio_'+id+'">'+text+'</label><br/>';
+			var row='<input id="checkbox_'+id+'" value="'+id+'" type="checkbox" name="'+options.name+'" title="'+text+'"/> <label for="checkbox_'+id+'">'+text+'</label><br/>';
+			if(!options.multi){
+				row='<input id="radio_'+id+'" value="'+id+'" type="radio" name="'+options.name+'" title="'+text+'"/> <label for="radio_'+id+'">'+text+'</label><br/>';
 			}
 			drawArea.append(row);
 		});
@@ -190,13 +189,13 @@ function generateSelect2(options){
 			});
 		}
 		if(!options.multi){
-			$('#'+options.divID+' input:radio').checkbox({cls:'jquery-safari-checkbox',empty: '/verve_style/scripts2/checkbox/empty.png'});
+			//$('#'+options.divID+' input:radio').checkbox({cls:'jquery-safari-checkbox',empty: '/verve_style/scripts2/checkbox/empty.png'});
 			$('#'+options.divID+' input:radio').change(function(event){
 				var value=$(this).val();
 				options.clickEvent(value);
 			});
 		}else{
-			$('#'+options.divID+' input:checkbox').checkbox({cls:'jquery-safari-checkbox',empty: '/verve_style/scripts2/checkbox/empty.png'});
+			//$('#'+options.divID+' input:checkbox').checkbox({cls:'jquery-safari-checkbox',empty: '/verve_style/scripts2/checkbox/empty.png'});
 			$('#'+options.divID+' input:checkbox').change(function(event){
 				var value=$(this).val();
 				options.clickEvent(value);
