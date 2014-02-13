@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Daily verve Ads" pageWidth="1802" pageHeight="1190" orientation="Landscape" columnWidth="1762" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="2.1398375295825027"/>
-	<property name="ireport.x" value="2781"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="15"/>
 	<parameter name="p_start_date" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new String("2014-01-01")]]></defaultValueExpression>
 	</parameter>
@@ -106,30 +106,16 @@ ORDER BY full_date,adnetwork_name]]>
 		<band/>
 	</background>
 	<title>
-		<band height="320">
+		<band height="168">
 			<staticText>
-				<reportElement x="0" y="154" width="241" height="20"/>
-				<textElement>
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Summary:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="0" y="279" width="241" height="41"/>
-				<textElement verticalAlignment="Bottom">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Detail:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="0" width="1762" height="20"/>
+				<reportElement x="0" y="0" width="1644" height="20"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Notes:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="20" width="1762" height="134"/>
+				<reportElement x="0" y="20" width="1644" height="148"/>
 				<textElement/>
 				<text><![CDATA[- N/A = Data is not exposed by 3rd party (e.g. Marchex ) or not go through adcel ( e.g Itune)
 - Data Unavailable = Data not currently available from 3rd party at the time Dw download
@@ -142,17 +128,6 @@ ORDER BY full_date,adnetwork_name]]>
 - Gross =  based on latest 3rd party revenue calculation rules
 - Daily Delta Gross = gross $ Day N - Gross $ for Day N-1]]></text>
 			</staticText>
-			<subreport>
-				<reportElement mode="Transparent" x="0" y="187" width="1235" height="75"/>
-				<subreportParameter name="p_start_date">
-					<subreportParameterExpression><![CDATA[$P{p_start_date}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="p_end_date">
-					<subreportParameterExpression><![CDATA[$P{p_end_date}]]></subreportParameterExpression>
-				</subreportParameter>
-				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_verve_ads_subreport_summary.jasper"]]></subreportExpression>
-			</subreport>
 		</band>
 	</title>
 	<columnHeader>
