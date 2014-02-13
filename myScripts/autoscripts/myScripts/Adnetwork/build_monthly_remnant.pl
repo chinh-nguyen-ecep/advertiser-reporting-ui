@@ -113,6 +113,11 @@ sub runAgg{
 	runPostgresComand("select billing.fn_build_ba_monthly_adnetwork_summary($p_date_sk_start,$p_date_sk_end,$month_sk,'PS',45)");
 	runPostgresComand("update billing.ba_monthly_adnetwork_summary set is_active=true where month_since_2005=$month_sk");
 	
+	#ba_monthly_adnetwork_summary V1
+	runPostgresComand("delete from billing.ba_monthly_adnetwork_summary_v1 where month_since_2005=$month_sk");
+	runPostgresComand("select billing.fn_build_ba_monthly_adnetwork_summary_v1($p_date_sk_start,$p_date_sk_end,$month_sk,'PS',45)");
+	runPostgresComand("update billing.ba_monthly_adnetwork_summary_v1 set is_active=true where month_since_2005=$month_sk");	
+	
 	#ba_monthly_publisher_revenue_v51
 	runPostgresComand("select billing.fn_build_ba_monthly_publisher_revenue_v51($month_sk,$process_id,'PS')");
 	runPostgresComand("update billing.ba_monthly_publisher_revenue_v5 set is_active=true where month_since_2005=$month_sk");
