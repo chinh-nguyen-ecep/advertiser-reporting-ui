@@ -217,7 +217,7 @@ ORDER BY row_order,"name";]]></query>
         <live><![CDATA[false]]></live>  
         <query><![CDATA[SELECT b.min_full_date, b.max_full_date
 FROM refer.date_dim a,
-(SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM adm.daily_agg_network_revenue_by_publisher WHERE is_active=true) b
+(SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM adm.daily_agg_network_revenue_min WHERE is_active=true) b
 WHERE a.full_date = b.min_full_date OR a.full_date = b.max_full_date;]]></query> 
       </component-definition> 
     </action-definition>
