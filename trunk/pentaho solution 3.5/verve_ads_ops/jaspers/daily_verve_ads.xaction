@@ -137,12 +137,18 @@
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </report-definition>  
-    <report-definition2>
+    <report-definition2> 
+      <solution-file> 
+        <location>daily_verve_ads/daily_verve_ads_one_day.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition2>  
+    <report-definition3>
       <solution-file>
-        <location>daily_verve_ads/daily_verve_ads_one_day.jasper</location>
+        <location>daily_verve_ads/daily_verve_ads_csv.jasper</location>
         <mime-type>text/plain</mime-type>
       </solution-file>
-    </report-definition2>
+    </report-definition3>
   </resources>
   
   <actions> 
@@ -237,27 +243,27 @@ ORDER BY month_since_2005 desc]]></query>
   
       <actions> 
         <condition><![CDATA[p_date_mode=='date']]></condition>  
-        <actions>
-          <condition><![CDATA[p_start_date==p_end_date]]></condition>
-          <action-definition>
+        <actions> 
+          <condition><![CDATA[p_start_date==p_end_date]]></condition>  
+          <action-definition> 
             <component-name>JasperReportsComponent</component-name>
             <action-type>Jasper</action-type>
-            <action-inputs>
-              <p_start_date type="string"/>
-              <p_end_date type="string"/>
-              <jndi type="string" mapping="connectionName"/>
-              <output-type type="string" mapping="p_output"/>
+            <action-inputs> 
+              <p_start_date type="string"/>  
+              <p_end_date type="string"/>  
+              <jndi type="string" mapping="connectionName"/>  
+              <output-type type="string" mapping="p_output"/> 
             </action-inputs>
-            <action-resources>
-              <report-definition mapping="report-definition2"/>
+            <action-resources> 
+              <report-definition mapping="report-definition2"/> 
             </action-resources>
-            <component-definition/>
+            <component-definition/> 
           </action-definition>
-
+ 
         </actions>
-
-        <actions>
-          <condition><![CDATA[p_start_date!=p_end_date]]></condition>
+  
+        <actions> 
+          <condition><![CDATA[p_start_date!=p_end_date]]></condition>  
           <action-definition> 
             <component-name>JasperReportsComponent</component-name>
             <action-type>Jasper</action-type>
@@ -272,7 +278,7 @@ ORDER BY month_since_2005 desc]]></query>
             </action-resources>
             <component-definition/> 
           </action-definition>
-
+ 
         </actions>
  
       </actions>
@@ -340,7 +346,7 @@ var p_mailTitle='Daily Verve Ads Report - '+p_end_date;]]></script>
           <p_end_date type="string"/> 
         </action-inputs>
         <action-resources> 
-          <report-definition mapping="report-definition1"/> 
+          <report-definition mapping="report-definition3"/> 
         </action-resources>
         <action-outputs> 
           <report-output type="content" mapping="report_ou_csv"/> 
