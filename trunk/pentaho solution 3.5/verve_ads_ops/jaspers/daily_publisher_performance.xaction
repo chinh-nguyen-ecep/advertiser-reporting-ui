@@ -151,6 +151,10 @@ SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM a
         <query><![CDATA[SELECT calendar_year_month,month_since_2005 
 FROM adsops.monthly_agg_publisher_performance
 GROUP BY calendar_year_month,month_since_2005
+UNION ALL
+SELECT calendar_year_month,month_since_2005 
+FROM adsops.monthly_agg_publisher_performance
+GROUP BY calendar_year_month,month_since_2005
 ORDER BY month_since_2005 desc]]></query> 
       </component-definition> 
     </action-definition>
