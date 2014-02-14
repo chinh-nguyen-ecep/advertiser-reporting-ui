@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Monthly publisher performance" pageWidth="3400" pageHeight="1684" orientation="Landscape" columnWidth="3360" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.3286707500000021"/>
-	<property name="ireport.x" value="1720"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="boder">
 		<box leftPadding="5" rightPadding="5">
@@ -61,7 +61,6 @@
   FROM adsops.daily_agg_publisher_performance
   WHERE is_active =true
   AND month_since_2005 BETWEEN $P{p_start_month_since_2005}::int AND $P{p_end_month_since_2005}::int
-  AND cta_any > 0 AND clicks > 0 AND cta_any <> clicks
   GROUP BY
   calendar_year_month,month_since_2005,
        publisher_id, publisher_name
