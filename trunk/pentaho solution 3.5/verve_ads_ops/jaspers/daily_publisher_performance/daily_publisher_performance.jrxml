@@ -61,7 +61,6 @@
   FROM adsops.daily_agg_publisher_performance
   WHERE is_active =true
   AND full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
-  AND cta_any > 0 AND clicks > 0 AND cta_any <> clicks
   GROUP BY
   full_date,
        publisher_id, publisher_name
