@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dail_ad_network_summary_subreport1" language="groovy" pageWidth="1002" pageHeight="842" orientation="Landscape" columnWidth="1002" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="1.768460768250001"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="703"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="calendar_year_month" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new String("")]]></defaultValueExpression>
@@ -20,7 +20,7 @@ a.parent1_name as publisher
 ,sum(paid_impressions) as paid_impressions
 ,sum(a.gross_revenue) as gross_revenue
 ,sum(a.p_net_revenue) as p_net_revenue
-,(case when sum(a.gross_revenue)>0 then sum(a.p_net_revenue)/sum(a.gross_revenue) else 0 end) as p_share
+,partner_revenue_share as p_share
 ,sum(a.v_net_revenue) as v_net_revenue
 ,sum(a.fullfilled_code_y) as adcel_y_ad_responses
 ,sum(total_billable_impressions) as total_billable_impressions
@@ -30,7 +30,8 @@ GROUP BY
 a.parent1_name
 ,a.ad_network_id
 ,a.partner_id
-ORDER BY a.parent1_name,a.ad_network_id]]>
+,partner_revenue_share
+ORDER BY a.parent1_name,a.ad_network_id, a.partner_id]]>
 	</queryString>
 	<field name="publisher" class="java.lang.String"/>
 	<field name="ad_id" class="java.lang.Integer"/>
@@ -211,7 +212,7 @@ Impressions]]></text>
 				</textElement>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{paid_impressions}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00 %">
+			<textField pattern="#,##0 %">
 				<reportElement x="682" y="0" width="80" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
