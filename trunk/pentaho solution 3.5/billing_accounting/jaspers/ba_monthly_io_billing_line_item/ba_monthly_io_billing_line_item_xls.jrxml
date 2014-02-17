@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="infobright_daily_row_count_summary" pageWidth="3590" pageHeight="2380" orientation="Landscape" columnWidth="3590" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
-	<property name="ireport.zoom" value="1.0263162364614176"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="infobright_daily_row_count_summary" pageWidth="3990" pageHeight="2380" orientation="Landscape" columnWidth="3990" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.502629601803162"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="border">
@@ -47,6 +47,9 @@ max(dt_lastchange) as dt_lastchange
 ,IO_line_items_budget
 ,IO_line_items_start_date
 ,IO_line_items_end_date
+,vendor_names
+,dfp_impressions
+,dfp_clicks
 FROM billing.ba_monthly_io_line_item
 WHERE month_since_2005=$P{p_month_sk}::int
 GROUP BY
@@ -77,6 +80,9 @@ io_orders_id
 ,calendar_year_month
 ,eastern_start_date
 ,eastern_end_date
+,vendor_names
+,dfp_impressions
+,dfp_clicks
 ORDER BY io_orders_id]]>
 	</queryString>
 	<field name="dt_lastchange" class="java.sql.Timestamp"/>
@@ -107,6 +113,9 @@ ORDER BY io_orders_id]]>
 	<field name="io_line_items_budget" class="java.lang.Double"/>
 	<field name="io_line_items_start_date" class="java.sql.Timestamp"/>
 	<field name="io_line_items_end_date" class="java.sql.Timestamp"/>
+	<field name="vendor_names" class="java.lang.String"/>
+	<field name="dfp_impressions" class="java.lang.Long"/>
+	<field name="dfp_clicks" class="java.lang.Long"/>
 	<background>
 		<band/>
 	</background>
@@ -125,14 +134,14 @@ ORDER BY io_orders_id]]>
 				<text><![CDATA[IO ORDER INFO sections]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="60" width="3590" height="15" forecolor="#0099CC"/>
+				<reportElement x="0" y="60" width="3990" height="15" forecolor="#0099CC"/>
 				<textElement textAlignment="Right" verticalAlignment="Top">
 					<font fontName="Calibri" size="22" isBold="true"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="0" y="0" width="3590" height="20"/>
+				<reportElement x="0" y="0" width="3990" height="20"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
@@ -140,7 +149,7 @@ ORDER BY io_orders_id]]>
 				<textFieldExpression class="java.lang.String"><![CDATA["Month: " +$F{calendar_year_month}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="20" width="3590" height="20"/>
+				<reportElement x="0" y="20" width="3990" height="20"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
@@ -148,13 +157,21 @@ ORDER BY io_orders_id]]>
 				<textFieldExpression class="java.lang.String"><![CDATA["Date range from "+new SimpleDateFormat("yyyy-MM-dd").format($F{eastern_start_date})+" to "+new SimpleDateFormat("yyyy-MM-dd").format($F{eastern_end_date})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="40" width="3590" height="20"/>
+				<reportElement x="0" y="40" width="3990" height="20"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA["Refresh: "+new SimpleDateFormat("yyyy-MM-dd HH:MM:SS").format($F{dt_lastchange})]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement style="border" mode="Opaque" x="3590" y="75" width="400" height="20" backcolor="#339900"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+				</box>
+				<textElement/>
+				<text><![CDATA[]]></text>
+			</staticText>
 		</band>
 	</title>
 	<columnHeader>
@@ -351,6 +368,30 @@ ORDER BY io_orders_id]]>
 				</textElement>
 				<text><![CDATA[io_line_items_end_date]]></text>
 			</staticText>
+			<staticText>
+				<reportElement style="border" mode="Opaque" x="3590" y="0" width="200" height="20" backcolor="#339900"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vendor(s)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" mode="Opaque" x="3790" y="0" width="100" height="20" backcolor="#339900"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DFP_Impressions]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" mode="Opaque" x="3890" y="0" width="100" height="20" backcolor="#339900"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DFP_Clicks]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -504,6 +545,24 @@ ORDER BY io_orders_id]]>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement/>
 				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{io_line_items_end_date}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="border" x="3590" y="0" width="200" height="20"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{vendor_names}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement style="border" x="3790" y="0" width="100" height="20"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{dfp_impressions}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement style="border" x="3890" y="0" width="100" height="20"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{dfp_clicks}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
