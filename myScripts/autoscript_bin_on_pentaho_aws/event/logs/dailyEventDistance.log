@@ -1,0 +1,1108 @@
+*Init the autoscript...
+Aggregate process run on: localhost
+*Get report date...
+Today date: 2014-02-17
+Today date sk: 3335
+Report date: 2014-02-16
+Report date sk: 3334
+Report date roll back 7 day: 2014-02-10
+Report date roll back 7 day sk: 3328
+*Daily Event by Distance Process
+*Registe to ETL process page...
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 1
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 0
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 0
+Waiting: 10
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 0
+Waiting: 10
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 0
+Waiting: 10
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 0
+Waiting: 10
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 0
+Waiting: 10
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 0
+Waiting: 10
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 0
+Waiting: 10
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 1
+Loaded filesok: 1
+Loaded fail: 0
+Waiting: 9
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 1
+Loaded filesok: 1
+Loaded fail: 0
+Waiting: 9
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 1
+Loaded filesok: 1
+Loaded fail: 0
+Waiting: 9
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 1
+Loaded filesok: 1
+Loaded fail: 0
+Waiting: 9
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 1
+Loaded filesok: 1
+Loaded fail: 0
+Waiting: 9
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 1
+Loaded filesok: 1
+Loaded fail: 0
+Waiting: 9
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 2
+Loaded filesok: 2
+Loaded fail: 0
+Waiting: 8
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 2
+Loaded filesok: 2
+Loaded fail: 0
+Waiting: 8
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 2
+Loaded filesok: 2
+Loaded fail: 0
+Waiting: 8
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 2
+Loaded filesok: 2
+Loaded fail: 0
+Waiting: 8
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 2
+Loaded filesok: 2
+Loaded fail: 0
+Waiting: 8
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 3
+Loaded filesok: 3
+Loaded fail: 0
+Waiting: 7
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 3
+Loaded filesok: 3
+Loaded fail: 0
+Waiting: 7
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 3
+Loaded filesok: 3
+Loaded fail: 0
+Waiting: 7
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 3
+Loaded filesok: 3
+Loaded fail: 0
+Waiting: 7
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 4
+Loaded filesok: 4
+Loaded fail: 0
+Waiting: 6
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 4
+Loaded filesok: 4
+Loaded fail: 0
+Waiting: 6
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 4
+Loaded filesok: 4
+Loaded fail: 0
+Waiting: 6
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 4
+Loaded filesok: 4
+Loaded fail: 0
+Waiting: 6
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 4
+Loaded filesok: 4
+Loaded fail: 0
+Waiting: 6
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 4
+Loaded filesok: 4
+Loaded fail: 0
+Waiting: 6
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 4
+Loaded filesok: 4
+Loaded fail: 0
+Waiting: 6
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 4
+Loaded filesok: 4
+Loaded fail: 0
+Waiting: 6
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 4
+Loaded filesok: 4
+Loaded fail: 0
+Waiting: 6
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 5
+Loaded filesok: 5
+Loaded fail: 0
+Waiting: 5
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 5
+Loaded filesok: 5
+Loaded fail: 0
+Waiting: 5
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 5
+Loaded filesok: 5
+Loaded fail: 0
+Waiting: 5
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 5
+Loaded filesok: 5
+Loaded fail: 0
+Waiting: 5
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 5
+Loaded filesok: 5
+Loaded fail: 0
+Waiting: 5
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 5
+Loaded filesok: 5
+Loaded fail: 0
+Waiting: 5
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 5
+Loaded filesok: 5
+Loaded fail: 0
+Waiting: 5
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 6
+Loaded filesok: 6
+Loaded fail: 0
+Waiting: 4
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 6
+Loaded filesok: 6
+Loaded fail: 0
+Waiting: 4
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 6
+Loaded filesok: 6
+Loaded fail: 0
+Waiting: 4
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 6
+Loaded filesok: 6
+Loaded fail: 0
+Waiting: 4
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 6
+Loaded filesok: 6
+Loaded fail: 0
+Waiting: 4
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 7
+Loaded filesok: 7
+Loaded fail: 0
+Waiting: 3
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 7
+Loaded filesok: 7
+Loaded fail: 0
+Waiting: 3
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 7
+Loaded filesok: 7
+Loaded fail: 0
+Waiting: 3
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 7
+Loaded filesok: 7
+Loaded fail: 0
+Waiting: 3
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 7
+Loaded filesok: 7
+Loaded fail: 0
+Waiting: 3
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 7
+Loaded filesok: 7
+Loaded fail: 0
+Waiting: 3
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 8
+Loaded filesok: 8
+Loaded fail: 0
+Waiting: 2
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 8
+Loaded filesok: 8
+Loaded fail: 0
+Waiting: 2
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 8
+Loaded filesok: 8
+Loaded fail: 0
+Waiting: 2
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 8
+Loaded filesok: 8
+Loaded fail: 0
+Waiting: 2
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 8
+Loaded filesok: 8
+Loaded fail: 0
+Waiting: 2
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 8
+Loaded filesok: 8
+Loaded fail: 0
+Waiting: 2
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 9
+Loaded filesok: 9
+Loaded fail: 0
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 9
+Loaded filesok: 9
+Loaded fail: 0
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 9
+Loaded filesok: 9
+Loaded fail: 0
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 9
+Loaded filesok: 9
+Loaded fail: 0
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 9
+Loaded filesok: 9
+Loaded fail: 0
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+Loaded files: 9
+Loaded filesok: 9
+Loaded fail: 0
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 9
+Total file: 10
+17-2-2014 3:36:15 # Loading file completed!
+Process param 10 has been runing with ID 5400
+*Check Param 10 run in 2014-02-17 
+Process id: 5400
+Total Trans: 2
+Total Trans Completed: 0
+*Check Param 10 run in 2014-02-17 
+Process id: 5400
+Total Trans: 2
+Total Trans Completed: 0
+*Check Param 10 run in 2014-02-17 
+Process id: 5400
+Total Trans: 2
+Total Trans Completed: 1
+*Check Param 10 run in 2014-02-17 
+Process id: 5400
+Total Trans: 2
+Total Trans Completed: 2
+17-2-2014 3:39:35 # Process completed!
+*Promote parameter: 10
+Call function: staging.fn_promote_daily_event_distance_report()
+17-2-2014 3:39:58 # Completed!
