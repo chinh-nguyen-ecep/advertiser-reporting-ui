@@ -18,8 +18,10 @@ adstraffic.daily_event_stats
 adstraffic.daily_event_stats_by_adnet
 adstraffic.daily_event_stats_by_content_category
 adstraffic.daily_event_stats_by_dma
+adstraffic.daily_event_stats_by_flight
 adstraffic.daily_olap_event_by_portal
 evttracker.daily_event_adcel_stats
+evttracker.daily_event_adcel_stats_by_flight
 evttracker.daily_event_by_distance
 evttracker.daily_event_dma
 evttracker.daily_event_dma_by_hour
