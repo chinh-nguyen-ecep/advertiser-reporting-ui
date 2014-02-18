@@ -83,7 +83,25 @@
         <request>connectionName</request> 
       </sources>  
       <default-value><![CDATA[verveReportConnection]]></default-value> 
-    </connectionName> 
+    </connectionName>  
+    <p_publisher_ids type="string">
+      <sources>
+        <request>p_publisher_ids</request>
+      </sources>
+      <default-value/>
+    </p_publisher_ids>
+    <p_property_ids type="string">
+      <sources>
+        <request>p_property_ids</request>
+      </sources>
+      <default-value/>
+    </p_property_ids>
+    <p_channel_ids type="string">
+      <sources>
+        <request>p_channel_ids</request>
+      </sources>
+      <default-value/>
+    </p_channel_ids>
   </inputs>
 
   <outputs> 
@@ -215,7 +233,10 @@ ORDER BY month_since_2005 desc]]></query>
           <jndi type="string" mapping="connectionName"/>  
           <p_start_date type="string"/>  
           <p_end_date type="string"/>  
-          <output-type type="string" mapping="p_output"/> 
+          <output-type type="string" mapping="p_output"/>  
+          <p_publisher_ids type="string"/>
+          <p_property_ids type="string"/>
+          <p_channel_ids type="string"/>
         </action-inputs>
         <action-resources> 
           <report-definition mapping="report-definition1"/> 
@@ -234,7 +255,10 @@ ORDER BY month_since_2005 desc]]></query>
           <p_start_month_since_2005 type="string"/>  
           <p_end_month_since_2005 type="string"/>  
           <jndi type="string" mapping="connectionName"/>  
-          <output-type type="string" mapping="p_output"/> 
+          <output-type type="string" mapping="p_output"/>  
+          <p_publisher_ids type="string"/>
+          <p_property_ids type="string"/>
+          <p_channel_ids type="string"/>
         </action-inputs>
         <action-resources> 
           <report-definition type="resource"/> 

@@ -54,18 +54,18 @@
       </sources>  
       <default-value><![CDATA[dw3dw3]]></default-value> 
     </ConnectionName>  
-    <network_id type="string"> 
+    <publisher_ids type="string"> 
       <sources> 
-        <request>network_id</request> 
+        <request>publisher_ids</request> 
       </sources>  
       <default-value><![CDATA[-100]]></default-value> 
-    </network_id>  
-    <merchant_ids type="string"> 
+    </publisher_ids>  
+    <property_ids type="string"> 
       <sources> 
-        <request>merchant_ids</request> 
+        <request>property_ids</request> 
       </sources>  
-      <default-value><![CDATA[0]]></default-value> 
-    </merchant_ids> 
+      <default-value><![CDATA[-100]]></default-value> 
+    </property_ids> 
   </inputs>
 
   <outputs> 
@@ -80,87 +80,87 @@
   
   <actions> 
     <actions> 
-      <condition><![CDATA[mode=='agency']]></condition>  
-      <action-definition> 
-        <component-name>SQLLookupRule</component-name>
-        <action-type>Relational</action-type>
-        <action-inputs> 
-          <page type="string"/>  
-          <limit type="string"/>  
-          <term type="string"/>  
-          <jndi type="string" mapping="ConnectionName"/> 
-        </action-inputs>
-        <action-outputs> 
-          <query-result type="result-set" mapping="query_result"/> 
-        </action-outputs>
-        <component-definition> 
-          <live><![CDATA[false]]></live>  
-          <query><![CDATA[SELECT network_id,title||' ('||network_id||')' as name 
-FROM vlmo_dw.vlmo_dim_networks
-WHERE dt_expire='9999-12-31' AND lower(title||' ('||network_id||')') LIKE lower('%{term}%') 
-GROUP BY network_id,title
-ORDER BY network_id
-LIMIT {limit} OFFSET ({page}-1)*10 ;]]></query> 
-        </component-definition> 
-      </action-definition>
- 
-    </actions>
-  
-    <actions> 
-      <condition><![CDATA[mode=='merchant']]></condition>  
-      <action-definition> 
-        <component-name>SQLLookupRule</component-name>
-        <action-type>Relational</action-type>
-        <action-inputs> 
-          <limit type="string"/>  
-          <page type="string"/>  
-          <term type="string"/>  
-          <jndi type="string" mapping="ConnectionName"/>  
-          <network_id type="string"/> 
-        </action-inputs>
-        <action-outputs> 
-          <query-result type="result-set" mapping="query_result"/> 
-        </action-outputs>
-        <component-definition> 
-          <query><![CDATA[SELECT merchant_id,name||' ('||merchant_id||')' as name
-FROM vlmo_dw.vlmo_dim_merchants
-WHERE dt_expire='9999-12-31' 
-AND lower(name||' ('||merchant_id||')') LIKE lower('%{term}%') 
-AND network_id={network_id}
-GROUP BY merchant_id,name
-ORDER BY name LIMIT {limit} OFFSET ({page}-1)*10 ;]]></query>  
-          <live><![CDATA[false]]></live> 
-        </component-definition> 
-      </action-definition>
- 
-    </actions>
-  
-    <actions> 
-      <condition><![CDATA[mode=='offer']]></condition>  
+      <condition><![CDATA[mode=='publisher']]></condition>  
       <action-definition> 
         <component-name>SQLLookupRule</component-name>
         <action-type>Relational</action-type>
         <action-inputs> 
           <jndi type="string" mapping="ConnectionName"/>  
           <limit type="string"/>
-          <network_id type="string"/>
           <page type="string"/>
           <term type="string"/>
-          <merchant_ids type="string"/>
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
+        </action-outputs>
+        <component-definition> 
+          <live><![CDATA[false]]></live>  
+          <query><![CDATA[SELECT publisher_id,publisher_name||' ('||publisher_id||')' as name 
+FROM adsops.daily_agg_publisher_performance
+WHERE lower(publisher_name||' ('||publisher_id||')') LIKE lower('%{term}%') 
+GROUP BY publisher_id,publisher_name
+ORDER BY publisher_name
+LIMIT {limit} OFFSET ({page}-1)*10 ;]]></query>
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[mode=='property']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="ConnectionName"/>  
+          <limit type="string"/>
+          <page type="string"/>
+          <term type="string"/>
+          <publisher_ids type="string"/>
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
+        </action-outputs>
+        <component-definition> 
+          <live><![CDATA[false]]></live>  
+          <query><![CDATA[SELECT property_id,property_name||' ('||property_id||')' as name 
+FROM adsops.daily_agg_publisher_performance
+WHERE lower(property_name||' ('||property_id||')') LIKE lower('%{term}%') 
+AND (publisher_id IN ({publisher_ids}) OR '0'='{publisher_ids}')
+GROUP BY property_id,property_name
+ORDER BY property_name
+LIMIT {limit} OFFSET ({page}-1)*10 ;]]></query>
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[mode=='channel']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="ConnectionName"/>  
+          <limit type="string"/>
+          <property_ids type="string"/>
+          <page type="string"/>
+          <term type="string"/>
+          <publisher_ids type="string"/>
         </action-inputs>
         <action-outputs> 
           <query-result type="result-set" mapping="query_result"/> 
         </action-outputs>
         <component-definition> 
           <live><![CDATA[true]]></live>  
-          <query><![CDATA[SELECT offer_id,title||' ('||offer_id||')' as titlte
-FROM vlmo_dw.vlmo_dim_offers
-WHERE dt_expire='9999-12-31' 
-AND lower(title||' ('||offer_id||')') LIKE lower('%{term}%') 
-AND (merchant_id IN ({merchant_ids}) OR '0'='{merchant_ids}')
-AND merchant_id IN (SELECT DISTINCT merchant_id FROM vlmo_dw.vlmo_dim_merchants WHERE dt_expire='9999-12-31'  AND network_id={network_id})
-GROUP BY offer_id,title
-ORDER BY title LIMIT {limit} OFFSET ({page}-1)*10 ;]]></query>
+          <query><![CDATA[SELECT channel_id,channel_name||' ('||channel_id||')' as name 
+FROM adsops.daily_agg_publisher_performance
+WHERE lower(channel_name||' ('||channel_id||')') LIKE lower('%{term}%') 
+AND (publisher_id IN ({publisher_ids}) OR '0'='{publisher_ids}')
+AND (property_id IN({property_ids}) OR '0'='{property_ids}')
+GROUP BY channel_id,channel_name
+ORDER BY channel_name
+LIMIT {limit} OFFSET ({page}-1)*10 ;]]></query>
         </component-definition> 
       </action-definition>
  

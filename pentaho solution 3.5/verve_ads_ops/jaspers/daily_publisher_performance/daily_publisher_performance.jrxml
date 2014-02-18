@@ -21,6 +21,15 @@
 	<parameter name="p_end_date" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new String("2014-01-01")]]></defaultValueExpression>
 	</parameter>
+	<parameter name="p_publisher_ids" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("0")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_property_ids" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("0")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_channel_ids" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("0")]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT full_date as "Date",
        publisher_id as "Publisher ID"
@@ -61,6 +70,9 @@
   FROM adsops.daily_agg_publisher_performance
   WHERE is_active =true
   AND full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
+AND (publisher_id IN (select unnest(string_to_array($P{p_publisher_ids}, ','))::int) OR '0'=$P{p_publisher_ids})
+AND (property_id IN (select unnest(string_to_array($P{p_property_ids}, ','))::int) OR '0'=$P{p_property_ids})
+AND (channel_id IN (select unnest(string_to_array($P{p_channel_ids}, ','))::int) OR '0'=$P{p_channel_ids})
   GROUP BY
   full_date,
        publisher_id, publisher_name
