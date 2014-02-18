@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Weekly Advance Digital" pageWidth="2180" pageHeight="2380" orientation="Landscape" columnWidth="2140" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.6528925619834764"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="border">
+		<box leftPadding="5" rightPadding="5">
+			<topPen lineWidth="0.75"/>
+			<leftPen lineWidth="0.75"/>
+			<bottomPen lineWidth="0.75"/>
+			<rightPen lineWidth="0.75"/>
+		</box>
+	</style>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_year_week" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("2013-W24")]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+start_week
+,end_week
+,publisher_id
+,publisher_name
+,organization_id
+,organization_name
+,advertiser_id
+,advertiser_name
+,order_id
+,order_name
+,flight_id
+,flight_name
+,flight_start_date
+,flight_end_date
+,flight_quantity as booked_units
+,flight_metric as metric
+,Case network_id when 1 THEN 'Local' WHEN 4 THEN 'VLM' END as "Network"
+,max(dt_lastchange) as dt_lastchange
+FROM adsops.weekly_agg_advance_digital
+WHERE is_active=true AND year_week=$P{p_year_week}
+GROUP BY
+start_week
+,end_week
+,publisher_id
+,publisher_name
+,organization_id
+,organization_name
+,advertiser_id
+,advertiser_name
+,order_id
+,order_name
+,flight_id
+,flight_name
+,flight_start_date
+,flight_end_date
+,flight_quantity
+,flight_metric
+,network_id
+ORDER BY
+publisher_name
+,organization_name
+,advertiser_name
+,order_name
+,flight_name]]>
+	</queryString>
+	<field name="start_week" class="java.sql.Date"/>
+	<field name="end_week" class="java.sql.Date"/>
+	<field name="publisher_id" class="java.lang.Integer"/>
+	<field name="publisher_name" class="java.lang.String"/>
+	<field name="organization_id" class="java.lang.Integer"/>
+	<field name="organization_name" class="java.lang.String"/>
+	<field name="advertiser_id" class="java.lang.Integer"/>
+	<field name="advertiser_name" class="java.lang.String"/>
+	<field name="order_id" class="java.lang.Integer"/>
+	<field name="order_name" class="java.lang.String"/>
+	<field name="flight_id" class="java.lang.Integer"/>
+	<field name="flight_name" class="java.lang.String"/>
+	<field name="flight_start_date" class="java.sql.Timestamp"/>
+	<field name="flight_end_date" class="java.sql.Timestamp"/>
+	<field name="booked_units" class="java.lang.Integer"/>
+	<field name="metric" class="java.lang.String"/>
+	<field name="Network" class="java.lang.String"/>
+	<field name="dt_lastchange" class="java.sql.Timestamp"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="94">
+			<image>
+				<reportElement x="0" y="9" width="64" height="40"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"../vervelogo.jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="64" y="29" width="2076" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["From "+ new SimpleDateFormat("yyyy-MM-dd").format($F{start_week})+" To "+new SimpleDateFormat("yyyy-MM-dd").format($F{end_week})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="49" width="2140" height="25"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Refresh date: "+new SimpleDateFormat("yyyy-MM-dd").format($F{dt_lastchange})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="64" y="9" width="2076" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Weekly Advance Digital]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="74" width="2140" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20">
+			<staticText>
+				<reportElement style="border" x="0" y="0" width="254" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[publisher_name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" x="254" y="0" width="110" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[organization_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" x="364" y="0" width="254" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[organization_name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" x="618" y="0" width="80" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[advertiser_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" x="698" y="0" width="254" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[advertiser_name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" x="952" y="0" width="80" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[order_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" x="1032" y="0" width="284" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[order_name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" x="1316" y="0" width="80" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[flight_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" x="1396" y="0" width="254" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[flight_name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" x="1650" y="0" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[flight_start_date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" x="1750" y="0" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[flight_end_date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" x="1850" y="0" width="90" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[booked_units]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" x="1940" y="0" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[unit_type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" x="2040" y="0" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[network]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<textField>
+				<reportElement style="border" x="0" y="0" width="254" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{publisher_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="border" x="254" y="0" width="110" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{organization_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="border" x="364" y="0" width="254" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{organization_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="border" x="618" y="0" width="80" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{advertiser_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="border" x="698" y="0" width="254" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{advertiser_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="border" x="952" y="0" width="80" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{order_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="border" x="1032" y="0" width="284" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{order_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="border" x="1316" y="0" width="80" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{flight_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="border" x="1396" y="0" width="254" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{flight_name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd">
+				<reportElement style="border" x="1650" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{flight_start_date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd">
+				<reportElement style="border" x="1750" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{flight_end_date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="border" x="1850" y="0" width="90" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{booked_units}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="border" x="1940" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{metric}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="border" x="2040" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Network}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="26">
+			<textField pattern="yyyy-MM-dd hh:mm aaa">
+				<reportElement x="0" y="6" width="254" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="254" y="6" width="1786" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="2040" y="6" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="4" width="2140" height="1"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>
