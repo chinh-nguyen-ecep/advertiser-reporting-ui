@@ -1,0 +1,27 @@
+*Init the autoscript...
+Aggregate process run on: localhost
+*Get report date...
+Today date: 2014-02-17
+Today date sk: 3335
+Report date: 2014-02-16
+Report date sk: 3334
+Report date roll back 7 day: 2014-02-10
+Report date roll back 7 day sk: 3328
+*Registe to ETL process page...
+*Check file loading...
+Data file config id: 1
+Total file: 10
+17-2-2014 1:5:18 # Loading file completed!
+Process param 3 has been runing with ID 5391
+*Check Param 3 run in 2014-02-17 
+Process id: 5391
+Total Trans: 2
+Total Trans Completed: 0
+*Check Param 3 run in 2014-02-17 
+Process id: 5391
+Total Trans: 2
+Total Trans Completed: 2
+17-2-2014 1:6:36 # Process completed!
+*Promote parameter: 3
+Call function: staging.fn_promote_daily_ad_response_report()
+17-2-2014 1:7:2 # Completed!

@@ -1,0 +1,7250 @@
+*Init the autoscript...
+Aggregate process run on: localhost
+*Get report date...
+Today date: 2014-02-17
+Today date sk: 3335
+Report date: 2014-02-16
+Report date sk: 3334
+Report date roll back 7 day: 2014-02-10
+Report date roll back 7 day sk: 3328
+*Registe to ETL process page...
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 24
+Total file: 0
+Loaded files: 0
+Loaded filesok: 0
+Loaded fail: 1
+Waiting: 1
+Recheck after 60s!

@@ -1,0 +1,235 @@
+*Init the autoscript...
+Aggregate process run on: localhost
+*Get report date...
+Today date: 2014-02-17
+Today date sk: 3335
+Report date: 2014-02-16
+Report date sk: 3334
+Report date roll back 7 day: 2014-02-10
+Report date roll back 7 day sk: 3328
+*Registe to ETL process page...
+*Check file loading...
+Data file config id: 12
+Total file: 10
+Loaded files: 7
+Loaded filesok: 7
+Loaded fail: 0
+Waiting: 3
+Recheck after 60s!
+*Check file loading...
+Data file config id: 12
+Total file: 10
+Loaded files: 7
+Loaded filesok: 7
+Loaded fail: 0
+Waiting: 3
+Recheck after 60s!
+*Check file loading...
+Data file config id: 12
+Total file: 10
+Loaded files: 7
+Loaded filesok: 7
+Loaded fail: 0
+Waiting: 3
+Recheck after 60s!
+*Check file loading...
+Data file config id: 12
+Total file: 10
+Loaded files: 7
+Loaded filesok: 7
+Loaded fail: 0
+Waiting: 3
+Recheck after 60s!
+*Check file loading...
+Data file config id: 12
+Total file: 10
+Loaded files: 8
+Loaded filesok: 8
+Loaded fail: 0
+Waiting: 2
+Recheck after 60s!
+*Check file loading...
+Data file config id: 12
+Total file: 10
+Loaded files: 8
+Loaded filesok: 8
+Loaded fail: 0
+Waiting: 2
+Recheck after 60s!
+*Check file loading...
+Data file config id: 12
+Total file: 10
+Loaded files: 8
+Loaded filesok: 8
+Loaded fail: 0
+Waiting: 2
+Recheck after 60s!
+*Check file loading...
+Data file config id: 12
+Total file: 10
+Loaded files: 8
+Loaded filesok: 8
+Loaded fail: 0
+Waiting: 2
+Recheck after 60s!
+*Check file loading...
+Data file config id: 12
+Total file: 10
+Loaded files: 8
+Loaded filesok: 8
+Loaded fail: 0
+Waiting: 2
+Recheck after 60s!
+*Check file loading...
+Data file config id: 12
+Total file: 10
+Loaded files: 9
+Loaded filesok: 9
+Loaded fail: 0
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 12
+Total file: 10
+Loaded files: 9
+Loaded filesok: 9
+Loaded fail: 0
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 12
+Total file: 10
+Loaded files: 9
+Loaded filesok: 9
+Loaded fail: 0
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 12
+Total file: 10
+Loaded files: 9
+Loaded filesok: 9
+Loaded fail: 0
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 12
+Total file: 10
+Loaded files: 9
+Loaded filesok: 9
+Loaded fail: 0
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 12
+Total file: 10
+Loaded files: 9
+Loaded filesok: 9
+Loaded fail: 0
+Waiting: 1
+Recheck after 60s!
+*Check file loading...
+Data file config id: 12
+Total file: 10
+17-2-2014 1:21:4 # Loading file completed!
+Process param 5 has been runing with ID 5392
+*Check Param 5 run in 2014-02-17 
+Process id: 5392
+Total Trans: 4
+Total Trans Completed: 0
+*Check Param 5 run in 2014-02-17 
+Process id: 5392
+Total Trans: 4
+Total Trans Completed: 0
+*Check Param 5 run in 2014-02-17 
+Process id: 5392
+Total Trans: 4
+Total Trans Completed: 0
+*Check Param 5 run in 2014-02-17 
+Process id: 5392
+Total Trans: 4
+Total Trans Completed: 0
+*Check Param 5 run in 2014-02-17 
+Process id: 5392
+Total Trans: 4
+Total Trans Completed: 0
+*Check Param 5 run in 2014-02-17 
+Process id: 5392
+Total Trans: 4
+Total Trans Completed: 0
+*Check Param 5 run in 2014-02-17 
+Process id: 5392
+Total Trans: 4
+Total Trans Completed: 0
+*Check Param 5 run in 2014-02-17 
+Process id: 5392
+Total Trans: 4
+Total Trans Completed: 0
+*Check Param 5 run in 2014-02-17 
+Process id: 5392
+Total Trans: 4
+Total Trans Completed: 0
+*Check Param 5 run in 2014-02-17 
+Process id: 5392
+Total Trans: 4
+Total Trans Completed: 0
+*Check Param 5 run in 2014-02-17 
+Process id: 5392
+Total Trans: 4
+Total Trans Completed: 0
+*Check Param 5 run in 2014-02-17 
+Process id: 5392
+Total Trans: 4
+Total Trans Completed: 0
+*Check Param 5 run in 2014-02-17 
+Process id: 5392
+Total Trans: 4
+Total Trans Completed: 0
+*Check Param 5 run in 2014-02-17 
+Process id: 5392
+Total Trans: 4
+Total Trans Completed: 0
+*Check Param 5 run in 2014-02-17 
+Process id: 5392
+Total Trans: 4
+Total Trans Completed: 0
+*Check Param 5 run in 2014-02-17 
+Process id: 5392
+Total Trans: 4
+Total Trans Completed: 0
+*Check Param 5 run in 2014-02-17 
+Process id: 5392
+Total Trans: 4
+Total Trans Completed: 0
+*Check Param 5 run in 2014-02-17 
+Process id: 5392
+Total Trans: 4
+Total Trans Completed: 0
+*Check Param 5 run in 2014-02-17 
+Process id: 5392
+Total Trans: 4
+Total Trans Completed: 1
+*Check Param 5 run in 2014-02-17 
+Process id: 5392
+Total Trans: 4
+Total Trans Completed: 1
+*Check Param 5 run in 2014-02-17 
+Process id: 5392
+Total Trans: 4
+Total Trans Completed: 1
+*Check Param 5 run in 2014-02-17 
+Process id: 5392
+Total Trans: 4
+Total Trans Completed: 2
+*Check Param 5 run in 2014-02-17 
+Process id: 5392
+Total Trans: 4
+Total Trans Completed: 2
+*Check Param 5 run in 2014-02-17 
+Process id: 5392
+Total Trans: 4
+Total Trans Completed: 4
+17-2-2014 1:45:47 # Process completed!
+*Promote parameter: 5
+Call function: staging.fn_promote_daily_filled_report()
+17-2-2014 1:46:17 # Completed!
