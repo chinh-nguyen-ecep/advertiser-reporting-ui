@@ -59,7 +59,7 @@ sub runAgg{
         note("*Run agg");
         #monthly_agg_adm_data_feed
         runPostgresComand("select adsops.fn_build_weekly_agg_mcclatchy_off($p_start_date_sk ,$p_end_date_sk, 0, 'PS')");
-		runPostgresComand("select adsops.fn_build_weekly_agg_advance_digital($p_start_date_sk ,$p_end_date_sk, 0, 'PS')");
+		
         ##runPostgresComand("select staging.fn_ba_monthly_agg_adm_data_feed($p_date_sk_start,$p_date_sk_end,$year_week,'PS')");
         ##runPostgresComand("update  adm.monthly_agg_adm_data_feed set is_active=true where month_since_2005=$year_week");
 
@@ -69,8 +69,7 @@ sub transferFinalData{
         note("*Transfer final data to reporting");
 		my $comand=" cd /opt/temp/autoscripts/transformer/;perl main.pl table $host $transferToHost adsops.weekly_agg_mcclatchy_off";
 		system($comand);
-		my $comand=" cd /opt/temp/autoscripts/transformer/;perl main.pl table $host $transferToHost adsops.weekly_agg_advance_digital";
-		system($comand);
+
 }
 sub runPostgresComand{
         #my $comand=shift;
