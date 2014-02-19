@@ -23,6 +23,7 @@ var subtitle; // subtitle of chart
 var title; // titile of chart
 var categories=[-1,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23];	 //hour category of chart
 var categories_date=['2013-10-01','2013-10-02','2013-10-03'];// date category of chart
+var categories_distance=['00-01m','01-02m','02-03m','03-04m','04-05m','05-06m','06-07m','07-08m','08-09m','09-10m','10-15m','15-20m','20-25m','25-30m','30+m'];// distance category of chart
 var chart_date_data=[{
 		name:'Impressions',
 		color: '#4572A7',
@@ -53,7 +54,7 @@ var table_data=[]; // data to show by table
 var myTable; // table object
 var myDateRangeInput; // Date rang input object
 var breakBy='hour'; // The value status of break by hour or break by date
-
+var measure='click'; // The value of measure value
 $(document).ready(function(){ 
 	setTabActive('dailyAdvertiser');
 	myDateRangeInput=new generateDateRange({
@@ -259,7 +260,7 @@ $(document).ready(function(){
 	function drawChart(categories,series,title,subtitle){
 
 		console.log('Draw chart');
-		
+		console.log(JSON.stringify(series));
 		 $('#daily-advertiser-chart-container').highcharts({
 			 	chart: {
 				 type: 'spline'
@@ -456,6 +457,9 @@ $(document).ready(function(){
 		if(by=='date'){
 			$('#measuresBt button').prop('disabled', true);
 			$('#breakBt button').html('by date<span class="caret"></span>');
+		}else if(by=='distance'){
+			$('#measuresBt button').prop('disabled', false);
+			$('#breakBt button').html('by distance<span class="caret"></span>');
 		}else{
 			$('#measuresBt button').prop('disabled', false);
 			$('#breakBt button').html('by hour<span class="caret"></span>');
@@ -463,8 +467,173 @@ $(document).ready(function(){
 		breakBy=by;
 		loadChart();
 	}
-	function loadChartByDistance(){
+	function changeMeasure(name){
+		measure=name;
+		var categories;
+		var title;
+		var series;
+		if(measure=='click'){
+			series=
+		}else if(measure=='imp'){
+					
+		}else if(measure=='cta'){
+						
+		}
 		
+		drawChart(categories,series,title,subtitle);
+		
+	}
+	function loadChartByDistance(){
+		myDateRangeInput.disable();
+		series_clicks=[];
+		series_impressions=[];
+		series_cta=[];
+		var dateRange_value='where[date.between]='+urlMaster.getParam('where[date.between]');
+		var measureValue=$("#e2").val();
+		var url=apiRootUrl+'/AdvertiserByDistance?select=date|distance&limit=2000&'+dateRange_value+"&by=impressions|clicks|cta_maps";
+		if(myAjaxStore.isLoading(url)){
+			console.log('Your request is loading...');
+			console.log('Callback after '+loadingCallback+'s...');
+			delayTimeout(loadingCallback,function(){
+				loadChartByDistance();
+			});
+			return;
+		}
+		if(chart !=null){
+			chart.showLoading();
+		}
+
+		var ajaxData=myAjaxStore.get(url);
+		if(ajaxData==null){
+			myAjaxStore.registe(url);
+			$.ajax({
+				dataType: "json",
+				url: url,
+				timeout: ajaxRequestTimeout,
+				xhrFields: {
+					      withCredentials: true
+		   		},
+				success: function(json){
+					  myAjaxStore.add(url,json);
+					  loadChartByDistance();
+				},
+				error: function(xhr,status,error){
+					myAjaxStore.remove(url);
+					console.log('Request url error: '+url);
+					console.log('Status:  '+status);
+					console.log('Error:  '+error);
+					console.log('Reload chart!');
+					if(error=='timeout'){
+						loadChartByDistance();
+					}else{
+						delayTimeout(2000,function(){
+							location.reload(false);
+						});
+					}
+				},
+				complete: function(){
+					
+				}
+				});			
+		}else{
+			processData(ajaxData);
+			if(ajaxData.data.length==0){
+				var mydialog=new contentDialog();
+				mydialog.setTitle("Daily Advertiser Message!");
+				mydialog.setContent("Your data from "+selectStartDate.format('yyyy-mm-dd')+" to "+selectEndDate.format('yyyy-mm-dd')+" is not available.");
+				mydialog.open();
+			}
+		}
+		function processData(json){
+			title="Advertiser Clicks By Date Distance";
+		  	subtitle="From "+selectStartDate.format("yyyy-mm-dd")+" to "+selectEndDate.format("yyyy-mm-dd");
+		  	var responseStatus=json.responseStatus;
+		  	var page=json.page;
+		  	if(responseStatus=='OK' && page==1){
+		  		data=json.data;
+		  		var name='';
+		  		//this loop add date to series
+
+		  		
+		  		for(var i=0;i<data.length;i++){				  			
+		  			var row=data[i];
+		  			var newName=row[0];
+		  			if(newName!=name){
+		  				//console.log("Add serie: "+newName);
+//				  		var initDataArray=[categories_distance.length];
+//				  		var initDataArray2=[categories_distance.length];
+//				  		var initDataArray3=[categories_distance.length];
+//				  		for(var i=0; i<categories_distance.length;i++){
+//				  			initDataArray[i]=0;
+//				  			initDataArray2[i]=0;
+//				  			initDataArray3[i]=0;
+//				  		}
+		  				var row={name: newName,data:[]};
+		  				var row2={name: newName,data:[]};
+		  				var row3={name: newName,data:[]};
+		  				series_clicks.push(row);
+		  				series_impressions.push(row2);
+		  				series_cta.push(row3);
+		  				name=newName;
+		  			}
+
+		  		}
+		  		//end loop add date to series
+		  		
+		  		//begin add value
+		  		for(var i=0;i<data.length;i++){
+		  			var row=data[i];
+		  			var newName=row[0];
+		  			var distance=row[1];
+		  			var value=row[3];
+		  			var value_imp=row[2];
+		  			var value_cta=row[4];
+		  			var index=categories_distance.indexOf(distance);
+		  			console.log("Add Value: "+newName+" ckl "+value+" im "+value_imp+" cta "+value_cta+ " index "+index +" distance "+distance);
+		  			for(var j=0;j<series_clicks.length;j++){
+			  			var item=series_clicks[j];	
+			  			if(item.name==newName && index>=0){	
+			  				console.log("Date "+newName+" "+j+" Add value "+ value+" At "+index);
+			  				series_clicks[j].data[index]=parseFloat(value);
+			  				series_impressions[j].data[index]=parseFloat(value_imp);
+			  				series_cta[j].data[index]=parseFloat(value_cta);
+			  			}
+			  		}
+		  		}
+		  		//end add values
+		  		
+			  	//generate table data
+			  	table_data=json.data;
+			  	//end generate table data
+			  	
+			  	//generate table
+			  	myTable=new drawTableFromArray({
+			  		table_id: 'daily-advertiser-dataTable',
+			  		table_colums: ['Date','Distance','Impressions','Clicks','Cta maps'],
+			  		columns_format:['','','number','number','number'],
+			  		table_data: table_data,
+			  		page_items: 25,
+			  		paging: true,
+			  		//sort_by: 'Date',
+			  		sortable: false,
+			  		onClickRow: function(row){
+			  			//alert(row[0]);
+			  		}
+			  	});
+			  	
+		  		
+		  	}else{
+		  		return;
+		  	}
+		  	// draw chart
+		  	if(chart){
+		  		chart.hideLoading();
+		  	}
+		  	drawChart(categories_distance,series_impressions,title,subtitle);
+		  	  	
+		  	//unable date range input
+		  	myDateRangeInput.unable();
+		}
 	}
 	function reviewExportData(){
 		var mydialog=new contentDialog();

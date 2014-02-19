@@ -22,16 +22,14 @@
 	 		    <form class="navbar-form navbar-right form-inline" role="form">
 					<div class="form-group">
 			   	     <select class="form-control">			        
-				        <option>Advertiser ID</option>
-				        <option>Advertiser Name</option>
-				        <option>Order ID</option>
-				        <option>External ID</option>
+				        <option>Advertiser</option>
+				        <option>Order</option>
 				      </select>
 					</div>
 			      <div class="form-group">
-			        <input type="text" class="form-control" placeholder="[Enter Search]">
+			        <input type="text" class="form-control" placeholder="">
 			      </div>
-			      <button type="submit" class="btn btn-primary">Search</button>
+			      <button type="submit" class="btn btn-primary">Filter</button>
 			    </form>  
 			    <div class="row" >
 			    <div class="col-md-7">
