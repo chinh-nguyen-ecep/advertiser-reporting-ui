@@ -1,0 +1,7 @@
+E:\Chinh\C# projects\test01\vietnam\vietnam\obj\Debug\vietnam.csprojResolveAssemblyReference.cache
+E:\Chinh\C# projects\test01\vietnam\vietnam\bin\Debug\vietnam.dll
+E:\Chinh\C# projects\test01\vietnam\vietnam\bin\Debug\vietnam.pdb
+E:\Chinh\C# projects\test01\vietnam\vietnam\bin\Debug\human.dll
+E:\Chinh\C# projects\test01\vietnam\vietnam\bin\Debug\human.pdb
+E:\Chinh\C# projects\test01\vietnam\vietnam\obj\Debug\vietnam.dll
+E:\Chinh\C# projects\test01\vietnam\vietnam\obj\Debug\vietnam.pdb
