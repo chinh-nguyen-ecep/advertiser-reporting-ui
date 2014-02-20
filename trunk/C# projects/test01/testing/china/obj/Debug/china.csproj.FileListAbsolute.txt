@@ -1,0 +1,7 @@
+E:\Chinh\C# projects\test01\testing\china\bin\Debug\china.dll
+E:\Chinh\C# projects\test01\testing\china\bin\Debug\china.pdb
+E:\Chinh\C# projects\test01\testing\china\bin\Debug\human.dll
+E:\Chinh\C# projects\test01\testing\china\bin\Debug\human.pdb
+E:\Chinh\C# projects\test01\testing\china\obj\Debug\china.csprojResolveAssemblyReference.cache
+E:\Chinh\C# projects\test01\testing\china\obj\Debug\china.dll
+E:\Chinh\C# projects\test01\testing\china\obj\Debug\china.pdb

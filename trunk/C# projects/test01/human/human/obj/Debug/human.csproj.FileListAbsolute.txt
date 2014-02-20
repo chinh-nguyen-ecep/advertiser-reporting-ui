@@ -1,0 +1,4 @@
+E:\Chinh\C# projects\test01\human\human\bin\Debug\human.dll
+E:\Chinh\C# projects\test01\human\human\bin\Debug\human.pdb
+E:\Chinh\C# projects\test01\human\human\obj\Debug\human.dll
+E:\Chinh\C# projects\test01\human\human\obj\Debug\human.pdb

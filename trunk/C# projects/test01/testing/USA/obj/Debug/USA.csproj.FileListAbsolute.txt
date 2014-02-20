@@ -1,0 +1,7 @@
+E:\Chinh\C# projects\test01\testing\USA\bin\Debug\USA.dll
+E:\Chinh\C# projects\test01\testing\USA\bin\Debug\USA.pdb
+E:\Chinh\C# projects\test01\testing\USA\bin\Debug\human.dll
+E:\Chinh\C# projects\test01\testing\USA\bin\Debug\human.pdb
+E:\Chinh\C# projects\test01\testing\USA\obj\Debug\USA.csprojResolveAssemblyReference.cache
+E:\Chinh\C# projects\test01\testing\USA\obj\Debug\USA.dll
+E:\Chinh\C# projects\test01\testing\USA\obj\Debug\USA.pdb

@@ -1,0 +1,9 @@
+E:\Chinh\C# projects\test01\testing\testing\bin\Debug\testing.exe
+E:\Chinh\C# projects\test01\testing\testing\bin\Debug\testing.pdb
+E:\Chinh\C# projects\test01\testing\testing\obj\x86\Debug\testing.Properties.Resources.resources
+E:\Chinh\C# projects\test01\testing\testing\obj\x86\Debug\testing.csproj.GenerateResource.Cache
+E:\Chinh\C# projects\test01\testing\testing\obj\x86\Debug\testing.exe
+E:\Chinh\C# projects\test01\testing\testing\obj\x86\Debug\testing.pdb
+E:\Chinh\C# projects\test01\testing\testing\bin\Debug\human.dll
+E:\Chinh\C# projects\test01\testing\testing\bin\Debug\human.pdb
+E:\Chinh\C# projects\test01\testing\testing\obj\x86\Debug\testing.csprojResolveAssemblyReference.cache
