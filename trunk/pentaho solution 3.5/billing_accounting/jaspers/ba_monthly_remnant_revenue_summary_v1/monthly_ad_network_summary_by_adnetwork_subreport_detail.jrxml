@@ -20,30 +20,15 @@
 ,a.total_billable_impressions
 FROM
 (
-	/* AT&T Yellowpages */
-	SELECT
-	'AT&T Yellowpages (27)' as adname,
-	sum(fullfilled_code_y) as paid_impressions,
-	sum(gross_revenue) as gross_revenue,
-	sum(p_net_revenue) as p_net_revenue,
-	sum(v_net_revenue) as v_net_revenue,
-	sum(fullfilled_code_y) as fullfilled_code_y,
-	sum(fullfilled_code_y) as total_billable_impressions
-	FROM billing.ba_monthly_yp_performance
-	WHERE is_active = true
-	AND $P{adname}='AT&T (32,33,27)'
-	AND calendar_year_month=$P{calendar_year_month}::text
-	GROUP BY adname
-	UNION
 	/* AT&T Static Banner Yellowpages */
 	SELECT
 	'AT&T Static Banner Yellowpages (32)' as adname,
-	sum(fullfilled_code_y) as paid_impressions,
+	sum(impressions) as paid_impressions,
 	sum(gross_revenue) as gross_revenue,
 	sum(p_net_revenue) as p_net_revenue,
 	sum(v_net_revenue) as v_net_revenue,
 	sum(fullfilled_code_y) as fullfilled_code_y,
-	sum(fullfilled_code_y) as total_billable_impressions
+	sum(total_billable_impressions) as total_billable_impressions
 	FROM billing.ba_monthly_yp_sb_performance
 	WHERE is_active = true
 	AND $P{adname}='AT&T (32,33,27)'
@@ -53,12 +38,12 @@ FROM
 	/* AT&T No Logo Yellowpages */
 	SELECT
 	'AT&T No Logo(Yellowpages)(33)' as adname,
-	sum(fullfilled_code_y) as paid_impressions,
+	sum(impressions) as paid_impressions,
 	sum(gross_revenue) as gross_revenue,
 	sum(p_net_revenue) as p_net_revenue,
 	sum(v_net_revenue) as v_net_revenue,
 	sum(fullfilled_code_y) as fullfilled_code_y,
-	sum(fullfilled_code_y) as total_billable_impressions
+	sum(total_billable_impressions) as total_billable_impressions
 	FROM billing.ba_monthly_yp_no_performance
 	WHERE  is_active = true
 	AND $P{adname}='AT&T (32,33,27)'
