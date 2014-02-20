@@ -7,9 +7,9 @@
 
 				  <div class="form-group">
 						<div id="measuresBt" class="btn-group btn-group-sm">
-						  <button type="button" class="btn btn-default" onclick="drawChart(categories,series_clicks,'Advertiser Clicks By Date',subtitle);">Clicks</button>
-						  <button type="button" class="btn btn-default" onclick="drawChart(categories,series_impressions,'Advertiser Impressions By Date',subtitle);">Impressions</button>
-						  <button type="button" class="btn btn-default" onclick="drawChart(categories,series_cta,'Advertiser Cta maps By Date',subtitle);">Cta maps</button>
+						  <button type="button" class="btn btn-default" onclick="changeMeasure('click');">Clicks</button>
+						  <button type="button" class="btn btn-default" onclick="changeMeasure('imp');">Impressions</button>
+						  <button type="button" class="btn btn-default" onclick="changeMeasure('cta');">Cta maps</button>
 						</div>
 				  </div>
 				  <div class="form-group">
