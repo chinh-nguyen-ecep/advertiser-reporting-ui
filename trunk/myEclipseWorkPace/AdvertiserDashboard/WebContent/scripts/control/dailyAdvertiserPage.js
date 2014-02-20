@@ -469,19 +469,28 @@ $(document).ready(function(){
 	}
 	function changeMeasure(name){
 		measure=name;
-		var categories;
-		var title;
+		var _categories;
+		title="Advertiser ";
 		var series;
 		if(measure=='click'){
-			series=
+			series=series_clicks; 
+			title+=" Clicks by Date ";
 		}else if(measure=='imp'){
-					
+			series=series_impressions;
+			title+=" Impressions by Date ";
 		}else if(measure=='cta'){
-						
+			series=series_cta;
+			title+=" Cta by Date ";
 		}
 		
-		drawChart(categories,series,title,subtitle);
-		
+		if(breakBy=='hour'){
+			_categories=categories;
+			title+=" Hour";
+		}else if(breakBy=='distance'){
+			_categories=categories_distance;
+			title+=" Distance";
+		}
+		drawChart(_categories,series,title,subtitle);
 	}
 	function loadChartByDistance(){
 		myDateRangeInput.disable();
@@ -629,7 +638,7 @@ $(document).ready(function(){
 		  	if(chart){
 		  		chart.hideLoading();
 		  	}
-		  	drawChart(categories_distance,series_impressions,title,subtitle);
+		  	drawChart(categories_distance,series_clicks,title,subtitle);
 		  	  	
 		  	//unable date range input
 		  	myDateRangeInput.unable();
@@ -647,6 +656,9 @@ $(document).ready(function(){
 		if(breakBy=='date'){
 			mydialog.setTitle('Daily Advertiser by Date From '+selectStartDate.format('yyyy-mm-dd')+' To '+selectEndDate.format('yyyy-mm-dd'));
 			loadingUrl=rootUrl+'/GenerateJasperReport'+'?export_type=html&jrxml=daily_advertiser_report&p_end_date='+selectEndDate.format('yyyy-mm-dd')+'&p_start_date='+selectStartDate.format('yyyy-mm-dd')+'&path=dailyAdvertiser';
+		}else if(breakBy=='distance'){
+			mydialog.setTitle('Daily Advertiser by Date Distance From '+selectStartDate.format('yyyy-mm-dd')+' To '+selectEndDate.format('yyyy-mm-dd'));
+			loadingUrl=rootUrl+'/GenerateJasperReport'+'?export_type=html&jrxml=daily_advertiser_report_by_distance&p_end_date='+selectEndDate.format('yyyy-mm-dd')+'&p_start_date='+selectStartDate.format('yyyy-mm-dd')+'&path=dailyAdvertiser';
 		}
 		var htmlResult;
 		
@@ -683,6 +695,8 @@ $(document).ready(function(){
 		var loadingUrl=rootUrl+'/GenerateJasperReport'+'?export_type='+exportType+'&jrxml=daily_advertiser_report_by_hour&p_end_date='+selectEndDate.format('yyyy-mm-dd')+'&p_start_date='+selectStartDate.format('yyyy-mm-dd')+'&path=dailyAdvertiser';
 		if(breakBy=='date'){
 			loadingUrl=rootUrl+'/GenerateJasperReport'+'?export_type='+exportType+'&jrxml=daily_advertiser_report&p_end_date='+selectEndDate.format('yyyy-mm-dd')+'&p_start_date='+selectStartDate.format('yyyy-mm-dd')+'&path=dailyAdvertiser';
+		}else if(breakBy=='distance'){
+			loadingUrl=rootUrl+'/GenerateJasperReport'+'?export_type='+exportType+'&jrxml=daily_advertiser_report_by_distance&p_end_date='+selectEndDate.format('yyyy-mm-dd')+'&p_start_date='+selectStartDate.format('yyyy-mm-dd')+'&path=dailyAdvertiser';
 		}	
 		window.open(loadingUrl);
 	}
