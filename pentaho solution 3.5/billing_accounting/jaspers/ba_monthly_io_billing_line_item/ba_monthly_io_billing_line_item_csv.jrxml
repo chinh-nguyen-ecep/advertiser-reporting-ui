@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="infobright_daily_row_count_summary" pageWidth="3264" pageHeight="2380" orientation="Landscape" columnWidth="3264" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="infobright_daily_row_count_summary" pageWidth="3464" pageHeight="2380" orientation="Landscape" columnWidth="3464" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="1.502629601803162"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -40,6 +40,8 @@ max(dt_lastchange) as dt_lastchange
 ,IO_line_items_created_at
 ,IO_line_items_updated_at
 ,IO_line_items_flight_count
+,io_line_items_rate
+,io_line_items_metric
 ,IO_line_items_quantity
 ,IO_line_items_io_date
 ,IO_line_items_external_ref
@@ -74,6 +76,8 @@ io_orders_id
 ,IO_line_items_io_date
 ,IO_line_items_external_ref
 ,IO_line_items_comments_count
+,io_line_items_rate
+,io_line_items_metric
 ,IO_line_items_budget
 ,IO_line_items_start_date
 ,IO_line_items_end_date
@@ -106,6 +110,8 @@ ORDER BY io_orders_id]]>
 	<field name="io_line_items_created_at" class="java.sql.Timestamp"/>
 	<field name="io_line_items_updated_at" class="java.sql.Timestamp"/>
 	<field name="io_line_items_flight_count" class="java.lang.Long"/>
+	<field name="io_line_items_rate" class="java.lang.Double"/>
+	<field name="io_line_items_metric" class="java.lang.String"/>
 	<field name="io_line_items_quantity" class="java.lang.Long"/>
 	<field name="io_line_items_io_date" class="java.sql.Timestamp"/>
 	<field name="io_line_items_external_ref" class="java.lang.String"/>
@@ -226,7 +232,7 @@ ORDER BY io_orders_id]]>
 				<text><![CDATA[IO Line Item Quantity]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="border" mode="Opaque" x="2236" y="0" width="162" height="20" backcolor="#CCCCCC"/>
+				<reportElement style="border" mode="Opaque" x="2436" y="0" width="162" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement>
 					<font isBold="true"/>
@@ -234,7 +240,7 @@ ORDER BY io_orders_id]]>
 				<text><![CDATA[IO Line Item External Ref]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="border" mode="Opaque" x="2398" y="0" width="190" height="20" backcolor="#CCCCCC"/>
+				<reportElement style="border" mode="Opaque" x="2598" y="0" width="190" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
@@ -250,7 +256,7 @@ ORDER BY io_orders_id]]>
 				<text><![CDATA[IO Line Item Budget]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="border" mode="Opaque" x="2588" y="0" width="138" height="20" backcolor="#CCCCCC"/>
+				<reportElement style="border" mode="Opaque" x="2788" y="0" width="138" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement>
 					<font isBold="true"/>
@@ -258,7 +264,7 @@ ORDER BY io_orders_id]]>
 				<text><![CDATA[Start Date]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="border" mode="Opaque" x="2726" y="0" width="138" height="20" backcolor="#CCCCCC"/>
+				<reportElement style="border" mode="Opaque" x="2926" y="0" width="138" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement>
 					<font isBold="true"/>
@@ -266,7 +272,7 @@ ORDER BY io_orders_id]]>
 				<text><![CDATA[End Date]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="border" mode="Opaque" x="2864" y="0" width="200" height="20" backcolor="#339900"/>
+				<reportElement style="border" mode="Opaque" x="3064" y="0" width="200" height="20" backcolor="#339900"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement>
 					<font isBold="true"/>
@@ -274,7 +280,7 @@ ORDER BY io_orders_id]]>
 				<text><![CDATA[Vendors]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="border" mode="Opaque" x="3064" y="0" width="100" height="20" backcolor="#339900"/>
+				<reportElement style="border" mode="Opaque" x="3264" y="0" width="100" height="20" backcolor="#339900"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement>
 					<font isBold="true"/>
@@ -282,12 +288,28 @@ ORDER BY io_orders_id]]>
 				<text><![CDATA[DFP Impressions]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="border" mode="Opaque" x="3164" y="0" width="100" height="20" backcolor="#339900"/>
+				<reportElement style="border" mode="Opaque" x="3364" y="0" width="100" height="20" backcolor="#339900"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[DFP Clicks]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" mode="Opaque" x="2236" y="0" width="100" height="20" forecolor="#000000" backcolor="#CCCCCC"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Metric]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" mode="Opaque" x="2336" y="0" width="100" height="20" forecolor="#000000" backcolor="#CCCCCC"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Rate]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -374,13 +396,13 @@ ORDER BY io_orders_id]]>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{io_line_items_quantity}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="border" mode="Opaque" x="2236" y="0" width="162" height="20" backcolor="#CCCCCC"/>
+				<reportElement style="border" mode="Opaque" x="2436" y="0" width="162" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{io_line_items_external_ref}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement style="border" mode="Opaque" x="2398" y="0" width="190" height="20" backcolor="#CCCCCC"/>
+				<reportElement style="border" mode="Opaque" x="2598" y="0" width="190" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{io_line_items_comments_count}]]></textFieldExpression>
@@ -392,34 +414,46 @@ ORDER BY io_orders_id]]>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{io_line_items_budget}]]></textFieldExpression>
 			</textField>
 			<textField pattern="yyyy-MM-dd">
-				<reportElement style="border" mode="Opaque" x="2588" y="0" width="138" height="20" backcolor="#CCCCCC"/>
+				<reportElement style="border" mode="Opaque" x="2788" y="0" width="138" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement/>
 				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{io_line_items_start_date}]]></textFieldExpression>
 			</textField>
 			<textField pattern="yyyy-MM-dd">
-				<reportElement style="border" mode="Opaque" x="2726" y="0" width="138" height="20" backcolor="#CCCCCC"/>
+				<reportElement style="border" mode="Opaque" x="2926" y="0" width="138" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement/>
 				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{io_line_items_end_date}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement style="border" x="2864" y="0" width="200" height="20"/>
+				<reportElement style="border" x="3064" y="0" width="200" height="20"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{vendor_names}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0" isBlankWhenNull="true">
-				<reportElement style="border" x="3064" y="0" width="100" height="20"/>
+				<reportElement style="border" x="3264" y="0" width="100" height="20"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{dfp_impressions}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0" isBlankWhenNull="true">
-				<reportElement style="border" x="3164" y="0" width="100" height="20"/>
+				<reportElement style="border" x="3364" y="0" width="100" height="20"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{dfp_clicks}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement style="border" mode="Opaque" x="2336" y="0" width="100" height="20" backcolor="#CCCCCC"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{io_line_items_rate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="border" mode="Opaque" x="2236" y="0" width="100" height="20" backcolor="#CCCCCC"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{io_line_items_metric}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
