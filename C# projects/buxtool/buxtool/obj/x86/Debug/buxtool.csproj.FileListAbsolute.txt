@@ -1,0 +1,12 @@
+E:\Chinh\C# projects\buxtool\buxtool\obj\x86\Debug\buxtool.Properties.Resources.resources
+E:\Chinh\C# projects\buxtool\buxtool\obj\x86\Debug\buxtool.csproj.GenerateResource.Cache
+E:\Chinh\C# projects\buxtool\buxtool\obj\x86\Debug\buxtool.EditForm.resources
+E:\Chinh\C# projects\buxtool\buxtool\obj\x86\Debug\buxtool.MainForm.resources
+E:\Chinh\C# projects\buxtool\buxtool\bin\Debug\buxtool.exe
+E:\Chinh\C# projects\buxtool\buxtool\bin\Debug\buxtool.pdb
+E:\Chinh\C# projects\buxtool\buxtool\bin\Debug\buxscript.dll
+E:\Chinh\C# projects\buxtool\buxtool\bin\Debug\buxscript.pdb
+E:\Chinh\C# projects\buxtool\buxtool\obj\x86\Debug\buxtool.csprojResolveAssemblyReference.cache
+E:\Chinh\C# projects\buxtool\buxtool\obj\x86\Debug\buxtool.EditSiteForm.resources
+E:\Chinh\C# projects\buxtool\buxtool\obj\x86\Debug\buxtool.exe
+E:\Chinh\C# projects\buxtool\buxtool\obj\x86\Debug\buxtool.pdb

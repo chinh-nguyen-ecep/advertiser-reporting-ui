@@ -1,0 +1,7 @@
+E:\Chinh\C# projects\buxtool\neobux\bin\Debug\neobux.dll
+E:\Chinh\C# projects\buxtool\neobux\bin\Debug\neobux.pdb
+E:\Chinh\C# projects\buxtool\neobux\bin\Debug\buxscript.dll
+E:\Chinh\C# projects\buxtool\neobux\bin\Debug\buxscript.pdb
+E:\Chinh\C# projects\buxtool\neobux\obj\Debug\neobux.csprojResolveAssemblyReference.cache
+E:\Chinh\C# projects\buxtool\neobux\obj\Debug\neobux.dll
+E:\Chinh\C# projects\buxtool\neobux\obj\Debug\neobux.pdb
