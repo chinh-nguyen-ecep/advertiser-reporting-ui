@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Daily Verve Ads V1</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>chinhnguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type>report</result-type>  
+    <icon>chart_1(2).png|chart_1(2).png</icon> 
+  </documentation>
+
+  <inputs> 
+    <p_start_date type="string"> 
+      <sources> 
+        <request>p_start_date</request> 
+      </sources>  
+      <default-value/> 
+    </p_start_date>  
+    <p_end_date type="string"> 
+      <sources> 
+        <request>p_end_date</request> 
+      </sources>  
+      <default-value/> 
+    </p_end_date>  
+    <v_max_date type="string"> 
+      <sources> 
+        <request>v_max_date</request> 
+      </sources>  
+      <default-value/> 
+    </v_max_date>  
+    <v_min_date type="string"> 
+      <sources> 
+        <request>v_min_date</request> 
+      </sources>  
+      <default-value/> 
+    </v_min_date>  
+    <p_start_month_since_2005 type="string"> 
+      <sources> 
+        <request>p_start_month_since_2005</request> 
+      </sources>  
+      <default-value><![CDATA[0]]></default-value> 
+    </p_start_month_since_2005>  
+    <p_end_month_since_2005 type="string"> 
+      <sources> 
+        <request>p_end_month_since_2005</request> 
+      </sources>  
+      <default-value><![CDATA[0]]></default-value> 
+    </p_end_month_since_2005>  
+    <p_date_mode type="string"> 
+      <sources> 
+        <request>p_date_mode</request> 
+      </sources>  
+      <default-value><![CDATA[date]]></default-value> 
+    </p_date_mode>  
+    <list_date_mode type="string-list"> 
+      <sources> 
+        <request>list_date_mode</request> 
+      </sources>  
+      <default-value type="string-list"> 
+        <list-item>date</list-item>  
+        <list-item>month</list-item> 
+      </default-value> 
+    </list_date_mode>  
+    <List_output_type type="string-list"> 
+      <default-value type="string-list"> 
+        <list-item>html</list-item>  
+        <list-item>pdf</list-item>  
+        <list-item>xls</list-item>  
+        <list-item>rtf</list-item>  
+        <list-item>csv</list-item> 
+      </default-value> 
+    </List_output_type>  
+    <p_output type="string"> 
+      <sources> 
+        <request>p_output</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </p_output>  
+    <connectionName type="string"> 
+      <sources> 
+        <request>connectionName</request> 
+      </sources>  
+      <default-value><![CDATA[verveReportConnection]]></default-value> 
+    </connectionName>  
+    <p_mailTo type="string"> 
+      <sources> 
+        <request>p_mailTo</request> 
+      </sources>  
+      <default-value><![CDATA[chinh.nguyen@ecepvn.org]]></default-value> 
+    </p_mailTo>  
+    <p_emailMode type="string"> 
+      <sources> 
+        <request>p_emailMode</request> 
+      </sources>  
+      <default-value><![CDATA[false]]></default-value> 
+    </p_emailMode>  
+    <p_emailExportFileType type="string"> 
+      <sources> 
+        <request>p_emailExportFileType</request> 
+      </sources>  
+      <default-value><![CDATA[pdf]]></default-value> 
+    </p_emailExportFileType>  
+    <parameter_string type="string"> 
+      <sources> 
+        <request>parameter_string</request> 
+      </sources>  
+      <default-value/> 
+    </parameter_string> 
+  </inputs>
+
+  <outputs> 
+    <result type="string"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </result> 
+  </outputs>
+
+  <resources> 
+    <pageTemplate1> 
+      <solution-file> 
+        <location>daily_verve_ads_v1/template.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </pageTemplate1>  
+    <report-definition1>
+      <solution-file>
+        <location>daily_verve_ads_v1/daily_verve_ads.jasper</location>
+        <mime-type>text/plain</mime-type>
+      </solution-file>
+    </report-definition1>
+    <report-definition>
+      <solution-file>
+        <location>daily_verve_ads_v1/daily_verve_ads.jasper</location>
+        <mime-type>text/plain</mime-type>
+      </solution-file>
+    </report-definition>
+    <report-definition3>
+      <solution-file>
+        <location>daily_verve_ads_v1/daily_verve_ads_csv.jasper</location>
+        <mime-type>text/plain</mime-type>
+      </solution-file>
+    </report-definition3>
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get max min date data</action-type>
+      <action-inputs> 
+        <jndi type="string" mapping="connectionName"/> 
+      </action-inputs>
+      <action-outputs> 
+        <query-result type="result-set" mapping="q_max_min_date"/>  
+        <max_full_date type="string"/>  
+        <min_full_date type="string"/>  
+        <back_30_date type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <live><![CDATA[false]]></live>  
+        <query><![CDATA[SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date,MAX (full_date)-29 as back_30_date FROM adsops.daily_agg_verve_ads_by_remnant WHERE is_active=true
+UNION ALL
+SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date,MAX (full_date)-29 as back_30_date FROM adsops.daily_agg_verve_ads_by_remnant WHERE is_active=true]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <actions> 
+      <condition><![CDATA[p_emailMode=='false']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Get list of months</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result_list_months"/>  
+          <calendar_year_month type="string"/>  
+          <month_since_2005 type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <live><![CDATA[false]]></live>  
+          <query><![CDATA[SELECT calendar_year_month,month_since_2005 
+FROM adsops.daily_agg_verve_ads_by_remnant 
+GROUP BY calendar_year_month,month_since_2005
+ORDER BY month_since_2005 desc]]></query> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>SecureFilterComponent</component-name>
+        <action-type>Prompt/Secure Filter</action-type>
+        <action-inputs> 
+          <p_start_date type="string"/>  
+          <p_end_date type="string"/>  
+          <v_max_date type="string"/>  
+          <v_min_date type="string"/>  
+          <q_max_min_date type="result-set"/>  
+          <p_output type="string"/>  
+          <List_output_type type="string-list"/>  
+          <p_date_mode type="string"/>  
+          <list_date_mode type="string-list"/>  
+          <p_start_month_since_2005 type="string"/>  
+          <p_end_month_since_2005 type="string"/>  
+          <query_result_list_months type="result-set"/> 
+        </action-inputs>
+        <action-resources> 
+          <pageTemplate mapping="pageTemplate1"/> 
+        </action-resources>
+        <component-definition> 
+          <selections> 
+            <p_start_date filter="none" style="text-box"/>  
+            <p_end_date filter="none" style="text-box"/>  
+            <v_max_date style="select"> 
+              <filter value-col-name="max_full_date" display-col-name="max_full_date">q_max_min_date</filter> 
+            </v_max_date>  
+            <v_min_date style="select"> 
+              <filter value-col-name="min_full_date" display-col-name="min_full_date">q_max_min_date</filter> 
+            </v_min_date>  
+            <p_output style="select"> 
+              <filter>List_output_type</filter> 
+            </p_output>  
+            <p_date_mode style="radio"> 
+              <filter>list_date_mode</filter> 
+            </p_date_mode>  
+            <p_start_month_since_2005 style="select"> 
+              <filter value-col-name="month_since_2005" display-col-name="calendar_year_month">query_result_list_months</filter> 
+            </p_start_month_since_2005>  
+            <p_end_month_since_2005 style="select"> 
+              <filter value-col-name="month_since_2005" display-col-name="calendar_year_month">query_result_list_months</filter> 
+            </p_end_month_since_2005> 
+          </selections>  
+          <xsl><![CDATA[pageTemplate]]></xsl> 
+        </component-definition> 
+      </action-definition>
+  
+      <actions> 
+        <condition><![CDATA[p_date_mode=='date']]></condition>  
+        <action-definition> 
+          <component-name>JasperReportsComponent</component-name>
+          <action-type>Jasper</action-type>
+          <action-inputs> 
+            <jndi type="string" mapping="connectionName"/>  
+            <output-type type="string" mapping="p_output"/> 
+          </action-inputs>
+          <action-resources> 
+            <report-definition/> 
+          </action-resources>
+          <component-definition/> 
+        </action-definition>
+ 
+      </actions>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_emailMode=='true']]></condition>  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>Process report input</action-type>
+        <action-inputs> 
+          <p_emailExportFileType type="string"/>  
+          <parameter_string type="string"/>  
+          <q_max_min_date type="result-set"/>  
+          <p_start_date type="string"/>  
+          <p_end_date type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <reportName type="string"/>  
+          <p_start_date type="string"/>  
+          <reportNameCsv type="string"/>  
+          <p_mailTextMessage type="string"/>  
+          <p_mailTitle type="string"/>  
+          <reportNamePdf type="string"/>  
+          <p_end_date type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var reportName='';
+p_start_date=q_max_min_date.getValueAt(0,2);
+p_end_date=q_max_min_date.getValueAt(0,1);
+reportName='Daily_Verve_Ads_'+p_start_date+'_'+p_end_date;
+reportNameCsv=reportName+'.csv';
+var reportNamePdf=reportName+'.pdf';
+var p_mailTextMessage='Attached is Daily Verve Ads report from '+p_start_date+' to '+p_end_date;
+var p_mailTitle='Daily Verve Ads Report - '+p_end_date;]]></script> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper CSV</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition3"/> 
+        </action-resources>
+        <action-outputs> 
+          <report-output type="content" mapping="report_ou_csv"/> 
+        </action-outputs>
+        <component-definition> 
+          <output-type><![CDATA[csv]]></output-type> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper PDF</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition type="resource" mapping="report-definition1"/> 
+        </action-resources>
+        <action-outputs> 
+          <report-output type="content" mapping="report_ou_pdf"/> 
+        </action-outputs>
+        <component-definition> 
+          <output-type><![CDATA[pdf]]></output-type> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>EmailComponent</component-name>
+        <action-type>E-Mail</action-type>
+        <action-inputs> 
+          <to type="string" mapping="p_mailTo"/>  
+          <subject type="string" mapping="p_mailTitle"/>  
+          <message-plain type="string" mapping="p_mailTextMessage"/>  
+          <report_ou_csv type="content"/>  
+          <attach_name_2 type="string" mapping="reportNameCsv"/>  
+          <report_ou_pdf type="content"/>  
+          <attach_name_3 type="string" mapping="reportNamePdf"/> 
+        </action-inputs>
+        <component-definition> 
+          <attachment-ref name-param="attach_name_2" input-param="report_ou_csv"/>  
+          <attachment-ref name-param="attach_name_3" input-param="report_ou_pdf"/> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+ 
+  </actions> 
+</action-sequence>
