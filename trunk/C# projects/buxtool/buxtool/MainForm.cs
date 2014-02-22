@@ -14,6 +14,7 @@ namespace buxtool
     {
         private buxscript.buxscript[] listBuxScripts;
         private List<buxscript.buxscript> listBuxScriptsRuning = new List<buxscript.buxscript>();
+        private ProfileControl profileControl = new ProfileControl();
         public MainForm()
         {
             InitializeComponent();
@@ -27,6 +28,9 @@ namespace buxtool
                 buxscript.buxscript temp = buxscript.buxscript.loadObjectFromDll(dllName);
                 listBuxScripts[i] = temp;
             }
+            //
+            profileControl.listView = listView1;
+            profileControl.loadProfile();
 
         }
 
@@ -220,6 +224,11 @@ namespace buxtool
             }
             return result;
 
+        }
+
+        private void toolStripSaveBtn_Click(object sender, EventArgs e)
+        {
+            profileControl.save();
         }
        
 

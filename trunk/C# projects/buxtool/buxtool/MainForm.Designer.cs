@@ -49,25 +49,25 @@
             this.toolStripLoadProfileBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripSaveBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripAddSiteBtn = new System.Windows.Forms.ToolStripButton();
+            this.toolStripEditSiteBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripRemoveSiteBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripRunAllBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripRunBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripStopBtn = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripExitBtn = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.listView1 = new System.Windows.Forms.ListView();
             this.site = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.userName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.password = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.proxy = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.port = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.status = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.amount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.password = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.toolStripRunAllBtn = new System.Windows.Forms.ToolStripButton();
-            this.toolStripExitBtn = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripEditSiteBtn = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -203,7 +203,7 @@
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(654, 25);
             this.toolStrip1.TabIndex = 2;
-            this.toolStrip1.Text = "toolStrip1";
+            this.toolStrip1.Text = "IP 192.16.1.234";
             // 
             // toolStripLoadProfileBtn
             // 
@@ -222,6 +222,7 @@
             this.toolStripSaveBtn.Name = "toolStripSaveBtn";
             this.toolStripSaveBtn.Size = new System.Drawing.Size(23, 22);
             this.toolStripSaveBtn.Text = "Save Profile";
+            this.toolStripSaveBtn.Click += new System.EventHandler(this.toolStripSaveBtn_Click);
             // 
             // toolStripAddSiteBtn
             // 
@@ -232,6 +233,16 @@
             this.toolStripAddSiteBtn.Size = new System.Drawing.Size(23, 22);
             this.toolStripAddSiteBtn.Text = "Add Site";
             this.toolStripAddSiteBtn.Click += new System.EventHandler(this.toolStripAddSiteBtn_Click);
+            // 
+            // toolStripEditSiteBtn
+            // 
+            this.toolStripEditSiteBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripEditSiteBtn.Image = ((System.Drawing.Image)(resources.GetObject("toolStripEditSiteBtn.Image")));
+            this.toolStripEditSiteBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripEditSiteBtn.Name = "toolStripEditSiteBtn";
+            this.toolStripEditSiteBtn.Size = new System.Drawing.Size(23, 22);
+            this.toolStripEditSiteBtn.Text = "Edit site";
+            this.toolStripEditSiteBtn.Click += new System.EventHandler(this.toolStripEditSiteBtn_Click);
             // 
             // toolStripRemoveSiteBtn
             // 
@@ -247,6 +258,16 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripRunAllBtn
+            // 
+            this.toolStripRunAllBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripRunAllBtn.Image = ((System.Drawing.Image)(resources.GetObject("toolStripRunAllBtn.Image")));
+            this.toolStripRunAllBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripRunAllBtn.Name = "toolStripRunAllBtn";
+            this.toolStripRunAllBtn.Size = new System.Drawing.Size(23, 22);
+            this.toolStripRunAllBtn.Text = "Run All";
+            this.toolStripRunAllBtn.Click += new System.EventHandler(this.toolStripRunAllBtn_Click);
             // 
             // toolStripRunBtn
             // 
@@ -268,6 +289,21 @@
             this.toolStripStopBtn.Text = "Stop";
             this.toolStripStopBtn.Click += new System.EventHandler(this.toolStripStopBtn_Click);
             // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripExitBtn
+            // 
+            this.toolStripExitBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripExitBtn.Image = ((System.Drawing.Image)(resources.GetObject("toolStripExitBtn.Image")));
+            this.toolStripExitBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripExitBtn.Name = "toolStripExitBtn";
+            this.toolStripExitBtn.Size = new System.Drawing.Size(23, 22);
+            this.toolStripExitBtn.Text = "Exit";
+            this.toolStripExitBtn.Click += new System.EventHandler(this.toolStripExitBtn_Click);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -281,8 +317,8 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
-            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(83, 17);
+            this.toolStripStatusLabel1.Text = "IP 192.14.34.68";
             // 
             // listView1
             // 
@@ -306,7 +342,6 @@
             this.listView1.TabIndex = 6;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
-            //this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // site
             // 
@@ -317,6 +352,12 @@
             // 
             this.userName.Text = "User";
             this.userName.Width = 100;
+            // 
+            // password
+            // 
+            this.password.DisplayIndex = 6;
+            this.password.Text = "Password";
+            this.password.Width = 0;
             // 
             // proxy
             // 
@@ -341,47 +382,6 @@
             this.amount.DisplayIndex = 5;
             this.amount.Text = "Amount";
             this.amount.Width = 100;
-            // 
-            // password
-            // 
-            this.password.DisplayIndex = 6;
-            this.password.Text = "Password";
-            this.password.Width = 0;
-            // 
-            // toolStripRunAllBtn
-            // 
-            this.toolStripRunAllBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripRunAllBtn.Image = ((System.Drawing.Image)(resources.GetObject("toolStripRunAllBtn.Image")));
-            this.toolStripRunAllBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripRunAllBtn.Name = "toolStripRunAllBtn";
-            this.toolStripRunAllBtn.Size = new System.Drawing.Size(23, 22);
-            this.toolStripRunAllBtn.Text = "Run All";
-            this.toolStripRunAllBtn.Click += new System.EventHandler(this.toolStripRunAllBtn_Click);
-            // 
-            // toolStripExitBtn
-            // 
-            this.toolStripExitBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripExitBtn.Image = ((System.Drawing.Image)(resources.GetObject("toolStripExitBtn.Image")));
-            this.toolStripExitBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripExitBtn.Name = "toolStripExitBtn";
-            this.toolStripExitBtn.Size = new System.Drawing.Size(23, 22);
-            this.toolStripExitBtn.Text = "Exit";
-            this.toolStripExitBtn.Click += new System.EventHandler(this.toolStripExitBtn_Click);
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripEditSiteBtn
-            // 
-            this.toolStripEditSiteBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripEditSiteBtn.Image = ((System.Drawing.Image)(resources.GetObject("toolStripEditSiteBtn.Image")));
-            this.toolStripEditSiteBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripEditSiteBtn.Name = "toolStripEditSiteBtn";
-            this.toolStripEditSiteBtn.Size = new System.Drawing.Size(23, 22);
-            this.toolStripEditSiteBtn.Text = "Edit site";
-            this.toolStripEditSiteBtn.Click += new System.EventHandler(this.toolStripEditSiteBtn_Click);
             // 
             // MainForm
             // 
