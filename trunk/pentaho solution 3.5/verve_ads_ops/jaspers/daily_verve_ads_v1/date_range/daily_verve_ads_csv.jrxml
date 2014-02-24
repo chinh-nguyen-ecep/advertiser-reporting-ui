@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Daily verve Ads" pageWidth="1802" pageHeight="1190" orientation="Landscape" columnWidth="1762" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.2078825000000013"/>
-	<property name="ireport.x" value="1064"/>
+	<property name="ireport.zoom" value="2.1398375295825027"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<style name="redColor" mode="Opaque">
-		<conditionalStyle>
-			<conditionExpression><![CDATA[$F{Daily Delta Gross}<0]]></conditionExpression>
-			<style forecolor="#FF0000"/>
-		</conditionalStyle>
-	</style>
+	<parameter name="p_start_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("2014-01-01")]]></defaultValueExpression>
+	</parameter>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_end_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("2014-01-01")]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[SELECT
@@ -35,7 +35,7 @@ full_date as "Date"
 ,(CASE WHEN adnetwork_reports_ads_filled>0 THEN adnetwork_reports_gross::float/(verve_reports_ads_filled::float/1000) ELSE null END) as "CPM"
 FROM adsops.daily_agg_verve_ads_by_remnant
 WHERE is_active=true
-AND full_date BETWEEN date_trunc('MONTH',now())::date AND now()::date
+AND full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
 ORDER BY full_date,adnetwork_name]]>
 	</queryString>
 	<field name="Date" class="java.sql.Date"/>
@@ -105,104 +105,6 @@ ORDER BY full_date,adnetwork_name]]>
 	<background>
 		<band/>
 	</background>
-	<title>
-		<band height="544">
-			<staticText>
-				<reportElement positionType="Float" x="0" y="434" width="241" height="40"/>
-				<box bottomPadding="5"/>
-				<textElement verticalAlignment="Bottom">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Summary: Daily delivery]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="0" y="504" width="241" height="40"/>
-				<box bottomPadding="5"/>
-				<textElement verticalAlignment="Bottom">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Detail: Daily Delivery by Ad Network]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="0" width="1762" height="20"/>
-				<textElement>
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Notes:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="20" width="1762" height="134"/>
-				<textElement/>
-				<text><![CDATA[- N/A = Data is not exposed by 3rd party (e.g. Marchex ) or not go through adcel ( e.g Itune)
-- Data Unavailable = Data not currently available from 3rd party at the time Dw download
-- Fill Rate = ads filled/ ad requests
-- Discrepancy:
-+ Ad Requests = Ad Network Reported Requests - AdCel Reported Ad Requests
-+ Ads Filled = Ad Network Reported Ads Filled - AdCel Reported Ads Filled
-+ Filled Impressions Discrepancy = 1 - (Ad Network Reported Ads Filled / AdCel Reported Ads Filled)
-- Clicks = Using banner clicks for network that does not have clicks reported.
-- Gross =  based on latest 3rd party revenue calculation rules
-- Daily Delta Gross = gross $ Day N - Gross $ for Day N-1]]></text>
-			</staticText>
-			<subreport>
-				<reportElement positionType="Float" mode="Transparent" x="0" y="474" width="1570" height="30"/>
-				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_verve_ads_subreport_summary.jasper"]]></subreportExpression>
-			</subreport>
-			<subreport>
-				<reportElement positionType="Float" mode="Transparent" x="0" y="404" width="1570" height="30"/>
-				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_verve_ads_subreport_mtd_by_adnetworks.jasper"]]></subreportExpression>
-			</subreport>
-			<staticText>
-				<reportElement positionType="Float" x="0" y="364" width="241" height="40"/>
-				<box bottomPadding="5"/>
-				<textElement verticalAlignment="Bottom">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Summary: MTD delivery by Ad Network]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="0" y="294" width="241" height="40"/>
-				<box bottomPadding="5"/>
-				<textElement verticalAlignment="Bottom">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Summary: MTD delivery]]></text>
-			</staticText>
-			<subreport>
-				<reportElement positionType="Float" mode="Transparent" x="0" y="334" width="1570" height="30"/>
-				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_verve_ads_subreport_mtd_delivery.jasper"]]></subreportExpression>
-			</subreport>
-			<staticText>
-				<reportElement positionType="Float" x="0" y="224" width="352" height="40"/>
-				<box bottomPadding="5"/>
-				<textElement verticalAlignment="Bottom">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Summary: Yesterday's delivery by Ad Network]]></text>
-			</staticText>
-			<subreport>
-				<reportElement positionType="Float" mode="Transparent" x="0" y="264" width="1570" height="30"/>
-				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_verve_ads_subreport_delivery_by_adnetworks_yesterday.jasper"]]></subreportExpression>
-			</subreport>
-			<subreport>
-				<reportElement positionType="Float" mode="Transparent" x="0" y="194" width="1762" height="30"/>
-				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_verve_ads_subreport_delivery_yesterday.jasper"]]></subreportExpression>
-			</subreport>
-			<staticText>
-				<reportElement positionType="Float" x="0" y="154" width="352" height="40"/>
-				<box bottomPadding="5"/>
-				<textElement verticalAlignment="Bottom">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Summary: Yesterday's delivery ]]></text>
-			</staticText>
-		</band>
-	</title>
 	<columnHeader>
 		<band height="40">
 			<staticText>
@@ -651,8 +553,8 @@ ORDER BY full_date,adnetwork_name]]>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[($F{adnetwork_reports_gross}==null ? ($F{adnetwork_reports_ads_filled}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("$ ###,##0.00").format($F{adnetwork_reports_gross}) )]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
-				<reportElement style="redColor" x="1457" y="0" width="113" height="20"/>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="1457" y="0" width="113" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -660,7 +562,7 @@ ORDER BY full_date,adnetwork_name]]>
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[($F{Daily Delta Gross}==null ? "N/A" : new DecimalFormat("$ #,##0.00;($ #,##0.00)").format($F{Daily Delta Gross}) )]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{Daily Delta Gross}==null ? "N/A" : new DecimalFormat("$ #,##0.00;$ -#,##0.00").format($F{Daily Delta Gross}) )]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
 				<reportElement x="1570" y="0" width="64" height="20"/>
@@ -698,7 +600,7 @@ ORDER BY full_date,adnetwork_name]]>
 		</band>
 	</detail>
 	<summary>
-		<band height="50">
+		<band height="20">
 			<textField pattern="" isBlankWhenNull="true">
 				<reportElement mode="Transparent" x="241" y="0" width="111" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
