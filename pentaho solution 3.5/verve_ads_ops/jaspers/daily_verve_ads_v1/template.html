@@ -30,12 +30,12 @@
          <form name="parameter-form" id="parameter-form" method="GET">
          <table class="tableForm">
          <tbody>	         
-			 <tr style="display:none">
+			 <tr >
 		         <th>Date mode:</th>
 		         <td><div style="float: left;">{p_date_mode}</div>
 		         </td>
 	         </tr>
-	         <tr style="display:none">
+	         <tr >
 		         <th>Range from:</th>
 		         <td>
 					<div id="datemode" style="float: left;">
@@ -126,11 +126,11 @@
 			if(isChecked){
 				var dateMode=$(this).val();
 				if(dateMode=='date'){
-					$('#datemode').show();
-					$('#monthmode').hide();
+					//$('#datemode').show();
+					//$('#monthmode').hide();
 				}else{
-					$('#datemode').hide();
-					$('#monthmode').show();
+					//$('#datemode').hide();
+					//$('#monthmode').show();
 				}
 			}
 			
