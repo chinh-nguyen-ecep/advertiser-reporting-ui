@@ -89,7 +89,7 @@
         <jndi><![CDATA[dw3]]></jndi>  
         <live><![CDATA[true]]></live>  
         <query><![CDATA[SELECT DISTINCT calendar_year_month, month_since_2005
-FROM adnetwork.ba_monthly_adnetwork_summary
+FROM billing.ba_monthly_adnetwork_summary
 WHERE is_active = true
 ORDER BY month_since_2005 desc]]></query> 
       </component-definition> 
