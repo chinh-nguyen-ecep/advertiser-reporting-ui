@@ -22,7 +22,7 @@ sum(case v_net_revenue when -1 then 0 else v_net_revenue end) as v_net_revenue,
 sum(case fullfilled_code_count when -1 then 0 else fullfilled_code_count end) as total_adcel_total,
 sum(case fullfilled_code_y when -1 then 0 else fullfilled_code_y end) as total_adcel_yes,
 sum(total_billable_impressions) as total_billable_impressions
-  FROM adnetwork.ba_monthly_adnetwork_summary a
+  FROM billing.ba_monthly_adnetwork_summary a
 WHERE calendar_year_month=$P{calendar_year_month}::text
   AND is_active=true
   GROUP BY calendar_year_month]]>
