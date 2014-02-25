@@ -24,7 +24,7 @@ a.parent1_name as publisher
 ,sum(a.v_net_revenue) as v_net_revenue
 ,sum(a.fullfilled_code_y) as adcel_y_ad_responses
 ,sum(total_billable_impressions) as total_billable_impressions
-FROM adnetwork.ba_monthly_adnetwork_summary a
+FROM billing.ba_monthly_adnetwork_summary a
 WHERE calendar_year_month=$P{calendar_year_month} AND is_active=true
 GROUP BY
 a.parent1_name

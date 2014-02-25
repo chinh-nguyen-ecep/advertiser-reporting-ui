@@ -29,7 +29,7 @@ sum(p_net_revenue) as p_net_revenue,
 sum(v_net_revenue) as v_net_revenue,
 sum(fullfilled_code_y) as fullfilled_code_y,
 sum(total_billable_impressions) as total_billable_impressions
-FROM adnetwork.ba_monthly_adsense_dbclk_channel
+FROM billing.ba_monthly_adsense_dbclk_channel
 WHERE  is_active = true
 AND calendar_year_month=$P{calendar_year_month}::text
 GROUP BY adname
@@ -43,7 +43,7 @@ sum(p_net_revenue) as p_net_revenue,
 sum(v_net_revenue) as v_net_revenue,
 sum(fullfilled_code_y) as fullfilled_code_y,
 sum(total_billable_impressions) as total_billable_impressions
-FROM adnetwork.ba_monthly_cg_mobile_performance
+FROM billing.ba_monthly_cg_mobile_performance
 WHERE  is_active = true
 AND calendar_year_month=$P{calendar_year_month}::text
 GROUP BY adname
@@ -57,7 +57,7 @@ sum(p_net_revenue) as p_net_revenue,
 sum(v_net_revenue) as v_net_revenue,
 sum(fullfilled_code_y) as fullfilled_code_y,
 sum(total_billable_impressions) as total_billable_impressions
-FROM adnetwork.ba_monthly_cg_performance
+FROM billing.ba_monthly_cg_performance
 WHERE  is_active = true
 AND calendar_year_month=$P{calendar_year_month}::text
 GROUP BY adname
@@ -71,7 +71,7 @@ sum(p_net_revenue) as p_net_revenue,
 sum(v_net_revenue) as v_net_revenue,
 0 as fullfilled_code_y,
 sum(impressions) as total_billable_impressions
-FROM adnetwork.ba_monthly_it_performance
+FROM billing.ba_monthly_it_performance
 WHERE  is_active = true
 AND calendar_year_month=$P{calendar_year_month}::text
 GROUP BY adname
@@ -85,7 +85,7 @@ sum(p_net_revenue) as p_net_revenue,
 sum(v_net_revenue) as v_net_revenue,
 sum(fullfilled_code_y) as fullfilled_code_y,
 sum(total_billable_impressions) as total_billable_impressions
-FROM adnetwork.ba_monthly_jt_performance
+FROM billing.ba_monthly_jt_performance
 WHERE  is_active = true
 AND calendar_year_month=$P{calendar_year_month}::text
 GROUP BY adname
@@ -99,7 +99,7 @@ sum(p_net_revenue) as p_net_revenue,
 sum(v_net_revenue) as v_net_revenue,
 sum(fullfilled_code_y) as fullfilled_code_y,
 sum(total_billable_impressions) as total_billable_impressions
-FROM adnetwork.ba_monthly_mm_performance
+FROM billing.ba_monthly_mm_performance
 WHERE  is_active = true
 AND calendar_year_month=$P{calendar_year_month}::text AND requests > 0
 GROUP BY adname
@@ -113,7 +113,7 @@ sum(p_net_revenue) as p_net_revenue,
 sum(v_net_revenue) as v_net_revenue,
 sum(fullfilled_code_y) as fullfilled_code_y,
 sum(total_billable_impressions) as total_billable_impressions
-FROM adnetwork.ba_monthly_mx_performance
+FROM billing.ba_monthly_mx_performance
 WHERE  is_active = true
 AND calendar_year_month=$P{calendar_year_month}::text
 GROUP BY adname
@@ -127,7 +127,7 @@ sum(p_net_revenue) as p_net_revenue,
 sum(v_net_revenue) as v_net_revenue,
 sum(fullfilled_code_y) as fullfilled_code_y,
 sum(total_billable_impressions) as total_billable_impressions
-FROM adnetwork.ba_monthly_sp_blue_performance
+FROM billing.ba_monthly_sp_blue_performance
 WHERE  is_active = true
 AND calendar_year_month=$P{calendar_year_month}::text
 GROUP BY adname
@@ -141,7 +141,7 @@ sum(p_net_revenue) as p_net_revenue,
 sum(v_net_revenue) as v_net_revenue,
 sum(fullfilled_code_y) as fullfilled_code_y,
 sum(total_billable_impressions) as total_billable_impressions
-FROM adnetwork.ba_monthly_wh_performance
+FROM billing.ba_monthly_wh_performance
 WHERE  is_active = true
 AND calendar_year_month=$P{calendar_year_month}::text
 GROUP BY adname
@@ -155,7 +155,7 @@ sum(p_net_revenue) as p_net_revenue,
 sum(v_net_revenue) as v_net_revenue,
 sum(fullfilled_code_y) as fullfilled_code_y,
 sum(total_billable_impressions) as total_billable_impressions
-FROM adnetwork.ba_monthly_kt_performance
+FROM billing.ba_monthly_kt_performance
 WHERE  is_active = true
 AND calendar_year_month=$P{calendar_year_month}::text
 GROUP BY adname
@@ -179,7 +179,7 @@ SELECT 'AT&T (32,33,27)' as adname
 	sum(v_net_revenue) as v_net_revenue,
 	sum(fullfilled_code_y) as fullfilled_code_y,
 	sum(total_billable_impressions) as total_billable_impressions
-	FROM adnetwork.ba_monthly_yp_performance
+	FROM billing.ba_monthly_yp_performance
 	WHERE  is_active = true
 	AND calendar_year_month=$P{calendar_year_month}::text
 	GROUP BY adname
@@ -193,7 +193,7 @@ SELECT 'AT&T (32,33,27)' as adname
 	sum(v_net_revenue) as v_net_revenue,
 	sum(fullfilled_code_y) as fullfilled_code_y,
 	sum(total_billable_impressions) as total_billable_impressions
-	FROM adnetwork.ba_monthly_yp_sb_performance
+	FROM billing.ba_monthly_yp_sb_performance
 	WHERE  is_active = true
 	AND calendar_year_month=$P{calendar_year_month}::text
 	GROUP BY adname
@@ -207,7 +207,7 @@ SELECT 'AT&T (32,33,27)' as adname
 	sum(v_net_revenue) as v_net_revenue,
 	sum(fullfilled_code_y) as fullfilled_code_y,
 	sum(total_billable_impressions) as total_billable_impressions
-	FROM adnetwork.ba_monthly_yp_no_performance
+	FROM billing.ba_monthly_yp_no_performance
 	WHERE  is_active = true
 	AND calendar_year_month=$P{calendar_year_month}::text
 	GROUP BY adname
