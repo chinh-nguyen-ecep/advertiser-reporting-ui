@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_verve_ads_subreport_summary" language="groovy" pageWidth="1570" pageHeight="802" columnWidth="1570" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
-	<property name="ireport.zoom" value="0.24526198623983703"/>
+	<property name="ireport.zoom" value="1.6105100000000019"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
@@ -14,7 +14,9 @@ TO_CHAR(NOW(), 'Month') as "Month"
 ,SUM(adnetwork_reports_gross) as "Total Gross"
 FROM adsops.daily_agg_verve_ads_by_remnant
 WHERE is_active=true
-AND full_date BETWEEN date_trunc('MONTH',now())::date AND now()::date]]>
+AND full_date BETWEEN date_trunc('MONTH',now())::date AND now()::date
+
+]]>
 	</queryString>
 	<field name="Month" class="java.lang.String"/>
 	<field name="Total Ad requests" class="java.lang.Long"/>
@@ -36,11 +38,14 @@ AND full_date BETWEEN date_trunc('MONTH',now())::date AND now()::date]]>
 		<band splitType="Stretch"/>
 	</background>
 	<columnHeader>
-		<band height="41" splitType="Stretch">
+		<band height="40" splitType="Stretch">
 			<staticText>
 				<reportElement x="91" y="0" width="370" height="20"/>
 				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement>
 					<font isBold="true"/>
@@ -50,7 +55,10 @@ AND full_date BETWEEN date_trunc('MONTH',now())::date AND now()::date]]>
 			<staticText>
 				<reportElement x="461" y="0" width="404" height="20"/>
 				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement>
 					<font isBold="true"/>
@@ -60,7 +68,10 @@ AND full_date BETWEEN date_trunc('MONTH',now())::date AND now()::date]]>
 			<staticText>
 				<reportElement x="865" y="0" width="370" height="20"/>
 				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement>
 					<font isBold="true"/>
@@ -70,7 +81,10 @@ AND full_date BETWEEN date_trunc('MONTH',now())::date AND now()::date]]>
 			<staticText>
 				<reportElement x="0" y="0" width="91" height="20"/>
 				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement>
 					<font isBold="true"/>
@@ -78,9 +92,12 @@ AND full_date BETWEEN date_trunc('MONTH',now())::date AND now()::date]]>
 				<text><![CDATA[]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="865" y="21" width="182" height="20"/>
+				<reportElement x="865" y="20" width="182" height="20"/>
 				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement>
 					<font isBold="true"/>
@@ -88,9 +105,12 @@ AND full_date BETWEEN date_trunc('MONTH',now())::date AND now()::date]]>
 				<text><![CDATA[Total Clicks]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="461" y="21" width="202" height="20"/>
+				<reportElement x="461" y="20" width="202" height="20"/>
 				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement>
 					<font isBold="true"/>
@@ -98,9 +118,12 @@ AND full_date BETWEEN date_trunc('MONTH',now())::date AND now()::date]]>
 				<text><![CDATA[Total Ad Requests]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="241" y="21" width="220" height="20"/>
+				<reportElement x="241" y="20" width="220" height="20"/>
 				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement>
 					<font isBold="true"/>
@@ -108,9 +131,12 @@ AND full_date BETWEEN date_trunc('MONTH',now())::date AND now()::date]]>
 				<text><![CDATA[Total Ads Filled]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="663" y="21" width="202" height="20"/>
+				<reportElement x="663" y="20" width="202" height="20"/>
 				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement>
 					<font isBold="true"/>
@@ -118,9 +144,12 @@ AND full_date BETWEEN date_trunc('MONTH',now())::date AND now()::date]]>
 				<text><![CDATA[Total Verve Ad Filled]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1047" y="21" width="188" height="20"/>
+				<reportElement x="1047" y="20" width="188" height="20"/>
 				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement>
 					<font isBold="true"/>
@@ -128,9 +157,12 @@ AND full_date BETWEEN date_trunc('MONTH',now())::date AND now()::date]]>
 				<text><![CDATA[Total Gross]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="91" y="21" width="150" height="20"/>
+				<reportElement x="91" y="20" width="150" height="20"/>
 				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement>
 					<font isBold="true"/>
@@ -138,9 +170,12 @@ AND full_date BETWEEN date_trunc('MONTH',now())::date AND now()::date]]>
 				<text><![CDATA[Total Ad requests]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="21" width="91" height="20"/>
+				<reportElement x="0" y="20" width="91" height="20"/>
 				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement>
 					<font isBold="true"/>
@@ -148,9 +183,12 @@ AND full_date BETWEEN date_trunc('MONTH',now())::date AND now()::date]]>
 				<text><![CDATA[Month]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1457" y="21" width="113" height="20"/>
+				<reportElement x="1457" y="20" width="113" height="20"/>
 				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement>
 					<font isBold="true"/>
@@ -158,9 +196,12 @@ AND full_date BETWEEN date_trunc('MONTH',now())::date AND now()::date]]>
 				<text><![CDATA[CTR]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1235" y="21" width="111" height="20"/>
+				<reportElement x="1235" y="20" width="111" height="20"/>
 				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement>
 					<font isBold="true"/>
@@ -168,9 +209,12 @@ AND full_date BETWEEN date_trunc('MONTH',now())::date AND now()::date]]>
 				<text><![CDATA[eCPC]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1346" y="21" width="111" height="20"/>
+				<reportElement x="1346" y="20" width="111" height="20"/>
 				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement>
 					<font isBold="true"/>
@@ -180,11 +224,14 @@ AND full_date BETWEEN date_trunc('MONTH',now())::date AND now()::date]]>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="21" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<textField pattern="">
 				<reportElement x="0" y="0" width="91" height="20"/>
 				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{Month}]]></textFieldExpression>
@@ -192,7 +239,10 @@ AND full_date BETWEEN date_trunc('MONTH',now())::date AND now()::date]]>
 			<textField pattern="">
 				<reportElement x="91" y="0" width="150" height="20"/>
 				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Total Ad requests}==null ? ($F{Total Ads Filled}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($F{Total Ad requests}) )]]></textFieldExpression>
@@ -200,7 +250,10 @@ AND full_date BETWEEN date_trunc('MONTH',now())::date AND now()::date]]>
 			<textField pattern="">
 				<reportElement x="241" y="0" width="220" height="20"/>
 				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Total Ads Filled}==null ? ($F{Total Ad requests}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($F{Total Ads Filled}) )]]></textFieldExpression>
@@ -208,7 +261,10 @@ AND full_date BETWEEN date_trunc('MONTH',now())::date AND now()::date]]>
 			<textField pattern="">
 				<reportElement x="461" y="0" width="202" height="20"/>
 				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[($F{Total Verve Ad Requests}==null ? ($F{Total Verve Ad Filled}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($F{Total Verve Ad Requests}) )]]></textFieldExpression>
@@ -216,7 +272,10 @@ AND full_date BETWEEN date_trunc('MONTH',now())::date AND now()::date]]>
 			<textField pattern="">
 				<reportElement x="663" y="0" width="202" height="20"/>
 				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[($F{Total Verve Ad Filled}==null ? ($F{Total Verve Ad Requests}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($F{Total Verve Ad Filled}) )]]></textFieldExpression>
@@ -224,7 +283,10 @@ AND full_date BETWEEN date_trunc('MONTH',now())::date AND now()::date]]>
 			<textField pattern="">
 				<reportElement x="865" y="0" width="182" height="20"/>
 				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Total Clicks}==null ? ($F{Total Gross}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($F{Total Clicks}) )]]></textFieldExpression>
@@ -232,7 +294,10 @@ AND full_date BETWEEN date_trunc('MONTH',now())::date AND now()::date]]>
 			<textField pattern="">
 				<reportElement x="1047" y="0" width="188" height="20"/>
 				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Total Gross}==null ? ($F{Total Clicks}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($F{Total Gross}) )]]></textFieldExpression>
@@ -240,7 +305,10 @@ AND full_date BETWEEN date_trunc('MONTH',now())::date AND now()::date]]>
 			<textField pattern="" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="1235" y="0" width="111" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
@@ -250,7 +318,10 @@ AND full_date BETWEEN date_trunc('MONTH',now())::date AND now()::date]]>
 			<textField pattern="" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="1346" y="0" width="111" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
@@ -260,7 +331,10 @@ AND full_date BETWEEN date_trunc('MONTH',now())::date AND now()::date]]>
 			<textField pattern="" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="1457" y="0" width="113" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.0"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
