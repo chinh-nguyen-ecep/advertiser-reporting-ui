@@ -47,7 +47,12 @@ ORDER BY adnetwork_name]]>
 		<band height="40" splitType="Stretch">
 			<staticText>
 				<reportElement x="91" y="0" width="370" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -55,7 +60,12 @@ ORDER BY adnetwork_name]]>
 			</staticText>
 			<staticText>
 				<reportElement x="461" y="0" width="404" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -63,7 +73,12 @@ ORDER BY adnetwork_name]]>
 			</staticText>
 			<staticText>
 				<reportElement x="865" y="0" width="370" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -71,7 +86,12 @@ ORDER BY adnetwork_name]]>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="0" width="91" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -79,7 +99,12 @@ ORDER BY adnetwork_name]]>
 			</staticText>
 			<staticText>
 				<reportElement x="865" y="20" width="182" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -87,7 +112,12 @@ ORDER BY adnetwork_name]]>
 			</staticText>
 			<staticText>
 				<reportElement x="461" y="20" width="202" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -95,7 +125,12 @@ ORDER BY adnetwork_name]]>
 			</staticText>
 			<staticText>
 				<reportElement x="241" y="20" width="220" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -103,7 +138,12 @@ ORDER BY adnetwork_name]]>
 			</staticText>
 			<staticText>
 				<reportElement x="663" y="20" width="202" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -111,7 +151,12 @@ ORDER BY adnetwork_name]]>
 			</staticText>
 			<staticText>
 				<reportElement x="1047" y="20" width="188" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -119,7 +164,12 @@ ORDER BY adnetwork_name]]>
 			</staticText>
 			<staticText>
 				<reportElement x="91" y="20" width="150" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -127,7 +177,12 @@ ORDER BY adnetwork_name]]>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="20" width="91" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -135,7 +190,12 @@ ORDER BY adnetwork_name]]>
 			</staticText>
 			<staticText>
 				<reportElement x="1457" y="20" width="113" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -143,7 +203,12 @@ ORDER BY adnetwork_name]]>
 			</staticText>
 			<staticText>
 				<reportElement x="1235" y="20" width="111" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -151,7 +216,12 @@ ORDER BY adnetwork_name]]>
 			</staticText>
 			<staticText>
 				<reportElement x="1346" y="20" width="111" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -163,13 +233,23 @@ ORDER BY adnetwork_name]]>
 		<band height="20" splitType="Stretch">
 			<textField pattern="">
 				<reportElement x="0" y="0" width="91" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{Ad Network}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="1346" y="0" width="111" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
@@ -177,7 +257,12 @@ ORDER BY adnetwork_name]]>
 			</textField>
 			<textField pattern="" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="1457" y="0" width="113" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
@@ -185,7 +270,12 @@ ORDER BY adnetwork_name]]>
 			</textField>
 			<textField pattern="" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="1235" y="0" width="111" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
@@ -193,37 +283,67 @@ ORDER BY adnetwork_name]]>
 			</textField>
 			<textField pattern="">
 				<reportElement x="241" y="0" width="220" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Total Ads Filled}==null ? ($F{Total Ad requests}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($F{Total Ads Filled}) )]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
 				<reportElement x="663" y="0" width="202" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[($F{Total Verve Ad Filled}==null ? ($F{Total Verve Ad Requests}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($F{Total Verve Ad Filled}) )]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
 				<reportElement x="461" y="0" width="202" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[($F{Total Verve Ad Requests}==null ? ($F{Total Verve Ad Filled}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($F{Total Verve Ad Requests}) )]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
 				<reportElement x="91" y="0" width="150" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Total Ad requests}==null ? ($F{Total Ads Filled}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($F{Total Ad requests}) )]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
 				<reportElement x="1047" y="0" width="188" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Total Gross}==null ? ($F{Total Clicks}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($F{Total Gross}) )]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
 				<reportElement x="865" y="0" width="182" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Total Clicks}==null ? ($F{Total Gross}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($F{Total Clicks}) )]]></textFieldExpression>
 			</textField>
