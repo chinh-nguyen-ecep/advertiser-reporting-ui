@@ -14,9 +14,7 @@ TO_CHAR(NOW(), 'Month') as "Month"
 ,SUM(adnetwork_reports_gross) as "Total Gross"
 FROM adsops.daily_agg_verve_ads_by_remnant
 WHERE is_active=true
-AND full_date BETWEEN date_trunc('MONTH',now())::date AND now()::date
-
-]]>
+AND full_date BETWEEN date_trunc('MONTH',now()::date-1)::date AND now()::date-1]]>
 	</queryString>
 	<field name="Month" class="java.lang.String"/>
 	<field name="Total Ad requests" class="java.lang.Long"/>

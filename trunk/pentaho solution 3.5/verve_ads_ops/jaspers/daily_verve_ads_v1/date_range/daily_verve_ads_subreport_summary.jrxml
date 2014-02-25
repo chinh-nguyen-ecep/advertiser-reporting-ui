@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_verve_ads_subreport_summary" language="groovy" pageWidth="1762" pageHeight="802" columnWidth="1762" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
-	<property name="ireport.zoom" value="0.6830134553650713"/>
+	<property name="ireport.zoom" value="0.5644739300537779"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="p_start_date" class="java.lang.String">
@@ -47,7 +47,12 @@ ORDER BY full_date]]>
 		<band height="40" splitType="Stretch">
 			<staticText>
 				<reportElement x="91" y="0" width="370" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -55,7 +60,12 @@ ORDER BY full_date]]>
 			</staticText>
 			<staticText>
 				<reportElement x="461" y="0" width="404" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -63,7 +73,12 @@ ORDER BY full_date]]>
 			</staticText>
 			<staticText>
 				<reportElement x="865" y="0" width="370" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -71,7 +86,12 @@ ORDER BY full_date]]>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="0" width="91" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -79,7 +99,12 @@ ORDER BY full_date]]>
 			</staticText>
 			<staticText>
 				<reportElement x="865" y="20" width="182" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -87,7 +112,12 @@ ORDER BY full_date]]>
 			</staticText>
 			<staticText>
 				<reportElement x="461" y="20" width="202" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -95,7 +125,12 @@ ORDER BY full_date]]>
 			</staticText>
 			<staticText>
 				<reportElement x="241" y="20" width="220" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -103,7 +138,12 @@ ORDER BY full_date]]>
 			</staticText>
 			<staticText>
 				<reportElement x="663" y="20" width="202" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -111,7 +151,12 @@ ORDER BY full_date]]>
 			</staticText>
 			<staticText>
 				<reportElement x="1047" y="20" width="188" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -119,7 +164,12 @@ ORDER BY full_date]]>
 			</staticText>
 			<staticText>
 				<reportElement x="91" y="20" width="150" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -127,7 +177,12 @@ ORDER BY full_date]]>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="20" width="91" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -135,7 +190,12 @@ ORDER BY full_date]]>
 			</staticText>
 			<staticText>
 				<reportElement x="1457" y="20" width="113" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -143,7 +203,12 @@ ORDER BY full_date]]>
 			</staticText>
 			<staticText>
 				<reportElement x="1235" y="20" width="111" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -151,7 +216,12 @@ ORDER BY full_date]]>
 			</staticText>
 			<staticText>
 				<reportElement x="1346" y="20" width="111" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -163,49 +233,89 @@ ORDER BY full_date]]>
 		<band height="20" splitType="Stretch">
 			<textField pattern="yyyy-MM-dd">
 				<reportElement x="0" y="0" width="91" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{Date}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
 				<reportElement x="91" y="0" width="150" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{Total Ad requests}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
 				<reportElement x="241" y="0" width="220" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{Total Ads Filled}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
 				<reportElement x="461" y="0" width="202" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{Total Verve Ad Requests}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
 				<reportElement x="663" y="0" width="202" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{Total Verve Ad Filled}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
 				<reportElement x="865" y="0" width="182" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{Total Clicks}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00">
 				<reportElement x="1047" y="0" width="188" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Total Gross}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="1235" y="0" width="111" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
@@ -213,7 +323,12 @@ ORDER BY full_date]]>
 			</textField>
 			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="1346" y="0" width="111" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
@@ -221,7 +336,12 @@ ORDER BY full_date]]>
 			</textField>
 			<textField pattern="#,##0.00 %">
 				<reportElement x="1457" y="0" width="113" height="20"/>
-				<box leftPadding="5" rightPadding="5"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{CTR}]]></textFieldExpression>
 			</textField>
