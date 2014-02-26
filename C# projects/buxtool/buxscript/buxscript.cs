@@ -12,7 +12,9 @@ namespace buxscript
         public string userName;
         public string password;
         public string proxy;
+        public MyBrowser webBrowser;
         public string port;
+        public Boolean isRuning = false;
         public ListViewItem listViewItem; // a line from list view to update status of process
 
         public abstract string name();
@@ -30,5 +32,11 @@ namespace buxscript
             result = (buxscript)assembly.CreateInstance(fullTypeName);
             return result;
         }
+
+        public void setStatus(string status) {
+            listViewItem.SubItems[5].Text = status;
+        }
+       
     }
+    
 }

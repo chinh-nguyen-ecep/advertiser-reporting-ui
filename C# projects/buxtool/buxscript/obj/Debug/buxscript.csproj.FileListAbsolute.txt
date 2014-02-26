@@ -2,3 +2,5 @@ E:\Chinh\C# projects\buxtool\buxscript\obj\Debug\buxscript.pdb
 E:\Chinh\C# projects\buxtool\buxscript\bin\Debug\buxscript.dll
 E:\Chinh\C# projects\buxtool\buxscript\bin\Debug\buxscript.pdb
 E:\Chinh\C# projects\buxtool\buxscript\obj\Debug\buxscript.dll
+E:\Chinh\C# projects\buxtool\buxscript\obj\Debug\buxscript.MyBrowser.resources
+E:\Chinh\C# projects\buxtool\buxscript\obj\Debug\buxscript.csproj.GenerateResource.Cache
