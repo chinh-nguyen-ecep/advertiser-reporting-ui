@@ -43,11 +43,11 @@ namespace buxtool
             }else if(!proxy.Equals("")){
 
             }
-
-            string[] row = { site, userName, password,proxy, port, "", "" };
-            var listViewItem = new ListViewItem(row);
-            _listView.Items.Add(listViewItem);
-           Close();
+            Boolean result=RunSitesControl.addSiteInstance(site,userName,password,proxy,port);
+            if (result) {
+                Close();
+            }
+           
         }
 
         private void cancelBtn_Click(object sender, EventArgs e)

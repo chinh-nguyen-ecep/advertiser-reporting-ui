@@ -22,12 +22,17 @@ namespace neobux
         }
         public override void start()
         {
-            this.listViewItem.SubItems[5].Text = "Starting";
-            return;
+            this.isRuning = true;
+            setStatus("Runing");
+            webBrowser = new buxscript.MyBrowser();
+            webBrowser.Show();
+            webBrowser.getWebBrowser().Navigate(address());
         }
         public override void stop()
         {
-            this.listViewItem.SubItems[5].Text = "Stopped";
+            webBrowser.Close();
+            setStatus("Stooped");
+            isRuning = false;
         }
     }
 }

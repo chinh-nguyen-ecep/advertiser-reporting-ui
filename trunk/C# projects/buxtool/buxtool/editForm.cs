@@ -17,12 +17,16 @@ namespace buxtool
             InitializeComponent();
             _listView = listView;
             //Add value for Site combobox
-            foreach (buxscript.buxscript site in listSites)
+            string site = _listView.SelectedItems[0].SubItems[0].Text;
+            int selectIndex=0;
+            int i = 0;
+            foreach (buxscript.buxscript script in listSites)
             {
-                SiteCbx.Items.Add(site.address());
+                SiteCbx.Items.Add(script.address());
+                if(script.address().Equals(site)){selectIndex=i;}
+                i++;
             }
-
-            SiteCbx.SelectedIndex = _listView.SelectedItems[0].Index;
+            SiteCbx.SelectedIndex= selectIndex;
 
             //Set value form
             ListViewItem item = _listView.SelectedItems[0];
@@ -49,12 +53,14 @@ namespace buxtool
 
             }
             ListViewItem item = _listView.SelectedItems[0];
-            item.SubItems[0].Text = site;
-            item.SubItems[1].Text = userName;
-            item.SubItems[2].Text = password;
-            item.SubItems[3].Text = proxy;
-            item.SubItems[4].Text = port;
-            Close();
+            string oldSite = item.SubItems[0].Text;
+            string oldUserName = item.SubItems[1].Text;
+            
+            Boolean result= RunSitesControl.editSiteInstance(oldSite,oldUserName,site,userName,password,proxy,port);
+            if(result){
+                Close();
+            }
+            
         }
     }
 }

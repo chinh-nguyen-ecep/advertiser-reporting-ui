@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -42,7 +43,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="buxscript.cs" />
+    <Compile Include="MyBrowser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyBrowser.Designer.cs">
+      <DependentUpon>MyBrowser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MyBrowser.resx">
+      <DependentUpon>MyBrowser.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

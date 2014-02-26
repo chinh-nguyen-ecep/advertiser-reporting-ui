@@ -58,8 +58,8 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripExitBtn = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolStripStatusIP = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusFileProfile = new System.Windows.Forms.ToolStripStatusLabel();
             this.listView1 = new System.Windows.Forms.ListView();
             this.site = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.userName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -68,6 +68,9 @@
             this.port = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.status = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.amount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.saveFileAsDialog = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.newProfileFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -110,6 +113,7 @@
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.newToolStripMenuItem.Text = "New Profile";
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // openProfileToolStripMenuItem
             // 
@@ -117,6 +121,7 @@
             this.openProfileToolStripMenuItem.Name = "openProfileToolStripMenuItem";
             this.openProfileToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.openProfileToolStripMenuItem.Text = "Open Profile";
+            this.openProfileToolStripMenuItem.Click += new System.EventHandler(this.openProfileToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
@@ -137,12 +142,14 @@
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
             this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.saveAsToolStripMenuItem.Text = "Save As";
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -213,6 +220,7 @@
             this.toolStripLoadProfileBtn.Name = "toolStripLoadProfileBtn";
             this.toolStripLoadProfileBtn.Size = new System.Drawing.Size(23, 22);
             this.toolStripLoadProfileBtn.Text = "Open Profile";
+            this.toolStripLoadProfileBtn.Click += new System.EventHandler(this.toolStripLoadProfileBtn_Click);
             // 
             // toolStripSaveBtn
             // 
@@ -307,18 +315,26 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
+            this.toolStripStatusIP,
+            this.toolStripStatusFileProfile});
             this.statusStrip1.Location = new System.Drawing.Point(0, 244);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(654, 22);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // toolStripStatusLabel1
+            // toolStripStatusIP
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(83, 17);
-            this.toolStripStatusLabel1.Text = "IP 192.14.34.68";
+            this.toolStripStatusIP.Name = "toolStripStatusIP";
+            this.toolStripStatusIP.Size = new System.Drawing.Size(83, 17);
+            this.toolStripStatusIP.Text = "IP 192.14.34.68";
+            this.toolStripStatusIP.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
+            // 
+            // toolStripStatusFileProfile
+            // 
+            this.toolStripStatusFileProfile.Name = "toolStripStatusFileProfile";
+            this.toolStripStatusFileProfile.Size = new System.Drawing.Size(118, 17);
+            this.toolStripStatusFileProfile.Text = "toolStripStatusLabel2";
             // 
             // listView1
             // 
@@ -383,6 +399,18 @@
             this.amount.Text = "Amount";
             this.amount.Width = 100;
             // 
+            // saveFileAsDialog
+            // 
+            this.saveFileAsDialog.Filter = "Buxtool Profile|*.btp";
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.Filter = "Buxtoo Profile File|*.btp";
+            // 
+            // newProfileFileDialog
+            // 
+            this.newProfileFileDialog.Filter = "Buxtool Profile|*.btp";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -400,6 +428,7 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Buxtool 2014";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
@@ -420,14 +449,13 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusIP;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openProfileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripRunBtn;
         private System.Windows.Forms.ToolStripButton toolStripStopBtn;
-        private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
@@ -451,9 +479,15 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripButton toolStripExitBtn;
         private System.Windows.Forms.ToolStripButton toolStripEditSiteBtn;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusFileProfile;
+        private System.Windows.Forms.SaveFileDialog saveFileAsDialog;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.SaveFileDialog newProfileFileDialog;
 
        // public System.EventHandler listView1_SelectedIndexChanged { get; set; }
 
+
+        public object MainForm_Closing { get; set; }
     }
 }
 
