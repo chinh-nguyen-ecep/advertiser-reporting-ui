@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Weekly Flight Missing vendor" pageWidth="1555" pageHeight="2380" orientation="Landscape" columnWidth="1515" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.3660269107301466"/>
+	<property name="ireport.x" value="957"/>
+	<property name="ireport.y" value="0"/>
+	<style name="border">
+		<box leftPadding="5" rightPadding="5">
+			<topPen lineWidth="0.75"/>
+			<leftPen lineWidth="0.75"/>
+			<bottomPen lineWidth="0.75"/>
+			<rightPen lineWidth="0.75"/>
+		</box>
+	</style>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_year_week" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("2013-W24")]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+start_week
+,end_week
+,order_id as "ADM Order Id"
+,order_name as "ADM Order Name"
+,flight_id as "ADM Flight Id"
+,flight_name as "ADM Flight Name"
+,flight_start_date as "ADM Flight Start Date"
+,flight_end_date as "ADM Flight End Date"
+--,flight_quantity as booked_units
+--,flight_metric as metric
+--,Case network_id when 1 THEN 'Local' WHEN 4 THEN 'VLM' END as "Network"
+,vendor_ids as "Vendor ids"
+,vendor_names as "Vendor Names"
+,vendor_roles as "Vendor Roles"
+,max(dt_lastchange) as dt_lastchange
+FROM adsops.weekly_agg_flight_missing_vendor
+WHERE is_active=true AND year_week=$P{p_year_week}
+GROUP BY
+start_week
+,end_week
+,order_id
+,order_name
+,flight_id
+,flight_name
+,flight_start_date
+,flight_end_date
+,vendor_ids
+,vendor_names
+,vendor_roles
+ORDER BY
+order_name
+,flight_name
+,vendor_names
+,vendor_roles]]>
+	</queryString>
+	<field name="start_week" class="java.sql.Date"/>
+	<field name="end_week" class="java.sql.Date"/>
+	<field name="ADM Order Id" class="java.lang.Integer"/>
+	<field name="ADM Order Name" class="java.lang.String"/>
+	<field name="ADM Flight Id" class="java.lang.Integer"/>
+	<field name="ADM Flight Name" class="java.lang.String"/>
+	<field name="ADM Flight Start Date" class="java.sql.Timestamp"/>
+	<field name="ADM Flight End Date" class="java.sql.Timestamp"/>
+	<field name="Vendor ids" class="java.lang.String"/>
+	<field name="Vendor Names" class="java.lang.String"/>
+	<field name="Vendor Roles" class="java.lang.String"/>
+	<field name="dt_lastchange" class="java.sql.Timestamp"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="94">
+			<image>
+				<reportElement x="0" y="9" width="64" height="40"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"../vervelogo.jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="64" y="29" width="1451" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["From "+ new SimpleDateFormat("yyyy-MM-dd").format($F{start_week})+" To "+new SimpleDateFormat("yyyy-MM-dd").format($F{end_week})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="49" width="1515" height="25"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Refresh date: "+new SimpleDateFormat("yyyy-MM-dd").format($F{dt_lastchange})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="64" y="9" width="1451" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Weekly Flight Missing Vendor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="74" width="1515" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20">
+			<staticText>
+				<reportElement x="337" y="0" width="100" height="20"/>
+				<box leftPadding="4" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ADM Flight Id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="437" y="0" width="394" height="20"/>
+				<box leftPadding="4" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ADM Flight Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1098" y="0" width="80" height="20"/>
+				<box leftPadding="4" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vendor ids]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1178" y="0" width="237" height="20"/>
+				<box leftPadding="4" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vendor Names]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1415" y="0" width="100" height="20"/>
+				<box leftPadding="4" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vendor Roles]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="237" height="20"/>
+				<box leftPadding="4" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ADM Order Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20"/>
+				<box leftPadding="4" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ADM Order Id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="831" y="0" width="137" height="20"/>
+				<box leftPadding="4" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ADM Flight Start Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="968" y="0" width="130" height="20"/>
+				<box leftPadding="4" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ADM Flight End Date]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<textField isBlankWhenNull="true">
+				<reportElement x="1098" y="0" width="80" height="20"/>
+				<box leftPadding="4" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Vendor ids}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd" isBlankWhenNull="true">
+				<reportElement x="831" y="0" width="137" height="20"/>
+				<box leftPadding="4" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement/>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{ADM Flight Start Date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="337" y="0" width="100" height="20"/>
+				<box leftPadding="4" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{ADM Flight Id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="437" y="0" width="394" height="20"/>
+				<box leftPadding="4" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ADM Flight Name}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1178" y="0" width="237" height="20"/>
+				<box leftPadding="4" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Vendor Names}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd" isBlankWhenNull="true">
+				<reportElement x="968" y="0" width="130" height="20"/>
+				<box leftPadding="4" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement/>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{ADM Flight End Date}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1415" y="0" width="100" height="20"/>
+				<box leftPadding="4" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Vendor Roles}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="237" height="20"/>
+				<box leftPadding="4" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ADM Order Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20"/>
+				<box leftPadding="4" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{ADM Order Id}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="63">
+			<textField pattern="yyyy-MM-dd hh:mm aaa">
+				<reportElement x="0" y="43" width="337" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="337" y="43" width="1078" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="1415" y="43" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="41" width="1515" height="1"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>
