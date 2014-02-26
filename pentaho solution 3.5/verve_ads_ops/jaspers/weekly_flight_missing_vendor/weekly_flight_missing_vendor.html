@@ -1,0 +1,91 @@
+<html xmlns:xf="http://www.w3.org/2002/xforms">
+   <head>
+	<!-- do not include a <meta> tag -->
+      <link rel="stylesheet" type="text/css" href="/pentaho-style/active/default.css"></link>
+      <title id="exportFileName">Weekly Flight Missing Vendor</title>
+	  <link  href="/verve_style/css/tableInForm.css" rel="stylesheet" type="text/css" media="screen" />
+	  <link  href="/verve_style/css/charttool.css" rel="stylesheet" type="text/css" media="screen" />
+	  <link rel="stylesheet" type="text/css" href="/verve_style/scripts2/easyui/themes/metro/easyui.css" />
+	  <link rel="stylesheet" type="text/css" href="/verve_style/scripts2/easyui/themes/icon.css" />
+	  <link rel="stylesheet" type="text/css" href="/verve_style/scripts2/datetimepicker/jquery.datetimepicker.css" />
+	  <link rel="stylesheet" type="text/css" href="/verve_style/scripts2/checkbox/jquery.checkbox.css" />
+	  <link rel="stylesheet" type="text/css" href="/verve_style/scripts2/checkbox/jquery.safari-checkbox.css" />
+	  <script src="/verve_style/scripts2/jquery.min.js"></script>	
+	  <script src="/verve_style/scripts2/easyui/easyloader.js"></script>		
+	  <script src="/verve_style/scripts2/easyui/jquery.easyui.min.js"></script>
+	  <script src="/verve_style/scripts2/datetimepicker/jquery.datetimepicker.js"></script>
+	  <script src="/verve_style/scripts2/checkbox/jquery.checkbox.min.js"></script>
+	  <script src="/verve_style/scripts2/utils.js"></script>			  
+      		
+	{xform-header}
+
+   </head>
+   <body style="background-color: #fff">
+   <div id="toolbar2">	   
+		   <div class="leftGroup">
+		   <img id="open" title="Open control panel" src="/verve_style/images/preferences_system_windows_actions.png"/>		   
+		   </div>	  
+   </div>
+      <div class="easyui-dialog" title="Weekly Flight Missing Vendor" data-options="iconCls:'icon-tip',modal:true" id="mydiv">
+         <form name="parameter-form" id="parameter-form" method="GET">
+         <table class="tableForm">
+         <tbody>	         
+			<tr>
+				 <th>Year Week:</th>
+				 <td>
+					{p_year_week}
+				 </td>
+			 </tr>
+			<tr id="tr_bt">
+				<th>Output type: </th>
+				<td>
+				{p_output}<input type="button" style="cursor: pointer;margin-left: 5px" name="go" class="portlet-form-button" value="Run" onClick="validation()"/>
+				</td>
+				 
+	         </tr>			 
+         </tbody>
+         </table>
+		{solution}
+		{action}
+		{path}
+	    </form>
+      </div>    
+   
+   <iframe id="mainFrame" width="100%" height="100%" name="theoutput" frameborder="0" scrolling="yes" style="overflow-x:hidden;"></iframe>
+
+	
+	<script> 
+	$( document ).ready(function() {
+		console.log(  $().jquery );
+		//Remove all Choose value of select 
+		$('option[value=]').remove();
+		//Add open buttion event
+		$('#open').click(function(){
+			$('#mydiv').dialog('open');
+		});
+		
+		//Set location for dialog
+		$('#mydiv').dialog({
+			left: 70,
+			top: 40,
+			resizable:false
+		});
+
+
+	}); 
+	function validation(){
+		
+		
+		var urlData={			
+		}
+		//set title page
+		urlData=$.extend({},$( "#parameter-form" ).serializeObject(),urlData); 
+		var url='/pentaho/ViewAction?'+$.param(urlData);
+		$('#mydiv').dialog('close');
+		$('#mainFrame').attr('src',url);
+		return true;
+	}
+    </script>
+   </body>
+     
+</html>
