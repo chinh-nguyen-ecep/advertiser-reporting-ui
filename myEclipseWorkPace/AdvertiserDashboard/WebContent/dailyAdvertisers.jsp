@@ -21,8 +21,11 @@
 					    <li><a href="#" onclick="breakChart('hour')">Hour</a></li>
 					    <li><a href="#" onclick="breakChart('date')">Date</a></li>
 					    <li><a href="#" onclick="breakChart('distance')">Distance</a></li>
+					    <li><a href="#" onclick="breakChart('dma')">Dma</a></li>
 					  </ul>
+					  	
 					</div>
+					<button id="dmaFilterBtn" style="margin-left: 5px;display:none;" type="button" class="btn btn-primary btn-sm">  <span class="glyphicon glyphicon-plus"></span> Dma Filter</button>	
 				  </div>
 <!--		      		 <button type="button" onclick="loadChart()" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-upload"></span>Update</button>-->
 			    </form>
@@ -97,7 +100,9 @@
 			</ul>
 		 	</div>	 
 		</div>
+		
 	<!--  control scripts -->
 	<script type="text/javascript" src="scripts/control/dailyAdvertiserPage.js"></script>	
-
+	<script type="text/javascript" src="scripts/control/dailyAdvertiserPage_dma_control.js"></script>	
+	<!--  control scripts -->
 
