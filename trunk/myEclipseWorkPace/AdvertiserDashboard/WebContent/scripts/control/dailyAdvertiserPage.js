@@ -24,6 +24,7 @@ var title; // titile of chart
 var categories=[-1,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23];	 //hour category of chart
 var categories_date=['2013-10-01','2013-10-02','2013-10-03'];// date category of chart
 var categories_distance=['00-01m','01-02m','02-03m','03-04m','04-05m','05-06m','06-07m','07-08m','08-09m','09-10m','10-15m','15-20m','20-25m','25-30m','30+m'];// distance category of chart
+
 var chart_date_data=[{
 		name:'Impressions',
 		color: '#4572A7',
@@ -77,6 +78,9 @@ $(document).ready(function(){
 		//if break chart by distance then 
 		if(breakBy=='distance'){
 			loadChartByDistance();
+			return;
+		}else if(breakBy=='dma'){
+			loadChartByDma();
 			return;
 		}
 		myDateRangeInput.disable();
@@ -454,14 +458,19 @@ $(document).ready(function(){
 	}
 
 	function breakChart(by){
+		//hide dma filter button
+		$("#dmaFilterBtn").hide();
+		$('#measuresBt button').prop('disabled', false);		
 		if(by=='date'){
 			$('#measuresBt button').prop('disabled', true);
 			$('#breakBt button').html('by date<span class="caret"></span>');
 		}else if(by=='distance'){
-			$('#measuresBt button').prop('disabled', false);
+			
 			$('#breakBt button').html('by distance<span class="caret"></span>');
-		}else{
-			$('#measuresBt button').prop('disabled', false);
+		}else if(by=='dma'){
+			$("#dmaFilterBtn").show();
+			$('#breakBt button').html('by dma<span class="caret"></span>');
+		}else{			
 			$('#breakBt button').html('by hour<span class="caret"></span>');
 		}
 		breakBy=by;
