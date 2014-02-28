@@ -18,12 +18,12 @@
       </sources>  
       <default-value/> 
     </calendar_year_month>  
-    <output type="string"> 
+    <p_output type="string"> 
       <sources> 
-        <request>output</request> 
+        <request>p_output</request> 
       </sources>  
       <default-value><![CDATA[html]]></default-value> 
-    </output>  
+    </p_output>  
     <List_networks type="string-list"> 
       <sources> 
         <request>List_networks</request> 
@@ -57,12 +57,12 @@
         <list-item>2011-Dec</list-item> 
       </default-value> 
     </List_dates>  
-    <connection_name type="string">
-      <sources>
-        <request>connection_name</request>
-      </sources>
-      <default-value><![CDATA[verveReportConnection]]></default-value>
-    </connection_name>
+    <connection_name type="string"> 
+      <sources> 
+        <request>connection_name</request> 
+      </sources>  
+      <default-value><![CDATA[verveReportConnection]]></default-value> 
+    </connection_name> 
   </inputs>
 
   <outputs/>
@@ -86,8 +86,8 @@
     <action-definition> 
       <component-name>SQLLookupRule</component-name>
       <action-type>Get calendar year month</action-type>
-      <action-inputs>
-        <jndi type="string" mapping="connection_name"/>
+      <action-inputs> 
+        <jndi type="string" mapping="connection_name"/> 
       </action-inputs>
       <action-outputs> 
         <query-result type="result-set" mapping="query_result"/>  
@@ -129,7 +129,7 @@ ORDER BY month_since_2005 desc]]></query>
       <action-type>Jasper</action-type>
       <action-inputs> 
         <calendar_year_month type="string"/>  
-        <output-type type="string" mapping="output"/> 
+        <output-type type="string" mapping="p_output"/> 
       </action-inputs>
       <action-resources> 
         <report-definition mapping="report-definition10"/> 

@@ -779,7 +779,7 @@ background: #F8F8F8;
 
 
 
-</script>]]></template>
+</script>]]></template> 
         </component-definition> 
       </action-definition>
  
@@ -877,7 +877,7 @@ background: #F8F8F8;
         </action-outputs>
         <component-definition> 
           <live><![CDATA[false]]></live>  
-          <query><![CDATA[SELECT inv_mmyy as value,to_char(to_date(inv_mmyy, 'MMYY'),'Mon YYYY') as name FROM accounting.ba_inv_detail GROUP BY inv_mmyy ORDER BY inv_mmyy desc;]]></query> 
+          <query><![CDATA[SELECT inv_mmyy as value,to_char(to_date(inv_mmyy, 'MMYY'),'Mon YYYY') as name,to_date(inv_mmyy, 'MMYY')as monthYear FROM accounting.ba_inv_detail GROUP BY inv_mmyy ORDER BY monthYear desc;]]></query> 
         </component-definition> 
       </action-definition>
  
