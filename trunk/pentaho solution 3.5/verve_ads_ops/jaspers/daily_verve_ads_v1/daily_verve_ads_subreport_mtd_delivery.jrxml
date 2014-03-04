@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_verve_ads_subreport_summary" language="groovy" pageWidth="1570" pageHeight="802" columnWidth="1570" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="1.6105100000000019"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="1304"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
 		<![CDATA[SELECT
@@ -298,7 +298,7 @@ AND full_date BETWEEN date_trunc('MONTH',now()::date-1)::date AND now()::date-1]
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Total Gross}==null ? ($F{Total Clicks}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($F{Total Gross}) )]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Total Gross}==null ? ($F{Total Clicks}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("\$ ###,##0").format($F{Total Gross}) )]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="1235" y="0" width="111" height="20" forecolor="#000000" backcolor="#FFFFFF"/>

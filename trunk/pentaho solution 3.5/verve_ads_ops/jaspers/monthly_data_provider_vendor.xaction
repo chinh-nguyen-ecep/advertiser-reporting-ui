@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <action-sequence> 
-  <title>Weekly Flight Missing Vendor</title>
+  <title>Monthly Data Provider Vendor</title>
   <version>1</version>
   <logging-level>ERROR</logging-level>
   <documentation> 
@@ -18,12 +18,12 @@
       </sources>  
       <default-value><![CDATA[html]]></default-value> 
     </p_output>  
-    <p_year_week type="string"> 
+    <p_month_since_2005 type="string"> 
       <sources> 
-        <request>p_year_week</request> 
+        <request>p_month_since_2005</request> 
       </sources>  
-      <default-value><![CDATA[2013-W23]]></default-value> 
-    </p_year_week>  
+      <default-value/> 
+    </p_month_since_2005>  
     <List_output type="string-list"> 
       <sources> 
         <request>List_output</request> 
@@ -84,39 +84,40 @@
   <resources> 
     <report-definition> 
       <solution-file> 
-        <location>weekly_flight_missing_vendor/weekly_flight_missing_vendor.jasper</location>  
+        <location>monthly_data_provider_vendor/monthly_data_provider_vendor.jasper</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </report-definition>  
     <pageTemplate1> 
       <solution-file> 
-        <location>weekly_flight_missing_vendor/weekly_flight_missing_vendor.html</location>  
+        <location>monthly_data_provider_vendor/monthly_data_provider_vendor.html</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </pageTemplate1>  
-    <report-definition1>
-      <solution-file>
-        <location>weekly_flight_missing_vendor/weekly_flight_missing_vendor_csv.jasper</location>
-        <mime-type>text/plain</mime-type>
-      </solution-file>
-    </report-definition1>
+    <report-definition1> 
+      <solution-file> 
+        <location>monthly_data_provider_vendor/monthly_data_provider_vendor_csv.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition1> 
   </resources>
   
   <actions> 
     <action-definition> 
       <component-name>SQLLookupRule</component-name>
-      <action-type>Get List of week</action-type>
+      <action-type>Get List of moth</action-type>
       <action-inputs> 
         <jndi type="string" mapping="connection_name"/> 
       </action-inputs>
       <action-outputs> 
-        <query-result type="result-set" mapping="q_list_week"/>  
-        <year_week type="string"/> 
+        <query-result type="result-set" mapping="q_list_month"/>  
+        <month_since_2005 type="string"/>  
+        <calendar_year_month type="string"/> 
       </action-outputs>
       <component-definition> 
         <live><![CDATA[false]]></live>  
-        <query><![CDATA[SELECT year_week,start_week,end_week FROM adsops.weekly_agg_flight_missing_vendor WHERE is_active=true GROUP BY year_week,start_week,end_week
-ORDER BY year_week desc]]></query> 
+        <query><![CDATA[SELECT month_since_2005,calendar_year_month FROM adsops.monthly_agg_data_provider_vendor GROUP BY month_since_2005,calendar_year_month
+ORDER BY month_since_2005 desc]]></query> 
       </component-definition> 
     </action-definition>
   
@@ -126,22 +127,22 @@ ORDER BY year_week desc]]></query>
         <component-name>SecureFilterComponent</component-name>
         <action-type>Prompt/Secure Filter</action-type>
         <action-inputs> 
-          <p_year_week type="string"/>  
-          <q_list_week type="result-set"/>  
+          <p_month_since_2005 type="string"/>  
           <p_output type="string"/>  
-          <List_output type="string-list"/> 
+          <q_list_month type="result-set"/>  
+          <List_output type="string-list"/>
         </action-inputs>
         <action-resources> 
           <pageTemplate mapping="pageTemplate1"/> 
         </action-resources>
         <component-definition> 
           <selections> 
-            <p_year_week style="select"> 
-              <filter value-col-name="year_week" display-col-name="year_week">q_list_week</filter> 
-            </p_year_week>  
-            <p_output style="select"> 
-              <filter>List_output</filter> 
-            </p_output> 
+            <p_output style="select">
+              <filter>List_output</filter>
+            </p_output>  
+            <p_month_since_2005 style="select"> 
+              <filter value-col-name="month_since_2005" display-col-name="calendar_year_month">q_list_month</filter> 
+            </p_month_since_2005> 
           </selections>  
           <xsl><![CDATA[pageTemplate]]></xsl> 
         </component-definition> 
@@ -152,7 +153,7 @@ ORDER BY year_week desc]]></query>
         <action-type>Jasper</action-type>
         <action-inputs> 
           <output-type type="string" mapping="p_output"/>  
-          <p_year_week type="string"/>  
+          <p_month_since_2005 type="string"/>  
           <jndi type="string" mapping="connection_name"/> 
         </action-inputs>
         <action-resources> 
@@ -170,11 +171,11 @@ ORDER BY year_week desc]]></query>
         <action-type>Process report input</action-type>
         <action-inputs> 
           <parameter_string type="string"/>  
-          <q_list_week type="result-set"/>  
-          <p_year_week type="string"/> 
+          <q_list_month type="result-set"/>  
+          <p_month_since_2005 type="string"/> 
         </action-inputs>
         <action-outputs> 
-          <p_year_week type="string"/>  
+          <p_month_since_2005 type="string"/>  
           <reportNameCsv type="string"/>  
           <reportNamePdf type="string"/>  
           <p_mailTextMessage type="string"/> 
@@ -183,16 +184,14 @@ ORDER BY year_week desc]]></query>
           <script><![CDATA[var reportName='';
 var reportNameCsv='';
 var reportNamePdf='';
-var start_date_of_week=q_list_week.getValueAt(0,1);
-var end_date_of_week=q_list_week.getValueAt(0,2);
 
-p_year_week=q_list_week.getValueAt(0,0);
-
-reportName='Weekly_ Advance_Digital.'+start_date_of_week+'.'+end_date_of_week;
+var p_month_since_2005=q_list_month.getValueAt(0,0);
+var month=q_list_month.getValueAt(0,1);
+reportName='Monthly_data_provider_vendor.'+month;
 reportNameCsv=reportName+'.csv';
 reportNamePdf=reportName+'.pdf';
 
-var p_mailTextMessage='Attached is the Weekly  Advance Digital Report with start date from '+start_date_of_week+' to '+end_date_of_week;]]></script> 
+var p_mailTextMessage='Attached is the Monthly Data Provider Vendor Report with month '+ month;]]></script> 
         </component-definition> 
       </action-definition>
   
@@ -200,7 +199,7 @@ var p_mailTextMessage='Attached is the Weekly  Advance Digital Report with start
         <component-name>JasperReportsComponent</component-name>
         <action-type>Jasper pdf</action-type>
         <action-inputs> 
-          <p_year_week type="string"/>  
+          <p_month_since_2005 type="string"/>  
           <jndi type="string" mapping="connection_name"/> 
         </action-inputs>
         <action-outputs> 
@@ -216,10 +215,10 @@ var p_mailTextMessage='Attached is the Weekly  Advance Digital Report with start
         <action-type>Jasper Csv</action-type>
         <action-inputs> 
           <jndi type="string" mapping="connection_name"/>  
-          <p_year_week type="string"/> 
+          <p_month_since_2005 type="string"/> 
         </action-inputs>
-        <action-resources>
-          <report-definition mapping="report-definition1"/>
+        <action-resources> 
+          <report-definition mapping="report-definition1"/> 
         </action-resources>
         <action-outputs> 
           <report-output type="content" mapping="reportCsv"/> 
