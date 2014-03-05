@@ -135,7 +135,7 @@
           <query-result type="result-set" mapping="rs_total_file"/> 
         </action-outputs>
         <component-definition> 
-          <query><![CDATA[SELECT COUNT(*) FROM control.data_file WHERE data_file_config_id IN (23,26,30,31,32,33,34,35,42,54,63,76,71,78,125,165) AND file_timestamp::date=(date '{full_date}' - integer '0')]]></query>  
+          <query><![CDATA[SELECT COUNT(*) FROM control.data_file WHERE data_file_config_id IN (23,26,30,31,32,33,34,35,42,54,63,76,71,78,125,165,174,91) AND file_timestamp::date=(date '{full_date}' - integer '0')]]></query>  
           <live><![CDATA[true]]></live> 
         </component-definition> 
       </action-definition>
@@ -151,7 +151,7 @@
           <query-result type="result-set" mapping="rs_total_file_su"/> 
         </action-outputs>
         <component-definition> 
-          <query><![CDATA[SELECT COUNT(*) FROM control.data_file WHERE data_file_config_id IN (23,26,30,31,32,33,34,35,42,54,63,76,71,78,125,165) AND file_timestamp::date=(date '{full_date}' - integer '0') AND file_status LIKE 'SU']]></query>  
+          <query><![CDATA[SELECT COUNT(*) FROM control.data_file WHERE data_file_config_id IN (23,26,30,31,32,33,34,35,42,54,63,76,71,78,125,165,174,91) AND file_timestamp::date=(date '{full_date}' - integer '0') AND file_status LIKE 'SU']]></query>  
           <live><![CDATA[true]]></live> 
         </component-definition> 
       </action-definition>
@@ -168,7 +168,7 @@
         </action-outputs>
         <component-definition> 
           <live><![CDATA[true]]></live>  
-          <query><![CDATA[SELECT file_name,file_status,staging_load_count,fact_table_load_count,file_timestamp FROM control.data_file WHERE data_file_config_id IN (23,26,30,31,32,33,34,35,42,54,63,76,71,78,125,165) AND file_timestamp::date =(date '{full_date}' - integer '0') AND (file_status LIKE 'EF' OR (file_status LIKE 'SU' AND staging_load_count=0) OR (file_status LIKE 'SU' AND fact_table_load_count=0))]]></query> 
+          <query><![CDATA[SELECT file_name,file_status,staging_load_count,fact_table_load_count,file_timestamp FROM control.data_file WHERE data_file_config_id IN (23,26,30,31,32,33,34,35,42,54,63,76,71,78,125,165,174,91) AND file_timestamp::date =(date '{full_date}' - integer '0') AND (file_status LIKE 'EF' OR (file_status LIKE 'SU' AND staging_load_count=0) OR (file_status LIKE 'SU' AND fact_table_load_count=0))]]></query> 
         </component-definition> 
       </action-definition>
  
