@@ -60,6 +60,7 @@ sub runAgg{
         #monthly_agg_adm_data_feed
         runPostgresComand("select fn_build_weekly_new_booked($p_start_date_sk ,$p_end_date_sk, 0, 'PS')");
 		runPostgresComand("select adsops.fn_build_weekly_agg_advance_digital($p_start_date_sk ,$p_end_date_sk, 0, 'PS')");
+		runPostgresComand("select adsops.fn_build_weekly_agg_flight_missing_vendor($p_start_date_sk ,$p_end_date_sk, 0, 'PS')");
         ##runPostgresComand("select staging.fn_ba_monthly_agg_adm_data_feed($p_date_sk_start,$p_date_sk_end,$year_week,'PS')");
         ##runPostgresComand("update  adm.monthly_agg_adm_data_feed set is_active=true where month_since_2005=$year_week");
 
@@ -67,9 +68,14 @@ sub runAgg{
 
 sub transferFinalData{
         note("*Transfer final data to reporting");
+		# adsops.weekly_new_booked
 		my $comand=" cd /opt/temp/autoscripts/transformer/;perl main.pl table $host $transferToHost adsops.weekly_new_booked";
 		system($comand);
+		# adsops.weekly_agg_advance_digital
 		my $comand=" cd /opt/temp/autoscripts/transformer/;perl main.pl table $host $transferToHost adsops.weekly_agg_advance_digital";
+		system($comand);
+		# adsops.weekly_agg_flight_missing_vendor
+		my $comand=" cd /opt/temp/autoscripts/transformer/;perl main.pl table $host $transferToHost adsops.weekly_agg_flight_missing_vendor";
 		system($comand);
 }
 sub runPostgresComand{
