@@ -153,12 +153,12 @@
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </report-definition3>  
-    <report-definition2>
-      <solution-file>
-        <location>daily_verve_ads_v1/date_range/daily_verve_ads.jasper</location>
-        <mime-type>text/plain</mime-type>
-      </solution-file>
-    </report-definition2>
+    <report-definition2> 
+      <solution-file> 
+        <location>daily_verve_ads_v1/date_range/daily_verve_ads.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition2> 
   </resources>
   
   <actions> 
@@ -373,7 +373,22 @@ var p_mailTitle='Daily Verve Ads Report V1- '+p_end_date;]]></script>
           <attachment-ref name-param="attach_name_3" input-param="report_ou_pdf"/> 
         </component-definition> 
       </action-definition>
- 
+  
+      <action-definition>
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Send email via Subscription</action-type>
+        <action-inputs>
+          <jndi type="string" mapping="connectionName"/>
+        </action-inputs>
+        <action-outputs>
+          <query-result type="result-set" mapping="query_result"/>
+        </action-outputs>
+        <component-definition>
+          <query><![CDATA[SELECT * FROM control.fn_spctl_insert_subscription_to_process(27,'',true);]]></query>
+          <live><![CDATA[true]]></live>
+        </component-definition>
+      </action-definition>
+
     </actions>
  
   </actions> 
