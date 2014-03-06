@@ -76,3 +76,4 @@ evttracker.monthly_event_stats_by_hour
 evttracker.monthly_event_stats
 evttracker.monthly_event_stats_by_date
 billing.ba_monthly_advance_digital
+billing.ba_monthly_io_line_item
