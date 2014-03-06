@@ -135,7 +135,7 @@ sub runAgg{
 	runPostgresComand("update billing.ba_monthly_api_revenue_by_publisher set is_active=true where month_since_2005=$month_sk");
 	
 	# IO line items report
-	runPostgresComand("select billing.fn_build_ba_monthly_io_line_item($month_sk,$process_id,'PS')");
+	runPostgresComand("select billing.fn_build_ba_monthly_io_line_item($p_date_sk_start,$p_date_sk_end,$month_sk,'PS')");
 	runPostgresComand("update billing.ba_monthly_io_line_item set is_active=true where month_since_2005=$month_sk");
 }
 
