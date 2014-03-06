@@ -53,6 +53,9 @@ sub main{
 		checkParam(28,8);				
 		promote(28);
 		
+		# Check param 69 from admDFP before continue
+		checkParam(69,5);	
+		
 		#run param 34 transfer data to network data mark
 		##writelog("Run param 34");	
 		##runParam(34);
