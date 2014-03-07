@@ -68,7 +68,7 @@ inv_detail_id
 ,verve_share as "verve_share"
 ,SUM(billable_units) as "Quantity"
 ,SUM(gross_revenue) as "Gross"
-FROM accounting.ba_inv_local_report_detail
+FROM accounting.ba_inv_local_report_detail_v2
 WHERE inv_mmyy=$P{p_month_year}
 AND status = 'ACTIVE'
 --AND gross_revenue >0

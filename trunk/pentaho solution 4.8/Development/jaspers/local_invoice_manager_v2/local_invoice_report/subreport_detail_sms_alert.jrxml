@@ -64,7 +64,7 @@ inv_detail_id
 ,sms_quantity as "Quantity"
 ,sms_rate as "Rate"
 ,sms_fee as sms_fee
-from accounting.ba_inv_local_report_detail
+from accounting.ba_inv_local_report_detail_v2
 where inv_mmyy=$P{p_month_year} --pass month
 and status = 'ACTIVE' --pass status
 and inv_detail_id = $P{p_inv_detail_id} --pass specific invoice number

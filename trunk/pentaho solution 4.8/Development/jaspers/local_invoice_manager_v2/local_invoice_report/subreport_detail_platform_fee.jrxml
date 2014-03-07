@@ -77,7 +77,7 @@ FROM  accounting.ba_platform_fee a
 INNER JOIN accounting.ba_platform b
 ON(b.is_active = 1 AND b.id = a.platform_id)
 INNER JOIN( SELECT distinct inv_detail_id, account_partner_map_id
-FROM accounting.ba_inv_Local_report_detail
+FROM accounting.ba_inv_local_report_detail_v2
 WHERE
 inv_mmyy = $P{p_month_year}
 AND status = 'ACTIVE'
