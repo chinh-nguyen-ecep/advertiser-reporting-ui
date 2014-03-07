@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dail_ad_network_summary_subreport1" language="groovy" pageWidth="1002" pageHeight="842" orientation="Landscape" columnWidth="1002" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="1.768460768250001"/>
-	<property name="ireport.x" value="703"/>
+	<property name="ireport.x" value="773"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="calendar_year_month" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new String("")]]></defaultValueExpression>
@@ -217,7 +217,7 @@ Impressions]]></text>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{p_share}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[($F{p_share} == null) ? 0 : $F{p_share}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
 				<reportElement x="365" y="0" width="77" height="20"/>
