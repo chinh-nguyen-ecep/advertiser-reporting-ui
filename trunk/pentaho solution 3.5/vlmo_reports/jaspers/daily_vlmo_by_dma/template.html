@@ -164,6 +164,7 @@
 			name: 'p_agency_id',
 			multi: false,
 			ajaxUrl: '/pentaho/ViewAction',
+			selectAll: true,
 			data: function(term,page){
 				return {
 					solution: solution,
@@ -186,10 +187,10 @@
 			},
 			success: function(){
 				mySearch2.action();
+				mySearch3.action();
 			},
 			clickEvent: function(id){
-				mySearch2.action();
-				mySearch3.action();
+				mySearch2.action();				
 			}
 		});
 		mySearch.action();
@@ -223,7 +224,7 @@
 				return {results: results,more: more}
 			},
 			success: function(){
-				mySearch3.action();
+				
 			},
 			clickEvent: function(id){
 				

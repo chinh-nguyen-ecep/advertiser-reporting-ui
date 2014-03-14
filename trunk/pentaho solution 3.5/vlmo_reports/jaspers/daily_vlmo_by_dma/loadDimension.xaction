@@ -126,7 +126,7 @@ LIMIT {limit} OFFSET ({page}-1)*10 ;]]></query>
 FROM vlmo_dw.vlmo_dim_merchants
 WHERE dt_expire='9999-12-31' 
 AND lower(name||' ('||merchant_id||')') LIKE lower('%{term}%') 
-AND network_id={network_id}
+AND (network_id={network_id} OR '0'='{network_id}')
 GROUP BY merchant_id,name
 ORDER BY name LIMIT {limit} OFFSET ({page}-1)*10 ;]]></query>  
           <live><![CDATA[false]]></live> 
@@ -142,23 +142,20 @@ ORDER BY name LIMIT {limit} OFFSET ({page}-1)*10 ;]]></query>
         <action-type>Relational</action-type>
         <action-inputs> 
           <jndi type="string" mapping="ConnectionName"/>  
-          <limit type="string"/>
-          <network_id type="string"/>
-          <page type="string"/>
-          <term type="string"/>
+          <limit type="string"/>  
+          <page type="string"/>  
+          <term type="string"/> 
         </action-inputs>
         <action-outputs> 
           <query-result type="result-set" mapping="query_result"/> 
         </action-outputs>
         <component-definition> 
           <live><![CDATA[true]]></live>  
-          <query><![CDATA[SELECT metros_id,name||' ('||metros_id||')' as titlte
-FROM vlmo_dw.vlmo_dim_metros
-WHERE dt_expire='9999-12-31' 
-AND lower(name||' ('||metros_id||')') LIKE lower('%{term}%') 
-AND network_id={network_id}
-GROUP BY metros_id,name
-ORDER BY name LIMIT {limit} OFFSET ({page}-1)*10 ;]]></query>
+          <query><![CDATA[SELECT id as metros_id,name||' ('||id||')' as titlte
+FROM verveloc.metro
+WHERE lower(name||' ('||id||')') LIKE lower('%{term}%') 
+GROUP BY id,name
+ORDER BY name LIMIT {limit} OFFSET ({page}-1)*10 ;]]></query> 
         </component-definition> 
       </action-definition>
  

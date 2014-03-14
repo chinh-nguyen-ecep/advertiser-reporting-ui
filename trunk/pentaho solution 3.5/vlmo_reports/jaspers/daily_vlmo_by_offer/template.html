@@ -163,6 +163,7 @@
 			divID: 'dimesion',
 			name: 'p_agency_id',
 			multi: false,
+			selectAll: true,
 			ajaxUrl: '/pentaho/ViewAction',
 			data: function(term,page){
 				return {
@@ -222,10 +223,13 @@
 				return {results: results,more: more}
 			},
 			success: function(){
-				mySearch3.action();
+				//mySearch3.action();
 			},
 			clickEvent: function(id){
-				mySearch3.action();
+				if(mySearch2.getID().length>0){
+					mySearch3.action();
+				}
+				
 			}
 		});    
 		//offer check box
