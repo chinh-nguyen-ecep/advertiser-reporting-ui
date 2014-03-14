@@ -109,6 +109,7 @@ ORDER BY inv_detail_id, account_name, adm_partner_id;]]>
 	<variable name="site_net_to_verve" class="java.lang.Double">
 		<variableExpression><![CDATA[( $V{local_sub_total}==null  ? 0 : $V{local_sub_total} )+( $V{sms_fee}==null ? 0 : $V{sms_fee} )]]></variableExpression>
 	</variable>
+	<variable name="platform_fee_1" class="java.lang.Double" resetType="None"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -282,7 +283,8 @@ ORDER BY inv_detail_id, account_name, adm_partner_id;]]>
 					<subreportParameterExpression><![CDATA[$P{p_month_year}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<returnValue subreportVariable="local_sub_total" toVariable="local_sub_total" calculation="Sum"/>
+				<returnValue subreportVariable="local_sub_total" toVariable="local_sub_total"/>
+				<returnValue subreportVariable="platform_fee_1" toVariable="platform_fee_1"/>
 				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "subreport_detail_platform_fee.jasper"]]></subreportExpression>
 			</subreport>
 			<textField evaluationTime="Report" pattern="$ #,##0.00">
@@ -290,7 +292,7 @@ ORDER BY inv_detail_id, account_name, adm_partner_id;]]>
 				<textElement textAlignment="Right">
 					<font isItalic="false"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Double"><![CDATA[( $V{local_sub_total} == null ? $V{Gross_1}*$F{verve_share} : $V{local_sub_total} )+( $V{sms_fee}==null ? 0 : $V{sms_fee} )]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{Gross_1}*$F{verve_share}+($V{platform_fee_1}==null ? 0 : $V{platform_fee_1} )+( $V{sms_fee}==null ? 0 : $V{sms_fee} )]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>
