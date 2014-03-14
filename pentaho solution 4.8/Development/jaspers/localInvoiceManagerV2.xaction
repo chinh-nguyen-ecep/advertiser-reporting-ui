@@ -404,7 +404,7 @@ function delay_timeout(second_time,func){
 	}
 	</script>
 </body>
-</html>]]></template>
+</html>]]></template> 
         </component-definition> 
       </action-definition>
  
@@ -899,7 +899,8 @@ background: #F8F8F8;
           <query><![CDATA[SELECT b.id,b.account_id,c.name as "account_name",b.inv_network_type,b.inv_status FROM accounting.ba_inv_detail b
 INNER JOIN accounting.ba_account c
 on(c.is_active=1 and c.id = b.account_id)
-WHERE b.inv_mmyy='{p_month_year}']]></query>  
+WHERE b.inv_mmyy='{p_month_year}'
+ORDER BY b.id]]></query>  
           <live><![CDATA[false]]></live> 
         </component-definition> 
       </action-definition>
