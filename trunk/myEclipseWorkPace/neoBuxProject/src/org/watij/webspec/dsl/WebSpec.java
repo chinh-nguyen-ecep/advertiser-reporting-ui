@@ -10,7 +10,6 @@ import com.teamdev.jxbrowser.proxy.ServerType;
 import com.teamdev.jxbrowser.script.ScriptErrorEvent;
 import com.teamdev.jxbrowser.script.ScriptErrorListener;
 import com.teamdev.jxbrowser.security.*;
-import com.teamdev.xpcom.*;
 
 import org.watij.webspec.dsl.cookie.Cookie;
 
