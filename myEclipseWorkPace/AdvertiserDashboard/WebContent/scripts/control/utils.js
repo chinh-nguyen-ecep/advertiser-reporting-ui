@@ -366,28 +366,31 @@ function ajaxStore(){
 };
 
 function contentDialog(){
-	var div=$('<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-dialog">  <div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title">Modal title</h4></div><div class="modal-body"></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div></div></div></div>');
+	var div=$('<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-dialog">  <div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title">Modal title</h4></div><div class="modal-body" style="padding-bottom: 0px;"></div><div class="modal-footer" ><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div></div></div></div>');
 	$('body').append(div);
-	var okBtn=$('<button type="button" class="btn btn-success" >Ok</button>');
 	this.open=open;
+	this.hide=hide;
 	this.setContent=setContent;
 	this.setTitle=setTitle;
 	this.setWidth=setWidth;
-	this.acceptFunction=acceptFunction;
 	this.addDom=addDom;
-	this.setAcceptBtnName=setAcceptBtnName;
-	function setAcceptBtnName(name){
-		okBtn.html(name);		
-	}
-	function addDom(dom){
-		div.find('div.modal-body').first().append();		
-	}
-	function acceptFunction(func){		
-		div.find('.modal-footer').append(okBtn);
-		okBtn.click(function(){
-			func();			
+	this.addButton=addButton;
+	//function add button
+	// example: addButton({name: 'abc',btnClass:'btn-default',action: function(){}});
+	function addButton(btn){
+		var name=btn.name;
+		var btnClass=btn.btnClass;		
+		var myBtn=$('<button type="button" class="btn btn-default" >'+name+'</button>');
+		myBtn.removeClass("btn-default");
+		myBtn.addClass(btnClass);
+		myBtn.click(function(){
+			btn.action();			
 		});
-		
+		div.find('.modal-footer').append(myBtn);
+	}
+
+	function addDom(dom){
+		div.find('div.modal-body').first().append(dom);		
 	}
 	function setWidth(width){
 		div.find('div.modal-dialog').css('width',width+'px');
@@ -400,8 +403,12 @@ function contentDialog(){
 	}
 	function open(){
 		div.modal({
-			  keyboard: false
+			  keyboard: false,
+			  backdrop: 'static'
 		});
+	}
+	function hide(){
+		div.modal('hide');
 	}
 }
 

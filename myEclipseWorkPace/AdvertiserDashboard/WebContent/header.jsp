@@ -6,7 +6,7 @@
   %>
   <div class="navbar navbar-default navbar-fixed-top">
 	  <div class="navbar navbar-default navbar-fixed-top">
-	  <div class="navbar-inner" style="background-image: url('images/reports_back-fb.png');height: 91px;padding-top: 10px;">
+	  <div class="navbar-inner" style="background-image: url('images/reports_back-fb.png');height: 90px;padding-top: 10px;">
 	      <div class="container">
 	        <div class="navbar-header">
 	          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">

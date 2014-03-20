@@ -70,7 +70,11 @@
                <tr>
                   <td><a href="ApiOverviewDetail?api=advertiserByDistance">Advertiser by Distance</a></td>
                   <td>overview-internal</td>
-               </tr> 			   
+               </tr> 
+               <tr>
+                  <td><a href="ApiOverviewDetail?api=advertiserByDma">Advertiser by DMA</a></td>
+                  <td>overview-internal</td>
+               </tr>			   
             </table>
             <nav>
                <ul class='breadcrumb'>

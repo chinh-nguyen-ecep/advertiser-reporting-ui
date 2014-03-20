@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * @author ChinhNguyen
+ *
+ */
 public class ApiResponseResultSet {
 	/**
 	 * @param args
@@ -13,6 +17,7 @@ public class ApiResponseResultSet {
 	private int totalPage;
 	private int unitsPerPage;
 	private String errorMessage;
+	private String formatOutput="json";
 	private ArrayList<String> columnName;
 	private ArrayList<String> columnType;
 	private ArrayList<String[]> data;
@@ -31,6 +36,14 @@ public class ApiResponseResultSet {
 
 	public String getResponseStatus() {
 		return responseStatus;
+	}
+
+	public String getFormatOutput() {
+		return formatOutput;
+	}
+
+	public void setFormatOutput(String formatOutput) {
+		this.formatOutput = formatOutput;
 	}
 
 	public void setResponseStatus(String responseStatus) {
@@ -91,6 +104,30 @@ public class ApiResponseResultSet {
 
 	public void setData(ArrayList<String[]> data) {
 		this.data = data;
+	}
+	public String toString(){
+		String result="";
+		if(formatOutput==null){
+			formatOutput="json";
+		}else if(formatOutput.equals("csv")){
+			formatOutput="csv";
+		}else{
+			formatOutput="json";
+		}
+		
+		if(formatOutput.equals("json")){
+			try {
+				result=toJson().toString();
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		if(formatOutput.equals("csv")){
+			result=toCsv();
+		}
+		return result;
 	}
 	
 	public JSONObject toJson() throws JSONException{	

@@ -164,6 +164,7 @@ public class MainApiLookup implements QueryApi{
 			apiResult.setErrorMessage(exceptionMessage);
 			apiResult.setResponseStatus("ERROR");
 		}
+		apiResult.setFormatOutput(AddableHttpRequest.returnFormat(myRequest));
 		return apiResult;
 	}
 

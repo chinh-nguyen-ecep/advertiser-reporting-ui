@@ -10,7 +10,7 @@
     </init-param>
     <init-param>
       <param-name>serverName</param-name>
-      <param-value>localhost:8081</param-value>
+      <param-value>reporting.vervemobile.com</param-value>
     </init-param>
     <init-param>
       <param-name>renew</param-name>
@@ -30,7 +30,7 @@
     </init-param>
     <init-param>
       <param-name>serverName</param-name>
-      <param-value>localhost:8081</param-value>
+      <param-value>reporting.vervemobile.com</param-value>
     </init-param>
   </filter>
   <filter>
@@ -152,5 +152,15 @@
   <servlet-mapping>
     <servlet-name>LookupCreatives</servlet-name>
     <url-pattern>/LookupCreatives</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ApiAdvertiserByDma</display-name>
+    <servlet-name>ApiAdvertiserByDma</servlet-name>
+    <servlet-class>org.ecepvn.api.servlet.ApiAdvertiserByDma</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ApiAdvertiserByDma</servlet-name>
+    <url-pattern>/AdvertiserByDma</url-pattern>
   </servlet-mapping>
 </web-app>
