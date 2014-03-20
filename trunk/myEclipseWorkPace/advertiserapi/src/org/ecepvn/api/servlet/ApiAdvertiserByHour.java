@@ -35,14 +35,6 @@ public class ApiAdvertiserByHour extends HttpServlet {
 		response.setContentType("text/plain");
 		PrintWriter pw=response.getWriter();
 		
-		//get export format
-		String format=request.getParameter("format");
-		if(format==null){
-			format="json";
-		}else{
-			format="csv";
-		}
-
 		ApiResponseResultSet apiResponse=new ApiResponseResultSet();
 		api=new AdvertiserByHour();
 		//get info param
@@ -53,19 +45,7 @@ public class ApiAdvertiserByHour extends HttpServlet {
 			pw.println(infoResult.toString());
 		}else{
 			apiResponse=api.processApiRequest(request);
-			
-			//Json format
-			if(format.equals("json")){
-				try {
-					pw.println(apiResponse.toJson());
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					pw.println(e.getMessage());
-				}
-			}else{//csv format
-				pw.println(apiResponse.toCsv());
-			}			
+			pw.println(apiResponse.toString());
 		}
 	}
 

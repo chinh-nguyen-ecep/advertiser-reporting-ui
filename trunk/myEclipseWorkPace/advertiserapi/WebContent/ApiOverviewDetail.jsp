@@ -419,6 +419,8 @@
 				url+="AdvertiserByDate?info";
 			}if(api=='advertiserByDistance'){
 				url+="AdvertiserByDistance?info";
+			}if(api=='advertiserByDma'){
+				url+="AdvertiserByDma?info";
 			}if(api=='lookup_orders'){
 				url+="LookupOrders?info";
 			}if(api=='lookup_flights'){

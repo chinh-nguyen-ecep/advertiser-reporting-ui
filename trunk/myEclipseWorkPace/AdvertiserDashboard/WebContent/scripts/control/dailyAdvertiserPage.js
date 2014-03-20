@@ -24,7 +24,8 @@ var title; // titile of chart
 var categories=[-1,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23];	 //hour category of chart
 var categories_date=['2013-10-01','2013-10-02','2013-10-03'];// date category of chart
 var categories_distance=['00-01m','01-02m','02-03m','03-04m','04-05m','05-06m','06-07m','07-08m','08-09m','09-10m','10-15m','15-20m','20-25m','25-30m','30+m'];// distance category of chart
-
+var categories_dma=[];//
+var p_dma_ids=[];// array content list of dma ids user selected
 var chart_date_data=[{
 		name:'Impressions',
 		color: '#4572A7',
@@ -498,6 +499,9 @@ $(document).ready(function(){
 		}else if(breakBy=='distance'){
 			_categories=categories_distance;
 			title+=" Distance";
+		}else if(breakBy=='dma'){
+			_categories=categories_dma;
+			title+=" Dma";
 		}
 		drawChart(_categories,series,title,subtitle);
 	}
@@ -668,6 +672,11 @@ $(document).ready(function(){
 		}else if(breakBy=='distance'){
 			mydialog.setTitle('Daily Advertiser by Date Distance From '+selectStartDate.format('yyyy-mm-dd')+' To '+selectEndDate.format('yyyy-mm-dd'));
 			loadingUrl=rootUrl+'/GenerateJasperReport'+'?export_type=html&jrxml=daily_advertiser_report_by_distance&p_end_date='+selectEndDate.format('yyyy-mm-dd')+'&p_start_date='+selectStartDate.format('yyyy-mm-dd')+'&path=dailyAdvertiser';
+		}else if(breakBy=='dma'){
+			mydialog.setTitle('Daily Advertiser by Date Dma From '+selectStartDate.format('yyyy-mm-dd')+' To '+selectEndDate.format('yyyy-mm-dd'));
+			loadingUrl=rootUrl+'/GenerateJasperReport'+'?export_type=html&jrxml=daily_advertiser_report_by_dma&p_end_date=';
+			loadingUrl+=selectEndDate.format('yyyy-mm-dd')+'&p_start_date='+selectStartDate.format('yyyy-mm-dd')+'&path=dailyAdvertiser';
+			loadingUrl+='&p_dma_ids='+p_dma_ids.join(",");
 		}
 		var htmlResult;
 		
@@ -706,6 +715,10 @@ $(document).ready(function(){
 			loadingUrl=rootUrl+'/GenerateJasperReport'+'?export_type='+exportType+'&jrxml=daily_advertiser_report&p_end_date='+selectEndDate.format('yyyy-mm-dd')+'&p_start_date='+selectStartDate.format('yyyy-mm-dd')+'&path=dailyAdvertiser';
 		}else if(breakBy=='distance'){
 			loadingUrl=rootUrl+'/GenerateJasperReport'+'?export_type='+exportType+'&jrxml=daily_advertiser_report_by_distance&p_end_date='+selectEndDate.format('yyyy-mm-dd')+'&p_start_date='+selectStartDate.format('yyyy-mm-dd')+'&path=dailyAdvertiser';
+		}else if(breakBy=='dma'){
+			loadingUrl=rootUrl+'/GenerateJasperReport'+'?export_type='+exportType+'&jrxml=daily_advertiser_report_by_dma&p_end_date=';
+			loadingUrl+=selectEndDate.format('yyyy-mm-dd')+'&p_start_date='+selectStartDate.format('yyyy-mm-dd')+'&path=dailyAdvertiser';
+			loadingUrl+='&p_dma_ids='+p_dma_ids.join(",");
 		}	
 		window.open(loadingUrl);
 	}

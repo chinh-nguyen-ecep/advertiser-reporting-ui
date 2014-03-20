@@ -15,7 +15,17 @@ public class AddableHttpRequest extends HttpServletRequestWrapper {
 	private Map<String,String[]> params = new HashMap();
 
 
-
+	   public static String returnFormat(HttpServletRequest request){
+		   String format=request.getParameter("format");
+			if(format==null){
+				format="json";
+			}else if(format.equals("csv")){
+				format="csv";
+			}else{
+				format="json";
+			}
+		   return format;
+	   }
 	   public String getParameter(String name) {
 	           // if we added one, return that one
 	           if ( params.get( name ) != null ) {
