@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Io LineItem Flights Exception" language="groovy" pageWidth="3370" pageHeight="1684" orientation="Landscape" columnWidth="3330" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.6528925619834782"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="4739"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Crosstab Data Text" mode="Transparent" hAlign="Center" fontName="Calibri">
 		<box leftPadding="5" rightPadding="5"/>
@@ -37,8 +37,7 @@
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[
-select
+		<![CDATA[select
 '005' as error_code
 ,a.io_id
 ,a.io_name
@@ -191,8 +190,7 @@ inner join refer.adm_dim_io_orders io
 on(io.dt_expire = '9999-12-31' and io.io_orders_id = o.insertion_order_id)
 where o.dt_expire = '9999-12-31'
 and o.order_id not in(select order_id from adsops.AdsOp_IO_ADM_exception_order_exclusion where is_active = 1)
-order by error_code, io_line_item_id;
-]]>
+order by error_code, io_line_item_id;]]>
 	</queryString>
 	<field name="error_code" class="java.lang.String"/>
 	<field name="io_id" class="java.lang.String"/>
@@ -514,7 +512,7 @@ order by error_code, io_line_item_id;
 					<rightPen lineWidth="0.5" lineStyle="Solid"/>
 				</box>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{io_budget}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $F{io_budget}.equals("Unknown") ? "Unknown" : new DecimalFormat("\$ #,##0.00").format(Double.parseDouble($F{io_budget})))]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="697" y="0" width="90" height="20"/>
@@ -591,7 +589,7 @@ order by error_code, io_line_item_id;
 					<rightPen lineWidth="0.5" lineStyle="Solid"/>
 				</box>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{io_line_item_budget}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $F{io_line_item_budget}.equals("Unknown") ? "Unknown" : new DecimalFormat("\$ #,##0.00").format(Double.parseDouble($F{io_line_item_budget})))]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="1986" y="0" width="133" height="20"/>
@@ -602,7 +600,7 @@ order by error_code, io_line_item_id;
 					<rightPen lineWidth="0.5" lineStyle="Solid"/>
 				</box>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{io_line_item_quantity}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $F{io_line_item_quantity}.equals("Unknown") ? "Unknown" : new DecimalFormat("#,##0").format(Double.parseDouble($F{io_line_item_quantity})))]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="2119" y="0" width="90" height="20"/>
@@ -648,7 +646,7 @@ order by error_code, io_line_item_id;
 				<textElement/>
 				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{adm_flight_end_date}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="$ #,##0.00">
 				<reportElement x="2798" y="0" width="133" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
@@ -659,7 +657,7 @@ order by error_code, io_line_item_id;
 				<textElement/>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{adm_flight_budget}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0">
 				<reportElement x="2931" y="0" width="133" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
@@ -670,7 +668,7 @@ order by error_code, io_line_item_id;
 				<textElement/>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{adm_flight_quantity}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="$ #,##0.00">
 				<reportElement x="3064" y="0" width="133" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
