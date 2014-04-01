@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AdOps Exception" language="groovy" pageWidth="2580" pageHeight="1684" orientation="Landscape" columnWidth="2540" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.1289478601075593"/>
-	<property name="ireport.x" value="2088"/>
+	<property name="ireport.x" value="1614"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Crosstab Data Text" mode="Transparent" hAlign="Center" fontName="Calibri">
 		<box leftPadding="5" rightPadding="5"/>
@@ -247,7 +247,7 @@ on(sum.order_id = o.order_id)
 where o.dt_expire = '9999-12-31'
 and o.order_id not in(select order_id from adsops.AdsOp_IO_ADM_exception_order_exclusion where is_active = 1)
 and o.insertion_order_id not in(select distinct io_orders_id from refer.adm_dim_io_orders where dt_expire = '9999-12-31')
-order by error_code, io_name
+order by error_code, io_name, adm_order_name, io_line_item_name
 ;]]>
 	</queryString>
 	<field name="error_code" class="java.lang.String"/>
