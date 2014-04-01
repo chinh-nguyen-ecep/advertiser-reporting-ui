@@ -229,75 +229,14 @@
 						<tr><td colspan="8" style="text-align: left"><img src="/verve_style/images/loading.gif" /></td></tr>
 					</tbody>
 				</table>
-
-		</div>	
-	</div>
-	<div class="mybox" style="width: 100%">
-		<div class="title">Daily ETL/Data Process Status On dw4</div>
-		<div class="box_content" style="min-height: 300px;width: 100%">	
-			<br/>
-			<h2>Adcel</h2>
-			<div class="etl_box" id="adcel_etl_status_dw4">
-				<img src="/verve_style/images/loading.gif" />
-			</div>
-			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('16,17,18,19,20, 27, 28,29,81,82,83,84,85,86,87,88,89,90,106,107,108,109,127,128,129,130,131,132,153,154,155,156,157,158,159,160,166,167','Adcel log files',dateBefore,'dw4');" title="Adcel log files" class="view_log_detail">Log files detail</a>
-				<table  class="table1">
-					<thead>
-						<th width="300">Process</th>
-						<th width="50">Param</th>
-						<th width="70">Status</th>
-						<th>Start time</th>
-						<th title="Expected Start time">Exp St_time</th>
-						<th>Completion time</th>
-						<th title="Expected Completion time">Exp Co_time</th>
-						<th>Status note</th>
-					</thead>
-					<tbody id="adcel_dw4">
-						<tr><td colspan="8" style="text-align: left"><img src="/verve_style/images/loading.gif" /></td></tr>
-					</tbody>
-				</table>
-		</div>
-	</div>
-	<div class="mybox" style="width: 100%">
-		<div class="title">Daily ETL/Data Process Status On dw5</div>
-		<div class="box_content" style="min-height: 300px;width: 100%">	
-			<br/>
-			<h2>Adcel</h2>
-			<div class="etl_box" id="adcel_etl_status_dw5">
-				<img src="/verve_style/images/loading.gif" />
-			</div>
-			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('16,17,18,19,20, 27, 28,29,81,82,83,84,85,86,87,88,89,90,106,107,108,109,127,128,129,130,131,132,153,154,155,156,157,158,159,160,166,167','Adcel log files',dateBefore,'dw5');" title="Adcel log files" class="view_log_detail">Log files detail</a>
-				<table  class="table1">
-					<thead>
-						<th width="300">Process</th>
-						<th width="50">Param</th>
-						<th width="70">Status</th>
-						<th>Start time</th>
-						<th title="Expected Start time">Exp St_time</th>
-						<th>Completion time</th>
-						<th title="Expected Completion time">Exp Co_time</th>
-						<th>Status note</th>
-					</thead>
-					<tbody id="adcel_dw5">
-						<tr><td colspan="8" style="text-align: left"><img src="/verve_style/images/loading.gif" /></td></tr>
-					</tbody>
-				</table>
-		</div>
-	</div>
-	<div class="mybox" style="width: 100%">
-		<div class="title">Daily ETL/Data Process Status On dw6</div>
-		<div class="box_content" style="min-height: 300px;width: 100%">
-		<br/>		
-		<h2>Event Tracker</h2>
-			<div class="etl_box" id="adcel_etl_status_dw6">
-				<img src="/verve_style/images/loading.gif" />
-			</div>
-			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('16,17,18,19,20, 27, 28,29,81,82,83,84,85,86,87,88,89,90,106,107,108,109,127,128,129,130,131,132,153,154,155,156,157,158,159,160,166,167','Adcel log files',dateBefore,'dw6');" title="Adcel log files" class="view_log_detail">Adcel log files detail</a>
-			<div class="etl_box" id="event_etl_status_dw6">
-				<img src="/verve_style/images/loading.gif" />
-			</div>
+				
+			<h2>VLMO</h2>
 			
-			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('92,93,94,95,96,97,98,99,100,110,111,133,134,135,161,162,163,164,168','Event Tracker log files',dateBefore,'dw6');" title="Event Tracker log files" class="view_log_detail">Event log files detail</a>
+			<div class="etl_box" id="vlmo_etl_status">
+				<img src="/verve_style/images/loading.gif" />
+			</div>
+			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('200,201,202,203,181,182,183,184,185,186,187,198,199','VLMO Dim log files',process_date,defaultServer);" title="VLMO Dim log files" class="view_log_detail">VLMO Dim log files</a><br/>
+			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('188','VLMO Fact log files',dateBefore,defaultServer);" title="VLMO Fact log files" class="view_log_detail">VLMO Fact log files</a>
 				<table class="table1">
 					<thead>
 						<th width="300">Process</th>
@@ -309,12 +248,14 @@
 						<th title="Expected Completion time">Exp Co_time</th>
 						<th>Status note</th>
 					</thead>
-					<tbody id="eventTracker_dw6">
+					<tbody id="vlmo">
 						<tr><td colspan="8" style="text-align: left"><img src="/verve_style/images/loading.gif" /></td></tr>
 					</tbody>
 				</table>
-		</div>
-	</div>	
+		</div>	
+	</div>
+
+
 	<div id="list_log_files_dl">
 			<table cellpadding="0" cellspacing="0" border="0" class="display" id="list_log_files_tb" style="width: 100%">
 				<thead>

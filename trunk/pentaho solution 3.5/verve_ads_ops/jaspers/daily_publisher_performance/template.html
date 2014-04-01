@@ -18,14 +18,16 @@
 	  <script src="/verve_style/scripts2/utils.js"></script>			  
       		
 	{xform-header}
-
+	<style>
+		iframe{
+			border: 1px dashed gray;
+			padding: 0px;
+			margin: 0px;			
+		}
+	</style>
    </head>
    <body style="background-color: #fff">
-   <div id="toolbar2">	   
-		   <div class="leftGroup">
-		   <img id="open" title="Open control panel" src="/verve_style/images/preferences_system_windows_actions.png"/>		   
-		   </div>	  
-   </div>
+
       <div class="easyui-dialog" title="Publisher Performance Report" data-options="iconCls:'icon-tip',resizable:false,modal:true,deltaX: 10, left: 20,top: 40" id="mydiv">
          <form name="parameter-form" id="parameter-form" method="GET">
          <table class="tableForm">
@@ -101,12 +103,42 @@
 		 </div>
 	    </form>
       </div>    
+    <div class="easyui-tabs" data-options="fit: true" style="">
+        <div title="National Engagement" style="padding:10px">
+            <iframe class="iframe" id="mainFrame1"   name="theoutput" frameborder="0" scrolling="yes" style="overflow-x:hidden;"></iframe>
+        </div>
+        <div title="National Non Engagement" style="padding:10px">
+            <iframe class="iframe" id="mainFrame2"  name="theoutput1" frameborder="0" scrolling="yes" style="overflow-x:hidden;"></iframe>
+        </div>
+        <div title="Remnant" data-options="" style="padding:10px">
+			<iframe class="iframe" id="mainFrame3" name="theoutput2" frameborder="0" scrolling="yes" style="overflow-x:hidden;"></iframe>
+        </div>
+    </div>
    
-   <iframe id="mainFrame" width="100%" height="100%" name="theoutput" frameborder="0" scrolling="yes" style="overflow-x:hidden;"></iframe>
-
+   
+   
+   <div id="toolbar2" style="margin-top: 40px;">	   
+		   <div class="leftGroup">
+		   <img id="open" title="Open control panel" src="/verve_style/images/preferences_system_windows_actions.png"/>		   
+		   </div>	  
+   </div>
 	
 	<script> 
+	function changeSizeIframe(){
+		var width=$(window).width();
+		var height=$(window).height();
+		$('.iframe').width(width-35);
+		$('.iframe').height(height-55);
+	}
+	
+	$( window ).resize(function() {
+		var width=$(window).width();
+		var height=$(window).height();
+		console.log(width+'x'+height);
+		changeSizeIframe();
+	});
 	$( document ).ready(function() {
+		changeSizeIframe();
 		console.log(  $().jquery );
 		//Remove all Choose value of select 
 		$('option[value=]').remove();
@@ -291,17 +323,30 @@
 		if(channelArray.length==0){
 			alert("Please select Channels!");
 			return false;
-		}		
+		}	
+		$('#mydiv').dialog('close');
+		//Set data for National Engagement
 		var urlData={			
 			p_publisher_ids: publisherArray.join(","),
 			p_property_ids: propertyArray.join(","),
-			p_channel_ids: channelArray.join(",")			
+			p_channel_ids: channelArray.join(","),
+			p_report_type: 1			
 		}
-		//set title page
 		urlData=$.extend({},$( "#parameter-form" ).serializeObject(),urlData); 
 		var url='/pentaho/ViewAction?'+$.param(urlData);
-		$('#mydiv').dialog('close');
-		$('#mainFrame').attr('src',url);
+		$('#mainFrame1').attr('src',url);
+		
+		//set data for Non National Engagement
+		urlData.p_report_type=2;				
+		var url='/pentaho/ViewAction?'+$.param(urlData);
+		$('#mainFrame2').attr('src',url);
+		
+		//set data for Daily Remnant
+		urlData.p_report_type=3;
+		urlData=$.extend({},$( "#parameter-form" ).serializeObject(),urlData); 
+		var url='/pentaho/ViewAction?'+$.param(urlData);
+		$('#mainFrame3').attr('src',url);
+		
 		return true;
 	}
     </script>
