@@ -69,7 +69,7 @@
       <sources> 
         <request>p_all</request> 
       </sources>  
-      <default-value><![CDATA[false]]></default-value> 
+      <default-value><![CDATA[month]]></default-value> 
     </p_all>  
     <connection_name_2 type="string"> 
       <sources> 
@@ -81,20 +81,24 @@
       <sources> 
         <request>List_mode</request> 
       </sources>  
-      <default-value type="result-set"> 
-        <row> 
-          <name>All</name>  
-          <values>true</values> 
-        </row>  
-        <row> 
-          <name>Month</name>  
-          <values>false</values> 
-        </row> 
+      <default-value type="result-set">
+        <row>
+          <name>All</name>
+          <values>all</values>
+        </row>
+        <row>
+          <name>Month</name>
+          <values>month</values>
+        </row>
+        <row>
+          <name>Current Month</name>
+          <values>current_month</values>
+        </row>
       </default-value>  
-      <columns> 
-        <name type="string"/>  
-        <values type="string"/> 
-      </columns> 
+      <columns>
+        <name type="string"/>
+        <values type="string"/>
+      </columns>
     </List_mode> 
   </inputs>
 
@@ -172,7 +176,13 @@
         <location>ba_monthly_io_billing_line_item/io_billing_line_item/io_billing_line_item.jasper</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
-    </report-definition10> 
+    </report-definition10>  
+    <report-definition11> 
+      <solution-file> 
+        <location>ba_monthly_io_billing_line_item/io_billing_line_item_cuurent_month/io_billing_line_item.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition11> 
   </resources>
   
   <actions> 
@@ -229,7 +239,7 @@ ORDER BY month_since_2005 desc]]></query>
       </action-definition>
   
       <actions> 
-        <condition><![CDATA[p_all=='false']]></condition>  
+        <condition><![CDATA[p_all=='month']]></condition>  
         <actions> 
           <condition><![CDATA[p_output=='csv']]></condition>  
           <action-definition> 
@@ -309,7 +319,7 @@ ORDER BY month_since_2005 desc]]></query>
       </actions>
   
       <actions> 
-        <condition><![CDATA[p_all=='true']]></condition>  
+        <condition><![CDATA[p_all=='all']]></condition>  
         <actions> 
           <condition><![CDATA[p_output=='csv']]></condition>  
           <action-definition> 
@@ -381,6 +391,23 @@ ORDER BY month_since_2005 desc]]></query>
           </action-definition>
  
         </actions>
+ 
+      </actions>
+  
+      <actions> 
+        <condition><![CDATA[p_all=='current_month']]></condition>  
+        <action-definition> 
+          <component-name>JasperReportsComponent</component-name>
+          <action-type>Jasper</action-type>
+          <action-inputs> 
+            <output-type type="string" mapping="p_output"/>  
+            <jndi type="string" mapping="connection_name_2"/> 
+          </action-inputs>
+          <action-resources> 
+            <report-definition mapping="report-definition11"/> 
+          </action-resources>
+          <component-definition/> 
+        </action-definition>
  
       </actions>
  

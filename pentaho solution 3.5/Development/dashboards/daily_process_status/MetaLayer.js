@@ -71,12 +71,7 @@ MetaLayer = {
 				$('#doubleClick').empty();
 				$('#adm20').empty();
 				$('#adcel').empty();
-			}else if(host=='dw6'){
-				$('#eventTracker_dw6').empty();
-			}else if(host=='dw4'){
-				$('#adcel_dw4').empty();
-			}else if(host=='dw5'){
-				$('#adcel_dw5').empty();
+				$('#vlmo').empty();
 			}
 			
 			var loadingNote='<tr><td colspan="8" style="text-align: left"><img src="/verve_style/images/loading.gif" /></td></tr>';
@@ -85,12 +80,7 @@ MetaLayer = {
 				$('#doubleClick').append(loadingNote);
 				$('#adm20').append(loadingNote);
 				$('#adcel').append(loadingNote);
-			}else if(host=='dw4'){
-				$('#adcel_dw4').append(loadingNote);
-			}else if(host=='dw5'){
-				$('#adcel_dw5').append(loadingNote);
-			}else if(host=='dw6'){
-				$('#eventTracker_dw6').append(loadingNote);
+				$('#vlmo').append(loadingNote);
 			}
 
 		  },
@@ -100,12 +90,7 @@ MetaLayer = {
 				$('#doubleClick').empty();
 				$('#adm20').empty();
 				$('#adcel').empty();
-			}else if(host=='dw4'){
-				$('#adcel_dw4').empty();
-			}else if(host=='dw5'){
-				$('#adcel_dw5').empty();
-			}else if(host=='dw6'){
-				$('#eventTracker_dw6').empty();
+				$('#vlmo').empty();
 			}
 
 			var dataArray=json.adata;
@@ -116,12 +101,7 @@ MetaLayer = {
 					$('#doubleClick').append(noData);
 					$('#adm20').append(noData);
 					$('#adcel').append(noData);
-				}else if(host=='dw4'){
-					$('#adcel_dw4').append(noData);
-				}else if(host=='dw5'){
-					$('#adcel_dw5').append(noData);
-				}else if(host=='dw6'){
-					$('#eventTracker_dw6').append(noData);
+					$('#vlmo').append(noData);
 				}
 
 			}
@@ -175,12 +155,8 @@ MetaLayer = {
 					$('#adm20').append(node);
 				}else if (group_process_name=='Adcel' && host == 'dw3dw3'){
 					$('#adcel').append(node);
-				}else if (group_process_name=='Adcel' && host == 'dw4'){
-					$('#adcel_dw4').append(node);
-				}else if (group_process_name=='Adcel' && host == 'dw5'){
-					$('#adcel_dw5').append(node);
-				}else if (group_process_name=='Event Tracker' && host == 'dw6'){
-					$('#eventTracker_dw6').append(node);
+				}else if (group_process_name=='VLMO' && host == 'dw3dw3'){
+					$('#vlmo').append(node);
 				}
 			}
 			bumpboxInstall();
@@ -284,9 +260,6 @@ MetaLayer = {
 	},
 	refresh: function(){
 		MetaLayer.loadProcessStatusData(defaultServer);
-		MetaLayer.loadProcessStatusData('dw6');
-		//MetaLayer.loadProcessStatusData('dw4');
-		MetaLayer.loadProcessStatusData('dw5');
 		setTimeout(function(){
 			MetaLayer.loadETLStatus($('#adcel_etl_status'),'Adcel',dateBefore,defaultServer);
 		},1000);
@@ -300,17 +273,9 @@ MetaLayer = {
 			MetaLayer.loadETLStatus($('#adm_20_etl_status'),'ADM2.0',process_date,defaultServer);
 		},4000);
 		setTimeout(function(){
-			//MetaLayer.loadETLStatus($('#adcel_etl_status_dw4'),'Adcel',dateBefore,'dw4');
+			MetaLayer.loadETLStatus($('#vlmo_etl_status'),'VLMO',dateBefore,defaultServer);
 		},5000);
-		setTimeout(function(){
-			MetaLayer.loadETLStatus($('#adcel_etl_status_dw5'),'Adcel',dateBefore,'dw5');
-		},6000);
-		setTimeout(function(){
-			MetaLayer.loadETLStatus($('#adcel_etl_status_dw6'),'Adcel',dateBefore,'dw6');
-		},7000);
-		setTimeout(function(){
-			MetaLayer.loadETLStatus($('#event_etl_status_dw6'),'Event Tracker',dateBefore,'dw6');
-		},8000);		
+				
 	}
 };
 

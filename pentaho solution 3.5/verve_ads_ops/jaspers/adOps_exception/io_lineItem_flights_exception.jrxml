@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="io_lineItem_flights_exception" language="groovy" pageWidth="3280" pageHeight="1684" orientation="Landscape" columnWidth="3240" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.1289478601075593"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Io LineItem Flights Exception" language="groovy" pageWidth="3370" pageHeight="1684" orientation="Landscape" columnWidth="3330" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.6528925619834782"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Crosstab Data Text" mode="Transparent" hAlign="Center" fontName="Calibri">
@@ -37,8 +37,10 @@
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select
-a.io_id
+		<![CDATA[
+select
+'005' as error_code
+,a.io_id
 ,a.io_name
 ,a.io_budget
 ,a.adm_order_id
@@ -92,7 +94,7 @@ and f.network_id = 2
 and f.paused_at is null
 and f.cancelled_at is null
 and f.submitted_at is NOT null
-and f.end_date_current::date >= '2014-01-01'
+--and f.end_date_current::date >= '2014-01-01'
 group by f.order_id, f.billing_line_item_id
 )sum
 on(sum.order_id = o.order_id and sum.billing_line_item_id = li.billing_line_items_id)
@@ -105,11 +107,94 @@ and f.network_id = 2
 and f.paused_at is null
 and f.cancelled_at is null
 and f.submitted_at is NOT null
-and f.end_date_current::date >= '2014-01-01'
+--and f.end_date_current::date >= '2014-01-01'
+and f.specialty_id<>4
 and f.billing_line_item_id = a.io_line_item_id::int)
 where a.difference_budget::double precision<> 0 or a.difference_quantity::double precision <>0
-order by a.io_line_item_id]]>
+--order by a.io_line_item_id
+union
+select
+'006' as error_code
+,'Unknown' as io_id
+,'Unknown' as io_name
+,'Unknown' as io_budget
+,o.order_id::text as adm_order_id
+,o.name_current as adm_order_name
+,'Unknown' as io_line_item_id
+,'Unknown' as io_line_item_name
+,null as io_line_item_start_date
+,null as io_line_item_end_date
+,'Unknown' as io_line_item_budget
+,'Unknown' as io_line_item_quantity
+,f.flight_id as adm_flight_id
+,f.name_current as adm_flight_name
+,f.start_date_current as adm_flight_start_date
+,f.end_date_current as adm_flight_end_date
+,f.budget_current as adm_flight_budget
+,f.quantity as adm_flight_quantity
+,f.rate as adm_flight_rate
+,f.metric as adm_flight_metric
+from refer.adm_dim_orders o
+inner join
+(select * from refer.adm_dim_flights f
+where f.dt_expire = '9999-12-31'
+and f.network_id = 2
+and f.paused_at is null
+and f.cancelled_at is null
+and f.submitted_at is NOT null
+and f.end_date_current::date >= '2014-01-01'
+and f.specialty_id<>4
+and f.billing_line_item_id not in(select distinct billing_line_items_id from refer.adm_dim_io_lineitems
+where dt_expire = '9999-12-31')
+)f
+on(f.order_id = o.order_id)
+where o.dt_expire = '9999-12-31'
+and o.order_id not in(select order_id from adsops.AdsOp_IO_ADM_exception_order_exclusion where is_active = 1)
+and o.insertion_order_id not in(select distinct io_orders_id from refer.adm_dim_io_orders where dt_expire = '9999-12-31')
+union
+select
+'003' as Error_code
+,io.io_orders_id::text as io_id
+,io.coract_name::text as io_name
+,io.revenue_goal::text as io_budget
+,o.order_id::text as adm_order_id
+,o.name_current::text as adm_order_name
+,'Unknown' as io_line_item_id
+,'Unknown' as io_line_item_name
+,null as io_line_item_start_date
+,null as io_line_item_end_date
+,'Unknown' as io_line_item_budget
+,'Unknown' as io_line_item_quantity
+,f.flight_id as adm_flight_id
+,f.name_current as adm_flight_name
+,f.start_date_current as adm_flight_start_date
+,f.end_date_current as adm_flight_end_date
+,f.budget_current as adm_flight_budget
+,f.quantity as adm_flight_quantity
+,f.rate as adm_flight_rate
+,f.metric as adm_flight_metric
+from refer.adm_dim_orders o
+inner join
+(select * from refer.adm_dim_flights f
+where f.dt_expire = '9999-12-31'
+and f.network_id = 2
+and f.paused_at is null
+and f.cancelled_at is null
+and f.submitted_at is NOT null
+and f.end_date_current::date >= '2014-01-01'
+and f.specialty_id<>4
+and f.billing_line_item_id not in(select distinct billing_line_items_id from refer.adm_dim_io_lineitems
+where dt_expire = '9999-12-31')
+)f
+on(f.order_id = o.order_id)
+inner join refer.adm_dim_io_orders io
+on(io.dt_expire = '9999-12-31' and io.io_orders_id = o.insertion_order_id)
+where o.dt_expire = '9999-12-31'
+and o.order_id not in(select order_id from adsops.AdsOp_IO_ADM_exception_order_exclusion where is_active = 1)
+order by error_code, io_line_item_id;
+]]>
 	</queryString>
+	<field name="error_code" class="java.lang.String"/>
 	<field name="io_id" class="java.lang.String"/>
 	<field name="io_name" class="java.lang.String"/>
 	<field name="io_budget" class="java.lang.String"/>
@@ -135,7 +220,7 @@ order by a.io_line_item_id]]>
 	<columnHeader>
 		<band height="21">
 			<staticText>
-				<reportElement x="0" y="0" width="70" height="20"/>
+				<reportElement x="90" y="0" width="70" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -148,7 +233,7 @@ order by a.io_line_item_id]]>
 				<text><![CDATA[io_id]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="70" y="0" width="447" height="20"/>
+				<reportElement x="160" y="0" width="447" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -161,7 +246,7 @@ order by a.io_line_item_id]]>
 				<text><![CDATA[io_name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="517" y="0" width="90" height="20"/>
+				<reportElement x="607" y="0" width="90" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -174,7 +259,7 @@ order by a.io_line_item_id]]>
 				<text><![CDATA[io_budget]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="607" y="0" width="90" height="20"/>
+				<reportElement x="697" y="0" width="90" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -187,7 +272,7 @@ order by a.io_line_item_id]]>
 				<text><![CDATA[adm_order_id]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="697" y="0" width="133" height="20"/>
+				<reportElement x="787" y="0" width="133" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -200,7 +285,7 @@ order by a.io_line_item_id]]>
 				<text><![CDATA[adm_order_name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="830" y="0" width="90" height="20"/>
+				<reportElement x="920" y="0" width="90" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -213,7 +298,7 @@ order by a.io_line_item_id]]>
 				<text><![CDATA[io_line_item_id]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="920" y="0" width="577" height="20"/>
+				<reportElement x="1010" y="0" width="577" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -226,7 +311,7 @@ order by a.io_line_item_id]]>
 				<text><![CDATA[io_line_item_name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1497" y="0" width="133" height="20"/>
+				<reportElement x="1587" y="0" width="133" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -239,7 +324,7 @@ order by a.io_line_item_id]]>
 				<text><![CDATA[io_line_item_start_date]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1630" y="0" width="133" height="20"/>
+				<reportElement x="1720" y="0" width="133" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -252,7 +337,7 @@ order by a.io_line_item_id]]>
 				<text><![CDATA[io_line_item_end_date]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1763" y="0" width="133" height="20"/>
+				<reportElement x="1853" y="0" width="133" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -265,7 +350,7 @@ order by a.io_line_item_id]]>
 				<text><![CDATA[io_line_item_budget]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1896" y="0" width="133" height="20"/>
+				<reportElement x="1986" y="0" width="133" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -278,7 +363,7 @@ order by a.io_line_item_id]]>
 				<text><![CDATA[io_line_item_quantity]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="2029" y="0" width="90" height="20"/>
+				<reportElement x="2119" y="0" width="90" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -291,7 +376,7 @@ order by a.io_line_item_id]]>
 				<text><![CDATA[adm_flight_id]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="2119" y="0" width="323" height="20"/>
+				<reportElement x="2209" y="0" width="323" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -304,7 +389,7 @@ order by a.io_line_item_id]]>
 				<text><![CDATA[adm_flight_name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="2442" y="0" width="133" height="20"/>
+				<reportElement x="2532" y="0" width="133" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -317,7 +402,7 @@ order by a.io_line_item_id]]>
 				<text><![CDATA[adm_flight_start_date]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="2575" y="0" width="133" height="20"/>
+				<reportElement x="2665" y="0" width="133" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -330,7 +415,7 @@ order by a.io_line_item_id]]>
 				<text><![CDATA[adm_flight_end_date]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="2708" y="0" width="133" height="20"/>
+				<reportElement x="2798" y="0" width="133" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -343,7 +428,7 @@ order by a.io_line_item_id]]>
 				<text><![CDATA[adm_flight_budget]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="2841" y="0" width="133" height="20"/>
+				<reportElement x="2931" y="0" width="133" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -356,7 +441,7 @@ order by a.io_line_item_id]]>
 				<text><![CDATA[adm_flight_quantity]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="2974" y="0" width="133" height="20"/>
+				<reportElement x="3064" y="0" width="133" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -369,7 +454,7 @@ order by a.io_line_item_id]]>
 				<text><![CDATA[adm_flight_rate]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="3107" y="0" width="133" height="20"/>
+				<reportElement x="3197" y="0" width="133" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -381,12 +466,25 @@ order by a.io_line_item_id]]>
 				</textElement>
 				<text><![CDATA[adm_flight_metric]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="90" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[error_code]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="20">
 			<textField>
-				<reportElement x="0" y="0" width="70" height="20"/>
+				<reportElement x="90" y="0" width="70" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -397,7 +495,7 @@ order by a.io_line_item_id]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{io_id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="70" y="0" width="447" height="20"/>
+				<reportElement x="160" y="0" width="447" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -408,7 +506,7 @@ order by a.io_line_item_id]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{io_name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="517" y="0" width="90" height="20"/>
+				<reportElement x="607" y="0" width="90" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -419,7 +517,7 @@ order by a.io_line_item_id]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{io_budget}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="607" y="0" width="90" height="20"/>
+				<reportElement x="697" y="0" width="90" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -430,7 +528,7 @@ order by a.io_line_item_id]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{adm_order_id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="697" y="0" width="133" height="20"/>
+				<reportElement x="787" y="0" width="133" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -441,7 +539,7 @@ order by a.io_line_item_id]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{adm_order_name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="830" y="0" width="90" height="20"/>
+				<reportElement x="920" y="0" width="90" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -452,7 +550,7 @@ order by a.io_line_item_id]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{io_line_item_id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="920" y="0" width="577" height="20"/>
+				<reportElement x="1010" y="0" width="577" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -463,7 +561,7 @@ order by a.io_line_item_id]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{io_line_item_name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1497" y="0" width="133" height="20"/>
+				<reportElement x="1587" y="0" width="133" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -474,7 +572,7 @@ order by a.io_line_item_id]]>
 				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{io_line_item_start_date}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1630" y="0" width="133" height="20"/>
+				<reportElement x="1720" y="0" width="133" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -485,7 +583,7 @@ order by a.io_line_item_id]]>
 				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{io_line_item_end_date}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1763" y="0" width="133" height="20"/>
+				<reportElement x="1853" y="0" width="133" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -496,7 +594,7 @@ order by a.io_line_item_id]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{io_line_item_budget}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1896" y="0" width="133" height="20"/>
+				<reportElement x="1986" y="0" width="133" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -507,7 +605,7 @@ order by a.io_line_item_id]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{io_line_item_quantity}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="2029" y="0" width="90" height="20"/>
+				<reportElement x="2119" y="0" width="90" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -518,7 +616,7 @@ order by a.io_line_item_id]]>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{adm_flight_id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="2119" y="0" width="323" height="20"/>
+				<reportElement x="2209" y="0" width="323" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -529,7 +627,7 @@ order by a.io_line_item_id]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{adm_flight_name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="2442" y="0" width="133" height="20"/>
+				<reportElement x="2532" y="0" width="133" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -540,7 +638,7 @@ order by a.io_line_item_id]]>
 				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{adm_flight_start_date}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="2575" y="0" width="133" height="20"/>
+				<reportElement x="2665" y="0" width="133" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -551,7 +649,7 @@ order by a.io_line_item_id]]>
 				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{adm_flight_end_date}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="2708" y="0" width="133" height="20"/>
+				<reportElement x="2798" y="0" width="133" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -562,7 +660,7 @@ order by a.io_line_item_id]]>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{adm_flight_budget}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="2841" y="0" width="133" height="20"/>
+				<reportElement x="2931" y="0" width="133" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -573,7 +671,7 @@ order by a.io_line_item_id]]>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{adm_flight_quantity}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="2974" y="0" width="133" height="20"/>
+				<reportElement x="3064" y="0" width="133" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -584,7 +682,7 @@ order by a.io_line_item_id]]>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{adm_flight_rate}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="3107" y="0" width="133" height="20"/>
+				<reportElement x="3197" y="0" width="133" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -593,6 +691,17 @@ order by a.io_line_item_id]]>
 				</box>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{adm_flight_metric}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="90" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{error_code}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
