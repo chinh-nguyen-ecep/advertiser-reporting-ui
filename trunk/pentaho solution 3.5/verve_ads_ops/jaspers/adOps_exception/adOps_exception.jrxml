@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AdOps Exception" language="groovy" pageWidth="2580" pageHeight="1684" orientation="Landscape" columnWidth="2540" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.1289478601075593"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="2088"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Crosstab Data Text" mode="Transparent" hAlign="Center" fontName="Calibri">
 		<box leftPadding="5" rightPadding="5"/>
@@ -247,9 +247,8 @@ on(sum.order_id = o.order_id)
 where o.dt_expire = '9999-12-31'
 and o.order_id not in(select order_id from adsops.AdsOp_IO_ADM_exception_order_exclusion where is_active = 1)
 and o.insertion_order_id not in(select distinct io_orders_id from refer.adm_dim_io_orders where dt_expire = '9999-12-31')
-order by error_code
-;
-]]>
+order by error_code, io_name
+;]]>
 	</queryString>
 	<field name="error_code" class="java.lang.String"/>
 	<field name="io_id" class="java.lang.String"/>
@@ -595,7 +594,7 @@ order by error_code
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[( $F{total_adm_flight_budget}.equals("Unknown") ? $F{total_adm_flight_budget} : new DecimalFormat("\$ #,##0.00").format(Double.parseDouble($F{total_adm_flight_budget})))]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement x="1872" y="0" width="167" height="20"/>
 				<box leftPadding="4" rightPadding="4">
 					<topPen lineWidth="0.5"/>
@@ -604,7 +603,7 @@ order by error_code
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{budget_compare_difference}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $F{budget_compare_difference}.equals("N/A") ? $F{budget_compare_difference} : new DecimalFormat("\$ #,##0.00").format(Double.parseDouble($F{budget_compare_difference})))]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="2039" y="0" width="167" height="20"/>
@@ -615,7 +614,7 @@ order by error_code
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{io_line_item_quantity}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $F{io_line_item_quantity}.equals("Unknown") ? "Unknown" : new DecimalFormat("#,##0").format(Double.parseDouble($F{io_line_item_quantity})))]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="2206" y="0" width="167" height="20"/>
@@ -626,7 +625,7 @@ order by error_code
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{total_adm_flight_quantity}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $F{total_adm_flight_quantity}.equals("Unknown") ? "Unknown" : new DecimalFormat("#,##0").format(Double.parseDouble($F{total_adm_flight_quantity})))]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="2373" y="0" width="167" height="20"/>
@@ -637,7 +636,7 @@ order by error_code
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{quantity_compare_difference}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $F{quantity_compare_difference}.equals("N/A") ? "N/A" : new DecimalFormat("#,##0").format(Double.parseDouble($F{quantity_compare_difference})))]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
