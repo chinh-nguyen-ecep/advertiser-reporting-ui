@@ -84,7 +84,7 @@
   <resources> 
     <report-definition1> 
       <solution-file> 
-        <location>daily_publisher_performance/daily_remnant.jasper</location>  
+        <location>weekly_publisher_performance/weekly_remnant.jasper</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </report-definition1>  
@@ -96,13 +96,13 @@
     </report-definition>  
     <report-definition2> 
       <solution-file> 
-        <location>daily_publisher_performance/daily_national_engagement.jasper</location>  
+        <location>weekly_publisher_performance/weekly_national_engagement.jasper</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </report-definition2>  
     <report-definition3> 
       <solution-file> 
-        <location>daily_publisher_performance/daily_national_non_engagement.jasper</location>  
+        <location>weekly_publisher_performance/weekly_national_non_engagement.jasper</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </report-definition3>  
@@ -166,69 +166,65 @@ GROUP BY year_week,start_date_sk ORDER BY start_date_sk desc]]></query>
       </action-definition>
 
       <actions> 
-        <condition><![CDATA[p_date_mode=='date']]></condition>  
-        <actions> 
-          <condition><![CDATA[p_report_type=='1']]></condition>  
-          <action-definition> 
-            <component-name>JasperReportsComponent</component-name>
-            <action-type>Jasper</action-type>
-            <action-inputs> 
-              <jndi type="string" mapping="connectionName"/>  
-              <p_publisher_ids type="string"/>  
-              <p_property_ids type="string"/>  
-              <p_channel_ids type="string"/>  
-              <output-type type="string" mapping="p_output"/>  
-              <p_start_date_sk type="string"/>
-            </action-inputs>
-            <action-resources> 
-              <report-definition mapping="report-definition2"/> 
-            </action-resources>
-            <component-definition/> 
-          </action-definition>
+        <condition><![CDATA[p_report_type=='1']]></condition>  
+        <action-definition> 
+          <component-name>JasperReportsComponent</component-name>
+          <action-type>Jasper</action-type>
+          <action-inputs> 
+            <jndi type="string" mapping="connectionName"/>  
+            <p_publisher_ids type="string"/>  
+            <p_property_ids type="string"/>  
+            <p_channel_ids type="string"/>  
+            <output-type type="string" mapping="p_output"/>  
+            <p_start_date_sk type="string"/>
+          </action-inputs>
+          <action-resources> 
+            <report-definition mapping="report-definition2"/> 
+          </action-resources>
+          <component-definition/> 
+        </action-definition>
  
-        </actions>
-  
-        <actions> 
-          <condition><![CDATA[p_report_type=='2']]></condition>  
-          <action-definition> 
-            <component-name>JasperReportsComponent</component-name>
-            <action-type>Jasper</action-type>
-            <action-inputs> 
-              <output-type type="string" mapping="p_output"/>  
-              <jndi type="string" mapping="connectionName"/>  
-              <p_publisher_ids type="string"/>  
-              <p_property_ids type="string"/>  
-              <p_channel_ids type="string"/>  
-              <p_start_date_sk type="string"/>
-            </action-inputs>
-            <action-resources> 
-              <report-definition mapping="report-definition3"/> 
-            </action-resources>
-            <component-definition/> 
-          </action-definition>
+      </actions>
+
+      <actions> 
+        <condition><![CDATA[p_report_type=='2']]></condition>  
+        <action-definition> 
+          <component-name>JasperReportsComponent</component-name>
+          <action-type>Jasper</action-type>
+          <action-inputs> 
+            <output-type type="string" mapping="p_output"/>  
+            <jndi type="string" mapping="connectionName"/>  
+            <p_publisher_ids type="string"/>  
+            <p_property_ids type="string"/>  
+            <p_channel_ids type="string"/>  
+            <p_start_date_sk type="string"/>
+          </action-inputs>
+          <action-resources> 
+            <report-definition mapping="report-definition3"/> 
+          </action-resources>
+          <component-definition/> 
+        </action-definition>
  
-        </actions>
-  
-        <actions> 
-          <condition><![CDATA[p_report_type=='3']]></condition>  
-          <action-definition> 
-            <component-name>JasperReportsComponent</component-name>
-            <action-type>Jasper</action-type>
-            <action-inputs> 
-              <jndi type="string" mapping="connectionName"/>  
-              <output-type type="string" mapping="p_output"/>  
-              <p_publisher_ids type="string"/>  
-              <p_property_ids type="string"/>  
-              <p_channel_ids type="string"/>  
-              <p_start_date_sk type="string"/>
-            </action-inputs>
-            <action-resources> 
-              <report-definition mapping="report-definition1"/> 
-            </action-resources>
-            <component-definition/> 
-          </action-definition>
- 
-        </actions>
+      </actions>
+
+      <actions> 
+        <condition><![CDATA[p_report_type=='3']]></condition>  
+        <action-definition> 
+          <component-name>JasperReportsComponent</component-name>
+          <action-type>Jasper</action-type>
+          <action-inputs> 
+            <jndi type="string" mapping="connectionName"/>  
+            <output-type type="string" mapping="p_output"/>  
+            <p_publisher_ids type="string"/>  
+            <p_property_ids type="string"/>  
+            <p_channel_ids type="string"/>  
+            <p_start_date_sk type="string"/>
+          </action-inputs>
+          <action-resources> 
+            <report-definition mapping="report-definition1"/> 
+          </action-resources>
+          <component-definition/> 
+        </action-definition>
  
       </actions>
  
