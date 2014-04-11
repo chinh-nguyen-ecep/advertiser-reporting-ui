@@ -190,7 +190,7 @@ inner join refer.adm_dim_io_orders io
 on(io.dt_expire = '9999-12-31' and io.io_orders_id = o.insertion_order_id)
 where o.dt_expire = '9999-12-31'
 and o.order_id not in(select order_id from adsops.AdsOp_IO_ADM_exception_order_exclusion where is_active = 1)
-order by error_code, io_line_item_id;]]>
+order by error_code, io_name, adm_order_name, io_line_item_name;]]>
 	</queryString>
 	<field name="error_code" class="java.lang.String"/>
 	<field name="io_id" class="java.lang.String"/>
