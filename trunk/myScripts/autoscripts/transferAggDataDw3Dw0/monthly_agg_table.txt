@@ -59,6 +59,7 @@ billing.ba_monthly_jt_performance
 billing.ba_monthly_wh_performance
 billing.ba_monthly_mm_performance
 billing.ba_monthly_kt_performance
+billing.ba_monthly_vlm_revenue_v6
 billing.ba_monthly_api_revenue_by_publisher
 billing.ba_monthly_adnetwork_summary
 billing.ba_monthly_adnetwork_summary_v1
