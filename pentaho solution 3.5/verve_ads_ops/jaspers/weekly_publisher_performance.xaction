@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Weekly Publisher Performance Report</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>chinhnguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type>report</result-type>  
+    <icon>chart_1(2).png|chart_1(2).png</icon> 
+  </documentation>
+
+  <inputs> 
+    <List_output_type type="string-list"> 
+      <default-value type="string-list"> 
+        <list-item>html</list-item>  
+        <list-item>pdf</list-item>  
+        <list-item>xls</list-item>  
+        <list-item>rtf</list-item>  
+        <list-item>csv</list-item> 
+      </default-value> 
+    </List_output_type>  
+    <p_output type="string"> 
+      <sources> 
+        <request>p_output</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </p_output>  
+    <connectionName type="string"> 
+      <sources> 
+        <request>connectionName</request> 
+      </sources>  
+      <default-value><![CDATA[dw3dw3]]></default-value> 
+    </connectionName>  
+    <p_publisher_ids type="string"> 
+      <sources> 
+        <request>p_publisher_ids</request> 
+      </sources>  
+      <default-value/> 
+    </p_publisher_ids>  
+    <p_property_ids type="string"> 
+      <sources> 
+        <request>p_property_ids</request> 
+      </sources>  
+      <default-value/> 
+    </p_property_ids>  
+    <p_channel_ids type="string"> 
+      <sources> 
+        <request>p_channel_ids</request> 
+      </sources>  
+      <default-value/> 
+    </p_channel_ids>  
+    <p_report_type type="string"> 
+      <sources> 
+        <request>p_report_type</request> 
+      </sources>  
+      <default-value><![CDATA[1]]></default-value> 
+    </p_report_type>  
+    <p_emailMode type="string"> 
+      <sources> 
+        <request>p_emailMode</request> 
+      </sources>  
+      <default-value><![CDATA[false]]></default-value> 
+    </p_emailMode>  
+    <p_start_date_sk type="string">
+      <sources>
+        <request>p_start_date_sk</request>
+      </sources>
+      <default-value/>
+    </p_start_date_sk>
+  </inputs>
+
+  <outputs> 
+    <result type="string"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </result>  
+    <p_end_date type="string"/>  
+    <p_start_date type="string"/> 
+  </outputs>
+
+  <resources> 
+    <report-definition1> 
+      <solution-file> 
+        <location>daily_publisher_performance/daily_remnant.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition1>  
+    <report-definition> 
+      <solution-file> 
+        <location>daily_publisher_performance/monthly_publisher_performance.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition>  
+    <report-definition2> 
+      <solution-file> 
+        <location>daily_publisher_performance/daily_national_engagement.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition2>  
+    <report-definition3> 
+      <solution-file> 
+        <location>daily_publisher_performance/daily_national_non_engagement.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition3>  
+    <pageTemplate1>
+      <solution-file>
+        <location>weekly_publisher_performance/template.html</location>
+        <mime-type>text/plain</mime-type>
+      </solution-file>
+    </pageTemplate1>
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get list of weekly</action-type>
+      <action-inputs> 
+        <jndi type="string" mapping="connectionName"/> 
+      </action-inputs>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result_list_weekls"/>  
+        <year_week type="string"/>  
+        <start_date_sk type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <live><![CDATA[false]]></live>  
+        <query><![CDATA[SELECT year_week,start_date_sk FROM(
+SELECT year_week,start_date_sk FROM adsops.weekly_agg_publisher_performance_national_engagement GROUP BY year_week,start_date_sk
+UNION ALL
+SELECT year_week,start_date_sk FROM adsops.weekly_agg_publisher_performance_national_non_engagement GROUP BY year_week,start_date_sk 
+UNION ALL
+SELECT year_week,start_date_sk FROM adsops.weekly_agg_publisher_performance_remnant GROUP BY year_week,start_date_sk ) a
+GROUP BY year_week,start_date_sk ORDER BY start_date_sk desc]]></query>
+      </component-definition> 
+    </action-definition>
+  
+    <actions> 
+      <condition><![CDATA[p_emailMode=='false']]></condition>  
+      <action-definition>
+        <component-name>SecureFilterComponent</component-name>
+        <action-type>Prompt/Secure Filter</action-type>
+        <action-inputs>
+          <p_output type="string"/>
+          <p_start_date_sk type="string"/>
+          <List_output_type type="string-list"/>
+          <query_result_list_weekls type="result-set"/>
+        </action-inputs>
+        <action-resources>
+          <pageTemplate mapping="pageTemplate1"/>
+        </action-resources>
+        <component-definition>
+          <selections>
+            <p_output style="select">
+              <filter>List_output_type</filter>
+            </p_output>
+            <p_start_date_sk style="select">
+              <filter value-col-name="start_date_sk" display-col-name="year_week">query_result_list_weekls</filter>
+            </p_start_date_sk>
+          </selections>
+          <xsl><![CDATA[pageTemplate]]></xsl>
+        </component-definition>
+      </action-definition>
+
+      <actions> 
+        <condition><![CDATA[p_date_mode=='date']]></condition>  
+        <actions> 
+          <condition><![CDATA[p_report_type=='1']]></condition>  
+          <action-definition> 
+            <component-name>JasperReportsComponent</component-name>
+            <action-type>Jasper</action-type>
+            <action-inputs> 
+              <jndi type="string" mapping="connectionName"/>  
+              <p_publisher_ids type="string"/>  
+              <p_property_ids type="string"/>  
+              <p_channel_ids type="string"/>  
+              <output-type type="string" mapping="p_output"/>  
+              <p_start_date_sk type="string"/>
+            </action-inputs>
+            <action-resources> 
+              <report-definition mapping="report-definition2"/> 
+            </action-resources>
+            <component-definition/> 
+          </action-definition>
+ 
+        </actions>
+  
+        <actions> 
+          <condition><![CDATA[p_report_type=='2']]></condition>  
+          <action-definition> 
+            <component-name>JasperReportsComponent</component-name>
+            <action-type>Jasper</action-type>
+            <action-inputs> 
+              <output-type type="string" mapping="p_output"/>  
+              <jndi type="string" mapping="connectionName"/>  
+              <p_publisher_ids type="string"/>  
+              <p_property_ids type="string"/>  
+              <p_channel_ids type="string"/>  
+              <p_start_date_sk type="string"/>
+            </action-inputs>
+            <action-resources> 
+              <report-definition mapping="report-definition3"/> 
+            </action-resources>
+            <component-definition/> 
+          </action-definition>
+ 
+        </actions>
+  
+        <actions> 
+          <condition><![CDATA[p_report_type=='3']]></condition>  
+          <action-definition> 
+            <component-name>JasperReportsComponent</component-name>
+            <action-type>Jasper</action-type>
+            <action-inputs> 
+              <jndi type="string" mapping="connectionName"/>  
+              <output-type type="string" mapping="p_output"/>  
+              <p_publisher_ids type="string"/>  
+              <p_property_ids type="string"/>  
+              <p_channel_ids type="string"/>  
+              <p_start_date_sk type="string"/>
+            </action-inputs>
+            <action-resources> 
+              <report-definition mapping="report-definition1"/> 
+            </action-resources>
+            <component-definition/> 
+          </action-definition>
+ 
+        </actions>
+ 
+      </actions>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_emailMode=='true']]></condition> 
+    </actions>
+ 
+  </actions> 
+</action-sequence>

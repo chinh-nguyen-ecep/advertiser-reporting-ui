@@ -1,0 +1,341 @@
+<html xmlns:xf="http://www.w3.org/2002/xforms">
+   <head>
+	<!-- do not include a <meta> tag -->
+      <link rel="stylesheet" type="text/css" href="/pentaho-style/active/default.css"></link>
+      <title id="exportFileName">Publisher Performance Report</title>
+	  <link  href="/verve_style/css/tableInForm.css" rel="stylesheet" type="text/css" media="screen" />
+	  <link  href="/verve_style/css/charttool.css" rel="stylesheet" type="text/css" media="screen" />
+	  <link rel="stylesheet" type="text/css" href="/verve_style/scripts2/easyui/themes/metro/easyui.css" />
+	  <link rel="stylesheet" type="text/css" href="/verve_style/scripts2/easyui/themes/icon.css" />
+	  <link rel="stylesheet" type="text/css" href="/verve_style/scripts2/datetimepicker/jquery.datetimepicker.css" />
+	  <link rel="stylesheet" type="text/css" href="/verve_style/scripts2/checkbox/jquery.checkbox.css" />
+	  <link rel="stylesheet" type="text/css" href="/verve_style/scripts2/checkbox/jquery.safari-checkbox.css" />
+	  <script src="/verve_style/scripts2/jquery.min.js"></script>	
+	  <script src="/verve_style/scripts2/easyui/easyloader.js"></script>		
+	  <script src="/verve_style/scripts2/easyui/jquery.easyui.min.js"></script>
+	  <script src="/verve_style/scripts2/datetimepicker/jquery.datetimepicker.js"></script>
+	  <script src="/verve_style/scripts2/checkbox/jquery.checkbox.min.js"></script>
+	  <script src="/verve_style/scripts2/utils.js"></script>			  
+      		
+	{xform-header}
+	<style>
+		iframe{
+			border: 1px dashed gray;
+			padding: 0px;
+			margin: 0px;			
+		}
+	</style>
+   </head>
+   <body style="background-color: #fff">
+
+      <div class="easyui-dialog" title="Publisher Performance Report" data-options="iconCls:'icon-tip',resizable:false,modal:true,deltaX: 10, left: 20,top: 40" id="mydiv">
+         <form name="parameter-form" id="parameter-form" method="GET">
+         <table class="tableForm">
+         <tbody>	         
+			 <tr>
+		         <th>Week:</th>
+		         <td>{p_start_date_sk}</td>
+	         </tr>
+	          
+			<tr>
+				 <th>Publishers:</th>
+				 <td>
+					<input id="dimesion_fillter" type="text" style="width: 300px;"/>
+					<div id="dimesion" style="width: 290px;border: 1px solid gray;overflow: auto;height: 80px;padding: 5px;">
+					</div>
+				 </td>
+			 </tr>
+			<tr>
+				 <th>Properties:</th>
+				 <td>
+					<input id="dimesion_fillter_2" type="text" style="width: 300px;"/>
+					<div id="dimesion_2" style="width: 290px;border: 1px solid gray;overflow: auto;height: 80px;padding: 5px;">
+					</div>
+				 </td>
+			 </tr>
+			<tr>
+				 <th>Channes:</th>
+				 <td>
+					<input id="dimesion_fillter_3" type="text" style="width: 300px;"/>
+					<div id="dimesion_3" style="width: 290px;border: 1px solid gray;overflow: auto;height: 80px;padding: 5px;">
+					</div>
+				 </td>
+			 </tr>
+         </tbody>
+         </table>
+		          <div id="switch_control" >
+			<table class="tableForm">
+			 <tbody>		 
+
+			</tbody>
+		 </table>
+		</div>
+		<table class="tableForm">
+         <tbody>
+			<tr id="tr_bt">
+				<th>Output type: </th>
+				<td>
+				{p_output}<input type="button" style="cursor: pointer;margin-left: 5px" name="go" class="portlet-form-button" value="Run" onClick="validation()"/>
+				</td>
+				 
+	         </tr>
+		 </tbody>
+		 </table>
+		 <div style="display: none">
+		 {p_year_week}
+		{solution}
+		{action}
+		{path}		 
+		 </div>
+	    </form>
+      </div>    
+    <div class="easyui-tabs" data-options="fit: true" style="">
+        <div title="National Engagement" style="padding:10px">
+            <iframe class="iframe" id="mainFrame1"   name="theoutput" frameborder="0" scrolling="yes" style="overflow-x:hidden;"></iframe>
+        </div>
+        <div title="National Non Engagement" style="padding:10px">
+            <iframe class="iframe" id="mainFrame2"  name="theoutput1" frameborder="0" scrolling="yes" style="overflow-x:hidden;"></iframe>
+        </div>
+        <div title="Remnant" data-options="" style="padding:10px">
+			<iframe class="iframe" id="mainFrame3" name="theoutput2" frameborder="0" scrolling="yes" style="overflow-x:hidden;"></iframe>
+        </div>
+    </div>
+   
+   
+   
+   <div id="toolbar2" style="margin-top: 40px;">	   
+		   <div class="leftGroup">
+		   <img id="open" title="Open control panel" src="/verve_style/images/preferences_system_windows_actions.png"/>		   
+		   </div>	  
+   </div>
+	
+	<script> 
+	function changeSizeIframe(){
+		var width=$(window).width();
+		var height=$(window).height();
+		$('.iframe').width(width-35);
+		$('.iframe').height(height-55);
+	}
+	
+	$( window ).resize(function() {
+		var width=$(window).width();
+		var height=$(window).height();
+		console.log(width+'x'+height);
+		changeSizeIframe();
+	});
+	$( document ).ready(function() {
+		changeSizeIframe();
+		console.log(  $().jquery );
+		//Remove all Choose value of select 
+		$('option[value=]').remove();
+		$('#open').click(function(){
+			$('#mydiv').dialog('open');
+		});
+		//Init date picker
+		var start_date=new Date(new Date($('#v_max_date').val()).setDate(new Date($('#v_max_date').val()).getDate()-0));;
+		var start_date=myformatter(start_date);
+		$('input[name=p_start_date]').datetimepicker({
+			value: start_date,
+			timepicker:false,
+			format: 'Y-m-d',
+			validateOnBlur: false,
+			formatDate:'Y-m-d',
+			minDate: $('#v_min_date').val(),
+			maxDate: $('#v_max_date').val()
+		});
+		$('input[name=p_end_date]').datetimepicker({
+			value: $('#v_max_date').val(),
+			timepicker:false,
+			format: 'Y-m-d',
+			formatDate:'Y-m-d',
+			validateOnBlur: false,
+			minDate: $('#v_min_date').val(),
+			maxDate: $('#v_max_date').val()
+		});
+		//Month select
+		$('input[name=p_date_mode]').change(function(){
+		
+			var isChecked=$(this).is(':checked');
+			console.log(isChecked);
+			if(isChecked){
+				var dateMode=$(this).val();
+				if(dateMode=='date'){
+					$('#datemode').show();
+					$('#monthmode').hide();
+				}else{
+					$('#datemode').hide();
+					$('#monthmode').show();
+				}
+			}
+			
+		});
+		//Publisher check box
+		mySearchPublisher=new generateSelect2({
+			inputID: 'dimesion_fillter',
+			divID: 'dimesion',
+			name: 'p_publisher_id',
+			multi: true,
+			selectAll: true,
+			ajaxUrl: '/pentaho/ViewAction',
+			data: function(term,page){
+				return {
+					solution: solution,
+					path: path+'/daily_publisher_performance',
+					mode: 'loadDimensions',
+					action: 'loadDimension.xaction',
+					term: term, //search term
+					limit: 10, // page size
+					page: page, // page number
+					mode: 'publisher'
+				};
+			},
+			result: function(data, page){
+				var results=data.data;
+				var more=false;
+				if(results.length==data.limit){
+					more=true
+				}
+				return {results: results,more: more}
+			},
+			success: function(){
+				//mySearch2.action();
+			},
+			clickEvent: function(id){
+				if(mySearchPublisher.getID().length>0){
+					mySearchProperties.action();
+				}
+				
+				//mySearch3.action();
+			}
+		});
+		mySearchPublisher.action();
+		//Property check box
+		mySearchProperties=new generateSelect2({
+			inputID: 'dimesion_fillter_2',
+			divID: 'dimesion_2',
+			name: 'p_property_id',
+			multi: true,
+			selectAll: true,
+			ajaxUrl: '/pentaho/ViewAction',
+			data: function(term,page){
+				return {
+					solution: solution,
+					path: path+'/daily_publisher_performance',
+					mode: 'loadDimensions',
+					action: 'loadDimension.xaction',
+					term: term, //search term
+					limit: 10, // page size
+					page: page, // page number
+					publisher_ids: mySearchPublisher.getID().join(','),
+					mode: 'property'
+				};
+			},
+			result: function(data, page){
+				var results=data.data;
+				var more=false;
+				if(results.length==data.limit){
+					more=true
+				}
+				return {results: results,more: more}
+			},
+			success: function(){
+				//mySearch2.action();
+			},
+			clickEvent: function(id){
+				if(mySearchProperties.getID().length){
+					mySearchChannels.action();
+				}
+				//mySearch2.action();
+				//mySearch3.action();
+			}
+		});
+		//Channel check box
+		mySearchChannels=new generateSelect2({
+			inputID: 'dimesion_fillter_3',
+			divID: 'dimesion_3',
+			name: 'p_channel_id',
+			multi: true,
+			selectAll: true,
+			ajaxUrl: '/pentaho/ViewAction',
+			data: function(term,page){
+				return {
+					solution: solution,
+					path: path+'/daily_publisher_performance',
+					mode: 'loadDimensions',
+					action: 'loadDimension.xaction',
+					term: term, //search term
+					limit: 10, // page size
+					page: page, // page number
+					publisher_ids: mySearchPublisher.getID().join(','),
+					property_ids: mySearchProperties.getID().join(','),
+					mode: 'channel'
+				};
+			},
+			result: function(data, page){
+				var results=data.data;
+				var more=false;
+				if(results.length==data.limit){
+					more=true
+				}
+				return {results: results,more: more}
+			},
+			success: function(){
+				//mySearch2.action();
+			},
+			clickEvent: function(id){
+				//mySearch2.action();
+				//mySearch3.action();
+			}
+		});
+	}); 
+	function validation(){
+		var start_date=$('#p_start_date').val();
+		var end_date=$('#p_end_date').val();
+		var publisherArray=mySearchPublisher.getID();
+		var propertyArray=mySearchProperties.getID();
+		var channelArray=mySearchChannels.getID();
+		
+		if(start_date==''||end_date==''){
+			return false;
+		}
+		if(publisherArray.length==0){
+			alert("Please select Publishers!");
+			return false;
+		}
+		if(propertyArray.length==0){
+			alert("Please select Properties!");
+			return false;
+		}
+		if(channelArray.length==0){
+			alert("Please select Channels!");
+			return false;
+		}	
+		$('#mydiv').dialog('close');
+		//Set data for National Engagement
+		var urlData={			
+			p_publisher_ids: publisherArray.join(","),
+			p_property_ids: propertyArray.join(","),
+			p_channel_ids: channelArray.join(","),
+			p_report_type: 1			
+		}
+		urlData=$.extend({},$( "#parameter-form" ).serializeObject(),urlData); 
+		var url='/pentaho/ViewAction?'+$.param(urlData);
+		$('#mainFrame1').attr('src',url);
+		
+		//set data for Non National Engagement
+		urlData.p_report_type=2;				
+		var url='/pentaho/ViewAction?'+$.param(urlData);
+		$('#mainFrame2').attr('src',url);
+		
+		//set data for Daily Remnant
+		urlData.p_report_type=3;
+		urlData=$.extend({},$( "#parameter-form" ).serializeObject(),urlData); 
+		var url='/pentaho/ViewAction?'+$.param(urlData);
+		$('#mainFrame3').attr('src',url);
+		
+		return true;
+	}
+    </script>
+   </body>
+     
+</html>
