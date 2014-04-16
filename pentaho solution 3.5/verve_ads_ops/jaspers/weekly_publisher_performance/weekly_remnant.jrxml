@@ -103,7 +103,7 @@ ORDER BY  publisher_name, property_name, partner_keyword, channel_name, ad_netwo
 - Deliveries is all requests with disposition = 'Y' appropriate to the group
 - Impressions: Using e=&adimp for the count
 - Clicks: Using e=&bannerclk for the count
-- Exclude all ad_networks data points that have bannerclk = 0 (group at ad_network level for the last 90 days)"]]></text>
+- Exclude all ad_networks data points that have bannerclk = 0 (group at ad_network level for the last 90 days)]]></text>
 			</staticText>
 		</band>
 	</title>
