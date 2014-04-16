@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Daily Exchanger Payout" pageWidth="620" pageHeight="1684" columnWidth="580" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="96"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="boder">
 		<box leftPadding="5" rightPadding="5">
@@ -35,7 +35,7 @@
 FROM rtb.daily_agg_exchanger_payout
 WHERE is_active = true
   AND full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
-  AND (exchanger IN (select unnest(string_to_array($P{p_exchangers}, ','))::text) OR '' = $P{p_exchangers})
+  AND (exchanger IN (select unnest(string_to_array($P{p_exchangers}, ','))::text) OR 'all' = $P{p_exchangers})
 GROUP BY full_date, exchanger
 ORDER BY  full_date, exchanger;]]>
 	</queryString>
