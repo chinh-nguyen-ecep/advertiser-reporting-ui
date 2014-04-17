@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <action-sequence> 
-  <title>Exchanger Payout Summary</title>
+  <title>RTB Exchange Cost Analysis</title>
   <version>1</version>
   <logging-level>ERROR</logging-level>
   <documentation> 
@@ -103,13 +103,13 @@
   <resources> 
     <pageTemplate1> 
       <solution-file> 
-        <location>exchanger_payout_summary/template.html</location>  
+        <location>exchanger_cost_analysis/template.html</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </pageTemplate1>  
     <report-definition2> 
       <solution-file> 
-        <location>exchanger_payout_summary/exchanger_payout_summary.jasper</location>  
+        <location>exchanger_cost_analysis/exchanger_cost_analysis.jasper</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </report-definition2> 
@@ -129,9 +129,9 @@
       </action-outputs>
       <component-definition> 
         <live><![CDATA[false]]></live>  
-        <query><![CDATA[SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM rtb.daily_agg_exchanger_payout WHERE is_active=true
+        <query><![CDATA[SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM rtb.daily_agg_exchanger_cost_analysis WHERE is_active=true
 UNION ALL
-SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM rtb.daily_agg_exchanger_payout WHERE is_active=true]]></query> 
+SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM rtb.daily_agg_exchanger_cost_analysis WHERE is_active=true]]></query> 
       </component-definition> 
     </action-definition>
   
@@ -149,11 +149,11 @@ SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM r
       <component-definition> 
         <live><![CDATA[false]]></live>  
         <query><![CDATA[SELECT calendar_year_month,month_since_2005 
-FROM rtb.daily_agg_exchanger_payout
+FROM rtb.daily_agg_exchanger_cost_analysis
 GROUP BY calendar_year_month,month_since_2005
 UNION ALL
 SELECT calendar_year_month,month_since_2005 
-FROM rtb.daily_agg_exchanger_payout
+FROM rtb.daily_agg_exchanger_cost_analysis
 GROUP BY calendar_year_month,month_since_2005]]></query> 
       </component-definition> 
     </action-definition>

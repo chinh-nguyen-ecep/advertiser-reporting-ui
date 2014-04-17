@@ -96,7 +96,7 @@
         <component-definition> 
           <live><![CDATA[false]]></live>  
           <query><![CDATA[SELECT exchanger,exchanger as name 
-FROM rtb.daily_agg_exchanger_payout
+FROM rtb.daily_agg_exchanger_cost_analysis
 WHERE lower(exchanger) LIKE lower('%{term}%') 
 GROUP BY exchanger
 ORDER BY exchanger
