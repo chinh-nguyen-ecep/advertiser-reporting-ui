@@ -27,16 +27,16 @@
 	<queryString>
 		<![CDATA[SELECT full_date as "Date"
      , exchanger as "Exchanger"
-     , SUM(imp_cnt)::bigint as "Imp Cnt"
-     , AVG(paid_price) as "Avg Paid Price"
-     , AVG(bid_price) as "Avg Bid Price"
-     , SUM(paid_amount) as "Paid Amount"
+     , imp_cnt as "Imp Cnt"
+     , avg_paid_price as "Avg Paid Price"
+     , avg_bid_price as "Avg Bid Price"
+     , paid_amount as "Paid Amount"
      , max(dt_lastchange) as dt_lastchange
 FROM rtb.daily_agg_exchanger_cost_analysis
 WHERE is_active = true
   AND full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
   AND (exchanger IN (select unnest(string_to_array($P{p_exchangers}, ','))::text) OR 'all' = $P{p_exchangers})
-GROUP BY full_date, exchanger
+GROUP BY full_date, exchanger, imp_cnt, avg_paid_price, avg_bid_price, paid_amount
 ORDER BY  full_date, exchanger;]]>
 	</queryString>
 	<field name="Date" class="java.sql.Date"/>
