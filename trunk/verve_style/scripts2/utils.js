@@ -125,13 +125,13 @@ function generateSelect2(options){
 			   var result=options.result(ajaxData,page);
 			   var data=result.results;
 			   var more=result.more;
-			   rawData(data,more);
+			   rawData(data,more,term);
 			   options.success();
 			}
 		})
 		
 	}
-	function rawData(data,more,isLoadMore){
+	function rawData(data,more,term){
 		var checkedList;
 		if(page==1){
 			checkedList=$('#'+options.divID+' input:checked');
@@ -147,7 +147,7 @@ function generateSelect2(options){
 				//var row="Don't have results....";
 				//drawArea.append(row);
 			}
-			if(options.selectAll&&data.length>0){
+			if(options.selectAll&&data.length>0&&term==''){
 				var row=[options.selectAllValue,'All'];
 				data.unshift(row);
 			}
@@ -163,7 +163,7 @@ function generateSelect2(options){
 			drawArea.append(row);
 		});
 		//check all event
-		if(options.selectAll){
+		if(options.selectAll && options.multi && term==''){
 			var allCheckbox=$('#'+options.divID+' input:not(:button)').first();
 			var isChecked=allCheckbox.is(':checked');
 				console.log(isChecked);
@@ -248,5 +248,4 @@ function generateSelect2(options){
 		}
 		return result;
 	}
-	
 }
