@@ -26,7 +26,7 @@
 		   <img id="open" title="Open control panel" src="/verve_style/images/preferences_system_windows_actions.png"/>		   
 		   </div>	  
    </div>
-      <div class="easyui-dialog" title="Exchanger Payout Summary" data-options="iconCls:'icon-tip',resizable:false,modal:true,deltaX: 10" id="mydiv">
+      <div class="easyui-dialog" title="RTB Exchange Cost Analysis" data-options="iconCls:'icon-tip',resizable:false,modal:true,deltaX: 10" id="mydiv">
          <form name="parameter-form" id="parameter-form" method="GET">
          <table class="tableForm">
          <tbody>	         
@@ -153,7 +153,7 @@
 			data: function(term,page){
 				return {
 					solution: solution,
-					path: path+'/exchanger_payout_detail',
+					path: path+'/exchanger_cost_analysis',
 					mode: 'loadDimensions',
 					action: 'loadDimension.xaction',
 					term: term, //search term
