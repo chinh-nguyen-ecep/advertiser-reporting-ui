@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Io Billing Line Item" pageWidth="3464" pageHeight="2380" orientation="Landscape" columnWidth="3464" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0263162364614176"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="border">
+		<box>
+			<topPen lineWidth="0.75" lineStyle="Solid"/>
+			<leftPen lineWidth="0.75" lineStyle="Solid"/>
+			<bottomPen lineWidth="0.75" lineStyle="Solid"/>
+			<rightPen lineWidth="0.75" lineStyle="Solid"/>
+		</box>
+	</style>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select
+a.io_orders_id
+,a.sfdc_opportunity_id
+,a.organization_id
+,o.adm_order_ids ----new column
+,a.io_date
+,a.coract_name as contract_name
+,a.agency_name
+,a.created_at
+,a.updated_at
+,a.revenue_goal
+,a.comments_count
+,a.quantity_goal
+,a.agency_fee
+,b.billing_line_items_id  as IO_line_item_id
+,f.adm_flight_ids ----new column
+,b.name_current as IO_lineitem_name
+,b.created_at as IO_line_items_created_at
+,b.updated_at as IO_line_items_updated_at
+,b.flights_count as IO_line_items_flight_count
+,b.quantity_current as IO_line_items_quantity
+,b.io_date as IO_line_items_io_date
+,b.external_ref as IO_line_items_external_ref
+,b.comments_count as IO_line_items_comments_count
+,b.budget_current as IO_line_items_budget
+,b.start_date_current as IO_line_items_start_date
+,b.end_date_current as IO_line_items_end_date
+from refer.adm_dim_IO_orders a
+inner join refer.adm_dim_io_lineitems b
+on(b.dt_expire='9999-12-31' and b.insertion_order_id = a.io_orders_id)
+--join to get adm_order_id list
+left join (
+select insertion_order_id, array_to_string(vlsm.array_accum(order_id),',') as ADM_Order_ids
+from(
+select insertion_order_id,order_id from refer.adm_dim_orders
+where dt_expire = '9999-12-31'
+and insertion_order_id <>-100
+)a group by insertion_order_id
+)o
+on(a.io_orders_id = o.insertion_order_id)
+--join to get adm flight ids list
+left join(
+select billing_line_item_id, array_to_string(vlsm.array_accum(flight_id),',')as ADM_Flight_ids
+from(
+select billing_line_item_id,flight_id from refer.adm_dim_flights
+where dt_expire = '9999-12-31'
+and network_id = 2
+and billing_line_item_id <>-100
+)a
+group by billing_line_item_id
+)f
+on(b.billing_line_items_id = f.billing_line_item_id)
+where
+a.dt_expire = '9999-12-31'
+order by io_orders_id;]]>
+	</queryString>
+	<field name="io_orders_id" class="java.lang.Integer"/>
+	<field name="sfdc_opportunity_id" class="java.lang.String"/>
+	<field name="organization_id" class="java.lang.Integer"/>
+	<field name="adm_order_ids" class="java.lang.String"/>
+	<field name="io_date" class="java.sql.Timestamp"/>
+	<field name="contract_name" class="java.lang.String"/>
+	<field name="agency_name" class="java.lang.String"/>
+	<field name="created_at" class="java.sql.Timestamp"/>
+	<field name="updated_at" class="java.sql.Timestamp"/>
+	<field name="revenue_goal" class="java.lang.Double"/>
+	<field name="comments_count" class="java.lang.Integer"/>
+	<field name="quantity_goal" class="java.lang.Integer"/>
+	<field name="agency_fee" class="java.lang.Integer"/>
+	<field name="io_line_item_id" class="java.lang.Long"/>
+	<field name="adm_flight_ids" class="java.lang.String"/>
+	<field name="io_lineitem_name" class="java.lang.String"/>
+	<field name="io_line_items_created_at" class="java.sql.Timestamp"/>
+	<field name="io_line_items_updated_at" class="java.sql.Timestamp"/>
+	<field name="io_line_items_flight_count" class="java.lang.Long"/>
+	<field name="io_line_items_quantity" class="java.lang.Integer"/>
+	<field name="io_line_items_io_date" class="java.sql.Timestamp"/>
+	<field name="io_line_items_external_ref" class="java.lang.String"/>
+	<field name="io_line_items_comments_count" class="java.lang.Long"/>
+	<field name="io_line_items_budget" class="java.lang.Double"/>
+	<field name="io_line_items_start_date" class="java.sql.Timestamp"/>
+	<field name="io_line_items_end_date" class="java.sql.Timestamp"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<staticText>
+				<reportElement mode="Opaque" x="1476" y="52" width="1988" height="20" backcolor="#CCCCCC"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement/>
+				<text><![CDATA[IO Line Item Info section]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="52" width="1476" height="20"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement/>
+				<text><![CDATA[IO ORDER INFO sections]]></text>
+			</staticText>
+			<image isUsingCache="false" isLazy="true">
+				<reportElement x="0" y="0" width="201" height="37"/>
+				<imageExpression class="java.lang.String"><![CDATA["http://s3.amazonaws.com/uploads.uservoice.com/logo/design_setting/24549/original/pub_adops_logo.png?1348177717"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="201" y="0" width="3263" height="37" forecolor="#0099CC"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Calibri" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IO Billing Line Item ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="37" width="3464" height="15" forecolor="#0099CC"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Calibri" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20">
+			<staticText>
+				<reportElement style="border" mode="Opaque" x="0" y="0" width="81" height="20" backcolor="#FFFF00"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[IO Order ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" mode="Opaque" x="81" y="0" width="120" height="20" backcolor="#FFFF00"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SFDC Opportunity ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" mode="Opaque" x="201" y="0" width="99" height="20" backcolor="#FFFF00"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Organization ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" mode="Opaque" x="400" y="0" width="83" height="20" backcolor="#FFFF00"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[IO Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" mode="Opaque" x="483" y="0" width="217" height="20" backcolor="#FFFF00"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Contract Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" mode="Opaque" x="700" y="0" width="176" height="20" backcolor="#FFFF00"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Agency]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" mode="Opaque" x="976" y="0" width="100" height="20" backcolor="#FFFF00"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Revenue Goal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" mode="Opaque" x="1076" y="0" width="100" height="20" backcolor="#FFFF00"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[IO Comments]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" mode="Opaque" x="1176" y="0" width="100" height="20" backcolor="#FFFF00"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[IO Quantity Goal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" mode="Opaque" x="876" y="0" width="100" height="20" backcolor="#FFFF00"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Agency Fee]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" mode="Opaque" x="1276" y="0" width="100" height="20" backcolor="#FFFF00"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[IO Line Item ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" mode="Opaque" x="1476" y="0" width="677" height="20" backcolor="#CCCCCC"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[IO Line Item Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" mode="Opaque" x="2153" y="0" width="145" height="20" backcolor="#CCCCCC"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[IO Line Item Quantity]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" mode="Opaque" x="2436" y="0" width="162" height="20" backcolor="#CCCCCC"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[IO Line Item External Ref]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" mode="Opaque" x="2598" y="0" width="190" height="20" backcolor="#CCCCCC"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[IO Line Comments]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" mode="Opaque" x="2298" y="0" width="138" height="20" backcolor="#CCCCCC"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[IO Line Item Budget]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" mode="Opaque" x="2788" y="0" width="138" height="20" backcolor="#CCCCCC"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Start Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" mode="Opaque" x="2926" y="0" width="138" height="20" backcolor="#CCCCCC"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[End Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" mode="Opaque" x="3064" y="0" width="200" height="20" backcolor="#339900"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vendors]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" mode="Opaque" x="3264" y="0" width="100" height="20" backcolor="#339900"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DFP Impressions]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="border" mode="Opaque" x="3364" y="0" width="100" height="20" backcolor="#339900"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DFP Clicks]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1376" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFF00"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[ADM Flight Ids]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="300" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFF00"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[ADM Order Ids]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<textField>
+				<reportElement style="border" x="0" y="0" width="81" height="20"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{io_orders_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="border" x="81" y="0" width="120" height="20"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{sfdc_opportunity_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="border" x="201" y="0" width="99" height="20"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{organization_id}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd" isBlankWhenNull="false">
+				<reportElement style="border" mode="Transparent" x="400" y="0" width="83" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{io_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="border" x="483" y="0" width="217" height="20"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{contract_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="border" x="700" y="0" width="176" height="20"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{agency_name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement style="border" x="976" y="0" width="100" height="20"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{revenue_goal}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="border" x="1076" y="0" width="100" height="20"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{comments_count}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="border" x="1176" y="0" width="100" height="20"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{quantity_goal}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="border" x="876" y="0" width="100" height="20"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{agency_fee}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="border" x="1276" y="0" width="100" height="20"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{io_line_item_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="border" mode="Opaque" x="1476" y="0" width="677" height="20" backcolor="#CCCCCC"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{io_lineitem_name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement style="border" mode="Opaque" x="2153" y="0" width="145" height="20" backcolor="#CCCCCC"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{io_line_items_quantity}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="border" mode="Opaque" x="2436" y="0" width="162" height="20" backcolor="#CCCCCC"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{io_line_items_external_ref}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="border" mode="Opaque" x="2598" y="0" width="190" height="20" backcolor="#CCCCCC"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{io_line_items_comments_count}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement style="border" mode="Opaque" x="2298" y="0" width="138" height="20" backcolor="#CCCCCC"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{io_line_items_budget}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd">
+				<reportElement style="border" mode="Opaque" x="2788" y="0" width="138" height="20" backcolor="#CCCCCC"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement/>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{io_line_items_start_date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd">
+				<reportElement style="border" mode="Opaque" x="2926" y="0" width="138" height="20" backcolor="#CCCCCC"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement/>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{io_line_items_end_date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="1376" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{adm_flight_ids}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="300" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{adm_order_ids}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="20">
+			<textField pattern="yyyy-MM-dd HH:mm a">
+				<reportElement x="0" y="0" width="201" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+</jasperReport>
