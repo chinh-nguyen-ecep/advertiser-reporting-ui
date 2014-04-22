@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Daily verve Ads" language="groovy" pageWidth="1900" pageHeight="1190" orientation="Landscape" columnWidth="1860" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="0.9075000000000011"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="549"/>
 	<property name="ireport.y" value="0"/>
 	<style name="redColor" mode="Opaque">
 		<conditionalStyle>
@@ -530,7 +530,7 @@ ORDER BY adnetwork_name,full_date]]>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{Ad Network}]]></textFieldExpression>
 			</textField>
-			<textField pattern="" isBlankWhenNull="true">
+			<textField pattern="#,##0" isBlankWhenNull="true">
 				<reportElement x="241" y="0" width="129" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -539,9 +539,9 @@ ORDER BY adnetwork_name,full_date]]>
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Ad requests}==null ? ($F{adnetwork_reports_ads_filled}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($F{Ad requests}) )]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $F{Ad requests}==null ? ($F{adnetwork_reports_ads_filled}==null ? null : 0) : $F{Ad requests} )]]></textFieldExpression>
 			</textField>
-			<textField pattern="" isBlankWhenNull="true">
+			<textField pattern="#,##0" isBlankWhenNull="true">
 				<reportElement x="370" y="0" width="140" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -550,9 +550,9 @@ ORDER BY adnetwork_name,full_date]]>
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[( $F{adnetwork_reports_ads_filled}==null ? ($F{Ad requests}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($F{adnetwork_reports_ads_filled}) )]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $F{adnetwork_reports_ads_filled}==null ? ($F{Ad requests}==null ? null : 0) : $F{adnetwork_reports_ads_filled} )]]></textFieldExpression>
 			</textField>
-			<textField pattern="" isBlankWhenNull="true">
+			<textField pattern="#,##0.00 %" isBlankWhenNull="true">
 				<reportElement x="510" y="0" width="140" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -561,9 +561,9 @@ ORDER BY adnetwork_name,full_date]]>
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Ad Fill Rate}==null ? "N/A" : new DecimalFormat("###,##0.00 %").format($F{Ad Fill Rate}) )]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $F{Ad Fill Rate}==null ? 0 : $F{Ad Fill Rate} )]]></textFieldExpression>
 			</textField>
-			<textField pattern="" isBlankWhenNull="true">
+			<textField pattern="#,##0" isBlankWhenNull="true">
 				<reportElement x="650" y="0" width="111" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -572,9 +572,9 @@ ORDER BY adnetwork_name,full_date]]>
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Verve Ad Requests}==null ? ($F{verve_reports_ads_filled}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($F{Verve Ad Requests}) )]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $F{Verve Ad Requests}==null ? ($F{verve_reports_ads_filled}==null ? null : 0) : $F{Verve Ad Requests} )]]></textFieldExpression>
 			</textField>
-			<textField pattern="" isBlankWhenNull="true">
+			<textField pattern="#,##0" isBlankWhenNull="true">
 				<reportElement x="761" y="0" width="111" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -583,9 +583,9 @@ ORDER BY adnetwork_name,full_date]]>
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[( $F{verve_reports_ads_filled}==null ? ($F{verve_reports_ads_filled}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($F{verve_reports_ads_filled}) )]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $F{verve_reports_ads_filled}==null ? ($F{verve_reports_ads_filled}==null ? null : 0) : $F{verve_reports_ads_filled} )]]></textFieldExpression>
 			</textField>
-			<textField pattern="" isBlankWhenNull="true">
+			<textField pattern="#,##0.00 %" isBlankWhenNull="true">
 				<reportElement x="872" y="0" width="91" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -594,9 +594,9 @@ ORDER BY adnetwork_name,full_date]]>
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Verve Fill Rate}==null ? "N/A" : new DecimalFormat("###,##0.00 %").format($F{Verve Fill Rate}) )]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $F{Verve Fill Rate}==null ? 0 : $F{Verve Fill Rate})]]></textFieldExpression>
 			</textField>
-			<textField pattern="" isBlankWhenNull="true">
+			<textField pattern="#,##0" isBlankWhenNull="true">
 				<reportElement x="963" y="0" width="91" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -605,9 +605,9 @@ ORDER BY adnetwork_name,full_date]]>
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Discrepancy Ad Requests}==null ? "N/A" : new DecimalFormat("###,##0").format($F{Discrepancy Ad Requests}) )]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $F{Discrepancy Ad Requests}==null ? 0 : $F{Discrepancy Ad Requests} )]]></textFieldExpression>
 			</textField>
-			<textField pattern="" isBlankWhenNull="true">
+			<textField pattern="#,##0" isBlankWhenNull="true">
 				<reportElement x="1054" y="0" width="91" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -616,9 +616,9 @@ ORDER BY adnetwork_name,full_date]]>
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Discrepancy Ad Filled}==null ? "N/A" : new DecimalFormat("###,##0").format($F{Discrepancy Ad Filled}) )]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $F{Discrepancy Ad Filled}==null ? 0 : $F{Discrepancy Ad Filled} )]]></textFieldExpression>
 			</textField>
-			<textField pattern="" isBlankWhenNull="true">
+			<textField pattern="#,##0.00 %" isBlankWhenNull="true">
 				<reportElement x="1145" y="0" width="188" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -627,9 +627,9 @@ ORDER BY adnetwork_name,full_date]]>
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Filled Impressions Discrepancy}==null ? "N/A" : new DecimalFormat("###,##0.00 %").format($F{Filled Impressions Discrepancy}) )]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $F{Filled Impressions Discrepancy}==null ? 0 : $F{Filled Impressions Discrepancy})]]></textFieldExpression>
 			</textField>
-			<textField pattern="" isBlankWhenNull="true">
+			<textField pattern="#,##0" isBlankWhenNull="true">
 				<reportElement x="1333" y="0" width="111" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -638,9 +638,9 @@ ORDER BY adnetwork_name,full_date]]>
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[( $F{adnetwork_reports_clicks}==null ? ($F{adnetwork_reports_ads_filled}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($F{adnetwork_reports_clicks}) )]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $F{adnetwork_reports_clicks}==null ? ($F{adnetwork_reports_ads_filled}==null ? null : 0) : $F{adnetwork_reports_clicks})]]></textFieldExpression>
 			</textField>
-			<textField pattern="" isBlankWhenNull="true">
+			<textField pattern="$ #,##0.00" isBlankWhenNull="true">
 				<reportElement x="1444" y="0" width="111" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -649,9 +649,9 @@ ORDER BY adnetwork_name,full_date]]>
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[($F{adnetwork_reports_gross}==null ? ($F{adnetwork_reports_ads_filled}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("\$ ###,##0.00").format($F{adnetwork_reports_gross}))]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[($F{adnetwork_reports_gross}==null ? ($F{adnetwork_reports_ads_filled}==null ? null : 0) : $F{adnetwork_reports_gross})]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+			<textField pattern="$ #,##0.00" isBlankWhenNull="true">
 				<reportElement style="redColor" x="1555" y="0" width="113" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -660,9 +660,9 @@ ORDER BY adnetwork_name,full_date]]>
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[($F{Daily Delta Gross}==null ? "N/A" : new DecimalFormat("\$ #,##0.00;(\$ #,##0.00)").format($F{Daily Delta Gross}) )]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[($F{Daily Delta Gross}==null ? 0 : $F{Daily Delta Gross} )]]></textFieldExpression>
 			</textField>
-			<textField pattern="" isBlankWhenNull="true">
+			<textField pattern="$ #,##0.00" isBlankWhenNull="true">
 				<reportElement x="1668" y="0" width="64" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -671,9 +671,9 @@ ORDER BY adnetwork_name,full_date]]>
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[($F{CPC}==null ? "N/A" : new DecimalFormat("\$ ###,##0.00").format($F{CPC}) )]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[($F{CPC}==null ? 0 : $F{CPC} )]]></textFieldExpression>
 			</textField>
-			<textField pattern="" isBlankWhenNull="true">
+			<textField pattern="#,##0.00 %" isBlankWhenNull="true">
 				<reportElement x="1732" y="0" width="64" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -682,9 +682,9 @@ ORDER BY adnetwork_name,full_date]]>
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[( $F{CTR}==null ? "N/A" : new DecimalFormat("###,##0.00 %").format($F{CTR}) )]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $F{CTR}==null ? 0 : $F{CTR} )]]></textFieldExpression>
 			</textField>
-			<textField pattern="" isBlankWhenNull="true">
+			<textField pattern="$ #,##0.00" isBlankWhenNull="true">
 				<reportElement x="1796" y="0" width="64" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -693,13 +693,13 @@ ORDER BY adnetwork_name,full_date]]>
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[($F{CPM}==null ? "N/A" : new DecimalFormat("\$ ###,##0.00").format($F{CPM}) )]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[($F{CPM}==null ? 0 : $F{CPM} )]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<summary>
 		<band height="20">
-			<textField pattern="" isBlankWhenNull="true">
+			<textField pattern="#,##0" isBlankWhenNull="true">
 				<reportElement mode="Transparent" x="241" y="0" width="129" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -710,9 +710,9 @@ ORDER BY adnetwork_name,full_date]]>
 				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[( $V{Ad requests}==null ? ($V{adnetwork_reports_ads_filled}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($V{Ad requests}) )]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $V{Ad requests}==null ? ($V{adnetwork_reports_ads_filled}==null ? null : 0) : $V{Ad requests} )]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
 				<reportElement x="370" y="0" width="140" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -723,9 +723,9 @@ ORDER BY adnetwork_name,full_date]]>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[( $V{adnetwork_reports_ads_filled}==null ? ($V{Ad requests}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($V{adnetwork_reports_ads_filled}) )]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $V{adnetwork_reports_ads_filled}==null ? ($V{Ad requests}==null ? null : 0) : $V{adnetwork_reports_ads_filled})]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
 				<reportElement x="650" y="0" width="111" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -736,9 +736,9 @@ ORDER BY adnetwork_name,full_date]]>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[( $V{Verve Ad Requests}==null ? ($V{verve_reports_ads_filled}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($V{Verve Ad Requests}) )]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $V{Verve Ad Requests}==null ? ($V{verve_reports_ads_filled}==null ? null : 0) : $V{Verve Ad Requests})]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
 				<reportElement x="761" y="0" width="111" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -749,7 +749,7 @@ ORDER BY adnetwork_name,full_date]]>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[( $V{verve_reports_ads_filled}==null ?($V{Verve Ad Requests}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($V{verve_reports_ads_filled}) )]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $V{verve_reports_ads_filled}==null ?($V{Verve Ad Requests}==null ? null : 0) : $V{verve_reports_ads_filled})]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="0" width="91" height="20"/>
@@ -777,7 +777,7 @@ ORDER BY adnetwork_name,full_date]]>
 				</textElement>
 				<text><![CDATA[Total]]></text>
 			</staticText>
-			<textField pattern="" isBlankWhenNull="true">
+			<textField pattern="#,##0" isBlankWhenNull="true">
 				<reportElement x="1333" y="0" width="111" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -788,9 +788,9 @@ ORDER BY adnetwork_name,full_date]]>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[( $V{adnetwork_reports_clicks}==null ? ($V{adnetwork_reports_ads_filled}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($V{adnetwork_reports_clicks}) )]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $V{adnetwork_reports_clicks}==null ? ($V{adnetwork_reports_ads_filled}==null ? null : 0) : $V{adnetwork_reports_clicks})]]></textFieldExpression>
 			</textField>
-			<textField pattern="" isBlankWhenNull="true">
+			<textField pattern="$ #,##0.00" isBlankWhenNull="true">
 				<reportElement x="1444" y="0" width="111" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -801,7 +801,7 @@ ORDER BY adnetwork_name,full_date]]>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[($V{adnetwork_reports_gross}==null ? ($V{adnetwork_reports_ads_filled}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("\$ ###,##0.00").format($V{adnetwork_reports_gross}) )]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[($V{adnetwork_reports_gross}==null ? ($V{adnetwork_reports_ads_filled}==null ? null : 0) : $V{adnetwork_reports_gross})]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="510" y="0" width="140" height="20"/>

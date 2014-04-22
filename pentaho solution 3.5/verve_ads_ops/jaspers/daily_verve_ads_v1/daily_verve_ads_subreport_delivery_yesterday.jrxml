@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_verve_ads_subreport_summary" language="groovy" pageWidth="1145" pageHeight="802" columnWidth="1145" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="1.331000000000002"/>
-	<property name="ireport.x" value="7"/>
+	<property name="ireport.x" value="357"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
 		<![CDATA[SELECT
@@ -236,110 +236,118 @@ ORDER BY full_date]]>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{Date}]]></textFieldExpression>
 			</textField>
-			<textField pattern="">
-				<reportElement x="91" y="0" width="150" height="20"/>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="91" y="0" width="150" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Total Ad requests}==null ? ($F{Total Ads Filled}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($F{Total Ad requests}) )]]></textFieldExpression>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{Total Ad requests}]]></textFieldExpression>
 			</textField>
-			<textField pattern="">
-				<reportElement x="241" y="0" width="129" height="20"/>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="241" y="0" width="129" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Total Ads Filled}==null ? ($F{Total Ad requests}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($F{Total Ads Filled}) )]]></textFieldExpression>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{Total Ads Filled}]]></textFieldExpression>
 			</textField>
-			<textField pattern="">
-				<reportElement x="370" y="0" width="140" height="20"/>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="370" y="0" width="140" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[($F{Total Verve Ad Requests}==null ? ($F{Total Verve Ad Filled}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($F{Total Verve Ad Requests}) )]]></textFieldExpression>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{Total Verve Ad Requests}]]></textFieldExpression>
 			</textField>
-			<textField pattern="">
-				<reportElement x="510" y="0" width="140" height="20"/>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="510" y="0" width="140" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[($F{Total Verve Ad Filled}==null ? ($F{Total Verve Ad Requests}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($F{Total Verve Ad Filled}) )]]></textFieldExpression>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{Total Verve Ad Filled}]]></textFieldExpression>
 			</textField>
-			<textField pattern="">
-				<reportElement x="650" y="0" width="111" height="20"/>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="650" y="0" width="111" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Total Clicks}==null ? ($F{Total Gross}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($F{Total Clicks}) )]]></textFieldExpression>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{Total Clicks}]]></textFieldExpression>
 			</textField>
-			<textField pattern="">
-				<reportElement x="761" y="0" width="111" height="20"/>
+			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="761" y="0" width="111" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Total Gross}==null ? ($F{Total Clicks}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("\$ ###,##0").format($F{Total Gross}) )]]></textFieldExpression>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Total Gross}]]></textFieldExpression>
 			</textField>
-			<textField pattern="" isBlankWhenNull="false">
+			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="872" y="0" width="91" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[( $V{eCPC}==null ? "N/A" : new DecimalFormat("\$ #,##0.00").format($V{eCPC}) )]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{eCPC}]]></textFieldExpression>
 			</textField>
-			<textField pattern="" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="963" y="0" width="91" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+			<textField pattern="$ #,##0.00">
+				<reportElement x="963" y="0" width="91" height="20"/>
 				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
-					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[( $V{eCPM}==null ? "N/A" : new DecimalFormat("\$ #,##0.00").format($V{eCPM}) )]]></textFieldExpression>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{eCPM}]]></textFieldExpression>
 			</textField>
-			<textField pattern="" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="1054" y="0" width="91" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="1054" y="0" width="91" height="20"/>
 				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
-					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[( $V{CTR}==null ? "N/A" : new DecimalFormat("#,##0.00%").format($V{CTR}) )]]></textFieldExpression>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{CTR}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

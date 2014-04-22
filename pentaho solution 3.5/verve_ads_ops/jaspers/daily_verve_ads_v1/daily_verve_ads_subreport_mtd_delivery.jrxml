@@ -234,7 +234,7 @@ AND full_date BETWEEN date_trunc('MONTH',now()::date-1)::date AND now()::date-1]
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{Month}]]></textFieldExpression>
 			</textField>
-			<textField pattern="">
+			<textField pattern="#,##0" isBlankWhenNull="true">
 				<reportElement x="91" y="0" width="150" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -243,9 +243,9 @@ AND full_date BETWEEN date_trunc('MONTH',now()::date-1)::date AND now()::date-1]
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Total Ad requests}==null ? ($F{Total Ads Filled}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($F{Total Ad requests}) )]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $F{Total Ad requests}==null ? ($F{Total Ads Filled}==null ? null :0) : $F{Total Ad requests} )]]></textFieldExpression>
 			</textField>
-			<textField pattern="">
+			<textField pattern="#,##0" isBlankWhenNull="true">
 				<reportElement x="241" y="0" width="129" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -254,9 +254,9 @@ AND full_date BETWEEN date_trunc('MONTH',now()::date-1)::date AND now()::date-1]
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Total Ads Filled}==null ? ($F{Total Ad requests}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($F{Total Ads Filled}) )]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $F{Total Ads Filled}==null ? ($F{Total Ad requests}==null ? null : 0) : $F{Total Ads Filled} )]]></textFieldExpression>
 			</textField>
-			<textField pattern="">
+			<textField pattern="#,##0" isBlankWhenNull="true">
 				<reportElement x="370" y="0" width="140" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -265,9 +265,9 @@ AND full_date BETWEEN date_trunc('MONTH',now()::date-1)::date AND now()::date-1]
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[($F{Total Verve Ad Requests}==null ? ($F{Total Verve Ad Filled}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($F{Total Verve Ad Requests}) )]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[($F{Total Verve Ad Requests}==null ? ($F{Total Verve Ad Filled}==null ? null : 0) : $F{Total Verve Ad Requests} )]]></textFieldExpression>
 			</textField>
-			<textField pattern="">
+			<textField pattern="#,##0" isBlankWhenNull="true">
 				<reportElement x="510" y="0" width="140" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -276,9 +276,9 @@ AND full_date BETWEEN date_trunc('MONTH',now()::date-1)::date AND now()::date-1]
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[($F{Total Verve Ad Filled}==null ? ($F{Total Verve Ad Requests}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($F{Total Verve Ad Filled}) )]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[($F{Total Verve Ad Filled}==null ? ($F{Total Verve Ad Requests}==null ? null : 0) :$F{Total Verve Ad Filled} )]]></textFieldExpression>
 			</textField>
-			<textField pattern="">
+			<textField pattern="#,##0" isBlankWhenNull="true">
 				<reportElement x="650" y="0" width="111" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -287,9 +287,9 @@ AND full_date BETWEEN date_trunc('MONTH',now()::date-1)::date AND now()::date-1]
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Total Clicks}==null ? ($F{Total Gross}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($F{Total Clicks}) )]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $F{Total Clicks}==null ? ($F{Total Gross}==null ? null : 0) : $F{Total Clicks} )]]></textFieldExpression>
 			</textField>
-			<textField pattern="">
+			<textField pattern="$ #,##0.00" isBlankWhenNull="true">
 				<reportElement x="761" y="0" width="111" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -298,9 +298,9 @@ AND full_date BETWEEN date_trunc('MONTH',now()::date-1)::date AND now()::date-1]
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Total Gross}==null ? ($F{Total Clicks}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("\$ ###,##0").format($F{Total Gross}) )]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $F{Total Gross}==null ? ($F{Total Clicks}==null ? null : 0) : $F{Total Gross} )]]></textFieldExpression>
 			</textField>
-			<textField pattern="" isBlankWhenNull="false">
+			<textField pattern="$ #,##0.00" isBlankWhenNull="true">
 				<reportElement mode="Transparent" x="872" y="0" width="91" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -311,9 +311,9 @@ AND full_date BETWEEN date_trunc('MONTH',now()::date-1)::date AND now()::date-1]
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[( $V{eCPC}==null ? "N/A" : new DecimalFormat("\$ #,##0.00").format($V{eCPC}) )]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $V{eCPC}==null ? 0 : $V{eCPC} )]]></textFieldExpression>
 			</textField>
-			<textField pattern="" isBlankWhenNull="false">
+			<textField pattern="$ #,##0.00" isBlankWhenNull="true">
 				<reportElement mode="Transparent" x="963" y="0" width="91" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -324,9 +324,9 @@ AND full_date BETWEEN date_trunc('MONTH',now()::date-1)::date AND now()::date-1]
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[( $V{eCPM}==null ? "N/A" : new DecimalFormat("\$ #,##0.00").format($V{eCPM}) )]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $V{eCPM}==null ? 0 : $V{eCPM} )]]></textFieldExpression>
 			</textField>
-			<textField pattern="" isBlankWhenNull="false">
+			<textField pattern="#,##0.00 %" isBlankWhenNull="true">
 				<reportElement mode="Transparent" x="1054" y="0" width="91" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -337,7 +337,7 @@ AND full_date BETWEEN date_trunc('MONTH',now()::date-1)::date AND now()::date-1]
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[( $V{CTR}==null ? "N/A" : new DecimalFormat("#,##0.00%").format($V{CTR}) )]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $V{CTR}==null ? 0 : $V{CTR} )]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
