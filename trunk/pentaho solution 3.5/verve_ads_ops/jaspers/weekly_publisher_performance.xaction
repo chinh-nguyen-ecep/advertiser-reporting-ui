@@ -31,7 +31,7 @@
       <sources> 
         <request>connectionName</request> 
       </sources>  
-      <default-value><![CDATA[dw3dw3]]></default-value> 
+      <default-value><![CDATA[verveReportConnection]]></default-value> 
     </connectionName>  
     <p_publisher_ids type="string"> 
       <sources> 
@@ -63,12 +63,12 @@
       </sources>  
       <default-value><![CDATA[false]]></default-value> 
     </p_emailMode>  
-    <p_start_date_sk type="string">
-      <sources>
-        <request>p_start_date_sk</request>
-      </sources>
-      <default-value/>
-    </p_start_date_sk>
+    <p_start_date_sk type="string"> 
+      <sources> 
+        <request>p_start_date_sk</request> 
+      </sources>  
+      <default-value/> 
+    </p_start_date_sk> 
   </inputs>
 
   <outputs> 
@@ -106,12 +106,12 @@
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </report-definition3>  
-    <pageTemplate1>
-      <solution-file>
-        <location>weekly_publisher_performance/template.html</location>
-        <mime-type>text/plain</mime-type>
-      </solution-file>
-    </pageTemplate1>
+    <pageTemplate1> 
+      <solution-file> 
+        <location>weekly_publisher_performance/template.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </pageTemplate1> 
   </resources>
   
   <actions> 
@@ -134,37 +134,37 @@ UNION ALL
 SELECT year_week,start_date_sk FROM adsops.weekly_agg_publisher_performance_national_non_engagement GROUP BY year_week,start_date_sk 
 UNION ALL
 SELECT year_week,start_date_sk FROM adsops.weekly_agg_publisher_performance_remnant GROUP BY year_week,start_date_sk ) a
-GROUP BY year_week,start_date_sk ORDER BY start_date_sk desc]]></query>
+GROUP BY year_week,start_date_sk ORDER BY start_date_sk desc]]></query> 
       </component-definition> 
     </action-definition>
   
     <actions> 
       <condition><![CDATA[p_emailMode=='false']]></condition>  
-      <action-definition>
+      <action-definition> 
         <component-name>SecureFilterComponent</component-name>
         <action-type>Prompt/Secure Filter</action-type>
-        <action-inputs>
-          <p_output type="string"/>
-          <p_start_date_sk type="string"/>
-          <List_output_type type="string-list"/>
-          <query_result_list_weekls type="result-set"/>
+        <action-inputs> 
+          <p_output type="string"/>  
+          <p_start_date_sk type="string"/>  
+          <List_output_type type="string-list"/>  
+          <query_result_list_weekls type="result-set"/> 
         </action-inputs>
-        <action-resources>
-          <pageTemplate mapping="pageTemplate1"/>
+        <action-resources> 
+          <pageTemplate mapping="pageTemplate1"/> 
         </action-resources>
-        <component-definition>
-          <selections>
-            <p_output style="select">
-              <filter>List_output_type</filter>
-            </p_output>
-            <p_start_date_sk style="select">
-              <filter value-col-name="start_date_sk" display-col-name="year_week">query_result_list_weekls</filter>
-            </p_start_date_sk>
-          </selections>
-          <xsl><![CDATA[pageTemplate]]></xsl>
-        </component-definition>
+        <component-definition> 
+          <selections> 
+            <p_output style="select"> 
+              <filter>List_output_type</filter> 
+            </p_output>  
+            <p_start_date_sk style="select"> 
+              <filter value-col-name="start_date_sk" display-col-name="year_week">query_result_list_weekls</filter> 
+            </p_start_date_sk> 
+          </selections>  
+          <xsl><![CDATA[pageTemplate]]></xsl> 
+        </component-definition> 
       </action-definition>
-
+  
       <actions> 
         <condition><![CDATA[p_report_type=='1']]></condition>  
         <action-definition> 
@@ -176,7 +176,7 @@ GROUP BY year_week,start_date_sk ORDER BY start_date_sk desc]]></query>
             <p_property_ids type="string"/>  
             <p_channel_ids type="string"/>  
             <output-type type="string" mapping="p_output"/>  
-            <p_start_date_sk type="string"/>
+            <p_start_date_sk type="string"/> 
           </action-inputs>
           <action-resources> 
             <report-definition mapping="report-definition2"/> 
@@ -185,7 +185,7 @@ GROUP BY year_week,start_date_sk ORDER BY start_date_sk desc]]></query>
         </action-definition>
  
       </actions>
-
+  
       <actions> 
         <condition><![CDATA[p_report_type=='2']]></condition>  
         <action-definition> 
@@ -197,7 +197,7 @@ GROUP BY year_week,start_date_sk ORDER BY start_date_sk desc]]></query>
             <p_publisher_ids type="string"/>  
             <p_property_ids type="string"/>  
             <p_channel_ids type="string"/>  
-            <p_start_date_sk type="string"/>
+            <p_start_date_sk type="string"/> 
           </action-inputs>
           <action-resources> 
             <report-definition mapping="report-definition3"/> 
@@ -206,7 +206,7 @@ GROUP BY year_week,start_date_sk ORDER BY start_date_sk desc]]></query>
         </action-definition>
  
       </actions>
-
+  
       <actions> 
         <condition><![CDATA[p_report_type=='3']]></condition>  
         <action-definition> 
@@ -218,7 +218,7 @@ GROUP BY year_week,start_date_sk ORDER BY start_date_sk desc]]></query>
             <p_publisher_ids type="string"/>  
             <p_property_ids type="string"/>  
             <p_channel_ids type="string"/>  
-            <p_start_date_sk type="string"/>
+            <p_start_date_sk type="string"/> 
           </action-inputs>
           <action-resources> 
             <report-definition mapping="report-definition1"/> 
