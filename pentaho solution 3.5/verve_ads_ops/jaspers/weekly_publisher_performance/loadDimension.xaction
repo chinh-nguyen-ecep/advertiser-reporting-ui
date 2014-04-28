@@ -52,7 +52,7 @@
       <sources> 
         <request>ConnectionName</request> 
       </sources>  
-      <default-value><![CDATA[dw3dw3]]></default-value> 
+      <default-value><![CDATA[verveReportConnection]]></default-value> 
     </ConnectionName>  
     <publisher_ids type="string"> 
       <sources> 
@@ -124,7 +124,7 @@ LIMIT {limit} OFFSET ({page}-1)*10 ;]]></query>
         <component-definition> 
           <live><![CDATA[false]]></live>  
           <query><![CDATA[SELECT property_id,property_name||' ('||property_id||')' as name 
-FROM weekly_agg_publisher_performance_remnant
+FROM adsops.weekly_agg_publisher_performance_remnant
 WHERE lower(property_name||' ('||property_id||')') LIKE lower('%{term}%') 
 AND (publisher_id IN ({publisher_ids}) OR '0'='{publisher_ids}')
 GROUP BY property_id,property_name
