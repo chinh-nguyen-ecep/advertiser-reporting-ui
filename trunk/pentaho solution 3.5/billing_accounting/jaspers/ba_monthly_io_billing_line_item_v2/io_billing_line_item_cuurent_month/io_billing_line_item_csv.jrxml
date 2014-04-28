@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="io billing line item in current month mode" language="groovy" pageWidth="4120" pageHeight="2380" orientation="Landscape" columnWidth="4120" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="io billing line item in current month mode" language="groovy" pageWidth="5520" pageHeight="2380" orientation="Landscape" columnWidth="5520" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="1.0263162364614176"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -130,7 +130,7 @@ order by b.start_date_current;]]>
 				<text><![CDATA[organization_id]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="border" mode="Opaque" x="400" y="0" width="83" height="20" backcolor="#FFFF00"/>
+				<reportElement style="border" mode="Opaque" x="1300" y="0" width="83" height="20" backcolor="#FFFF00"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement>
 					<font isBold="true"/>
@@ -138,7 +138,7 @@ order by b.start_date_current;]]>
 				<text><![CDATA[io_date]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="border" mode="Opaque" x="483" y="0" width="217" height="20" backcolor="#FFFF00"/>
+				<reportElement style="border" mode="Opaque" x="1383" y="0" width="217" height="20" backcolor="#FFFF00"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement>
 					<font isBold="true"/>
@@ -146,7 +146,7 @@ order by b.start_date_current;]]>
 				<text><![CDATA[contract_name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="border" mode="Opaque" x="700" y="0" width="106" height="20" backcolor="#FFFF00"/>
+				<reportElement style="border" mode="Opaque" x="1600" y="0" width="106" height="20" backcolor="#FFFF00"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement>
 					<font isBold="true"/>
@@ -154,7 +154,7 @@ order by b.start_date_current;]]>
 				<text><![CDATA[agency_name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="border" mode="Opaque" x="806" y="0" width="90" height="20" backcolor="#FFFF00"/>
+				<reportElement style="border" mode="Opaque" x="1706" y="0" width="90" height="20" backcolor="#FFFF00"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement>
 					<font isBold="true"/>
@@ -162,7 +162,7 @@ order by b.start_date_current;]]>
 				<text><![CDATA[created_at]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="border" mode="Opaque" x="896" y="0" width="90" height="20" backcolor="#FFFF00"/>
+				<reportElement style="border" mode="Opaque" x="1796" y="0" width="90" height="20" backcolor="#FFFF00"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement>
 					<font isBold="true"/>
@@ -170,7 +170,7 @@ order by b.start_date_current;]]>
 				<text><![CDATA[updated_at]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="border" mode="Opaque" x="986" y="0" width="100" height="20" backcolor="#FFFF00"/>
+				<reportElement style="border" mode="Opaque" x="1886" y="0" width="100" height="20" backcolor="#FFFF00"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
@@ -178,7 +178,7 @@ order by b.start_date_current;]]>
 				<text><![CDATA[revenue_goal]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="border" mode="Opaque" x="1086" y="0" width="100" height="20" backcolor="#FFFF00"/>
+				<reportElement style="border" mode="Opaque" x="1986" y="0" width="100" height="20" backcolor="#FFFF00"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
@@ -186,7 +186,7 @@ order by b.start_date_current;]]>
 				<text><![CDATA[comments_count]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="border" mode="Opaque" x="1186" y="0" width="100" height="20" backcolor="#FFFF00"/>
+				<reportElement style="border" mode="Opaque" x="2086" y="0" width="100" height="20" backcolor="#FFFF00"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
@@ -194,7 +194,7 @@ order by b.start_date_current;]]>
 				<text><![CDATA[quantity_goal]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="border" mode="Opaque" x="1286" y="0" width="100" height="20" backcolor="#FFFF00"/>
+				<reportElement style="border" mode="Opaque" x="2186" y="0" width="100" height="20" backcolor="#FFFF00"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
@@ -202,7 +202,7 @@ order by b.start_date_current;]]>
 				<text><![CDATA[agency_fee]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="border" mode="Opaque" x="1386" y="0" width="100" height="20" backcolor="#FFFF00"/>
+				<reportElement style="border" mode="Opaque" x="2286" y="0" width="100" height="20" backcolor="#FFFF00"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement>
 					<font isBold="true"/>
@@ -210,7 +210,7 @@ order by b.start_date_current;]]>
 				<text><![CDATA[io_line_item_id]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="border" mode="Opaque" x="1986" y="0" width="677" height="20" backcolor="#CCCCCC"/>
+				<reportElement style="border" mode="Opaque" x="3386" y="0" width="677" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement>
 					<font isBold="true"/>
@@ -218,7 +218,7 @@ order by b.start_date_current;]]>
 				<text><![CDATA[io_lineitem_name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="border" mode="Opaque" x="2663" y="0" width="138" height="20" backcolor="#CCCCCC"/>
+				<reportElement style="border" mode="Opaque" x="4063" y="0" width="138" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement>
 					<font isBold="true"/>
@@ -226,7 +226,7 @@ order by b.start_date_current;]]>
 				<text><![CDATA[io_line_items_created_at]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="border" mode="Opaque" x="2801" y="0" width="150" height="20" backcolor="#CCCCCC"/>
+				<reportElement style="border" mode="Opaque" x="4201" y="0" width="150" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement>
 					<font isBold="true"/>
@@ -234,7 +234,7 @@ order by b.start_date_current;]]>
 				<text><![CDATA[io_line_items_updated_at]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="border" mode="Opaque" x="2951" y="0" width="153" height="20" backcolor="#CCCCCC"/>
+				<reportElement style="border" mode="Opaque" x="4351" y="0" width="153" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
@@ -242,7 +242,7 @@ order by b.start_date_current;]]>
 				<text><![CDATA[io_line_items_flight_count]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="border" mode="Opaque" x="3104" y="0" width="145" height="20" backcolor="#CCCCCC"/>
+				<reportElement style="border" mode="Opaque" x="4504" y="0" width="145" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
@@ -250,7 +250,7 @@ order by b.start_date_current;]]>
 				<text><![CDATA[io_line_items_quantity]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="border" mode="Opaque" x="3249" y="0" width="121" height="20" backcolor="#CCCCCC"/>
+				<reportElement style="border" mode="Opaque" x="4649" y="0" width="121" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement>
 					<font isBold="true"/>
@@ -258,7 +258,7 @@ order by b.start_date_current;]]>
 				<text><![CDATA[io_line_items_io_date]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="border" mode="Opaque" x="3370" y="0" width="146" height="20" backcolor="#CCCCCC"/>
+				<reportElement style="border" mode="Opaque" x="4770" y="0" width="146" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement>
 					<font isBold="true"/>
@@ -266,7 +266,7 @@ order by b.start_date_current;]]>
 				<text><![CDATA[io_line_items_external_ref]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="border" mode="Opaque" x="3516" y="0" width="190" height="20" backcolor="#CCCCCC"/>
+				<reportElement style="border" mode="Opaque" x="4916" y="0" width="190" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
@@ -274,7 +274,7 @@ order by b.start_date_current;]]>
 				<text><![CDATA[io_line_items_comments_count]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="border" mode="Opaque" x="3706" y="0" width="138" height="20" backcolor="#CCCCCC"/>
+				<reportElement style="border" mode="Opaque" x="5106" y="0" width="138" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
@@ -282,7 +282,7 @@ order by b.start_date_current;]]>
 				<text><![CDATA[io_line_items_budget]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="border" mode="Opaque" x="3844" y="0" width="138" height="20" backcolor="#CCCCCC"/>
+				<reportElement style="border" mode="Opaque" x="5244" y="0" width="138" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement>
 					<font isBold="true"/>
@@ -290,7 +290,7 @@ order by b.start_date_current;]]>
 				<text><![CDATA[io_line_items_start_date]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="border" mode="Opaque" x="3982" y="0" width="138" height="20" backcolor="#CCCCCC"/>
+				<reportElement style="border" mode="Opaque" x="5382" y="0" width="138" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement>
 					<font isBold="true"/>
@@ -298,7 +298,7 @@ order by b.start_date_current;]]>
 				<text><![CDATA[io_line_items_end_date]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="1486" y="0" width="500" height="20" forecolor="#000000" backcolor="#FFFF00"/>
+				<reportElement mode="Opaque" x="2386" y="0" width="1000" height="20" forecolor="#000000" backcolor="#FFFF00"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -311,7 +311,7 @@ order by b.start_date_current;]]>
 				<text><![CDATA[adm_flight_ids]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="300" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFF00"/>
+				<reportElement mode="Opaque" x="300" y="0" width="1000" height="20" forecolor="#000000" backcolor="#FFFF00"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -346,7 +346,7 @@ order by b.start_date_current;]]>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{organization_id}]]></textFieldExpression>
 			</textField>
 			<textField pattern="yyyy-MM-dd" isBlankWhenNull="false">
-				<reportElement style="border" mode="Transparent" x="400" y="0" width="83" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement style="border" mode="Transparent" x="1300" y="0" width="83" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
@@ -354,19 +354,19 @@ order by b.start_date_current;]]>
 				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{io_date}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="border" x="483" y="0" width="217" height="20"/>
+				<reportElement style="border" x="1383" y="0" width="217" height="20"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{contract_name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="border" x="700" y="0" width="106" height="20"/>
+				<reportElement style="border" x="1600" y="0" width="106" height="20"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{agency_name}]]></textFieldExpression>
 			</textField>
 			<textField pattern="yyyy-MM-dd HH:mm" isBlankWhenNull="false">
-				<reportElement style="border" mode="Transparent" x="806" y="0" width="90" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement style="border" mode="Transparent" x="1706" y="0" width="90" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
@@ -374,7 +374,7 @@ order by b.start_date_current;]]>
 				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{created_at}]]></textFieldExpression>
 			</textField>
 			<textField pattern="yyyy-MM-dd HH:mm" isBlankWhenNull="false">
-				<reportElement style="border" mode="Transparent" x="896" y="0" width="90" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement style="border" mode="Transparent" x="1796" y="0" width="90" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
@@ -382,103 +382,103 @@ order by b.start_date_current;]]>
 				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{updated_at}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement style="border" x="986" y="0" width="100" height="20"/>
+				<reportElement style="border" x="1886" y="0" width="100" height="20"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{revenue_goal}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement style="border" x="1086" y="0" width="100" height="20"/>
+				<reportElement style="border" x="1986" y="0" width="100" height="20"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{comments_count}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement style="border" x="1186" y="0" width="100" height="20"/>
+				<reportElement style="border" x="2086" y="0" width="100" height="20"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{quantity_goal}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement style="border" x="1286" y="0" width="100" height="20"/>
+				<reportElement style="border" x="2186" y="0" width="100" height="20"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{agency_fee}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="border" x="1386" y="0" width="100" height="20"/>
+				<reportElement style="border" x="2286" y="0" width="100" height="20"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{io_line_item_id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="border" mode="Opaque" x="1986" y="0" width="677" height="20" backcolor="#CCCCCC"/>
+				<reportElement style="border" mode="Opaque" x="3386" y="0" width="677" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{io_lineitem_name}]]></textFieldExpression>
 			</textField>
 			<textField pattern="yyyy-MM-dd HH:mm">
-				<reportElement style="border" mode="Opaque" x="2663" y="0" width="138" height="20" backcolor="#CCCCCC"/>
+				<reportElement style="border" mode="Opaque" x="4063" y="0" width="138" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement/>
 				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{io_line_items_created_at}]]></textFieldExpression>
 			</textField>
 			<textField pattern="yyyy-MM-dd HH:mm">
-				<reportElement style="border" mode="Opaque" x="2801" y="0" width="150" height="20" backcolor="#CCCCCC"/>
+				<reportElement style="border" mode="Opaque" x="4201" y="0" width="150" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement/>
 				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{io_line_items_updated_at}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement style="border" mode="Opaque" x="2951" y="0" width="153" height="20" backcolor="#CCCCCC"/>
+				<reportElement style="border" mode="Opaque" x="4351" y="0" width="153" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{io_line_items_flight_count}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement style="border" mode="Opaque" x="3104" y="0" width="145" height="20" backcolor="#CCCCCC"/>
+				<reportElement style="border" mode="Opaque" x="4504" y="0" width="145" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{io_line_items_quantity}]]></textFieldExpression>
 			</textField>
 			<textField pattern="yyyy-MM-dd">
-				<reportElement style="border" mode="Opaque" x="3249" y="0" width="121" height="20" backcolor="#CCCCCC"/>
+				<reportElement style="border" mode="Opaque" x="4649" y="0" width="121" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement/>
 				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{io_line_items_io_date}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="border" mode="Opaque" x="3370" y="0" width="146" height="20" backcolor="#CCCCCC"/>
+				<reportElement style="border" mode="Opaque" x="4770" y="0" width="146" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{io_line_items_external_ref}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement style="border" mode="Opaque" x="3516" y="0" width="190" height="20" backcolor="#CCCCCC"/>
+				<reportElement style="border" mode="Opaque" x="4916" y="0" width="190" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{io_line_items_comments_count}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement style="border" mode="Opaque" x="3706" y="0" width="138" height="20" backcolor="#CCCCCC"/>
+				<reportElement style="border" mode="Opaque" x="5106" y="0" width="138" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{io_line_items_budget}]]></textFieldExpression>
 			</textField>
 			<textField pattern="yyyy-MM-dd">
-				<reportElement style="border" mode="Opaque" x="3844" y="0" width="138" height="20" backcolor="#CCCCCC"/>
+				<reportElement style="border" mode="Opaque" x="5244" y="0" width="138" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement/>
 				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{io_line_items_start_date}]]></textFieldExpression>
 			</textField>
 			<textField pattern="yyyy-MM-dd">
-				<reportElement style="border" mode="Opaque" x="3982" y="0" width="138" height="20" backcolor="#CCCCCC"/>
+				<reportElement style="border" mode="Opaque" x="5382" y="0" width="138" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement/>
 				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{io_line_items_end_date}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="1486" y="0" width="500" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="2386" y="0" width="1000" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -491,7 +491,7 @@ order by b.start_date_current;]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{adm_flight_ids}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="300" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="300" y="0" width="1000" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
