@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_verve_ads_subreport_summary" language="groovy" pageWidth="1762" pageHeight="802" columnWidth="1762" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
-	<property name="ireport.zoom" value="0.5644739300537779"/>
-	<property name="ireport.x" value="0"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_verve_ads_subreport_summary" language="groovy" pageWidth="1145" pageHeight="802" columnWidth="1145" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.4641000000000026"/>
+	<property name="ireport.x" value="192"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="p_start_date" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new String("2013-01-01")]]></defaultValueExpression>
@@ -46,7 +46,7 @@ ORDER BY full_date]]>
 	<columnHeader>
 		<band height="40" splitType="Stretch">
 			<staticText>
-				<reportElement x="91" y="0" width="370" height="20"/>
+				<reportElement x="91" y="0" width="279" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -59,7 +59,7 @@ ORDER BY full_date]]>
 				<text><![CDATA[	Ad Network Report]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="461" y="0" width="404" height="20"/>
+				<reportElement x="370" y="0" width="280" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -72,7 +72,7 @@ ORDER BY full_date]]>
 				<text><![CDATA[Verve Report]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="865" y="0" width="370" height="20"/>
+				<reportElement x="650" y="0" width="222" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -98,7 +98,7 @@ ORDER BY full_date]]>
 				<text><![CDATA[]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="865" y="20" width="182" height="20"/>
+				<reportElement x="650" y="20" width="111" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -111,7 +111,7 @@ ORDER BY full_date]]>
 				<text><![CDATA[Total Clicks]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="461" y="20" width="202" height="20"/>
+				<reportElement x="370" y="20" width="140" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -124,7 +124,7 @@ ORDER BY full_date]]>
 				<text><![CDATA[Total Ad Requests]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="241" y="20" width="220" height="20"/>
+				<reportElement x="241" y="20" width="129" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -137,7 +137,7 @@ ORDER BY full_date]]>
 				<text><![CDATA[Total Ads Filled]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="663" y="20" width="202" height="20"/>
+				<reportElement x="510" y="20" width="140" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -150,7 +150,7 @@ ORDER BY full_date]]>
 				<text><![CDATA[Total Verve Ad Filled]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1047" y="20" width="188" height="20"/>
+				<reportElement x="761" y="20" width="111" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -189,7 +189,7 @@ ORDER BY full_date]]>
 				<text><![CDATA[Date]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1457" y="20" width="113" height="20"/>
+				<reportElement x="1054" y="20" width="91" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -202,7 +202,7 @@ ORDER BY full_date]]>
 				<text><![CDATA[CTR]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1235" y="20" width="111" height="20"/>
+				<reportElement x="872" y="20" width="91" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -215,7 +215,7 @@ ORDER BY full_date]]>
 				<text><![CDATA[eCPC]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1346" y="20" width="111" height="20"/>
+				<reportElement x="963" y="20" width="91" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -242,7 +242,90 @@ ORDER BY full_date]]>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{Date}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0">
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="510" y="0" width="140" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[($F{Total Verve Ad Filled}==null ? ($F{Total Verve Ad Requests}==null ? null : 0) :$F{Total Verve Ad Filled} )]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="1054" y="0" width="91" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $V{CTR}==null ? 0 : $V{CTR} )]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="872" y="0" width="91" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $V{eCPC}==null ? 0 : $V{eCPC} )]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="370" y="0" width="140" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[($F{Total Verve Ad Requests}==null ? ($F{Total Verve Ad Filled}==null ? null : 0) : $F{Total Verve Ad Requests} )]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="761" y="0" width="111" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $F{Total Gross}==null ? ($F{Total Clicks}==null ? null : 0) : $F{Total Gross} )]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="650" y="0" width="111" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $F{Total Clicks}==null ? ($F{Total Gross}==null ? null : 0) : $F{Total Clicks} )]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="963" y="0" width="91" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $V{eCPM}==null ? 0 : $V{eCPM} )]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
 				<reportElement x="91" y="0" width="150" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -251,10 +334,10 @@ ORDER BY full_date]]>
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Long"><![CDATA[$F{Total Ad requests}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $F{Total Ad requests}==null ? ($F{Total Ads Filled}==null ? null :0) : $F{Total Ad requests} )]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0">
-				<reportElement x="241" y="0" width="220" height="20"/>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="241" y="0" width="129" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -262,89 +345,11 @@ ORDER BY full_date]]>
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Long"><![CDATA[$F{Total Ads Filled}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0">
-				<reportElement x="461" y="0" width="202" height="20"/>
-				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Long"><![CDATA[$F{Total Verve Ad Requests}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0">
-				<reportElement x="663" y="0" width="202" height="20"/>
-				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Long"><![CDATA[$F{Total Verve Ad Filled}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0">
-				<reportElement x="865" y="0" width="182" height="20"/>
-				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Long"><![CDATA[$F{Total Clicks}]]></textFieldExpression>
-			</textField>
-			<textField pattern="$ #,##0.00">
-				<reportElement x="1047" y="0" width="188" height="20"/>
-				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Total Gross}]]></textFieldExpression>
-			</textField>
-			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="1235" y="0" width="111" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
-				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
-					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-				</textElement>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$V{eCPC}]]></textFieldExpression>
-			</textField>
-			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="1346" y="0" width="111" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
-				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
-					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-				</textElement>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$V{eCPM}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00 %">
-				<reportElement x="1457" y="0" width="113" height="20"/>
-				<box leftPadding="5" rightPadding="5">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$V{CTR}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $F{Total Ads Filled}==null ? ($F{Total Ad requests}==null ? null : 0) : $F{Total Ads Filled} )]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
+	<summary>
+		<band height="20"/>
+	</summary>
 </jasperReport>
