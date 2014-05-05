@@ -54,7 +54,7 @@ max(dt_lastchange) as dt_lastchange
 ,dfp_clicks
 ,adm_order_ids as "ADM_order_ids"
 ,adm_flights_ids as "ADM_flights_ids"
-FROM billing.ba_monthly_io_line_item_temp
+FROM billing.ba_monthly_io_line_item_v2
 WHERE month_since_2005=$P{p_month_sk}::int
 GROUP BY
 io_orders_id
