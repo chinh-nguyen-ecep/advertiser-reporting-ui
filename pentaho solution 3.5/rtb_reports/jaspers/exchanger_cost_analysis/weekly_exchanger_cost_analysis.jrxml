@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Daily Exchanger Payout" pageWidth="620" pageHeight="1684" columnWidth="580" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="boder">
+		<box leftPadding="5" rightPadding="5">
+			<pen lineWidth="0.5"/>
+			<topPen lineWidth="0.5"/>
+			<leftPen lineWidth="0.5"/>
+			<bottomPen lineWidth="0.5"/>
+			<rightPen lineWidth="0.5"/>
+		</box>
+	</style>
+	<parameter name="p_start_week" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("2014-01-01")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_end_week" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("2014-01-01")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_exchangers" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("")]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT year_week as "Week"
+     , exchanger as "Exchanger"
+     , imp_cnt as "Imp Cnt"
+     , avg_paid_price as "Avg Paid Price"
+     , avg_bid_price as "Avg Bid Price"
+     , paid_amount as "Paid Amount"
+     , max(dt_lastchange) as dt_lastchange
+FROM rtb.weekly_agg_exchanger_cost_analysis
+WHERE is_active = true
+  AND year_week BETWEEN $P{p_start_week} AND $P{p_end_week}
+  AND (exchanger IN (select unnest(string_to_array($P{p_exchangers}, ','))::text) OR 'all' = $P{p_exchangers})
+GROUP BY year_week, exchanger, imp_cnt, avg_paid_price, avg_bid_price, paid_amount
+ORDER BY  year_week, exchanger;]]>
+	</queryString>
+	<field name="Week" class="java.lang.String"/>
+	<field name="Exchanger" class="java.lang.String"/>
+	<field name="Imp Cnt" class="java.lang.Long"/>
+	<field name="Avg Paid Price" class="java.lang.Double"/>
+	<field name="Avg Bid Price" class="java.lang.Double"/>
+	<field name="Paid Amount" class="java.lang.Double"/>
+	<field name="dt_lastchange" class="java.sql.Timestamp"/>
+	<variable name="Imp Cnt_1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{Imp Cnt}]]></variableExpression>
+	</variable>
+	<variable name="Paid Amount_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{Paid Amount}]]></variableExpression>
+	</variable>
+	<variable name="Avg Paid Price_1" class="java.lang.Double" calculation="Average">
+		<variableExpression><![CDATA[$F{Avg Paid Price}]]></variableExpression>
+	</variable>
+	<variable name="Avg Bid Price_1" class="java.lang.Double" calculation="Average">
+		<variableExpression><![CDATA[$F{Avg Bid Price}]]></variableExpression>
+	</variable>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="80">
+			<staticText>
+				<reportElement x="0" y="0" width="580" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Notes:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="580" height="60"/>
+				<textElement/>
+				<text><![CDATA[- Imp Cnt: It is the sum of unique count ( group by day, exchanger, paid price, bid price)
+- Paid Price: it is paid price (vrv.price) field in impression log
+- Bid Price: it is bid price (vrv.bid) field in impression log
+- Paid Amount: Paid Price * (Imp Cnt / 1000)]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20">
+			<staticText>
+				<reportElement style="boder" x="0" y="0" width="80" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Week]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="80" y="0" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Exchanger]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="480" y="0" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Avg Bid Price]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="280" y="0" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Paid Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" mode="Transparent" x="380" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Avg Paid Price]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" mode="Transparent" x="180" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Imp Cnt]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<textField pattern="">
+				<reportElement style="boder" x="0" y="0" width="80" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Week}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="boder" x="80" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Exchanger}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00000">
+				<reportElement style="boder" x="480" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Avg Bid Price}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00000">
+				<reportElement style="boder" x="280" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Paid Amount}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00000" isBlankWhenNull="false">
+				<reportElement style="boder" mode="Transparent" x="380" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Avg Paid Price}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement style="boder" mode="Transparent" x="180" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{Imp Cnt}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="20">
+			<textField pattern="#,##0">
+				<reportElement x="180" y="0" width="100" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{Imp Cnt_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00000" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="280" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{Paid Amount_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="80" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="0" width="100" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<textField pattern="#,##0.00000">
+				<reportElement x="380" y="0" width="100" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{Avg Paid Price_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00000">
+				<reportElement x="480" y="0" width="100" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{Avg Bid Price_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
