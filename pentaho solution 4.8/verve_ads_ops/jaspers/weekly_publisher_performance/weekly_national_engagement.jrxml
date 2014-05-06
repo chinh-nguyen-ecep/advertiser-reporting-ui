@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="National Engagement Performance" pageWidth="7230" pageHeight="1684" orientation="Landscape" columnWidth="7190" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.239669421487605"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="4727"/>
 	<property name="ireport.y" value="0"/>
 	<style name="boder">
 		<box leftPadding="5" rightPadding="5">
@@ -53,9 +53,9 @@
      , SUM(cta_any_90) as "90days_cta_any"
      , SUM(cta_any_30) as "30days_cta_any"
      , SUM(cta_any_07) as "7days_cta_any"
-     , (CASE WHEN SUM(imp_cnt_90) > 0 THEN (SUM(cta_any_90) / SUM(imp_cnt_90) / 1000) ELSE 0 END) as "90days_cta_any per 1000_national engagement impressions"
-     , (CASE WHEN SUM(imp_cnt_30) > 0 THEN (SUM(cta_any_30) / SUM(imp_cnt_30) / 1000) ELSE 0 END) as "30days_cta_any per 1000_national engagement impressions"
-     , (CASE WHEN SUM(imp_cnt_07) > 0 THEN (SUM(cta_any_07) / SUM(imp_cnt_07) / 1000) ELSE 0 END) as "7days_cta_any per 1000_national engagement impressions"
+     , (CASE WHEN SUM(imp_cnt_90) > 0 THEN (SUM(cta_any_90) / (SUM(imp_cnt_90)::FLOAT / 1000)) ELSE 0 END) as "90days_cta_any per 1000_national engagement impressions"
+     , (CASE WHEN SUM(imp_cnt_30) > 0 THEN (SUM(cta_any_30) / (SUM(imp_cnt_30)::FLOAT / 1000)) ELSE 0 END) as "30days_cta_any per 1000_national engagement impressions"
+     , (CASE WHEN SUM(imp_cnt_07) > 0 THEN (SUM(cta_any_07) / (SUM(imp_cnt_07)::FLOAT / 1000)) ELSE 0 END) as "7days_cta_any per 1000_national engagement impressions"
      , (CASE WHEN SUM(click_cnt_90) > 0 THEN SUM(cta_any_90) / SUM(click_cnt_90) ELSE 0 END) as "90days_cta_any per national engagement clicks"
      , (CASE WHEN SUM(click_cnt_30) > 0 THEN SUM(cta_any_30) / SUM(click_cnt_30) ELSE 0 END) as "30days_cta_any per national engagement clicks"
      , (CASE WHEN SUM(click_cnt_07) > 0 THEN SUM(cta_any_07) / SUM(click_cnt_07) ELSE 0 END) as "7days_cta_any per national engagement clicks"
@@ -117,9 +117,9 @@ ORDER BY  publisher_name, property_name, partner_keyword, channel_name, ad_netwo
 	<field name="90days_cta_any" class="java.math.BigDecimal"/>
 	<field name="30days_cta_any" class="java.math.BigDecimal"/>
 	<field name="7days_cta_any" class="java.math.BigDecimal"/>
-	<field name="90days_cta_any per 1000_national engagement impressions" class="java.math.BigDecimal"/>
-	<field name="30days_cta_any per 1000_national engagement impressions" class="java.math.BigDecimal"/>
-	<field name="7days_cta_any per 1000_national engagement impressions" class="java.math.BigDecimal"/>
+	<field name="90days_cta_any per 1000_national engagement impressions" class="java.lang.Double"/>
+	<field name="30days_cta_any per 1000_national engagement impressions" class="java.lang.Double"/>
+	<field name="7days_cta_any per 1000_national engagement impressions" class="java.lang.Double"/>
 	<field name="90days_cta_any per national engagement clicks" class="java.math.BigDecimal"/>
 	<field name="30days_cta_any per national engagement clicks" class="java.math.BigDecimal"/>
 	<field name="7days_cta_any per national engagement clicks" class="java.math.BigDecimal"/>
@@ -1140,7 +1140,7 @@ ORDER BY  publisher_name, property_name, partner_keyword, channel_name, ad_netwo
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{90days_cta_any per 1000_national engagement impressions}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{90days_cta_any per 1000_national engagement impressions}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="3650" y="0" width="330" height="20"/>
@@ -1151,7 +1151,7 @@ ORDER BY  publisher_name, property_name, partner_keyword, channel_name, ad_netwo
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{30days_cta_any per 1000_national engagement impressions}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{30days_cta_any per 1000_national engagement impressions}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="4310" y="0" width="260" height="20"/>
@@ -1426,7 +1426,7 @@ ORDER BY  publisher_name, property_name, partner_keyword, channel_name, ad_netwo
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{7days_cta_any per 1000_national engagement impressions}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{7days_cta_any per 1000_national engagement impressions}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
