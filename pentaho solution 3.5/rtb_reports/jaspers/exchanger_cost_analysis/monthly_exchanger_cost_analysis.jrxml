@@ -12,14 +12,14 @@
 			<rightPen lineWidth="0.5"/>
 		</box>
 	</style>
-	<parameter name="p_start_month" class="java.lang.String">
-		<defaultValueExpression><![CDATA[new String("2014-01-01")]]></defaultValueExpression>
+	<parameter name="p_start_month_since_2005" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("0")]]></defaultValueExpression>
 	</parameter>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
-	<parameter name="p_end_month" class="java.lang.String">
-		<defaultValueExpression><![CDATA[new String("2014-01-01")]]></defaultValueExpression>
+	<parameter name="p_end_month_since_2005" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("1")]]></defaultValueExpression>
 	</parameter>
 	<parameter name="p_exchangers" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new String("")]]></defaultValueExpression>
@@ -34,7 +34,7 @@
      , max(dt_lastchange) as dt_lastchange
 FROM rtb.monthly_agg_exchanger_cost_analysis
 WHERE is_active = true
-  AND calendar_year_month BETWEEN $P{p_start_month} AND $P{p_end_month}
+  AND month_since_2005 BETWEEN $P{p_start_month_since_2005}::int AND $P{p_end_month_since_2005}::int
   AND (exchanger IN (select unnest(string_to_array($P{p_exchangers}, ','))::text) OR 'all' = $P{p_exchangers})
 GROUP BY calendar_year_month, month_since_2005, exchanger, imp_cnt, avg_paid_price, avg_bid_price, paid_amount
 ORDER BY  month_since_2005, exchanger;]]>

@@ -42,6 +42,11 @@
 						 <label style="margin-left: 0px;"></label> {p_start_date}
 						 <label style="margin-left: 0px;">To:</label> {p_end_date}
 					</div>
+					<div id="weekmode" style="display: none;float: left;">
+		             <label style="margin-left: 0px;"></label> {p_start_week}
+		             <label style="margin-left: 0px;">To:</label> {p_end_week}
+		             </div>	
+					 
 		             <div id="monthmode" style="display: none;float: left;">
 		             <label style="margin-left: 0px;"></label> {p_start_month_since_2005}
 		             <label style="margin-left: 0px;">To:</label> {p_end_month_since_2005}
@@ -131,11 +136,14 @@
 			console.log(isChecked);
 			if(isChecked){
 				var dateMode=$(this).val();
+				$('#weekmode').hide();
+				$('#datemode').hide();
+				$('#monthmode').hide();
 				if(dateMode=='date'){
-					$('#datemode').show();
-					$('#monthmode').hide();
+					$('#datemode').show();					
+				}else if(dateMode=='week'){
+					$('#weekmode').show();
 				}else{
-					$('#datemode').hide();
 					$('#monthmode').show();
 				}
 			}
