@@ -58,9 +58,10 @@
       <sources> 
         <request>list_date_mode</request> 
       </sources>  
-      <default-value type="string-list"> 
-        <list-item>date</list-item>  
-        <list-item>month</list-item> 
+      <default-value type="string-list">
+        <list-item>date</list-item>
+        <list-item>week</list-item>
+        <list-item>month</list-item>
       </default-value> 
     </list_date_mode>  
     <List_output_type type="string-list"> 
@@ -89,7 +90,19 @@
         <request>p_exchangers</request> 
       </sources>  
       <default-value/> 
-    </p_exchangers> 
+    </p_exchangers>  
+    <p_start_week type="string">
+      <sources>
+        <request>p_start_week</request>
+      </sources>
+      <default-value/>
+    </p_start_week>
+    <p_end_week type="string">
+      <sources>
+        <request>p_end_week</request>
+      </sources>
+      <default-value/>
+    </p_end_week>
   </inputs>
 
   <outputs> 
@@ -112,7 +125,19 @@
         <location>exchanger_cost_analysis/exchanger_cost_analysis.jasper</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
-    </report-definition2> 
+    </report-definition2>  
+    <report-definition>
+      <solution-file>
+        <location>exchanger_cost_analysis/weekly_exchanger_cost_analysis.jasper</location>
+        <mime-type>text/plain</mime-type>
+      </solution-file>
+    </report-definition>
+    <report-definition1>
+      <solution-file>
+        <location>exchanger_cost_analysis/monthly_exchanger_cost_analysis.jasper</location>
+        <mime-type>text/plain</mime-type>
+      </solution-file>
+    </report-definition1>
   </resources>
   
   <actions> 
@@ -149,15 +174,36 @@ SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM r
       <component-definition> 
         <live><![CDATA[false]]></live>  
         <query><![CDATA[SELECT calendar_year_month,month_since_2005 
-FROM rtb.daily_agg_exchanger_cost_analysis
+FROM rtb.monthly_agg_exchanger_cost_analysis
 GROUP BY calendar_year_month,month_since_2005
 UNION ALL
 SELECT calendar_year_month,month_since_2005 
-FROM rtb.daily_agg_exchanger_cost_analysis
-GROUP BY calendar_year_month,month_since_2005]]></query> 
+FROM rtb.monthly_agg_exchanger_cost_analysis
+GROUP BY calendar_year_month,month_since_2005]]></query>
       </component-definition> 
     </action-definition>
   
+    <action-definition>
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get list weekly</action-type>
+      <action-inputs>
+        <jndi type="string" mapping="connectionName"/>
+      </action-inputs>
+      <action-outputs>
+        <query-result type="result-set" mapping="query_result_list_weeks"/>
+        <year_week type="string"/>
+        <start_date_sk type="string"/>
+        <end_date_sk type="string"/>
+      </action-outputs>
+      <component-definition>
+        <query><![CDATA[SELECT year_week,start_date_sk,end_date_sk 
+FROM rtb.weekly_agg_exchanger_cost_analysis 
+GROUP BY year_week,start_date_sk,end_date_sk 
+ORDER BY end_date_sk desc]]></query>
+        <live><![CDATA[false]]></live>
+      </component-definition>
+    </action-definition>
+
     <action-definition> 
       <component-name>SecureFilterComponent</component-name>
       <action-type>Prompt/Secure Filter</action-type>
@@ -173,7 +219,10 @@ GROUP BY calendar_year_month,month_since_2005]]></query>
         <list_date_mode type="string-list"/>  
         <p_start_month_since_2005 type="string"/>  
         <p_end_month_since_2005 type="string"/>  
-        <query_result_list_months type="result-set"/> 
+        <query_result_list_months type="result-set"/>  
+        <p_start_week type="string"/>
+        <query_result_list_weeks type="result-set"/>
+        <p_end_week type="string"/>
       </action-inputs>
       <action-resources> 
         <pageTemplate mapping="pageTemplate1"/> 
@@ -199,7 +248,13 @@ GROUP BY calendar_year_month,month_since_2005]]></query>
           </p_start_month_since_2005>  
           <p_end_month_since_2005 style="select"> 
             <filter value-col-name="month_since_2005" display-col-name="calendar_year_month">query_result_list_months</filter> 
-          </p_end_month_since_2005> 
+          </p_end_month_since_2005>  
+          <p_start_week style="select">
+            <filter value-col-name="year_week" display-col-name="year_week">query_result_list_weeks</filter>
+          </p_start_week>
+          <p_end_week style="select">
+            <filter value-col-name="year_week" display-col-name="year_week">query_result_list_weeks</filter>
+          </p_end_week>
         </selections>  
         <xsl><![CDATA[pageTemplate]]></xsl> 
       </component-definition> 
@@ -225,8 +280,44 @@ GROUP BY calendar_year_month,month_since_2005]]></query>
  
     </actions>
   
+    <actions>
+      <condition><![CDATA[p_date_mode=='week']]></condition>
+      <action-definition>
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs>
+          <jndi type="string" mapping="connectionName"/>
+          <p_start_week type="string"/>
+          <p_end_week type="string"/>
+          <p_exchangers type="string"/>
+          <output-type type="string" mapping="p_output"/>
+        </action-inputs>
+        <action-resources>
+          <report-definition type="resource"/>
+        </action-resources>
+        <component-definition/>
+      </action-definition>
+
+    </actions>
+
     <actions> 
-      <condition><![CDATA[p_date_mode=='month']]></condition> 
+      <condition><![CDATA[p_date_mode=='month']]></condition>  
+      <action-definition>
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs>
+          <p_start_month_since_2005 type="string"/>
+          <p_end_month_since_2005 type="string"/>
+          <jndi type="string" mapping="connectionName"/>
+          <output-type type="string" mapping="p_output"/>
+          <p_exchangers type="string"/>
+        </action-inputs>
+        <action-resources>
+          <report-definition mapping="report-definition1"/>
+        </action-resources>
+        <component-definition/>
+      </action-definition>
+
     </actions>
  
   </actions> 
