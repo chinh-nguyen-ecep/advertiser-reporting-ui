@@ -156,9 +156,9 @@ function generateSelect2(options){
 		$.each(data,function(index,temp){
 			var id=temp[0];
 			var text=temp[1];
-			var row='<input id="checkbox_'+id+'" value="'+id+'" type="checkbox" name="'+options.name+'" title="'+text+'"/> <label for="checkbox_'+id+'">'+text+'</label><br/>';
+			var row='<input id="checkbox_'+options.name+'_'+id+'" value="'+id+'" type="checkbox" name="'+options.name+'" title="'+text+'"/> <label for="checkbox_'+options.name+'_'+id+'">'+text+'</label><br/>';
 			if(!options.multi){
-				row='<input id="radio_'+id+'" value="'+id+'" type="radio" name="'+options.name+'" title="'+text+'"/> <label for="radio_'+id+'">'+text+'</label><br/>';
+				row='<input id="radio_'+options.name+'_'+id+'" value="'+id+'" type="radio" name="'+options.name+'" title="'+text+'"/> <label for="radio_'+options.name+'_'+id+'">'+text+'</label><br/>';
 			}
 			drawArea.append(row);
 		});
