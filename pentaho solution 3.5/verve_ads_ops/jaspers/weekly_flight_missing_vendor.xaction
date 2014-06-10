@@ -39,7 +39,7 @@
       <sources> 
         <request>connection_name</request> 
       </sources>  
-      <default-value><![CDATA[dw3dw3]]></default-value> 
+      <default-value><![CDATA[verveReportConnection]]></default-value> 
     </connection_name>  
     <p_mailTo type="string"> 
       <sources> 
@@ -94,12 +94,12 @@
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </pageTemplate1>  
-    <report-definition1>
-      <solution-file>
-        <location>weekly_flight_missing_vendor/weekly_flight_missing_vendor_csv.jasper</location>
-        <mime-type>text/plain</mime-type>
-      </solution-file>
-    </report-definition1>
+    <report-definition1> 
+      <solution-file> 
+        <location>weekly_flight_missing_vendor/weekly_flight_missing_vendor_csv.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition1> 
   </resources>
   
   <actions> 
@@ -165,89 +165,37 @@ ORDER BY year_week desc]]></query>
   
     <actions> 
       <condition><![CDATA[p_emailMode == 'true']]></condition>  
-      <action-definition> 
+      <action-definition>
         <component-name>JavascriptRule</component-name>
-        <action-type>Process report input</action-type>
-        <action-inputs> 
-          <parameter_string type="string"/>  
-          <q_list_week type="result-set"/>  
-          <p_year_week type="string"/> 
+        <action-type>Get year_week value</action-type>
+        <action-inputs>
+          <q_list_week type="result-set"/>
         </action-inputs>
-        <action-outputs> 
-          <p_year_week type="string"/>  
-          <reportNameCsv type="string"/>  
-          <reportNamePdf type="string"/>  
-          <p_mailTextMessage type="string"/> 
+        <action-outputs>
+          <p_year_week type="string"/>
         </action-outputs>
-        <component-definition> 
-          <script><![CDATA[var reportName='';
-var reportNameCsv='';
-var reportNamePdf='';
-var start_date_of_week=q_list_week.getValueAt(0,1);
-var end_date_of_week=q_list_week.getValueAt(0,2);
-
-p_year_week=q_list_week.getValueAt(0,0);
-
-reportName='Weekly_ Advance_Digital.'+start_date_of_week+'.'+end_date_of_week;
-reportNameCsv=reportName+'.csv';
-reportNamePdf=reportName+'.pdf';
-
-var p_mailTextMessage='Attached is the Weekly  Advance Digital Report with start date from '+start_date_of_week+' to '+end_date_of_week;]]></script> 
-        </component-definition> 
+        <component-definition>
+          <script><![CDATA[var p_year_week;
+p_year_week=q_list_week.getValueAt(0,0);]]></script>
+        </component-definition>
       </action-definition>
-  
-      <action-definition> 
-        <component-name>JasperReportsComponent</component-name>
-        <action-type>Jasper pdf</action-type>
-        <action-inputs> 
-          <p_year_week type="string"/>  
-          <jndi type="string" mapping="connection_name"/> 
+
+      <action-definition>
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Insert subscription</action-type>
+        <action-inputs>
+          <jndi type="string" mapping="connection_name"/>
+          <p_year_week type="string"/>
         </action-inputs>
-        <action-outputs> 
-          <report-output type="content" mapping="reportPdf"/> 
+        <action-outputs>
+          <query-result type="result-set" mapping="query_result"/>
         </action-outputs>
-        <component-definition> 
-          <output-type><![CDATA[pdf]]></output-type> 
-        </component-definition> 
+        <component-definition>
+          <live><![CDATA[true]]></live>
+          <query><![CDATA[SELECT * FROM control.fn_spctl_insert_subscription_to_process(32,'week={p_year_week}',true);]]></query>
+        </component-definition>
       </action-definition>
-  
-      <action-definition> 
-        <component-name>JasperReportsComponent</component-name>
-        <action-type>Jasper Csv</action-type>
-        <action-inputs> 
-          <jndi type="string" mapping="connection_name"/>  
-          <p_year_week type="string"/> 
-        </action-inputs>
-        <action-resources>
-          <report-definition mapping="report-definition1"/>
-        </action-resources>
-        <action-outputs> 
-          <report-output type="content" mapping="reportCsv"/> 
-        </action-outputs>
-        <component-definition> 
-          <output-type><![CDATA[csv]]></output-type> 
-        </component-definition> 
-      </action-definition>
-  
-      <action-definition> 
-        <component-name>EmailComponent</component-name>
-        <action-type>E-Mail</action-type>
-        <action-inputs> 
-          <to type="string" mapping="p_mailTo"/>  
-          <subject type="string" mapping="p_mailTitle"/>  
-          <message-html type="string" mapping="p_mailTextMessage"/>  
-          <reportPdf type="content"/>  
-          <reportCsv type="content"/>  
-          <attach_name_1 type="string" mapping="reportNamePdf"/>  
-          <attach_name_2 type="string" mapping="reportNameCsv"/>  
-          <bcc type="string" mapping="p_emailBcc"/> 
-        </action-inputs>
-        <component-definition> 
-          <attachment-ref name-param="attach_name_1" input-param="reportPdf"/>  
-          <attachment-ref name-param="attach_name_2" input-param="reportCsv"/> 
-        </component-definition> 
-      </action-definition>
- 
+
     </actions>
  
   </actions> 
