@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Billing Monthly VLMO Revenue" pageWidth="1700" pageHeight="842" orientation="Landscape" columnWidth="1660" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="60"/>
+	<property name="ireport.y" value="332"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="parameter1" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/opt/pentaho/biserver-ce/pentaho-solutions/third_party_reports/jaspers/daily_performance_report/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="calendar_year_month" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT calendar_year_month
+,(max(dt_lastchange)::timestamp with time zone AT TIME ZONE 'America/Los_Angeles')::timestamp with time zone AT TIME ZONE 'America/New_York' as dt_lastchange
+FROM billing.ba_monthly_vlmo_revenue
+GROUP BY calendar_year_month]]>
+	</queryString>
+	<field name="calendar_year_month" class="java.lang.String"/>
+	<field name="dt_lastchange" class="java.sql.Timestamp"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="344">
+			<staticText>
+				<reportElement x="60" y="9" width="1600" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Billing Monthly VLMO Revenue]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="60" y="29" width="1600" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Month: " + $F{calendar_year_month}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="49" width="160" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Refresh Date (ET):]]></text>
+			</staticText>
+			<textField pattern="yyyy-MM-dd">
+				<reportElement x="160" y="49" width="200" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{dt_lastchange}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="80" width="1160" height="20"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Notes:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="115" width="1160" height="15" forecolor="#FF0000"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[*Clicks: Using event e=click for the count]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="100" width="1160" height="15" forecolor="#FF0000"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[*Delivered Imps: Using event e=imp for the count]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="145" width="1160" height="15" forecolor="#FF0000"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[*Billable Rate: Sum the impressions at the agency level and using tiers to determine the billable rate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="130" width="1160" height="15" forecolor="#FF0000"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[*Booked Imps: from the orders table in VLMO]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="9" width="60" height="40"/>
+				<imageExpression class="java.lang.String"><![CDATA["../vervelogo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="160" width="1160" height="15" forecolor="#FF0000"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[*Billable Imps: If TOTAL delivered is greater than booked, then just billable imp = booked imps]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="175" width="1160" height="15" forecolor="#FF0000"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[*Gross Revenue = (billable imp /1000)* billable rate]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="0" y="210" width="1160" height="30"/>
+				<subreportParameter name="calendar_year_month">
+					<subreportParameterExpression><![CDATA[$P{calendar_year_month}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "sub_summary.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="240" width="1660" height="30"/>
+				<subreportParameter name="calendar_year_month">
+					<subreportParameterExpression><![CDATA[$P{calendar_year_month}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "sub_campaign.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="270" width="1660" height="30"/>
+				<subreportParameter name="calendar_year_month">
+					<subreportParameterExpression><![CDATA[$P{calendar_year_month}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "sub_offer.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="300" width="1160" height="30"/>
+				<subreportParameter name="calendar_year_month">
+					<subreportParameterExpression><![CDATA[$P{calendar_year_month}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "sub_tier_rate.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="26">
+			<textField>
+				<reportElement x="0" y="4" width="160" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="4" width="1500" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page " + $V{PAGE_NUMBER} + " of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="3" width="1660" height="1"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>
