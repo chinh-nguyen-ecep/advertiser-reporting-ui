@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>BA National Management</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>chinhnguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <actions type="string"> 
+      <sources> 
+        <request>actions</request> 
+      </sources>  
+      <default-value><![CDATA[template]]></default-value> 
+    </actions>  
+    <returnResult type="string"> 
+      <sources> 
+        <request>returnResult</request> 
+      </sources>  
+      <default-value/> 
+    </returnResult>  
+    <query_result type="result-set"> 
+      <sources> 
+        <request>query_result</request> 
+      </sources>  
+      <default-value/> 
+    </query_result>  
+    <connectionName type="string"> 
+      <sources> 
+        <request>connectionName</request> 
+      </sources>  
+      <default-value><![CDATA[dw3dw3]]></default-value> 
+    </connectionName>  
+    <p_month_year type="string"> 
+      <sources> 
+        <request>p_month_year</request> 
+      </sources>  
+      <default-value><![CDATA[0813]]></default-value> 
+    </p_month_year>  
+    <p_inv_detail_id type="string"> 
+      <sources> 
+        <request>p_inv_detail_id</request> 
+      </sources>  
+      <default-value/> 
+    </p_inv_detail_id>  
+    <data type="string"> 
+      <sources> 
+        <request>data</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </data>  
+    <exportType type="string"> 
+      <sources> 
+        <request>exportType</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </exportType>  
+    <reportEmailTo type="string"> 
+      <sources> 
+        <request>reportEmailTo</request> 
+      </sources>  
+      <default-value><![CDATA[chinh.nguyen@ecepvn.org]]></default-value> 
+    </reportEmailTo>  
+    <p_account_name type="string"> 
+      <sources> 
+        <request>p_account_name</request> 
+      </sources>  
+      <default-value/> 
+    </p_account_name>  
+    <reportEmailContent type="string"> 
+      <sources> 
+        <request>reportEmailContent</request> 
+      </sources>  
+      <default-value><![CDATA[Hello,<p/> This is the testing email<br/>Please review and feeback to nhut@vervemobile.com.<p/>Thanks!]]></default-value> 
+    </reportEmailContent>  
+    <page type="string">
+      <sources>
+        <request>page</request>
+      </sources>
+      <default-value><![CDATA[1]]></default-value>
+    </page>
+    <limit type="string">
+      <sources>
+        <request>limit</request>
+      </sources>
+      <default-value><![CDATA[10]]></default-value>
+    </limit>
+    <term type="string">
+      <sources>
+        <request>term</request>
+      </sources>
+      <default-value/>
+    </term>
+  </inputs>
+
+  <outputs> 
+    <returnResult type="string"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </returnResult> 
+  </outputs>
+
+  <resources> 
+    <report-definition> 
+      <solution-file> 
+        <location>local_invoice_manager/local_invoice_summary_report/local_invoice_summary_report.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition>  
+    <report-definition1> 
+      <solution-file> 
+        <location>local_invoice_manager/local_invoice_report/local_invoice_report.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition1>  
+    <report-definition2> 
+      <solution-file> 
+        <location>local_invoice_manager/local_invoice_report/local_invoice_report.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition2>  
+    <report-definition3> 
+      <solution-file> 
+        <location>local_invoice_manager/local_invoice_report/local_invoice_report.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition3>  
+    <template> 
+      <solution-file> 
+        <location>ba_national_management/index.jsp</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </template>  
+    <template1> 
+      <solution-file> 
+        <location>ba_national_management/information.jsp</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </template1>  
+    <template2> 
+      <solution-file> 
+        <location>ba_national_management/add-information-form.jsp</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </template2> 
+  </resources>
+  
+  <actions> 
+    <actions> 
+      <condition><![CDATA[actions=='template']]></condition>  
+      <action-definition> 
+        <component-name>TemplateComponent</component-name>
+        <action-type>Message Template</action-type>
+        <action-resources> 
+          <template type="resource"/> 
+        </action-resources>
+        <action-outputs> 
+          <output-message type="string" mapping="returnResult"/> 
+        </action-outputs>
+        <component-definition/> 
+      </action-definition>
+ 
+    </actions>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>Process data grid</action-type>
+      <action-inputs> 
+        <actions type="string"/>  
+        <returnResult type="string"/>  
+        <query_result type="result-set"/>  
+        <data type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <returnResult type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var result_set=query_result;
+var rowCount=query_result.getRowCount();
+var meta = result_set.getMetaData();      // Returns an IPentahoMetaData object
+var colCount = meta.getColumnCount();
+var colHeaders = meta.getColumnHeaders(); //getColumnHeaders() returns object[][]
+var rowHeaders = meta.getRowHeaders(); 
+
+if(data=='html'){
+	returnResult=returnResult;
+}else{
+	returnResult='[';
+	//process data item
+	for(var i=0;i<result_set.getRowCount();i++){
+		var item='';
+		if(i>0){
+			item+=',';
+		}
+		item+='{';
+			for(var j=0;j<result_set.getColumnCount();j++){ 		
+				var value=result_set.getValueAt(i,j);
+				var columnValue=colHeaders[0][j];
+				if(j>0){
+					item+=',';
+				}
+				item+='"'+columnValue+'":"'+value+'"';
+			}
+		item+='}';	
+
+	returnResult+=item;
+	}
+	//end
+
+	returnResult+=']';
+}]]></script> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>
