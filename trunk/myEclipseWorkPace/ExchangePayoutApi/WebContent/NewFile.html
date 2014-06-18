@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Email schedule manager</title>
+	<link rel="stylesheet" type="text/css" href="/verve-lib/scripts/metroui.org.ua.095-a/css/modern.css">
+    <link rel="stylesheet" type="text/css" href="/verve-lib/scripts/jquery-easyui-1.3.4/themes/bootstrap/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/verve-lib/scripts/jquery-easyui-1.3.4/themes/icon.css">
+    <script type="text/javascript" src="/verve-lib/scripts/jquery-easyui-1.3.4/jquery.min.js"></script>
+    <script type="text/javascript" src="/verve-lib/scripts/jquery-easyui-1.3.4/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/verve-lib/scripts/jquery-easyui-1.3.4/utils.js"></script>
+	<style>
+		body{
+			font-family:Verdana,"Lucida Console", Times, serif;
+			font-size:14px;
+		}
+		
+		form div{
+			margin-bottom: 5px;	
+		}
+		form div label{
+			width: 100px;
+			float: left;
+		}
+		div.detail div{
+			border-bottom: 1px dashed gray;
+			height: 25px;
+			line-height: 25px;
+		}
+		
+		div.detail{
+			font-family: Verdana;
+			font-size:11px;
+			
+		}
+		div.detail label{
+			width: 110px;
+			float: left;				
+			margin-right: 5px;
+			text-align: right;
+		}
+		span.email{
+			color: #3399CC;
+			font-style:italic;
+		}
+		span.name{
+			font-weight:bold;
+			font-size:12px;
+		}
+	</style>
+</head>
+<body >
+
+
+<div id="mainLayout" class="easyui-layout" style="" data-options="fit:true">
+	<div data-options="region:'center',title:'Email Schedule Manager',iconCls:'icon-message',collapsible:false">
+		<table id="tb1">	</table>
+	</div>
+	<div data-options="region:'south',split:true,title:'Detail'" style="height:200px;padding: 10px"></div>
+</div>
+
+
+<div id="add_schedule_win" style="padding: 10px">
+    <form id="add_form">
+		<div>
+			<label for="name">Type:</label>
+			<select name="p_schedule_type" class="easyui-combobox" panelHeight="auto" style="width:100px">
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+            </select>
+		</div>
+		<div>
+			<label for="name">Report name:</label>
+			<input value="" name="p_report_name" class="easyui-validatebox" data-options="required:true," style="width:250px"/>
+		</div>
+		<div>
+			<label for="name">Solution:</label>
+			<select name="p_solution" class="easyui-combobox" panelHeight="auto" >
+                <option value="ad_serving">Revenue Reporting</option>
+				<option value="Adcel reports">Adcel reports</option>
+				<option value="billing_accounting">Billing Accounting</option>
+				<option value="delivery_reports">Delivery reports</option>
+				<option value="Development">WIP-Development</option>
+				<option value="event_tracker">Event Tracker</option>
+				<option value="third_party_reports">Third Party networks</option>
+				<option value="verve_ads_ops">Verve Ads Ops</option>
+            </select>
+		</div>	
+		<div>
+			<label for="name">Path:</label>
+			<input name="p_path" value="jaspers" class="easyui-validatebox" data-options="required:true" style="width:350px"/>
+		</div>	
+		<div>
+			<label for="name">Xaction file:</label>
+			<input value="" name="p_xaction_file" class="easyui-validatebox" data-options="required:true" style="width:300px"/>
+		</div>	
+		<div>
+			<label for="name">Table source:</label>
+			<input name="p_table_source" value="refer.date_dim" class="easyui-validatebox" data-options="required:true" style="width:300px"/>
+		</div>
+		<div>
+			<label for="name">Fire Date:</label>
+			<input name="p_fire_date" class="easyui-datebox" style="width:150px"/>
+		</div>	
+		<div>
+			<label for="name">Fire Time:</label>
+			<input name="p_fire_time" value="09:00" class="easyui-timespinner" data-options="required:true" style="width:150px"/>
+		</div>
+		<div>
+			<label for="name">Email to:</label>
+			<textarea rows="8" cols="60" class="easyui-validatebox" data-options="required:true" name="p_email_to" >chinh.nguyen@ecepvn.org,tho.hoang@ecepvn.org</textarea>
+		</div>		
+	</form>
+</div>
+ 
+<div id="email_schedule" style="padding: 10px">
+    <form id="edit_form">
+		<div>
+			<label for="name">Report name:</label>
+			<input value="" name="p_report_name" class="easyui-validatebox" data-options="required:true," style="width:350px"/>
+		</div>
+		<div>
+			<label for="name">Solution:</label>
+			<select name="p_solution" class="easyui-combobox" panelHeight="auto" data-options="required:true">
+                <option value="ad_serving">Revenue Reporting</option>
+				<option value="Adcel reports">Adcel reports</option>
+				<option value="billing_accounting">Billing Accounting</option>
+				<option value="delivery_reports">Delivery reports</option>
+				<option value="Development">WIP-Development</option>
+				<option value="event_tracker">Event Tracker</option>
+				<option value="third_party_reports">Third Party networks</option>
+				<option value="verve_ads_ops">Verve Ads Ops</option>
+            </select>
+		</div>	
+		<div>
+			<label for="name">Path:</label>
+			<input name="p_path" value="jaspers" class="easyui-validatebox" data-options="required:true" style="width:250px"/>
+		</div>	
+		<div>
+			<label for="name">Table source:</label>
+			<input name="p_table_source" value="refer.date_dim" class="easyui-validatebox" data-options="required:true" style="width:300px"/>
+		</div>
+		<div>
+			<label for="name">Email to:</label>
+			<textarea rows="8" cols="65" class="easyui-validatebox" data-options="required:true" name="p_email_to" ></textarea>
+		</div>		
+	</form>
+</div>
+ <script>
+	//this function paser param from url
+	function gup( name ){
+	  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+	  var regexS = "[\\?&]"+name+"=([^&#]*)";
+	  var regex = new RegExp( regexS );
+	  var results = regex.exec( window.location.href );
+	  if( results == null )
+		return "";
+	  else
+		return results[1];
+	}
+	//This function paser date from date object
+	function formatDate(date){
+		var result='';
+		var months = new Array('01','02','03','04','05','06','07','08','09','10','11','12');
+		var tdate=date.getDate();
+		if(tdate<10) tdate='0'+tdate;
+		result=date.getFullYear()+'-'+months[date.getMonth()]+'-'+tdate;
+		return result;
+	}
+	
+	var solution=gup('solution');
+	var path=gup('path');
+	var rootPath='ViewAction?solution='+solution+'&path='+path+'&action=emailScheduleManager.xaction';
+	//var rootSubPath='ViewAction?solution='+solution+'&path='+path+'/subscriptionManager';
+	// Local variable declaration
+	var select_date_current='';	
+	var customer_key_current=0;
+	// process default start date and end date
+	var myDate=new Date();
+	var date = myDate;
+	date.setDate(date.getDate()-0);
+	current_date=date;
+	select_date_current=formatDate(date);	
+	//function format date
+	function dateFormat(date){
+		var y = date.getFullYear();
+		var m = date.getMonth()+1;
+		var d = date.getDate();
+		return y+'-'+m+'-'+d;
+	}
+	//
+	$('input[name=p_fire_date]').val(formatDate(new Date()));
+	$('input[name=p_fire_date]').datebox({
+		required:true,
+		currentText: formatDate(new Date()),
+		formatter: function(date){
+			return formatDate(date);
+		},
+		parser: function(s){
+			var t = Date.parse(s);
+			if (!isNaN(t)){
+				return new Date(t);
+			} else {
+				return new Date();
+			}
+		}
+	});
+	// end process start date , end date 
+	$( document ).ready(function() {
+		console.log( "ready!" );
+		console.log("jQuery verion: "+jQuery.fn.jquery);
+		scheduleLoader();
+			
+	});
+	
+	//*******************************
+	// Script code on Processing page
+	//*******************************
+	//function load list schedule
+	var scheduleLoader=function(){
+				$('#mainLayout').layout('panel','south').panel({
+					content: null
+				});	
+		var dataGrid=$('#tb1');
+		dataGrid.datagrid({
+			url:rootPath+'&actions=listSchedule',
+			columns:[[
+				{field:'schedule_id',title:'ID',fixed:true},
+				{field:'report_name',title:'Report name',width:300},
+				{field:'next_fire_time',title:'Next time',fixed:true},
+				{field:'is_active',title:'Active',formatter:formatActive,fixed:true}				
+			]],
+			fitColumns: true,
+			border: false,
+			singleSelect: true,
+			toolbar: toolbar,
+			onSelect: function(rowIndex, rowData){
+				viewDetail();
+			},
+			onLoadSuccess: function(data){
+							
+			}
+			
+			//view: scheduleView,
+			//noheader: true
+		});
+		
+	}
+	
+	function formatActive(val,row){
+		if(val=='true'){
+			return '<span style="color:green;">Active</span>';
+		}else{
+			return '<span style="color:red;">InActive</span>';
+		}
+	}
+	 var toolbar = [{
+            text:'Add',
+            iconCls:'icon-add',
+            handler:function(){
+				openAddScheduleDialog();				
+			}
+        },{
+            text:'Edit',
+            iconCls:'icon-edit',
+            handler:function(){
+				openEditSchedule();
+			}
+        },{
+            text:'Active',
+            iconCls:'icon-ok',
+            handler:function(){activeSchedule('true');}
+        },{
+            text:'InActive',
+            iconCls:'icon-no',
+            handler:function(){activeSchedule('false');}
+        },{
+            text:'Delete',
+            iconCls:'icon-cancel',
+            handler:function(){deleteSchedule();}
+        },'-',{
+            text:'Reload',
+            iconCls:'icon-reload',
+            handler:function(){scheduleLoader();}
+        }];
+		
+//add_schedule_win
+$('#add_schedule_win').dialog({closed: true});
+var openAddScheduleDialog=function(){
+	$('#add_schedule_win').dialog({
+		title: 'Add new schedule',
+		width: 530,
+		//height: 200,
+		//closed: false,
+		resizable: false,
+		modal: true,
+		draggable: false,
+		buttons:[
+			{
+				text: 'Add',
+				handler:function(){
+					addFromSubmit();
+				}
+			},
+			{
+				text: 'Reset',
+				handler:function(){
+					$('#add_form').form('reset');
+				}
+			}
+		]
+	});
+	$('#add_schedule_win').dialog('open');
+	var addFromSubmit=function(){
+		var form=$('#add_form').form('submit',{
+			url: rootPath,
+			onSubmit: function(param){
+				param.solution = solution;
+				param.path = path;
+				param.action='emailScheduleManager.xaction';
+				param.actions='addSchedule';
+				
+				$.messager.progress();
+				var isValid = $(this).form('validate');
+				if (!isValid){
+					$.messager.progress('close');	// hide progress bar while the form is invalid
+				}
+				return isValid;	// return false will stop the form submission
+			},
+			success: function(data){
+				$.messager.progress('close');	// hide progress bar while submit successfully
+				$('#add_schedule_win').dialog('close');
+				$.messager.show({
+					title:'Add schedule',
+					msg:'Add schedule successful!',
+					timeout:5000,
+					showType:'slide'
+				});
+				$('#add_form').form('reset');
+				scheduleLoader();
+			}
+		});
+	}
+}
+
+//function delete schedule
+var deleteSchedule=function(){
+	var checkedRows=$('#tb1').datagrid('getSelections');
+	var schedule_id=checkedRows[0].schedule_id;
+	$.messager.confirm('Confirm', 'Are you sure to delete this schedule '+schedule_id+'?', function(r){
+		if (r){
+			// exit action;
+				$.ajax( {
+					url: rootPath+'&actions=delSchedule&p_schedule_id='+schedule_id,
+					beforeSend: function(){
+						$.messager.progress();	
+					},
+					success: function(data){
+						$.messager.show({
+							title:'Delete schedule',
+							msg:'Schedule deleted!',
+							timeout:5000,
+							showType:'slide'
+						});		
+					},
+					error: function(){
+					
+					},
+					complete: function(){
+						$.messager.progress('close');
+						scheduleLoader();			
+					}
+				});
+		}else{
+			return;
+		}
+	});
+}
+
+//function edit schedule
+$('#email_schedule').dialog({closed: true});
+var openEditSchedule=function(){
+	var checkedRows=$('#tb1').datagrid('getSelections');
+	if(checkedRows.length==0){
+				$.messager.show({
+					title:'Update schedule',
+					msg:'Please select a schedule!',
+					timeout:5000,
+					showType:'slide'
+				});
+		return;
+	}
+	$('#email_schedule').dialog({
+		title: 'Update schedule',
+		width: 530,
+		//height: 200,
+		//closed: false,
+		resizable: false,
+		modal: true,
+		draggable: false,
+		buttons:[
+			{
+				text: 'Update',
+				handler:function(){
+					$.messager.confirm('Confirm', 'Are you sure to update this schedule ?', function(r){
+						if(r){
+							editFromSubmit();
+						}else{
+						
+						}
+					});
+					
+				}
+			},
+			{
+				text: 'Close',
+				handler:function(){
+					$('#email_schedule').dialog('close');
+					$('#edit_form').form('clear');
+				}
+			}
+		]
+	});
+	$('#email_schedule').dialog('open');	
+	var editFromSubmit=function(){
+		$('#email_schedule').dialog('close');
+		var form=$('#edit_form').form('submit',{
+			url: rootPath,
+			onSubmit: function(param){
+				param.solution = solution;
+				param.path = path;
+				param.action='emailScheduleManager.xaction';
+				param.actions='editSchedule';
+				param.p_schedule_id=checkedRows[0].schedule_id;				
+				$.messager.progress();
+				var isValid = $(this).form('validate');
+				if (!isValid){
+					$.messager.progress('close');	// hide progress bar while the form is invalid
+				}
+				return isValid;	// return false will stop the form submission
+			},
+			success: function(data){				
+				$.messager.progress('close');	// hide progress bar while submit successfully				
+				$.messager.show({
+					title:'Update schedule',
+					msg:'Update schedule successful!',
+					timeout:5000,
+					showType:'slide'
+				});
+				$('#edit_form').form('clear');
+				scheduleLoader();
+			}
+		});
+	}
+	$('#edit_form').form('load',{
+		p_report_name:checkedRows[0].report_name,
+		p_solution:checkedRows[0].solution,
+		p_email_to:checkedRows[0].email_to,
+		p_path:checkedRows[0].path,
+		p_table_source:checkedRows[0].report_agg_table
+	});
+	//Set value for form
+	$('#edit_form').form('validate');	
+}
+//function active schedule
+var activeSchedule=function(p_is_active){
+	var checkedRows=$('#tb1').datagrid('getSelections');
+	if(checkedRows.length==0){
+		$.messager.show({
+				title:'Set Active schedule',
+				msg:'Select a schedule!',
+				timeout:5000,
+				showType:'slide'
+			});	
+		return;
+	}
+	var schedule_id=checkedRows[0].schedule_id;
+	$.ajax( {
+		url: rootPath+'&actions=activeSchedule&p_schedule_id='+schedule_id+'&p_is_active='+p_is_active,
+		beforeSend: function(){
+			$.messager.progress();	
+		},
+		success: function(data){
+			$.messager.show({
+				title:'Set Active schedule',
+				msg:'Schedule set active value by '+p_is_active+' successful!',
+				timeout:5000,
+				showType:'slide'
+			});		
+		},
+		error: function(){
+		
+		},
+		complete: function(){
+			$.messager.progress('close');
+			scheduleLoader();			
+		}
+	})
+}
+
+//Set view
+var viewDetail=function(){
+	var checkedRows=$('#tb1').datagrid('getSelections');
+	if(checkedRows.length==0){
+		$('#mainLayout').layout('panel','south').panel({
+		content: ''
+		});
+		return;
+	}
+	var rowData=checkedRows[0];
+	var html=rowData.schedule_id+'<br/>'+ rowData.schedule_type+'<br/>'+ rowData.email_to+'<br/>'+ rowData.report_file_type+'<br/>'+ rowData.report_name+'<br/>'+ rowData.solution+'<br/>'+ rowData.path+'<br/>'+ rowData.xaction_file+'<br/>'+ rowData.parameter_string+'<br/>'+ rowData.next_fire_time+'<br/>'+ rowData.last_fire_time+'<br/>'+ rowData.report_agg_table+'<br/>'+ rowData.report_group+'<br/>'+ rowData.parameter_string_example+'<br/>'+ rowData.is_active;
+	var myCode='<div class="detail">';
+	myCode+='<div><label>ID :</label>'+rowData.schedule_id+'</div>';
+	myCode+='<div><label>Type :</label>'+rowData.schedule_type+'</div>';
+	myCode+='<div><label>Report name :</label><span class="name">'+rowData.report_name+'</span></div>';
+	myCode+='<div><label>Data source :</label>'+rowData.report_agg_table+'</div>';
+	myCode+='<div><label>Email to :</label><span class="email">'+rowData.email_to+'</span></div>';
+	myCode+='<div><label>Solution :</label>'+rowData.solution+'</div>';
+	myCode+='<div><label>Path :</label>'+rowData.path+'</div>';
+	myCode+='<div><label>Xaction file :</label>'+rowData.xaction_file+'</div>';
+	myCode+='<div><label>Next Fire Time :</label>'+rowData.next_fire_time+'</div>';
+	myCode+='<div><label>Last Fire Time :</label>'+rowData.last_fire_time+'</div>';
+	myCode+="</div>";
+	$('#mainLayout').layout('panel','south').panel({
+		content: myCode
+	});
+}
+ </script>
+</body>
+</html>
