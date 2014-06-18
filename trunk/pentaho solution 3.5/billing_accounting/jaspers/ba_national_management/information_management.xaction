@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>BA National Management</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>chinhnguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <actions type="string"> 
+      <sources> 
+        <request>actions</request> 
+      </sources>  
+      <default-value><![CDATA[template]]></default-value> 
+    </actions>  
+    <returnResult type="string"> 
+      <sources> 
+        <request>returnResult</request> 
+      </sources>  
+      <default-value/> 
+    </returnResult>  
+    <query_result type="result-set"> 
+      <sources> 
+        <request>query_result</request> 
+      </sources>  
+      <default-value/> 
+    </query_result>  
+    <connectionName type="string"> 
+      <sources> 
+        <request>connectionName</request> 
+      </sources>  
+      <default-value><![CDATA[dw3dw3]]></default-value> 
+    </connectionName>  
+    <data type="string"> 
+      <sources> 
+        <request>data</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </data>  
+    <page type="string"> 
+      <sources> 
+        <request>page</request> 
+      </sources>  
+      <default-value><![CDATA[1]]></default-value> 
+    </page>  
+    <limit type="string"> 
+      <sources> 
+        <request>limit</request> 
+      </sources>  
+      <default-value><![CDATA[10]]></default-value> 
+    </limit>  
+    <term type="string"> 
+      <sources> 
+        <request>term</request> 
+      </sources>  
+      <default-value/> 
+    </term>  
+    <p_io_orders_id type="string">
+      <sources>
+        <request>p_io_orders_id</request>
+      </sources>
+      <default-value/>
+    </p_io_orders_id>
+    <p_campaign_id type="string">
+      <sources>
+        <request>p_campaign_id</request>
+      </sources>
+      <default-value/>
+    </p_campaign_id>
+    <p_billing_contact type="string">
+      <sources>
+        <request>p_billing_contact</request>
+      </sources>
+      <default-value/>
+    </p_billing_contact>
+    <p_comment type="string">
+      <sources>
+        <request>p_comment</request>
+      </sources>
+      <default-value/>
+    </p_comment>
+    <principalName type="string">
+      <sources>
+        <security>principalName</security>
+      </sources>
+      <default-value/>
+    </principalName>
+    <p_io_line_item_id type="string">
+      <sources>
+        <request>p_io_line_item_id</request>
+      </sources>
+      <default-value/>
+    </p_io_line_item_id>
+    <p_io_line_item_name type="string">
+      <sources>
+        <request>p_io_line_item_name</request>
+      </sources>
+      <default-value/>
+    </p_io_line_item_name>
+  </inputs>
+
+  <outputs> 
+    <returnResult type="string"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </returnResult> 
+  </outputs>
+
+  <resources> 
+    <report-definition> 
+      <solution-file> 
+        <location>local_invoice_manager/local_invoice_summary_report/local_invoice_summary_report.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition>  
+    <report-definition1> 
+      <solution-file> 
+        <location>local_invoice_manager/local_invoice_report/local_invoice_report.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition1>  
+    <report-definition2> 
+      <solution-file> 
+        <location>local_invoice_manager/local_invoice_report/local_invoice_report.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition2>  
+    <report-definition3> 
+      <solution-file> 
+        <location>local_invoice_manager/local_invoice_report/local_invoice_report.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition3>  
+    <template> 
+      <solution-file> 
+        <location>ba_national_management/index.jsp</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </template>  
+    <template1> 
+      <solution-file> 
+        <location>information.jsp</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </template1>  
+    <template2> 
+      <solution-file> 
+        <location>add-information-form.jsp</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </template2>  
+    <template3>
+      <solution-file>
+        <location>edit-information-form.jsp</location>
+        <mime-type>text/plain</mime-type>
+      </solution-file>
+    </template3>
+  </resources>
+  
+  <actions> 
+    <actions> 
+      <condition><![CDATA[actions=='information_script']]></condition>  
+      <action-definition> 
+        <component-name>TemplateComponent</component-name>
+        <action-type>Message Template</action-type>
+        <action-resources> 
+          <template mapping="template1"/> 
+        </action-resources>
+        <action-outputs> 
+          <output-message type="string" mapping="returnResult"/> 
+        </action-outputs>
+        <component-definition/> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='add_infomation_form']]></condition>  
+      <action-definition> 
+        <component-name>TemplateComponent</component-name>
+        <action-type>Message Template</action-type>
+        <action-inputs>
+          <p_comment type="string"/>
+          <p_campaign_id type="string"/>
+          <p_billing_contact type="string"/>
+        </action-inputs>
+        <action-resources> 
+          <template mapping="template2"/> 
+        </action-resources>
+        <action-outputs> 
+          <output-message type="string" mapping="returnResult"/> 
+        </action-outputs>
+        <component-definition/> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions>
+      <condition><![CDATA[actions=='edit_infomation_form']]></condition>
+      <action-definition>
+        <component-name>TemplateComponent</component-name>
+        <action-type>Message Template</action-type>
+        <action-inputs>
+          <p_io_orders_id type="string"/>
+          <p_campaign_id type="string"/>
+          <p_billing_contact type="string"/>
+          <p_comment type="string"/>
+          <p_io_line_item_name type="string"/>
+          <p_io_line_item_id type="string"/>
+        </action-inputs>
+        <action-resources>
+          <template mapping="template3"/>
+        </action-resources>
+        <action-outputs>
+          <output-message type="string" mapping="returnResult"/>
+        </action-outputs>
+        <component-definition/>
+      </action-definition>
+
+    </actions>
+
+    <actions> 
+      <condition><![CDATA[actions=='loadInfomationTable']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
+        </action-outputs>
+        <component-definition> 
+          <live><![CDATA[true]]></live>  
+          <query><![CDATA[SELECT sk, io_orders_id, io_line_item_id, combine_ids, io_line_item_name, 
+       campaign_id, billing_contact, created_by, created_at, updated_by, 
+       updated_at, "comment"
+  FROM billing.vw_ba_national_dim_io ORDER BY combine_ids;]]></query> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='loadListIoOrders']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <page type="string"/>  
+          <limit type="string"/>  
+          <term type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
+        </action-outputs>
+        <component-definition> 
+          <query><![CDATA[SELECT io_orders_id, io_line_item_id, combined_ids, io_line_item_name
+FROM refer.vw_national_io_order_line_item_insert 
+WHERE (''='{term}' OR UPPER(combined_ids||' | '||io_line_item_name) LIKE UPPER('%{term}%'))
+ORDER BY combined_ids
+OFFSET ({page}-1)*{limit} LIMIT {limit}
+;]]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions>
+      <condition><![CDATA[actions=='insertInformation']]></condition>
+      <action-definition>
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs>
+          <jndi type="string" mapping="connectionName"/>
+          <p_io_orders_id type="string"/>
+          <p_io_line_item_id type="string"/>
+          <p_campaign_id type="string"/>
+          <p_billing_contact type="string"/>
+          <p_comment type="string"/>
+          <principalName type="string"/>
+        </action-inputs>
+        <action-outputs>
+          <query-result type="result-set" mapping="query_result"/>
+        </action-outputs>
+        <component-definition>
+          <query><![CDATA[SELECT * FROM billing.fn_ba_national_dim_io_insert({p_io_orders_id},{p_io_line_item_id} ,'{p_campaign_id}', '{p_billing_contact}', '{principalName}','{p_comment}')]]></query>
+          <live><![CDATA[true]]></live>
+        </component-definition>
+      </action-definition>
+
+    </actions>
+
+    <actions>
+      <condition><![CDATA[actions=='updateInformation']]></condition>
+      <action-definition>
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs>
+          <p_billing_contact type="string"/>
+          <p_io_orders_id type="string"/>
+          <principalName type="string"/>
+          <p_io_line_item_id type="string"/>
+          <p_comment type="string"/>
+          <p_campaign_id type="string"/>
+          <jndi type="string" mapping="connectionName"/>
+        </action-inputs>
+        <action-outputs>
+          <query-result type="result-set" mapping="query_result"/>
+        </action-outputs>
+        <component-definition>
+          <query><![CDATA[SELECT * FROM billing.fn_ba_national_dim_io_update({p_io_orders_id},{p_io_line_item_id} ,'{p_campaign_id}', '{p_billing_contact}', '{principalName}','{p_comment}')]]></query>
+          <live><![CDATA[true]]></live>
+        </component-definition>
+      </action-definition>
+
+    </actions>
+
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>Process data grid</action-type>
+      <action-inputs> 
+        <actions type="string"/>  
+        <returnResult type="string"/>  
+        <query_result type="result-set"/>  
+        <data type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <returnResult type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var result_set=query_result;
+var rowCount=query_result.getRowCount();
+var meta = result_set.getMetaData();      // Returns an IPentahoMetaData object
+var colCount = meta.getColumnCount();
+var colHeaders = meta.getColumnHeaders(); //getColumnHeaders() returns object[][]
+var rowHeaders = meta.getRowHeaders(); 
+
+if(data=='html'){
+	returnResult=returnResult;
+}else{
+	returnResult='[';
+	//process data item
+	for(var i=0;i<result_set.getRowCount();i++){
+		var item='';
+		if(i>0){
+			item+=',';
+		}
+		item+='{';
+			for(var j=0;j<result_set.getColumnCount();j++){ 		
+				var value=result_set.getValueAt(i,j);
+				var columnValue=colHeaders[0][j];
+				if(j>0){
+					item+=',';
+				}
+				item+='"'+columnValue+'":"'+value+'"';
+			}
+		item+='}';	
+
+	returnResult+=item;
+	}
+	//end
+
+	returnResult+=']';
+}]]></script> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>
