@@ -5,19 +5,25 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using System.IO;
+using Microsoft.Win32;
 
 namespace buxtool
 {
     public partial class MainForm : Form
     {
-        
+        private Form advertiserForm;
+        delegate void SetStatusCallback(string site,string text);
+
         private List<buxscript.buxscript> listBuxScriptsRuning = new List<buxscript.buxscript>();
         public MainForm()
         {
             InitializeComponent();
-            
+           
+            advertiserForm = new AdvertiserForm();
+           
             //Loading configure
             ConfigureControl.loadConfig();
             //Open the last profile
@@ -29,9 +35,11 @@ namespace buxtool
             toolStrip1.Refresh();
             //
             RunSitesControl.Initialize(listView1);
+            //
+           
 
         }
-
+       
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
@@ -176,9 +184,13 @@ namespace buxtool
                 toolStripStatusFileProfile.Text = fileName;
             }
         }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            RunSitesControl.monitorProcess();
+        }
+
         
-
-
 
 
 

@@ -5,3 +5,12 @@ E:\Chinh\C# projects\buxtool\wonbux\bin\Debug\buxscript.pdb
 E:\Chinh\C# projects\buxtool\wonbux\obj\Debug\wonbux.csprojResolveAssemblyReference.cache
 E:\Chinh\C# projects\buxtool\wonbux\obj\Debug\wonbux.dll
 E:\Chinh\C# projects\buxtool\wonbux\obj\Debug\wonbux.pdb
+E:\Chinh\C# projects\buxtool\wonbux\bin\Debug\EO.WebBrowser.WinForm.dll
+E:\Chinh\Cprojects\buxtool\wonbux\bin\Debug\wonbux.dll
+E:\Chinh\Cprojects\buxtool\wonbux\bin\Debug\wonbux.pdb
+E:\Chinh\Cprojects\buxtool\wonbux\bin\Debug\buxscript.dll
+E:\Chinh\Cprojects\buxtool\wonbux\bin\Debug\CefSharp.dll
+E:\Chinh\Cprojects\buxtool\wonbux\bin\Debug\CefSharp.WinForms.dll
+E:\Chinh\Cprojects\buxtool\wonbux\bin\Debug\buxscript.pdb
+E:\Chinh\Cprojects\buxtool\wonbux\obj\Debug\wonbux.dll
+E:\Chinh\Cprojects\buxtool\wonbux\obj\Debug\wonbux.pdb

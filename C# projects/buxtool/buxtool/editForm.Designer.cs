@@ -29,11 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditForm));
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.proxyTbx = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.portTbx = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.userNameTbx = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -44,54 +39,8 @@
             this.SiteCbx = new System.Windows.Forms.ComboBox();
             this.cancelBtn = new System.Windows.Forms.Button();
             this.updateBtn = new System.Windows.Forms.Button();
-            this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.proxyTbx);
-            this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.portTbx);
-            this.groupBox2.Location = new System.Drawing.Point(17, 116);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(290, 78);
-            this.groupBox2.TabIndex = 21;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "HTTP/HTTPS Proxy server";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(26, 22);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(60, 13);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "IP address:";
-            // 
-            // proxyTbx
-            // 
-            this.proxyTbx.Location = new System.Drawing.Point(99, 19);
-            this.proxyTbx.Name = "proxyTbx";
-            this.proxyTbx.Size = new System.Drawing.Size(139, 20);
-            this.proxyTbx.TabIndex = 9;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(56, 48);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(29, 13);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Port:";
-            // 
-            // portTbx
-            // 
-            this.portTbx.Location = new System.Drawing.Point(99, 45);
-            this.portTbx.Name = "portTbx";
-            this.portTbx.Size = new System.Drawing.Size(77, 20);
-            this.portTbx.TabIndex = 11;
             // 
             // groupBox1
             // 
@@ -140,9 +89,9 @@
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 202);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 125);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(396, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(397, 22);
             this.statusStrip1.TabIndex = 19;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -157,6 +106,7 @@
             // 
             // SiteCbx
             // 
+            this.SiteCbx.Enabled = false;
             this.SiteCbx.FormattingEnabled = true;
             this.SiteCbx.Location = new System.Drawing.Point(87, 6);
             this.SiteCbx.Name = "SiteCbx";
@@ -189,8 +139,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelBtn;
-            this.ClientSize = new System.Drawing.Size(396, 224);
-            this.Controls.Add(this.groupBox2);
+            this.ClientSize = new System.Drawing.Size(397, 147);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.label1);
@@ -201,8 +150,6 @@
             this.Name = "EditForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Edit Site";
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -212,11 +159,6 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox proxyTbx;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox portTbx;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox userNameTbx;
         private System.Windows.Forms.Label label2;

@@ -30,45 +30,39 @@ namespace buxtool
                 string site = item.SubItems[0].Text;
                 string userName = item.SubItems[1].Text;
                 string password = item.SubItems[2].Text;
-                string proxy = item.SubItems[3].Text;
-                string port = item.SubItems[4].Text;
                 buxscript.buxscript instance = getNewScriptInstance(site);
                 instance.userName = userName;
                 instance.password = password;
-                instance.proxy = proxy;
-                instance.port = port;
                 instance.listViewItem = item;
                 scritpIntances.Add(instance);  
             }
         }
-        public static Boolean addSiteInstance(string site,string userName,string password,string proxy,string port) {
+        public static Boolean addSiteInstance(string site,string userName,string password) {
             Boolean result = true;
-            buxscript.buxscript instance = getScriptIntance(site, userName);
+            buxscript.buxscript instance = getScriptIntance(site);
             if(instance==null){
-                string[] row = { site, userName, password, proxy, port, "", "" };
+                string[] row = { site, userName, password, "", "" };
                 var listViewItem = new ListViewItem(row);
                 listView.Items.Add(listViewItem);
                 instance = getNewScriptInstance(site);
                 instance.userName = userName;
                 instance.password = password;
-                instance.proxy = proxy;
-                instance.port = port;
                 instance.listViewItem = listViewItem;
                 scritpIntances.Add(instance);
             }else{
-                MessageBox.Show("The site already exists. Please choose another site or enter another user name!","Notice!");
+                MessageBox.Show("The site already exists. Please choose another site!","Site already exists");
                 result = false;
             }
             return result;
         }
-        public static Boolean editSiteInstance(string oldSite,string oldUserName,string newSite,string newUserName,string password,string proxy,string port) {
+        public static Boolean editSiteInstance(string oldSite,string oldUserName,string newSite,string newUserName,string password) {
             Boolean result = true;
             buxscript.buxscript oldInstance = getScriptIntance(oldSite, oldUserName);
             buxscript.buxscript newInstance = getScriptIntance(newSite, oldSite);
             if (!oldInstance.isRuning && newInstance == null)
             {
                 removeInstance(oldInstance);
-                addSiteInstance(newSite, newUserName, password, proxy, port);
+                addSiteInstance(newSite, newUserName, password);
             }
             else {
                 result = false;
@@ -81,11 +75,9 @@ namespace buxtool
             foreach (ListViewItem eachItem in listView.SelectedItems)
             {
                 string site = eachItem.SubItems[0].Text;
-                string status = eachItem.SubItems[5].Text;
+                string status = eachItem.SubItems[3].Text;
                 string user = eachItem.SubItems[1].Text;
                 string password = eachItem.SubItems[2].Text;
-                string proxy = eachItem.SubItems[3].Text;
-                string port = eachItem.SubItems[4].Text;
                 buxscript.buxscript newScriptInstance = getScriptIntance(site, user);
                 if (!newScriptInstance.isRuning)
                 {
@@ -98,11 +90,9 @@ namespace buxtool
             foreach (ListViewItem eachItem in listView.Items)
             {
                 string site = eachItem.SubItems[0].Text;
-                string status = eachItem.SubItems[5].Text;
+                string status = eachItem.SubItems[3].Text;
                 string user = eachItem.SubItems[1].Text;
                 string password = eachItem.SubItems[2].Text;
-                string proxy = eachItem.SubItems[3].Text;
-                string port = eachItem.SubItems[4].Text;
                 buxscript.buxscript newScriptInstance = getScriptIntance(site, user);
                 if (!newScriptInstance.isRuning)
                 {
@@ -115,15 +105,30 @@ namespace buxtool
             foreach (ListViewItem eachItem in listView.SelectedItems)
             {
                 string site = eachItem.SubItems[0].Text;
-                string status = eachItem.SubItems[5].Text;
+                string status = eachItem.SubItems[3].Text;
                 string user = eachItem.SubItems[1].Text;
                 string password = eachItem.SubItems[2].Text;
-                string proxy = eachItem.SubItems[3].Text;
-                string port = eachItem.SubItems[4].Text;
                 buxscript.buxscript scriptIntance = getScriptIntance(site, user);
                 if (scriptIntance != null)
                 {
                     scriptIntance.stop();
+                }
+
+            }
+        }
+        public static void monitorProcess() {
+            foreach (ListViewItem eachItem in listView.SelectedItems)
+            {
+                string site = eachItem.SubItems[0].Text;
+                string status = eachItem.SubItems[3].Text;
+                string user = eachItem.SubItems[1].Text;
+                string password = eachItem.SubItems[2].Text;
+                buxscript.buxscript scriptIntance = getScriptIntance(site, user);
+                if (scriptIntance != null)
+                {
+                    if(scriptIntance.isRuning){
+                        scriptIntance.webBrowserForm.Show();
+                    }
                 }
 
             }
@@ -157,6 +162,19 @@ namespace buxtool
             foreach (buxscript.buxscript item in scritpIntances)
             {
                 if (item.userName.Equals(userName) && item.address().Equals(site))
+                {
+                    result = item;
+                    break;
+                }
+            }
+            return result;
+        }
+        public static buxscript.buxscript getScriptIntance(string site)
+        {
+            buxscript.buxscript result = null;
+            foreach (buxscript.buxscript item in scritpIntances)
+            {
+                if (item.address().Equals(site))
                 {
                     result = item;
                     break;

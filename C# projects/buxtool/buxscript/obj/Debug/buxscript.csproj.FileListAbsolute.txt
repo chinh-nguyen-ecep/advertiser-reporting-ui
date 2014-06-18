@@ -4,3 +4,17 @@ E:\Chinh\C# projects\buxtool\buxscript\bin\Debug\buxscript.pdb
 E:\Chinh\C# projects\buxtool\buxscript\obj\Debug\buxscript.dll
 E:\Chinh\C# projects\buxtool\buxscript\obj\Debug\buxscript.MyBrowser.resources
 E:\Chinh\C# projects\buxtool\buxscript\obj\Debug\buxscript.csproj.GenerateResource.Cache
+E:\Chinh\Cprojects\buxtool\buxscript\bin\Debug\buxscript.dll
+E:\Chinh\Cprojects\buxtool\buxscript\bin\Debug\buxscript.pdb
+E:\Chinh\Cprojects\buxtool\buxscript\bin\Debug\CefSharp.dll
+E:\Chinh\Cprojects\buxtool\buxscript\bin\Debug\CefSharp.WinForms.dll
+E:\Chinh\Cprojects\buxtool\buxscript\bin\Debug\Interop.YACSUILib.dll
+E:\Chinh\Cprojects\buxtool\buxscript\bin\Debug\AxInterop.YACSUILib.dll
+E:\Chinh\Cprojects\buxtool\buxscript\obj\Debug\buxscript.csprojResolveAssemblyReference.cache
+E:\Chinh\Cprojects\buxtool\buxscript\obj\Debug\Interop.YACSUILib.dll
+E:\Chinh\Cprojects\buxtool\buxscript\obj\Debug\AxInterop.YACSUILib.dll
+E:\Chinh\Cprojects\buxtool\buxscript\obj\Debug\buxscript.csproj.ResolveComReference.cache
+E:\Chinh\Cprojects\buxtool\buxscript\obj\Debug\buxscript.MyBrowser.resources
+E:\Chinh\Cprojects\buxtool\buxscript\obj\Debug\buxscript.csproj.GenerateResource.Cache
+E:\Chinh\Cprojects\buxtool\buxscript\obj\Debug\buxscript.dll
+E:\Chinh\Cprojects\buxtool\buxscript\obj\Debug\buxscript.pdb

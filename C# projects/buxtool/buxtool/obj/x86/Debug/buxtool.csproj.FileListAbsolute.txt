@@ -10,3 +10,18 @@ E:\Chinh\C# projects\buxtool\buxtool\obj\x86\Debug\buxtool.csprojResolveAssembly
 E:\Chinh\C# projects\buxtool\buxtool\obj\x86\Debug\buxtool.EditSiteForm.resources
 E:\Chinh\C# projects\buxtool\buxtool\obj\x86\Debug\buxtool.exe
 E:\Chinh\C# projects\buxtool\buxtool\obj\x86\Debug\buxtool.pdb
+E:\Chinh\Cprojects\buxtool\buxtool\bin\Debug\buxtool.exe
+E:\Chinh\Cprojects\buxtool\buxtool\bin\Debug\buxtool.pdb
+E:\Chinh\Cprojects\buxtool\buxtool\bin\Debug\buxscript.dll
+E:\Chinh\Cprojects\buxtool\buxtool\bin\Debug\CefSharp.dll
+E:\Chinh\Cprojects\buxtool\buxtool\bin\Debug\CefSharp.WinForms.dll
+E:\Chinh\Cprojects\buxtool\buxtool\bin\Debug\buxscript.pdb
+E:\Chinh\Cprojects\buxtool\buxtool\obj\x86\Debug\buxtool.csprojResolveAssemblyReference.cache
+E:\Chinh\Cprojects\buxtool\buxtool\obj\x86\Debug\buxtool.EditSiteForm.resources
+E:\Chinh\Cprojects\buxtool\buxtool\obj\x86\Debug\buxtool.EditForm.resources
+E:\Chinh\Cprojects\buxtool\buxtool\obj\x86\Debug\buxtool.AdvertiserForm.resources
+E:\Chinh\Cprojects\buxtool\buxtool\obj\x86\Debug\buxtool.MainForm.resources
+E:\Chinh\Cprojects\buxtool\buxtool\obj\x86\Debug\buxtool.Properties.Resources.resources
+E:\Chinh\Cprojects\buxtool\buxtool\obj\x86\Debug\buxtool.csproj.GenerateResource.Cache
+E:\Chinh\Cprojects\buxtool\buxtool\obj\x86\Debug\buxtool.exe
+E:\Chinh\Cprojects\buxtool\buxtool\obj\x86\Debug\buxtool.pdb

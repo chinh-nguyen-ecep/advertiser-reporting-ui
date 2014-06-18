@@ -5,3 +5,12 @@ E:\Chinh\C# projects\buxtool\neobux\bin\Debug\buxscript.pdb
 E:\Chinh\C# projects\buxtool\neobux\obj\Debug\neobux.csprojResolveAssemblyReference.cache
 E:\Chinh\C# projects\buxtool\neobux\obj\Debug\neobux.dll
 E:\Chinh\C# projects\buxtool\neobux\obj\Debug\neobux.pdb
+E:\Chinh\Cprojects\buxtool\neobux\bin\Debug\neobux.dll
+E:\Chinh\Cprojects\buxtool\neobux\bin\Debug\neobux.pdb
+E:\Chinh\Cprojects\buxtool\neobux\bin\Debug\buxscript.dll
+E:\Chinh\Cprojects\buxtool\neobux\bin\Debug\CefSharp.dll
+E:\Chinh\Cprojects\buxtool\neobux\bin\Debug\CefSharp.WinForms.dll
+E:\Chinh\Cprojects\buxtool\neobux\bin\Debug\buxscript.pdb
+E:\Chinh\Cprojects\buxtool\neobux\obj\Debug\neobux.csprojResolveAssemblyReference.cache
+E:\Chinh\Cprojects\buxtool\neobux\obj\Debug\neobux.dll
+E:\Chinh\Cprojects\buxtool\neobux\obj\Debug\neobux.pdb

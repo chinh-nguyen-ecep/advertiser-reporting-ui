@@ -56,6 +56,7 @@
             this.toolStripRunBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripStopBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMonitorBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripExitBtn = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusIP = new System.Windows.Forms.ToolStripStatusLabel();
@@ -64,8 +65,6 @@
             this.site = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.userName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.password = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.proxy = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.port = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.status = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.amount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.saveFileAsDialog = new System.Windows.Forms.SaveFileDialog();
@@ -88,7 +87,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(654, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(393, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -205,10 +204,11 @@
             this.toolStripRunBtn,
             this.toolStripStopBtn,
             this.toolStripSeparator5,
+            this.toolStripMonitorBtn,
             this.toolStripExitBtn});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(654, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(393, 25);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "IP 192.16.1.234";
             // 
@@ -302,6 +302,16 @@
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
             // 
+            // toolStripMonitorBtn
+            // 
+            this.toolStripMonitorBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripMonitorBtn.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMonitorBtn.Image")));
+            this.toolStripMonitorBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripMonitorBtn.Name = "toolStripMonitorBtn";
+            this.toolStripMonitorBtn.Size = new System.Drawing.Size(23, 22);
+            this.toolStripMonitorBtn.Text = "Monitor";
+            this.toolStripMonitorBtn.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
             // toolStripExitBtn
             // 
             this.toolStripExitBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -317,9 +327,9 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusIP,
             this.toolStripStatusFileProfile});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 244);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 153);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(654, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(393, 22);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -343,18 +353,16 @@
             this.site,
             this.userName,
             this.password,
-            this.proxy,
-            this.port,
             this.status,
             this.amount});
+            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView1.FullRowSelect = true;
             this.listView1.GridLines = true;
             this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listView1.HideSelection = false;
-            this.listView1.LabelEdit = true;
-            this.listView1.Location = new System.Drawing.Point(0, 52);
+            this.listView1.Location = new System.Drawing.Point(0, 49);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(654, 189);
+            this.listView1.Size = new System.Drawing.Size(393, 104);
             this.listView1.TabIndex = 6;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -367,37 +375,25 @@
             // userName
             // 
             this.userName.Text = "User";
-            this.userName.Width = 100;
+            this.userName.Width = 150;
             // 
             // password
             // 
-            this.password.DisplayIndex = 6;
+            this.password.DisplayIndex = 4;
             this.password.Text = "Password";
             this.password.Width = 0;
             // 
-            // proxy
-            // 
-            this.proxy.DisplayIndex = 2;
-            this.proxy.Text = "Proxy";
-            this.proxy.Width = 120;
-            // 
-            // port
-            // 
-            this.port.DisplayIndex = 3;
-            this.port.Text = "Port";
-            this.port.Width = 80;
-            // 
             // status
             // 
-            this.status.DisplayIndex = 4;
+            this.status.DisplayIndex = 2;
             this.status.Text = "Status";
-            this.status.Width = 100;
+            this.status.Width = 88;
             // 
             // amount
             // 
-            this.amount.DisplayIndex = 5;
-            this.amount.Text = "Amount";
-            this.amount.Width = 100;
+            this.amount.DisplayIndex = 3;
+            this.amount.Text = "Estimate Amount";
+            this.amount.Width = 0;
             // 
             // saveFileAsDialog
             // 
@@ -415,7 +411,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(654, 266);
+            this.ClientSize = new System.Drawing.Size(393, 175);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
@@ -437,6 +433,7 @@
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
+            
 
         }
 
@@ -463,11 +460,8 @@
         private System.Windows.Forms.ToolStripButton toolStripSaveBtn;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        protected System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader site;
         private System.Windows.Forms.ColumnHeader userName;
-        private System.Windows.Forms.ColumnHeader proxy;
-        private System.Windows.Forms.ColumnHeader port;
         private System.Windows.Forms.ColumnHeader status;
         private System.Windows.Forms.ColumnHeader amount;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
@@ -483,6 +477,8 @@
         private System.Windows.Forms.SaveFileDialog saveFileAsDialog;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog newProfileFileDialog;
+        private System.Windows.Forms.ToolStripButton toolStripMonitorBtn;
+        public System.Windows.Forms.ListView listView1;
 
        // public System.EventHandler listView1_SelectedIndexChanged { get; set; }
 
