@@ -38,14 +38,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.passwordTbx = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.proxyTbx = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.portTbx = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // addBtn
@@ -90,9 +84,9 @@
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 212);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 127);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(398, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(395, 22);
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
             this.statusStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.statusStrip1_ItemClicked);
@@ -129,38 +123,6 @@
             this.passwordTbx.Size = new System.Drawing.Size(139, 20);
             this.passwordTbx.TabIndex = 7;
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(26, 22);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(60, 13);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "IP address:";
-            // 
-            // proxyTbx
-            // 
-            this.proxyTbx.Location = new System.Drawing.Point(99, 19);
-            this.proxyTbx.Name = "proxyTbx";
-            this.proxyTbx.Size = new System.Drawing.Size(139, 20);
-            this.proxyTbx.TabIndex = 9;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(56, 48);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(29, 13);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Port:";
-            // 
-            // portTbx
-            // 
-            this.portTbx.Location = new System.Drawing.Point(99, 45);
-            this.portTbx.Name = "portTbx";
-            this.portTbx.Size = new System.Drawing.Size(77, 20);
-            this.portTbx.TabIndex = 11;
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.userNameTbx);
@@ -175,20 +137,6 @@
             this.groupBox1.Text = "Authorization";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.proxyTbx);
-            this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.portTbx);
-            this.groupBox2.Location = new System.Drawing.Point(17, 122);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(290, 78);
-            this.groupBox2.TabIndex = 14;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "HTTP/HTTPS Proxy server";
-            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
-            // 
             // EditSiteForm
             // 
             this.AcceptButton = this.addBtn;
@@ -196,8 +144,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.CancelButton = this.cancelBtn;
-            this.ClientSize = new System.Drawing.Size(398, 234);
-            this.Controls.Add(this.groupBox2);
+            this.ClientSize = new System.Drawing.Size(395, 149);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.label1);
@@ -214,8 +161,6 @@
             this.TopMost = true;
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -232,11 +177,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox passwordTbx;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox proxyTbx;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox portTbx;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
     }
 }

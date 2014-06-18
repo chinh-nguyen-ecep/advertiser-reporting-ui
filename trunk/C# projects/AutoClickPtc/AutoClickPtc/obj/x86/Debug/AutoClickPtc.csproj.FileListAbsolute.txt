@@ -1,0 +1,7 @@
+E:\Chinh\Cprojects\AutoClickPtc\AutoClickPtc\bin\Debug\AutoClickPtc.exe
+E:\Chinh\Cprojects\AutoClickPtc\AutoClickPtc\bin\Debug\AutoClickPtc.pdb
+E:\Chinh\Cprojects\AutoClickPtc\AutoClickPtc\obj\x86\Debug\AutoClickPtc.Form1.resources
+E:\Chinh\Cprojects\AutoClickPtc\AutoClickPtc\obj\x86\Debug\AutoClickPtc.Properties.Resources.resources
+E:\Chinh\Cprojects\AutoClickPtc\AutoClickPtc\obj\x86\Debug\AutoClickPtc.csproj.GenerateResource.Cache
+E:\Chinh\Cprojects\AutoClickPtc\AutoClickPtc\obj\x86\Debug\AutoClickPtc.exe
+E:\Chinh\Cprojects\AutoClickPtc\AutoClickPtc\obj\x86\Debug\AutoClickPtc.pdb

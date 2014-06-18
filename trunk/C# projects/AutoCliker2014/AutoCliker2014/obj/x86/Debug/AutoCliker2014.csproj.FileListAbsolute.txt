@@ -1,0 +1,12 @@
+E:\Chinh\Cprojects\AutoCliker2014\AutoCliker2014\bin\Debug\AutoCliker2014.exe
+E:\Chinh\Cprojects\AutoCliker2014\AutoCliker2014\bin\Debug\AutoCliker2014.pdb
+E:\Chinh\Cprojects\AutoCliker2014\AutoCliker2014\obj\x86\Debug\AutoCliker2014.Properties.Resources.resources
+E:\Chinh\Cprojects\AutoCliker2014\AutoCliker2014\obj\x86\Debug\AutoCliker2014.csproj.GenerateResource.Cache
+E:\Chinh\Cprojects\AutoCliker2014\AutoCliker2014\obj\x86\Debug\AutoCliker2014.exe
+E:\Chinh\Cprojects\AutoCliker2014\AutoCliker2014\obj\x86\Debug\AutoCliker2014.pdb
+E:\Chinh\Cprojects\AutoCliker2014\AutoCliker2014\obj\x86\Debug\AutoCliker2014.SettingForm.resources
+E:\Chinh\Cprojects\AutoCliker2014\AutoCliker2014\bin\Debug\CefSharp.dll
+E:\Chinh\Cprojects\AutoCliker2014\AutoCliker2014\bin\Debug\CefSharp.WinForms.dll
+E:\Chinh\Cprojects\AutoCliker2014\AutoCliker2014\bin\Debug\CefSharp.xml
+E:\Chinh\Cprojects\AutoCliker2014\AutoCliker2014\obj\x86\Debug\AutoCliker2014.csprojResolveAssemblyReference.cache
+E:\Chinh\Cprojects\AutoCliker2014\AutoCliker2014\obj\x86\Debug\AutoCliker2014.MainForm.resources

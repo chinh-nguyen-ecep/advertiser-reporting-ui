@@ -35,15 +35,11 @@ namespace buxtool
             string site = SiteCbx.Text;
             string userName = userNameTbx.Text;
             string password = passwordTbx.Text;
-            string proxy = proxyTbx.Text;
-            string port = portTbx.Text;
             if(userName.Equals("") || password.Equals("") ){
                 MessageBox.Show("Must enter Username and Password", "Notice!");
                 return;
-            }else if(!proxy.Equals("")){
-
             }
-            Boolean result=RunSitesControl.addSiteInstance(site,userName,password,proxy,port);
+            Boolean result=RunSitesControl.addSiteInstance(site,userName,password);
             if (result) {
                 Close();
             }

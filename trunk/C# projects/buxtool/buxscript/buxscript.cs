@@ -7,12 +7,12 @@ using System.Windows.Forms;
 
 namespace buxscript
 {
-    public abstract class buxscript
+    public abstract class buxscript: Form
     {
         public string userName;
         public string password;
         public string proxy;
-        public MyBrowser webBrowser;
+        public MyBrowser webBrowserForm;
         public string port;
         public Boolean isRuning = false;
         public ListViewItem listViewItem; // a line from list view to update status of process
@@ -22,7 +22,7 @@ namespace buxscript
         public abstract string address();
         public abstract void start();
         public abstract void stop();
-
+        delegate void SetStatusCallback(string text);
 
         public static buxscript loadObjectFromDll(string dllFileName) {
             buxscript result = null;
@@ -33,8 +33,8 @@ namespace buxscript
             return result;
         }
 
-        public void setStatus(string status) {
-            listViewItem.SubItems[5].Text = status;
+        public void setStatus(string status) { 
+            this.listViewItem.SubItems[3].Text = status;
         }
        
     }

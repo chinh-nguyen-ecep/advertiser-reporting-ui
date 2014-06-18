@@ -31,9 +31,7 @@ namespace buxtool
             //Set value form
             ListViewItem item = _listView.SelectedItems[0];
             userNameTbx.Text = item.SubItems[1].Text;
-            passwordTbx.Text = item.SubItems[2].Text;
-            proxyTbx.Text = item.SubItems[3].Text;
-            portTbx.Text = item.SubItems[4].Text;
+            passwordTbx.Text = item.SubItems[2].Text;           
         }
 
         private void updateBtn_Click(object sender, EventArgs e)
@@ -41,22 +39,18 @@ namespace buxtool
             string site = SiteCbx.Text;
             string userName = userNameTbx.Text;
             string password = passwordTbx.Text;
-            string proxy = proxyTbx.Text;
-            string port = portTbx.Text;
+           
             if (userName.Equals("") || password.Equals(""))
             {
                 MessageBox.Show("Must enter Username and Password", "Notice!");
                 return;
             }
-            else if (!proxy.Equals(""))
-            {
-
-            }
+           
             ListViewItem item = _listView.SelectedItems[0];
             string oldSite = item.SubItems[0].Text;
             string oldUserName = item.SubItems[1].Text;
             
-            Boolean result= RunSitesControl.editSiteInstance(oldSite,oldUserName,site,userName,password,proxy,port);
+            Boolean result= RunSitesControl.editSiteInstance(oldSite,oldUserName,site,userName,password);
             if(result){
                 Close();
             }

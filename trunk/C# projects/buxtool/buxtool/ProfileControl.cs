@@ -55,7 +55,7 @@ namespace buxtool
             string[][] myArray = array.ToArray();
             foreach (string[] item in myArray)
             {
-                item[5] = "";
+                item[3] = "";
                 ListViewItem listViewItem = new ListViewItem(item);
                 
                 listView.Items.Add(listViewItem);
