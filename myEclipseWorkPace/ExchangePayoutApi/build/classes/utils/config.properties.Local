@@ -1,0 +1,8 @@
+hosting=http://localhost:8081
+appName=ExchangePayoutApi
+revenueByHourAPIUrl=/dailyExchangeCostAnalysisByHour
+dailyExchangerPayoutAPIUrl=/dailyExchangeCostAnalysis
+advertiserByDateAPIUrl=/AdvertiserByDate
+lookupOrdersUrl=/LookupOrders
+adcelJNDIConnect=verveReportConnection
+defaultJNDI=IBConnection
