@@ -128,6 +128,7 @@ border-bottom: 1px solid #ccc;
 		{mainScript}
 		{informationControl}
 		{adjustedUnitsControl}
+		{billingControl}
 	</script>
 </body>
 </html>
