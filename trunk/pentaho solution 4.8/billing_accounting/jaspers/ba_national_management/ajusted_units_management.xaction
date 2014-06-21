@@ -66,18 +66,6 @@
       </sources>  
       <default-value/> 
     </p_io_orders_id>  
-    <p_campaign_id type="string"> 
-      <sources> 
-        <request>p_campaign_id</request> 
-      </sources>  
-      <default-value/> 
-    </p_campaign_id>  
-    <p_billing_contact type="string"> 
-      <sources> 
-        <request>p_billing_contact</request> 
-      </sources>  
-      <default-value/> 
-    </p_billing_contact>  
     <p_comment type="string"> 
       <sources> 
         <request>p_comment</request> 
@@ -101,7 +89,19 @@
         <request>p_io_line_item_name</request> 
       </sources>  
       <default-value/> 
-    </p_io_line_item_name> 
+    </p_io_line_item_name>  
+    <p_month_sk type="string">
+      <sources>
+        <request>p_month_sk</request>
+      </sources>
+      <default-value/>
+    </p_month_sk>
+    <p_adjusted_units type="string">
+      <sources>
+        <request>p_adjusted_units</request>
+      </sources>
+      <default-value/>
+    </p_adjusted_units>
   </inputs>
 
   <outputs> 
@@ -145,19 +145,19 @@
     </template>  
     <template1> 
       <solution-file> 
-        <location>templates/information.jsp</location>  
+        <location>information.jsp</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </template1>  
     <template2> 
       <solution-file> 
-        <location>templates/add_information_form.jsp</location>  
+        <location>add-information-form.jsp</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </template2>  
     <template3> 
       <solution-file> 
-        <location>templates/edit_information_form.jsp</location>  
+        <location>edit-information-form.jsp</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </template3> 
@@ -165,115 +165,7 @@
   
   <actions> 
     <actions> 
-      <condition><![CDATA[actions=='information_script']]></condition>  
-      <action-definition> 
-        <component-name>TemplateComponent</component-name>
-        <action-type>Message Template</action-type>
-        <action-resources> 
-          <template mapping="template1"/> 
-        </action-resources>
-        <action-outputs> 
-          <output-message type="string" mapping="returnResult"/> 
-        </action-outputs>
-        <component-definition/> 
-      </action-definition>
- 
-    </actions>
-  
-    <actions> 
-      <condition><![CDATA[actions=='add_infomation_form']]></condition>  
-      <action-definition> 
-        <component-name>TemplateComponent</component-name>
-        <action-type>Message Template</action-type>
-        <action-inputs> 
-          <p_campaign_id type="string"/>  
-          <p_billing_contact type="string"/> 
-        </action-inputs>
-        <action-resources> 
-          <template mapping="template2"/> 
-        </action-resources>
-        <action-outputs> 
-          <output-message type="string" mapping="returnResult"/> 
-        </action-outputs>
-        <component-definition/> 
-      </action-definition>
- 
-    </actions>
-  
-    <actions> 
-      <condition><![CDATA[actions=='edit_infomation_form']]></condition>  
-      <action-definition> 
-        <component-name>TemplateComponent</component-name>
-        <action-type>Message Template</action-type>
-        <action-inputs> 
-          <p_io_orders_id type="string"/>  
-          <p_campaign_id type="string"/>  
-          <p_billing_contact type="string"/>  
-          <p_io_line_item_name type="string"/>  
-          <p_io_line_item_id type="string"/> 
-        </action-inputs>
-        <action-resources> 
-          <template mapping="template3"/> 
-        </action-resources>
-        <action-outputs> 
-          <output-message type="string" mapping="returnResult"/> 
-        </action-outputs>
-        <component-definition/> 
-      </action-definition>
- 
-    </actions>
-  
-    <actions> 
-      <condition><![CDATA[actions=='loadInfomationTable']]></condition>  
-      <action-definition> 
-        <component-name>SQLLookupRule</component-name>
-        <action-type>Relational</action-type>
-        <action-inputs> 
-          <jndi type="string" mapping="connectionName"/> 
-        </action-inputs>
-        <action-outputs> 
-          <query-result type="result-set" mapping="query_result"/> 
-        </action-outputs>
-        <component-definition> 
-          <live><![CDATA[true]]></live>  
-          <query><![CDATA[SELECT sk, io_orders_id, io_line_item_id, combine_ids, io_line_item_name, 
-       campaign_id, billing_contact, created_by, created_at, updated_by, 
-       updated_at, "comment"
-  FROM billing.vw_ba_national_dim_io ORDER BY combine_ids;]]></query> 
-        </component-definition> 
-      </action-definition>
- 
-    </actions>
-  
-    <actions> 
-      <condition><![CDATA[actions=='loadListIoOrders']]></condition>  
-      <action-definition> 
-        <component-name>SQLLookupRule</component-name>
-        <action-type>Relational</action-type>
-        <action-inputs> 
-          <jndi type="string" mapping="connectionName"/>  
-          <page type="string"/>  
-          <limit type="string"/>  
-          <term type="string"/> 
-        </action-inputs>
-        <action-outputs> 
-          <query-result type="result-set" mapping="query_result"/> 
-        </action-outputs>
-        <component-definition> 
-          <query><![CDATA[SELECT io_orders_id, io_line_item_id, combined_ids, io_line_item_name
-FROM refer.vw_national_io_order_line_item_insert 
-WHERE (''='{term}' OR UPPER(combined_ids||' | '||io_line_item_name) LIKE UPPER('%{term}%'))
-ORDER BY combined_ids
-OFFSET ({page}-1)*{limit} LIMIT {limit}
-;]]></query>  
-          <live><![CDATA[true]]></live> 
-        </component-definition> 
-      </action-definition>
- 
-    </actions>
-  
-    <actions> 
-      <condition><![CDATA[actions=='insertInformation']]></condition>  
+      <condition><![CDATA[actions=='insertAjustedUnits']]></condition>  
       <action-definition> 
         <component-name>SQLLookupRule</component-name>
         <action-type>Relational</action-type>
@@ -281,41 +173,16 @@ OFFSET ({page}-1)*{limit} LIMIT {limit}
           <jndi type="string" mapping="connectionName"/>  
           <p_io_orders_id type="string"/>  
           <p_io_line_item_id type="string"/>  
-          <p_campaign_id type="string"/>  
-          <p_billing_contact type="string"/>  
           <p_comment type="string"/>  
-          <principalName type="string"/> 
-        </action-inputs>
-        <action-outputs> 
-          <query-result type="result-set" mapping="query_result"/> 
-        </action-outputs>
-        <component-definition> 
-          <query><![CDATA[SELECT * FROM billing.fn_ba_national_dim_io_insert({p_io_orders_id},{p_io_line_item_id} ,'{p_campaign_id}', '{p_billing_contact}', '{principalName}','{p_comment}')]]></query>  
-          <live><![CDATA[true]]></live> 
-        </component-definition> 
-      </action-definition>
- 
-    </actions>
-  
-    <actions> 
-      <condition><![CDATA[actions=='updateInformation']]></condition>  
-      <action-definition> 
-        <component-name>SQLLookupRule</component-name>
-        <action-type>Relational</action-type>
-        <action-inputs> 
-          <p_billing_contact type="string"/>  
-          <p_io_orders_id type="string"/>  
           <principalName type="string"/>  
-          <p_io_line_item_id type="string"/>  
-          <p_comment type="string"/>  
-          <p_campaign_id type="string"/>  
-          <jndi type="string" mapping="connectionName"/> 
+          <p_month_sk type="string"/>
+          <p_adjusted_units type="string"/>
         </action-inputs>
         <action-outputs> 
           <query-result type="result-set" mapping="query_result"/> 
         </action-outputs>
         <component-definition> 
-          <query><![CDATA[SELECT * FROM billing.fn_ba_national_dim_io_update({p_io_orders_id},{p_io_line_item_id} ,'{p_campaign_id}', '{p_billing_contact}', '{principalName}','{p_comment}')]]></query>  
+          <query><![CDATA[SELECT * FROM billing.fn_ba_national_dim_adjustment_insert({p_io_orders_id},{p_io_line_item_id} ,{p_month_sk}, {p_adjusted_units}, '{principalName}','{p_comment}')]]></query>  
           <live><![CDATA[true]]></live> 
         </component-definition> 
       </action-definition>
