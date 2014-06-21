@@ -92,6 +92,7 @@ function generateSelect2(options){
 	var term='';
 	this.getID=getID;
 	this.action=action;
+	this.clearList=clearList;
 	var ajaxObject=$.ajax({
 		type: "POST",
 		url: "some.php",
@@ -248,4 +249,10 @@ function generateSelect2(options){
 		}
 		return result;
 	}
+	function clearList(){
+		$('#'+options.divID).empty();		
+	}
+}
+function loadingDialog(msg){
+	
 }
