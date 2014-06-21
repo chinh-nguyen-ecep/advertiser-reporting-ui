@@ -411,59 +411,15 @@
 			}
 		});
 		// Load detail table
-		$.ajax({
-			url : rootPath_Biiling,
-			dataType : 'json',
-			data : {
-				actions: 'loadBillingDetail',
-				data: 'json',
-				p_month_since_2005: p_month_since_2005,
-				p_io_orders: p_io_orders,
-				p_io_line_items: p_io_line_items
-			},
-			success : function(json) {
-				data = json;
-				setTableData(data);
-			}
-		});
-		function setTableData(data) {
-			var i = 0;
-			var rows = [];
-			for (var i = 0; i < data.length; i++) {
-				var combined_ids = data[i].combined_ids;
-				var campaign_id=data[i].campaign_id;
-				var billing_contact=data[i].billing_contact;
-				var adjusted_units=data[i].adjusted_units;
-				var information_control=data[i].information_control;
-				var adjusted_units_control=data[i].adjusted_units_control;
+		loadBillingDetailTable({
+			p_month_since_2005 : p_month_since_2005,
+			p_io_orders: p_io_orders,
+			p_io_line_items: p_io_line_items,
+			obj_table: $('#detailTable'),
+			success: function(){
 				
-				var row = '<tr>' 
-						+ '<td>' + combined_ids +'</td>' 
-						+ '<td>' + campaign_id + '</td>'
-						+ '<td>' + billing_contact + '</td>' 
-						+ '<td>' + adjusted_units + '</td>'
-						+ '<td><div class="btn-toolbar">';
-						
-				if(information_control=='add'){
-					row +='<button title="" data-toggle="modal" data-target="#addInformationDialog" type="button" class="btn btn-success btn-xs" onclick="loadInfomationAddForm('+i+');">  <span class="glyphicon glyphicon-plus"></span> Information</button>';
-				}else if(information_control=='edit'){
-					row +='<button type="button" data-toggle="modal" data-target="#editInformationDialog" class="btn btn-info btn-xs" onclick="loadInfomationEditForm('+i+');">  <span class="glyphicon glyphicon-edit"></span> Information</button>';
-				}
-				
-				if(adjusted_units_control=='add'){
-					row +='<button type="button" data-toggle="modal" data-target="#addAdjustedUnitDialog" class="btn btn-success btn-xs" onclick="loadAdjustedAddForm('+i+');">  <span class="glyphicon glyphicon-plus"></span> Adjusted Units</button>';
-				}else if(adjusted_units_control=='edit'){
-					row +='<button type="button" data-toggle="modal" data-target="#updateAdjustedUnitDialog" class="btn btn-info btn-xs" onclick="loadAdjustedUpdateForm('+i+');">  <span class="glyphicon glyphicon-edit"></span> Adjusted Units</button>';
-				}
-					row+='</div></td></tr>' ;
-					
-				rows.push(row);
 			}
-			var htmlTable = rows.join("");
-			//console.log(htmlTable);
-			$('#detailTable tbody').empty();
-			$('#detailTable tbody').append(htmlTable);
-		}		
+		});	
 	}
 	///////////////////////////////////
 	// load information edit form

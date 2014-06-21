@@ -87,7 +87,7 @@ border-bottom: 1px solid #ccc;
 					class="icon-bar"></span>
 			</button>
 			<a class="navbar-brand" href="#"><span class="icon-stack">
-					<i class="icon-sign-blank icon-stack-base"></i> <i class="icon-twitter icon-light"></i>
+					<i class="icon-sign-blank icon-stack-base"></i> <i class="icon-usd icon-light"></i>
 			</span>BA National Management</a>			
 		</div>
 
