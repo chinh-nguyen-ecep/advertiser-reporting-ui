@@ -183,6 +183,47 @@
 </div>
 <!-- End -->
 
+<!-- Form update adjusted units  -->
+<div class="modal fade bs-example-modal-lg" id="updateAdjustedUnitDialog" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Update Adjusted Units</h4>
+      </div>
+      <div class="modal-body">
+		<form class="form-horizontal" role="form"  onsubmit="return informationFormAction()" id="updateAdjustedUnitForm">
+			<div class="form-group">
+				<label for="combined_ids" class="required control-label">Combined IDs <abbr title="Required">*</abbr></label>
+				<input  class="form-control" type="hidden" name="p_io_orders_id" style="width: 100%" value="" />
+				<input  class="form-control" type="hidden" name="p_io_line_item_id" style="width: 100%" value="" />
+				<input  class="form-control" type="hidden" name="p_month_sk" style="width: 100%" value="" />
+				<input  class="form-control" type="text" name="selectbox-combined_ids" style="width: 100%" value="" disabled/>				
+			</div>
+			<div class="form-group">
+				<label for="campaign_id" class="required control-label">Month<abbr title="Required">*</abbr></label>
+				<input type="text" class="form-control" name="month" value="" disabled>
+			</div>
+			<div class="form-group">
+				<label for="campaign_id" class="required control-label">Ajusted Units<abbr title="Required">*</abbr></label>
+				<input type="text" class="form-control"  placeholder="Enter ajusted units" name="adjusted_units" value="">
+			</div>
+			<div class="form-group">
+				<label for="comment" class="required control-label">Comment</label>
+				<input type="text" class="form-control" placeholder="Enter comment" name="comment" value="">
+			</div>
+		</form>      
+      </div>
+		<div class="modal-footer">
+	    	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	    	<button type="button" class="btn btn-primary" onclick="billingUpdateAjustedUnits()">Update</button>
+	    </div>
+    </div>
+
+  </div>
+</div>
+<!-- End -->
+
 <!-- Table -->
 <div>
 	<table id="detailTable"	class="table table-bordered table-hover table-responsive">
@@ -207,32 +248,20 @@
 	</table>
 </div>
 <script>
+
 	/////////////////////////
 	// Load list of month
 	/////////////////////////
-	
-	var request = $.ajax({
-		url : rootPath_Biiling,
-		type: "POST",
-		dataType : 'json',
-		data:{
-			actions: 'loadListMonths',
-			data: 'json'
+	generateBillingMonthListDropDown({
+		p_select_object: $('#selectbox-month_sk'),
+		success: function(){
+			loadIoOrders.action();
+		},
+		change: function(){
+	 		loadIoOrders.action();
+	 		loadIoLineItems.clearList();			
 		}
 	});
- 	request.done(function(data){
- 		var resultData=data;
- 		var myData= [];
-		$.each(resultData,function(index,item){	
-			var option='<option value="'+item.month_since_2005+'">'+item.calendar_year_month+'</option>';
-			$('#selectbox-month_sk').append(option);
-		});		
-		loadIoOrders.action();
- 	});
- 	$('#selectbox-month_sk').change(function(){
- 		loadIoOrders.action();
- 		loadIoLineItems.clearList();
- 	});
 	
 	//////////////////////////////
 	//Load list order
@@ -393,9 +422,9 @@
 				}
 				
 				if(adjusted_units_control=='add'){
-					row +='<button type="button" data-toggle="modal" data-target="#addAdjustedUnitDialog" class="btn btn-success btn-xs" onclick="loadAjustedAddForm('+i+');">  <span class="glyphicon glyphicon-plus"></span> Adjusted Units</button>';
+					row +='<button type="button" data-toggle="modal" data-target="#addAdjustedUnitDialog" class="btn btn-success btn-xs" onclick="loadAdjustedAddForm('+i+');">  <span class="glyphicon glyphicon-plus"></span> Adjusted Units</button>';
 				}else if(adjusted_units_control=='edit'){
-					row +='<button type="button" class="btn btn-info btn-xs" onclick="loadEditForm('+i+');">  <span class="glyphicon glyphicon-edit"></span> Adjusted Units</button>';
+					row +='<button type="button" data-toggle="modal" data-target="#updateAdjustedUnitDialog" class="btn btn-info btn-xs" onclick="loadAdjustedUpdateForm('+i+');">  <span class="glyphicon glyphicon-edit"></span> Adjusted Units</button>';
 				}
 					row+='</div></td></tr>' ;
 					
@@ -482,9 +511,9 @@
 	}
 	
 	///////////////////////////////////
-	// load ajusted add form
+	// load adjusted add form
 	//////////////////////////////////	
-	function loadAjustedAddForm(row){
+	function loadAdjustedAddForm(row){
 		var combined_ids = data[row].combined_ids;
 		var io_line_item_name=data[row].io_line_item_name;
 		var month_since_2005=data[row].month_since_2005;
@@ -492,7 +521,7 @@
 		var p_io_orders_id=combined_ids.split("-")[0];
 		var p_io_line_item_id=combined_ids.split("-")[1];
 		
-		console.log(month_since_2005);
+		// set value to form
 		$('#addAdjustedUnitDialog input[name=p_io_orders_id]').val(p_io_orders_id);
 		$('#addAdjustedUnitDialog input[name=p_io_line_item_id]').val(p_io_line_item_id);	
 		$('#addAdjustedUnitDialog input[name=month]').val(calendar_year_month);	
@@ -502,7 +531,7 @@
 		$('#addAdjustedUnitDialog input[name=comment]').val('');		
 	}
 	/////////////////////////////////////
-	// Add Ajusted Units
+	// Add Adjusted Units
 	/////////////////////////////////////
 	function billingAddAjustedUnits(){
 		addAjustedUnits({
@@ -518,6 +547,45 @@
 				//var msg=data[0].fn_ba_national_dim_io_update;
 				//alert(msg);
 			}
+		});
+	}
+	///////////////////////////////////
+	// load adjusted update form
+	//////////////////////////////////	
+	function loadAdjustedUpdateForm(row){
+		var combined_ids = data[row].combined_ids;
+		var io_line_item_name=data[row].io_line_item_name;
+		var month_since_2005=data[row].month_since_2005;
+		var calendar_year_month=data[row].calendar_year_month;
+		var p_io_orders_id=combined_ids.split("-")[0];
+		var p_io_line_item_id=combined_ids.split("-")[1];
+		var p_adjusted_units=data[row].adjusted_units;
+		//Set value to form
+		$('#updateAdjustedUnitForm input[name=p_io_orders_id]').val(p_io_orders_id);
+		$('#updateAdjustedUnitForm input[name=p_io_line_item_id]').val(p_io_line_item_id);	
+		$('#updateAdjustedUnitForm input[name=month]').val(calendar_year_month);	
+		$('#updateAdjustedUnitForm input[name=p_month_sk]').val(month_since_2005);	
+		$('#updateAdjustedUnitForm input[name=adjusted_units]').val(p_adjusted_units);	
+		$('#updateAdjustedUnitForm input[name=selectbox-combined_ids]').val(combined_ids+" | "+io_line_item_name);
+		$('#updateAdjustedUnitForm input[name=comment]').val('');		
+	}
+	/////////////////////////////////////
+	// Update Adjusted Units
+	/////////////////////////////////////	
+	function billingUpdateAjustedUnits(){
+		updateAdjustedUnits({
+			p_combined_ids: $('#updateAdjustedUnitForm input[name=selectbox-combined_ids]').val(),
+			p_io_orders_id: $('#updateAdjustedUnitForm input[name=p_io_orders_id]').val(),
+			p_io_line_item_id: $('#updateAdjustedUnitForm input[name=p_io_line_item_id]').val(),
+			p_adjusted_units: $('#updateAdjustedUnitForm input[name=adjusted_units]').val(),
+			p_month_sk: $('#updateAdjustedUnitForm input[name=p_month_sk]').val(),
+			p_comment: $('#updateAdjustedUnitForm input[name=comment]').val(),
+			success: function(data){
+				$('#updateAdjustedUnitDialog').modal('hide');
+				applyControlPanel();
+				//var msg=data[0].fn_ba_national_dim_io_update;
+				//alert(msg);
+			}		
 		});
 	}
 </script>

@@ -90,18 +90,18 @@
       </sources>  
       <default-value/> 
     </p_io_line_item_name>  
-    <p_month_sk type="string">
-      <sources>
-        <request>p_month_sk</request>
-      </sources>
-      <default-value/>
-    </p_month_sk>
-    <p_adjusted_units type="string">
-      <sources>
-        <request>p_adjusted_units</request>
-      </sources>
-      <default-value/>
-    </p_adjusted_units>
+    <p_month_sk type="string"> 
+      <sources> 
+        <request>p_month_sk</request> 
+      </sources>  
+      <default-value/> 
+    </p_month_sk>  
+    <p_adjusted_units type="string"> 
+      <sources> 
+        <request>p_adjusted_units</request> 
+      </sources>  
+      <default-value/> 
+    </p_adjusted_units> 
   </inputs>
 
   <outputs> 
@@ -175,8 +175,8 @@
           <p_io_line_item_id type="string"/>  
           <p_comment type="string"/>  
           <principalName type="string"/>  
-          <p_month_sk type="string"/>
-          <p_adjusted_units type="string"/>
+          <p_month_sk type="string"/>  
+          <p_adjusted_units type="string"/> 
         </action-inputs>
         <action-outputs> 
           <query-result type="result-set" mapping="query_result"/> 
@@ -189,6 +189,31 @@
  
     </actions>
   
+    <actions>
+      <condition><![CDATA[actions=='updateAjustedUnits']]></condition>
+      <action-definition>
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs>
+          <p_io_orders_id type="string"/>
+          <p_month_sk type="string"/>
+          <principalName type="string"/>
+          <p_io_line_item_id type="string"/>
+          <p_comment type="string"/>
+          <p_adjusted_units type="string"/>
+          <jndi type="string" mapping="connectionName"/>
+        </action-inputs>
+        <action-outputs>
+          <query-result type="result-set" mapping="query_result"/>
+        </action-outputs>
+        <component-definition>
+          <query><![CDATA[SELECT * FROM billing.fn_ba_national_dim_adjustment_update({p_io_orders_id},{p_io_line_item_id} ,{p_month_sk}, {p_adjusted_units}, '{principalName}','{p_comment}')]]></query>
+          <live><![CDATA[true]]></live>
+        </component-definition>
+      </action-definition>
+
+    </actions>
+
     <action-definition> 
       <component-name>JavascriptRule</component-name>
       <action-type>Process data grid</action-type>
