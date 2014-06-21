@@ -6,7 +6,10 @@
 </script>
 <div class="page-header">
 	<div class="btn-group pull-right">
-		<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+		<button type="button" class="btn btn-success" onclick="applyControlPanel()" >
+		  <span class="glyphicon glyphicon-refresh"></span> Refresh
+		</button>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
 		  <span class="glyphicon glyphicon-cog"></span> Control Panel
 		</button>
 	</div>
@@ -226,13 +229,29 @@
 
 <!-- Table -->
 <div>
-	<table id="detailTable"	class="table table-bordered table-hover table-responsive">
+	<table id="summaryTable"	class="table table-bordered table-striped table-hover">
 		<thead>
 			<tr>
 				<th class="buttons" colspan="5">
-					<button type="button" class="btn btn-success" onclick="applyControlPanel()" >
-					  <span class="glyphicon glyphicon-refresh"></span> Refresh
-					</button>
+					<p>The summary at the IO Order level</p>
+				</th>
+			</tr>
+			<tr>				
+				<th>Combined IDs</th>
+				<th>Campaign ID</th>
+				<th>Billing Contact</th>
+				<th>Adjusted Units</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+	<table id="detailTable"	class="table table-bordered table-striped table-hover">
+		<thead>
+			<tr>
+				<th class="buttons" colspan="5">
+					<p>The detail at the IO Line Item level</p>
 				</th>
 			</tr>
 			<tr>				
