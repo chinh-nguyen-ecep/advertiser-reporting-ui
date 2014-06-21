@@ -4,7 +4,7 @@
 	Home
 	</a>
 	<span class="separator">/</span> 
-	<a class="first item-0" href="#" onclick="goHomePage()">Information</a> 
+	<a class="first item-0" href="#" onclick="goInformationPage()">Information</a> 
 	<span class="separator">/</span> 
 	<a class="first item-0" href="#">Add Information</a>
 </div>
@@ -89,48 +89,24 @@ function formAction(){
 	var campaign_id=$('#campaign_id').val();
 	var billing_contact=$('#billing_contact').val();
 	var comment=$('#comment').val();
-	if(combined_ids == '' || campaign_id == '' || billing_contact == ''){
-		alert("Please fill required fields");
-		return false;
-	}
-	//disable button
-	$('input[type="submit"]').prop('disabled', true);
-	$('input[type="submit"]').attr('value','Please wait ...');
-	// call request to insert information
 	var p_io_orders_id=combined_ids.split("-")[0];
 	var p_io_line_item_id =combined_ids.split("-")[1];
-	var request = $.ajax({
-	  url: rootPath_Information,
-	  type: "POST",
-	  data: { 
-		actions: 'insertInformation',
-		data: 'json',
-		p_io_orders_id : p_io_orders_id,
-		p_io_line_item_id : p_io_line_item_id,
-		p_campaign_id : campaign_id,
-		p_billing_contact : billing_contact,
-		p_comment: comment
-	  },
-	  dataType: "json"
-	});
-	request.done(function( data ) {
-		var msg=data[0].fn_ba_national_dim_io_insert;
-		console.log("Insert Information result: "+msg);
-		if(msg=='SUCCESSED'){
-			alert("Added successfully");
-		}else if(msg=='DUPLICATED'){
-			alert("Duplicated information");
-		}else{
-			alert("Error occur!");
+	addInfomation({
+		p_combined_ids: combined_ids,
+		p_io_orders_id: p_io_orders_id,
+		p_io_line_item_id: p_io_line_item_id,
+		p_campaign_id: campaign_id,
+		p_billing_contact: billing_contact,
+		p_comment: comment,
+		success: function(data){
+			var msg=data[0].fn_ba_national_dim_io_insert;
+			if(msg=='SUCCESSED'){
+				alert("Added successfully");
+				loadPage();
+			}
+			
 		}
 	});
-	 
-	request.fail(function( jqXHR, textStatus ) {
-	  alert( "Request failed: " + textStatus );
-	});
-	//enable button
-	$('input[type="submit"]').prop('disabled', false);
-	$('input[type="submit"]').attr('value','Create');	
 	return false;
 }
 </script>

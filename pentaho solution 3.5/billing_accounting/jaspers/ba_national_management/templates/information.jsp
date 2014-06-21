@@ -1,20 +1,13 @@
 <style>
-tr.selected{
-background: #F8F8F8;
-}
 
-table thead th.buttons {
-background-color: #e7e7e7;
-background-image: -moz-linear-gradient(top, #eeeeee, #dddddd);
-background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#eeeeee), to(#dddddd));
-/* background-image: -webkit-linear-gradient(top, #eeeeee, #dddddd); */
-background-image: -o-linear-gradient(top, #eeeeee, #dddddd);
-/* background-image: linear-gradient(to bottom, #eeeeee, #dddddd); */
-/* background-repeat: repeat-x; */
-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffeeeeee', endColorstr='#ffdddddd', GradientType=0);
-border-bottom: 1px solid #ccc;
-}
 </style>
+<script>
+//Set locate
+	urlMaster.replaceParam('page','information_script');
+	urlMaster.replaceParam('actionPath','information_management');
+	activeTab('Information');
+</script>
+
 	<!-- Table -->
 	<div class="breadcrumbs">
 		<a href="#" onclick="goHomePage()">
@@ -22,9 +15,9 @@ border-bottom: 1px solid #ccc;
 		Home
 		</a>
 		<span class="separator">/</span> 
-		<a class="first item-0" href="#" onclick="goHomePage()">Information</a> 
+		<a class="first item-0" href="#" onclick="goInformationPage()">Information</a> 
 	</div>
-	<table id="mainDataTable"		class="table table-bordered table-hover table-responsive">
+	<table id="mainDataTable" class="table table-bordered table-striped table-hover">
 		<thead>
 			<tr>
 				<th class="buttons" colspan="4">
@@ -34,10 +27,10 @@ border-bottom: 1px solid #ccc;
 				</th>
 			</tr>
 			<tr>				
-				<th>Combine IDs</th>
-				<th>Campain ID</th>
-				<th>Billing Contact</th>
-				<th></th>
+				<th  class="col-md-4">Combine IDs</th>
+				<th  class="col-md-3">Campaign ID</th>
+				<th  class="col-md-3">Billing Contact</th>
+				<th  class="col-md-2"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -45,10 +38,6 @@ border-bottom: 1px solid #ccc;
 	</table>
 
 <script>
-
-	//Load invoice data
-	urlMaster.replaceParam('page','information_script');
-	urlMaster.replaceParam('actionPath','information_management');
 	var data = [];
 	$.ajax({
 		url : rootPath_Information + '&actions=loadInfomationTable&data=json',
