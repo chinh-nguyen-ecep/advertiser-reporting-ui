@@ -237,11 +237,11 @@
 				</th>
 			</tr>
 			<tr>				
-				<th>Combined IDs</th>
-				<th>Campaign ID</th>
-				<th>Billing Contact</th>
-				<th>Adjusted Units</th>
-				<th></th>
+				<th class="col-md-2">IO Number<br/>IO Revision Date<br/>IO Order<br/></th>
+				<th class="col-md-4">Advertiser<br/>Campaign Name<br/>Agency</th>
+				<th class="col-md-2">Delivered Units</th>
+				<th class="col-md-2">Invoice Amount</th>
+				<th class="col-md-2">Total Amount Invoiced Upto Month</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -400,7 +400,17 @@
 		var p_month_since_2005=$('#selectbox-month_sk').val();
 		var p_io_orders=loadIoOrders.getID().join(",");
 		var p_io_line_items=loadIoLineItems.getID().join(",");
-		
+		// Load summary table
+		loadBillingSummaryTable({
+			p_month_since_2005 : p_month_since_2005,
+			p_io_orders: p_io_orders,
+			p_io_line_items: p_io_line_items,
+			obj_table: $('#summaryTable'),
+			success: function(){
+				
+			}
+		});
+		// Load detail table
 		$.ajax({
 			url : rootPath_Biiling,
 			dataType : 'json',
