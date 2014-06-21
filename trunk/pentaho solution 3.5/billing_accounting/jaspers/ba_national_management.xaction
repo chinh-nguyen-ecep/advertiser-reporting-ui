@@ -78,24 +78,24 @@
       </sources>  
       <default-value><![CDATA[Hello,<p/> This is the testing email<br/>Please review and feeback to nhut@vervemobile.com.<p/>Thanks!]]></default-value> 
     </reportEmailContent>  
-    <page type="string">
-      <sources>
-        <request>page</request>
-      </sources>
-      <default-value><![CDATA[1]]></default-value>
-    </page>
-    <limit type="string">
-      <sources>
-        <request>limit</request>
-      </sources>
-      <default-value><![CDATA[10]]></default-value>
-    </limit>
-    <term type="string">
-      <sources>
-        <request>term</request>
-      </sources>
-      <default-value/>
-    </term>
+    <page type="string"> 
+      <sources> 
+        <request>page</request> 
+      </sources>  
+      <default-value><![CDATA[1]]></default-value> 
+    </page>  
+    <limit type="string"> 
+      <sources> 
+        <request>limit</request> 
+      </sources>  
+      <default-value><![CDATA[10]]></default-value> 
+    </limit>  
+    <term type="string"> 
+      <sources> 
+        <request>term</request> 
+      </sources>  
+      <default-value/> 
+    </term> 
   </inputs>
 
   <outputs> 
@@ -148,24 +148,96 @@
         <location>ba_national_management/add-information-form.jsp</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
-    </template2> 
+    </template2>  
+    <template3>
+      <solution-file>
+        <location>ba_national_management/script/mainScript.js</location>
+        <mime-type>text/plain</mime-type>
+      </solution-file>
+    </template3>
+    <template4>
+      <solution-file>
+        <location>ba_national_management/index.jsp</location>
+        <mime-type>text/plain</mime-type>
+      </solution-file>
+    </template4>
+    <template5>
+      <solution-file>
+        <location>ba_national_management/script/informationControl.js</location>
+        <mime-type>text/plain</mime-type>
+      </solution-file>
+    </template5>
+    <template6>
+      <solution-file>
+        <location>ba_national_management/script/adjustedUnitsControl.js</location>
+        <mime-type>text/plain</mime-type>
+      </solution-file>
+    </template6>
+    <template7>
+      <solution-file>
+        <location>ba_national_management/templates/index.jsp</location>
+        <mime-type>text/plain</mime-type>
+      </solution-file>
+    </template7>
   </resources>
   
   <actions> 
     <actions> 
       <condition><![CDATA[actions=='template']]></condition>  
-      <action-definition> 
+      <action-definition>
+        <component-name>TemplateComponent</component-name>
+        <action-type>Load main script</action-type>
+        <action-inputs/>
+        <action-resources>
+          <template mapping="template3"/>
+        </action-resources>
+        <action-outputs>
+          <output-message type="string" mapping="mainScript"/>
+        </action-outputs>
+        <component-definition/>
+      </action-definition>
+  
+      <action-definition>
+        <component-name>TemplateComponent</component-name>
+        <action-type>Load informationScript</action-type>
+        <action-resources>
+          <template mapping="template5"/>
+        </action-resources>
+        <action-outputs>
+          <output-message type="string" mapping="informationControl"/>
+        </action-outputs>
+        <component-definition/>
+      </action-definition>
+
+      <action-definition>
+        <component-name>TemplateComponent</component-name>
+        <action-type>Load AdjustedUnitsScript</action-type>
+        <action-resources>
+          <template mapping="template6"/>
+        </action-resources>
+        <action-outputs>
+          <output-message type="string" mapping="adjustedUnitsControl"/>
+        </action-outputs>
+        <component-definition/>
+      </action-definition>
+
+      <action-definition>
         <component-name>TemplateComponent</component-name>
         <action-type>Message Template</action-type>
-        <action-resources> 
-          <template type="resource"/> 
+        <action-inputs>
+          <adjustedUnitsControl type="string"/>
+          <informationControl type="string"/>
+          <mainScript type="string"/>
+        </action-inputs>
+        <action-resources>
+          <template mapping="template7"/>
         </action-resources>
-        <action-outputs> 
-          <output-message type="string" mapping="returnResult"/> 
+        <action-outputs>
+          <output-message type="string" mapping="returnResult"/>
         </action-outputs>
-        <component-definition/> 
+        <component-definition/>
       </action-definition>
- 
+
     </actions>
   
     <action-definition> 
