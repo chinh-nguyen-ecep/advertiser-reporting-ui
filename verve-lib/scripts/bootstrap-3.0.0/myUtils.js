@@ -103,7 +103,7 @@ function urlMaster(){
 	this.getParam=getParam;
 	this.replaceParam=replaceParam;
 	function clear(){
-		window.history.replaceState('local '+local, 'Title '+local, rootUrl+"/?f=1");
+		window.history.replaceState('local '+local, 'Title '+local, rootUrl+"");
 		local++;
 	}
 	function addParam(name,value){
