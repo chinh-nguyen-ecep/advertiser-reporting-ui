@@ -7,20 +7,19 @@
 <div class="page-header">
 
 	<!-- Split button -->
-<div class="btn-group pull-right">
-  <button type="button" class="btn btn-danger">Action</button>
-  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
-    <span class="caret"></span>
-    <span class="sr-only">Toggle Dropdown</span>
-  </button>
-  <ul class="dropdown-menu" role="menu">
-    <li><a href="#">Action</a></li>
-    <li><a href="#">Another action</a></li>
-    <li><a href="#">Something else here</a></li>
-    <li class="divider"></li>
-    <li><a href="#">Separated link</a></li>
-  </ul>
-</div>
+	<div class="btn-group pull-right" style="margin-left: 5px;">
+	  <button type="button" class="btn btn-info">Export</button>
+	  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+	    <span class="caret"></span>
+	    <span class="sr-only">Toggle Dropdown</span>
+	  </button>
+	  <ul class="dropdown-menu" role="menu">
+	    <li><a href="#">Review</a></li>
+	    <li class="divider"></li>
+	    <li><a href="#">Pdf</a></li>
+	    <li><a href="#">Excel</a></li>
+	  </ul>
+	</div>
 	<div class="btn-group pull-right">
 		<button type="button" class="btn btn-success" onclick="applyControlPanel()" >
 		  <span class="glyphicon glyphicon-refresh"></span> Refresh
