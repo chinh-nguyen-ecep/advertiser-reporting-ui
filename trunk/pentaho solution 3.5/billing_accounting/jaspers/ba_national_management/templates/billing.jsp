@@ -516,6 +516,7 @@
 	// Update information
 	/////////////////////////////////////
 	function billingUpdateInformation(){
+		$('#editInformationDialog').modal('hide');
 		updateInfomation({
 			p_combined_ids: $('#editInformationForm input[name=selectbox-combined_ids]').val(),
 			p_io_orders_id: $('#editInformationForm input[name=p_io_orders_id]').val(),
@@ -523,8 +524,7 @@
 			p_campaign_id: $('#editInformationForm input[name=campaign_id]').val(),
 			p_billing_contact: $('#editInformationForm input[name=billing_contact]').val(),
 			p_comment: '',
-			success: function(data){
-				$('#editInformationDialog').modal('hide');
+			success: function(data){				
 				loadPage();
 				//var msg=data[0].fn_ba_national_dim_io_update;
 				//alert(msg);
@@ -535,6 +535,7 @@
 	// Add information
 	/////////////////////////////////////
 	function billingAddInformation(){
+		$('#addInformationDialog').modal('hide');
 		addInfomation({
 			p_combined_ids: $('#addInformationForm input[name=selectbox-combined_ids]').val(),
 			p_io_orders_id: $('#addInformationForm input[name=p_io_orders_id]').val(),
@@ -542,8 +543,7 @@
 			p_campaign_id: $('#addInformationForm input[name=campaign_id]').val(),
 			p_billing_contact: $('#addInformationForm input[name=billing_contact]').val(),
 			p_comment: $('#addInformationForm input[name=comment]').val(),
-			success: function(data){
-				$('#addInformationDialog').modal('hide');
+			success: function(data){				
 				loadPage();
 				//var msg=data[0].fn_ba_national_dim_io_update;
 				//alert(msg);
@@ -575,6 +575,7 @@
 	// Add Adjusted Units
 	/////////////////////////////////////
 	function billingAddAjustedUnits(){
+		$('#addAdjustedUnitDialog').modal('hide');
 		addAjustedUnits({
 			p_combined_ids: $('#addAdjustedUnitForm input[name=selectbox-combined_ids]').val(),
 			p_io_orders_id: $('#addAdjustedUnitForm input[name=p_io_orders_id]').val(),
@@ -582,8 +583,7 @@
 			p_adjusted_units: $('#addAdjustedUnitForm input[name=adjusted_units]').val(),
 			p_month_sk: $('#addAdjustedUnitForm input[name=p_month_sk]').val(),
 			p_comment: $('#addAdjustedUnitForm input[name=comment]').val(),
-			success: function(data){
-				$('#addAdjustedUnitDialog').modal('hide');
+			success: function(data){				
 				loadPage();
 				//var msg=data[0].fn_ba_national_dim_io_update;
 				//alert(msg);
@@ -614,6 +614,7 @@
 	// Update Adjusted Units
 	/////////////////////////////////////	
 	function billingUpdateAjustedUnits(){
+		$('#updateAdjustedUnitDialog').modal('hide');
 		updateAdjustedUnits({
 			p_combined_ids: $('#updateAdjustedUnitForm input[name=selectbox-combined_ids]').val(),
 			p_io_orders_id: $('#updateAdjustedUnitForm input[name=p_io_orders_id]').val(),
@@ -622,7 +623,6 @@
 			p_month_sk: $('#updateAdjustedUnitForm input[name=p_month_sk]').val(),
 			p_comment: $('#updateAdjustedUnitForm input[name=comment]').val(),
 			success: function(data){
-				$('#updateAdjustedUnitDialog').modal('hide');
 				loadPage();
 				//var msg=data[0].fn_ba_national_dim_io_update;
 				//alert(msg);
