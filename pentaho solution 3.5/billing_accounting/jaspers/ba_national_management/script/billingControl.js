@@ -1,3 +1,5 @@
+var dataTableSummary=[];
+var dataTableDetail=[];
 //////////////////////////////////////////////
 // Load list month of billing - select option
 ///////////////////////////////////////////////
@@ -57,8 +59,8 @@ function loadBillingSummaryTable(input){
 			p_io_line_items: input.p_io_line_items
 		},
 		success : function(json) {
-			data = json;
-			setTableData(data);
+			dataTableSummary = json;
+			setTableData(dataTableSummary);
 			input.success();
 		}
 	});
@@ -118,8 +120,8 @@ function loadBillingDetailTable(input){
 			p_io_line_items: input.p_io_line_items
 		},
 		success : function(json) {
-			data = json;
-			setTableData(data);
+			dataTableDetail = json;
+			setTableData(dataTableDetail);
 			input.success();
 		}
 	});

@@ -480,10 +480,10 @@
 	// load information edit form
 	//////////////////////////////////
 	function loadInfomationEditForm(row){
-		var combined_ids = data[row].combined_ids;
-		var io_line_item_name=data[row].io_line_item_name;
-		var campaign_id=data[row].campaign_id;
-		var billing_contact=data[row].billing_contact;	
+		var combined_ids = dataTableDetail[row].combined_ids;
+		var io_line_item_name=dataTableDetail[row].io_line_item_name;
+		var campaign_id=dataTableDetail[row].campaign_id;
+		var billing_contact=dataTableDetail[row].billing_contact;	
 		var p_io_orders_id=combined_ids.split("-")[0];
 		var p_io_line_item_id=combined_ids.split("-")[1];
 		
@@ -497,10 +497,10 @@
 	// load information add form
 	//////////////////////////////////
 	function loadInfomationAddForm(row){
-		var combined_ids = data[row].combined_ids;
-		var io_line_item_name=data[row].io_line_item_name;
-		var campaign_id=data[row].campaign_id;
-		var billing_contact=data[row].billing_contact;	
+		var combined_ids = dataTableDetail[row].combined_ids;
+		var io_line_item_name=dataTableDetail[row].io_line_item_name;
+		var campaign_id=dataTableDetail[row].campaign_id;
+		var billing_contact=dataTableDetail[row].billing_contact;	
 		var p_io_orders_id=combined_ids.split("-")[0];
 		var p_io_line_item_id=combined_ids.split("-")[1];
 		
@@ -554,10 +554,10 @@
 	// load adjusted add form
 	//////////////////////////////////	
 	function loadAdjustedAddForm(row){
-		var combined_ids = data[row].combined_ids;
-		var io_line_item_name=data[row].io_line_item_name;
-		var month_since_2005=data[row].month_since_2005;
-		var calendar_year_month=data[row].calendar_year_month;
+		var combined_ids = dataTableDetail[row].combined_ids;
+		var io_line_item_name=dataTableDetail[row].io_line_item_name;
+		var month_since_2005=dataTableDetail[row].month_since_2005;
+		var calendar_year_month=dataTableDetail[row].calendar_year_month;
 		var p_io_orders_id=combined_ids.split("-")[0];
 		var p_io_line_item_id=combined_ids.split("-")[1];
 		
@@ -593,13 +593,13 @@
 	// load adjusted update form
 	//////////////////////////////////	
 	function loadAdjustedUpdateForm(row){
-		var combined_ids = data[row].combined_ids;
-		var io_line_item_name=data[row].io_line_item_name;
-		var month_since_2005=data[row].month_since_2005;
-		var calendar_year_month=data[row].calendar_year_month;
+		var combined_ids = dataTableDetail[row].combined_ids;
+		var io_line_item_name=dataTableDetail[row].io_line_item_name;
+		var month_since_2005=dataTableDetail[row].month_since_2005;
+		var calendar_year_month=dataTableDetail[row].calendar_year_month;
 		var p_io_orders_id=combined_ids.split("-")[0];
 		var p_io_line_item_id=combined_ids.split("-")[1];
-		var p_adjusted_units=data[row].adjusted_units;
+		var p_adjusted_units=dataTableDetail[row].adjusted_units;
 		//Set value to form
 		$('#updateAdjustedUnitForm input[name=p_io_orders_id]').val(p_io_orders_id);
 		$('#updateAdjustedUnitForm input[name=p_io_line_item_id]').val(p_io_line_item_id);	
