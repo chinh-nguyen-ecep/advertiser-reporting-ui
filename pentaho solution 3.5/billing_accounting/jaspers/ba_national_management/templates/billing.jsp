@@ -21,7 +21,7 @@
 	  </ul>
 	</div>
 	<div class="btn-group pull-right">
-		<button type="button" class="btn btn-success" onclick="applyControlPanel()" >
+		<button type="button" class="btn btn-success" onclick="loadPage()" >
 		  <span class="glyphicon glyphicon-refresh"></span> Refresh
 		</button>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
@@ -524,7 +524,7 @@
 			p_comment: '',
 			success: function(data){
 				$('#editInformationDialog').modal('hide');
-				applyControlPanel();
+				loadPage();
 				//var msg=data[0].fn_ba_national_dim_io_update;
 				//alert(msg);
 			}
@@ -543,7 +543,7 @@
 			p_comment: $('#addInformationForm input[name=comment]').val(),
 			success: function(data){
 				$('#addInformationDialog').modal('hide');
-				applyControlPanel();
+				loadPage();
 				//var msg=data[0].fn_ba_national_dim_io_update;
 				//alert(msg);
 			}
@@ -583,7 +583,7 @@
 			p_comment: $('#addAdjustedUnitForm input[name=comment]').val(),
 			success: function(data){
 				$('#addAdjustedUnitDialog').modal('hide');
-				applyControlPanel();
+				loadPage();
 				//var msg=data[0].fn_ba_national_dim_io_update;
 				//alert(msg);
 			}
@@ -622,7 +622,7 @@
 			p_comment: $('#updateAdjustedUnitForm input[name=comment]').val(),
 			success: function(data){
 				$('#updateAdjustedUnitDialog').modal('hide');
-				applyControlPanel();
+				loadPage();
 				//var msg=data[0].fn_ba_national_dim_io_update;
 				//alert(msg);
 			}		
