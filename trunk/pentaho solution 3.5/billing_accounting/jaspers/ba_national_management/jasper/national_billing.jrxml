@@ -34,7 +34,7 @@ SELECT calendar_year_month
      , (billable_rate *(SUM(imps)::float / 1000)) * (partner_share::double precision / 100) AS pub_net_revenue
      , (max(dt_lastchange)::timestamp with time zone AT TIME ZONE 'America/Los_Angeles')::timestamp with time zone AT TIME ZONE 'America/New_York' AS dt_lastchange
 FROM billing.ba_monthly_vlmo_publisher_share
-WHERE month_since_2005 = $P{p_month_since_2005}::text
+WHERE month_since_2005 = $P{p_month_since_2005}::int
 GROUP BY calendar_year_month
        , network_title
        , merchant_id

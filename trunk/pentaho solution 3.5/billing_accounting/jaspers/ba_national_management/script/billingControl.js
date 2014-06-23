@@ -222,6 +222,6 @@ function exportNationalBillingReport(input){
 					+'&p_month_since_2005='+input.p_month_since_2005
 					+'&p_io_orders='+input.p_io_orders
 					+'&p_io_line_items='+input.p_io_line_items;
-					alert(urlExport);
+	window.open(urlExport);
 	
 };
