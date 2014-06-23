@@ -265,14 +265,15 @@
 	<table id="detailTable"	class="table table-bordered table-striped table-hover">
 		<thead>
 			<tr>
-				<th class="buttons" colspan="5">
+				<th class="buttons" colspan="6">
 					<p>The detail at the IO Line Item level</p>
 				</th>
 			</tr>
 			<tr>				
-				<th>Combined IDs</th>
-				<th>Campaign ID</th>
-				<th>Billing Contact</th>
+				<th class="col-md-3">Combined IDs</th>
+				<th class="col-md-3">Information</th>
+				<th class="col-md-1">Booking</th>
+				<th class="col-md-2">DFP/DFA</th>
 				<th>Adjusted Units</th>
 				<th></th>
 			</tr>

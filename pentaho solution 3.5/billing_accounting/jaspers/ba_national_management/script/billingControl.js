@@ -139,6 +139,14 @@ function loadBillingDetailTable(input){
 			var placement_id = data[i].placement_id;
 			var campaign_id=data[i].campaign_id;
 			var billing_contact=data[i].billing_contact;
+			var rate_type=data[i].rate_type;
+			var rate=data[i].rate;
+			var planned_units=data[i].planned_units;
+			var contracted_budget=data[i].contracted_budget;
+			var dfp_delivered_imps=data[i].dfp_delivered_imps;
+			var dfp_delivered_clicks=data[i].dfp_delivered_clicks;
+			var dfa_delivered_imps=data[i].dfa_delivered_imps;
+			var dfa_delivered_clicks=data[i].dfa_delivered_clicks;
 			var adjusted_units=data[i].adjusted_units;
 			var information_control=data[i].information_control;
 			var adjusted_units_control=data[i].adjusted_units_control;
@@ -146,18 +154,33 @@ function loadBillingDetailTable(input){
 			var start_date = new Date(io_line_item_start_date).format('mmm dd, yyyy');
 			var end_date = new Date(io_line_item_end_date).format('mmm dd, yyyy'); 
 			var placement_group_truncated = placement_group;
-			if (placement_group.length > 30) {
-				placement_group_truncated = placement_group.substring(0, 50) + '...';
+			if (placement_group.length > 60) {
+				placement_group_truncated = placement_group.substring(0, 60) + '...';
 			}
 			
 			
 			var row = '<tr>' 
 					+ '<td><a href="#" onclick="showBillingDetail('+month_since_2005+','+io_orders_id+','+io_line_item_id+')">' + combined_ids + ' | ' + start_date + ' - ' + end_date +'</a><br/><i>'+placement_group_truncated+'</i></td>' 
-					+ '<td>' + campaign_id + '</td>'
-					+ '<td>' + billing_contact + '</td>' 
-					+ '<td>' + adjusted_units + '</td>'
+					+ '<td>' + campaign_id + '<br/><i>'+billing_contact+'</i><br/>';
+					if(information_control=='add'){
+				row +='<button title="" data-toggle="modal" data-target="#addInformationDialog" type="button" class="btn btn-success btn-xs" onclick="loadInfomationAddForm('+i+');">  <span class="glyphicon glyphicon-plus"></span></button>';
+			}else if(information_control=='edit'){
+				row +='<button type="button" data-toggle="modal" data-target="#editInformationDialog" class="btn btn-info btn-xs" onclick="loadInfomationEditForm('+i+');">  <span class="glyphicon glyphicon-edit"></span></button>';
+			}
+				row	+= '</td>'
+					+ '<td>' + accounting.formatMoney(contracted_budget) + '<br/>' + accounting.formatNumber(planned_units) + ' units<br/>' + accounting.formatMoney(rate) + ' ' + rate_type + '</td>' 
+					+ '<td>' + accounting.formatNumber(dfp_delivered_imps) + ' imps | ' + accounting.formatNumber(dfp_delivered_clicks) + ' clicks<br/>' + accounting.formatNumber(dfa_delivered_imps) + ' imps | ' + accounting.formatNumber(dfa_delivered_clicks) + ' clicks' + '</td>'
+					+ '<td>' + adjusted_units + '<br/>'
+			
+			if(adjusted_units_control=='add'){
+				row +='<button type="button" data-toggle="modal" data-target="#addAdjustedUnitDialog" class="btn btn-success btn-xs" onclick="loadAdjustedAddForm('+i+');">  <span class="glyphicon glyphicon-plus"></span></button>';
+			}else if(adjusted_units_control=='edit'){
+				row +='<button type="button" data-toggle="modal" data-target="#updateAdjustedUnitDialog" class="btn btn-info btn-xs" onclick="loadAdjustedUpdateForm('+i+');">  <span class="glyphicon glyphicon-edit"></span></button>';
+			}
+			
+				row += '</td>'
 					+ '<td><div class="btn-toolbar">';
-					
+				/*	
 			if(information_control=='add'){
 				row +='<button title="" data-toggle="modal" data-target="#addInformationDialog" type="button" class="btn btn-success btn-xs" onclick="loadInfomationAddForm('+i+');">  <span class="glyphicon glyphicon-plus"></span> Information</button>';
 			}else if(information_control=='edit'){
@@ -169,6 +192,7 @@ function loadBillingDetailTable(input){
 			}else if(adjusted_units_control=='edit'){
 				row +='<button type="button" data-toggle="modal" data-target="#updateAdjustedUnitDialog" class="btn btn-info btn-xs" onclick="loadAdjustedUpdateForm('+i+');">  <span class="glyphicon glyphicon-edit"></span> Adjusted Units</button>';
 			}
+			*/
 				row+='</div></td></tr>' ;
 				
 			rows.push(row);
