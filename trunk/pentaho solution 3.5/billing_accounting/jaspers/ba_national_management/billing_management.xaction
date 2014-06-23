@@ -95,7 +95,13 @@
         <request>p_io_line_item_id</request> 
       </sources>  
       <default-value/> 
-    </p_io_line_item_id> 
+    </p_io_line_item_id>  
+    <p_export_output type="string">
+      <sources>
+        <request>p_export_output</request>
+      </sources>
+      <default-value><![CDATA[html]]></default-value>
+    </p_export_output>
   </inputs>
 
   <outputs> 
@@ -160,7 +166,13 @@
         <location>templates/billing_detail.jsp</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
-    </template4> 
+    </template4>  
+    <report-definition4>
+      <solution-file>
+        <location>jasper/national_billing.jasper</location>
+        <mime-type>text/plain</mime-type>
+      </solution-file>
+    </report-definition4>
   </resources>
   
   <actions> 
@@ -547,6 +559,26 @@ if(adjusted_units==null){
  
     </actions>
   
+    <actions>
+      <condition><![CDATA[actions=='export']]></condition>
+      <action-definition>
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs>
+          <jndi type="string" mapping="connectionName"/>
+          <output-type type="string" mapping="p_export_output"/>
+          <p_month_since_2005 type="string"/>
+          <p_io_orders type="string"/>
+          <p_io_line_items type="string"/>
+        </action-inputs>
+        <action-resources>
+          <report-definition mapping="report-definition4"/>
+        </action-resources>
+        <component-definition/>
+      </action-definition>
+
+    </actions>
+
     <action-definition> 
       <component-name>JavascriptRule</component-name>
       <action-type>Process data grid</action-type>
