@@ -3,6 +3,7 @@
 </style>
 <script>
 //Set locate
+	urlMaster.clear();
 	urlMaster.replaceParam('page','information_script');
 	urlMaster.replaceParam('actionPath','information_management');
 	activeTab('Information');
