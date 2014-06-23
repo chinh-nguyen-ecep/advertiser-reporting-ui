@@ -475,7 +475,11 @@ var invoice_amount=query_result.getValueAt(0,25);
 var total_amount_invoiced_upto_month=query_result.getValueAt(0,26);
 var remaining_budget=query_result.getValueAt(0,27);
 var information_control=query_result.getValueAt(0,28);
-var adjusted_units_control=query_result.getValueAt(0,28);]]></script>
+var adjusted_units_control=query_result.getValueAt(0,28);
+
+if(adjusted_units==null){
+	adjusted_units='null';
+}]]></script>
         </component-definition> 
       </action-definition>
   
