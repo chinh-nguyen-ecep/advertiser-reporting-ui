@@ -14,10 +14,10 @@
 	    <span class="sr-only">Toggle Dropdown</span>
 	  </button>
 	  <ul class="dropdown-menu" role="menu">
-	    <li><a href="#">Review</a></li>
+	    <li><a href="#" onclick="exportReport('html')">Review</a></li>
 	    <li class="divider"></li>
-	    <li><a href="#">Pdf</a></li>
-	    <li><a href="#">Excel</a></li>
+	    <li><a href="#" onclick="exportReport('pdf')">Pdf</a></li>
+	    <li><a href="#" onclick="exportReport('xls')">Excel</a></li>
 	  </ul>
 	</div>
 	<div class="btn-group pull-right">
@@ -643,5 +643,25 @@
 				$("#summary-content div.content").append(divDetail);
 			}
 		});
+	}
+	
+	///////////////////////////
+	// Export
+	//////////////////////////
+	function exportReport(exportType){
+		var p_month_since_2005=urlMaster.getParam('month_sk',p_month_since_2005);
+		var p_io_orders=urlMaster.getParam('io_orders',p_io_orders);
+		var p_io_line_items=urlMaster.getParam('io_line_items',p_io_line_items);
+		
+		if(p_month_since_2005!=''&&p_io_orders!=''&&p_io_line_items!=''){
+			exportNationalBillingReport({
+				p_export_output: exportType,
+				p_month_since_2005 : p_month_since_2005,
+				p_io_orders: p_io_orders,
+				p_io_line_items: p_io_line_items
+			});
+		}else{
+			
+		}
 	}
 </script>
