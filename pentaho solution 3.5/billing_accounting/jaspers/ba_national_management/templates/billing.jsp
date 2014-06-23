@@ -252,11 +252,11 @@
 				</th>
 			</tr>
 			<tr>				
-				<th class="col-md-3">IO Number<br/>IO Revision Date<br/>IO Order<br/></th>
-				<th class="col-md-6">Advertiser<br/>Campaign Name<br/>Agency</th>
+				<th class="col-md-3">IO Order<br/></th>
+				<th class="col-md-6">Campaign Name</th>
 				<th class="col-md-1">Delivered Units</th>
-				<th class="col-md-1">Invoice Amount</th>
-				<th class="col-md-1">Total Amount Invoiced Upto Month</th>
+				<th class="col-md-1">Invoiced Amount</th>
+				<th class="col-md-1">Invoiced Upto Month</th>
 			</tr>
 		</thead>
 		<tbody>

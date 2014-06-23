@@ -77,11 +77,11 @@ function loadBillingSummaryTable(input){
 			var total_amount_invoiced_upto_month=data[i].total_amount_invoiced_upto_month;
 			
 			var row = '<tr>' 
-					+ '<td><b>' + io_number+'</b><br/><i>'+io_revision_date+'</i><br/>'+ io_orders_id+'</td>' 
-					+ '<td><b>' + advertiser+'</b><br/><i>'+campaign_name+'</i><br/>'+ agency+'</td>' 
-					+ '<td>' + accounting.formatNumber(delivered_units) + '</td>' 
-					+ '<td>' + accounting.formatMoney(invoice_amount) + '</td>'
-					+ '<td>' + accounting.formatMoney(total_amount_invoiced_upto_month) + '</td>'
+					+ '<td><b>' + io_orders_id + '</b><br/><i>' + io_number + '</i><br/>' + io_revision_date + '</td>' 
+					+ '<td><b>' + campaign_name + '</b><br/><i>' + advertiser + '</i><br/>' + agency + '</td>' 
+					+ '<td align="right">' + accounting.formatNumber(delivered_units) + '</td>' 
+					+ '<td align="right">' + accounting.formatMoney(invoice_amount) + '</td>'
+					+ '<td align="right">' + accounting.formatMoney(total_amount_invoiced_upto_month) + '</td>'
 					+ '</tr>';
 				
 			rows.push(row);
@@ -130,15 +130,27 @@ function loadBillingDetailTable(input){
 			var month_since_2005=data[i].month_since_2005;
 			var io_orders_id=data[i].io_orders_id;
 			var io_line_item_id=data[i].io_line_item_id;
+			var io_line_item_start_date=data[i].io_line_item_start_date;
+			var io_line_item_end_date=data[i].io_line_item_end_date;
 			var combined_ids = data[i].combined_ids;
+			var placement_group = data[i].placement_group;
+			var placement_id = data[i].placement_id;
 			var campaign_id=data[i].campaign_id;
 			var billing_contact=data[i].billing_contact;
 			var adjusted_units=data[i].adjusted_units;
 			var information_control=data[i].information_control;
 			var adjusted_units_control=data[i].adjusted_units_control;
 			
+			var start_date = new Date(io_line_item_start_date).format('mmm dd, yyyy');
+			var end_date = new Date(io_line_item_end_date).format('mmm dd, yyyy'); 
+			var placement_group_truncated = placement_group;
+			if (placement_group.length > 30) {
+				placement_group_truncated = placement_group.substring(0, 50) + '...';
+			}
+			
+			
 			var row = '<tr>' 
-					+ '<td><a href="#" onclick="showBillingDetail('+month_since_2005+','+io_orders_id+','+io_line_item_id+')">' + combined_ids +'</a></td>' 
+					+ '<td><a href="#" onclick="showBillingDetail('+month_since_2005+','+io_orders_id+','+io_line_item_id+')">' + combined_ids + ' | ' + start_date + ' - ' + end_date +'</a><br/><i>'+placement_group_truncated+'</i></td>' 
 					+ '<td>' + campaign_id + '</td>'
 					+ '<td>' + billing_contact + '</td>' 
 					+ '<td>' + adjusted_units + '</td>'

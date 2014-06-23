@@ -95,13 +95,7 @@
         <request>p_io_line_item_id</request> 
       </sources>  
       <default-value/> 
-    </p_io_line_item_id>  
-    <p_export_output type="string">
-      <sources>
-        <request>p_export_output</request>
-      </sources>
-      <default-value><![CDATA[html]]></default-value>
-    </p_export_output>
+    </p_io_line_item_id> 
   </inputs>
 
   <outputs> 
@@ -161,18 +155,12 @@
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </template3>  
-    <template4>
-      <solution-file>
-        <location>templates/billing_detail.jsp</location>
-        <mime-type>text/plain</mime-type>
-      </solution-file>
-    </template4>
-    <report-definition4>
-      <solution-file>
-        <location>jasper/national_billing.jasper</location>
-        <mime-type>text/plain</mime-type>
-      </solution-file>
-    </report-definition4>
+    <template4> 
+      <solution-file> 
+        <location>templates/billing_detail.jsp</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </template4> 
   </resources>
   
   <actions> 
@@ -292,16 +280,34 @@ order by month_since_2005 DESC
 , a.month_since_2005
 , a.advertiser_io as io_number
 , a.updated_at::date as io_revision_date
-, a.io_line_item_start_date::date
-, a.io_line_item_end_date::date
-, a.io_line_item_name
-, COALESCE(b.campaign_id, '') as campaign_id
-, a.contract_name as campaign_name
-, COALESCE(b.billing_contact, '') as billing_contact
-, (a.io_orders_id ||'-'|| a.io_line_item_id) as combined_ids
-, a.adjusted_units --the user will update this field via UI
 , a.io_orders_id
 , a.io_line_item_id
+, a.io_line_item_start_date::date
+, a.io_line_item_end_date::date
+, a.organization_name as advertiser
+, COALESCE(b.campaign_id, '') as campaign_id
+, a.contract_name as campaign_name
+, a.agency_name as agency
+, COALESCE(b.billing_contact, '') as billing_contact
+, (a.io_orders_id ||'-'|| a.io_line_item_id) as combined_ids
+, a.io_line_item_name as placement_group
+, a.io_line_item_external_ref as placement_id
+, a.io_line_item_metric as rate_type
+, a.io_line_item_rate as rate
+, a.io_line_item_quantity as planned_units
+, a.io_line_item_budget as contracted_budget
+--,vendor_names as vendors
+, a.dfp_impressions as dfp_delivered_imps
+, a.dfp_clicks as dfp_delivered_clicks
+, a.dfa_impressions as dfa_delivered_imps
+, a.dfa_clicks as dfa_delivered_clicks
+, a.adjusted_units --the user will update this field via UI
+, a.delivered_units
+, a.remaining_units
+, a.billable_units
+, ROUND(a.invoice_amount::NUMERIC, 2) as invoice_amount
+, ROUND(a.total_amount_invoiced_upto_month::NUMERIC, 2) as total_amount_invoiced_upto_month
+, a.remaining_budget
 , CASE WHEN b.io_orders_id IS NULL THEN 'add' ELSE 'edit' END AS information_control
 , CASE WHEN a.adjusted_units IS NULL THEN 'add' ELSE 'edit' END AS adjusted_units_control
 from  billing.ba_monthly_national_worksheet a
@@ -310,7 +316,7 @@ where month_since_2005 = {p_month_since_2005}
 AND (a.io_orders_id IN ({p_io_orders}) OR '0'='{p_io_orders}')
 AND (a.io_line_item_id IN ({p_io_line_items}) OR '0'='{p_io_line_items}')
 AND a.is_active=true
-order by combined_ids, IO_line_item_start_date;]]></query> 
+order by advertiser, combined_ids;]]></query> 
         </component-definition> 
       </action-definition>
  
@@ -455,9 +461,9 @@ and a.io_line_item_id = {p_io_line_item_id}
           <total_amount_invoiced_upto_month type="string"/>  
           <information_control type="string"/>  
           <adjusted_units_control type="string"/>  
-          <remaining_budget type="string"/>
+          <remaining_budget type="string"/> 
         </action-outputs>
-        <component-definition>
+        <component-definition> 
           <script><![CDATA[var calendar_year_month=query_result.getValueAt(0,0);
 var io_number=query_result.getValueAt(0,1);
 var io_revision_date=query_result.getValueAt(0,2);
@@ -491,76 +497,56 @@ var adjusted_units_control=query_result.getValueAt(0,28);
 
 if(adjusted_units==null){
 	adjusted_units='null';
-}]]></script>
+}]]></script> 
         </component-definition> 
       </action-definition>
   
-      <action-definition>
+      <action-definition> 
         <component-name>TemplateComponent</component-name>
         <action-type>Message Template</action-type>
-        <action-inputs>
-          <io_line_item_start_date type="string"/>
-          <io_number type="string"/>
-          <dfp_delivered_imps type="string"/>
-          <placement_id type="string"/>
-          <information_control type="string"/>
-          <placement_group type="string"/>
-          <rate type="string"/>
-          <combined_ids type="string"/>
-          <delivered_units type="string"/>
-          <rate_type type="string"/>
-          <adjusted_units_control type="string"/>
-          <io_revision_date type="string"/>
-          <planned_units type="string"/>
-          <campaign_name type="string"/>
-          <agency type="string"/>
-          <invoice_amount type="string"/>
-          <remaining_budget type="string"/>
-          <campaign_id type="string"/>
-          <calendar_year_month type="string"/>
-          <total_amount_invoiced_upto_month type="string"/>
-          <billing_contact type="string"/>
-          <dfa_delivered_imps type="string"/>
-          <dfa_delivered_clicks type="string"/>
-          <remaining_units type="string"/>
-          <contracted_budget type="string"/>
-          <adjusted_units type="string"/>
-          <io_line_item_end_date type="string"/>
-          <billable_units type="string"/>
-          <dfp_delivered_clicks type="string"/>
-          <organization_name type="string"/>
+        <action-inputs> 
+          <io_line_item_start_date type="string"/>  
+          <io_number type="string"/>  
+          <dfp_delivered_imps type="string"/>  
+          <placement_id type="string"/>  
+          <information_control type="string"/>  
+          <placement_group type="string"/>  
+          <rate type="string"/>  
+          <combined_ids type="string"/>  
+          <delivered_units type="string"/>  
+          <rate_type type="string"/>  
+          <adjusted_units_control type="string"/>  
+          <io_revision_date type="string"/>  
+          <planned_units type="string"/>  
+          <campaign_name type="string"/>  
+          <agency type="string"/>  
+          <invoice_amount type="string"/>  
+          <remaining_budget type="string"/>  
+          <campaign_id type="string"/>  
+          <calendar_year_month type="string"/>  
+          <total_amount_invoiced_upto_month type="string"/>  
+          <billing_contact type="string"/>  
+          <dfa_delivered_imps type="string"/>  
+          <dfa_delivered_clicks type="string"/>  
+          <remaining_units type="string"/>  
+          <contracted_budget type="string"/>  
+          <adjusted_units type="string"/>  
+          <io_line_item_end_date type="string"/>  
+          <billable_units type="string"/>  
+          <dfp_delivered_clicks type="string"/>  
+          <organization_name type="string"/> 
         </action-inputs>
-        <action-resources>
-          <template mapping="template4"/>
+        <action-resources> 
+          <template mapping="template4"/> 
         </action-resources>
-        <action-outputs>
-          <output-message type="string" mapping="returnResult"/>
+        <action-outputs> 
+          <output-message type="string" mapping="returnResult"/> 
         </action-outputs>
-        <component-definition/>
+        <component-definition/> 
       </action-definition>
-
+ 
     </actions>
   
-    <actions>
-      <condition><![CDATA[actions=='export']]></condition>
-      <action-definition>
-        <component-name>JasperReportsComponent</component-name>
-        <action-type>Jasper</action-type>
-        <action-inputs>
-          <jndi type="string" mapping="connectionName"/>
-          <output-type type="string" mapping="p_export_output"/>
-          <p_month_since_2005 type="string"/>
-          <p_io_orders type="string"/>
-          <p_io_line_items type="string"/>
-        </action-inputs>
-        <action-resources>
-          <report-definition mapping="report-definition4"/>
-        </action-resources>
-        <component-definition/>
-      </action-definition>
-
-    </actions>
-
     <action-definition> 
       <component-name>JavascriptRule</component-name>
       <action-type>Process data grid</action-type>
