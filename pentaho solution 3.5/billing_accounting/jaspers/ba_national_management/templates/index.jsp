@@ -47,7 +47,6 @@ div.first-tab {
 	padding: 19px 20px 20px;
 	margin-top: 20px;
 	margin-bottom: 20px;
-	background-color: #f5f5f5;
 	border-top: 1px solid #e5e5e5;
 	padding-left: 0px;
 }
@@ -75,6 +74,11 @@ background-image: -o-linear-gradient(top, #eeeeee, #dddddd);
 /* background-repeat: repeat-x; */
 filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffeeeeee', endColorstr='#ffdddddd', GradientType=0);
 border-bottom: 1px solid #ccc;
+}
+
+.btn {
+border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
 </style>
 </head>
