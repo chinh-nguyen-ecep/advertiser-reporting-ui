@@ -2,14 +2,11 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Billing Monthly VLMO Revenue" pageWidth="3990" pageHeight="842" orientation="Landscape" columnWidth="3950" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="48"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
-	<parameter name="parameter1" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["/opt/pentaho/biserver-ce/pentaho-solutions/third_party_reports/jaspers/daily_performance_report/"]]></defaultValueExpression>
-	</parameter>
-	<parameter name="calendar_year_month" class="java.lang.String"/>
+	<parameter name="p_month_since_2005" class="java.lang.String"/>
 	<parameter name="p_io_orders" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new String("0")]]></defaultValueExpression>
 	</parameter>
@@ -37,7 +34,7 @@ SELECT calendar_year_month
      , (billable_rate *(SUM(imps)::float / 1000)) * (partner_share::double precision / 100) AS pub_net_revenue
      , (max(dt_lastchange)::timestamp with time zone AT TIME ZONE 'America/Los_Angeles')::timestamp with time zone AT TIME ZONE 'America/New_York' AS dt_lastchange
 FROM billing.ba_monthly_vlmo_publisher_share
-WHERE calendar_year_month = $P{calendar_year_month}::text
+WHERE month_since_2005 = $P{p_month_since_2005}::text
 GROUP BY calendar_year_month
        , network_title
        , merchant_id
@@ -99,11 +96,11 @@ GROUP BY calendar_year_month]]>
 				<subreportParameter name="p_io_orders">
 					<subreportParameterExpression><![CDATA[$P{p_io_orders}]]></subreportParameterExpression>
 				</subreportParameter>
+				<subreportParameter name="p_month_since_2005">
+					<subreportParameterExpression><![CDATA[$P{p_month_since_2005}]]></subreportParameterExpression>
+				</subreportParameter>
 				<subreportParameter name="p_io_line_items">
 					<subreportParameterExpression><![CDATA[$P{p_io_line_items}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="calendar_year_month">
-					<subreportParameterExpression><![CDATA[$P{calendar_year_month}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "sub_io_line_item.jasper"]]></subreportExpression>
@@ -113,11 +110,11 @@ GROUP BY calendar_year_month]]>
 				<subreportParameter name="p_io_orders">
 					<subreportParameterExpression><![CDATA[$P{p_io_orders}]]></subreportParameterExpression>
 				</subreportParameter>
+				<subreportParameter name="p_month_since_2005">
+					<subreportParameterExpression><![CDATA[$P{p_month_since_2005}]]></subreportParameterExpression>
+				</subreportParameter>
 				<subreportParameter name="p_io_line_items">
 					<subreportParameterExpression><![CDATA[$P{p_io_line_items}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="calendar_year_month">
-					<subreportParameterExpression><![CDATA[$P{calendar_year_month}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "sub_io_order.jasper"]]></subreportExpression>

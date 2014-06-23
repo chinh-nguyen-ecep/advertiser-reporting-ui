@@ -193,3 +193,23 @@ function loadBillingDetail(input){
 		}
 	});	
 }
+
+//////////////////////////////////
+// Export report
+/////////////////////////////////
+function exportNationalBillingReport(input){
+	input = $.extend({}, {
+		p_export_output: 'html',
+		p_month_since_2005 : '',
+		p_io_orders: '',
+		p_io_line_items: ''		
+	}, input);
+	var urlExport=rootPath_Biiling
+					+'&actions=export'
+					+'&p_export_output='+input.p_export_output
+					+'&p_month_since_2005='+input.p_month_since_2005
+					+'&p_io_orders='+input.p_io_orders
+					+'&p_io_line_items='+input.p_io_line_items;
+					alert(urlExport);
+	
+};
