@@ -22,6 +22,7 @@ var solution = gup('solution');
 var path = gup('path');
 var rootPath = 'ViewAction?solution=' + solution + '&path=' + path
 		+ '&action=ba_national_management.xaction';
+var rootUrl=window.location.protocol+'//'+window.location.hostname+':'+window.location.port+"/pentaho/"+rootPath;
 var rootPath_Information = 'ViewAction?solution=' + solution + '&path=' + path
 		+ '/ba_national_management' + '&action=information_management.xaction';
 var rootPath_Biiling = 'ViewAction?solution=' + solution + '&path=' + path
@@ -35,6 +36,11 @@ $(document).ready(function() {
 	console.log("ready!");
 	console.log("jQuery verion: " + jQuery.fn.jquery);
 	initProcessingPage();
+	if(window.location.hash === "open")
+    {
+		loadPage();
+    }
+	
 });
 
 // *******************************

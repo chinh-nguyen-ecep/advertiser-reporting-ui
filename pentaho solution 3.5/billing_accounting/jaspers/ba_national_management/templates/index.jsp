@@ -13,6 +13,7 @@
 <script type="text/javascript"	src="/verve-lib/scripts/bootstrap-3.0.0/blugins/jquery.validate.bootstrap.popover.min.js"></script>
 <script type="text/javascript"	src="/verve-lib/scripts/bootstrap-3.0.0/blugins/jquery.validate.min.js"></script>
 <script type="text/javascript"	src="/verve-lib/scripts/bootstrap-3.0.0/blugins/bootbox.min.js"></script>
+<script type="text/javascript"	src="/verve-lib/scripts/accounting.min.js"></script>
 <script src="/verve-lib/scripts/async-master/lib/async.js"></script>
     <!-- Select 2 -->
     <link rel="stylesheet" type="text/css" media="screen" href="/verve-lib/scripts/select2-3.4.3/select2.css"> 

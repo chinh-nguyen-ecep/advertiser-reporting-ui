@@ -83,7 +83,19 @@
         <request>p_io_line_items</request> 
       </sources>  
       <default-value><![CDATA[0]]></default-value> 
-    </p_io_line_items> 
+    </p_io_line_items>  
+    <p_io_order_id type="string"> 
+      <sources> 
+        <request>p_io_order_id</request> 
+      </sources>  
+      <default-value/> 
+    </p_io_order_id>  
+    <p_io_line_item_id type="string"> 
+      <sources> 
+        <request>p_io_line_item_id</request> 
+      </sources>  
+      <default-value/> 
+    </p_io_line_item_id> 
   </inputs>
 
   <outputs> 
@@ -142,7 +154,13 @@
         <location>edit-information-form.jsp</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
-    </template3> 
+    </template3>  
+    <template4>
+      <solution-file>
+        <location>templates/billing_detail.jsp</location>
+        <mime-type>text/plain</mime-type>
+      </solution-file>
+    </template4>
   </resources>
   
   <actions> 
@@ -243,7 +261,7 @@ order by month_since_2005 DESC
     </actions>
   
     <actions> 
-      <condition><![CDATA[actions=='loadBillingDetail']]></condition>  
+      <condition><![CDATA[actions=='loadBillingDetailTable']]></condition>  
       <action-definition> 
         <component-name>SQLLookupRule</component-name>
         <action-type>Relational</action-type>
@@ -286,20 +304,20 @@ order by combined_ids, IO_line_item_start_date;]]></query>
  
     </actions>
   
-    <actions>
-      <condition><![CDATA[actions=='loadBillingSummary']]></condition>
-      <action-definition>
+    <actions> 
+      <condition><![CDATA[actions=='loadBillingSummary']]></condition>  
+      <action-definition> 
         <component-name>SQLLookupRule</component-name>
         <action-type>Relational</action-type>
-        <action-inputs>
-          <jndi type="string" mapping="connectionName"/>
-          <p_io_orders type="string"/>
-          <p_io_line_items type="string"/>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <p_io_orders type="string"/>  
+          <p_io_line_items type="string"/> 
         </action-inputs>
-        <action-outputs>
-          <query-result type="result-set" mapping="query_result"/>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
         </action-outputs>
-        <component-definition>
+        <component-definition> 
           <query><![CDATA[select a.calendar_year_month
 , a.month_since_2005
 , a.advertiser_io as io_number
@@ -324,13 +342,189 @@ group by a.calendar_year_month
 , a.organization_name
 , a.contract_name
 , a.agency_name
-order by advertiser, a.io_orders_id;]]></query>
-          <live><![CDATA[true]]></live>
-        </component-definition>
+order by advertiser, a.io_orders_id;]]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='LoadBillingDetail']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <p_io_order_id type="string"/>  
+          <p_io_line_item_id type="string"/>  
+          <p_month_since_2005 type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
+        </action-outputs>
+        <component-definition> 
+          <query><![CDATA[select 
+a.calendar_year_month
+,a.advertiser_io as io_number
+,a.updated_at::date as io_revision_date
+,a.io_line_item_start_date::date
+,a.io_line_item_end_date::date
+,a.organization_name as advertiser
+,COALESCE(b.campaign_id, '') as campaign_id
+,a.contract_name as campaign_name
+,a.agency_name as agency
+,COALESCE(b.billing_contact, '') as billing_contact
+,(a.io_orders_id ||'-'|| a.io_line_item_id) as combined_ids
+,a.io_line_item_name as placement_group
+,a.io_line_item_external_ref as placement_id
+,a.io_line_item_metric as rate_type
+,a.io_line_item_rate as rate
+,a.io_line_item_quantity as planned_units
+,a.io_line_item_budget as contracted_budget
+--,vendor_names as vendors
+,a.dfp_impressions as dfp_delivered_imps
+,a.dfp_clicks as dfp_delivered_clicks
+,a.dfa_impressions as dfa_delivered_imps
+,a.dfa_clicks as dfa_delivered_clicks
+,a.adjusted_units --the user will update this field via UI
+,a.delivered_units
+,a.remaining_units
+,a.billable_units
+,ROUND(a.invoice_amount::NUMERIC, 2) as invoice_amount
+,ROUND(a.total_amount_invoiced_upto_month::NUMERIC, 2) as total_amount_invoiced_upto_month
+,a.remaining_budget
+, CASE WHEN b.io_orders_id IS NULL THEN 'add' ELSE 'edit' END AS information_control
+, CASE WHEN a.adjusted_units IS NULL THEN 'add' ELSE 'edit' END AS adjusted_units_control
+from  billing.ba_monthly_national_worksheet a
+left join billing.ba_national_dim_io b ON (b.is_active = true AND b.io_orders_id = a.io_orders_id AND b.io_line_item_id = a.io_line_item_id)
+where month_since_2005 = {p_month_since_2005}
+and a.is_active = true
+and a.io_orders_id = {p_io_order_id}
+and a.io_line_item_id = {p_io_line_item_id}
+;]]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>JavaScript</action-type>
+        <action-inputs> 
+          <query_result type="result-set"/> 
+        </action-inputs>
+        <action-outputs> 
+          <calendar_year_month type="string"/>  
+          <io_number type="string"/>  
+          <io_revision_date type="string"/>  
+          <io_line_item_start_date type="string"/>  
+          <io_line_item_end_date type="string"/>  
+          <organization_name type="string"/>  
+          <campaign_id type="string"/>  
+          <campaign_name type="string"/>  
+          <agency type="string"/>  
+          <billing_contact type="string"/>  
+          <combined_ids type="string"/>  
+          <placement_group type="string"/>  
+          <placement_id type="string"/>  
+          <rate_type type="string"/>  
+          <rate type="string"/>  
+          <planned_units type="string"/>  
+          <contracted_budget type="string"/>  
+          <dfp_delivered_imps type="string"/>  
+          <dfp_delivered_clicks type="string"/>  
+          <dfa_delivered_imps type="string"/>  
+          <dfa_delivered_clicks type="string"/>  
+          <adjusted_units type="string"/>  
+          <delivered_units type="string"/>  
+          <remaining_units type="string"/>  
+          <billable_units type="string"/>  
+          <invoice_amount type="string"/>  
+          <total_amount_invoiced_upto_month type="string"/>  
+          <information_control type="string"/>  
+          <adjusted_units_control type="string"/>  
+          <remaining_budget type="string"/>
+        </action-outputs>
+        <component-definition>
+          <script><![CDATA[var calendar_year_month=query_result.getValueAt(0,0);
+var io_number=query_result.getValueAt(0,1);
+var io_revision_date=query_result.getValueAt(0,2);
+var io_line_item_start_date=query_result.getValueAt(0,3);
+var io_line_item_end_date=query_result.getValueAt(0,4);
+var organization_name=query_result.getValueAt(0,5);
+var campaign_id=query_result.getValueAt(0,6);
+var campaign_name=query_result.getValueAt(0,7);
+var agency=query_result.getValueAt(0,8);
+var billing_contact=query_result.getValueAt(0,9);
+var combined_ids=query_result.getValueAt(0,10);
+var placement_group=query_result.getValueAt(0,11);
+var placement_id=query_result.getValueAt(0,12);
+var rate_type=query_result.getValueAt(0,13);
+var rate=query_result.getValueAt(0,14);
+var planned_units=query_result.getValueAt(0,15);
+var contracted_budget=query_result.getValueAt(0,16);
+var dfp_delivered_imps=query_result.getValueAt(0,17);
+var dfp_delivered_clicks=query_result.getValueAt(0,18);
+var dfa_delivered_imps=query_result.getValueAt(0,19);
+var dfa_delivered_clicks=query_result.getValueAt(0,20);
+var adjusted_units=query_result.getValueAt(0,21);
+var delivered_units=query_result.getValueAt(0,22);
+var remaining_units=query_result.getValueAt(0,23);
+var billable_units=query_result.getValueAt(0,24);
+var invoice_amount=query_result.getValueAt(0,25);
+var total_amount_invoiced_upto_month=query_result.getValueAt(0,26);
+var remaining_budget=query_result.getValueAt(0,27);
+var information_control=query_result.getValueAt(0,28);
+var adjusted_units_control=query_result.getValueAt(0,28);]]></script>
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition>
+        <component-name>TemplateComponent</component-name>
+        <action-type>Message Template</action-type>
+        <action-inputs>
+          <io_line_item_start_date type="string"/>
+          <io_number type="string"/>
+          <dfp_delivered_imps type="string"/>
+          <placement_id type="string"/>
+          <information_control type="string"/>
+          <placement_group type="string"/>
+          <rate type="string"/>
+          <combined_ids type="string"/>
+          <delivered_units type="string"/>
+          <rate_type type="string"/>
+          <adjusted_units_control type="string"/>
+          <io_revision_date type="string"/>
+          <planned_units type="string"/>
+          <campaign_name type="string"/>
+          <agency type="string"/>
+          <invoice_amount type="string"/>
+          <remaining_budget type="string"/>
+          <campaign_id type="string"/>
+          <calendar_year_month type="string"/>
+          <total_amount_invoiced_upto_month type="string"/>
+          <billing_contact type="string"/>
+          <dfa_delivered_imps type="string"/>
+          <dfa_delivered_clicks type="string"/>
+          <remaining_units type="string"/>
+          <contracted_budget type="string"/>
+          <adjusted_units type="string"/>
+          <io_line_item_end_date type="string"/>
+          <billable_units type="string"/>
+          <dfp_delivered_clicks type="string"/>
+          <organization_name type="string"/>
+        </action-inputs>
+        <action-resources>
+          <template mapping="template4"/>
+        </action-resources>
+        <action-outputs>
+          <output-message type="string" mapping="returnResult"/>
+        </action-outputs>
+        <component-definition/>
       </action-definition>
 
     </actions>
-
+  
     <action-definition> 
       <component-name>JavascriptRule</component-name>
       <action-type>Process data grid</action-type>

@@ -267,6 +267,39 @@
 	</table>
 </div>
 <script>
+	var data=[];
+	
+	//////////////////////////
+	// First load billing page
+	/////////////////////////
+	$( document ).ready(function(){
+		var p_month_since_2005=urlMaster.getParam('month_sk',p_month_since_2005);
+		var p_io_orders=urlMaster.getParam('io_orders',p_io_orders);
+		var p_io_line_items=urlMaster.getParam('io_line_items',p_io_line_items);
+		
+		if(p_month_since_2005!=''&&p_io_orders!=''&&p_io_line_items!=''){
+			// Load summary table
+			loadBillingSummaryTable({
+				p_month_since_2005 : p_month_since_2005,
+				p_io_orders: p_io_orders,
+				p_io_line_items: p_io_line_items,
+				obj_table: $('#summaryTable'),
+				success: function(){
+					
+				}
+			});
+			// Load detail table
+			loadBillingDetailTable({
+				p_month_since_2005 : p_month_since_2005,
+				p_io_orders: p_io_orders,
+				p_io_line_items: p_io_line_items,
+				obj_table: $('#detailTable'),
+				success: function(){
+					
+				}
+			});	
+		}		
+	}) ;
 
 	/////////////////////////
 	// Load list of month
@@ -383,10 +416,17 @@
 	////////////////////////////////
 	// Load billing detail
 	////////////////////////////////
-	var data=[];
+
 	
 	function applyControlPanel(){
-		//verify input 
+		var p_month_since_2005;
+		var p_io_orders;
+		var p_io_line_items;
+		//get input
+		p_month_since_2005=$('#selectbox-month_sk').val();
+		p_io_orders=loadIoOrders.getID().join(",");
+		p_io_line_items=loadIoLineItems.getID().join(",");
+		
 		if(loadIoOrders.getID().length==0){
 			alert("Please select IO Orders!");
 			return false;
@@ -396,10 +436,10 @@
 		}
 		//hide modal
 		$('#myModal').modal('hide');
-		//get input
-		var p_month_since_2005=$('#selectbox-month_sk').val();
-		var p_io_orders=loadIoOrders.getID().join(",");
-		var p_io_line_items=loadIoLineItems.getID().join(",");
+		//set to url
+		urlMaster.replaceParam('month_sk',p_month_since_2005);
+		urlMaster.replaceParam('io_orders',p_io_orders);
+		urlMaster.replaceParam('io_line_items',p_io_line_items);
 		// Load summary table
 		loadBillingSummaryTable({
 			p_month_since_2005 : p_month_since_2005,
@@ -571,6 +611,22 @@
 				//var msg=data[0].fn_ba_national_dim_io_update;
 				//alert(msg);
 			}		
+		});
+	}
+	
+	///////////////////////////////////
+	//	Show billing detail
+	///////////////////////////////////
+	function showBillingDetail(p_month_since_2005,p_io_order_id,p_io_line_item_id){
+		$("#summary-content div.content").empty();
+		loadBillingDetail({
+			p_month_since_2005:p_month_since_2005,
+			p_io_order_id: p_io_order_id,
+			p_io_line_item_id: p_io_line_item_id,
+			success: function(content){				
+				var divDetail=$(content);
+				$("#summary-content div.content").append(divDetail);
+			}
 		});
 	}
 </script>

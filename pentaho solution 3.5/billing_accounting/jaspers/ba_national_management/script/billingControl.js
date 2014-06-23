@@ -77,11 +77,11 @@ function loadBillingSummaryTable(input){
 			var total_amount_invoiced_upto_month=data[i].total_amount_invoiced_upto_month;
 			
 			var row = '<tr>' 
-					+ '<td>' + io_number+'<br/>'+io_revision_date+'<br/>'+ io_orders_id+'</td>' 
-					+ '<td>' + advertiser+'<br/>'+campaign_name+'<br/>'+ agency+'</td>' 
-					+ '<td>' + delivered_units + '</td>' 
-					+ '<td>' + invoice_amount + '</td>'
-					+ '<td>' + total_amount_invoiced_upto_month + '</td>'
+					+ '<td><b>' + io_number+'</b><br/><i>'+io_revision_date+'</i><br/>'+ io_orders_id+'</td>' 
+					+ '<td><b>' + advertiser+'</b><br/><i>'+campaign_name+'</i><br/>'+ agency+'</td>' 
+					+ '<td>' + accounting.formatNumber(delivered_units) + '</td>' 
+					+ '<td>' + accounting.formatMoney(invoice_amount) + '</td>'
+					+ '<td>' + accounting.formatMoney(total_amount_invoiced_upto_month) + '</td>'
 					+ '</tr>';
 				
 			rows.push(row);
@@ -94,7 +94,7 @@ function loadBillingSummaryTable(input){
 }
 
 /////////////////////////////////////////////
-//Load summary table
+//Load detail table
 /////////////////////////////////////////////
 
 function loadBillingDetailTable(input){
@@ -111,7 +111,7 @@ function loadBillingDetailTable(input){
 		url : rootPath_Biiling,
 		dataType : 'json',
 		data : {
-			actions: 'loadBillingDetail',
+			actions: 'loadBillingDetailTable',
 			data: 'json',
 			p_month_since_2005: input.p_month_since_2005,
 			p_io_orders: input.p_io_orders,
@@ -127,6 +127,9 @@ function loadBillingDetailTable(input){
 		var i = 0;
 		var rows = [];
 		for (var i = 0; i < data.length; i++) {
+			var month_since_2005=data[i].month_since_2005;
+			var io_orders_id=data[i].io_orders_id;
+			var io_line_item_id=data[i].io_line_item_id;
 			var combined_ids = data[i].combined_ids;
 			var campaign_id=data[i].campaign_id;
 			var billing_contact=data[i].billing_contact;
@@ -135,7 +138,7 @@ function loadBillingDetailTable(input){
 			var adjusted_units_control=data[i].adjusted_units_control;
 			
 			var row = '<tr>' 
-					+ '<td>' + combined_ids +'</td>' 
+					+ '<td><a href="#" onclick="showBillingDetail('+month_since_2005+','+io_orders_id+','+io_line_item_id+')">' + combined_ids +'</a></td>' 
 					+ '<td>' + campaign_id + '</td>'
 					+ '<td>' + billing_contact + '</td>' 
 					+ '<td>' + adjusted_units + '</td>'
@@ -161,4 +164,32 @@ function loadBillingDetailTable(input){
 		input.obj_table.find('tbody').empty();
 		input.obj_table.find('tbody').append(htmlTable);
 	}	
+}
+
+////////////////////////////////////
+// Load Billing Detail
+///////////////////////////////////
+function loadBillingDetail(input){
+	input = $.extend({}, {
+		p_month_since_2005 : '',
+		p_io_order_id: '',
+		p_io_line_item_id: '',
+		success : function(content) {
+		}
+	}, input);
+	
+	$.ajax({
+		url : rootPath_Biiling,
+		dataType : 'html',
+		data : {
+			actions: 'LoadBillingDetail',
+			data: 'html',
+			p_month_since_2005: input.p_month_since_2005,
+			p_io_order_id: input.p_io_order_id,
+			p_io_line_item_id: input.p_io_line_item_id
+		},
+		success : function(html) {			
+			input.success(html);
+		}
+	});	
 }
