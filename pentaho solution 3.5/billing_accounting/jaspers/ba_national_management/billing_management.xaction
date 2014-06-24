@@ -96,12 +96,18 @@
       </sources>  
       <default-value/> 
     </p_io_line_item_id>  
-    <p_export_output type="string">
+    <p_export_output type="string"> 
+      <sources> 
+        <request>p_export_output</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </p_export_output>  
+    <p_calendar_year_month type="string">
       <sources>
-        <request>p_export_output</request>
+        <request>p_calendar_year_month</request>
       </sources>
-      <default-value><![CDATA[html]]></default-value>
-    </p_export_output>
+      <default-value/>
+    </p_calendar_year_month>
   </inputs>
 
   <outputs> 
@@ -167,12 +173,12 @@
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </template4>  
-    <report-definition4>
-      <solution-file>
-        <location>jasper/national_billing.jasper</location>
-        <mime-type>text/plain</mime-type>
-      </solution-file>
-    </report-definition4>
+    <report-definition4> 
+      <solution-file> 
+        <location>jasper/national_billing.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition4> 
   </resources>
   
   <actions> 
@@ -323,7 +329,7 @@ order by month_since_2005 DESC
 , CASE WHEN b.io_orders_id IS NULL THEN 'add' ELSE 'edit' END AS information_control
 , CASE WHEN a.adjusted_units IS NULL THEN 'add' ELSE 'edit' END AS adjusted_units_control
 from  billing.ba_monthly_national_worksheet a
-left join billing.ba_national_dim_io b ON (b.is_active = true AND b.io_orders_id = a.io_orders_id AND b.io_line_item_id = a.io_line_item_id)
+left join billing.ba_national_dim_io b ON (b.is_active = true AND b.io_orders_id = a.io_orders_id)
 where month_since_2005 = {p_month_since_2005}
 AND (a.io_orders_id IN ({p_io_orders}) OR '0'='{p_io_orders}')
 AND (a.io_line_item_id IN ({p_io_line_items}) OR '0'='{p_io_line_items}')
@@ -356,9 +362,11 @@ order by advertiser, combined_ids;]]></query>
 , a.organization_name as advertiser
 , a.contract_name as campaign_name
 , a.agency_name as agency
-, SUM(a.delivered_units) as delivered_units
-, SUM(ROUND(a.invoice_amount::NUMERIC, 2)) as invoice_amount
+, SUM(a.io_line_item_quantity) as planned_units
+, SUM(a.billable_units) as billable_units
 , SUM(ROUND(a.total_amount_invoiced_upto_month::NUMERIC, 2)) as total_amount_invoiced_upto_month
+, SUM(a.remaining_units) as remaining_units
+from  billing.ba_monthly_national_worksheet a
 from  billing.ba_monthly_national_worksheet a
 where month_since_2005 = 113
 AND (a.io_orders_id IN ({p_io_orders}) OR '0'='{p_io_orders}')
@@ -559,26 +567,26 @@ if(adjusted_units==null){
  
     </actions>
   
-    <actions>
-      <condition><![CDATA[actions=='export']]></condition>
-      <action-definition>
+    <actions> 
+      <condition><![CDATA[actions=='export']]></condition>  
+      <action-definition> 
         <component-name>JasperReportsComponent</component-name>
         <action-type>Jasper</action-type>
-        <action-inputs>
-          <jndi type="string" mapping="connectionName"/>
-          <output-type type="string" mapping="p_export_output"/>
-          <p_month_since_2005 type="string"/>
-          <p_io_orders type="string"/>
-          <p_io_line_items type="string"/>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <output-type type="string" mapping="p_export_output"/>  
+          <p_month_since_2005 type="string"/>  
+          <p_io_orders type="string"/>  
+          <p_io_line_items type="string"/> 
         </action-inputs>
-        <action-resources>
-          <report-definition mapping="report-definition4"/>
+        <action-resources> 
+          <report-definition mapping="report-definition4"/> 
         </action-resources>
-        <component-definition/>
+        <component-definition/> 
       </action-definition>
-
+ 
     </actions>
-
+  
     <action-definition> 
       <component-name>JavascriptRule</component-name>
       <action-type>Process data grid</action-type>
