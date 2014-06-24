@@ -78,6 +78,13 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffeeeeee', en
 border-bottom: 1px solid #ccc;
 }
 
+tr.summary {
+background-color: #e7e7e7;
+background-image: -moz-linear-gradient(top, #eeeeee, #dddddd);
+background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#eeeeee), to(#dddddd));
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffeeeeee', endColorstr='#ffdddddd', GradientType=0);
+}
+
 .btn {
 border-color: #e6e6e6 #e6e6e6 #bfbfbf;
 border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);

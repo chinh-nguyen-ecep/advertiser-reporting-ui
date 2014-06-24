@@ -128,75 +128,143 @@ function loadBillingDetailTable(input){
 	function setTableData(data) {
 		var i = 0;
 		var rows = [];
-		for (var i = 0; i < data.length; i++) {
-			var month_since_2005=data[i].month_since_2005;
-			var io_orders_id=data[i].io_orders_id;
-			var io_line_item_id=data[i].io_line_item_id;
-			var io_line_item_start_date=data[i].io_line_item_start_date;
-			var io_line_item_end_date=data[i].io_line_item_end_date;
-			var combined_ids = data[i].combined_ids;
-			var placement_group = data[i].placement_group;
-			var placement_id = data[i].placement_id;
-			var campaign_id=data[i].campaign_id;
-			var billing_contact=data[i].billing_contact;
-			var rate_type=data[i].rate_type;
-			var rate=data[i].rate;
-			var planned_units=data[i].planned_units;
-			var contracted_budget=data[i].contracted_budget;
-			var dfp_delivered_imps=data[i].dfp_delivered_imps;
-			var dfp_delivered_clicks=data[i].dfp_delivered_clicks;
-			var dfa_delivered_imps=data[i].dfa_delivered_imps;
-			var dfa_delivered_clicks=data[i].dfa_delivered_clicks;
-			var adjusted_units=data[i].adjusted_units;
-			var information_control=data[i].information_control;
-			var adjusted_units_control=data[i].adjusted_units_control;
-			
-			var start_date = new Date(io_line_item_start_date).format('mmm dd, yyyy');
-			var end_date = new Date(io_line_item_end_date).format('mmm dd, yyyy'); 
-			var placement_group_truncated = placement_group;
-			if (placement_group.length > 60) {
-				placement_group_truncated = placement_group.substring(0, 60) + '...';
-			}
-			
-			
-			var row = '<tr>' 
-					+ '<td><a href="#" onclick="showBillingDetail('+month_since_2005+','+io_orders_id+','+io_line_item_id+')">' + combined_ids + ' | ' + start_date + ' - ' + end_date +'</a><br/><i>'+placement_group_truncated+'</i></td>' 
-					+ '<td>' + campaign_id + '<br/><i>'+billing_contact+'</i><br/>';
-					if(information_control=='add'){
-				row +='<button title="" data-toggle="modal" data-target="#addInformationDialog" type="button" class="btn btn-success btn-xs" onclick="loadInfomationAddForm('+i+');">  <span class="glyphicon glyphicon-plus"></span></button>';
-			}else if(information_control=='edit'){
-				row +='<button type="button" data-toggle="modal" data-target="#editInformationDialog" class="btn btn-info btn-xs" onclick="loadInfomationEditForm('+i+');">  <span class="glyphicon glyphicon-edit"></span></button>';
-			}
-				row	+= '</td>'
-					+ '<td>' + accounting.formatMoney(contracted_budget) + '<br/>' + accounting.formatNumber(planned_units) + ' units<br/>' + accounting.formatMoney(rate) + ' ' + rate_type + '</td>' 
-					+ '<td>' + accounting.formatNumber(dfp_delivered_imps) + ' imps | ' + accounting.formatNumber(dfp_delivered_clicks) + ' clicks<br/>' + accounting.formatNumber(dfa_delivered_imps) + ' imps | ' + accounting.formatNumber(dfa_delivered_clicks) + ' clicks' + '</td>'
-					+ '<td>' + adjusted_units + '<br/>'
-			
-			if(adjusted_units_control=='add'){
-				row +='<button type="button" data-toggle="modal" data-target="#addAdjustedUnitDialog" class="btn btn-success btn-xs" onclick="loadAdjustedAddForm('+i+');">  <span class="glyphicon glyphicon-plus"></span></button>';
-			}else if(adjusted_units_control=='edit'){
-				row +='<button type="button" data-toggle="modal" data-target="#updateAdjustedUnitDialog" class="btn btn-info btn-xs" onclick="loadAdjustedUpdateForm('+i+');">  <span class="glyphicon glyphicon-edit"></span></button>';
-			}
-			
-				row += '</td>'
-					+ '<td><div class="btn-toolbar">';
-				/*	
-			if(information_control=='add'){
-				row +='<button title="" data-toggle="modal" data-target="#addInformationDialog" type="button" class="btn btn-success btn-xs" onclick="loadInfomationAddForm('+i+');">  <span class="glyphicon glyphicon-plus"></span> Information</button>';
-			}else if(information_control=='edit'){
-				row +='<button type="button" data-toggle="modal" data-target="#editInformationDialog" class="btn btn-info btn-xs" onclick="loadInfomationEditForm('+i+');">  <span class="glyphicon glyphicon-edit"></span> Information</button>';
-			}
-			
-			if(adjusted_units_control=='add'){
-				row +='<button type="button" data-toggle="modal" data-target="#addAdjustedUnitDialog" class="btn btn-success btn-xs" onclick="loadAdjustedAddForm('+i+');">  <span class="glyphicon glyphicon-plus"></span> Adjusted Units</button>';
-			}else if(adjusted_units_control=='edit'){
-				row +='<button type="button" data-toggle="modal" data-target="#updateAdjustedUnitDialog" class="btn btn-info btn-xs" onclick="loadAdjustedUpdateForm('+i+');">  <span class="glyphicon glyphicon-edit"></span> Adjusted Units</button>';
-			}
-			*/
-				row+='</div></td></tr>' ;
-				
-			rows.push(row);
+		var current_io_orders_id = '';
+		var rowSummary = '';
+		var rowDetail = '';
+		var total_booking_units = 0;
+		var total_billable_units = 0;
+		var total_amount_invoiced_to_date = 0;
+		var total_remaining_units = 0;
+		var total_remaining_budget = 0;
+		
+		if (data.length > 0){
+			current_io_orders_id = data[0].io_orders_id;
 		}
+		
+		for (var i = 0; i < data.length; i++) {
+			var month_since_2005        = data[i].month_since_2005;
+			var io_number               = data[i].io_number;
+			var io_revision_date        = data[i].io_revision_date;
+			var io_orders_id            = data[i].io_orders_id;
+			var io_line_item_id         = data[i].io_line_item_id;
+			var io_line_item_start_date = data[i].io_line_item_start_date;
+			var io_line_item_end_date   = data[i].io_line_item_end_date;
+			var advertiser              = data[i].advertiser;
+			var campaign_id             = data[i].campaign_id;
+			var campaign_name           = data[i].campaign_name;
+			var agency                  = data[i].agency;
+			var billing_contact         = data[i].billing_contact;
+			var combined_ids            = data[i].combined_ids;
+			var placement_group         = data[i].placement_group;
+			var placement_id            = data[i].placement_id;
+			var rate_type               = data[i].rate_type;
+			var rate                    = data[i].rate;
+			var planned_units           = data[i].planned_units;
+			var contracted_budget       = data[i].contracted_budget;
+			var dfp_delivered_imps      = data[i].dfp_delivered_imps;
+			var dfp_delivered_clicks    = data[i].dfp_delivered_clicks;
+			var dfa_delivered_imps      = data[i].dfa_delivered_imps;
+			var dfa_delivered_clicks    = data[i].dfa_delivered_clicks;
+			var adjusted_units          = data[i].adjusted_units;
+			var delivered_units         = data[i].delivered_units;
+			var remaining_units         = data[i].remaining_units;
+			var billable_units          = data[i].billable_units;
+			var invoice_amount          = data[i].invoice_amount;
+			var amount_invoiced_to_date = data[i].amount_invoiced_to_date;
+			var remaining_budget        = data[i].remaining_budget;
+			var information_control     = data[i].information_control;
+			var adjusted_units_control  = data[i].adjusted_units_control;
+			
+			total_booking_units += parseInt(planned_units);
+			total_billable_units += parseInt(billable_units);
+			total_amount_invoiced_to_date += parseFloat(amount_invoiced_to_date);
+			total_remaining_budget += parseFloat(remaining_budget);
+			total_remaining_units += parseInt(remaining_units);
+			
+			var revision_date = new Date(io_revision_date).format('mmm dd, yyyy');
+			var start_date = new Date(io_line_item_start_date).format('mmm dd');
+			var end_date = new Date(io_line_item_end_date).format('mmm dd'); 
+			var placement_group_truncated = placement_group;
+			if (placement_group.length > 45) {
+				placement_group_truncated = placement_group.substring(0, 45) + '...';
+			}
+			
+			var detail = '';
+			detail += '<tr>';
+			detail += '<td colspan="2"><a href="#" onclick="showBillingDetail(' + month_since_2005 + ',' + io_orders_id + ',' + io_line_item_id + ')">#' + combined_ids + ' | ' + start_date + ' - ' + end_date + '</a><br/><i>' + placement_group_truncated + '</i></td>';
+			detail += '<td colspan="2">' + accounting.formatMoney(contracted_budget) + '<br/>' + accounting.formatNumber(planned_units) + ' units<br/>' + accounting.formatMoney(rate) + ' ' + rate_type + '</td>';
+			detail += '<td align="right">' + accounting.formatNumber(dfp_delivered_imps) + ' imps<br/>' + accounting.formatNumber(dfp_delivered_clicks) + ' clicks</td>';
+			detail += '<td align="right">' + accounting.formatNumber(dfa_delivered_imps) + ' imps<br/>' + accounting.formatNumber(dfa_delivered_clicks) + ' clicks</td>';
+		    detail += '<td align="right">' + accounting.formatNumber(adjusted_units);
+			if(adjusted_units_control=='add'){
+				detail += '<button type="button" data-toggle="modal" data-target="#addAdjustedUnitDialog" class="btn btn-success btn-xs" style="float: left;" onclick="loadAdjustedAddForm('+i+');">  <span class="glyphicon glyphicon-plus"></span></button>';
+			}else if(adjusted_units_control=='edit'){
+				detail += '<button type="button" data-toggle="modal" data-target="#updateAdjustedUnitDialog" class="btn btn-info btn-xs" style="float: left;" onclick="loadAdjustedUpdateForm('+i+');">  <span class="glyphicon glyphicon-edit"></span></button>';
+			}
+			detail += '</td>';
+			detail += '<td align="right">' + accounting.formatNumber(billable_units) + '</td>';
+			detail += '<td align="right">' + accounting.formatMoney(invoice_amount) + '</td>';
+			detail += '<td align="right">' + accounting.formatMoney(amount_invoiced_to_date) + '</td>';
+			detail += '<td align="right">' + accounting.formatNumber(remaining_units) + '</td>';
+			detail += '<td align="right">' + accounting.formatMoney(remaining_budget) + '</td>';
+			detail += '</tr>';
+			
+			if (current_io_orders_id != io_orders_id){			
+				rows.push(rowSummary);
+				rows.push(rowDetail);
+				rowDetail = detail;
+				total_booking_units = 0;
+				total_billable_units = 0;
+				total_amount_invoiced_to_date = 0;
+				total_remaining_budget = 0;
+				total_remaining_units = 0;
+				current_io_orders_id = io_orders_id;
+			} else {
+				rowDetail += detail;
+			}
+			
+			rowSummary = '';
+			rowSummary += '<tr class="summary">';
+			rowSummary += '<td colspan="2"><b>ADM IO Order # | IO # | IO Revision Date</b></td>';
+			rowSummary += '<td colspan="3"><b>Campaign Name | Advertiser | Agency</b></td>';
+			rowSummary += '<td colspan="3"><b>Campaign ID | Billing Contact</b></td>';
+			rowSummary += '<td align="right"><b>Booking</b></td>';
+			rowSummary += '<td align="right"><b>Units Inv to Date</b></td>';
+			rowSummary += '<td align="right"><b>Amount Inv to Date</b></td>';
+			rowSummary += '<td align="right"><b>Remaining</b></td>';
+			rowSummary += '</tr>';
+			rowSummary += '<tr class="summary">';
+			rowSummary += '<td colspan="2"><b>ADM IO Order #: ' + io_orders_id + '</b><br/><i>IO #: ' + io_number + '</i><br/>IO Revision Date: ' + revision_date + '</td>';
+			rowSummary += '<td colspan="3"><b>' + campaign_name + '</b><br/><i>Adv: ' + advertiser + '</i><br/>Agency: ' + agency + '</td>';
+			rowSummary += '<td colspan="3"><b>' + campaign_id + '</b>';
+			if(information_control=='add'){
+				rowSummary += '<button title="" data-toggle="modal" data-target="#addInformationDialog" type="button" class="btn btn-success btn-xs" style="float: right;" onclick="loadInfomationAddForm('+i+');">  <span class="glyphicon glyphicon-plus"></span></button>';
+			} else if(information_control=='edit'){
+				rowSummary += '<button type="button" data-toggle="modal" data-target="#editInformationDialog" class="btn btn-info btn-xs" style="float: right;" onclick="loadInfomationEditForm('+i+');">  <span class="glyphicon glyphicon-edit"></span></button>';
+			}
+			rowSummary += '<br/><i>' + billing_contact + '</i></td>';
+			rowSummary += '<td align="right"><b>' + accounting.formatNumber(total_booking_units) + '</b></td>';
+			rowSummary += '<td align="right"><b>' + accounting.formatNumber(total_billable_units) + '</b></td>';
+			rowSummary += '<td align="right"><b>' + accounting.formatMoney(total_amount_invoiced_to_date)+ '</b></td>';
+			rowSummary += '<td align="right"><b>' + accounting.formatMoney(total_remaining_budget)+ '</b></td>';
+			rowSummary += '</tr>';
+			rowSummary += '<tr>';
+			rowSummary += '<td colspan="2"><b>IO Line Item</b></td>';
+			rowSummary += '<td colspan="2"><b>Booking</b></td>';
+			rowSummary += '<td align="right"><b>DFP Delivered</b></td>';
+			rowSummary += '<td align="right"><b>DFA Delivered</b></td>';
+			rowSummary += '<td align="right"><b>Adjusted Units</b></td>';
+			rowSummary += '<td align="right"><b>Billable Units</b></td>';
+			rowSummary += '<td align="right"><b>Invoiced Amount</b></td>';
+			rowSummary += '<td align="right"><b>Invoiced to Date</b></td>';
+			rowSummary += '<td align="right"><b>Remaining Units</b></td>';
+			rowSummary += '<td align="right"><b>Remaining Budget</b></td>';
+			rowSummary += '</tr>';
+		}
+				
+		rows.push(rowSummary);
+		rows.push(rowDetail);
+
 		var htmlTable = rows.join("");
 		//console.log(htmlTable);
 		input.obj_table.find('tbody').empty();

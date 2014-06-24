@@ -82,20 +82,18 @@
       <div class="modal-body">
 		<form class="form-horizontal" role="form"  onsubmit="return informationFormAction()" id="editInformationForm">
 			<div class="form-group">
-				<label for="combined_ids" class="required control-label">Combined IDs <abbr title="Required">*</abbr></label>
-				<input  class="form-control" type="hidden" name="p_io_orders_id" style="width: 100%" value="{p_io_orders_id}" />
-				<input  class="form-control" type="hidden" name="p_io_line_item_id" style="width: 100%" value="{p_io_line_item_id}" />
-				<input  class="form-control" type="text" name="selectbox-combined_ids" style="width: 100%" value="{p_io_orders_id} - {p_io_line_item_id} | {p_io_line_item_name}" disabled/>
-				<p class="help-block">Please select your combined ids</p>
+				<label for="io_orders_id" class="required control-label">IO Order ID <abbr title="Required">*</abbr></label>
+				<input  class="form-control" type="hidden" name="p_io_orders_id" style="width: 100%" value="" />
+				<input  class="form-control" type="text" name="selectbox_io_orders_id" style="width: 100%" value="" disabled/>
 			</div>
 			<div class="form-group">
 				<label for="campaign_id" class="required control-label">Campaign ID <abbr title="Required">*</abbr></label>
-				<input type="text" class="form-control" placeholder="Enter campaign id" name="campaign_id" value="{p_campaign_id}">
+				<input type="text" class="form-control" placeholder="Enter campaign id" name="campaign_id" value="">
 				<p class="help-block">Enter a friendly campaign id</p>
 			</div>
 			<div class="form-group">
 				<label for="billing_contact" class="required control-label">Billing Contact <abbr title="Required">*</abbr></label>
-				<input type="text" class="form-control" placeholder="Enter billing contact" name="billing_contact" value="{p_billing_contact}">
+				<input type="text" class="form-control" placeholder="Enter billing contact" name="billing_contact" value="">
 				<p class="help-block">Enter a billing contact</p>
 			</div>
 			<div class="form-group">
@@ -126,20 +124,18 @@
       <div class="modal-body">
 		<form class="form-horizontal" role="form"  onsubmit="return informationFormAction()" id="addInformationForm">
 			<div class="form-group">
-				<label for="combined_ids" class="required control-label">Combined IDs <abbr title="Required">*</abbr></label>
-				<input  class="form-control" type="hidden" name="p_io_orders_id" style="width: 100%" value="{p_io_orders_id}" />
-				<input  class="form-control" type="hidden" name="p_io_line_item_id" style="width: 100%" value="{p_io_line_item_id}" />
-				<input  class="form-control" type="text" name="selectbox-combined_ids" style="width: 100%" value="{p_io_orders_id} - {p_io_line_item_id} | {p_io_line_item_name}" disabled/>
-				<p class="help-block">Please select your combined ids</p>
+				<label for="io_orders_id" class="required control-label">IO Order ID <abbr title="Required">*</abbr></label>
+				<input  class="form-control" type="hidden" name="p_io_orders_id" style="width: 100%" value="" />
+				<input  class="form-control" type="text" name="selectbox_io_orders_id" style="width: 100%" value="" disabled/>
 			</div>
 			<div class="form-group">
 				<label for="campaign_id" class="required control-label">Campaign ID <abbr title="Required">*</abbr></label>
-				<input type="text" class="form-control"  placeholder="Enter campaign id" name="campaign_id" value="{p_campaign_id}">
+				<input type="text" class="form-control"  placeholder="Enter campaign id" name="campaign_id" value="">
 				<p class="help-block">Enter a friendly campaign id</p>
 			</div>
 			<div class="form-group">
 				<label for="billing_contact" class="required control-label">Billing Contact <abbr title="Required">*</abbr></label>
-				<input type="text" class="form-control" placeholder="Enter billing contact" name="billing_contact" value="{p_billing_contact}">
+				<input type="text" class="form-control" placeholder="Enter billing contact" name="billing_contact" value="">
 				<p class="help-block">Enter a billing contact</p>
 			</div>
 			<div class="form-group">
@@ -244,7 +240,7 @@
 
 <!-- Table -->
 <div>
-	<table id="summaryTable"	class="table table-bordered table-striped table-hover">
+	<!--<table id="summaryTable"	class="table table-bordered table-striped table-hover">
 		<thead>
 			<tr>
 				<th class="buttons" colspan="5">
@@ -261,10 +257,10 @@
 		</thead>
 		<tbody>
 		</tbody>
-	</table>
-	<table id="detailTable"	class="table table-bordered table-striped table-hover">
+	</table>-->
+	<table id="detailTable"	class="table table-bordered table-hover">
 		<thead>
-			<tr>
+			<!--<tr>
 				<th class="buttons" colspan="6">
 					<p>The detail at the IO Line Item level</p>
 				</th>
@@ -276,6 +272,20 @@
 				<th class="col-md-2">DFP | DFA Delivered</th>
 				<th>Adjusted Units</th>
 				<th></th>
+			</tr>-->
+			<tr>
+				<th class="buttons col-md-1"></th>
+				<th class="buttons col-md-1"></th>
+				<th class="buttons col-md-1"></th>
+				<th class="buttons col-md-1"></th>
+				<th class="buttons col-md-1"></th>
+				<th class="buttons col-md-1"></th>
+				<th class="buttons col-md-1"></th>
+				<th class="buttons col-md-1"></th>
+				<th class="buttons col-md-1"></th>
+				<th class="buttons col-md-1"></th>
+				<th class="buttons col-md-1"></th>
+				<th class="buttons col-md-1"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -489,36 +499,25 @@
 	// load information edit form
 	//////////////////////////////////
 	function loadInfomationEditForm(row){
-		var combined_ids = dataTableDetail[row].combined_ids;
-		var io_line_item_name=dataTableDetail[row].io_line_item_name;
-		var campaign_id=dataTableDetail[row].campaign_id;
-		var billing_contact=dataTableDetail[row].billing_contact;	
-		var p_io_orders_id=combined_ids.split("-")[0];
-		var p_io_line_item_id=combined_ids.split("-")[1];
+		var io_orders_id    = dataTableDetail[row].io_orders_id;
+		var displayed_name  = dataTableDetail[row].io_orders_id + ' | ' + dataTableDetail[row].campaign_name;
+		var campaign_id     = dataTableDetail[row].campaign_id;
+		var billing_contact = dataTableDetail[row].billing_contact;
 		
-		$('#editInformationForm input[name=p_io_orders_id]').val(p_io_orders_id);
-		$('#editInformationForm input[name=p_io_line_item_id]').val(p_io_line_item_id);
+		$('#editInformationForm input[name=p_io_orders_id]').val(io_orders_id);
 		$('#editInformationForm input[name=campaign_id]').val(campaign_id);
 		$('#editInformationForm input[name=billing_contact]').val(billing_contact);	
-		$('#editInformationForm input[name=selectbox-combined_ids]').val(combined_ids+" | "+io_line_item_name);
+		$('#editInformationForm input[name=selectbox_io_orders_id]').val(displayed_name);
 	}
 	///////////////////////////////////
 	// load information add form
 	//////////////////////////////////
 	function loadInfomationAddForm(row){
-		var combined_ids = dataTableDetail[row].combined_ids;
-		var io_line_item_name=dataTableDetail[row].io_line_item_name;
-		var campaign_id=dataTableDetail[row].campaign_id;
-		var billing_contact=dataTableDetail[row].billing_contact;	
-		var p_io_orders_id=combined_ids.split("-")[0];
-		var p_io_line_item_id=combined_ids.split("-")[1];
+		var io_orders_id    = dataTableDetail[row].io_orders_id;
+		var displayed_name  = dataTableDetail[row].io_orders_id + ' | ' + dataTableDetail[row].campaign_name;
 		
-		$('#addInformationForm input[name=p_io_orders_id]').val(p_io_orders_id);
-		$('#addInformationForm input[name=p_io_line_item_id]').val(p_io_line_item_id);
-		$('#addInformationForm input[name=campaign_id]').val(campaign_id);
-		$('#addInformationForm input[name=billing_contact]').val(billing_contact);	
-		$('#addInformationForm input[name=selectbox-combined_ids]').val(combined_ids+" | "+io_line_item_name);
-		$('#addInformationForm input[name=comment]').val('');
+		$('#addInformationForm input[name=p_io_orders_id]').val(io_orders_id);
+		$('#addInformationForm input[name=selectbox_io_orders_id]').val(displayed_name);
 	}
 	/////////////////////////////////////
 	// Update information
@@ -526,16 +525,12 @@
 	function billingUpdateInformation(){
 		$('#editInformationDialog').modal('hide');
 		updateInfomation({
-			p_combined_ids: $('#editInformationForm input[name=selectbox-combined_ids]').val(),
 			p_io_orders_id: $('#editInformationForm input[name=p_io_orders_id]').val(),
-			p_io_line_item_id: $('#editInformationForm input[name=p_io_line_item_id]').val(),
 			p_campaign_id: $('#editInformationForm input[name=campaign_id]').val(),
 			p_billing_contact: $('#editInformationForm input[name=billing_contact]').val(),
 			p_comment: '',
 			success: function(data){				
 				loadPage();
-				//var msg=data[0].fn_ba_national_dim_io_update;
-				//alert(msg);
 			}
 		});
 	}
@@ -545,16 +540,12 @@
 	function billingAddInformation(){
 		$('#addInformationDialog').modal('hide');
 		addInfomation({
-			p_combined_ids: $('#addInformationForm input[name=selectbox-combined_ids]').val(),
 			p_io_orders_id: $('#addInformationForm input[name=p_io_orders_id]').val(),
-			p_io_line_item_id: $('#addInformationForm input[name=p_io_line_item_id]').val(),
 			p_campaign_id: $('#addInformationForm input[name=campaign_id]').val(),
 			p_billing_contact: $('#addInformationForm input[name=billing_contact]').val(),
 			p_comment: $('#addInformationForm input[name=comment]').val(),
 			success: function(data){				
 				loadPage();
-				//var msg=data[0].fn_ba_national_dim_io_update;
-				//alert(msg);
 			}
 		});
 	}
