@@ -324,7 +324,7 @@ order by month_since_2005 DESC
 , a.remaining_units
 , a.billable_units
 , ROUND(a.invoice_amount::NUMERIC, 2) as invoice_amount
-, ROUND(a.total_amount_invoiced_upto_month::NUMERIC, 2) as total_amount_invoiced_upto_month
+, ROUND(a.total_amount_invoiced_upto_month::NUMERIC, 2) as amount_invoiced_to_date
 , a.remaining_budget
 , CASE WHEN b.io_orders_id IS NULL THEN 'add' ELSE 'edit' END AS information_control
 , CASE WHEN a.adjusted_units IS NULL THEN 'add' ELSE 'edit' END AS adjusted_units_control
@@ -431,11 +431,11 @@ a.calendar_year_month
 ,a.billable_units
 ,ROUND(a.invoice_amount::NUMERIC, 2) as invoice_amount
 ,ROUND(a.total_amount_invoiced_upto_month::NUMERIC, 2) as total_amount_invoiced_upto_month
-,a.remaining_budget
+,ROUND(a.remaining_budget::NUMERIC, 2) as remaining_budget
 , CASE WHEN b.io_orders_id IS NULL THEN 'add' ELSE 'edit' END AS information_control
 , CASE WHEN a.adjusted_units IS NULL THEN 'add' ELSE 'edit' END AS adjusted_units_control
 from  billing.ba_monthly_national_worksheet a
-left join billing.ba_national_dim_io b ON (b.is_active = true AND b.io_orders_id = a.io_orders_id AND b.io_line_item_id = a.io_line_item_id)
+left join billing.ba_national_dim_io b ON (b.is_active = true AND b.io_orders_id = a.io_orders_id)
 where month_since_2005 = {p_month_since_2005}
 and a.is_active = true
 and a.io_orders_id = {p_io_order_id}
