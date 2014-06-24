@@ -90,18 +90,12 @@
       </sources>  
       <default-value/> 
     </principalName>  
-    <p_io_line_item_id type="string"> 
+    <p_displayed_name type="string"> 
       <sources> 
-        <request>p_io_line_item_id</request> 
+        <request>p_displayed_name</request> 
       </sources>  
       <default-value/> 
-    </p_io_line_item_id>  
-    <p_io_line_item_name type="string"> 
-      <sources> 
-        <request>p_io_line_item_name</request> 
-      </sources>  
-      <default-value/> 
-    </p_io_line_item_name> 
+    </p_displayed_name> 
   </inputs>
 
   <outputs> 
@@ -209,8 +203,7 @@
           <p_io_orders_id type="string"/>  
           <p_campaign_id type="string"/>  
           <p_billing_contact type="string"/>  
-          <p_io_line_item_name type="string"/>  
-          <p_io_line_item_id type="string"/> 
+          <p_displayed_name type="string"/> 
         </action-inputs>
         <action-resources> 
           <template mapping="template3"/> 
@@ -236,10 +229,10 @@
         </action-outputs>
         <component-definition> 
           <live><![CDATA[true]]></live>  
-          <query><![CDATA[SELECT sk, io_orders_id, io_line_item_id, combine_ids, io_line_item_name, 
+          <query><![CDATA[SELECT sk, io_orders_id, contact_name, io_orders_id || ' | ' || contact_name as displayed_name, 
        campaign_id, billing_contact, created_by, created_at, updated_by, 
        updated_at, "comment"
-  FROM billing.vw_ba_national_dim_io ORDER BY combine_ids;]]></query> 
+  FROM billing.vw_ba_national_dim_io ORDER BY io_orders_id;]]></query> 
         </component-definition> 
       </action-definition>
  
@@ -260,10 +253,10 @@
           <query-result type="result-set" mapping="query_result"/> 
         </action-outputs>
         <component-definition> 
-          <query><![CDATA[SELECT io_orders_id, io_line_item_id, combined_ids, io_line_item_name
-FROM refer.vw_national_io_order_line_item_insert 
-WHERE (''='{term}' OR UPPER(combined_ids||' | '||io_line_item_name) LIKE UPPER('%{term}%'))
-ORDER BY combined_ids
+          <query><![CDATA[SELECT io_orders_id, contact_name, io_orders_id || ' | ' || contact_name as displayed_name
+FROM billing.vw_national_io_order_insert 
+WHERE ('' = '{term}' OR UPPER(io_orders_id || ' | ' || contact_name) LIKE UPPER('%{term}%'))
+ORDER BY io_orders_id
 OFFSET ({page}-1)*{limit} LIMIT {limit}
 ;]]></query>  
           <live><![CDATA[true]]></live> 
@@ -280,7 +273,6 @@ OFFSET ({page}-1)*{limit} LIMIT {limit}
         <action-inputs> 
           <jndi type="string" mapping="connectionName"/>  
           <p_io_orders_id type="string"/>  
-          <p_io_line_item_id type="string"/>  
           <p_campaign_id type="string"/>  
           <p_billing_contact type="string"/>  
           <p_comment type="string"/>  
@@ -290,7 +282,7 @@ OFFSET ({page}-1)*{limit} LIMIT {limit}
           <query-result type="result-set" mapping="query_result"/> 
         </action-outputs>
         <component-definition> 
-          <query><![CDATA[SELECT * FROM billing.fn_ba_national_dim_io_insert({p_io_orders_id},{p_io_line_item_id} ,'{p_campaign_id}', '{p_billing_contact}', '{principalName}','{p_comment}')]]></query>  
+          <query><![CDATA[SELECT * FROM billing.fn_ba_national_dim_io_insert({p_io_orders_id},'{p_campaign_id}', '{p_billing_contact}', '{principalName}','{p_comment}')]]></query>  
           <live><![CDATA[true]]></live> 
         </component-definition> 
       </action-definition>
@@ -306,7 +298,6 @@ OFFSET ({page}-1)*{limit} LIMIT {limit}
           <p_billing_contact type="string"/>  
           <p_io_orders_id type="string"/>  
           <principalName type="string"/>  
-          <p_io_line_item_id type="string"/>  
           <p_comment type="string"/>  
           <p_campaign_id type="string"/>  
           <jndi type="string" mapping="connectionName"/> 
@@ -315,7 +306,7 @@ OFFSET ({page}-1)*{limit} LIMIT {limit}
           <query-result type="result-set" mapping="query_result"/> 
         </action-outputs>
         <component-definition> 
-          <query><![CDATA[SELECT * FROM billing.fn_ba_national_dim_io_update({p_io_orders_id},{p_io_line_item_id} ,'{p_campaign_id}', '{p_billing_contact}', '{principalName}','{p_comment}')]]></query>  
+          <query><![CDATA[SELECT * FROM billing.fn_ba_national_dim_io_update({p_io_orders_id}, '{p_campaign_id}', '{p_billing_contact}', '{principalName}','{p_comment}')]]></query>  
           <live><![CDATA[true]]></live> 
         </component-definition> 
       </action-definition>
