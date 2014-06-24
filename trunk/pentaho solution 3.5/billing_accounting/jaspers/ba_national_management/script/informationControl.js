@@ -93,3 +93,40 @@ function updateInfomation(input) {
 	});
 	return false;
 }
+/////////////////////////////////
+// Load Page Information Detail
+/////////////////////////////////
+function loadInformationDetailPage(input){
+	this.input = $.extend({}, {
+		p_io_orders_id : '',	
+		p_row: 1,
+		success : function(html) {
+		}
+	}, input);
+	
+	//verify input
+	if(input.p_io_orders_id==''){
+		alert("Load detail page need to input param: p_io_orders_id");
+		return;
+	}
+	// call request to insert information
+	var request = $.ajax({
+		url : rootPath_Information,
+		type : "POST",
+		data : {
+			actions : 'LoadInformatinoDetailPage',
+			data : 'html',
+			p_io_orders_id : this.input.p_io_orders_id,
+			p_row: input.p_row
+		},
+		dataType : "html"
+	});
+	request.done(function(html) {
+		input.success(html);		
+	});
+
+	request.fail(function(jqXHR, textStatus) {
+		alert("Request failed: " + textStatus);
+	});
+	return false;
+}
