@@ -128,7 +128,7 @@ color: #999999;
 		<ul class="nav nav-tabs">
 			<li title="Billing" class="active"><a href="#"	onclick="goHomePage()">Billing Worksheet</a></li>
 			<li title="Information" ><a href="#" onclick="goInformationPage()">Information</a></li>
-			<li title="Additional Adjustment"><a href="#" onclick="">Adjustment</a></li>
+			<li title="Additional Adjustment"><a href="#" onclick="goAdjustedUnitPage()">Adjustment</a></li>
 		</ul>
 	</div>
 

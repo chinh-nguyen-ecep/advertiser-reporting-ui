@@ -160,10 +160,32 @@
         <location>edit-information-form.jsp</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
-    </template3> 
+    </template3>  
+    <template4> 
+      <solution-file> 
+        <location>templates/adjusted_units.jsp</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </template4> 
   </resources>
   
   <actions> 
+    <actions> 
+      <condition><![CDATA[actions=='template']]></condition>  
+      <action-definition> 
+        <component-name>TemplateComponent</component-name>
+        <action-type>Message Template</action-type>
+        <action-resources> 
+          <template mapping="template4"/> 
+        </action-resources>
+        <action-outputs> 
+          <output-message type="string" mapping="returnResult"/> 
+        </action-outputs>
+        <component-definition/> 
+      </action-definition>
+ 
+    </actions>
+  
     <actions> 
       <condition><![CDATA[actions=='insertAjustedUnits']]></condition>  
       <action-definition> 
@@ -189,31 +211,81 @@
  
     </actions>
   
-    <actions>
-      <condition><![CDATA[actions=='updateAjustedUnits']]></condition>
+    <actions> 
+      <condition><![CDATA[actions=='updateAjustedUnits']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <p_io_orders_id type="string"/>  
+          <p_month_sk type="string"/>  
+          <principalName type="string"/>  
+          <p_io_line_item_id type="string"/>  
+          <p_comment type="string"/>  
+          <p_adjusted_units type="string"/>  
+          <jndi type="string" mapping="connectionName"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
+        </action-outputs>
+        <component-definition> 
+          <query><![CDATA[SELECT * FROM billing.fn_ba_national_dim_adjustment_update({p_io_orders_id},{p_io_line_item_id} ,{p_month_sk}, {p_adjusted_units}, '{principalName}','{p_comment}')]]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='loadListAjustedUnit']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <p_month_sk type="string"/>  
+          <p_io_line_item_name type="string"/>
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
+        </action-outputs>
+        <component-definition> 
+          <query><![CDATA[SELECT sk, io_orders_id, io_line_item_id, combine_ids, io_line_item_name, 
+       month_since_2005, adjusted_units, created_by, created_at, updated_by, 
+       updated_at, comment
+  FROM billing.vw_ba_national_dim_adjustment
+WHERE (month_since_2005={p_month_sk} OR 0={p_month_sk})
+AND ( UPPER(io_line_item_name) LIKE UPPER('%{p_io_line_item_name}%') OR ''='{p_io_line_item_name}')
+;]]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='loadListMonths']]></condition>  
       <action-definition>
         <component-name>SQLLookupRule</component-name>
         <action-type>Relational</action-type>
         <action-inputs>
-          <p_io_orders_id type="string"/>
-          <p_month_sk type="string"/>
-          <principalName type="string"/>
-          <p_io_line_item_id type="string"/>
-          <p_comment type="string"/>
-          <p_adjusted_units type="string"/>
           <jndi type="string" mapping="connectionName"/>
         </action-inputs>
         <action-outputs>
           <query-result type="result-set" mapping="query_result"/>
         </action-outputs>
         <component-definition>
-          <query><![CDATA[SELECT * FROM billing.fn_ba_national_dim_adjustment_update({p_io_orders_id},{p_io_line_item_id} ,{p_month_sk}, {p_adjusted_units}, '{principalName}','{p_comment}')]]></query>
+          <query><![CDATA[SELECT a.month_since_2005,b.calendar_year_month
+FROM billing.vw_ba_national_dim_adjustment a 
+LEFT JOIN refer.month_dim b ON (a.month_since_2005=b.month_sk) 
+GROUP BY a.month_since_2005,b.calendar_year_month 
+ORDER BY a.month_since_2005 DESC;]]></query>
           <live><![CDATA[true]]></live>
         </component-definition>
       </action-definition>
 
     </actions>
-
+  
     <action-definition> 
       <component-name>JavascriptRule</component-name>
       <action-type>Process data grid</action-type>

@@ -25,9 +25,9 @@ var rootPath = 'ViewAction?solution=' + solution + '&path=' + path
 var rootUrl=window.location.protocol+'//'+window.location.hostname+':'+window.location.port+"/pentaho/"+rootPath;
 var rootPath_Information = 'ViewAction?solution=' + solution + '&path=' + path
 		+ '/ba_national_management' + '&action=information_management.xaction';
-var rootPath_Biiling = 'ViewAction?solution=' + solution + '&path=' + path
+var rootPath_Billing = 'ViewAction?solution=' + solution + '&path=' + path
 		+ '/ba_national_management' + '&action=billing_management.xaction';
-var rootPath_AjustedUnits = 'ViewAction?solution=' + solution + '&path=' + path
+var rootPath_AdjustedUnits = 'ViewAction?solution=' + solution + '&path=' + path
 		+ '/ba_national_management'
 		+ '&action=adjusted_units_management.xaction';
 
@@ -82,7 +82,7 @@ function loadPage() {
 }
 function activeTab(tabTitle) {
 	$('#page-tab li').removeClass('active');
-	$('#page-tab li[title=' + tabTitle + ']').addClass('active');
+	$('#page-tab li[title=\'' + tabTitle + '\']').addClass('active');
 }
 function goHomePage() {
 	var page = 'billing_script';
@@ -98,6 +98,13 @@ function goInformationPage() {
 	urlMaster.replaceParam('page', page);
 	urlMaster.replaceParam('actionPath', actionPath);
 	loadPage();
+}
+
+function goAdjustedUnitPage(){
+	urlMaster.clear();
+	urlMaster.replaceParam('page','template');
+	urlMaster.replaceParam('actionPath','adjusted_units_management');
+	loadPage();	
 }
 
 
