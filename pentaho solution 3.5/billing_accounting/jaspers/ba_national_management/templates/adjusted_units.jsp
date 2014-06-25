@@ -3,7 +3,6 @@
 </style>
 <script>
 	//Set locate
-	urlMaster.clear();
 	urlMaster.replaceParam('page', 'template');
 	urlMaster.replaceParam('actionPath', 'adjusted_units_management');
 	activeTab('Additional Adjustment');
@@ -20,7 +19,7 @@
 	class="table table-bordered table-striped table-hover">
 	<thead>
 		<tr>
-			<th class="buttons" colspan="10"><a class="btn btn-success"	href="#" onclick="showAddInfomationForm();">
+			<th class="buttons" colspan="10"><a class="btn btn-success"	href="#" id="addAdjustedUnitsButton">
 				<i	class="icon-plus icon-white"></i> Add Adjusted Unit </a>
 				<div class="pull-right">
 							<form role="form" class="form-inline">
@@ -81,11 +80,17 @@
 					rows.push(row);
 				}
 				$('#selectbox_month_sk').html(rows.join(""));
-				
-					loadTableAdjustedUnit();
+				var month_sk=urlMaster.getParam('msk');		
+				if(month_sk==''){
+					urlMaster.replaceParam('msk',$('#selectbox_month_sk').val());
+				}else{
+					$('#selectbox_month_sk').prop("value",month_sk);
+				}
+				loadTableAdjustedUnit();
 			}
 		});
 		$('#selectbox_month_sk').change(function(){
+			urlMaster.replaceParam('msk', $('#selectbox_month_sk').val());
 			delay_timeout(1000,function(){
 				loadTableAdjustedUnit();
 			});
@@ -103,8 +108,9 @@
 	// Load table adjusted unit 
 	/////////////////////////////////////
 	function loadTableAdjustedUnit(){
+		var month_sk=urlMaster.getParam('msk');		
 		loadAdjustedUnits({
-			p_month_sk: $('#selectbox_month_sk').val(),
+			p_month_sk: month_sk,
 			p_io_line_item_name: $.trim($('#search_input').val()),
 			success: function(json){
 				dataTableAjustedUnits=json;
@@ -142,4 +148,15 @@
 			$('#mainDataTable tbody').html(rows.join(""));
 		}
 	}
+	////////////////////////////////////
+	// Load add form
+	////////////////////////////////////
+	$('#addAdjustedUnitsButton').click(function(){
+		adjustedUnitsLoadAddForm({
+			success: function(html){
+				$('#summary-content div.content').html(html);
+			}
+		});		
+	});
+
 </script>

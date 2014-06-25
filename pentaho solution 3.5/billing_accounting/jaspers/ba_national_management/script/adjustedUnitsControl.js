@@ -165,3 +165,30 @@ function loadListMonthAdjustedUnits(input){
 		alert("loadListMonthAdjustedUnits - Request failed: " + textStatus);
 	});
 }
+
+////////////////////////////////////
+// Load Add form
+//////////////////////////////////
+function adjustedUnitsLoadAddForm(input){
+	input = $.extend({}, {
+		success : function(html) {
+		}
+	}, input);
+
+	var request=$.ajax({
+		url : rootPath_AdjustedUnits,
+		type : "POST",
+		dataType : 'html',
+		data : {
+			actions: 'adjustedUnitsAddForm',
+			data: 'html'
+		}		
+	});
+	
+	request.done(function(html) {
+		input.success(html);
+	});
+	request.fail(function(jqXHR, textStatus) {
+		alert("adjustedUnitsLoadAddForm - Request failed: " + textStatus);
+	});	
+}

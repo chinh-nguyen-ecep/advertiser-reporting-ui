@@ -166,7 +166,13 @@
         <location>templates/adjusted_units.jsp</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
-    </template4> 
+    </template4>  
+    <template5>
+      <solution-file>
+        <location>templates/adjusted_units_add_form.jsp</location>
+        <mime-type>text/plain</mime-type>
+      </solution-file>
+    </template5>
   </resources>
   
   <actions> 
@@ -186,6 +192,23 @@
  
     </actions>
   
+    <actions>
+      <condition><![CDATA[actions=='adjustedUnitsAddForm']]></condition>
+      <action-definition>
+        <component-name>TemplateComponent</component-name>
+        <action-type>Message Template</action-type>
+        <action-inputs/>
+        <action-resources>
+          <template mapping="template5"/>
+        </action-resources>
+        <action-outputs>
+          <output-message type="string" mapping="returnResult"/>
+        </action-outputs>
+        <component-definition/>
+      </action-definition>
+
+    </actions>
+
     <actions> 
       <condition><![CDATA[actions=='insertAjustedUnits']]></condition>  
       <action-definition> 
@@ -286,6 +309,33 @@ ORDER BY a.month_since_2005 DESC;]]></query>
 
     </actions>
   
+    <actions>
+      <condition><![CDATA[actions=='loadListIoOrders']]></condition>
+      <action-definition>
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs>
+          <jndi type="string" mapping="connectionName"/>
+          <limit type="string"/>
+          <page type="string"/>
+          <term type="string"/>
+        </action-inputs>
+        <action-outputs>
+          <query-result type="result-set" mapping="query_result"/>
+        </action-outputs>
+        <component-definition>
+          <query><![CDATA[SELECT io_orders_id, contact_name, io_orders_id || ' | ' || contact_name as displayed_name
+FROM billing.vw_national_io_order_insert 
+WHERE ('' = '{term}' OR UPPER(io_orders_id || ' | ' || contact_name) LIKE UPPER('%{term}%'))
+ORDER BY io_orders_id
+OFFSET ({page}-1)*{limit} LIMIT {limit}
+;]]></query>
+          <live><![CDATA[true]]></live>
+        </component-definition>
+      </action-definition>
+
+    </actions>
+
     <action-definition> 
       <component-name>JavascriptRule</component-name>
       <action-type>Process data grid</action-type>
