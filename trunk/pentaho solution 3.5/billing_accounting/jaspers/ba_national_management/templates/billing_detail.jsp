@@ -102,10 +102,6 @@
 	var information_control='{information_control}';
 	var adjusted_units_control='{adjusted_units_control}';
 	
-	var command = '';
-	if ({information_control} == 'add') {
-	}
-	
 	$('#lineItemDetail td[name=rate]').html(accounting.formatMoney({rate}));
 	$('#lineItemDetail td[name=planned_units]').html(accounting.formatNumber({planned_units}));
 	$('#lineItemDetail td[name=contracted_budget]').html(accounting.formatMoney({contracted_budget}));
