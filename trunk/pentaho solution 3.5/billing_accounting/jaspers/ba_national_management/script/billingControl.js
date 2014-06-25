@@ -270,7 +270,7 @@ function loadBillingDetailTable(input){
 			rowSummary += '<td align="right"><b>Amount Inv.</b></td>';
 			rowSummary += '<td align="right"><b>Units Inv. ToDate</b></td>';
 			rowSummary += '<td align="right"><b>Amount Inv. ToDate</b></td>';
-			rowSummary += '<td align="right"><b>Remaining</b></td>';
+			rowSummary += '<td align="right"><b>Remaining Balance</b></td>';
 			rowSummary += '</tr>';
 		}
 				

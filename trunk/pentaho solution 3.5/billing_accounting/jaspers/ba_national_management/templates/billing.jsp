@@ -287,7 +287,7 @@
 				<th class="buttons" style="text-align: right;"><b>Booking</b></th>
 				<th class="buttons" style="text-align: right;"><b>Units Inv. ToDate</b></th>
 				<th class="buttons" style="text-align: right;"><b>Amount Inv. ToDate</b></th>
-				<th class="buttons" style="text-align: right;"><b>Remaining</b></th>
+				<th class="buttons" style="text-align: right;"><b>Remaining Balance</b></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -580,7 +580,7 @@
 	//////////////////////////////////	
 	function loadAdjustedAddForm(row){
 		var combined_ids = dataTableDetail[row].combined_ids;
-		var io_line_item_name=dataTableDetail[row].io_line_item_name;
+		var io_line_item_name=dataTableDetail[row].placement_group;
 		var month_since_2005=dataTableDetail[row].month_since_2005;
 		var calendar_year_month=dataTableDetail[row].calendar_year_month;
 		var p_io_orders_id=combined_ids.split("-")[0];
@@ -619,13 +619,12 @@
 	//////////////////////////////////	
 	function loadAdjustedUpdateForm(row){
 		var combined_ids = dataTableDetail[row].combined_ids;
-		var io_line_item_name=dataTableDetail[row].io_line_item_name;
+		var io_line_item_name=dataTableDetail[row].placement_group;
 		var month_since_2005=dataTableDetail[row].month_since_2005;
 		var calendar_year_month=dataTableDetail[row].calendar_year_month;
 		var p_io_orders_id=combined_ids.split("-")[0];
 		var p_io_line_item_id=combined_ids.split("-")[1];
 		var p_adjusted_units=dataTableDetail[row].adjusted_units;
-		alert(io_line_item_name);
 		//Set value to form
 		$('#updateAdjustedUnitForm input[name=p_io_orders_id]').val(p_io_orders_id);
 		$('#updateAdjustedUnitForm input[name=p_io_line_item_id]').val(p_io_line_item_id);	
