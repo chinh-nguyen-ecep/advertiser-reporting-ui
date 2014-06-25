@@ -287,6 +287,14 @@
 				<th class="buttons col-md-1"></th>
 				<th class="buttons col-md-1"></th>
 			</tr>
+				<th class="buttons" colspan="2"><b>ADM IO Order # | IO # | IO Revision Date</b></th>
+				<th class="buttons" colspan="3"><b>Campaign Name | Advertiser | Agency</b></th>
+				<th class="buttons" colspan="3"><b>Campaign ID | Billing Contact | Comment</b></th>
+				<th class="buttons" style="text-align: right;"><b>Booking</b></th>
+				<th class="buttons" style="text-align: right;"><b>Units Inv. ToDate</b></th>
+				<th class="buttons" style="text-align: right;"><b>Amount Inv. ToDate</b></th>
+				<th class="buttons" style="text-align: right;"><b>Remaining</b></th>
+			</tr>
 		</thead>
 		<tbody>
 		</tbody>
@@ -662,6 +670,17 @@
 			});
 		}else{
 			
+		}
+	}
+	
+	////////////////////////////////////////
+	// Show IO Line Item Detail by IO Order
+	////////////////////////////////////////
+	function showDetail(io_order_id){
+		if ($('tr.class' + io_order_id).first().css('display') == 'none') {
+			$('tr.class' + io_order_id).show();
+		} else {
+			$('tr.class' + io_order_id).hide();
 		}
 	}
 </script>

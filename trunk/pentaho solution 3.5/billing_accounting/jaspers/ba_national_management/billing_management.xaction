@@ -102,12 +102,12 @@
       </sources>  
       <default-value><![CDATA[html]]></default-value> 
     </p_export_output>  
-    <p_calendar_year_month type="string">
-      <sources>
-        <request>p_calendar_year_month</request>
-      </sources>
-      <default-value/>
-    </p_calendar_year_month>
+    <p_calendar_year_month type="string"> 
+      <sources> 
+        <request>p_calendar_year_month</request> 
+      </sources>  
+      <default-value/> 
+    </p_calendar_year_month> 
   </inputs>
 
   <outputs> 
@@ -307,6 +307,7 @@ order by month_since_2005 DESC
 , a.contract_name as campaign_name
 , a.agency_name as agency
 , COALESCE(b.billing_contact, '') as billing_contact
+, COALESCE(b.comment, '') as comment
 , (a.io_orders_id ||'-'|| a.io_line_item_id) as combined_ids
 , a.io_line_item_name as placement_group
 , a.io_line_item_external_ref as placement_id
