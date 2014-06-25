@@ -21,7 +21,7 @@
 	  </ul>
 	</div>
 	<div class="btn-group pull-right">
-		<button type="button" class="btn btn-success" onclick="loadPage()" >
+		<button type="button" class="btn btn-success" onclick="loadBillingDetailFromUrl()" >
 		  <span class="glyphicon glyphicon-refresh"></span> Refresh
 		</button>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
@@ -307,6 +307,13 @@
 	// First load billing page
 	/////////////////////////
 	$( document ).ready(function(){
+		loadBillingDetailFromUrl();
+	}) ;
+	
+	///////////////////////////////////
+	// Load page from param on url
+	////////////////////////////////////
+	function loadBillingDetailFromUrl(){
 		var p_month_since_2005=urlMaster.getParam('month_sk');
 		var p_calendar_year_month=urlMaster.getParam('year_month');
 		var p_io_orders=urlMaster.getParam('io_orders');
@@ -337,9 +344,8 @@
 					
 				}
 			});
-		}		
-	}) ;
-
+		}	
+	}
 	/////////////////////////
 	// Load list of month
 	/////////////////////////
@@ -483,25 +489,7 @@
 		urlMaster.replaceParam('io_orders',p_io_orders);
 		urlMaster.replaceParam('io_line_items',p_io_line_items);
 		// Load summary table
-		// loadBillingSummaryTable({
-			// p_month_since_2005 : p_month_since_2005,
-			// p_io_orders: p_io_orders,
-			// p_io_line_items: p_io_line_items,
-			// obj_table: $('#summaryTable'),
-			// success: function(){
-				
-			// }
-		// });
-		// Load detail table
-		loadBillingDetailTable({
-			p_month_since_2005 : p_month_since_2005,
-			p_io_orders: p_io_orders,
-			p_io_line_items: p_io_line_items,
-			obj_table: $('#detailTable'),
-			success: function(){
-				
-			}
-		});	
+		loadBillingDetailFromUrl();
 	}
 	///////////////////////////////////
 	// load information edit form
@@ -538,7 +526,7 @@
 			p_billing_contact: $('#editInformationForm input[name=billing_contact]').val(),
 			p_comment: '',
 			success: function(data){				
-				loadPage();
+				loadBillingDetailFromUrl();
 			}
 		});
 	}
@@ -553,7 +541,7 @@
 			p_billing_contact: $('#addInformationForm input[name=billing_contact]').val(),
 			p_comment: $('#addInformationForm input[name=comment]').val(),
 			success: function(data){				
-				loadPage();
+				loadBillingDetailFromUrl();
 			}
 		});
 	}
@@ -591,7 +579,7 @@
 			p_month_sk: $('#addAdjustedUnitForm input[name=p_month_sk]').val(),
 			p_comment: $('#addAdjustedUnitForm input[name=comment]').val(),
 			success: function(data){				
-				loadPage();
+				loadBillingDetailFromUrl();
 				//var msg=data[0].fn_ba_national_dim_io_update;
 				//alert(msg);
 			}
@@ -630,7 +618,7 @@
 			p_month_sk: $('#updateAdjustedUnitForm input[name=p_month_sk]').val(),
 			p_comment: $('#updateAdjustedUnitForm input[name=comment]').val(),
 			success: function(data){
-				loadPage();
+				loadBillingDetailFromUrl();
 				//var msg=data[0].fn_ba_national_dim_io_update;
 				//alert(msg);
 			}		

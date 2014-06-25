@@ -262,8 +262,8 @@ function loadBillingDetailTable(input){
 
 		var htmlTable = rows.join("");
 		//console.log(htmlTable);
-		input.obj_table.find('tbody').empty();
-		input.obj_table.find('tbody').append(htmlTable);
+//		input.obj_table.find('tbody').empty();
+		input.obj_table.find('tbody').html(htmlTable);
 	}	
 }
 

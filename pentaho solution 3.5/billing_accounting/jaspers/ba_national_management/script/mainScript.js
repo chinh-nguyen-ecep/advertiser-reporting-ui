@@ -29,7 +29,7 @@ var rootPath_Biiling = 'ViewAction?solution=' + solution + '&path=' + path
 		+ '/ba_national_management' + '&action=billing_management.xaction';
 var rootPath_AjustedUnits = 'ViewAction?solution=' + solution + '&path=' + path
 		+ '/ba_national_management'
-		+ '&action=ajusted_units_management.xaction';
+		+ '&action=adjusted_units_management.xaction';
 
 // end process start date , end date
 $(document).ready(function() {
@@ -65,8 +65,19 @@ function loadPage() {
 	var url = 'ViewAction?solution=' + solution + '&path=' + path
 			+ '/ba_national_management' + '&action=' + actionPath + '.xaction'
 			+ '&actions=' + page;
-	$('#summary-content div.content').load(url, function() {
+	// call request to insert information
+	var request = $.ajax({
+		url : url,
+		type : "POST",		
+		dataType : "html"
+	});
+	request.done(function(html) {
+		$('#summary-content div.content').html(html);
 		$('#summary-content').removeClass('loading');
+	});
+
+	request.fail(function(jqXHR, textStatus) {
+		alert("Request failed: " + textStatus);
 	});
 }
 function activeTab(tabTitle) {
