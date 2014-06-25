@@ -10,9 +10,9 @@
 </div>
 <div class="page-header">
 	<div class="btn-group pull-right">
-	<a class="btn" href="" onclick="urlMaster.replaceParam('page','information_script');loadPage()"><i class="icon-chevron-left icon-black"></i>
-	Back
-	</a>
+		<a class="btn" href="" onclick="urlMaster.replaceParam('page','information_script');loadPage()"><i class="icon-chevron-left icon-black"></i>
+			Back
+		</a>
 	</div>
 	<h1>
 	Add Information
