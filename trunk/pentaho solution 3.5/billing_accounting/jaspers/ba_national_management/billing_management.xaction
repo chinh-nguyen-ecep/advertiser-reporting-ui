@@ -329,6 +329,7 @@ order by month_since_2005 DESC
 , a.remaining_budget
 , CASE WHEN b.io_orders_id IS NULL THEN 'add' ELSE 'edit' END AS information_control
 , CASE WHEN a.adjusted_units IS NULL THEN 'add' ELSE 'edit' END AS adjusted_units_control
+, a.total_billable_units_upto_month as billable_units_to_date
 from  billing.ba_monthly_national_worksheet a
 left join billing.ba_national_dim_io b ON (b.is_active = true AND b.io_orders_id = a.io_orders_id)
 where month_since_2005 = {p_month_since_2005}

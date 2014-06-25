@@ -14,46 +14,17 @@
 	<queryString>
 		<![CDATA[SELECT calendar_year_month
      , MAX(dt_lastchange) AS dt_lastchange
-     , SUM(imps)::bigint AS imps
-     , SUM(gross_reveue) AS gross_reveue
-     , SUM(pub_net_revenue) AS pub_net_revenue
 FROM (
 SELECT calendar_year_month
-     , network_title
-     , merchant_id
-     , merchant_name
-     , parent1_id
-     , parent1_name
-     , partner_id
-     , partner_name
-     , partner_keyword
-     , SUM(imps)::bigint AS imps
-     , billable_rate::float
-     , partner_share
-     , billable_rate * (SUM(imps)::float / 1000) AS gross_reveue
-     , (billable_rate *(SUM(imps)::float / 1000)) * (partner_share::double precision / 100) AS pub_net_revenue
      , (max(dt_lastchange)::timestamp with time zone AT TIME ZONE 'America/Los_Angeles')::timestamp with time zone AT TIME ZONE 'America/New_York' AS dt_lastchange
-FROM billing.ba_monthly_vlmo_publisher_share
+FROM billing.ba_monthly_national_worksheet
 WHERE month_since_2005 = $P{p_month_since_2005}::int
 GROUP BY calendar_year_month
-       , network_title
-       , merchant_id
-       , merchant_name
-       , parent1_id
-       , parent1_name
-       , partner_id
-       , partner_name
-       , partner_keyword
-       , billable_rate
-       , partner_share
 ) a
 GROUP BY calendar_year_month]]>
 	</queryString>
 	<field name="calendar_year_month" class="java.lang.String"/>
 	<field name="dt_lastchange" class="java.sql.Timestamp"/>
-	<field name="imps" class="java.lang.Long"/>
-	<field name="gross_reveue" class="java.lang.Double"/>
-	<field name="pub_net_revenue" class="java.lang.Double"/>
 	<background>
 		<band/>
 	</background>

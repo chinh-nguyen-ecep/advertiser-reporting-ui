@@ -8,8 +8,8 @@
 
 	<!-- Split button -->
 	<div class="btn-group pull-right" style="margin-left: 5px;">
-	  <button type="button" class="btn btn-info">Export</button>
-	  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+	  <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-file"></span> Export</button>
+	  <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
 	    <span class="caret"></span>
 	    <span class="sr-only">Toggle Dropdown</span>
 	  </button>
@@ -21,10 +21,10 @@
 	  </ul>
 	</div>
 	<div class="btn-group pull-right">
-		<button type="button" class="btn btn-success" onclick="loadBillingDetailFromUrl()" >
+		<button type="button" class="btn btn-info" onclick="loadBillingDetailFromUrl()" >
 		  <span class="glyphicon glyphicon-refresh"></span> Refresh
 		</button>
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+		<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
 		  <span class="glyphicon glyphicon-cog"></span> Control Panel
 		</button>
 	</div>
@@ -89,17 +89,14 @@
 			<div class="form-group">
 				<label for="campaign_id" class="required control-label">Campaign ID <abbr title="Required">*</abbr></label>
 				<input type="text" class="form-control" placeholder="Enter campaign id" name="campaign_id" value="">
-				<p class="help-block">Enter a friendly campaign id</p>
 			</div>
 			<div class="form-group">
 				<label for="billing_contact" class="required control-label">Billing Contact <abbr title="Required">*</abbr></label>
 				<input type="text" class="form-control" placeholder="Enter billing contact" name="billing_contact" value="">
-				<p class="help-block">Enter a billing contact</p>
 			</div>
 			<div class="form-group">
 				<label for="comment" class="required control-label">Comment</label>
 				<input type="text" class="form-control" placeholder="Enter comment" name="comment" value="">
-				<p class="help-block">Enter your comment</p>
 			</div>
 		</form>      
       </div>
@@ -131,17 +128,14 @@
 			<div class="form-group">
 				<label for="campaign_id" class="required control-label">Campaign ID <abbr title="Required">*</abbr></label>
 				<input type="text" class="form-control"  placeholder="Enter campaign id" name="campaign_id" value="">
-				<p class="help-block">Enter a friendly campaign id</p>
 			</div>
 			<div class="form-group">
 				<label for="billing_contact" class="required control-label">Billing Contact <abbr title="Required">*</abbr></label>
 				<input type="text" class="form-control" placeholder="Enter billing contact" name="billing_contact" value="">
-				<p class="help-block">Enter a billing contact</p>
 			</div>
 			<div class="form-group">
 				<label for="comment" class="required control-label">Comment</label>
 				<input type="text" class="form-control" placeholder="Enter comment" name="comment" value="">
-				<p class="help-block">Enter your comment</p>
 			</div>
 		</form>      
       </div>
@@ -178,8 +172,8 @@
 				<input type="text" class="form-control" name="month" value="" disabled>
 			</div>
 			<div class="form-group">
-				<label for="campaign_id" class="required control-label">Ajusted Units<abbr title="Required">*</abbr></label>
-				<input type="text" class="form-control"  placeholder="Enter ajusted units" name="adjusted_units" value="">
+				<label for="campaign_id" class="required control-label">Adjusted Units<abbr title="Required">*</abbr></label>
+				<input type="text" class="form-control"  placeholder="Enter adjusted units" name="adjusted_units" value="">
 			</div>
 			<div class="form-group">
 				<label for="comment" class="required control-label">Comment</label>
@@ -219,8 +213,8 @@
 				<input type="text" class="form-control" name="month" value="" disabled>
 			</div>
 			<div class="form-group">
-				<label for="campaign_id" class="required control-label">Ajusted Units<abbr title="Required">*</abbr></label>
-				<input type="text" class="form-control"  placeholder="Enter ajusted units" name="adjusted_units" value="">
+				<label for="campaign_id" class="required control-label">Adjusted Units<abbr title="Required">*</abbr></label>
+				<input type="text" class="form-control"  placeholder="Enter adjusted units" name="adjusted_units" value="">
 			</div>
 			<div class="form-group">
 				<label for="comment" class="required control-label">Comment</label>
@@ -302,6 +296,9 @@
 </div>
 <script>
 	var data=[];
+	var g_information_campaign_id = '';
+	var g_information_billing_contact = '';
+	var g_information_comment = '';
 	
 	//////////////////////////
 	// First load billing page
@@ -499,11 +496,18 @@
 		var displayed_name  = dataTableDetail[row].io_orders_id + ' | ' + dataTableDetail[row].campaign_name;
 		var campaign_id     = dataTableDetail[row].campaign_id;
 		var billing_contact = dataTableDetail[row].billing_contact;
+		var comment         = dataTableDetail[row].comment;
+		
+		// keep history
+		g_information_campaign_id     = campaign_id;
+		g_information_billing_contact = billing_contact;
+		g_information_comment         = comment;
 		
 		$('#editInformationForm input[name=p_io_orders_id]').val(io_orders_id);
 		$('#editInformationForm input[name=campaign_id]').val(campaign_id);
 		$('#editInformationForm input[name=billing_contact]').val(billing_contact);	
 		$('#editInformationForm input[name=selectbox_io_orders_id]').val(displayed_name);
+		$('#editInformationForm input[name=comment]').val(comment);
 	}
 	///////////////////////////////////
 	// load information add form
@@ -519,31 +523,56 @@
 	// Update information
 	/////////////////////////////////////
 	function billingUpdateInformation(){
+		var is_changed = true;
+		
+		var campaign_id     = $('#editInformationForm input[name=campaign_id]').val();
+		var billing_contact = $('#editInformationForm input[name=billing_contact]').val();
+		var comment         = $('#editInformationForm input[name=comment]').val();
+		
+		if (campaign_id == g_information_campaign_id
+            && billing_contact == g_information_billing_contact
+			&& comment == g_information_comment) {
+			is_changed = false;
+		}
+		
+		if (is_changed == true){
 		$('#editInformationDialog').modal('hide');
-		updateInfomation({
-			p_io_orders_id: $('#editInformationForm input[name=p_io_orders_id]').val(),
-			p_campaign_id: $('#editInformationForm input[name=campaign_id]').val(),
-			p_billing_contact: $('#editInformationForm input[name=billing_contact]').val(),
-			p_comment: $('#editInformationForm input[name=comment]').val(),
-			success: function(data){				
-				loadBillingDetailFromUrl();
-			}
-		});
+			updateInfomation({
+				p_io_orders_id: $('#editInformationForm input[name=p_io_orders_id]').val(),
+				p_campaign_id: $('#editInformationForm input[name=campaign_id]').val(),
+				p_billing_contact: $('#editInformationForm input[name=billing_contact]').val(),
+				p_comment: $('#editInformationForm input[name=comment]').val(),
+				success: function(data){				
+					loadBillingDetailFromUrl();
+				}
+			});
+		} else {
+			alert('There is no change!');
+		}
 	}
 	/////////////////////////////////////
 	// Add information
 	/////////////////////////////////////
 	function billingAddInformation(){
-		$('#addInformationDialog').modal('hide');
-		addInfomation({
-			p_io_orders_id: $('#addInformationForm input[name=p_io_orders_id]').val(),
-			p_campaign_id: $('#addInformationForm input[name=campaign_id]').val(),
-			p_billing_contact: $('#addInformationForm input[name=billing_contact]').val(),
-			p_comment: $('#addInformationForm input[name=comment]').val(),
-			success: function(data){				
-				loadBillingDetailFromUrl();
-			}
-		});
+		var campaign_id     = $('#addInformationForm input[name=campaign_id]').val();
+		var billing_contact = $('#addInformationForm input[name=billing_contact]').val();
+		var comment         = $('#addInformationForm input[name=comment]').val();
+		
+		if (campaign_id == '' || billing_contact == '' || comment == ''){
+			alert("Please fill required fields");
+			
+		} else {
+			$('#addInformationDialog').modal('hide');
+			addInfomation({
+				p_io_orders_id: $('#addInformationForm input[name=p_io_orders_id]').val(),
+				p_campaign_id: $('#addInformationForm input[name=campaign_id]').val(),
+				p_billing_contact: $('#addInformationForm input[name=billing_contact]').val(),
+				p_comment: $('#addInformationForm input[name=comment]').val(),
+				success: function(data){				
+					loadBillingDetailFromUrl();
+				}
+			});
+		}
 	}
 	
 	///////////////////////////////////
