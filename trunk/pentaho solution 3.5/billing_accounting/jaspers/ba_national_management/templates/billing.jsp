@@ -524,7 +524,7 @@
 			p_io_orders_id: $('#editInformationForm input[name=p_io_orders_id]').val(),
 			p_campaign_id: $('#editInformationForm input[name=campaign_id]').val(),
 			p_billing_contact: $('#editInformationForm input[name=billing_contact]').val(),
-			p_comment: '',
+			p_comment: $('#editInformationForm input[name=comment]').val(),
 			success: function(data){				
 				loadBillingDetailFromUrl();
 			}

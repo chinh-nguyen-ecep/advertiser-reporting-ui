@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BA National Management</title>
+<title>Billing/Accounting National Management</title>
 <link rel="stylesheet" type="text/css"	href="/verve-lib/scripts/bootstrap-3.0.0/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css"	href="/verve-lib/scripts/bootstrap-3.0.0/css/bootstrap - custom.css" />	
 <link href="/verve-lib/scripts/bootstrap-3.0.0/blugins/font-awesome/css/font-awesome.css" rel="stylesheet" />
@@ -101,7 +101,7 @@ border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 			</button>
 			<a class="navbar-brand" href="#"><span class="icon-stack">
 					<i class="icon-sign-blank icon-stack-base"></i> <i class="icon-usd icon-light"></i>
-			</span>BA National Management</a>			
+			</span>Billing/Accounting National Management</a>			
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
@@ -122,9 +122,9 @@ border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 	</nav>
 	<div class="container first-tab theme-showcase " id="page-tab">
 		<ul class="nav nav-tabs">
-			<li title="Billing" class="active"><a href="#"	onclick="goHomePage()">Billing</a></li>
+			<li title="Billing" class="active"><a href="#"	onclick="goHomePage()">Billing Worksheet</a></li>
 			<li title="Information" ><a href="#" onclick="goInformationPage()">Information</a></li>
-			<li title="Additional Adjustment"><a href="#" onclick="">Additional Adjustment</a></li>
+			<li title="Additional Adjustment"><a href="#" onclick="">Adjustment</a></li>
 		</ul>
 	</div>
 
