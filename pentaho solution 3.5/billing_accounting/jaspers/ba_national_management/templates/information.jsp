@@ -10,13 +10,18 @@
 </script>
 
 	<!-- Table -->
-	<div class="breadcrumbs">
+	<!-- <div class="breadcrumbs">
 		<a href="#" onclick="goHomePage()">
 		<i class="icon-home"></i>
 		Home
 		</a>
 		<span class="separator">/</span> 
 		<a class="first item-0" href="#" onclick="goInformationPage()">Information</a> 
+	</div> -->
+	<div class="page-header">
+		<h1 id="page_header">
+			Informations
+		</h1>
 	</div>
 	<table id="mainDataTable" class="table table-bordered table-striped table-hover">
 		<thead>

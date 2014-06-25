@@ -625,6 +625,7 @@
 		var p_io_orders_id=combined_ids.split("-")[0];
 		var p_io_line_item_id=combined_ids.split("-")[1];
 		var p_adjusted_units=dataTableDetail[row].adjusted_units;
+		alert(io_line_item_name);
 		//Set value to form
 		$('#updateAdjustedUnitForm input[name=p_io_orders_id]').val(p_io_orders_id);
 		$('#updateAdjustedUnitForm input[name=p_io_line_item_id]').val(p_io_line_item_id);	

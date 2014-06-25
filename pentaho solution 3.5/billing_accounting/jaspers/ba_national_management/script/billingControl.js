@@ -12,7 +12,7 @@ function generateBillingMonthListDropDown(input){
 		}
 	}, input);
 	var request = $.ajax({
-		url : rootPath_Biiling,
+		url : rootPath_Billing,
 		type: "POST",
 		dataType : 'json',
 		data:{
@@ -49,7 +49,7 @@ function loadBillingSummaryTable(input){
 	}, input);
 	
 	$.ajax({
-		url : rootPath_Biiling,
+		url : rootPath_Billing,
 		dataType : 'json',
 		data : {
 			actions: 'loadBillingSummary',
@@ -110,7 +110,7 @@ function loadBillingDetailTable(input){
 	}, input);
 	
 	$.ajax({
-		url : rootPath_Biiling,
+		url : rootPath_Billing,
 		dataType : 'json',
 		data : {
 			actions: 'loadBillingDetailTable',
@@ -297,7 +297,7 @@ function loadBillingDetail(input){
 	}, input);
 	
 	$.ajax({
-		url : rootPath_Biiling,
+		url : rootPath_Billing,
 		dataType : 'html',
 		data : {
 			actions: 'LoadBillingDetail',
@@ -322,7 +322,7 @@ function exportNationalBillingReport(input){
 		p_io_orders: '',
 		p_io_line_items: ''		
 	}, input);
-	var urlExport=rootPath_Biiling
+	var urlExport=rootPath_Billing
 					+'&actions=export'
 					+'&p_export_output='+input.p_export_output
 					+'&p_month_since_2005='+input.p_month_since_2005

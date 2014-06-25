@@ -25,7 +25,7 @@ function addAjustedUnits(input) {
 	}
 	// call request to insert information
 	var request = $.ajax({
-		url : rootPath_AjustedUnits,
+		url : rootPath_AdjustedUnits,
 		type : "POST",
 		data : {
 			actions : 'insertAjustedUnits',
@@ -82,7 +82,7 @@ function updateAdjustedUnits(input) {
 	}
 	// call request to insert information
 	var request = $.ajax({
-		url : rootPath_AjustedUnits,
+		url : rootPath_AdjustedUnits,
 		type : "POST",
 		data : {
 			actions : 'updateAjustedUnits',
@@ -111,4 +111,57 @@ function updateAdjustedUnits(input) {
 		alert("Request failed: " + textStatus);
 	});
 	return false;
+}
+var loadAdjustedUnitsRequest=$.ajax({url:rootPath_AdjustedUnits});
+/////////////////////////////////
+// Load list of adjusted units 
+/////////////////////////////////
+function loadAdjustedUnits(input){
+	input = $.extend({}, {
+		p_month_sk : '',
+		p_io_line_item_name: '',
+		success : function(json) {
+		}
+	}, input);
+	loadAdjustedUnitsRequest.abort();
+	loadAdjustedUnitsRequest=$.ajax({
+		url : rootPath_AdjustedUnits,
+		dataType : 'json',
+		data : {
+			actions: 'loadListAjustedUnit',
+			data: 'json',
+			p_month_sk: input.p_month_sk,
+			p_io_line_item_name: input.p_io_line_item_name
+		},
+		success : function(json) {			
+			input.success(json);
+		}
+	});	
+}
+////////////////////////////////////////
+//Load list of month from adjusted dim
+////////////////////////////////////////
+
+function loadListMonthAdjustedUnits(input){
+	input = $.extend({}, {
+		success : function(arrayJson) {
+		}
+	}, input);
+
+	var request=$.ajax({
+		url : rootPath_AdjustedUnits,
+		type : "POST",
+		dataType : 'json',
+		data : {
+			actions: 'loadListMonths',
+			data: 'json'
+		}		
+	});
+	
+	request.done(function(arrayJson) {
+		input.success(arrayJson);
+	});
+	request.fail(function(jqXHR, textStatus) {
+		alert("loadListMonthAdjustedUnits - Request failed: " + textStatus);
+	});
 }
