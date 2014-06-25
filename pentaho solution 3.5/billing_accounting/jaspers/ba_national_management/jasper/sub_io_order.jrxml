@@ -25,7 +25,7 @@
 , SUM(ROUND(a.invoice_amount::NUMERIC, 2)) as "Invoiced Amount"
 , SUM(ROUND(a.total_amount_invoiced_upto_month::NUMERIC, 2)) as "Invoiced to Month"
 from  billing.ba_monthly_national_worksheet a
-left join billing.ba_national_dim_io b ON (b.is_active = true AND b.io_orders_id = a.io_orders_id AND b.io_line_item_id = a.io_line_item_id)
+left join billing.ba_national_dim_io b ON (b.is_active = true AND b.io_orders_id = a.io_orders_id)
 where month_since_2005 = $P{p_month_since_2005}::int
 and (a.io_orders_id IN (select unnest(string_to_array($P{p_io_orders}, ','))::int) OR '0'=$P{p_io_orders}::text)
 and (a.io_line_item_id IN (select unnest(string_to_array($P{p_io_line_items}, ','))::int) OR '0'=$P{p_io_line_items}::text)

@@ -89,6 +89,10 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffeeeeee', en
 border-color: #e6e6e6 #e6e6e6 #bfbfbf;
 border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
+
+.muted {
+color: #999999;
+}
 </style>
 </head>
 <body>

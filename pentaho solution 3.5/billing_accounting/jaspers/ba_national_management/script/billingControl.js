@@ -137,6 +137,7 @@ function loadBillingDetailTable(input){
 		var total_amount_invoiced_to_date = 0;
 		var total_remaining_units = 0;
 		var total_remaining_budget = 0;
+		var total_billable_units_to_date = 0;
 		
 		if (data.length > 0){
 			current_io_orders_id = data[0].io_orders_id;
@@ -176,6 +177,7 @@ function loadBillingDetailTable(input){
 			var remaining_budget        = data[i].remaining_budget;
 			var information_control     = data[i].information_control;
 			var adjusted_units_control  = data[i].adjusted_units_control;
+			var billable_units_to_date  = data[i].billable_units_to_date;
 			
 			total_booking_units += parseInt(planned_units);
 			total_booking_amount += parseFloat(contracted_budget);
@@ -183,6 +185,7 @@ function loadBillingDetailTable(input){
 			total_amount_invoiced_to_date += parseFloat(amount_invoiced_to_date);
 			total_remaining_budget += parseFloat(remaining_budget);
 			total_remaining_units += parseInt(remaining_units);
+			total_billable_units_to_date += parseInt(billable_units_to_date);
 			
 			var revision_date = new Date(io_revision_date).format('mmm dd, yyyy');
 			var start_date = new Date(io_line_item_start_date).format('mmm dd');
@@ -192,23 +195,27 @@ function loadBillingDetailTable(input){
 				placement_group_truncated = placement_group.substring(0, 45) + '...';
 			}
 			
+			if (adjusted_units != 'null'){
+				accounting.formatNumber(adjusted_units)
+			}
+			
 			var detail = '';
 			detail += '<tr class="class' + io_orders_id + '" style="display: none;">';
-			detail += '<td colspan="2"><a href="#" onclick="showBillingDetail(' + month_since_2005 + ',' + io_orders_id + ',' + io_line_item_id + ')">#' + combined_ids + ' | ' + start_date + ' - ' + end_date + '</a><br/><i>' + placement_group_truncated + '</i></td>';
-			detail += '<td colspan="2">' + accounting.formatMoney(contracted_budget) + '<br/>' + accounting.formatNumber(planned_units) + ' units<br/>' + accounting.formatMoney(rate) + ' ' + rate_type + '</td>';
+			detail += '<td colspan="2"><a href="#" onclick="showBillingDetail(' + month_since_2005 + ',' + io_orders_id + ',' + io_line_item_id + ')">#' + combined_ids + ' | ' + start_date + ' - ' + end_date + '</a><br/><i class="muted">' + placement_group_truncated + '</i></td>';
+			detail += '<td colspan="2">' + accounting.formatMoney(contracted_budget) + '&nbsp;&nbsp;' + accounting.formatNumber(planned_units) + ' units<br/><span class="muted">' + accounting.formatMoney(rate) + ' ' + rate_type + '</span></td>';
 			detail += '<td align="right">' + accounting.formatNumber(dfp_delivered_imps) + ' imps<br/>' + accounting.formatNumber(dfp_delivered_clicks) + ' clicks</td>';
 			detail += '<td align="right">' + accounting.formatNumber(dfa_delivered_imps) + ' imps<br/>' + accounting.formatNumber(dfa_delivered_clicks) + ' clicks</td>';
-		    detail += '<td align="right">' + accounting.formatNumber(adjusted_units);
+		    detail += '<td align="right">' + adjusted_units;
 			if(adjusted_units_control=='add'){
 				detail += '<button type="button" data-toggle="modal" data-target="#addAdjustedUnitDialog" class="btn btn-success btn-xs" style="float: left;" onclick="loadAdjustedAddForm('+i+');">  <span class="glyphicon glyphicon-plus"></span></button>';
 			}else if(adjusted_units_control=='edit'){
-				detail += '<button type="button" data-toggle="modal" data-target="#updateAdjustedUnitDialog" class="btn btn-info btn-xs" style="float: left;" onclick="loadAdjustedUpdateForm('+i+');">  <span class="glyphicon glyphicon-edit"></span></button>';
+				detail += '<button type="button" data-toggle="modal" data-target="#updateAdjustedUnitDialog" class="btn btn-primary btn-xs" style="float: left;" onclick="loadAdjustedUpdateForm('+i+');">  <span class="glyphicon glyphicon-edit"></span></button>';
 			}
 			detail += '</td>';
 			detail += '<td align="right">' + accounting.formatNumber(billable_units) + '</td>';
 			detail += '<td align="right">' + accounting.formatMoney(invoice_amount) + '</td>';
+			detail += '<td align="right">' + accounting.formatNumber(billable_units_to_date) + '</td>';
 			detail += '<td align="right">' + accounting.formatMoney(amount_invoiced_to_date) + '</td>';
-			detail += '<td align="right">' + accounting.formatNumber(remaining_units) + '</td>';
 			detail += '<td align="right">' + accounting.formatMoney(remaining_budget) + '<br/>' + accounting.formatNumber(remaining_units) + ' units</td>';
 			detail += '</tr>';
 			
@@ -216,30 +223,40 @@ function loadBillingDetailTable(input){
 				rows.push(rowSummary);
 				rows.push(rowDetail);
 				rowDetail = detail;
-				total_booking_units = 0;
-				total_booking_amount = 0;
-				total_billable_units = 0;
-				total_amount_invoiced_to_date = 0;
-				total_remaining_budget = 0;
-				total_remaining_units = 0;
+				// total_booking_units = 0;
+				// total_booking_amount = 0;
+				// total_billable_units = 0;
+				// total_amount_invoiced_to_date = 0;
+				// total_remaining_budget = 0;
+				// total_remaining_units = 0;
+				// total_billable_units_to_date = 0;
+				
 				current_io_orders_id = io_orders_id;
+				
+				total_booking_units           = parseInt(planned_units);
+				total_booking_amount          = parseFloat(contracted_budget);
+				total_billable_units          = parseInt(billable_units);
+				total_amount_invoiced_to_date = parseFloat(amount_invoiced_to_date);
+				total_remaining_budget        = parseFloat(remaining_budget);
+				total_remaining_units         = parseInt(remaining_units);
+				total_billable_units_to_date  = parseInt(billable_units_to_date);
 			} else {
 				rowDetail += detail;
 			}
 			
 			rowSummary = '';
 			rowSummary += '<tr class="summary">';
-			rowSummary += '<td colspan="2"><b><a href="#" onclick="showDetail(' + io_orders_id + ');">#' + io_orders_id + '</a></b><br/><i>#' + io_number + '</i><br/>' + revision_date + '</td>';
-			rowSummary += '<td colspan="3"><b>' + campaign_name + '</b><br/><i>' + advertiser + '</i><br/>' + agency + '</td>';
+			rowSummary += '<td colspan="2"><b><a href="#" onclick="showDetail(' + io_orders_id + ');">#' + io_orders_id + '</a></b><br/><i class="muted">#' + io_number + '</i><br/>' + revision_date + '</td>';
+			rowSummary += '<td colspan="3"><b>' + campaign_name + '</b><br/><i class="muted">' + advertiser + '</i><br/>' + agency + '</td>';
 			rowSummary += '<td colspan="3"><b>' + campaign_id + '</b>';
 			if(information_control=='add'){
 				rowSummary += '<button title="" data-toggle="modal" data-target="#addInformationDialog" type="button" class="btn btn-success btn-xs" style="float: right;" onclick="loadInfomationAddForm('+i+');">  <span class="glyphicon glyphicon-plus"></span></button>';
 			} else if(information_control=='edit'){
-				rowSummary += '<button type="button" data-toggle="modal" data-target="#editInformationDialog" class="btn btn-info btn-xs" style="float: right;" onclick="loadInfomationEditForm('+i+');">  <span class="glyphicon glyphicon-edit"></span></button>';
+				rowSummary += '<button type="button" data-toggle="modal" data-target="#editInformationDialog" class="btn btn-primary btn-xs" style="float: right;" onclick="loadInfomationEditForm('+i+');">  <span class="glyphicon glyphicon-edit"></span></button>';
 			}
-			rowSummary += '<br/><i>' + billing_contact + '</i><br/>' + comment + '</td>';
+			rowSummary += '<br/><i class="muted">' + billing_contact + '</i><br/>' + comment + '</td>';
 			rowSummary += '<td align="right"><b>' + accounting.formatMoney(total_booking_amount) + '<br/>' + accounting.formatNumber(total_booking_units) + ' units</b></td>';
-			rowSummary += '<td align="right"><b>' + accounting.formatNumber(total_billable_units) + '</b></td>';
+			rowSummary += '<td align="right"><b>' + accounting.formatNumber(total_billable_units_to_date) + '</b></td>';
 			rowSummary += '<td align="right"><b>' + accounting.formatMoney(total_amount_invoiced_to_date)+ '</b></td>';
 			rowSummary += '<td align="right"><b>' + accounting.formatMoney(total_remaining_budget) + '<br/>'+ accounting.formatNumber(total_remaining_units) + ' units</b></td>';
 			rowSummary += '</tr>';
@@ -251,8 +268,8 @@ function loadBillingDetailTable(input){
 			rowSummary += '<td align="right"><b>Adjusted Units</b></td>';
 			rowSummary += '<td align="right"><b>Billable Units</b></td>';
 			rowSummary += '<td align="right"><b>Amount Inv.</b></td>';
+			rowSummary += '<td align="right"><b>Units Inv. ToDate</b></td>';
 			rowSummary += '<td align="right"><b>Amount Inv. ToDate</b></td>';
-			rowSummary += '<td align="right"><b>Remaining Units</b></td>';
 			rowSummary += '<td align="right"><b>Remaining</b></td>';
 			rowSummary += '</tr>';
 		}
