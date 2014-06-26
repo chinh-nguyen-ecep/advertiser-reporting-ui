@@ -23,22 +23,18 @@
 		<label for="io_order_id" class="required control-label">IO Order ID <abbr title="Required">*</abbr></label>
 		<input  class="form-control" id="p_io_orders_id" type="hidden" name="p_io_orders_id" style="width: 100%" value="{p_io_orders_id}" />
 		<input  class="form-control" id="selectbox-io_order_id" type="text" name="io_order_id" style="width: 100%" value="{p_displayed_name}" disabled/>
-		<p class="help-block">Please select your combined ids</p>
 	</div>
 	<div class="form-group">
 		<label for="campaign_id" class="required control-label">Campaign ID <abbr title="Required">*</abbr></label>
-		<input type="text" class="form-control" id="campaign_id" placeholder="Enter campaign id" name="campaign_id" value="{p_campaign_id}">
-		<p class="help-block">Enter a friendly campaign id</p>
+		<input type="text" class="form-control" id="campaign_id" maxlength="255" placeholder="Enter campaign id" name="campaign_id" value="{p_campaign_id}">
 	</div>
 	<div class="form-group">
 		<label for="billing_contact" class="required control-label">Billing Contact <abbr title="Required">*</abbr></label>
-		<input type="text" class="form-control" id="billing_contact" placeholder="Enter billing contact" name="billing_contact" value="{p_billing_contact}">
-		<p class="help-block">Enter a billing contact</p>
+		<input type="text" class="form-control" id="billing_contact" maxlength="255" placeholder="Enter billing contact" name="billing_contact" value="{p_billing_contact}">
 	</div>
 	<div class="form-group">
 		<label for="comment" class="required control-label">Comment</label>
-		<input type="text" class="form-control" id="comment" placeholder="Enter comment" name="comment" value="">
-		<p class="help-block">Enter your comment</p>
+		<input type="text" class="form-control" id="comment" maxlength="255" placeholder="Enter comment" name="comment" value="{p_comment}">
 	</div>
 	<div class="form-actions">
 		<input class="btn btn-primary" data-disable-with="Please wait ..." name="commit" type="submit" value="Update">
@@ -50,6 +46,7 @@
 
 var current_campaign_id=$('#campaign_id').val();
 var current_billing_contact=$('#billing_contact').val(); 
+var current_comment=$('#comment').val(); 
 
 function formAction(){
 	var io_order_id=$('#p_io_orders_id').val();
@@ -58,7 +55,7 @@ function formAction(){
 	var comment=$('#comment').val();
 	
 	var is_valid = true;
-	if (current_campaign_id == campaign_id && current_billing_contact == billing_contact) {
+	if (current_campaign_id == campaign_id && current_billing_contact == billing_contact || current_comment == comment) {
 		alert("There is no change!");
 		is_valid = false;
 	}

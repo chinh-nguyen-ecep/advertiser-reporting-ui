@@ -96,12 +96,12 @@
       </sources>  
       <default-value/> 
     </p_displayed_name>  
-    <p_row type="string">
-      <sources>
-        <request>p_row</request>
-      </sources>
-      <default-value><![CDATA[0]]></default-value>
-    </p_row>
+    <p_row type="string"> 
+      <sources> 
+        <request>p_row</request> 
+      </sources>  
+      <default-value><![CDATA[0]]></default-value> 
+    </p_row> 
   </inputs>
 
   <outputs> 
@@ -161,12 +161,12 @@
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </template3>  
-    <template4>
-      <solution-file>
-        <location>templates/information_detail.jsp</location>
-        <mime-type>text/plain</mime-type>
-      </solution-file>
-    </template4>
+    <template4> 
+      <solution-file> 
+        <location>templates/information_detail.jsp</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </template4> 
   </resources>
   
   <actions> 
@@ -215,7 +215,8 @@
           <p_io_orders_id type="string"/>  
           <p_campaign_id type="string"/>  
           <p_billing_contact type="string"/>  
-          <p_displayed_name type="string"/> 
+          <p_displayed_name type="string"/>  
+          <p_comment type="string"/>
         </action-inputs>
         <action-resources> 
           <template mapping="template3"/> 
@@ -327,68 +328,68 @@ OFFSET ({page}-1)*{limit} LIMIT {limit}
   
     <actions> 
       <condition><![CDATA[actions=='LoadInformatinoDetailPage']]></condition>  
-      <action-definition>
+      <action-definition> 
         <component-name>SQLLookupRule</component-name>
         <action-type>Relational</action-type>
-        <action-inputs>
-          <jndi type="string" mapping="connectionName"/>
-          <p_io_orders_id type="string"/>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <p_io_orders_id type="string"/> 
         </action-inputs>
-        <action-outputs>
-          <query-result type="result-set" mapping="query_result"/>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
         </action-outputs>
-        <component-definition>
+        <component-definition> 
           <query><![CDATA[SELECT sk, io_orders_id, contact_name, io_orders_id || ' | ' || contact_name as displayed_name, 
        campaign_id, billing_contact, created_by, created_at, updated_by, 
        updated_at, "comment"
 FROM billing.vw_ba_national_dim_io
 WHERE io_orders_id ={p_io_orders_id}
-ORDER BY sk DESC;]]></query>
-          <live><![CDATA[true]]></live>
-        </component-definition>
+ORDER BY sk DESC;]]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
       </action-definition>
-
-      <action-definition>
+  
+      <action-definition> 
         <component-name>SQLLookupRule</component-name>
         <action-type>Relational history</action-type>
-        <action-inputs>
-          <jndi type="string" mapping="connectionName"/>
-          <p_io_orders_id type="string"/>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <p_io_orders_id type="string"/> 
         </action-inputs>
-        <action-outputs>
-          <query-result type="result-set" mapping="query_result_history"/>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result_history"/> 
         </action-outputs>
-        <component-definition>
+        <component-definition> 
           <query><![CDATA[SELECT sk ,io_orders_id, campaign_id, billing_contact, created_by, created_at, 
        updated_by, updated_at, comment, dt_effective, dt_expire, is_active
 FROM billing.ba_national_dim_io
 WHERE io_orders_id ={p_io_orders_id}
-ORDER BY sk DESC;]]></query>
-          <live><![CDATA[true]]></live>
-        </component-definition>
+ORDER BY sk DESC;]]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
       </action-definition>
-
-      <action-definition>
+  
+      <action-definition> 
         <component-name>JavascriptRule</component-name>
         <action-type>JavaScript</action-type>
-        <action-inputs>
-          <query_result type="result-set"/>
-          <query_result_history type="result-set"/>
+        <action-inputs> 
+          <query_result type="result-set"/>  
+          <query_result_history type="result-set"/> 
         </action-inputs>
-        <action-outputs>
-          <displayName type="string"/>
-          <io_orders_id type="string"/>
-          <historyJson type="string"/>
-          <contact_name type="string"/>
-          <campaign_id type="string"/>
-          <created_by type="string"/>
-          <billing_contact type="string"/>
-          <created_at type="string"/>
-          <comment type="string"/>
-          <updated_at type="string"/>
-          <updated_by type="string"/>
+        <action-outputs> 
+          <displayName type="string"/>  
+          <io_orders_id type="string"/>  
+          <historyJson type="string"/>  
+          <contact_name type="string"/>  
+          <campaign_id type="string"/>  
+          <created_by type="string"/>  
+          <billing_contact type="string"/>  
+          <created_at type="string"/>  
+          <comment type="string"/>  
+          <updated_at type="string"/>  
+          <updated_by type="string"/> 
         </action-outputs>
-        <component-definition>
+        <component-definition> 
           <script><![CDATA[var detailTable="";
 var historyJson="";
 var displayName=query_result.getValueAt(0,3);
@@ -426,36 +427,36 @@ historyJson='[';
 	}
 	//end
 
-	historyJson+=']';]]></script>
-        </component-definition>
+	historyJson+=']';]]></script> 
+        </component-definition> 
       </action-definition>
-
-      <action-definition>
+  
+      <action-definition> 
         <component-name>TemplateComponent</component-name>
         <action-type>Message Template</action-type>
-        <action-inputs>
-          <created_by type="string"/>
-          <updated_at type="string"/>
-          <io_orders_id type="string"/>
-          <billing_contact type="string"/>
-          <contact_name type="string"/>
-          <updated_by type="string"/>
-          <created_at type="string"/>
-          <comment type="string"/>
-          <displayName type="string"/>
-          <p_row type="string"/>
-          <historyJson type="string"/>
-          <campaign_id type="string"/>
+        <action-inputs> 
+          <created_by type="string"/>  
+          <updated_at type="string"/>  
+          <io_orders_id type="string"/>  
+          <billing_contact type="string"/>  
+          <contact_name type="string"/>  
+          <updated_by type="string"/>  
+          <created_at type="string"/>  
+          <comment type="string"/>  
+          <displayName type="string"/>  
+          <p_row type="string"/>  
+          <historyJson type="string"/>  
+          <campaign_id type="string"/> 
         </action-inputs>
-        <action-resources>
-          <template mapping="template4"/>
+        <action-resources> 
+          <template mapping="template4"/> 
         </action-resources>
-        <action-outputs>
-          <output-message type="string" mapping="returnResult"/>
+        <action-outputs> 
+          <output-message type="string" mapping="returnResult"/> 
         </action-outputs>
-        <component-definition/>
+        <component-definition/> 
       </action-definition>
-
+ 
     </actions>
   
     <action-definition> 

@@ -20,23 +20,24 @@
 	</div> -->
 	<div class="page-header">
 		<h1 id="page_header">
-			Informations
+			Information
 		</h1>
 	</div>
 	<table id="mainDataTable" class="table table-bordered table-striped table-hover">
 		<thead>
 			<tr>
-				<th class="buttons" colspan="4">
+				<th class="buttons" colspan="5">
 				<a class="btn btn-success" href="#" onclick="showAddInfomationForm();"><i class="icon-plus icon-white" ></i>
 				Add Information
 				</a>
 				</th>
 			</tr>
 			<tr>				
-				<th  class="col-md-4">IO Order ID</th>
-				<th  class="col-md-3">Campaign ID</th>
-				<th  class="col-md-3">Billing Contact</th>
-				<th  class="col-md-2"></th>
+				<th class="col-md-3">IO Order ID</th>
+				<th class="col-md-3">Campaign ID</th>
+				<th class="col-md-3">Billing Contact</th>
+				<th class="col-md-2">Comment</th>
+				<th class="col-md-1"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -64,13 +65,15 @@
 			var io_orders_id    = dataTableInformation[i].io_orders_id;
 			var displayed_name  = dataTableInformation[i].displayed_name;
 			var campaign_id     = dataTableInformation[i].campaign_id;
-			var billing_contact = dataTableInformation[i].billing_contact;			
+			var billing_contact = dataTableInformation[i].billing_contact;
+			var comment         = dataTableInformation[i].comment;			
 			
 			var row = '<tr>' 
-					+ '<td><a href="#" onclick="showDetail('+io_orders_id+','+i+')">' + displayed_name + '</a></td>' 
+					+ '<td><a href="#" onclick="showDetail(' + io_orders_id + ',' + i + ')">#' + displayed_name + '</a></td>' 
 					+ '<td>' + campaign_id + '</td>'
 					+ '<td>' + billing_contact + '</td>' 
-					+ '<td><div class="btn-toolbar"><button type="button" class="btn btn-info btn-xs" onclick="loadEditForm('+i+');">  <span class="glyphicon glyphicon-edit"></span> Edit</button><button type="button" class="btn btn-success btn-xs" onclick="loadAddForm('+i+');">  <span class="glyphicon glyphicon-share"></span> Copy</button></div></td>' 
+					+ '<td>' + comment + '</td>' 
+					+ '<td><div class="btn-group"><button type="button" class="btn btn-primary btn-xs" title="Edit" onclick="loadEditForm('+i+');"><span class="glyphicon glyphicon-edit"></span></button><button type="button" class="btn btn-success btn-xs" title="Copy" onclick="loadAddForm('+i+');"><span class="glyphicon glyphicon-share"></span></button></div></td>' 
 					+ '</tr>';
 			rows.push(row);
 		}
@@ -102,8 +105,8 @@
 		});
 	}
 	function loadAddForm(row){
-		var campaign_id=dataTableInformation[row].campaign_id;
-		var billing_contact=dataTableInformation[row].billing_contact;				
+		var campaign_id     = dataTableInformation[row].campaign_id;
+		var billing_contact = dataTableInformation[row].billing_contact;				
 		//load add form
 		$('#summary-content div.content').load(rootPath_Information,{
 			actions: 'add_infomation_form',
