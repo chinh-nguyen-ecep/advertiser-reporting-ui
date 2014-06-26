@@ -22,22 +22,22 @@
 			<th>IO Number #</th><td>{io_number}</td>
 		</tr>
 		<tr>
-			<th>IO Revision Date</th><td>{io_revision_date}</td>
+			<th>IO Revision Date</th><td name="io_revision_date">{io_revision_date}</td>
 		</tr>
 		<tr>
-			<th>Start_date</th><td>{io_line_item_start_date}</td>
+			<th>Start Date</th><td name="io_line_item_start_date">{io_line_item_start_date}</td>
 		</tr>
 		<tr>
-			<th>End_date</th><td>{io_line_item_end_date}</td>
+			<th>End Date</th><td name="io_line_item_end_date">{io_line_item_end_date}</td>
 		</tr>
 		<tr>
 			<th>Advertiser</th><td>{organization_name}</td>
 		</tr>
 		<tr>
-			<th>Campaign_ID</th><td>{campaign_id}</td>
+			<th>Campaign ID</th><td>{campaign_id}</td>
 		</tr>
 		<tr>
-			<th>Campaign_Name</th><td>{campaign_name}</td>
+			<th>Campaign Name</th><td>{campaign_name}</td>
 		</tr>
 		<tr>
 			<th>Agency</th><td>{agency}</td>
@@ -82,10 +82,10 @@
 			<th>Delivered Units</th><td name="delivered_units">{delivered_units}</td>
 		</tr>
 		<tr>
-			<th>Remaining Units</th><td name="remaining_units">{remaining_units}</td>
+			<th>Billable Units</th><td name="billable_units">{billable_units}</td>
 		</tr>
 		<tr>
-			<th>Billable Units</th><td name="billable_units">{billable_units}</td>
+			<th>Billable Units ToDate</th><td name="total_billable_units_upto_month">{total_billable_units_upto_month}</td>
 		</tr>
 		<tr>
 			<th>Amount Invoiced</th><td name="invoice_amount">{invoice_amount}</td>
@@ -94,13 +94,27 @@
 			<th>Amount Invoiced ToDate</th><td name="total_amount_invoiced_upto_month">{total_amount_invoiced_upto_month}</td>
 		</tr>
 		<tr>
+			<th>Remaining Units</th><td name="remaining_units">{remaining_units}</td>
+		</tr>
+		<tr>
 			<th>Remaining Budget</th><td name="remaining_budget">{remaining_budget}</td>
+		</tr>
+		<tr>
+			<th>Comment</th><td>{comment}</td>
 		</tr>
 	</tbody>
 </table>
 <script>
 	var information_control='{information_control}';
 	var adjusted_units_control='{adjusted_units_control}';
+	
+	var revision_date = new Date('{io_revision_date}').format('mmm dd, yyyy');
+	var start_date = new Date('{io_line_item_start_date}').format('mmm dd, yyyy');
+	var end_date = new Date('{io_line_item_end_date}').format('mmm dd, yyyy'); 
+	
+	$('#lineItemDetail td[name=io_revision_date]').html(revision_date);
+	$('#lineItemDetail td[name=io_line_item_start_date]').html(start_date);
+	$('#lineItemDetail td[name=io_line_item_end_date]').html(end_date);
 	
 	$('#lineItemDetail td[name=rate]').html(accounting.formatMoney({rate}));
 	$('#lineItemDetail td[name=planned_units]').html(accounting.formatNumber({planned_units}));
@@ -110,13 +124,14 @@
 	$('#lineItemDetail td[name=dfp_delivered_clicks]').html(accounting.formatNumber({dfp_delivered_clicks}));
 	$('#lineItemDetail td[name=dfa_delivered_imps]').html(accounting.formatNumber({dfa_delivered_imps}));
 	$('#lineItemDetail td[name=dfa_delivered_clicks]').html(accounting.formatNumber({dfa_delivered_clicks}));
-	if ({adjusted_units} != 'null') {
+	if ({adjusted_units} != null) {
 		$('#lineItemDetail td[name=adjusted_units]').html(accounting.formatNumber({adjusted_units}));
 	}
 	$('#lineItemDetail td[name=delivered_units]').html(accounting.formatNumber({delivered_units}));
-	$('#lineItemDetail td[name=remaining_units]').html(accounting.formatNumber({remaining_units}));
 	$('#lineItemDetail td[name=billable_units]').html(accounting.formatNumber({billable_units}));
+	$('#lineItemDetail td[name=total_billable_units_upto_month]').html(accounting.formatNumber({total_billable_units_upto_month}));
 	$('#lineItemDetail td[name=invoice_amount]').html(accounting.formatMoney({invoice_amount}));
 	$('#lineItemDetail td[name=total_amount_invoiced_upto_month]').html(accounting.formatMoney({total_amount_invoiced_upto_month}));
+	$('#lineItemDetail td[name=remaining_units]').html(accounting.formatNumber({remaining_units}));
 	$('#lineItemDetail td[name=remaining_budget]').html(accounting.formatMoney({remaining_budget}));
 </script>
