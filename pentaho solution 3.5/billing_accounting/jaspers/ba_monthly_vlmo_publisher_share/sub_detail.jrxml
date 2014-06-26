@@ -73,7 +73,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Month]]></text>
+				<text><![CDATA[Period]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="80" y="0" width="200" height="20" backcolor="#FFFF00"/>
@@ -115,7 +115,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Delivered Imps]]></text>
+				<text><![CDATA[Impressions]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="1650" y="0" width="100" height="20" backcolor="#FFFF00"/>
@@ -129,7 +129,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Billable Rate]]></text>
+				<text><![CDATA[Billable_Rate]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="1850" y="0" width="100" height="20" backcolor="#FFFF00"/>
@@ -143,7 +143,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Gross Revenue]]></text>
+				<text><![CDATA[Gross_Revenue]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="380" y="0" width="400" height="20" backcolor="#FFFF00"/>
@@ -171,7 +171,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Group ID]]></text>
+				<text><![CDATA[Group_ID]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="880" y="0" width="200" height="20" backcolor="#FFFF00"/>
@@ -185,7 +185,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Group Name]]></text>
+				<text><![CDATA[ Publisher]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="1180" y="0" width="250" height="20" backcolor="#FFFF00"/>
@@ -199,7 +199,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Partner Name]]></text>
+				<text><![CDATA[Site]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="1080" y="0" width="100" height="20" backcolor="#FFFF00"/>
@@ -213,7 +213,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Partner ID]]></text>
+				<text><![CDATA[Partner_ID]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="1430" y="0" width="120" height="20" backcolor="#FFFF00"/>
@@ -227,7 +227,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Partner Keyword]]></text>
+				<text><![CDATA[Keyname]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="1750" y="0" width="100" height="20" backcolor="#FFFF00"/>
@@ -241,7 +241,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Pub Share %]]></text>
+				<text><![CDATA[Publisher_Share]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="1950" y="0" width="130" height="20" backcolor="#FFFF00"/>
