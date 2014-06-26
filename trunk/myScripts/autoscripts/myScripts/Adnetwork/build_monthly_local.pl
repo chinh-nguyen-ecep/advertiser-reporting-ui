@@ -95,9 +95,16 @@ sub runAgg{
         runPostgresComand("SELECT staging.fn_build_monthly_agg_delivery_publisher_property_v3($month_sk,$month_sk,'PS')");
         runPostgresComand("UPDATE adsops.monthly_agg_delivery_publisher_property_v3 SET is_active=true WHERE month_since_2005=$month_sk");
 		
-		#VLM V6
-		runPostgresComand("SELECT billing.fn_build_ba_monthly_vlm_revenue_v6($month_sk,$month_sk,'PS')");
-		runPostgresComand("UPDATE billing.ba_monthly_vlm_revenue_v6 SET is_active=true WHERE month_since_2005=$month_sk");
+	#VLM V6
+	runPostgresComand("SELECT billing.fn_build_ba_monthly_vlm_revenue_v6($month_sk,$month_sk,'PS')");
+	runPostgresComand("UPDATE billing.ba_monthly_vlm_revenue_v6 SET is_active=true WHERE month_since_2005=$month_sk");
+
+	#VLMO 
+	runPostgresComand("SELECT billing.fn_build_ba_monthly_vlmo_revenue($month_sk,$month_sk,'PS')");
+	runPostgresComand("UPDATE billing.ba_monthly_vlmo_revenue SET is_active=true WHERE month_since_2005=$month_sk");
+
+	runPostgresComand("SELECT billing.fn_build_ba_monthly_vlmo_publisher_share($month_sk,$month_sk,'PS')");
+	runPostgresComand("UPDATE billing.ba_monthly_vlmo_publisher_share SET is_active=true WHERE month_since_2005=$month_sk");
 }
 
 sub transferFinalData{
@@ -115,3 +122,4 @@ sub runPostgresComand{
         sqlRunQuery($dbh,$query);
         sqlDisconnect($dbh);
 }
+
