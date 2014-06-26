@@ -59,8 +59,8 @@ billing.ba_monthly_jt_performance
 billing.ba_monthly_wh_performance
 billing.ba_monthly_mm_performance
 billing.ba_monthly_kt_performance
-billing.ba_monthly_vlm_revenue_v6
 billing.ba_monthly_api_revenue_by_publisher
+billing.ba_monthly_vlm_revenue_v6
 billing.ba_monthly_adnetwork_summary
 billing.ba_monthly_adnetwork_summary_v1
 adstraffic.monthly_ad_serving_stats
@@ -77,4 +77,6 @@ evttracker.monthly_event_stats_by_hour
 evttracker.monthly_event_stats
 evttracker.monthly_event_stats_by_date
 billing.ba_monthly_advance_digital
-billing.ba_monthly_io_line_item
+billing.ba_monthly_io_line_item_v2
+billing.ba_monthly_vlmo_publisher_share
+billing.ba_monthly_vlmo_revenue
