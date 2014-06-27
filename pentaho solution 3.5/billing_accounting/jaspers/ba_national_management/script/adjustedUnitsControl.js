@@ -12,8 +12,8 @@ function addAjustedUnits(input) {
 		success : function(data) {
 		}
 	}, input);
-	console.log("Add Ajusted Units: " + this.input);
-	if (this.input.p_combined_ids == '' || this.input.p_ajusted_units == ''
+	
+	if (this.input.p_combined_ids == '' || this.input.p_adjusted_units == ''
 			|| this.input.p_month_sk == '') {
 		alert("Please fill required fields");
 		return false;
@@ -112,6 +112,60 @@ function updateAdjustedUnits(input) {
 	});
 	return false;
 }
+
+// ////////////////////////////
+// Delete adjusted units
+// ///////////////////////////
+function deleteAdjustedUnits(input) {
+	this.input = $.extend({}, {
+		p_io_orders_id : '',
+		p_io_line_item_id : '',
+		p_month_sk : '',
+		p_comment : '',
+		success : function(data) {
+		}
+	}, input);
+	console.log("Update Ajusted Units: " + this.input);
+	console.log("Update Ajusted Units: " + this.input.p_io_orders_id);
+	console.log("Update Ajusted Units: " + this.input.p_io_line_item_id);
+	console.log("Update Ajusted Units: " + this.input.p_month_sk);
+	console.log("Update Ajusted Units: " + this.input.p_comment);
+	if (input.p_io_orders_id == '' || input.p_io_line_item_id == '' || input.p_month_sk == '' || input.p_comment == '') {
+		alert("Please fill required fields");
+		return false;
+	}
+	// call request to insert information
+	var request = $.ajax({
+		url : rootPath_AdjustedUnits,
+		type : "POST",
+		data : {
+			actions : 'deleteAjustedUnits',
+			data : 'json',
+			p_io_orders_id : this.input.p_io_orders_id,
+			p_io_line_item_id : this.input.p_io_line_item_id,
+			p_month_sk : this.input.p_month_sk,
+			p_comment : this.input.p_comment
+		},
+		dataType : "json"
+	});
+	request.done(function(data) {
+		input.success(data);
+		var msg = data[0].fn_ba_national_dim_adjustment_delete;
+		if (msg == 'SUCCESSED') {
+			// alert("Edited successfully");
+		} else if (msg == 'DUPLICATED') {
+			alert("Duplicated information");
+		} else {
+			alert("Error occur!");
+		}
+	});
+
+	request.fail(function(jqXHR, textStatus) {
+		alert("Request failed: " + textStatus);
+	});
+	return false;
+}
+
 var loadAdjustedUnitsRequest=$.ajax({url:rootPath_AdjustedUnits});
 /////////////////////////////////
 // Load list of adjusted units 
@@ -166,6 +220,30 @@ function loadListMonthAdjustedUnits(input){
 	});
 }
 
+function loadListMonthForAdd(input){
+	input = $.extend({}, {
+		success : function(arrayJson) {
+		}
+	}, input);
+
+	var request=$.ajax({
+		url : rootPath_AdjustedUnits,
+		type : "POST",
+		dataType : 'json',
+		data : {
+			actions: 'loadListMonthsForAdd',
+			data: 'json'
+		}		
+	});
+	
+	request.done(function(arrayJson) {
+		input.success(arrayJson);
+	});
+	request.fail(function(jqXHR, textStatus) {
+		alert("loadListMonthForAdd - Request failed: " + textStatus);
+	});
+}
+
 ////////////////////////////////////
 // Load Add form
 //////////////////////////////////
@@ -191,4 +269,56 @@ function adjustedUnitsLoadAddForm(input){
 	request.fail(function(jqXHR, textStatus) {
 		alert("adjustedUnitsLoadAddForm - Request failed: " + textStatus);
 	});	
+}
+/////////////////////////////////
+// Load Page Information Detail
+/////////////////////////////////
+function loadAdjustmentDetailPage(input){
+	this.input = $.extend({}, {
+		p_month_sk : '',
+		p_io_orders_id : '',
+		p_io_line_item_id : '',
+		p_row: 1,
+		success : function(html) {
+		}
+	}, input);
+	
+	//verify input
+	if(input.p_month_sk==''){
+		alert("Load detail page need to input param: p_month_sk");
+		return;
+	}
+	if(input.p_io_orders_id==''){
+		alert("Load detail page need to input param: p_io_orders_id");
+		return;
+	}
+	if(input.p_io_line_item_id==''){
+		alert("Load detail page need to input param: p_io_line_item_id");
+		return;
+	}
+	console.log("Update Ajusted Units: " + input.p_month_sk);
+	console.log("Update Ajusted Units: " + input.p_io_orders_id);
+	console.log("Update Ajusted Units: " + input.p_io_line_item_id);
+	// call request to insert information
+	var request = $.ajax({
+		url : rootPath_AdjustedUnits,
+		type : "POST",
+		data : {
+			actions : 'loadAdjustmentDetailPage',
+			data : 'html',
+			p_month_sk : input.p_month_sk,
+			p_io_orders_id : input.p_io_orders_id,
+			p_io_line_item_id : input.p_io_line_item_id,
+			p_row: input.p_row
+		},
+		dataType : "html"
+	});
+	request.done(function(html) {
+		input.success(html);		
+	});
+
+	request.fail(function(jqXHR, textStatus) {
+		alert("Request failed: " + textStatus);
+	});
+	return false;
 }

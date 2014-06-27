@@ -89,7 +89,7 @@
 			p_billing_contact: billing_contact,
 			p_comment: comment,
 			success: function(data){
-				var msg=data[0].fn_ba_national_dim_io_insert;
+				var msg=data[0].fn_ba_national_dim_adjustment_insert;
 				if(msg=='SUCCESSED'){
 					alert("Added successfully");
 					loadPage();

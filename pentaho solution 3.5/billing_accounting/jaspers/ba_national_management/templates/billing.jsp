@@ -2,7 +2,7 @@
 //Set locate
 	urlMaster.replaceParam('page','billing_script');
 	urlMaster.replaceParam('actionPath','billing_management');
-	activeTab('Billing');
+	activeTab('Billing Worksheet');
 </script>
 <div class="page-header">
 
@@ -34,40 +34,39 @@
 </div>
 <!-- Control panel -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Control panel</h4>
-      </div>
-      <div class="modal-body">
-        <form role="form">
-		  <div class="form-group">
-		    <label for="exampleInputEmail1">Month</label>		   
-		   <select class="form-control" id="selectbox-month_sk">			  
-			</select>
-		   
-		  </div>
-		  <div class="form-group">
-		    <label for="exampleInputPassword1">IO Orders</label>
-							<input id="io_order_search_input" type="text" class="form-control"/>
-							<div id="io_order_list" class="form-group" style="overflow: auto;height: 100px;margin: 10px;">
-							</div>
-		  </div>
-		  <div class="form-group">
-		    <label for="exampleInputPassword1">IO Line Items</label>
-							<input id="io_line_item_search_input" type="text" class="form-control"/>
-							<div id="io_line_item_list" class="form-group" style="overflow: auto;height: 100px;margin: 10px;">
-							</div>
-		  </div>
-		</form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="applyControlPanel()">Apply</button>
-      </div>
-    </div>
-  </div>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">Control panel</h4>
+			</div>
+			<div class="modal-body">
+				<form role="form">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Month</label>		   
+						<select class="form-control" id="selectbox-month_sk">			  
+							</select>
+					</div>
+					<div class="form-group">
+						<label for="io_order_list">IO Orders</label>
+						<input id="io_order_search_input" type="text" class="form-control"/>
+						<div id="io_order_list" class="form-group" style="overflow: auto;height: 100px;margin-bottom: 10px;">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="io_line_item_list">IO Line Items</label>
+						<input id="io_line_item_search_input" type="text" class="form-control"/>
+						<div id="io_line_item_list" class="form-group" style="overflow: auto;height: 100px;">
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" onclick="applyControlPanel()">Apply</button>
+			</div>
+		</div>
+	</div>
 </div>
 <!-- Control panel -->
 

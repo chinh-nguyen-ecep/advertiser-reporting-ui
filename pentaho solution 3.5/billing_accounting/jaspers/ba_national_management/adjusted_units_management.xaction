@@ -101,7 +101,37 @@
         <request>p_adjusted_units</request> 
       </sources>  
       <default-value/> 
-    </p_adjusted_units> 
+    </p_adjusted_units>  
+    <p_displayed_name type="string"> 
+      <sources> 
+        <request>p_displayed_name</request> 
+      </sources>  
+      <default-value/> 
+    </p_displayed_name>  
+    <p_start_date type="string">
+      <sources>
+        <request>p_start_date</request>
+      </sources>
+      <default-value/>
+    </p_start_date>
+    <p_end_date type="string">
+      <sources>
+        <request>p_end_date</request>
+      </sources>
+      <default-value/>
+    </p_end_date>
+    <p_calendar_year_month type="string">
+      <sources>
+        <request>p_calendar_year_month</request>
+      </sources>
+      <default-value/>
+    </p_calendar_year_month>
+    <p_row type="string">
+      <sources>
+        <request>p_row</request>
+      </sources>
+      <default-value/>
+    </p_row>
   </inputs>
 
   <outputs> 
@@ -167,12 +197,24 @@
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </template4>  
-    <template5>
+    <template5> 
+      <solution-file> 
+        <location>templates/adjusted_units_add_form.jsp</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </template5>  
+    <template6> 
+      <solution-file> 
+        <location>templates/adjusted_units_edit_form.jsp</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </template6>  
+    <template7>
       <solution-file>
-        <location>templates/adjusted_units_add_form.jsp</location>
+        <location>templates/adjusted_units_detail.jsp</location>
         <mime-type>text/plain</mime-type>
       </solution-file>
-    </template5>
+    </template7>
   </resources>
   
   <actions> 
@@ -192,23 +234,50 @@
  
     </actions>
   
-    <actions>
-      <condition><![CDATA[actions=='adjustedUnitsAddForm']]></condition>
-      <action-definition>
+    <actions> 
+      <condition><![CDATA[actions=='adjustedUnitsAddForm']]></condition>  
+      <action-definition> 
         <component-name>TemplateComponent</component-name>
         <action-type>Message Template</action-type>
-        <action-inputs/>
-        <action-resources>
-          <template mapping="template5"/>
+        <action-inputs> 
+          <p_adjusted_units type="string"/> 
+        </action-inputs>
+        <action-resources> 
+          <template mapping="template5"/> 
         </action-resources>
-        <action-outputs>
-          <output-message type="string" mapping="returnResult"/>
+        <action-outputs> 
+          <output-message type="string" mapping="returnResult"/> 
         </action-outputs>
-        <component-definition/>
+        <component-definition/> 
       </action-definition>
-
+ 
     </actions>
-
+  
+    <actions> 
+      <condition><![CDATA[actions=='adjustedUnitsEditForm']]></condition>  
+      <action-definition> 
+        <component-name>TemplateComponent</component-name>
+        <action-type>Message Template</action-type>
+        <action-inputs> 
+          <p_io_orders_id type="string"/>  
+          <p_io_line_item_id type="string"/>  
+          <p_displayed_name type="string"/>  
+          <p_adjusted_units type="string"/>  
+          <p_comment type="string"/>  
+          <p_month_sk type="string"/>  
+          <p_calendar_year_month type="string"/>
+        </action-inputs>
+        <action-resources> 
+          <template mapping="template6"/> 
+        </action-resources>
+        <action-outputs> 
+          <output-message type="string" mapping="returnResult"/> 
+        </action-outputs>
+        <component-definition/> 
+      </action-definition>
+ 
+    </actions>
+  
     <actions> 
       <condition><![CDATA[actions=='insertAjustedUnits']]></condition>  
       <action-definition> 
@@ -267,7 +336,7 @@
         <action-inputs> 
           <jndi type="string" mapping="connectionName"/>  
           <p_month_sk type="string"/>  
-          <p_io_line_item_name type="string"/>
+          <p_io_line_item_name type="string"/> 
         </action-inputs>
         <action-outputs> 
           <query-result type="result-set" mapping="query_result"/> 
@@ -275,10 +344,11 @@
         <component-definition> 
           <query><![CDATA[SELECT sk, io_orders_id, io_line_item_id, combine_ids, io_line_item_name, 
        month_since_2005, adjusted_units, created_by, created_at, updated_by, 
-       updated_at, comment
+       updated_at, comment, calendar_year_month
   FROM billing.vw_ba_national_dim_adjustment
 WHERE (month_since_2005={p_month_sk} OR 0={p_month_sk})
 AND ( UPPER(io_line_item_name) LIKE UPPER('%{p_io_line_item_name}%') OR ''='{p_io_line_item_name}')
+ORDER BY calendar_year_month, combine_ids
 ;]]></query>  
           <live><![CDATA[true]]></live> 
         </component-definition> 
@@ -288,48 +358,243 @@ AND ( UPPER(io_line_item_name) LIKE UPPER('%{p_io_line_item_name}%') OR ''='{p_i
   
     <actions> 
       <condition><![CDATA[actions=='loadListMonths']]></condition>  
-      <action-definition>
+      <action-definition> 
         <component-name>SQLLookupRule</component-name>
         <action-type>Relational</action-type>
-        <action-inputs>
-          <jndi type="string" mapping="connectionName"/>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/> 
         </action-inputs>
-        <action-outputs>
-          <query-result type="result-set" mapping="query_result"/>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
         </action-outputs>
-        <component-definition>
+        <component-definition> 
           <query><![CDATA[SELECT a.month_since_2005,b.calendar_year_month
 FROM billing.vw_ba_national_dim_adjustment a 
 LEFT JOIN refer.month_dim b ON (a.month_since_2005=b.month_sk) 
 GROUP BY a.month_since_2005,b.calendar_year_month 
-ORDER BY a.month_since_2005 DESC;]]></query>
-          <live><![CDATA[true]]></live>
-        </component-definition>
+ORDER BY a.month_since_2005 DESC;]]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
       </action-definition>
-
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='loadListMonthsForAdd']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
+        </action-outputs>
+        <component-definition> 
+          <live><![CDATA[true]]></live>  
+          <query><![CDATA[SELECT a.month_since_2005 || ';' || b.full_date || ';' || c.full_date as month_id,  a.calendar_year_month
+FROM (
+SELECT a.month_sk as month_since_2005, a.calendar_year_month, date_sk_start, date_sk_end
+FROM refer.month_dim a,
+(SELECT MAX(month_since_2005) AS min_month_sk, MAX(month_since_2005) + 3 AS max_month_sk
+FROM billing.ba_monthly_national_worksheet 
+WHERE is_active = true) b
+WHERE a.month_sk BETWEEN min_month_sk AND max_month_sk
+) a
+JOIN refer.date_dim b on b.date_sk = date_sk_start
+JOIN refer.date_dim c on c.date_sk = date_sk_end
+ORDER BY month_id]]></query> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='loadListCombinedIDs']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <limit type="string"/>  
+          <page type="string"/>  
+          <term type="string"/>  
+          <p_start_date type="string"/>
+          <p_end_date type="string"/>
+          <p_month_sk type="string"/>
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
+        </action-outputs>
+        <component-definition> 
+          <query><![CDATA[SELECT combined_ids, displayed_name
+FROM (
+ SELECT a.io_orders_id, b.billing_line_items_id AS io_line_item_id, (a.io_orders_id || '-'::text) || b.billing_line_items_id AS combined_ids, b.name_current AS io_line_item_name, (a.io_orders_id || '-'::text) || b.billing_line_items_id || ' | ' || b.name_current AS displayed_name
+   FROM refer.adm_dim_io_orders a
+   JOIN refer.adm_dim_io_lineitems b ON b.dt_expire = '9999-12-31' AND b.start_date_current::DATE <= '{p_end_date}'::DATE AND b.end_date_current::DATE >= '{p_start_date}'::DATE AND b.insertion_order_id = a.io_orders_id
+  WHERE a.dt_expire = '9999-12-31'
+  AND NOT EXISTS ( SELECT 1
+           FROM billing.ba_national_dim_adjustment c
+          WHERE c.is_active = true AND c.io_orders_id = a.io_orders_id AND c.io_line_item_id = b.billing_line_items_id AND c.month_since_2005 = {p_month_sk})
+) a 
+WHERE ('' = '{term}' OR UPPER(displayed_name) LIKE UPPER('%{term}%'))
+ORDER BY combined_ids
+OFFSET ({page}-1)*{limit} LIMIT {limit}
+;]]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
+      </action-definition>
+ 
     </actions>
   
     <actions>
-      <condition><![CDATA[actions=='loadListIoOrders']]></condition>
+      <condition><![CDATA[actions=='loadAdjustmentDetailPage']]></condition>
       <action-definition>
         <component-name>SQLLookupRule</component-name>
         <action-type>Relational</action-type>
         <action-inputs>
+          <p_io_orders_id type="string"/>
           <jndi type="string" mapping="connectionName"/>
-          <limit type="string"/>
-          <page type="string"/>
-          <term type="string"/>
+          <p_io_line_item_id type="string"/>
+          <p_month_sk type="string"/>
         </action-inputs>
         <action-outputs>
           <query-result type="result-set" mapping="query_result"/>
         </action-outputs>
         <component-definition>
-          <query><![CDATA[SELECT io_orders_id, contact_name, io_orders_id || ' | ' || contact_name as displayed_name
-FROM billing.vw_national_io_order_insert 
-WHERE ('' = '{term}' OR UPPER(io_orders_id || ' | ' || contact_name) LIKE UPPER('%{term}%'))
-ORDER BY io_orders_id
-OFFSET ({page}-1)*{limit} LIMIT {limit}
+          <query><![CDATA[SELECT sk, io_orders_id, io_line_item_id, combine_ids, io_line_item_name, 
+       month_since_2005, adjusted_units, created_by, created_at, updated_by, 
+       updated_at, comment, calendar_year_month
+FROM billing.vw_ba_national_dim_adjustment
+WHERE month_since_2005 = {p_month_sk} AND io_orders_id = {p_io_orders_id} AND io_line_item_id = {p_io_line_item_id}
 ;]]></query>
+          <live><![CDATA[true]]></live>
+        </component-definition>
+      </action-definition>
+
+      <action-definition>
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational History</action-type>
+        <action-inputs>
+          <jndi type="string" mapping="connectionName"/>
+          <p_io_orders_id type="string"/>
+          <p_io_line_item_id type="string"/>
+          <p_month_sk type="string"/>
+        </action-inputs>
+        <action-outputs>
+          <query-result type="result-set" mapping="query_result_history"/>
+        </action-outputs>
+        <component-definition>
+          <query><![CDATA[SELECT sk, io_orders_id, io_line_item_id, month_since_2005, adjusted_units, created_by, created_at, updated_by, 
+       updated_at, comment, is_active
+FROM billing.ba_national_dim_adjustment
+WHERE month_since_2005 = {p_month_sk} AND io_orders_id = {p_io_orders_id} AND io_line_item_id = {p_io_line_item_id}
+ORDER BY sk DESC;]]></query>
+          <live><![CDATA[true]]></live>
+        </component-definition>
+      </action-definition>
+
+      <action-definition>
+        <component-name>JavascriptRule</component-name>
+        <action-type>JavaScript</action-type>
+        <action-inputs>
+          <query_result type="result-set"/>
+          <query_result_history type="result-set"/>
+        </action-inputs>
+        <action-outputs>
+          <combine_ids type="string"/>
+          <io_line_item_name type="string"/>
+          <month_since_2005 type="string"/>
+          <adjusted_units type="string"/>
+          <comment type="string"/>
+          <historyJson type="string"/>
+          <calendar_year_month type="string"/>
+        </action-outputs>
+        <component-definition>
+          <script><![CDATA[var detailTable="";
+var historyJson="";
+var io_orders_id=query_result.getValueAt(0,1);
+var io_line_item_id=query_result.getValueAt(0,2);
+var combine_ids=query_result.getValueAt(0,3);
+var io_line_item_name=query_result.getValueAt(0,4);
+var month_since_2005=query_result.getValueAt(0,5);
+var adjusted_units=query_result.getValueAt(0,6);
+var created_by=query_result.getValueAt(0,7);
+var updated_by=query_result.getValueAt(0,8);
+var created_at=query_result.getValueAt(0,9);
+var updated_at=query_result.getValueAt(0,10);
+var comment=query_result.getValueAt(0,11);
+var calendar_year_month=query_result.getValueAt(0,12);
+
+var meta = query_result_history.getMetaData(); 
+var colHeaders = meta.getColumnHeaders(); 
+historyJson='[';
+	//process data item
+	for(var i=0;i<query_result_history.getRowCount();i++){
+		var item='';
+		if(i>0){
+			item+=',';
+		}
+		item+='{';
+			for(var j=0;j<query_result_history.getColumnCount();j++){ 		
+				var value=query_result_history.getValueAt(i,j);
+				var columnValue=colHeaders[0][j];
+				if(j>0){
+					item+=',';
+				}
+				item+='"'+columnValue+'":"'+value+'"';
+			}
+		item+='}';	
+
+	historyJson+=item;
+	}
+	//end
+
+	historyJson+=']';]]></script>
+        </component-definition>
+      </action-definition>
+
+      <action-definition>
+        <component-name>TemplateComponent</component-name>
+        <action-type>Message Template</action-type>
+        <action-inputs>
+          <combine_ids type="string"/>
+          <io_line_item_name type="string"/>
+          <adjusted_units type="string"/>
+          <comment type="string"/>
+          <p_row type="string"/>
+          <historyJson type="string"/>
+          <calendar_year_month type="string"/>
+        </action-inputs>
+        <action-resources>
+          <template mapping="template7"/>
+        </action-resources>
+        <action-outputs>
+          <output-message type="string" mapping="returnResult"/>
+        </action-outputs>
+        <component-definition/>
+      </action-definition>
+
+    </actions>
+
+    <actions>
+      <condition><![CDATA[actions=='deleteAjustedUnits']]></condition>
+      <action-definition>
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs>
+          <p_io_orders_id type="string"/>
+          <p_month_sk type="string"/>
+          <principalName type="string"/>
+          <p_io_line_item_id type="string"/>
+          <p_comment type="string"/>
+          <jndi type="string" mapping="connectionName"/>
+        </action-inputs>
+        <action-outputs>
+          <query-result type="result-set" mapping="query_result"/>
+        </action-outputs>
+        <component-definition>
+          <query><![CDATA[SELECT * FROM billing.fn_ba_national_dim_adjustment_delete({p_io_orders_id},{p_io_line_item_id} ,{p_month_sk}, '{principalName}','{p_comment}')]]></query>
           <live><![CDATA[true]]></live>
         </component-definition>
       </action-definition>
