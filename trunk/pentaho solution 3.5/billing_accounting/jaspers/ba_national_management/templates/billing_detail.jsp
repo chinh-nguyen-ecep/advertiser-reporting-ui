@@ -2,7 +2,7 @@
 	//Set locate
 	urlMaster.replaceParam('page', 'billing_script');
 	urlMaster.replaceParam('actionPath', 'billing_management');
-	activeTab('Billing');
+	activeTab('Billing Worksheet');
 </script>
 <div class="page-header">
 	<div class="btn-group pull-right" id="command">

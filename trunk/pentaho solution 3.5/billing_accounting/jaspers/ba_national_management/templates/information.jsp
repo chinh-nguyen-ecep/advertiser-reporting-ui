@@ -73,7 +73,7 @@
 					+ '<td>' + campaign_id + '</td>'
 					+ '<td>' + billing_contact + '</td>' 
 					+ '<td>' + comment + '</td>' 
-					+ '<td><div class="btn-group"><button type="button" class="btn btn-primary btn-xs" title="Edit" onclick="loadEditForm('+i+');"><span class="glyphicon glyphicon-edit"></span></button><button type="button" class="btn btn-success btn-xs" title="Copy" onclick="loadAddForm('+i+');"><span class="glyphicon glyphicon-share"></span></button></div></td>' 
+					+ '<td><div class="btn-toolbar" role="toolbar"><button type="button" class="btn btn-primary btn-xs" title="Edit" onclick="loadEditForm('+i+');"><span class="glyphicon glyphicon-edit"></span></button><button type="button" class="btn btn-success btn-xs" title="Copy" onclick="loadAddForm('+i+');"><span class="glyphicon glyphicon-share"></span></button></div></td>' 
 					+ '</tr>';
 			rows.push(row);
 		}
