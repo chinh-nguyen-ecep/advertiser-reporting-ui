@@ -86,11 +86,11 @@
 				<input class="form-control" type="text" name="selectbox_io_orders_id" style="width: 100%" value="" disabled/>
 			</div>
 			<div class="form-group">
-				<label for="campaign_id" class="required control-label">Campaign ID <abbr title="Required">*</abbr></label>
+				<label for="campaign_id" class="required control-label">Campaign ID</label>
 				<input type="text" class="form-control" maxlength="255" placeholder="Enter campaign id" name="campaign_id" value="">
 			</div>
 			<div class="form-group">
-				<label for="billing_contact" class="required control-label">Billing Contact <abbr title="Required">*</abbr></label>
+				<label for="billing_contact" class="required control-label">Billing Contact</label>
 				<input type="text" class="form-control" maxlength="255" placeholder="Enter billing contact" name="billing_contact" value="">
 			</div>
 			<div class="form-group">
@@ -125,11 +125,11 @@
 				<input class="form-control" type="text" name="selectbox_io_orders_id" style="width: 100%" value="" disabled/>
 			</div>
 			<div class="form-group">
-				<label for="campaign_id" class="required control-label">Campaign ID <abbr title="Required">*</abbr></label>
+				<label for="campaign_id" class="required control-label">Campaign ID</label>
 				<input type="text" class="form-control" maxlength="255" placeholder="Enter campaign id" name="campaign_id" value="">
 			</div>
 			<div class="form-group">
-				<label for="billing_contact" class="required control-label">Billing Contact <abbr title="Required">*</abbr></label>
+				<label for="billing_contact" class="required control-label">Billing Contact</label>
 				<input type="text" class="form-control" maxlength="255" placeholder="Enter billing contact" name="billing_contact" value="">
 			</div>
 			<div class="form-group">
@@ -487,32 +487,32 @@
 	/////////////////////////////////////
 	
 	function billingUpdateInformation(){
-		var is_changed = true;
-		
 		var campaign_id     = $('#editInformationForm input[name=campaign_id]').val();
 		var billing_contact = $('#editInformationForm input[name=billing_contact]').val();
 		var comment         = $('#editInformationForm input[name=comment]').val();
 		
+		if (campaign_id == '' && billing_contact == '' && comment == ''){
+			alert("Please fill required fields");
+			return false;
+		}
+		
 		if (campaign_id == g_information_campaign_id
             && billing_contact == g_information_billing_contact
 			&& comment == g_information_comment) {
-			is_changed = false;
+			alert('There is no change!');
+			return false;
 		}
 		
-		if (is_changed == true){
 		$('#editInformationDialog').modal('hide');
-			updateInfomation({
-				p_io_orders_id: $('#editInformationForm input[name=p_io_orders_id]').val(),
-				p_campaign_id: $('#editInformationForm input[name=campaign_id]').val(),
-				p_billing_contact: $('#editInformationForm input[name=billing_contact]').val(),
-				p_comment: $('#editInformationForm input[name=comment]').val(),
-				success: function(data){				
-					loadBillingDetailFromUrl();
-				}
-			});
-		} else {
-			alert('There is no change!');
-		}
+		updateInfomation({
+			p_io_orders_id: $('#editInformationForm input[name=p_io_orders_id]').val(),
+			p_campaign_id: $('#editInformationForm input[name=campaign_id]').val(),
+			p_billing_contact: $('#editInformationForm input[name=billing_contact]').val(),
+			p_comment: $('#editInformationForm input[name=comment]').val(),
+			success: function(data){				
+				loadBillingDetailFromUrl();
+			}
+		});
 	}
 	
 	/////////////////////////////////////
@@ -524,7 +524,7 @@
 		var billing_contact = $('#addInformationForm input[name=billing_contact]').val();
 		var comment         = $('#addInformationForm input[name=comment]').val();
 		
-		if (campaign_id == '' || billing_contact == '' || comment == ''){
+		if (campaign_id == '' && billing_contact == '' && comment == ''){
 			alert("Please fill required fields");
 			
 		} else {
