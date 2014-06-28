@@ -12,14 +12,14 @@
 	<div class="btn-group pull-right">
 
 	</div>
-	<h1 id="page_header">Adjusted Units</h1>
+	<h1 id="page_header">Adjustment</h1>
 </div>
 <!-- Table -->
 <table id="mainDataTable"
 	class="table table-bordered table-striped table-hover">
 	<thead>
 		<tr>
-			<th class="buttons" colspan="6"><a class="btn btn-success"	href="#" id="addAdjustedUnitsButton">
+			<th class="buttons" colspan="7"><a class="btn btn-success"	href="#" id="addAdjustedUnitsButton">
 				<i	class="icon-plus icon-white"></i> Add Adjusted Units</a>
 				<div class="pull-right">
 							<form role="form" class="form-inline">
@@ -37,9 +37,10 @@
 		<tr>
 			<th class="col-md-1">Month</th>
 			<th class="col-md-1">Combined IDs</th>
-			<th class="col-md-4">Line Item Name</th>
+			<th class="col-md-2">Campaign Name</th>
+			<th class="col-md-3">Line Item Name</th>
 			<th class="col-md-1" style="text-align: right;">Adjusted Units</th>
-			<th class="col-md-3">Comment</th>
+			<th class="col-md-2">Comment</th>
 			<th class="col-md-2"></th>
 		</tr>
 	</thead>
@@ -169,10 +170,12 @@
 				var comment             = data[i].comment;
 				var month_sk            = data[i].month_since_2005;
 				var calendar_year_month = data[i].calendar_year_month;
+				var campaign_name       = data[i].campaign_name;
 				
 				var row = '<tr>' 
 					+ '<td>' + calendar_year_month + '</td>'
 					+ '<td><a href="#" onclick="showDetail(' + month_sk + ',' + io_orders_id + ',' + io_line_item_id + ',' + i + ')">#' + combine_ids + '</a></td>' 
+					+ '<td>' + campaign_name + '</td>'
 					+ '<td>' + io_line_item_name + '</td>'
 					+ '<td align="right">' + accounting.formatNumber(adjusted_units) + '</td>' 
 					+ '<td>' + comment + '</td>' 

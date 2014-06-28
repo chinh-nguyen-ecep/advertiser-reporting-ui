@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="detail_at_io_line_item_level" language="groovy" pageWidth="1670" pageHeight="842" orientation="Landscape" columnWidth="1670" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="detail_at_io_line_item_level" language="groovy" pageWidth="2370" pageHeight="842" orientation="Landscape" columnWidth="2370" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -19,11 +19,16 @@
 , a.io_orders_id
 , a.updated_at::date as io_revision_date
 , a.organization_name as "Advertiser"
+, b.campaign_id as "Campaign ID"
 , a.contract_name as "Campaign Name"
 , a.agency_name as "Agency"
-, SUM(a.delivered_units) as "Delivered Units"
-, SUM(ROUND(a.invoice_amount::NUMERIC, 2)) as "Invoiced Amount"
-, SUM(ROUND(a.total_amount_invoiced_upto_month::NUMERIC, 2)) as "Invoiced to Month"
+, b.billing_contact as "Billing Contact"
+, SUM(a.io_line_item_quantity)::bigint as "Booking Units"
+, SUM(a.io_line_item_budget)::float as "Booking Budget"
+, SUM(a.total_billable_units_upto_month)::bigint as "Unit Invoiced ToDate"
+, SUM(ROUND(a.total_amount_invoiced_upto_month::NUMERIC, 2))::float as "Amount Invoiced ToDate"
+, SUM(a.remaining_units)::bigint as "Remaining Units"
+, SUM(a.remaining_budget)::float as "Remaining Budget"
 from  billing.ba_monthly_national_worksheet a
 left join billing.ba_national_dim_io b ON (b.is_active = true AND b.io_orders_id = a.io_orders_id)
 where month_since_2005 = $P{p_month_since_2005}::int
@@ -36,8 +41,10 @@ group by a.calendar_year_month
 , a.io_orders_id
 , a.updated_at::date
 , a.organization_name
+, b.campaign_id
 , a.contract_name
 , a.agency_name
+, b.billing_contact
 order by "Advertiser";]]>
 	</queryString>
 	<field name="Month" class="java.lang.String"/>
@@ -46,16 +53,33 @@ order by "Advertiser";]]>
 	<field name="io_orders_id" class="java.lang.Integer"/>
 	<field name="io_revision_date" class="java.sql.Date"/>
 	<field name="Advertiser" class="java.lang.String"/>
+	<field name="Campaign ID" class="java.lang.String"/>
 	<field name="Campaign Name" class="java.lang.String"/>
 	<field name="Agency" class="java.lang.String"/>
-	<field name="Delivered Units" class="java.math.BigDecimal"/>
-	<field name="Invoiced Amount" class="java.math.BigDecimal"/>
-	<field name="Invoiced to Month" class="java.math.BigDecimal"/>
-	<variable name="Invoiced Amount_1" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{Invoiced Amount}]]></variableExpression>
+	<field name="Billing Contact" class="java.lang.String"/>
+	<field name="Booking Units" class="java.lang.Long"/>
+	<field name="Booking Budget" class="java.lang.Double"/>
+	<field name="Unit Invoiced ToDate" class="java.lang.Long"/>
+	<field name="Amount Invoiced ToDate" class="java.lang.Double"/>
+	<field name="Remaining Units" class="java.lang.Long"/>
+	<field name="Remaining Budget" class="java.lang.Double"/>
+	<variable name="Booking Units_1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{Booking Units}]]></variableExpression>
 	</variable>
-	<variable name="Invoiced to Month_1" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{Invoiced to Month}]]></variableExpression>
+	<variable name="Booking Budget_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{Booking Budget}]]></variableExpression>
+	</variable>
+	<variable name="Unit Invoiced ToDate_1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{Unit Invoiced ToDate}]]></variableExpression>
+	</variable>
+	<variable name="Amount Invoiced ToDate_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{Amount Invoiced ToDate}]]></variableExpression>
+	</variable>
+	<variable name="Remaining Units_1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{Remaining Units}]]></variableExpression>
+	</variable>
+	<variable name="Remaining Budget_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{Remaining Budget}]]></variableExpression>
 	</variable>
 	<columnHeader>
 		<band height="50" splitType="Stretch">
@@ -88,7 +112,7 @@ order by "Advertiser";]]>
 				<text><![CDATA[IO Number]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="280" y="20" width="240" height="30" backcolor="#FFFF00"/>
+				<reportElement mode="Opaque" x="520" y="20" width="200" height="30" backcolor="#FFFF00"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -102,7 +126,7 @@ order by "Advertiser";]]>
 				<text><![CDATA[Advertiser]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="520" y="20" width="400" height="30" backcolor="#FFFF00"/>
+				<reportElement mode="Opaque" x="920" y="20" width="400" height="30" backcolor="#FFFF00"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -116,7 +140,7 @@ order by "Advertiser";]]>
 				<text><![CDATA[Campaign Name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="920" y="20" width="400" height="30" backcolor="#FFFF00"/>
+				<reportElement mode="Opaque" x="1320" y="20" width="150" height="30" backcolor="#FFFF00"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -130,51 +154,6 @@ order by "Advertiser";]]>
 				<text><![CDATA[Agency]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="1320" y="20" width="150" height="30" backcolor="#FFFF00"/>
-				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Delivered
-Units]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="1470" y="20" width="100" height="30" backcolor="#FFFF00"/>
-				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Invoiced
-Amount]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="1570" y="20" width="100" height="30" backcolor="#FFFF00"/>
-				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Invoiced
-to Month]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="0" y="0" width="520" height="20" forecolor="#FF0000"/>
 				<box leftPadding="5" rightPadding="5"/>
 				<textElement verticalAlignment="Middle">
@@ -182,12 +161,144 @@ to Month]]></text>
 				</textElement>
 				<text><![CDATA[2. The summary at the IO Order level]]></text>
 			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1470" y="20" width="300" height="30" backcolor="#FFFF00"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Billing Contact]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="280" y="20" width="240" height="30" backcolor="#FFFF00"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[IO Revision Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="720" y="20" width="200" height="30" backcolor="#FFFF00"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Campaign ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1770" y="20" width="100" height="30" backcolor="#FFFF00"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Booking
+Units]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1870" y="20" width="100" height="30" backcolor="#FFFF00"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Booking
+Budget]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1970" y="20" width="100" height="30" backcolor="#FFFF00"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unit Invoiced
+ToDate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="2070" y="20" width="100" height="30" backcolor="#FFFF00"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Amount Invoiced
+ToDate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="2170" y="20" width="100" height="30" backcolor="#FFFF00"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Remaining
+Units]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="2270" y="20" width="100" height="30" backcolor="#FFFF00"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Remaining
+Budget]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="20" splitType="Stretch">
+		<band height="30" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="80" height="20"/>
+				<reportElement x="0" y="0" width="80" height="30"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -199,7 +310,7 @@ to Month]]></text>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{Month}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="80" y="0" width="200" height="20"/>
+				<reportElement x="80" y="0" width="200" height="30"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -211,7 +322,7 @@ to Month]]></text>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{IO Number}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="280" y="0" width="240" height="20"/>
+				<reportElement x="520" y="0" width="200" height="30"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -223,7 +334,7 @@ to Month]]></text>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{Advertiser}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="520" y="0" width="400" height="20"/>
+				<reportElement x="920" y="0" width="400" height="30"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -235,7 +346,7 @@ to Month]]></text>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{Campaign Name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="920" y="0" width="400" height="20"/>
+				<reportElement x="1320" y="0" width="150" height="30"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -246,8 +357,44 @@ to Month]]></text>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{Agency}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="280" y="0" width="240" height="30"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{io_revision_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="720" y="0" width="200" height="30"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Campaign ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1470" y="0" width="300" height="30"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Billing Contact}]]></textFieldExpression>
+			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="1320" y="0" width="150" height="20"/>
+				<reportElement x="1770" y="0" width="100" height="30"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -256,10 +403,10 @@ to Month]]></text>
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Long"><![CDATA[$F{Delivered Units}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{Booking Units}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00">
-				<reportElement x="1470" y="0" width="100" height="20"/>
+				<reportElement x="1870" y="0" width="100" height="30"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -268,10 +415,22 @@ to Month]]></text>
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Invoiced Amount}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Booking Budget}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="1970" y="0" width="100" height="30"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{Unit Invoiced ToDate}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00">
-				<reportElement x="1570" y="0" width="100" height="20"/>
+				<reportElement x="2070" y="0" width="100" height="30"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -280,14 +439,38 @@ to Month]]></text>
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Invoiced to Month}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Amount Invoiced ToDate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="2170" y="0" width="100" height="30"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{Remaining Units}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00">
+				<reportElement x="2270" y="0" width="100" height="30"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Remaining Budget}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<summary>
-		<band height="40">
+		<band height="50">
 			<staticText>
-				<reportElement x="0" y="0" width="80" height="20"/>
+				<reportElement x="0" y="0" width="80" height="30"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -301,7 +484,7 @@ to Month]]></text>
 				<text><![CDATA[Total]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="80" y="0" width="200" height="20"/>
+				<reportElement x="80" y="0" width="200" height="30"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -315,7 +498,7 @@ to Month]]></text>
 				<text><![CDATA[Total]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="280" y="0" width="240" height="20"/>
+				<reportElement x="520" y="0" width="200" height="30"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -329,7 +512,7 @@ to Month]]></text>
 				<text><![CDATA[Total]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="520" y="0" width="400" height="20"/>
+				<reportElement x="920" y="0" width="400" height="30"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -343,7 +526,7 @@ to Month]]></text>
 				<text><![CDATA[Total]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="920" y="0" width="400" height="20"/>
+				<reportElement x="1320" y="0" width="150" height="30"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -357,7 +540,7 @@ to Month]]></text>
 				<text><![CDATA[Total]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1320" y="0" width="150" height="20"/>
+				<reportElement x="280" y="0" width="240" height="30"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -370,8 +553,36 @@ to Month]]></text>
 				</textElement>
 				<text><![CDATA[Total]]></text>
 			</staticText>
-			<textField pattern="$ #,##0.00">
-				<reportElement x="1570" y="0" width="100" height="20"/>
+			<staticText>
+				<reportElement x="720" y="0" width="200" height="30"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1470" y="0" width="300" height="30"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement x="1770" y="0" width="100" height="30"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -382,10 +593,10 @@ to Month]]></text>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$V{Invoiced to Month_1}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{Booking Units_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00">
-				<reportElement x="1470" y="0" width="100" height="20"/>
+				<reportElement x="1870" y="0" width="100" height="30"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -396,7 +607,63 @@ to Month]]></text>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$V{Invoiced Amount_1}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{Booking Budget_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="1970" y="0" width="100" height="30"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{Unit Invoiced ToDate_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00">
+				<reportElement x="2070" y="0" width="100" height="30"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{Amount Invoiced ToDate_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="2170" y="0" width="100" height="30"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{Remaining Units_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00">
+				<reportElement x="2270" y="0" width="100" height="30"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{Remaining Budget_1}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

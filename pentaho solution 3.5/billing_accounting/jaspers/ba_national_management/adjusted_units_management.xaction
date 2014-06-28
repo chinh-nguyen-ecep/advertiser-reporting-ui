@@ -108,30 +108,30 @@
       </sources>  
       <default-value/> 
     </p_displayed_name>  
-    <p_start_date type="string">
-      <sources>
-        <request>p_start_date</request>
-      </sources>
-      <default-value/>
-    </p_start_date>
-    <p_end_date type="string">
-      <sources>
-        <request>p_end_date</request>
-      </sources>
-      <default-value/>
-    </p_end_date>
-    <p_calendar_year_month type="string">
-      <sources>
-        <request>p_calendar_year_month</request>
-      </sources>
-      <default-value/>
-    </p_calendar_year_month>
-    <p_row type="string">
-      <sources>
-        <request>p_row</request>
-      </sources>
-      <default-value/>
-    </p_row>
+    <p_start_date type="string"> 
+      <sources> 
+        <request>p_start_date</request> 
+      </sources>  
+      <default-value/> 
+    </p_start_date>  
+    <p_end_date type="string"> 
+      <sources> 
+        <request>p_end_date</request> 
+      </sources>  
+      <default-value/> 
+    </p_end_date>  
+    <p_calendar_year_month type="string"> 
+      <sources> 
+        <request>p_calendar_year_month</request> 
+      </sources>  
+      <default-value/> 
+    </p_calendar_year_month>  
+    <p_row type="string"> 
+      <sources> 
+        <request>p_row</request> 
+      </sources>  
+      <default-value/> 
+    </p_row> 
   </inputs>
 
   <outputs> 
@@ -209,12 +209,12 @@
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </template6>  
-    <template7>
-      <solution-file>
-        <location>templates/adjusted_units_detail.jsp</location>
-        <mime-type>text/plain</mime-type>
-      </solution-file>
-    </template7>
+    <template7> 
+      <solution-file> 
+        <location>templates/adjusted_units_detail.jsp</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </template7> 
   </resources>
   
   <actions> 
@@ -265,7 +265,7 @@
           <p_adjusted_units type="string"/>  
           <p_comment type="string"/>  
           <p_month_sk type="string"/>  
-          <p_calendar_year_month type="string"/>
+          <p_calendar_year_month type="string"/> 
         </action-inputs>
         <action-resources> 
           <template mapping="template6"/> 
@@ -344,7 +344,7 @@
         <component-definition> 
           <query><![CDATA[SELECT sk, io_orders_id, io_line_item_id, combine_ids, io_line_item_name, 
        month_since_2005, adjusted_units, created_by, created_at, updated_by, 
-       updated_at, comment, calendar_year_month
+       updated_at, comment, calendar_year_month, campaign_name
   FROM billing.vw_ba_national_dim_adjustment
 WHERE (month_since_2005={p_month_sk} OR 0={p_month_sk})
 AND ( UPPER(io_line_item_name) LIKE UPPER('%{p_io_line_item_name}%') OR ''='{p_io_line_item_name}')
@@ -419,9 +419,9 @@ ORDER BY month_id]]></query>
           <limit type="string"/>  
           <page type="string"/>  
           <term type="string"/>  
-          <p_start_date type="string"/>
-          <p_end_date type="string"/>
-          <p_month_sk type="string"/>
+          <p_start_date type="string"/>  
+          <p_end_date type="string"/>  
+          <p_month_sk type="string"/> 
         </action-inputs>
         <action-outputs> 
           <query-result type="result-set" mapping="query_result"/> 
@@ -447,70 +447,70 @@ OFFSET ({page}-1)*{limit} LIMIT {limit}
  
     </actions>
   
-    <actions>
-      <condition><![CDATA[actions=='loadAdjustmentDetailPage']]></condition>
-      <action-definition>
+    <actions> 
+      <condition><![CDATA[actions=='loadAdjustmentDetailPage']]></condition>  
+      <action-definition> 
         <component-name>SQLLookupRule</component-name>
         <action-type>Relational</action-type>
-        <action-inputs>
-          <p_io_orders_id type="string"/>
-          <jndi type="string" mapping="connectionName"/>
-          <p_io_line_item_id type="string"/>
-          <p_month_sk type="string"/>
+        <action-inputs> 
+          <p_io_orders_id type="string"/>  
+          <jndi type="string" mapping="connectionName"/>  
+          <p_io_line_item_id type="string"/>  
+          <p_month_sk type="string"/> 
         </action-inputs>
-        <action-outputs>
-          <query-result type="result-set" mapping="query_result"/>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
         </action-outputs>
-        <component-definition>
+        <component-definition> 
           <query><![CDATA[SELECT sk, io_orders_id, io_line_item_id, combine_ids, io_line_item_name, 
        month_since_2005, adjusted_units, created_by, created_at, updated_by, 
        updated_at, comment, calendar_year_month
 FROM billing.vw_ba_national_dim_adjustment
 WHERE month_since_2005 = {p_month_sk} AND io_orders_id = {p_io_orders_id} AND io_line_item_id = {p_io_line_item_id}
-;]]></query>
-          <live><![CDATA[true]]></live>
-        </component-definition>
+;]]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
       </action-definition>
-
-      <action-definition>
+  
+      <action-definition> 
         <component-name>SQLLookupRule</component-name>
         <action-type>Relational History</action-type>
-        <action-inputs>
-          <jndi type="string" mapping="connectionName"/>
-          <p_io_orders_id type="string"/>
-          <p_io_line_item_id type="string"/>
-          <p_month_sk type="string"/>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <p_io_orders_id type="string"/>  
+          <p_io_line_item_id type="string"/>  
+          <p_month_sk type="string"/> 
         </action-inputs>
-        <action-outputs>
-          <query-result type="result-set" mapping="query_result_history"/>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result_history"/> 
         </action-outputs>
-        <component-definition>
+        <component-definition> 
           <query><![CDATA[SELECT sk, io_orders_id, io_line_item_id, month_since_2005, adjusted_units, created_by, created_at, updated_by, 
        updated_at, comment, is_active
 FROM billing.ba_national_dim_adjustment
 WHERE month_since_2005 = {p_month_sk} AND io_orders_id = {p_io_orders_id} AND io_line_item_id = {p_io_line_item_id}
-ORDER BY sk DESC;]]></query>
-          <live><![CDATA[true]]></live>
-        </component-definition>
+ORDER BY sk DESC;]]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
       </action-definition>
-
-      <action-definition>
+  
+      <action-definition> 
         <component-name>JavascriptRule</component-name>
         <action-type>JavaScript</action-type>
-        <action-inputs>
-          <query_result type="result-set"/>
-          <query_result_history type="result-set"/>
+        <action-inputs> 
+          <query_result type="result-set"/>  
+          <query_result_history type="result-set"/> 
         </action-inputs>
-        <action-outputs>
-          <combine_ids type="string"/>
-          <io_line_item_name type="string"/>
-          <month_since_2005 type="string"/>
-          <adjusted_units type="string"/>
-          <comment type="string"/>
-          <historyJson type="string"/>
-          <calendar_year_month type="string"/>
+        <action-outputs> 
+          <combine_ids type="string"/>  
+          <io_line_item_name type="string"/>  
+          <month_since_2005 type="string"/>  
+          <adjusted_units type="string"/>  
+          <comment type="string"/>  
+          <historyJson type="string"/>  
+          <calendar_year_month type="string"/> 
         </action-outputs>
-        <component-definition>
+        <component-definition> 
           <script><![CDATA[var detailTable="";
 var historyJson="";
 var io_orders_id=query_result.getValueAt(0,1);
@@ -550,57 +550,57 @@ historyJson='[';
 	}
 	//end
 
-	historyJson+=']';]]></script>
-        </component-definition>
+	historyJson+=']';]]></script> 
+        </component-definition> 
       </action-definition>
-
-      <action-definition>
+  
+      <action-definition> 
         <component-name>TemplateComponent</component-name>
         <action-type>Message Template</action-type>
-        <action-inputs>
-          <combine_ids type="string"/>
-          <io_line_item_name type="string"/>
-          <adjusted_units type="string"/>
-          <comment type="string"/>
-          <p_row type="string"/>
-          <historyJson type="string"/>
-          <calendar_year_month type="string"/>
+        <action-inputs> 
+          <combine_ids type="string"/>  
+          <io_line_item_name type="string"/>  
+          <adjusted_units type="string"/>  
+          <comment type="string"/>  
+          <p_row type="string"/>  
+          <historyJson type="string"/>  
+          <calendar_year_month type="string"/> 
         </action-inputs>
-        <action-resources>
-          <template mapping="template7"/>
+        <action-resources> 
+          <template mapping="template7"/> 
         </action-resources>
-        <action-outputs>
-          <output-message type="string" mapping="returnResult"/>
+        <action-outputs> 
+          <output-message type="string" mapping="returnResult"/> 
         </action-outputs>
-        <component-definition/>
+        <component-definition/> 
       </action-definition>
-
+ 
     </actions>
-
-    <actions>
-      <condition><![CDATA[actions=='deleteAjustedUnits']]></condition>
-      <action-definition>
+  
+    <actions> 
+      <condition><![CDATA[actions=='deleteAjustedUnits']]></condition>  
+      <action-definition> 
         <component-name>SQLLookupRule</component-name>
         <action-type>Relational</action-type>
-        <action-inputs>
-          <p_io_orders_id type="string"/>
-          <p_month_sk type="string"/>
-          <principalName type="string"/>
-          <p_io_line_item_id type="string"/>
-          <p_comment type="string"/>
-          <jndi type="string" mapping="connectionName"/>
+        <action-inputs> 
+          <p_io_orders_id type="string"/>  
+          <p_month_sk type="string"/>  
+          <principalName type="string"/>  
+          <p_io_line_item_id type="string"/>  
+          <p_comment type="string"/>  
+          <jndi type="string" mapping="connectionName"/> 
         </action-inputs>
-        <action-outputs>
-          <query-result type="result-set" mapping="query_result"/>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
         </action-outputs>
-        <component-definition>
-          <query><![CDATA[SELECT * FROM billing.fn_ba_national_dim_adjustment_delete({p_io_orders_id},{p_io_line_item_id} ,{p_month_sk}, '{principalName}','{p_comment}')]]></query>
-          <live><![CDATA[true]]></live>
-        </component-definition>
+        <component-definition> 
+          <query><![CDATA[SELECT * FROM billing.fn_ba_national_dim_adjustment_delete({p_io_orders_id},{p_io_line_item_id} ,{p_month_sk}, '{principalName}','{p_comment}')]]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
       </action-definition>
-
+ 
     </actions>
-
+  
     <action-definition> 
       <component-name>JavascriptRule</component-name>
       <action-type>Process data grid</action-type>

@@ -10,8 +10,8 @@ function addInfomation(input) {
 		success : function(data) {
 		}
 	}, input);
-	if (this.input.p_io_orders_id == '' || this.input.p_campaign_id == ''
-			|| this.input.p_billing_contact == '') {
+	if (this.input.p_io_orders_id == '' && this.input.p_campaign_id == ''
+			&& this.input.p_billing_contact == '' && this.input.p_comment == '') {
 		alert("Please fill required fields");
 		return false;
 	}
@@ -59,8 +59,8 @@ function updateInfomation(input) {
 		success : function(data) {
 		}
 	}, input);
-	if (this.input.p_io_orders_id == '' || this.input.p_campaign_id == ''
-			|| this.input.p_billing_contact == '') {
+	if (this.input.p_io_orders_id == '' && this.input.p_campaign_id == ''
+			&& this.input.p_billing_contact == '' && this.input.p_comment == '') {
 		alert("Please fill required fields");
 		return false;
 	}

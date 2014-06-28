@@ -25,11 +25,11 @@
 		<input  class="form-control" id="selectbox-io_order_id" type="text" name="io_order_id" style="width: 100%" value="{p_displayed_name}" disabled/>
 	</div>
 	<div class="form-group">
-		<label for="campaign_id" class="required control-label">Campaign ID <abbr title="Required">*</abbr></label>
+		<label for="campaign_id" class="required control-label">Campaign ID</label>
 		<input type="text" class="form-control" id="campaign_id" maxlength="255" placeholder="Enter campaign id" name="campaign_id" value="{p_campaign_id}">
 	</div>
 	<div class="form-group">
-		<label for="billing_contact" class="required control-label">Billing Contact <abbr title="Required">*</abbr></label>
+		<label for="billing_contact" class="required control-label">Billing Contact</label>
 		<input type="text" class="form-control" id="billing_contact" maxlength="255" placeholder="Enter billing contact" name="billing_contact" value="{p_billing_contact}">
 	</div>
 	<div class="form-group">
