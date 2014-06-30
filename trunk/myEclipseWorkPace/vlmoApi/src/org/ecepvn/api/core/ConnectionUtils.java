@@ -34,6 +34,19 @@ public class ConnectionUtils {
 		}
 		return result;
 	}
+	public static String getQueryDim(String tableName,String dimensions,String wheres,String orders,int itemPerPage,int page){
+		String query="SELECT "+dimensions+" FROM " +tableName+" " ;
+									
+		if(!wheres.equals("")){
+			query+=wheres+" ";
+		}
+		query+="GROUP BY "+dimensions+" ";	
+		if(!orders.equals("")){
+			query+=orders+" ";
+		}
+		query+="LIMIT "+itemPerPage+" OFFSET "+(page-1)*itemPerPage;
+		return query;
+	}
 	public static String getQuery(String tableName,String dimensions,String measures,String wheres,String orders,int itemPerPage,int page){
 		String query="SELECT "+dimensions+" , "+measures+" " +
 				"FROM " +tableName+" " ;

@@ -1,4 +1,4 @@
-package advertiserui.database;
+package vlmoui.database;
 
 import java.sql.Connection;
 import java.sql.SQLException;

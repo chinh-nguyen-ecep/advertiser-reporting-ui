@@ -123,4 +123,14 @@
     <servlet-name>ApiLookupNetworks</servlet-name>
     <url-pattern>/LookupNetworks</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ApiDailyAggRunningRevenue</display-name>
+    <servlet-name>ApiDailyAggRunningRevenue</servlet-name>
+    <servlet-class>org.ecepvn.api.servlet.ApiDailyAggRunningRevenue</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ApiDailyAggRunningRevenue</servlet-name>
+    <url-pattern>/dailyAggRunningRevenue</url-pattern>
+  </servlet-mapping>
 </web-app>

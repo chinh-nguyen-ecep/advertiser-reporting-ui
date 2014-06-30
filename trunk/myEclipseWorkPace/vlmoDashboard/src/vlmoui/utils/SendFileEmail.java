@@ -1,4 +1,4 @@
-package advertiserui.utils;
+package vlmoui.utils;
 
 // File Name SendFileEmail.java
 

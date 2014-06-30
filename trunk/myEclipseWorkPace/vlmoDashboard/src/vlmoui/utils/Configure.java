@@ -1,4 +1,4 @@
-package advertiserui.utils;
+package vlmoui.utils;
 
 import java.io.IOException;
 import java.io.InputStream;

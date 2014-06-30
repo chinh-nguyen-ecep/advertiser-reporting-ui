@@ -63,6 +63,10 @@
                   <td><a href="ApiOverviewDetail?api=dailyAggDemandByOffer">Daily Agg Demand By Offer</a></td>
                   <td>overview-internal</td>
                </tr>		   
+                <tr>
+                  <td><a href="ApiOverviewDetail?api=dailyAggRunningRevenue">Daily Agg Running Revenue</a></td>
+                  <td>overview-internal</td>
+               </tr>
             </table>
             <nav>
                <ul class='breadcrumb'>

@@ -8,19 +8,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.ecepvn.api.LookupOrders;
+import org.ecepvn.api.DailyAggDemandByOffer;
+import org.ecepvn.api.DailyAggRunningRevenue;
 import org.ecepvn.api.QueryApi;
 import org.ecepvn.bean.ApiResponseResultSet;
 import org.ecepvn.bean.ApiResponseResultSetInfo;
 
-
 /**
- * Servlet implementation class Api
+ * Servlet implementation class ApiDailyAggRuningRevenue
  */
-@SuppressWarnings("serial")
-public class ApiLookupOrders extends HttpServlet {
-	
-    public ApiLookupOrders() {
+public class ApiDailyAggRunningRevenue extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public ApiDailyAggRunningRevenue() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,13 +33,13 @@ public class ApiLookupOrders extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
 		QueryApi api=null;
 		response.setContentType("text/plain");
 		PrintWriter pw=response.getWriter();
 		
-		
 		ApiResponseResultSet apiResponse=new ApiResponseResultSet();
-		api=new LookupOrders();
+		api=new DailyAggRunningRevenue();
 		//get info param
 		String info=request.getParameter("info");
 		if(info!=null){
@@ -47,7 +50,6 @@ public class ApiLookupOrders extends HttpServlet {
 			apiResponse=api.processApiRequest(request);
 			pw.println(apiResponse.toString());	
 		}
-			
 	}
 
 	/**

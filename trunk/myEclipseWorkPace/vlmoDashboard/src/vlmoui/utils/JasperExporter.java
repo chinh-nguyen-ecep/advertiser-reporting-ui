@@ -1,4 +1,4 @@
-package advertiserui.utils;
+package vlmoui.utils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -10,7 +10,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import advertiserui.database.JNDIConnection;
+import vlmoui.database.JNDIConnection;
+
 
 
 import net.sf.jasperreports.engine.JRException;

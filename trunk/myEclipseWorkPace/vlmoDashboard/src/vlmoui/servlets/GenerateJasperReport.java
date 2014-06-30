@@ -1,4 +1,4 @@
-package advertiserui.servlets;
+package vlmoui.servlets;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import advertiserui.utils.JasperExporter;
+import vlmoui.utils.JasperExporter;
+
 
 import net.sf.jasperreports.engine.JRException;
 

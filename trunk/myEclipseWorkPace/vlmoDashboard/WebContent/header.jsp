@@ -55,7 +55,7 @@
        	<ul class="nav nav-tabs">
        	
 		  <li title="overview"><a href="#" onclick="changePage('overview')">Dashboard Overview</a></li>
-		  <!-- li title="dailyExchangePayoutByHour"><a href="#" onclick="changePage('dailyExchangePayoutByHour')">Hour</a></li-->
+		  <li title="Running Revenue"><a href="#" onclick="changePage('runningRevenue')">Running Revenue</a></li>
 		  
 		</ul>   
     </div>
