@@ -14,7 +14,7 @@ var apiRootUrl=window.location.protocol+'//'+window.location.hostname+':'+window
 var rootUrl=window.location.protocol+'//'+window.location.hostname+':'+window.location.port +'/vlmoDashboard';
 function setTabActive(tab_title){
 		$('#page-tab ul li').removeClass('active');
-		$('#page-tab ul li[title='+tab_title+']').attr('class','active');
+		$('#page-tab ul li[title=\''+tab_title+'\']').attr('class','active');
 }
 
 function generateDateRange(settings){

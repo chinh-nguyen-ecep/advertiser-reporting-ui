@@ -8,8 +8,9 @@
 		</div>
 			    <form class="navbar-form navbar-right" role="export">	
 			    <div class="form-group">
-				   
-			    </div>
+					<select class="form-control input-sm" id="selectbox_agency">
+					</select>
+				</div>
  			  	  <div class="form-group">
 		       			<div id="overview-date_range" class="form-control input-sm">
 					    <i class="icon-calendar icon-large"></i>
@@ -33,7 +34,7 @@
 	  		<ul class="list-group">
 	  			<li class="list-group-item">Impressions/Day<span class="badge av-impression">0</span></li>
 	  			<li class="list-group-item">Clicks/Day<span class="badge av-clicks">0</span></li>
-	  			<li class="list-group-item">Cta any/Day<span class="badge av-cta-any">0</span></li>
+	  			<!--<li class="list-group-item">Cta any/Day<span class="badge av-cta-any">0</span></li>-->
 			  	<!-- li class="list-group-item">Avg Bid Price/Day<span class="badge av-bid-price">0</span></li-->
 			  	
 			</ul>

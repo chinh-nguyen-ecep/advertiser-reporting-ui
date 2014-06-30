@@ -117,7 +117,7 @@ public class MainApiLookup implements QueryApi{
 			}
 
 			ResultSet resultSet = ConnectionUtils.queryDimTable(connectionDB,dataSourceTableName, dimensions, wheres, orders,Integer.parseInt(unitsPerPage), Integer.parseInt(page));
-			String query=ConnectionUtils.getQuery(dataSourceTableName, dimensions, measures, wheres, orders,Integer.parseInt(unitsPerPage), Integer.parseInt(page));
+			String query=ConnectionUtils.getQueryDim(dataSourceTableName, dimensions, wheres, orders,Integer.parseInt(unitsPerPage), Integer.parseInt(page));
 			ArrayList<String> columnNameArray = new ArrayList<String>();
 			ArrayList<String> columnTypeArray = new ArrayList<String>();
 			ArrayList<String[]> data = new ArrayList<String[]>();
