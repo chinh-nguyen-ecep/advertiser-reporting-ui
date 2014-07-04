@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RTB Weekly Exchange Cost Analysis" pageWidth="1580" pageHeight="1684" columnWidth="1540" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="1536"/>
+	<property name="ireport.y" value="0"/>
+	<style name="boder">
+		<box leftPadding="5" rightPadding="5">
+			<pen lineWidth="0.5"/>
+			<topPen lineWidth="0.5"/>
+			<leftPen lineWidth="0.5"/>
+			<bottomPen lineWidth="0.5"/>
+			<rightPen lineWidth="0.5"/>
+		</box>
+	</style>
+	<parameter name="p_start_week" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("2014-01-01")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_end_week" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("2014-01-01")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_exchangers" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("")]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT year_week as "Week"
+     , exchanger as "Exchanger"
+     , imp_cnt as "Imp Cnt"
+     , avg_paid_price as "Avg Paid Price"
+     , avg_bid_price as "Avg Bid Price"
+     , paid_amount as "Paid Amount"
+     , auction_cnt as "Auction Cnt"
+     , CASE auction_cnt WHEN 0 THEN 0 ELSE imp_cnt::float / auction_cnt END as "RTB Winrate %"
+     , filled_cnt as "AdCel - Filled Imps"
+     , filled_cnt::float / imp_cnt as "Adcel - Fill Rate %"
+     , dfp_imp_cnt as "DFP Imps"
+     , dfp_imp_cnt::float / imp_cnt as "DFP - Fill Rate %"
+     , event_imp_cnt as "Evt - Imp"
+     , event_adimpinternal_cnt as "Evt - Adimpinternal"
+     , max(dt_lastchange) as dt_lastchange
+FROM rtb.weekly_agg_exchanger_cost_analysis_v1
+WHERE is_active = true
+  AND year_week BETWEEN $P{p_start_week} AND $P{p_end_week}
+  AND (exchanger IN (select unnest(string_to_array($P{p_exchangers}, ','))::text) OR 'all' = $P{p_exchangers})
+GROUP BY year_week, exchanger, imp_cnt, avg_paid_price, avg_bid_price, paid_amount, auction_cnt, filled_cnt, dfp_imp_cnt, event_imp_cnt, event_adimpinternal_cnt
+ORDER BY  year_week, exchanger;]]>
+	</queryString>
+	<field name="Week" class="java.lang.String"/>
+	<field name="Exchanger" class="java.lang.String"/>
+	<field name="Imp Cnt" class="java.lang.Long"/>
+	<field name="Avg Paid Price" class="java.lang.Double"/>
+	<field name="Avg Bid Price" class="java.lang.Double"/>
+	<field name="Paid Amount" class="java.lang.Double"/>
+	<field name="Auction Cnt" class="java.lang.Long"/>
+	<field name="RTB Winrate %" class="java.lang.Double"/>
+	<field name="AdCel - Filled Imps" class="java.lang.Long"/>
+	<field name="Adcel - Fill Rate %" class="java.lang.Double"/>
+	<field name="DFP Imps" class="java.lang.Long"/>
+	<field name="DFP - Fill Rate %" class="java.lang.Double"/>
+	<field name="Evt - Imp" class="java.lang.Long"/>
+	<field name="Evt - Adimpinternal" class="java.lang.Long"/>
+	<field name="dt_lastchange" class="java.sql.Timestamp"/>
+	<variable name="Imp Cnt_1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{Imp Cnt}]]></variableExpression>
+	</variable>
+	<variable name="Paid Amount_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{Paid Amount}]]></variableExpression>
+	</variable>
+	<variable name="Avg Paid Price_1" class="java.lang.Double" calculation="Average">
+		<variableExpression><![CDATA[$F{Avg Paid Price}]]></variableExpression>
+	</variable>
+	<variable name="Avg Bid Price_1" class="java.lang.Double" calculation="Average">
+		<variableExpression><![CDATA[$F{Avg Bid Price}]]></variableExpression>
+	</variable>
+	<variable name="Auction Cnt_1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{Auction Cnt}]]></variableExpression>
+	</variable>
+	<variable name="AdCel - Filled Imps_1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{AdCel - Filled Imps}]]></variableExpression>
+	</variable>
+	<variable name="DFP Imps_1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{DFP Imps}]]></variableExpression>
+	</variable>
+	<variable name="Evt - Imp_1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{Evt - Imp}]]></variableExpression>
+	</variable>
+	<variable name="Evt - Adimpinternal_1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{Evt - Adimpinternal}]]></variableExpression>
+	</variable>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="100">
+			<staticText>
+				<reportElement x="0" y="0" width="580" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Notes:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="580" y="20" width="960" height="80"/>
+				<textElement/>
+				<text><![CDATA[- AdCel - Filled Imps: This is count from AdCel Attributed Request log with rtb.ex is not NULL and status = 'Y'. Group by date, exchange
+- AdCel - Filled Rate %: (AdCel - Filled Imps / Paid Imps) %
+- DFP - Imps: This is from DFP. Using adunit to join with ADM Property on RTB publishers
+- DFP - Filled Rate %: (DFP - Imps / Paid Imps) %
+- Evt - Imp: This is count from Event Tracker log and AdCel Attributed Request log  with rtb.ex is not NULL and status = 'Y' and e=&imp. Group by date, exchange
+- Evt - Adimpinternal: This is count from Event Tracker log and AdCel Attributed Request log  with rtb.ex is not NULL and status = 'Y' and e=&adimpinternal. Group by date, exchange]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="580" height="80"/>
+				<textElement/>
+				<text><![CDATA[- Paid Imps: It is the sum of unique count (group by date, exchange, paid price, bid price)
+- Paid Price: It is paid price (vrv.price) field in Impression log
+- Bid Price: It is bid price (vrv.bid) field in Impression log
+- Paid Amount: Paid Price * (Paid Imps / 1000)
+- RTB Bids: This is count from Auction log. Group by date, exchange
+- RTB Winrate %: (Paid Imps / RTB Bids) %]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20">
+			<staticText>
+				<reportElement style="boder" x="0" y="0" width="80" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Week]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="80" y="0" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Exchange]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="480" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Avg Bid Price]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="280" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Paid Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" mode="Transparent" x="380" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Avg Paid Price]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" mode="Transparent" x="180" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Paid Imps]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" mode="Transparent" x="580" y="0" width="120" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[RTB Bids]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="700" y="0" width="120" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RTB Winrate %]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="820" y="0" width="120" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[AdCel - Filled Imps]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="940" y="0" width="120" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[AdCel - Filled Rate %]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="1060" y="0" width="120" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DFP - Imps]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="boder" x="1180" y="0" width="120" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DFP - Filled Rate %]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1300" y="0" width="120" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Evt - Imp]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1420" y="0" width="120" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Evt - Adimpinternal]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<textField pattern="">
+				<reportElement style="boder" x="0" y="0" width="80" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Week}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="boder" x="80" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Exchanger}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00000">
+				<reportElement style="boder" x="480" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Avg Bid Price}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00000">
+				<reportElement style="boder" x="280" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Paid Amount}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00000" isBlankWhenNull="false">
+				<reportElement style="boder" mode="Transparent" x="380" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Avg Paid Price}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement style="boder" mode="Transparent" x="180" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{Imp Cnt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement style="boder" mode="Transparent" x="580" y="0" width="120" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{Auction Cnt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement style="boder" x="700" y="0" width="120" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{RTB Winrate %}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="boder" x="820" y="0" width="120" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{AdCel - Filled Imps}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement style="boder" x="940" y="0" width="120" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Adcel - Fill Rate %}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="boder" x="1060" y="0" width="120" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{DFP Imps}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement style="boder" x="1180" y="0" width="120" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{DFP - Fill Rate %}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="1300" y="0" width="120" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{Evt - Imp}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="1420" y="0" width="120" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{Evt - Adimpinternal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="20">
+			<textField pattern="#,##0">
+				<reportElement x="180" y="0" width="100" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{Imp Cnt_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00000" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="280" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{Paid Amount_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="80" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="0" width="100" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<textField pattern="$ #,##0.00000">
+				<reportElement x="380" y="0" width="100" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{Avg Paid Price_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00000">
+				<reportElement x="480" y="0" width="100" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{Avg Bid Price_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="boder" x="580" y="0" width="120" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{Auction Cnt_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement style="boder" x="700" y="0" width="120" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[($V{Auction Cnt_1} == 0 ? 0 : ($V{Imp Cnt_1} * 1.0) / $V{Auction Cnt_1})]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="boder" x="820" y="0" width="120" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{AdCel - Filled Imps_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement style="boder" x="940" y="0" width="120" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[($V{AdCel - Filled Imps_1} * 1.0) / $V{Imp Cnt_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="boder" x="1060" y="0" width="120" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{DFP Imps_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement style="boder" x="1180" y="0" width="120" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[($V{DFP Imps_1} * 1.0) / $V{Imp Cnt_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="1300" y="0" width="120" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{Evt - Imp_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="1420" y="0" width="120" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{Evt - Adimpinternal_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
