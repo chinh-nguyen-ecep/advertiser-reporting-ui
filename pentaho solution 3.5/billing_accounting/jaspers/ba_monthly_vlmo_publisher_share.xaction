@@ -99,10 +99,6 @@
         <query><![CDATA[SELECT DISTINCT calendar_year_month, month_since_2005
 FROM billing.ba_monthly_vlmo_publisher_share
 WHERE is_active = true
-union all
-SELECT DISTINCT calendar_year_month, month_since_2005
-FROM billing.ba_monthly_vlmo_publisher_share
-WHERE is_active = true
 ORDER BY month_since_2005 desc]]></query> 
       </component-definition> 
     </action-definition>
