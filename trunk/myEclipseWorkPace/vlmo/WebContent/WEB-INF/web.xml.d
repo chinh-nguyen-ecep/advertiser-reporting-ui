@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	<display-name>VLMO Dashboard</display-name>
+	<filter>
+		<filter-name>CAS Authentication Filter</filter-name>
+		<filter-class>org.jasig.cas.client.authentication.AuthenticationFilter</filter-class>
+		<init-param>
+			<param-name>casServerLoginUrl</param-name>
+			<param-value>https://sso.vervemobile.com/sign_in</param-value>
+		</init-param>
+		<init-param>
+			<param-name>serverName</param-name>
+			<param-value>reporting.vervemobile.com</param-value>
+		</init-param>
+		<init-param>
+			<param-name>renew</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<init-param>
+			<param-name>gateway</param-name>
+			<param-value>false</param-value>
+		</init-param>
+	</filter>
+	<filter>
+		<filter-name>CAS Validation Filter</filter-name>
+		<filter-class>org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter</filter-class>
+		<init-param>
+			<param-name>casServerUrlPrefix</param-name>
+			<param-value>https://sso.vervemobile.com</param-value>
+		</init-param>
+		<init-param>
+			<param-name>serverName</param-name>
+			<param-value>reporting.vervemobile.com</param-value>
+		</init-param>
+	</filter>
+	<filter>
+		<filter-name>CAS HttpServletRequest Wrapper Filter</filter-name>
+		<filter-class>org.jasig.cas.client.util.HttpServletRequestWrapperFilter</filter-class>
+	</filter>
+	<filter>
+		<filter-name>CAS Assertion Thread Local Filter</filter-name>
+		<filter-class>org.jasig.cas.client.util.AssertionThreadLocalFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>CAS Authentication Filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>CAS Validation Filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>CAS HttpServletRequest Wrapper Filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>CAS Assertion Thread Local Filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<listener>
+		<listener-class>org.jasig.cas.client.session.SingleSignOutHttpSessionListener</listener-class>
+	</listener>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+	<servlet>
+		<description></description>
+		<display-name>GenerateJasperReport</display-name>
+		<servlet-name>GenerateJasperReport</servlet-name>
+		<servlet-class>vlmoui.servlets.GenerateJasperReport</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GenerateJasperReport</servlet-name>
+		<url-pattern>/GenerateJasperReport</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>image</display-name>
+		<servlet-name>image</servlet-name>
+		<servlet-class>net.sf.jasperreports.j2ee.servlets.ImageServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>image</servlet-name>
+		<url-pattern>/image</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>api</display-name>
+		<servlet-name>api</servlet-name>
+		<jsp-file>/ApiOverview.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>api</servlet-name>
+		<url-pattern>/api/v1/overview</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>apidetail</display-name>
+		<servlet-name>apidetail</servlet-name>
+		<jsp-file>/ApiDetail.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>apidetail</servlet-name>
+		<url-pattern>/api/v1/apiDetail</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>ApiDailyAggDemandByOffer</display-name>
+		<servlet-name>ApiDailyAggDemandByOffer</servlet-name>
+		<servlet-class>vlmoui.servlets.ApiDailyAggDemandByOffer</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ApiDailyAggDemandByOffer</servlet-name>
+		<url-pattern>/api/v1/dailyAggDemandByOffer</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>ApiDailyAggRunningRevenue</display-name>
+		<servlet-name>ApiDailyAggRunningRevenue</servlet-name>
+		<servlet-class>vlmoui.servlets.ApiDailyAggRunningRevenue</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ApiDailyAggRunningRevenue</servlet-name>
+		<url-pattern>/api/v1/dailyAggRunningRevenue</url-pattern>
+	</servlet-mapping>
+	  <servlet>
+    <description></description>
+    <display-name>ApiLookupNetworks</display-name>
+    <servlet-name>ApiLookupNetworks</servlet-name>
+    <servlet-class>vlmoui.servlets.ApiLookupNetworks</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ApiLookupNetworks</servlet-name>
+    <url-pattern>/api/v1/LookupNetworks</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <description></description>
+    <display-name>ApiLookupAgencyTierRate</display-name>
+    <servlet-name>ApiLookupAgencyTierRate</servlet-name>
+    <servlet-class>vlmoui.servlets.ApiLookupAgencyTierRate</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ApiLookupAgencyTierRate</servlet-name>
+    <url-pattern>/api/v1/LookupAgencyTierRate</url-pattern>
+  </servlet-mapping>
+</web-app>
