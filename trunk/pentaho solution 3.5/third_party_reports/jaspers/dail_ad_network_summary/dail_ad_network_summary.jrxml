@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="monthly_ad_serving_statistics_summary" pageWidth="1175" pageHeight="842" orientation="Landscape" columnWidth="1135" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="3.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="960"/>
 	<parameter name="eastern_date_sk" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new String("1")]]></defaultValueExpression>
 	</parameter>
@@ -193,6 +193,19 @@ SELECT      eastern_date_sk, full_date,
             COALESCE(SUM(case fullfilled_code_y when -1 then null else fullfilled_code_y end),0) as fullfilled_code_y,
 			max(dt_lastchange) as dt_lastchange
 FROM        adnetwork.daily_kt_performance
+WHERE       is_active = true AND eastern_date_sk = $P{eastern_date_sk}::int
+GROUP BY    eastern_date_sk, full_date
+UNION
+/* AdMarvel */
+SELECT      eastern_date_sk, full_date,
+            COALESCE(SUM(requests),0) as requests,
+            COALESCE(SUM(impressions),0) as paid_impressions,
+            COALESCE(SUM(clicks),0) as clicked,
+            ROUND(COALESCE(SUM(case revenue when -1 then null else revenue end),0)::NUMERIC,3) as net_revenue,
+            COALESCE(SUM(case responses_count when -1 then null else responses_count end),0) as fullfilled_code_count,
+            COALESCE(SUM(case filled_requests when -1 then null else filled_requests end),0) as fullfilled_code_y,
+			max(dt_lastchange) as dt_lastchange
+FROM        adnetwork.daily_am_performance
 WHERE       is_active = true AND eastern_date_sk = $P{eastern_date_sk}::int
 GROUP BY    eastern_date_sk, full_date
 ) a
