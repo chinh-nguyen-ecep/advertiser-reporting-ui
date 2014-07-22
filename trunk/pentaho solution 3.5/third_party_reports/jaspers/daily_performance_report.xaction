@@ -42,6 +42,7 @@
         <list-item>Superpages Proxy/Blue</list-item>
         <list-item>Where/Where HTML</list-item>
         <list-item>KlickThru</list-item>
+        <list-item>AdMarvel</list-item>
       </default-value> 
     </List_networks>  
     <p_network type="string"> 
@@ -145,12 +146,18 @@
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </report-definition13>  
-    <report-definition14>
+    <report-definition14> 
+      <solution-file> 
+        <location>daily_performance_report/daily_performance_report_klick_thru.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition14>  
+    <report-definition15>
       <solution-file>
-        <location>daily_performance_report/daily_performance_report_klick_thru.jasper</location>
+        <location>daily_performance_report/daily_performance_report_admarvel.jasper</location>
         <mime-type>text/plain</mime-type>
       </solution-file>
-    </report-definition14>
+    </report-definition15>
   </resources>
   
   <actions> 
@@ -492,8 +499,27 @@ order by a.date_sk desc;]]></query>
  
     </actions>
   
+    <actions> 
+      <condition><![CDATA[p_network=='KlickThru']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <eastern_date_sk type="string"/>  
+          <output-type type="string" mapping="output"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition14"/> 
+        </action-resources>
+        <component-definition> 
+          <jndi><![CDATA[dw3]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
     <actions>
-      <condition><![CDATA[p_network=='KlickThru']]></condition>
+      <condition><![CDATA[p_network=='AdMarvel']]></condition>
       <action-definition>
         <component-name>JasperReportsComponent</component-name>
         <action-type>Jasper</action-type>
@@ -502,7 +528,7 @@ order by a.date_sk desc;]]></query>
           <output-type type="string" mapping="output"/>
         </action-inputs>
         <action-resources>
-          <report-definition mapping="report-definition14"/>
+          <report-definition mapping="report-definition15"/>
         </action-resources>
         <component-definition>
           <jndi><![CDATA[dw3]]></jndi>
