@@ -41,7 +41,8 @@
         <list-item>Millennial Media</list-item>  
         <list-item>Superpages Proxy/Blue</list-item>  
         <list-item>Where/Where HTML</list-item>  
-        <list-item>KlickThru</list-item> 
+        <list-item>KlickThru</list-item>  
+        <list-item>AdMarvel</list-item> 
       </default-value> 
     </List_networks>  
     <p_network type="string"> 
@@ -49,13 +50,7 @@
         <request>p_network</request> 
       </sources>  
       <default-value><![CDATA[Jumptap]]></default-value> 
-    </p_network>  
-    <ConnectionName type="string">
-      <sources>
-        <request>ConnectionName</request>
-      </sources>
-      <default-value><![CDATA[LocalPostgres]]></default-value>
-    </ConnectionName>
+    </p_network> 
   </inputs>
 
   <outputs/>
@@ -156,7 +151,13 @@
         <location>daily_performance_report/daily_performance_report_klick_thru.jasper</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
-    </report-definition14> 
+    </report-definition14>  
+    <report-definition15> 
+      <solution-file> 
+        <location>daily_performance_report/daily_performance_report_admarvel.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition15> 
   </resources>
   
   <actions> 
@@ -170,7 +171,7 @@
         <distinct type="string"/> 
       </action-outputs>
       <component-definition> 
-        <jndi><![CDATA[verveReportConnection]]></jndi>  
+        <jndi><![CDATA[dw3]]></jndi>  
         <live><![CDATA[true]]></live>  
         <query><![CDATA[select a.date_sk as eastern_date_sk, a.full_date 
 from refer.date_dim a,
@@ -245,7 +246,7 @@ order by a.date_sk desc;]]></query>
           <report-definition type="resource"/> 
         </action-resources>
         <component-definition> 
-          <jndi><![CDATA[verveReportConnection]]></jndi> 
+          <jndi><![CDATA[dw3]]></jndi> 
         </component-definition> 
       </action-definition>
  
@@ -264,7 +265,7 @@ order by a.date_sk desc;]]></query>
           <report-definition mapping="report-definition1"/> 
         </action-resources>
         <component-definition> 
-          <jndi><![CDATA[verveReportConnection]]></jndi> 
+          <jndi><![CDATA[dw3]]></jndi> 
         </component-definition> 
       </action-definition>
  
@@ -277,13 +278,14 @@ order by a.date_sk desc;]]></query>
         <action-type>Jasper</action-type>
         <action-inputs> 
           <output-type type="string" mapping="p_output"/>  
-          <eastern_date_sk type="string"/>  
-          <jndi type="string" mapping="ConnectionName"/>
+          <eastern_date_sk type="string"/> 
         </action-inputs>
         <action-resources> 
           <report-definition mapping="report-definition2"/> 
         </action-resources>
-        <component-definition/> 
+        <component-definition> 
+          <jndi><![CDATA[dw3]]></jndi> 
+        </component-definition> 
       </action-definition>
  
     </actions>
@@ -301,7 +303,7 @@ order by a.date_sk desc;]]></query>
           <report-definition mapping="report-definition3"/> 
         </action-resources>
         <component-definition> 
-          <jndi><![CDATA[verveReportConnection]]></jndi> 
+          <jndi><![CDATA[dw3]]></jndi> 
         </component-definition> 
       </action-definition>
  
@@ -320,7 +322,7 @@ order by a.date_sk desc;]]></query>
           <report-definition mapping="report-definition4"/> 
         </action-resources>
         <component-definition> 
-          <jndi><![CDATA[verveReportConnection]]></jndi> 
+          <jndi><![CDATA[dw3]]></jndi> 
         </component-definition> 
       </action-definition>
  
@@ -339,7 +341,7 @@ order by a.date_sk desc;]]></query>
           <report-definition mapping="report-definition5"/> 
         </action-resources>
         <component-definition> 
-          <jndi><![CDATA[verveReportConnection]]></jndi> 
+          <jndi><![CDATA[dw3]]></jndi> 
         </component-definition> 
       </action-definition>
  
@@ -358,7 +360,7 @@ order by a.date_sk desc;]]></query>
           <report-definition mapping="report-definition6"/> 
         </action-resources>
         <component-definition> 
-          <jndi><![CDATA[verveReportConnection]]></jndi> 
+          <jndi><![CDATA[dw3]]></jndi> 
         </component-definition> 
       </action-definition>
  
@@ -377,7 +379,7 @@ order by a.date_sk desc;]]></query>
           <report-definition mapping="report-definition7"/> 
         </action-resources>
         <component-definition> 
-          <jndi><![CDATA[verveReportConnection]]></jndi> 
+          <jndi><![CDATA[dw3]]></jndi> 
         </component-definition> 
       </action-definition>
  
@@ -396,7 +398,7 @@ order by a.date_sk desc;]]></query>
           <report-definition mapping="report-definition8"/> 
         </action-resources>
         <component-definition> 
-          <jndi><![CDATA[verveReportConnection]]></jndi> 
+          <jndi><![CDATA[dw3]]></jndi> 
         </component-definition> 
       </action-definition>
  
@@ -415,7 +417,7 @@ order by a.date_sk desc;]]></query>
           <report-definition mapping="report-definition9"/> 
         </action-resources>
         <component-definition> 
-          <jndi><![CDATA[verveReportConnection]]></jndi> 
+          <jndi><![CDATA[dw3]]></jndi> 
         </component-definition> 
       </action-definition>
  
@@ -434,7 +436,7 @@ order by a.date_sk desc;]]></query>
           <report-definition mapping="report-definition10"/> 
         </action-resources>
         <component-definition> 
-          <jndi><![CDATA[verveReportConnection]]></jndi> 
+          <jndi><![CDATA[dw3]]></jndi> 
         </component-definition> 
       </action-definition>
  
@@ -453,7 +455,7 @@ order by a.date_sk desc;]]></query>
           <report-definition mapping="report-definition11"/> 
         </action-resources>
         <component-definition> 
-          <jndi><![CDATA[verveReportConnection]]></jndi> 
+          <jndi><![CDATA[dw3]]></jndi> 
         </component-definition> 
       </action-definition>
  
@@ -472,7 +474,7 @@ order by a.date_sk desc;]]></query>
           <report-definition mapping="report-definition12"/> 
         </action-resources>
         <component-definition> 
-          <jndi><![CDATA[verveReportConnection]]></jndi> 
+          <jndi><![CDATA[dw3]]></jndi> 
         </component-definition> 
       </action-definition>
  
@@ -491,7 +493,7 @@ order by a.date_sk desc;]]></query>
           <report-definition mapping="report-definition13"/> 
         </action-resources>
         <component-definition> 
-          <jndi><![CDATA[verveReportConnection]]></jndi> 
+          <jndi><![CDATA[dw3]]></jndi> 
         </component-definition> 
       </action-definition>
  
@@ -510,7 +512,26 @@ order by a.date_sk desc;]]></query>
           <report-definition mapping="report-definition14"/> 
         </action-resources>
         <component-definition> 
-          <jndi><![CDATA[verveReportConnection]]></jndi> 
+          <jndi><![CDATA[dw3]]></jndi> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_network=='AdMarvel']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <eastern_date_sk type="string"/>  
+          <output-type type="string" mapping="p_output"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition15"/> 
+        </action-resources>
+        <component-definition> 
+          <jndi><![CDATA[dw3]]></jndi> 
         </component-definition> 
       </action-definition>
  

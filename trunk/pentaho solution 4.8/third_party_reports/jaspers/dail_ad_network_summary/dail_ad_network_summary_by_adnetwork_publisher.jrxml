@@ -225,6 +225,22 @@ SELECT      'KlickThru (35)'::text as ad_network_name,
             fullfilled_code_y as fullfilled_code_y
 FROM        adnetwork.daily_kt_performance
 WHERE       is_active = true AND eastern_date_sk = $P{eastern_date_sk}::int
+UNION
+/* AdMarvel */
+SELECT      'AdMarvel (50)'::text as ad_network_name,
+            parent1_id  as publisher_id,
+	  parent1_name  as publisher,
+            partner_keyword,
+            partner_id,
+            portal_keyword,
+            COALESCE(requests,0) as requests,
+            COALESCE(impressions,0) as paid_impressions,
+            COALESCE(clicks,0) as clicks,
+            ROUND(revenue::NUMERIC,3) as net_revenue,
+            responses_count as fullfilled_code_count,
+            filled_requests as fullfilled_code_y
+FROM        adnetwork.daily_am_performance
+WHERE       is_active = true AND eastern_date_sk = $P{eastern_date_sk}::int
 ) a
 ORDER BY ad_network_name, publisher, partner_keyword]]>
 	</queryString>
