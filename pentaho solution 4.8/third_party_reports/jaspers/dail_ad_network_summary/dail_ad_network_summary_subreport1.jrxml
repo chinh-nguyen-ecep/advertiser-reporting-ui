@@ -186,6 +186,19 @@ SELECT      eastern_date_sk, full_date, calendar_year_month, month_since_2005,
 FROM        adnetwork.daily_kt_performance
 WHERE       is_active = true AND eastern_date_sk = $P{eastern_date_sk}::int
 GROUP BY    eastern_date_sk, full_date, calendar_year_month, month_since_2005
+UNION
+/* AdMarvel */
+SELECT      eastern_date_sk, full_date, calendar_year_month, month_since_2005,
+            '50' as ad_network_id, 'AdMarvel' as ad_network_name,
+            COALESCE(SUM(requests),0) as requests,
+            COALESCE(SUM(impressions),0) as paid_impressions,
+            COALESCE(SUM(clicks),0) as clicked,
+            ROUND(COALESCE(SUM(case revenue when -1 then null else revenue end),0)::NUMERIC,3) as net_revenue,
+            COALESCE(SUM(case responses_count when -1 then null else responses_count end),0) as fullfilled_code_count,
+            COALESCE(SUM(case filled_requests when -1 then null else filled_requests end),0) as fullfilled_code_y
+FROM        adnetwork.daily_am_performance
+WHERE       is_active = true AND eastern_date_sk = $P{eastern_date_sk}::int
+GROUP BY    eastern_date_sk, full_date, calendar_year_month, month_since_2005
 ) a
 ORDER BY ad_network_name]]>
 	</queryString>
