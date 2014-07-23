@@ -43,19 +43,19 @@ sub main{
 		#run param22;
 		writelog("Run function param 22");
 		runParam(22);
-		checkParam(22,15);
+		checkParam(22,9);
 		promote(22);
 		
 		#run param 28
 		writelog("Run param 28");
 		system("cd ../notifications_for_late_reports/;perl notifications_for_late_reports.pl remnant > monitor/dailylog.remnant.$process_date.txt 2> errors/dailylog.remnant.$process_date.txt &");		
 		runParam(28);
-		checkParam(28,8);				
+		checkParam(28,4);				
 		promote(28);
 		
 		# Check param 69 from admDFP before continue
 		checkParam(69,5);	
-		
+
 		#run param 34 transfer data to network data mark
 		##writelog("Run param 34");	
 		##runParam(34);
@@ -153,22 +153,23 @@ sub rollBackTransferRemnant{
 		%h_report_date7=dw3_getDate(-7);
 		$report_date1=$h_report_date1{'year'}.'-'.$h_report_date1{'month'}.'-'.$h_report_date1{'day'};	#the report date 2012-02-02
 		$report_date7=$h_report_date7{'year'}.'-'.$h_report_date7{'month'}.'-'.$h_report_date7{'day'};	#the report date 2012-02-02
-		rollBackTransfer_table_wp('adm.daily_agg_network_performance',$report_date7,$report_date1);
-		rollBackTransfer_table('adm.daily_network_fct_request',$report_date7,$report_date1);
-		rollBackTransfer_table('adm.daily_network_fct_channel',$report_date7,$report_date1);
-		rollBackTransfer_table('adnetwork.daily_adnetwork_summary',$report_date7,$report_date1);
+		##rollBackTransfer_table_wp('adm.daily_agg_network_performance',$report_date7,$report_date1);
+		##rollBackTransfer_table('adm.daily_network_fct_request',$report_date7,$report_date1);
+		##rollBackTransfer_table('adm.daily_network_fct_channel',$report_date7,$report_date1);
+		##rollBackTransfer_table('adnetwork.daily_adnetwork_summary',$report_date7,$report_date1);
 		
-		checkEstimateTableToTransfer('adnetwork.daily_cg_mobile_performance');
+
 		checkEstimateTableToTransfer('adnetwork.daily_cg_performance');
 		checkEstimateTableToTransfer('adnetwork.daily_jt_performance');
-		checkEstimateTableToTransfer('adnetwork.daily_kt_performance');
+
 		checkEstimateTableToTransfer('adnetwork.daily_mm_performance');
 		checkEstimateTableToTransfer('adnetwork.daily_mx_performance');
 		checkEstimateTableToTransfer('adnetwork.daily_sp_blue_performance');
-		checkEstimateTableToTransfer('adnetwork.daily_wh_performance');
+
 		checkEstimateTableToTransfer('adnetwork.daily_yp_no_performance');
-		checkEstimateTableToTransfer('adnetwork.daily_yp_performance');
+
 		checkEstimateTableToTransfer('adnetwork.daily_yp_sb_performance');
+		checkEstimateTableToTransfer('adnetwork.daily_am_performance');
 }
 
 sub rollBackTransferDelivery{
@@ -206,7 +207,7 @@ sub rollBackTransferPublisherProperty{
 		rollBackTransfer_table('adm.ba_daily_flight',$report_date7,$report_date1);
 		rollBackTransfer_table('adm.ba_daily_flight_min',$report_date7,$report_date1);
 		rollBackTransfer_table('adm.ba_daily_flight_exception',$report_date7,$report_date1);
-		rollBackTransfer_table('adm.daily_agg_api_revenue_by_partner_v3',$report_date7,$report_date1);
+		##rollBackTransfer_table('adm.daily_agg_api_revenue_by_partner_v3',$report_date7,$report_date1);
 		##system("cd /opt/temp/autoscripts/transformer/ && perl main.pl daily_range dw3 pentaho.ecepvn.org:analyticsdb adm.daily_agg_fct_overview_revenue_beta $report_date7 $report_date1 3rdAdNetAutodaily &");
 		##system("cd /opt/temp/autoscripts/transformer/ && perl main.pl daily_range dw3 dw10:analyticsdb adm.daily_agg_fct_overview_revenue_beta $report_date7 $report_date1 3rdAdNetAutodaily &");
 
