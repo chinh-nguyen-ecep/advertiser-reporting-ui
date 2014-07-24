@@ -1,5 +1,5 @@
 defaultJNDI=verveReportConnection
-hosting=http://localhost:8081
+hosting=http://reporting.vervemobile.com
 appName=rtb
 revenueByHourAPIUrl=/api/v1/dailyExchangeCostAnalysisByHour
 dailyExchangerPayoutAPIUrl=/api/v1/dailyExchangeCostAnalysis
