@@ -10,7 +10,7 @@
     </init-param>
     <init-param>
       <param-name>serverName</param-name>
-      <param-value>localhost:8081</param-value>
+      <param-value>reporting.vervemobile.com</param-value>
     </init-param>
     <init-param>
       <param-name>renew</param-name>
@@ -30,7 +30,7 @@
     </init-param>
     <init-param>
       <param-name>serverName</param-name>
-      <param-value>localhost:8081</param-value>
+      <param-value>reporting.vervemobile.com</param-value>
     </init-param>
   </filter>
   <filter>

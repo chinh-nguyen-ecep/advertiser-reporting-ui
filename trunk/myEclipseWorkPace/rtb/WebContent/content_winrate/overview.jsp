@@ -6,7 +6,15 @@
 			  <button type="button" class="btn btn-default " onclick="rawChart2();" id="avg_chart_mode_bt">Ave. Price</button>
 			</div-->
 		</div>
-			    <form class="navbar-form navbar-right" role="export">	
+			    <form class="navbar-form navbar-right" role="export">
+				    <div class="form-group">
+					    <select style="width:150px" id="exchange_filter" >
+		    				<option value="All Exchanges">All exchanges</option>
+					        <option value="mopub">mopub</option>
+					        <option value="nexage">nexage</option>
+					        <option value="pubmatic">pubmatic</option>						        
+					    </select>
+				    </div>	
  			  	  <div class="form-group">
 		       			<div id="overview-date_range" class="form-control input-sm">
 					    <i class="icon-calendar icon-large"></i>
@@ -17,11 +25,26 @@
 			    </form>
 		</div>
 	</nav>
-	<div class="panel panel-default">
-	  <div class="panel-body" >
-	    <div id="chart-container" style="min-width: 310px; height: 450px; margin: 0 auto" class="loading"></div>
-	  </div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+			  <div class="panel-body" >
+			    <div id="chart-container" style="min-width: 310px; height: 450px; margin: 0 auto" class="loading"></div>
+			  </div>
+			</div>
+		</div>
+
 	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+			  <div class="panel-body" >
+			    <div id="chart-container-2" style="min-width: 310px; height: 450px; margin: 0 auto" class="loading"></div>
+			  </div>
+			</div>
+		</div>		
+	</div>
+	
 		<div class="row">
 	<div class="col-md-10">
 

@@ -184,7 +184,7 @@ public class RequestProcessing {
 			}else if(operator.equals("like")){
 				result+="LOWER("+dimension +") LIKE "+"'%"+value.toLowerCase().replaceAll(" ", "%")+"%'";
 			}else if(operator.equals("between")){
-				String[] values=value.split("\\..", -1);
+				String[] values=value.split("\\.\\.", -1);
 				if(values.length!=2){
 					values[0]="9999-12-31";
 					values[1]="9999-12-31";
