@@ -28,7 +28,7 @@ var series_chartData = [ {
 							animation: true,
 							tooltip : {
 								headerFormat: '',
-								pointFormat : '<b>Bid Price: {point.x}$</b><br/>Win Rate: {point.y:.2f}% <br/>Impressions: {point.value:,.0f}',
+								pointFormat : '<b>Bid Price: ${point.x}</b><br/>Win Rate: {point.y:.2f}% <br/>Wins: {point.value:,.0f}',
 							},
 							data : [ [ 0.079, 5.38, 37 ],
 									[ 0.16342, 2.10, 778 ] ]
@@ -58,8 +58,7 @@ function loadChart() {
 	var dateRange_value = 'where[full_date.between]='
 			+ urlMaster.getParam('where[full_date.between]');
 	var url = apiRootUrl
-			+ '/dailyWinRateExchangeBidprice?select=bid_price&limit=2000&'
-			+ dateRange_value + "&by=bid_cnt|imp_cnt&order=bid_price.asc";
+			+ '/dailyExchangeWinrate?select=bid_price&limit=9999&'+ dateRange_value + "&by=bids|wins&order=bid_price.asc";
 	if (myAjaxStore.isLoading(url)) {
 		console.log('Your request is loading...');
 		console.log('Callback after ' + loadingCallback + 's...');
@@ -139,7 +138,7 @@ function loadChart() {
 			console.log(table_data);
 			myTable = new drawTableFromArray({
 				table_id : 'winrate_dataTable',
-				table_colums : [ 'Bid Price', 'Bid Count', 'Impressions',
+				table_colums : [ 'Bid Price', 'Bid Count', 'Wins',
 						'Win Rate' ],
 				columns_format : [ '', 'number', 'number', '%' ],
 				table_data : table_data,
@@ -199,14 +198,17 @@ function loadChart() {
 								labels : {
 									align : 'left',
 									x : 0.1,
-									format : '{value}$' // long month
+									format : '${value}' // long month
 								},
 								showLastLabel : false,
-								tickLength : 0.5
+								tickLength : 0.5,
+								title : {
+									text : 'Bid Price'
+								}
 							},
 							yAxis : {
 								title : {
-									text : null
+									text : 'Winrate'
 								},
 								labels : {
 									format : '{value}%'
@@ -215,8 +217,7 @@ function loadChart() {
 								maxPadding : 0,
 								startOnTick : false,
 								endOnTick : false,
-								tickPositions : [ 0, 10, 20, 30, 40, 50, 60,
-										70, 80, 90, 100 ],
+								tickPositions : [ 0, 10, 20, 30, 40, 50, 60,70, 80, 90, 100 ],
 								tickWidth : 1,
 								min : 0,
 								max : 100

@@ -148,14 +148,14 @@
     <servlet-name>ApiDailyWinRateByHour</servlet-name>
     <url-pattern>/api/v1/dailyWinRateByHour</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <description></description>
-    <display-name>ApiDailyWinRateExchageBidprice</display-name>
-    <servlet-name>ApiDailyWinRateExchageBidprice</servlet-name>
-    <servlet-class>rtb.servlets.ApiDailyWinRateExchageBidprice</servlet-class>
+    <display-name>ApiDailyExchangeWinrate</display-name>
+    <servlet-name>ApiDailyExchangeWinrate</servlet-name>
+    <servlet-class>rtb.servlets.ApiDailyExchangeWinrate</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ApiDailyWinRateExchageBidprice</servlet-name>
-    <url-pattern>/api/v1/dailyWinRateExchangeBidprice</url-pattern>
+    <servlet-name>ApiDailyExchangeWinrate</servlet-name>
+    <url-pattern>/api/v1/dailyExchangeWinrate</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -10,9 +10,9 @@
 			    <div class="form-group">
 				    <select style="width:150px" id="exchange_filter" >
 	    				<option value="All Exchanges">All exchanges</option>
-				        <option value="mopub">Mopub</option>
-				        <option value="nexage">Nexage</option>
-				        <option value="pubmatic">Pubmatic</option>						        
+				        <option value="mopub">mopub</option>
+				        <option value="nexage">nexage</option>
+				        <option value="pubmatic">pubmatic</option>						        
 				    </select>
 			    </div>
  			  	  <div class="form-group">
@@ -36,11 +36,10 @@
 	  		<h2 style="margin-top: 0px;">Summary</h2>
 <!-- 	  		<p>The average values </p> -->
 	  		<ul class="list-group">
-	  			<li class="list-group-item">Impressions/Day<span class="badge av-impression">0</span></li>
+	  			<li class="list-group-item">Wins/Day<span class="badge av-impression">0</span></li>
 	  			<li class="list-group-item">Paid Amount/Day<span class="badge av-paid-amount">0</span></li>
 	  			<li class="list-group-item">Ave. Paid Price/Day<span class="badge av-paid-price">0</span></li>
 			  	<li class="list-group-item">Ave. Bid Price/Day<span class="badge av-bid-price">0</span></li>
-			  	
 			</ul>
 	  	</div>
 	  </div>	 
@@ -96,7 +95,7 @@
 	 	</div>	 
 	</div>
 	
-	<script src="scripts/control/dashboardOverview.js"></script>
+	<script src="scripts/control/exchangeCostAnalysisOverview.js"></script>
 	<script>
 
 	</script>
