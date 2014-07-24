@@ -23,7 +23,7 @@ var subtitle; // subtitle of chart
 var title; // titile of chart
 var categories=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23];	 //hour category of chart
 var p_dma_ids=[];// array content list of dma ids user selected
-var series_1=[]; // impressions data
+var series_1=[]; // Wins data
 var series_2=[]; // pay amount data
 var series_3=[]; // Ave. paid price data
 var series_4=[]; // Ave. bid price
@@ -32,7 +32,7 @@ var myTable; // table object
 var myTableSummary;
 var myDateRangeInput; // Date rang input object
 var breakBy='hour'; // The value status of break by hour or break by date
-var measure='Impressions'; // The value of measure value
+var measure='Wins'; // The value of measure value
 $(document).ready(function(){ 
 	setTabActive('dailyExchangePayoutByHour');
 	myDateRangeInput=new generateDateRange({
@@ -60,10 +60,10 @@ $(document).ready(function(){
 		var dateRange_value='where[full_date.between]='+urlMaster.getParam('where[full_date.between]');
 		var where_value='';
 		if($('#exchange_filter').val()!='All Exchanges'){
- 			where_value="&where[exchanger]="+$('#exchange_filter').val(); 			
+ 			where_value="&where[exchange]="+$('#exchange_filter').val(); 			
  		}
 		
-		var url=apiRootUrl+'/dailyExchangeCostAnalysisByHour?select=full_date|hour24_of_day&limit=2000&'+dateRange_value+"&by=imp_cnt|paid_amount|avg_paid_price.avg|avg_bid_price.avg&order=full_date|hour24_of_day"+where_value;
+		var url=apiRootUrl+'/dailyExchangeCostAnalysisByHour?select=full_date|hour24_of_day&limit=9999&'+dateRange_value+"&by=wins|paid_amount|ave_paid_price.avg|ave_bid_price.avg&order=full_date|hour24_of_day"+where_value;
 		if(myAjaxStore.isLoading(url)){
 			console.log('Your request is loading...');
 			console.log('Callback after '+loadingCallback+'s...');
@@ -177,7 +177,7 @@ $(document).ready(function(){
 		  	//generate table
 		  	myTable=new drawTableFromArray({
 		  		table_id: 'daily-advertiser-dataTable',
-		  		table_colums: ['Date','Hour','Impressions','Paid Amount','Ave. Paid Price','Ave. Bid Price'],
+		  		table_colums: ['Date','Hour','Wins','Paid Amount','Ave. Paid Price','Ave. Bid Price'],
 		  		columns_format:['','','number','money','money','money'],
 		  		table_data: table_data,
 		  		page_items: 24,
@@ -267,9 +267,6 @@ $(document).ready(function(){
 	                        return s;
 	                    }
 	                },
-	                title: {
-	                    text: 'Count'
-	                },
 	                gridLineWidth: 1
 	            },
 	            legend: {
@@ -338,9 +335,9 @@ $(document).ready(function(){
 		//
 		$('#measuresBt button').removeClass('active');
 		jqueryButon.addClass('active');
-		if(measure=='Impressions'){
+		if(measure=='Wins'){
 			series=series_1; 
-			title+=" Impressions ";
+			title+=" Wins ";
 			_format='number';
 		}else if(measure=='Paid Amount'){
 			series=series_2;
@@ -434,7 +431,7 @@ $(document).ready(function(){
 		            {name: 'Ave. Bid Price',data:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}
 		];
 		var tableData=[];
-		// summary impressions
+		// summary Wins
 		for(var i=0;i<combine_series[0].data.length;i++){
 			var total_imp=0;
 			var total_amount=0;
@@ -460,7 +457,7 @@ $(document).ready(function(){
 		//generate table
 	  	myTableSummary=new drawTableFromArray({
 	  		table_id: 'daily-advertiser-dataTable',
-	  		table_colums: ['Hour','Impressions','Paid Amount','Ave. Paid Price','Ave. Bid Price'],
+	  		table_colums: ['Hour','Wins','Paid Amount','Ave. Paid Price','Ave. Bid Price'],
 	  		columns_format:['','number','money','money','money'],
 	  		table_data: tableData,
 	  		page_items: 24,
@@ -527,7 +524,10 @@ $(document).ready(function(){
 	    
 	            },
 	            { //Second
-	                labels: {                    
+	                labels: {  
+	                	formatter: function() {
+	                        return accounting.formatMoney(this.value) ;
+	                    },
 	                    style: {
 	                        color: '#151515'
 	                    }
@@ -549,7 +549,7 @@ $(document).ready(function(){
 	                    }
 	                },
 	                title: {
-	                    text: 'Impressions',
+	                    text: 'Wins',
 	                    style: {
 	                        color: '#6E6E6E'
 	                    }
@@ -562,7 +562,7 @@ $(document).ready(function(){
 	                	var date_Value=this.x;
 	                	var s = '<b>'+ date_Value +'h</b>';                    
 	                    $.each(this.points, function(i, point) {
-	                    	if(point.series.name=='Impressions'){
+	                    	if(point.series.name=='Wins'){
 	                    		s += '<br/><font style="color: #6E6E6E;">'+ point.series.name +': '+
 	                            accounting.formatNumber(point.y)+'</font>';                    		
 	                    	}else if(point.series.name=='Paid Amount'){
@@ -598,7 +598,7 @@ $(document).ready(function(){
 	                type: 'areaspline',                
 	                data: combine_series[1].data                  
 	            },{
-	                name: 'Impressions',
+	                name: 'Wins',
 	                color: '#6E6E6E',
 	                type: 'column',   
 	                yAxis: 2,

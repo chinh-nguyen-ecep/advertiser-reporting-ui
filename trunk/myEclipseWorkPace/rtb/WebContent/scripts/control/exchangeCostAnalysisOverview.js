@@ -52,9 +52,9 @@
  		var where_value='';
  		
  		if($('#exchange_filter').val()!='All Exchanges'){
- 			where_value="&where[exchanger]="+$('#exchange_filter').val(); 			
+ 			where_value="&where[exchange]="+$('#exchange_filter').val(); 			
  		}
- 		var url=apiRootUrl+'/dailyExchangeCostAnalysis?select=full_date&limit=2000&'+dateRange_value+"&by=imp_cnt|paid_amount|avg_paid_price.avg|avg_bid_price.avg"+where_value;
+ 		var url=apiRootUrl+'/dailyExchangeCostAnalysis?select=full_date&limit=99999&'+dateRange_value+"&by=wins|paid_amount|ave_paid_price.avg|ave_bid_price.avg"+where_value;
  		console.log('Url: '+url);
 		if(myAjaxStore.isLoading(url)){
 			console.log('Your request is loading...');
@@ -121,7 +121,7 @@
 		
 			  	myTable=new drawTableFromArray({
 			  		table_id: 'dashboard-overview-dataTable',
-			  		table_colums: ['Date','Impressions','Paid Amount','Ave. Paid Price','Ave. Bid Price'],
+			  		table_colums: ['Date','Wins','Paid Amount','Ave. Paid Price','Ave. Bid Price'],
 			  		columns_format:['','number','money','money','money'],
 			  		table_data: table_data,
 			  		page_items: 31,
@@ -246,7 +246,10 @@
     
             },
             { //Second
-                labels: {                    
+                labels: {  
+                	formatter: function() {
+                        return accounting.formatMoney(this.value) ;
+                    },
                     style: {
                         color: '#151515'
                     }
@@ -268,7 +271,7 @@
                     }
                 },
                 title: {
-                    text: 'Impressions',
+                    text: 'Wins',
                     style: {
                         color: '#6E6E6E'
                     }
@@ -281,16 +284,16 @@
                 	var date_Value=verveDateConvert(this.x);
                 	var s = '<b>'+ date_Value.format('mmm d, yyyy') +'</b>';                    
                     $.each(this.points, function(i, point) {
-                    	if(point.series.name=='Impressions'){
+                    	if(point.series.name=='Wins'){
                     		s += '<br/><font style="color: #6E6E6E;">'+ point.series.name +': '+
                             accounting.formatNumber(point.y)+'</font>';                    		
                     	}else if(point.series.name=='Paid Amount'){
                     		s += '<br/><font style="color: #DBA901;">'+ point.series.name +': '+
                             accounting.formatMoney(point.y)+'</font>';                    		
-                    	}else if(point.series.name=='Avg Bid Price'){
+                    	}else if(point.series.name=='Ave. Bid Price'){
                     		s += '<br/><font style="color: #0489B1;">'+ point.series.name +': '+
                             accounting.formatMoney(point.y)+'</font>';                    		
-                    	}else if(point.series.name=='Avg Paid Price'){
+                    	}else if(point.series.name=='Ave. Paid Price'){
                     		s += '<br/><font style="color: #FA5858;">'+ point.series.name +': '+
                             accounting.formatMoney(point.y)+'</font>';                    		
                     	}else{
@@ -317,7 +320,7 @@
                 type: 'areaspline',                
                 data: secondData                
             },{
-                name: 'Impressions',
+                name: 'Wins',
                 color: '#6E6E6E',
                 type: 'column',   
                 yAxis: 2,
@@ -377,7 +380,7 @@
 		mydialog.setWidth(700);
 		mydialog.open();
 		
-		mydialog.setTitle('Daily Exchange Payout by Date From '+selectStartDate.format('yyyy-mm-dd')+' To '+selectEndDate.format('yyyy-mm-dd'));
+		mydialog.setTitle('Exchange Cost Analysis by Date From '+selectStartDate.format('yyyy-mm-dd')+' To '+selectEndDate.format('yyyy-mm-dd'));
 		var exchanger=$('#exchange_filter').val();
 		var	loadingUrl=rootUrl+'/GenerateJasperReport'+'?export_type=html&jrxml=daily_exchanger_payout&p_end_date='+selectEndDate.format('yyyy-mm-dd')+'&p_start_date='+selectStartDate.format('yyyy-mm-dd')+'&path=exchangePayout'+"&p_exchange="+exchanger;
 		var htmlResult;

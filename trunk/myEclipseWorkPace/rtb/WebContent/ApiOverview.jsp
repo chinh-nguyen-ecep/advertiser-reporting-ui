@@ -19,18 +19,18 @@
                   <td>overview-internal</td>
                </tr> 
                
-               <tr>
+           <!--     <tr>
                   <td><a href="apiDetail?api=dailyWinRate">Daily Win Rate</a></td>
                   <td>overview-internal</td>
-               </tr>  
+               </tr> -->  
                <tr>
-                  <td><a href="apiDetail?api=dailyWinRateExchangeBidprice">Daily Win Rate Exchange BidPrice</a></td>
+                  <td><a href="apiDetail?api=dailyExchangeWinrate">Daily Exchange Winrate</a></td>
                   <td>overview-internal</td>
                </tr>  
-               <tr>
+              <!--  <tr>
                   <td><a href="apiDetail?api=dailyWinRateByHour">Daily Win Rate By Hour</a></td>
                   <td>overview-internal</td>
-               </tr>               
+               </tr>   -->             
             </table>
             <nav>
                <ul class='breadcrumb'>

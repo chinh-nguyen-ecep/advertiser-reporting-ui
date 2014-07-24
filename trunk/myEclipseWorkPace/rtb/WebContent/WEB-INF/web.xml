@@ -110,22 +110,22 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>ApiDailyExchangerCostAnalysisByHour</display-name>
-    <servlet-name>ApiDailyExchangerCostAnalysisByHour</servlet-name>
-    <servlet-class>rtb.servlets.ApiDailyExchangerCostAnalysisByHour</servlet-class>
+    <display-name>ApiDailyExchangeCostAnalysisByHour</display-name>
+    <servlet-name>ApiDailyExchangeCostAnalysisByHour</servlet-name>
+    <servlet-class>rtb.servlets.ApiDailyExchangeCostAnalysisByHour</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ApiDailyExchangerCostAnalysisByHour</servlet-name>
+    <servlet-name>ApiDailyExchangeCostAnalysisByHour</servlet-name>
     <url-pattern>/api/v1/dailyExchangeCostAnalysisByHour</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>ApiDailyExchangerCostAnalysis</display-name>
-    <servlet-name>ApiDailyExchangerCostAnalysis</servlet-name>
-    <servlet-class>rtb.servlets.ApiDailyExchangerCostAnalysis</servlet-class>
+    <display-name>ApiDailyExchangeCostAnalysis</display-name>
+    <servlet-name>ApiDailyExchangeCostAnalysis</servlet-name>
+    <servlet-class>rtb.servlets.ApiDailyExchangeCostAnalysis</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ApiDailyExchangerCostAnalysis</servlet-name>
+    <servlet-name>ApiDailyExchangeCostAnalysis</servlet-name>
     <url-pattern>/api/v1/dailyExchangeCostAnalysis</url-pattern>
   </servlet-mapping>
   <servlet>
@@ -150,12 +150,12 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>ApiDailyWinRateExchageBidprice</display-name>
-    <servlet-name>ApiDailyWinRateExchageBidprice</servlet-name>
-    <servlet-class>rtb.servlets.ApiDailyWinRateExchageBidprice</servlet-class>
+    <display-name>ApiDailyExchangeWinrate</display-name>
+    <servlet-name>ApiDailyExchangeWinrate</servlet-name>
+    <servlet-class>rtb.servlets.ApiDailyExchangeWinrate</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ApiDailyWinRateExchageBidprice</servlet-name>
-    <url-pattern>/api/v1/dailyWinRateExchangeBidprice</url-pattern>
+    <servlet-name>ApiDailyExchangeWinrate</servlet-name>
+    <url-pattern>/api/v1/dailyExchangeWinrate</url-pattern>
   </servlet-mapping>
 </web-app>

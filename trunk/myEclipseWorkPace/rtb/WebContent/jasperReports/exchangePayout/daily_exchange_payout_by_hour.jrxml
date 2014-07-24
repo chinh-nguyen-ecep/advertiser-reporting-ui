@@ -61,7 +61,7 @@ ORDER BY full_date,hour24_of_day]]>
 				<textElement textAlignment="Right">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["Daily Exchange Payout by "+$P{p_exchange}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["Exchange Cost Analysis by "+$P{p_exchange}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -75,7 +75,7 @@ ORDER BY full_date,hour24_of_day]]>
 					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
 					<rightPen lineWidth="0.5" lineStyle="Solid"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Date]]></text>
@@ -88,7 +88,7 @@ ORDER BY full_date,hour24_of_day]]>
 					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
 					<rightPen lineWidth="0.5" lineStyle="Solid"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Ave. Paid Price]]></text>
@@ -101,7 +101,7 @@ ORDER BY full_date,hour24_of_day]]>
 					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
 					<rightPen lineWidth="0.5" lineStyle="Solid"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Ave. Bid Price]]></text>
@@ -114,7 +114,7 @@ ORDER BY full_date,hour24_of_day]]>
 					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
 					<rightPen lineWidth="0.5" lineStyle="Solid"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Paid Amount]]></text>
@@ -127,10 +127,10 @@ ORDER BY full_date,hour24_of_day]]>
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[Impression]]></text>
+				<text><![CDATA[Wins]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="111" y="0" width="70" height="20" backcolor="#CCCCCC"/>
@@ -140,7 +140,7 @@ ORDER BY full_date,hour24_of_day]]>
 					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
 					<rightPen lineWidth="0.5" lineStyle="Solid"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Hour]]></text>
