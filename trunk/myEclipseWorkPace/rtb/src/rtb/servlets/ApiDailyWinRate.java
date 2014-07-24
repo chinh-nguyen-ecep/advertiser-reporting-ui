@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import rtb.api.DailyExchangerCostAnalysis;
+import rtb.api.DailyExchangeCostAnalysis;
 import rtb.api.DailyWinRate;
 import rtb.api.QueryApi;
 import rtb.bean.ApiResponseResultSet;

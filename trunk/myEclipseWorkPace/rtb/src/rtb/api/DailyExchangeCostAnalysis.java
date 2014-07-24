@@ -11,14 +11,14 @@ import rtb.bean.ApiResponseResultSetInfo;
 import rtb.utils.Configure;
 
 
-public class DailyExchangerCostAnalysis extends MainApi{
+public class DailyExchangeCostAnalysis extends MainApi{
 
-	public DailyExchangerCostAnalysis() {
+	public DailyExchangeCostAnalysis() {
 		super();
 		// TODO Auto-generated constructor stub
-		this.setDataSourceTableName("rtb.daily_agg_exchanger_cost_analysis_v1");
+		this.setDataSourceTableName("rtb.vw_agg_exchange_cost_analysis");
 		this.setDefaultDimensions(new String[]{"full_date"});
-		this.setDefaultMeasures(new String[]{"paid_amount","avg_paid_price","avg_bid_price"});
+		this.setDefaultMeasures(new String[]{"paid_amount","ave_paid_price","ave_bid_price"});
 		this.setDataSourceJNDIConn("verveReportConnection");
 	}
 	@Override
@@ -40,39 +40,41 @@ public class DailyExchangerCostAnalysis extends MainApi{
 
 		// add dimensions
 		info.addDimension(new String[] { "full_date", "", "date" });
-		info.addDimension(new String[] { "calendar_year_month", "", "string" });
-		info.addDimension(new String[] { "exchanger", "", "string" });
+		info.addDimension(new String[] { "exchange", "", "string" });
 		// add measures
-		info.addMeasures(new String[] { "avg_paid_price", "", "double"});
-		info.addMeasures(new String[] { "avg_bid_price", "", "double" });
-		info.addMeasures(new String[] { "imp_cnt", "", "integer" });
-		info.addMeasures(new String[] { "paid_amount", "", "integer" });
-
+		info.addMeasures(new String[] { "paid_amount", "", "double" });
+		info.addMeasures(new String[] { "wins", "", "integer" });
+		info.addMeasures(new String[] { "ave_paid_price", "", "double"});
+		info.addMeasures(new String[] { "ave_bid_price", "", "double" });
+		info.addMeasures(new String[] { "rtb_bids", "", "integer" });
+		info.addMeasures(new String[] { "adcel_filled_imps", "", "integer" });
+		info.addMeasures(new String[] { "dfp_imps", "", "integer" });
+		info.addMeasures(new String[] { "event_imps", "", "integer" });
+		info.addMeasures(new String[] { "event_adimpinternals", "", "integer" });
+		info.addMeasures(new String[] { "event_clicks", "", "integer" });
 		// add constraint
-		info.addConstraint(new String[] { "exchanger.in", "integer","nexage,mopub" });
-		info.addConstraint(new String[] { "exchanger", "string","nexage" });
 		info.addConstraint(new String[] { "full_date", "date",currentDateExample });
 		info.addConstraint(new String[] { "full_date.between", "date",reportDateExample + ".." + currentDateExample });
-		info.addConstraint(new String[] { "calendar_year_month", "string","2014-Jan" });
-		info.addConstraint(new String[] { "calendar_year_month.in", "string","2014-Jan,2014-Feb" });
+		info.addConstraint(new String[] { "exchange.in", "string","nexage,mopub" });
+		info.addConstraint(new String[] { "exchange", "string","nexage" });
 
 		// add select example
 		info.addSelectExample("GET " + rootUrl + "?select=full_date");
-		info.addSelectExample("GET " + rootUrl + "?select=full_date|exchanger");
+		info.addSelectExample("GET " + rootUrl + "?select=full_date|exchange");
 		// add by example
-		info.addByExample("GET " + rootUrl + "?by=imp_cnt");
+		info.addByExample("GET " + rootUrl + "?by=wins");
 		info.addByExample("GET " + rootUrl + "?by=paid_amount");
-		info.addByExample("GET " + rootUrl + "?by=avg_paid_price.avg");
-		info.addByExample("GET " + rootUrl + "?by=imp_cnt|avg_paid_price.avg|avg_bid_price.avg");
-		info.addByExample("GET " + rootUrl + "?select=full_date|exchanger&by=avg_paid_price.avg");
+		info.addByExample("GET " + rootUrl + "?by=ave_paid_price.avg");
+		info.addByExample("GET " + rootUrl + "?by=wins|ave_paid_price.avg|ave_bid_price.avg");
+		info.addByExample("GET " + rootUrl + "?select=full_date|exchange&by=ave_paid_price.avg");
 		// add where example
 		info.addWhereExample("GET " + rootUrl + "?where[full_date]="+ currentDateExample);
 		info.addWhereExample("GET " + rootUrl + "?where[full_date.between]="+ reportDateExample + ".." + currentDateExample);
-		info.addWhereExample("GET " + rootUrl + "?where[full_date]="	+ currentDateExample + "&where[exchanger.in]=nexage,mopub");
-		info.addWhereExample("GET " + rootUrl + "?select=full_date&by=avg_paid_price.avg&where[full_date]="	+ currentDateExample);
+		info.addWhereExample("GET " + rootUrl + "?where[full_date]="	+ currentDateExample + "&where[exchange.in]=nexage,mopub");
+		info.addWhereExample("GET " + rootUrl + "?select=full_date&by=ave_paid_price.avg&where[full_date]="	+ currentDateExample);
 		// add order example
 		info.addOrderExample("GET " + rootUrl + "?order=full_date.desc");
-		info.addOrderExample("GET " + rootUrl + "?select=full_date&by=avg_paid_price.avg&where[full_date]="	+ currentDateExample + "&order=full_date.desc");
+		info.addOrderExample("GET " + rootUrl + "?select=full_date&by=ave_paid_price.avg&where[full_date]="	+ currentDateExample + "&order=full_date.desc");
 		return info;
 	}
 

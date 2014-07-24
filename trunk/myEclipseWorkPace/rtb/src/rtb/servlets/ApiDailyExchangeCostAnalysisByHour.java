@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import rtb.api.DailyExchangerCostAnalysisByHour;
+import rtb.api.DailyExchangeCostAnalysisByHour;
 import rtb.api.QueryApi;
 import rtb.bean.ApiResponseResultSet;
 import rtb.bean.ApiResponseResultSetInfo;
@@ -17,13 +17,13 @@ import rtb.bean.ApiResponseResultSetInfo;
 /**
  * Servlet implementation class ApiRevenueByHour
  */
-public class ApiDailyExchangerCostAnalysisByHour extends HttpServlet {
+public class ApiDailyExchangeCostAnalysisByHour extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ApiDailyExchangerCostAnalysisByHour() {
+    public ApiDailyExchangeCostAnalysisByHour() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,7 +39,7 @@ public class ApiDailyExchangerCostAnalysisByHour extends HttpServlet {
 		PrintWriter pw=response.getWriter();
 		
 		ApiResponseResultSet apiResponse=new ApiResponseResultSet();
-		api=new DailyExchangerCostAnalysisByHour();
+		api=new DailyExchangeCostAnalysisByHour();
 		//get info param
 		String info=request.getParameter("info");
 		if(info!=null){
