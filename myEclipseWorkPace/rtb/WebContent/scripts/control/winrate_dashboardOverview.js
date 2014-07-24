@@ -16,6 +16,7 @@ if (urlMaster.getParam('where[full_date.between]') == '') {
 	selectEndDate = verveDateConvert(dateRangeArray[1]);
 }
 var chart;// chart object
+var chart2;// chart object
 var subtitle; // subtitle of chart
 var title; // titile of chart
 var table_data = []; // data to show by table
@@ -33,6 +34,17 @@ var series_chartData = [ {
 							data : [ [ 0.079, 5.38, 37 ],
 									[ 0.16342, 2.10, 778 ] ]
 						} ];
+var series_chartData2 = [ {
+							    name: 'Bids',
+							    color: '#0489B1',
+							    type: 'line', 
+							    data: [[0.01,100],[0.02,120],[0.03,90]]
+							},{
+							    name: 'Wins',
+							    color: '#FA5858',
+							    type: 'line',
+							    data: [[0.01,90],[0.02,100],[0.03,80]]    
+							}];
 var myDateRangeInput; // Date rang input object
 $(document).ready(
 		function() {
@@ -55,10 +67,12 @@ $(document).ready(
 
 function loadChart() {
 	myDateRangeInput.disable();
-	var dateRange_value = 'where[full_date.between]='
-			+ urlMaster.getParam('where[full_date.between]');
-	var url = apiRootUrl
-			+ '/dailyExchangeWinrate?select=bid_price&limit=9999&'+ dateRange_value + "&by=bids|wins&order=bid_price.asc";
+	var dateRange_value = 'where[full_date.between]='+ urlMaster.getParam('where[full_date.between]');
+	var where_value='';
+	if($('#exchange_filter').val()!='All Exchanges'){
+		where_value="&where[exchange]="+$('#exchange_filter').val(); 			
+	}
+	var url = apiRootUrl+ '/dailyExchangeWinrate?select=bid_price&limit=999999999&'+ dateRange_value + "&by=bids|wins&order=bid_price"+where_value;
 	if (myAjaxStore.isLoading(url)) {
 		console.log('Your request is loading...');
 		console.log('Callback after ' + loadingCallback + 's...');
@@ -67,8 +81,9 @@ function loadChart() {
 		});
 		return;
 	}
-	if (chart != null) {
+	if (chart != null && chart2 != null) {
 		chart.showLoading();
+		chart2.showLoading();
 	}
 	var ajaxData = myAjaxStore.get(url);
 	if (ajaxData == null) {
@@ -135,12 +150,30 @@ function loadChart() {
 				table_data.push([ bid_price, bid_count, impression_count,
 						win_rate ]);
 			}
-			console.log(table_data);
+			
+
+			// generate chart data
+			series_chartData[0].data = [];
+			series_chartData2[0].data=[];
+			series_chartData2[1].data=[];
+			for (var i = 0; i < table_data.length; i++) {
+				var bid_price = table_data[i][0];
+				var bid_cnt= table_data[i][1];
+				var impression_count = table_data[i][2];
+				var win_rate = table_data[i][3];
+				series_chartData[0].data.push([ bid_price, win_rate * 100,impression_count ]);
+				series_chartData2[0].data[i]=([bid_price,bid_cnt]);
+				series_chartData2[1].data[i]=([bid_price,impression_count]);
+			}
+			// draw chart
+			drawChart();
+			// draw second chart
+			drawChart2();
+			
 			myTable = new drawTableFromArray({
 				table_id : 'winrate_dataTable',
-				table_colums : [ 'Bid Price', 'Bid Count', 'Wins',
-						'Win Rate' ],
-				columns_format : [ '', 'number', 'number', '%' ],
+				table_colums : [ 'Bid Price', 'Bid Count', 'Wins','Winrate' ],
+				columns_format : [ 'money', 'number', 'number', '%' ],
 				table_data : table_data,
 				page_items : 10,
 				paging : true,
@@ -150,27 +183,18 @@ function loadChart() {
 					// alert(row[0]);
 				}
 			});
-
-			// generate chart data
-			series_chartData[0].data = [];
-
-			for (var i = 0; i < table_data.length; i++) {
-				var bid_price = table_data[i][0];
-				var impression_count = table_data[i][2];
-				var win_rate = table_data[i][3];
-				series_chartData[0].data.push([ bid_price, win_rate * 100,impression_count ]);
-			}
-			// draw chart
-			drawChart();
 		}
 	}
 	function drawChart() {
-		var chart_title="WinRate Analysis";
+		var chart_title="WinRate Heatmap";
+		var exchange=$('#exchange_filter').val();
+		if(exchange !="All Exchanges"){
+ 			chart_title+=" by "+capitalise(exchange);
+ 		}
 		$('#chart-container').highcharts(
 						{
 							chart : {
-								type : 'heatmap',
-								margin : [ 60, 10, 80, 50 ],
+								type : 'heatmap'
 							},
 							title : {
 								text : chart_title
@@ -207,30 +231,26 @@ function loadChart() {
 								}
 							},
 							yAxis : {
-								title : {
-									text : 'Winrate'
-								},
+								title: {
+					                text: 'Winrate'					               
+					            },
 								labels : {
 									format : '{value}%'
-								},
-								minPadding : 0,
-								maxPadding : 0,
-								startOnTick : false,
-								endOnTick : false,
+								},								
 								tickPositions : [ 0, 10, 20, 30, 40, 50, 60,70, 80, 90, 100 ],
 								tickWidth : 1,
 								min : 0,
 								max : 100
 							},
-
 							colorAxis : {
-								stops : [ [ 0, '#C9FA09' ],[0.02,'#FAB509'],[0.05,'#FAA509'], [ 0.5, '#FF4000' ],
-										[ 1, '#610B0B' ] ],
-								startOnTick : false,
-								endOnTick : false,
+								stops : [ [0, '#58D3F7' ],[ 1, '#DF0101' ] ],
 								labels : {
-									format : '{value:,.0f} imp'
-								}
+									format : '{value:,.0f}'
+								},
+								min: 0,
+					            //max: 25,
+					            startOnTick: false,
+					            endOnTick: false,
 							},
 							series : series_chartData
 
@@ -240,9 +260,145 @@ function loadChart() {
 	}
 }
 
-// ///////////////////////////////////////////
-// / install plugin heatmap for hightchart
-// //////////////////////////////////////////////
+//////////////////////////////////////////////
+// Second chart
+/////////////////////////////////////////////
+	//function generate chart 
+	function drawChart2(){
+		console.log(series_chartData2);
+		var exchange=$('#exchange_filter').val();
+		var chart_title="Exchange Bids/Wins";
+		if(exchange !="All Exchanges"){
+ 			chart_title+=" by "+capitalise(exchange);
+ 		}
+		$('#chart-container-2').highcharts({
+        chart: {
+            zoomType: 'xy',
+            panning: true,
+            panKey: 'shift'
+        },
+        title: {
+            text: chart_title
+        },
+        subtitle: {
+            text: 'From '+selectStartDate.format('yyyy-mm-dd')+' To '+selectEndDate.format('yyyy-mm-dd')
+        },
+        credits:{
+        	href: 'http://www.vervemobile.com',
+        	text: 'vervemobile.com'
+        },
+        xAxis: [{
+            title: {
+                enabled: false
+            },
+            labels: {
+                rotation: -45,
+                formatter: function() {
+                    return accounting.formatMoney(this.value);;
+                }
+            }
+        }],
+        tooltip: {
+            shared: true,
+            formatter: function() {
+            	var value=this.x;
+            	var s = '<b>Bid Price: '+ accounting.formatMoney(value)+'</b>';                    
+                $.each(this.points, function(i, point) {
+                	if(point.series.name=='Wins'){
+                		s += '<br/><font style="color: #FA5858;">'+ point.series.name +': '+
+                        accounting.formatNumber(point.y)+'</font>';                    		
+                	}else if(point.series.name=='Bids'){
+                		s += '<br/><font style="color: #0489B1;">'+ point.series.name +': '+
+                        accounting.formatNumber(point.y)+'</font>';                    		
+                	}
+                    
+                });
+                return s;                    
+            }
+        },
+        yAxis: [{ // Primary
+        	min: 0,
+            labels: {
+                formatter: function() {
+                    return accounting.formatNumber(this.value);
+                }                
+            },
+            title: {
+                text: null               
+            },
+
+        }],
+        series: series_chartData2
+    });
+		chart2=$('#chart-container-2').highcharts();
+	}
+//////////////////////////////////////////////
+//
+///////////////////////////////
+	//echanger filter 
+	$("#exchange_filter").select2({
+	    placeholder: "Select Exchange",
+	    allowClear: true
+	});
+	$("#exchange_filter").change(function(){
+		loadChart();		
+	});
+//////////////////////////////////////////////
+///
+///////////////////////////////////////////////
+	function reviewExportData(){
+		var mydialog=new contentDialog();
+		var randomID=new Date().valueOf();
+		mydialog.setContent('<div title="'+randomID+'" class="loadingDots" style=""></div>');
+		mydialog.setWidth(700);
+		mydialog.open();
+		
+		mydialog.setTitle('Exchange Winrate Analysis From '+selectStartDate.format('yyyy-mm-dd')+' To '+selectEndDate.format('yyyy-mm-dd'));
+		var exchanger=$('#exchange_filter').val();
+		var	loadingUrl=rootUrl+'/GenerateJasperReport'+'?export_type=html&jrxml=exchange_winrate&p_end_date='+selectEndDate.format('yyyy-mm-dd')+'&p_start_date='+selectStartDate.format('yyyy-mm-dd')+'&path=exchangePayout'+"&p_exchange="+exchanger;
+		var htmlResult;
+		
+		if(myAjaxStore.isLoading(loadingUrl)){
+			mydialog.setContent('Your request is being processed. Please come back later 30s!');
+		}else{
+			htmlResult=myAjaxStore.get(loadingUrl);
+			if(htmlResult==null){
+				myAjaxStore.registe(loadingUrl);
+				$.ajax({
+					url: loadingUrl,
+					dataType : 'html',
+					success: function(data){
+						myAjaxStore.add(loadingUrl,data);
+						mydialog.setContent(data);
+					},
+					error: function(xhr,status,error){
+						myAjaxStore.remove(loadingUrl);
+						console.log('Generate report fail! ');
+						console.log('Url: '+loadingUrl);
+					},
+					complete: function(jqXHR,textStatus){
+						
+					}
+				});
+			}else{
+				console.log('Set content for div id title='+randomID);
+				mydialog.setContent(htmlResult);
+			}
+		}
+	}
+	
+	function exportReport(exportType){
+		var exchanger=$('#exchange_filter').val();
+		var	loadingUrl=rootUrl+'/GenerateJasperReport'+'?export_type='+exportType+'&jrxml=exchange_winrate&p_end_date='+selectEndDate.format('yyyy-mm-dd')+'&p_start_date='+selectStartDate.format('yyyy-mm-dd')+'&path=exchangePayout'+"&p_exchange="+exchanger;
+		window.open(loadingUrl);
+	}
+	
+	
+	
+	
+/////////////////////////////////////////////
+/// install plugin heatmap for hightchart
+////////////////////////////////////////////////
 /**
  * This plugin extends Highcharts in two ways: - Use HTML5 canvas instead of SVG
  * for rendering of the heatmap squares. Canvas outperforms SVG when it comes to

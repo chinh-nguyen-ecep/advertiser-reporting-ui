@@ -380,7 +380,7 @@
 		mydialog.setWidth(700);
 		mydialog.open();
 		
-		mydialog.setTitle('Exchange Cost Analysis by Date From '+selectStartDate.format('yyyy-mm-dd')+' To '+selectEndDate.format('yyyy-mm-dd'));
+		mydialog.setTitle('Exchange Cost Analysis From '+selectStartDate.format('yyyy-mm-dd')+' To '+selectEndDate.format('yyyy-mm-dd'));
 		var exchanger=$('#exchange_filter').val();
 		var	loadingUrl=rootUrl+'/GenerateJasperReport'+'?export_type=html&jrxml=daily_exchanger_payout&p_end_date='+selectEndDate.format('yyyy-mm-dd')+'&p_start_date='+selectStartDate.format('yyyy-mm-dd')+'&path=exchangePayout'+"&p_exchange="+exchanger;
 		var htmlResult;
