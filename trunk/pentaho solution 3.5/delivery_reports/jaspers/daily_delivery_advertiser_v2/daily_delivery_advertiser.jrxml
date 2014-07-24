@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="By Advertiser" pageWidth="2200" pageHeight="1684" orientation="Landscape" columnWidth="2200" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0000000000000022"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="p_end_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("2012-10-01")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_start_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("2012-10-01")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_order_id_list" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("0")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_advertiser_id_list" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("0")]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT full_date
+,SUM(booked_value) as booked_value
+,SUM(booked_units) as booked_units
+,SUM(impressions) as impressions
+,SUM(gross_revenue) as gross_revenue
+,SUM(clicks) as clicks
+FROM adsops.daily_agg_delivery_advertiser_beta
+WHERE is_active = true
+AND full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
+AND (order_id IN (select unnest(string_to_array($P{p_order_id_list}, ','))::int) OR '0'=$P{p_order_id_list})
+AND (advertiser_id IN (select unnest(string_to_array($P{p_advertiser_id_list}, ','))::int) OR '0'=$P{p_advertiser_id_list})
+GROUP BY full_date
+ORDER BY full_date]]>
+	</queryString>
+	<field name="full_date" class="java.sql.Date"/>
+	<field name="booked_value" class="java.lang.Double"/>
+	<field name="booked_units" class="java.lang.Long"/>
+	<field name="impressions" class="java.lang.Long"/>
+	<field name="gross_revenue" class="java.lang.Double"/>
+	<field name="clicks" class="java.lang.Long"/>
+	<variable name="booked_value_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{booked_value}]]></variableExpression>
+	</variable>
+	<variable name="booked_units_1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{booked_units}]]></variableExpression>
+	</variable>
+	<variable name="impressions_1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{impressions}]]></variableExpression>
+	</variable>
+	<variable name="gross_revenue_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{gross_revenue}]]></variableExpression>
+	</variable>
+	<variable name="clicks_2" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{clicks}]]></variableExpression>
+	</variable>
+	<background>
+		<band/>
+	</background>
+	<columnHeader>
+		<band height="33">
+			<staticText>
+				<reportElement x="0" y="0" width="250" height="30"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Organization]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="250" y="0" width="200" height="30"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Advertiser Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="0" width="170" height="30"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Order Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="670" y="0" width="200" height="30"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Flight Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="870" y="0" width="50" height="30"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ADM Flight ID ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="920" y="0" width="80" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Booked Value]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1000" y="0" width="80" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Booked Rate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1080" y="0" width="80" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Booked Units]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1340" y="0" width="150" height="30"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Publisher]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1490" y="0" width="50" height="30"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RPT ADM
+Portal ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1540" y="0" width="130" height="30"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Channel Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1670" y="0" width="70" height="30"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1740" y="0" width="80" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Delivery Rate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1820" y="0" width="80" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Impressions]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1900" y="0" width="80" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gross Revenue]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1980" y="0" width="50" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[eCPM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2030" y="0" width="50" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Clicks]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2080" y="0" width="50" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CTR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2130" y="0" width="70" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Flight Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1160" y="0" width="90" height="30"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Start Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1250" y="0" width="90" height="30"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[End Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="620" y="0" width="50" height="30"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ADM Order ID]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30">
+			<subreport>
+				<reportElement x="0" y="0" width="2200" height="30"/>
+				<subreportParameter name="p_start_date">
+					<subreportParameterExpression><![CDATA[$P{p_start_date}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_end_date">
+					<subreportParameterExpression><![CDATA[$P{p_end_date}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="full_date">
+					<subreportParameterExpression><![CDATA[$F{full_date}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_order_id_list">
+					<subreportParameterExpression><![CDATA[$P{p_order_id_list}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_advertiser_id_list">
+					<subreportParameterExpression><![CDATA[$P{p_advertiser_id_list}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_delivery_advertiser_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<summary>
+		<band height="20">
+			<textField pattern="#,##0.00">
+				<reportElement x="920" y="0" width="80" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{booked_value_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="1080" y="0" width="80" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{booked_units_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="1820" y="0" width="80" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{impressions_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="1900" y="0" width="80" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{gross_revenue_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="2030" y="0" width="50" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{clicks_2}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
