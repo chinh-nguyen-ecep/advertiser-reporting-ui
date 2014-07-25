@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dail_ad_network_summary_subreport1" language="groovy" pageWidth="1135" pageHeight="842" orientation="Landscape" columnWidth="1135" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
-	<property name="ireport.zoom" value="1.4019755979255695"/>
-	<property name="ireport.x" value="407"/>
+	<property name="ireport.zoom" value="0.75"/>
+	<property name="ireport.x" value="2"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="calendar_year_month" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -175,7 +175,7 @@ ORDER BY ad_network_name]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{adcel_y_ad_responses}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00;-#,##0.00">
+			<textField pattern="$ #,##0.00">
 				<reportElement x="715" y="0" width="140" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
@@ -203,42 +203,42 @@ ORDER BY ad_network_name]]>
 			<line>
 				<reportElement x="0" y="1" width="1135" height="1"/>
 			</line>
-			<textField pattern="#,###;-#,###" isBlankWhenNull="false">
+			<textField pattern="#,##0" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="295" y="4" width="140" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$V{requests_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,###;-#,###" isBlankWhenNull="false">
+			<textField pattern="#,##0" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="435" y="4" width="140" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{paid_impressions_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,###;-#,###" isBlankWhenNull="false">
+			<textField pattern="#,##0" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="575" y="4" width="140" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{clicks_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="false">
+			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="715" y="4" width="140" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{net_revenue_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,###;-#,###" isBlankWhenNull="false">
+			<textField pattern="#,##0" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="855" y="4" width="140" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$V{adcel_total_ad_responses_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,###;-#,###" isBlankWhenNull="false">
+			<textField pattern="#,##0" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="995" y="4" width="140" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
