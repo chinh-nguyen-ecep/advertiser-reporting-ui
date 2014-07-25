@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_delivery_advertiser_subreport1" language="groovy" pageWidth="2200" pageHeight="802" columnWidth="2200" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
-	<property name="ireport.zoom" value="1.0000000000000016"/>
-	<property name="ireport.x" value="0"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_delivery_advertiser_subreport1" language="groovy" pageWidth="2220" pageHeight="802" columnWidth="2220" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="912"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="p_order_id_list" class="java.lang.String"/>
 	<parameter name="p_advertiser_id_list" class="java.lang.String">
@@ -72,6 +72,7 @@ ORDER BY order_name
 		<band height="20" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="0" width="250" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>
@@ -79,6 +80,7 @@ ORDER BY order_name
 			</textField>
 			<textField>
 				<reportElement x="250" y="0" width="200" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>
@@ -86,62 +88,71 @@ ORDER BY order_name
 			</textField>
 			<textField>
 				<reportElement x="450" y="0" width="170" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{order_name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="620" y="0" width="50" height="20"/>
+				<reportElement x="620" y="0" width="60" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{order_id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="670" y="0" width="200" height="20"/>
+				<reportElement x="680" y="0" width="200" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{flight_name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="870" y="0" width="50" height="20"/>
+				<reportElement x="880" y="0" width="60" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{flight_id}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="920" y="0" width="80" height="20"/>
+				<reportElement x="940" y="0" width="80" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{booked_value}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="1000" y="0" width="80" height="20"/>
+				<reportElement x="1020" y="0" width="80" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{booked_rate}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="1080" y="0" width="80" height="20"/>
+				<reportElement x="1100" y="0" width="80" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{booked_units}]]></textFieldExpression>
 			</textField>
 			<textField pattern="yyyy-MM-dd">
-				<reportElement x="1160" y="0" width="90" height="20"/>
+				<reportElement x="1180" y="0" width="80" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{flight_start_date}]]></textFieldExpression>
 			</textField>
 			<textField pattern="yyyy-MM-dd">
-				<reportElement x="1250" y="0" width="90" height="20"/>
+				<reportElement x="1260" y="0" width="80" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>
@@ -149,76 +160,87 @@ ORDER BY order_name
 			</textField>
 			<textField>
 				<reportElement x="1340" y="0" width="150" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{publisher_name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1490" y="0" width="50" height="20"/>
+				<reportElement x="1490" y="0" width="60" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{rpt_adm_portal_id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1540" y="0" width="130" height="20"/>
+				<reportElement x="1550" y="0" width="130" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{channel_name}]]></textFieldExpression>
 			</textField>
 			<textField pattern="yyyy-MM-dd" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="1670" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="1680" y="0" width="80" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{full_date}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="1740" y="0" width="80" height="20"/>
+				<reportElement x="1760" y="0" width="80" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{delivery_rate}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="1820" y="0" width="80" height="20"/>
+				<reportElement x="1840" y="0" width="80" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{impressions}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="1900" y="0" width="80" height="20"/>
+				<reportElement x="1920" y="0" width="80" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{gross_revenue}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="1980" y="0" width="50" height="20"/>
+				<reportElement x="2000" y="0" width="50" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{ecpm}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="2030" y="0" width="50" height="20"/>
+				<reportElement x="2050" y="0" width="50" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{clicks}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %">
-				<reportElement x="2080" y="0" width="50" height="20"/>
+				<reportElement x="2100" y="0" width="50" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{ctr}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="2130" y="0" width="70" height="20"/>
+				<reportElement x="2150" y="0" width="70" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>

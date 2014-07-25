@@ -44,20 +44,16 @@
       <component-definition> 
         <jndi><![CDATA[dw3]]></jndi>  
         <live><![CDATA[false]]></live>  
-        <query><![CDATA[SELECT a.*
-FROM (
---SELECT '0' as "value",'All Adnetworks' as title,'All Adnetworks' as name_view, 0 as row_order
---UNION
+        <query><![CDATA[
 SELECT 
 	advertiser_id as "value",
 	name_current||'('||advertiser_id||')' as title, 
 	(CASE WHEN char_length(name_current)>30 THEN substring(name_current from 0 for 20)||'...('||advertiser_id||')' ELSE name_current||'('||advertiser_id||')' END) as name_view,
 	1 as row_order
-FROM refer.adm_advertiser_dim 
+FROM refer.adm_dim_advertisers 
 WHERE dt_expire='9999-12-31'
 GROUP BY "value",title,name_view
-) a
-ORDER BY row_order,name_view;]]></query>
+ORDER BY name_view;]]></query>
       </component-definition> 
     </action-definition>
   

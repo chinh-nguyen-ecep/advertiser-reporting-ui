@@ -61,8 +61,8 @@ SELECT
 	a.name_current||'('||a.order_id||')' as title, 
 	(CASE WHEN char_length(a.name_current)>30 THEN substring(a.name_current from 0 for 20)||'...('||a.order_id||')' ELSE a.name_current||'('||a.order_id||')' END) as name_view,
 	1 as row_order
-FROM refer.adm_order_dim a
-INNER JOIN refer.adm_advertiser_dim b 
+FROM refer.adm_dim_orders a
+INNER JOIN refer.adm_dim_advertisers b 
 	ON a.organization_id=b.organization_id 
 	AND a.publisher_id=b.publisher_id 
 	AND (b.advertiser_id IN (select unnest(string_to_array('{p_advertiser_id_list}', ','))::int)) 

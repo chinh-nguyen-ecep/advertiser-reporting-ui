@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="By Advertiser" pageWidth="2200" pageHeight="1684" orientation="Landscape" columnWidth="2200" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
-	<property name="ireport.zoom" value="1.0000000000000022"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="By Advertiser" pageWidth="2220" pageHeight="1684" orientation="Landscape" columnWidth="2220" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="p_end_date" class="java.lang.String">
@@ -61,6 +61,7 @@ ORDER BY full_date]]>
 		<band height="33">
 			<staticText>
 				<reportElement x="0" y="0" width="250" height="30"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
@@ -68,6 +69,7 @@ ORDER BY full_date]]>
 			</staticText>
 			<staticText>
 				<reportElement x="250" y="0" width="200" height="30"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
@@ -75,41 +77,48 @@ ORDER BY full_date]]>
 			</staticText>
 			<staticText>
 				<reportElement x="450" y="0" width="170" height="30"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Order Name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="670" y="0" width="200" height="30"/>
+				<reportElement x="680" y="0" width="200" height="30"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Flight Name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="870" y="0" width="50" height="30"/>
+				<reportElement x="880" y="0" width="60" height="30"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
-				<text><![CDATA[ADM Flight ID ]]></text>
+				<text><![CDATA[ADM
+Flight ID ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="920" y="0" width="80" height="30"/>
+				<reportElement x="940" y="0" width="80" height="30"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Booked Value]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1000" y="0" width="80" height="30"/>
+				<reportElement x="1020" y="0" width="80" height="30"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Booked Rate]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1080" y="0" width="80" height="30"/>
+				<reportElement x="1100" y="0" width="80" height="30"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
@@ -117,13 +126,15 @@ ORDER BY full_date]]>
 			</staticText>
 			<staticText>
 				<reportElement x="1340" y="0" width="150" height="30"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Publisher]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1490" y="0" width="50" height="30"/>
+				<reportElement x="1490" y="0" width="60" height="30"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
@@ -131,95 +142,109 @@ ORDER BY full_date]]>
 Portal ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1540" y="0" width="130" height="30"/>
+				<reportElement x="1550" y="0" width="130" height="30"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Channel Name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1670" y="0" width="70" height="30"/>
+				<reportElement x="1680" y="0" width="80" height="30"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Date]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1740" y="0" width="80" height="30"/>
+				<reportElement x="1760" y="0" width="80" height="30"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Delivery Rate]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1820" y="0" width="80" height="30"/>
+				<reportElement x="1840" y="0" width="80" height="30"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Impressions]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1900" y="0" width="80" height="30"/>
+				<reportElement x="1920" y="0" width="80" height="30"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Gross Revenue]]></text>
+				<text><![CDATA[Gross
+Revenue]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1980" y="0" width="50" height="30"/>
+				<reportElement x="2000" y="0" width="50" height="30"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[eCPM]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="2030" y="0" width="50" height="30"/>
+				<reportElement x="2050" y="0" width="50" height="30"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Clicks]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="2080" y="0" width="50" height="30"/>
+				<reportElement x="2100" y="0" width="50" height="30"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CTR]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="2130" y="0" width="70" height="30"/>
+				<reportElement x="2150" y="0" width="70" height="30"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Flight Type]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1160" y="0" width="90" height="30"/>
+				<reportElement x="1180" y="0" width="80" height="30"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Start Date]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1250" y="0" width="90" height="30"/>
+				<reportElement x="1260" y="0" width="80" height="30"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[End Date]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="620" y="0" width="50" height="30"/>
+				<reportElement x="620" y="0" width="60" height="30"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
-				<text><![CDATA[ADM Order ID]]></text>
+				<text><![CDATA[ADM
+Order ID]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="30">
 			<subreport>
-				<reportElement x="0" y="0" width="2200" height="30"/>
+				<reportElement x="0" y="0" width="2220" height="30"/>
 				<subreportParameter name="p_start_date">
 					<subreportParameterExpression><![CDATA[$P{p_start_date}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -243,35 +268,40 @@ Portal ID]]></text>
 	<summary>
 		<band height="20">
 			<textField pattern="#,##0.00">
-				<reportElement x="920" y="0" width="80" height="20"/>
+				<reportElement x="940" y="0" width="80" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{booked_value_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="1080" y="0" width="80" height="20"/>
+				<reportElement x="1100" y="0" width="80" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$V{booked_units_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="1820" y="0" width="80" height="20"/>
+				<reportElement x="1840" y="0" width="80" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$V{impressions_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="1900" y="0" width="80" height="20"/>
+				<reportElement x="1920" y="0" width="80" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{gross_revenue_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="2030" y="0" width="50" height="20"/>
+				<reportElement x="2050" y="0" width="50" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
