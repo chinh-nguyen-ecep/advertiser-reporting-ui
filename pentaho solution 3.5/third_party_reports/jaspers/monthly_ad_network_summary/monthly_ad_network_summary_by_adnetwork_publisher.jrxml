@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dail_ad_network_summary_subreport1" language="groovy" pageWidth="1135" pageHeight="842" orientation="Landscape" columnWidth="1135" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
-	<property name="ireport.zoom" value="4.0"/>
-	<property name="ireport.x" value="3408"/>
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="1393"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="calendar_year_month" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new String("")]]></defaultValueExpression>
@@ -183,6 +183,23 @@ SELECT      'AT&T Static Banner Yellowpages (32)'::text as ad_network_name,
 FROM        adnetwork.monthly_yp_sb_performance
 WHERE       is_active = true
 AND calendar_year_month=$P{calendar_year_month}
+UNION
+/* AdMarvel */
+SELECT      'AdMarvel (50)'::text as ad_network_name,
+             parent1_id  as publisher_id,
+	  parent1_name  as publisher,
+            partner_keyword,
+            partner_id,
+            portal_keyword,
+            requests as requests,
+            impressions as paid_impressions,
+            clicks as clicks,
+            ROUND(revenue::NUMERIC,3) as net_revenue,
+            responses_count as fullfilled_code_count,
+            filled_requests as fullfilled_code_y
+FROM        adnetwork.monthly_am_performance
+WHERE       is_active = true
+AND calendar_year_month=$P{calendar_year_month}
 ) a
 ORDER BY ad_network_name, publisher, partner_keyword]]>
 	</queryString>
@@ -315,7 +332,7 @@ ORDER BY ad_network_name, publisher, partner_keyword]]>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{ad_network_name}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0">
 				<reportElement x="715" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
@@ -336,14 +353,14 @@ ORDER BY ad_network_name, publisher, partner_keyword]]>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{partner_keyword}]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.00;-###0.00">
+			<textField pattern="$ #,##0.00">
 				<reportElement x="925" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{net_revenue}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0">
 				<reportElement x="995" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
@@ -357,14 +374,14 @@ ORDER BY ad_network_name, publisher, partner_keyword]]>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{partner_id}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0">
 				<reportElement x="1065" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{fullfilled_code_y}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0">
 				<reportElement x="855" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
@@ -378,7 +395,7 @@ ORDER BY ad_network_name, publisher, partner_keyword]]>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{publisher_id}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0">
 				<reportElement x="785" y="0" width="70" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
@@ -396,21 +413,21 @@ ORDER BY ad_network_name, publisher, partner_keyword]]>
 	</detail>
 	<summary>
 		<band height="43">
-			<textField pattern="#,###;-#,###">
+			<textField pattern="#,##0">
 				<reportElement x="1065" y="4" width="70" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$V{AdCel Yes sum}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,###;-#,###">
+			<textField pattern="#,##0">
 				<reportElement x="785" y="4" width="70" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$P{paid_impressions}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00;-#,##0.00">
+			<textField pattern="$ #,##0.00">
 				<reportElement x="925" y="4" width="70" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
@@ -420,21 +437,21 @@ ORDER BY ad_network_name, publisher, partner_keyword]]>
 			<line>
 				<reportElement x="0" y="1" width="1135" height="1"/>
 			</line>
-			<textField pattern="#,###;-#,###">
+			<textField pattern="#,##0">
 				<reportElement x="855" y="4" width="70" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$P{clicks}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,###;-#,###">
+			<textField pattern="#,##0">
 				<reportElement x="995" y="4" width="70" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$V{AdCel Total sum}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,###;-#,###">
+			<textField pattern="#,##0">
 				<reportElement x="715" y="4" width="70" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
