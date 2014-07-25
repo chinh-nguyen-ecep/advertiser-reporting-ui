@@ -42,6 +42,7 @@
         <list-item>Superpages Proxy/Blue(30,26)</list-item>
         <list-item>Where/Where HTML(23,25)</list-item>
         <list-item>KlickThru(35)</list-item>
+        <list-item>AdMarvel(50)</list-item>
       </default-value> 
     </List_networks>  
     <p_network type="string"> 
@@ -151,6 +152,12 @@
         <mime-type>text/plain</mime-type>
       </solution-file>
     </report-definition14>
+    <report-definition15>
+      <solution-file>
+        <location>monthly_performance_report/monthly_performance_report_admarvel.jasper</location>
+        <mime-type>text/plain</mime-type>
+      </solution-file>
+    </report-definition15>
   </resources>
   
   <actions> 
@@ -475,6 +482,25 @@ ORDER BY month_since_2005 desc]]></query>
         </action-inputs>
         <action-resources>
           <report-definition mapping="report-definition14"/>
+        </action-resources>
+        <component-definition>
+          <jndi><![CDATA[dw3]]></jndi>
+        </component-definition>
+      </action-definition>
+
+    </actions>
+  
+    <actions>
+      <condition><![CDATA[p_network=='AdMarvel(50)']]></condition>
+      <action-definition>
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs>
+          <calendar_year_month type="string"/>
+          <output-type type="string" mapping="output"/>
+        </action-inputs>
+        <action-resources>
+          <report-definition mapping="report-definition15"/>
         </action-resources>
         <component-definition>
           <jndi><![CDATA[dw3]]></jndi>
