@@ -83,7 +83,7 @@ ORDER BY bid_price asc]]>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Winrate]]></text>
+				<text><![CDATA[Winrate%]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="261" y="0" width="150" height="20" backcolor="#CCCCCC"/>

@@ -26,7 +26,7 @@ var p_dma_ids=[];// array content list of dma ids user selected
 var series_1=[]; // Wins data
 var series_2=[]; // pay amount data
 var series_3=[]; // Ave. paid price data
-var series_4=[]; // Ave. bid price
+var series_4=[]; // Ave. Bid Price
 var table_data=[]; // data to show by table
 var myTable; // table object
 var myTableSummary;
