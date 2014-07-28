@@ -29,7 +29,7 @@ var series_chartData = [ {
 							animation: true,
 							tooltip : {
 								headerFormat: '',
-								pointFormat : '<b>Bid Price: ${point.x}</b><br/>Win Rate: {point.y:.2f}% <br/>Wins: {point.value:,.0f}',
+								pointFormat : '<b>Bid Price: ${point.x}</b><br/>Winrate: {point.y:.2f}% <br/>Wins: {point.value:,.0f}',
 							},
 							data : [ [ 0.079, 5.38, 37 ],
 									[ 0.16342, 2.10, 778 ] ]
@@ -172,7 +172,7 @@ function loadChart() {
 			
 			myTable = new drawTableFromArray({
 				table_id : 'winrate_dataTable',
-				table_colums : [ 'Bid Price', 'Bid Count', 'Wins','Winrate' ],
+				table_colums : [ 'Bid Price', 'Bids', 'Wins','Winrate%' ],
 				columns_format : [ 'money', 'number', 'number', '%' ],
 				table_data : table_data,
 				page_items : 10,
@@ -186,10 +186,10 @@ function loadChart() {
 		}
 	}
 	function drawChart() {
-		var chart_title="WinRate Heatmap";
+		var chart_title="Winrate Heatmap per Bid Price";
 		var exchange=$('#exchange_filter').val();
 		if(exchange !="All Exchanges"){
- 			chart_title+=" by "+capitalise(exchange);
+ 			chart_title=capitalise(exchange)+' '+chart_title;
  		}
 		$('#chart-container').highcharts(
 						{
@@ -232,7 +232,7 @@ function loadChart() {
 							},
 							yAxis : {
 								title: {
-					                text: 'Winrate'					               
+					                text: 'Winrate (wins/bids %)'					               
 					            },
 								labels : {
 									format : '{value}%'
@@ -243,7 +243,7 @@ function loadChart() {
 								max : 100
 							},
 							colorAxis : {
-								stops : [ [0, '#58D3F7' ],[ 1, '#DF0101' ] ],
+								stops : [ [0, '#0080FF' ],[ 1, '#DF0101' ] ],
 								labels : {
 									format : '{value:,.0f}'
 								},
@@ -267,9 +267,9 @@ function loadChart() {
 	function drawChart2(){
 		console.log(series_chartData2);
 		var exchange=$('#exchange_filter').val();
-		var chart_title="Exchange Bids/Wins";
+		var chart_title="Wins and Bids Distribution per Bid Price Points";
 		if(exchange !="All Exchanges"){
- 			chart_title+=" by "+capitalise(exchange);
+			chart_title=capitalise(exchange)+' '+chart_title;
  		}
 		$('#chart-container-2').highcharts({
         chart: {

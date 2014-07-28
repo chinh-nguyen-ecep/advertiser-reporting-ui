@@ -54,7 +54,7 @@
  		if($('#exchange_filter').val()!='All Exchanges'){
  			where_value="&where[exchange]="+$('#exchange_filter').val(); 			
  		}
- 		var url=apiRootUrl+'/dailyExchangeCostAnalysis?select=full_date&limit=99999&'+dateRange_value+"&by=wins|paid_amount|ave_paid_price.avg|ave_bid_price.avg"+where_value;
+ 		var url=apiRootUrl+'/dailyExchangeCostAnalysis?select=full_date&limit=99999&'+dateRange_value+"&by=wins|paid_amount|ave_paid_price.avg|ave_bid_price.avg|adcel_filled_imps|event_imps|event_clicks"+where_value;
  		console.log('Url: '+url);
 		if(myAjaxStore.isLoading(url)){
 			console.log('Your request is loading...');
@@ -117,12 +117,19 @@
 			if(responseStatus=='OK' && page==1){
 				data=json.data;
 			  	//generate table data
-			  	table_data=json.data;
-		
+				table_data=[];
+				var temp_data=json.data;
+				for(var i=0;i<temp_data.length;i++){
+					var row=temp_data[i];
+					var ctr=parseFloat(row[7])/parseFloat(row[6]);
+					console.log(ctr);
+					table_data.push([row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],ctr]);
+				}
+			  	console.log(table_data);
 			  	myTable=new drawTableFromArray({
 			  		table_id: 'dashboard-overview-dataTable',
-			  		table_colums: ['Date','Wins','Paid Amount','Ave. Paid Price','Ave. Bid Price'],
-			  		columns_format:['','number','money','money','money'],
+			  		table_colums: ['Date','Wins','Paid Amount','Ave. Paid Price','Ave. Bid Price','AdCel - Filled Imps','Event - Imps','Event - Clicks','Event - CTR'],
+			  		columns_format:['','number','money','money','money','number','number','number','%'],
 			  		table_data: table_data,
 			  		page_items: 31,
 			  		paging: true,
@@ -255,7 +262,7 @@
                     }
                 },
                 title: {
-                    text: 'Ave. Bid/Paid Price',
+                    text: 'Ave. Bids,Paid Price',
                     style: {
                         color: '#151515'
                     }
@@ -377,7 +384,7 @@
 		var mydialog=new contentDialog();
 		var randomID=new Date().valueOf();
 		mydialog.setContent('<div title="'+randomID+'" class="loadingDots" style=""></div>');
-		mydialog.setWidth(700);
+		mydialog.setWidth(870);
 		mydialog.open();
 		
 		mydialog.setTitle('Exchange Cost Analysis From '+selectStartDate.format('yyyy-mm-dd')+' To '+selectEndDate.format('yyyy-mm-dd'));

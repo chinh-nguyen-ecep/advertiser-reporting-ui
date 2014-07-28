@@ -16,29 +16,29 @@
 		<defaultValueExpression><![CDATA[new String("")]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT full_date,hour24_of_day , avg(avg_paid_price) AS avg_paid_price ,avg(avg_bid_price) AS avg_bid_price ,SUM(paid_amount) AS paid_amount,SUM(imp_cnt) as imp_cnt  FROM rtb.daily_agg_exchanger_cost_analysis_by_hour
+		<![CDATA[SELECT full_date,hour24_of_day , avg(ave_paid_price) AS ave_paid_price ,avg(ave_bid_price) AS ave_bid_price ,SUM(paid_amount) AS paid_amount,SUM(wins) as wins  FROM rtb.vw_agg_exchange_cost_analysis_by_hour
 WHERE full_date BETWEEN $P{p_start_date}::date AND  $P{p_end_date}::date
-AND (exchanger=$P{p_exchange} OR 'All Exchanges'=$P{p_exchange})
+AND (exchange=$P{p_exchange} OR 'All Exchanges'=$P{p_exchange})
 GROUP BY full_date,hour24_of_day
 ORDER BY full_date,hour24_of_day]]>
 	</queryString>
 	<field name="full_date" class="java.sql.Date"/>
 	<field name="hour24_of_day" class="java.lang.Integer"/>
-	<field name="avg_paid_price" class="java.lang.Double"/>
-	<field name="avg_bid_price" class="java.lang.Double"/>
+	<field name="ave_paid_price" class="java.lang.Double"/>
+	<field name="ave_bid_price" class="java.lang.Double"/>
 	<field name="paid_amount" class="java.lang.Double"/>
-	<field name="imp_cnt" class="java.math.BigDecimal"/>
+	<field name="wins" class="java.math.BigDecimal"/>
 	<variable name="paid_amount_1" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{paid_amount}]]></variableExpression>
 	</variable>
-	<variable name="avg_paid_price_1" class="java.lang.Double" calculation="Average">
-		<variableExpression><![CDATA[$F{avg_paid_price}]]></variableExpression>
+	<variable name="ave_paid_price_1" class="java.lang.Double" calculation="Average">
+		<variableExpression><![CDATA[$F{ave_paid_price}]]></variableExpression>
 	</variable>
-	<variable name="avg_bid_price_1" class="java.lang.Double" calculation="Average">
-		<variableExpression><![CDATA[$F{avg_bid_price}]]></variableExpression>
+	<variable name="ave_bid_price_1" class="java.lang.Double" calculation="Average">
+		<variableExpression><![CDATA[$F{ave_bid_price}]]></variableExpression>
 	</variable>
-	<variable name="imp_cnt_1" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{imp_cnt}]]></variableExpression>
+	<variable name="wins_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{wins}]]></variableExpression>
 	</variable>
 	<background>
 		<band/>
@@ -169,7 +169,7 @@ ORDER BY full_date,hour24_of_day]]>
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{avg_paid_price}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{ave_paid_price}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00">
 				<reportElement x="514" y="0" width="111" height="20"/>
@@ -180,7 +180,7 @@ ORDER BY full_date,hour24_of_day]]>
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{avg_bid_price}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{ave_bid_price}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00">
 				<reportElement x="292" y="0" width="111" height="20"/>
@@ -204,7 +204,7 @@ ORDER BY full_date,hour24_of_day]]>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{imp_cnt}]]></textFieldExpression>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{wins}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="111" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
@@ -269,7 +269,7 @@ ORDER BY full_date,hour24_of_day]]>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$V{avg_paid_price_1}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{ave_paid_price_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00">
 				<reportElement x="514" y="0" width="111" height="20"/>
@@ -282,7 +282,7 @@ ORDER BY full_date,hour24_of_day]]>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$V{avg_bid_price_1}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{ave_bid_price_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="181" y="0" width="111" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
@@ -295,7 +295,7 @@ ORDER BY full_date,hour24_of_day]]>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{imp_cnt_1}]]></textFieldExpression>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{wins_1}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="111" y="0" width="70" height="20"/>

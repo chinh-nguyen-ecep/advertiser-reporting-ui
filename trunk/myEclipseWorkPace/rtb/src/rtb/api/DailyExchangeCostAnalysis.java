@@ -18,7 +18,7 @@ public class DailyExchangeCostAnalysis extends MainApi{
 		// TODO Auto-generated constructor stub
 		this.setDataSourceTableName("rtb.vw_agg_exchange_cost_analysis");
 		this.setDefaultDimensions(new String[]{"full_date"});
-		this.setDefaultMeasures(new String[]{"paid_amount","ave_paid_price","ave_bid_price"});
+		this.setDefaultMeasures(new String[]{"paid_amount"});
 		this.setDataSourceJNDIConn("verveReportConnection");
 	}
 	@Override
