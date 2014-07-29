@@ -137,6 +137,10 @@ sub runAgg{
 	# IO line items report
 	runPostgresComand("select billing.fn_build_ba_monthly_io_line_item_v2($p_date_sk_start,$p_date_sk_end,$month_sk,'PS')");
 	runPostgresComand("update billing.ba_monthly_io_line_item_v2 set is_active=true where month_since_2005=$month_sk");
+	
+	# AdMarvel 
+	runPostgresComand("select billing.fn_build_ba_monthly_am_performance_v3($p_date_sk_start,$p_date_sk_end,$month_sk,'PS')");
+	runPostgresComand("update billing.ba_monthly_am_performance set is_active=true where month_since_2005=$month_sk");
 }
 
 sub transferFinalData{

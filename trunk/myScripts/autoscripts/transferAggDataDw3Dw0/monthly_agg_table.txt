@@ -80,3 +80,4 @@ billing.ba_monthly_advance_digital
 billing.ba_monthly_io_line_item_v2
 billing.ba_monthly_vlmo_publisher_share
 billing.ba_monthly_vlmo_revenue
+billing.ba_monthly_am_performance
