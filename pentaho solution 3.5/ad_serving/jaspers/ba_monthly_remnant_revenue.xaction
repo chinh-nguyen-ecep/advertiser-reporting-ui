@@ -28,20 +28,21 @@
       <sources> 
         <request>List_networks</request> 
       </sources>  
-      <default-value type="string-list"> 
-        <list-item>AdSense DBCLK Channel</list-item>  
-        <list-item>AT&amp;T (Yellowpages)</list-item>  
-        <list-item>AT&amp;T No Logo (Yellowpages)</list-item>  
-        <list-item>AT&amp;T Static Banner (Yellowpages)</list-item>  
-        <list-item>City Grid/City Grid Proxy</list-item>  
-        <list-item>City Grid Mobile</list-item>  
-        <list-item>iTunes</list-item>  
-        <list-item>JumpTap</list-item>  
-        <list-item>Marchex/Marchex Proxy</list-item>  
-        <list-item>Millennial Media</list-item>  
-        <list-item>Superpages Proxy/Blue</list-item>  
-        <list-item>Where/Where HTML</list-item>  
-        <list-item>KlickThru</list-item> 
+      <default-value type="string-list">
+        <list-item>AdSense DBCLK Channel</list-item>
+        <list-item>AT&amp;T (Yellowpages)</list-item>
+        <list-item>AT&amp;T No Logo (Yellowpages)</list-item>
+        <list-item>AT&amp;T Static Banner (Yellowpages)</list-item>
+        <list-item>City Grid/City Grid Proxy</list-item>
+        <list-item>City Grid Mobile</list-item>
+        <list-item>iTunes</list-item>
+        <list-item>JumpTap</list-item>
+        <list-item>Marchex/Marchex Proxy</list-item>
+        <list-item>Millennial Media</list-item>
+        <list-item>Superpages Proxy/Blue</list-item>
+        <list-item>Where/Where HTML</list-item>
+        <list-item>KlickThru</list-item>
+        <list-item>AdMarvel</list-item>
       </default-value> 
     </List_networks>  
     <p_network type="string"> 
@@ -171,7 +172,13 @@
         <location>ba_monthly_remnant_revenue/monthly_performance_report_citigrid_mobile.jasper</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
-    </report-definition15> 
+    </report-definition15>  
+    <report-definition16>
+      <solution-file>
+        <location>ba_monthly_remnant_revenue/monthly_performance_report_admarvel.jasper</location>
+        <mime-type>text/plain</mime-type>
+      </solution-file>
+    </report-definition16>
   </resources>
   
   <actions> 
@@ -505,6 +512,24 @@ ORDER BY month_since_2005 desc]]></query>
       </action-definition>
  
     </actions>
- 
+  
+    <actions>
+      <condition><![CDATA[p_network=='AdMarvel']]></condition>
+      <action-definition>
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs>
+          <jndi type="string" mapping="connection_name"/>
+          <output-type type="string" mapping="output"/>
+          <calendar_year_month type="string"/>
+        </action-inputs>
+        <action-resources>
+          <report-definition mapping="report-definition16"/>
+        </action-resources>
+        <component-definition/>
+      </action-definition>
+
+    </actions>
+
   </actions> 
 </action-sequence>
