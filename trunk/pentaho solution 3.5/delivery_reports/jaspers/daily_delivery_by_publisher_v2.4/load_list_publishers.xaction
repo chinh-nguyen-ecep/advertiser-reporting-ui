@@ -165,7 +165,7 @@ SELECT
 	(CASE WHEN publisher_id=-100 THEN '-100' ELSE publisher_name||'('||publisher_id||')' END) as name_view,
 	1 as row_order,
 	(CASE 
-		WHEN publisher_id IN (SELECT DISTINCT publisher_id FROM adsops.daily_agg_delivery WHERE property_id IN (select unnest(string_to_array( '{p_property_id_string}' , ','))::int) ) THEN 1 
+		WHEN publisher_id IN (SELECT DISTINCT publisher_id FROM adsops.daily_agg_delivery_publisher_property_v3 WHERE property_id IN (select unnest(string_to_array( '{p_property_id_string}' , ','))::int) ) THEN 1 
 		--WHEN publisher_id IN (select unnest(string_to_array( '{p_selected_publisher_id_string}' , ','))::int) THEN 1
 		ELSE 0 END) as checked
 FROM adsops.daily_agg_delivery_publisher_property_v3
