@@ -257,7 +257,7 @@ function loadBillingDetailTable(input){
 			rowSummary += '<td colspan="2"><b>IO Line Item</b></td>';
 			rowSummary += '<td colspan="2"><b>Booking</b></td>';
 			rowSummary += '<td align="right"><b>DFP Delivered</b></td>';
-			rowSummary += '<td align="right"><b>DFA Delivered</b></td>';
+			rowSummary += '<td align="right"><b>3rd Party Delivered</b></td>';
 			rowSummary += '<td align="right"><b>Adjusted Units</b></td>';
 			rowSummary += '<td align="right"><b>Billable Units</b></td>';
 			rowSummary += '<td align="right"><b>Amount Inv.</b></td>';
