@@ -101,7 +101,6 @@ function goInformationPage() {
 }
 
 function goAdjustedUnitPage(){
-	urlMaster.clear();
 	urlMaster.replaceParam('page','template');
 	urlMaster.replaceParam('actionPath','adjusted_units_management');
 	loadPage();	
