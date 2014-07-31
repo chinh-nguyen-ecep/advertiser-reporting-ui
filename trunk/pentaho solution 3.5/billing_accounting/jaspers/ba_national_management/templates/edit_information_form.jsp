@@ -55,7 +55,7 @@ function formAction(){
 	var comment=$('#comment').val();
 	
 	var is_valid = true;
-	if (current_campaign_id == campaign_id && current_billing_contact == billing_contact || current_comment == comment) {
+	if (current_campaign_id == campaign_id && current_billing_contact == billing_contact && current_comment == comment) {
 		alert("There is no change!");
 		is_valid = false;
 	}
