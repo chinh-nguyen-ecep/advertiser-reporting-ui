@@ -12,27 +12,9 @@
   </documentation>
 
   <inputs> 
-    <p_publisher_id type="string"> 
-      <sources> 
-        <request>p_publisher_id</request> 
-      </sources>  
-      <default-value><![CDATA[0]]></default-value> 
-    </p_publisher_id>  
     <query_result type="result-set"> 
       <default-value/> 
     </query_result>  
-    <p_name type="string"> 
-      <sources> 
-        <request>p_name</request> 
-      </sources>  
-      <default-value><![CDATA[p_property_ids]]></default-value> 
-    </p_name>  
-    <p_mode type="integer"> 
-      <sources> 
-        <request>p_mode</request> 
-      </sources>  
-      <default-value><![CDATA[1]]></default-value> 
-    </p_mode>  
     <p_property_id_string type="string"> 
       <sources> 
         <request>p_property_id_string</request> 
@@ -44,7 +26,13 @@
         <request>p_selected_publisher_id_string</request> 
       </sources>  
       <default-value><![CDATA[0]]></default-value> 
-    </p_selected_publisher_id_string> 
+    </p_selected_publisher_id_string>  
+    <p_name type="string">
+      <sources>
+        <request>p_name</request>
+      </sources>
+      <default-value><![CDATA[p_property_ids]]></default-value>
+    </p_name>
   </inputs>
 
   <outputs> 
@@ -58,100 +46,20 @@
   <resources/>
   
   <actions> 
-    <actions> 
-      <condition><![CDATA[p_mode==1]]></condition>  
-      <action-definition> 
-        <component-name>SQLLookupRule</component-name>
-        <action-type>Relational</action-type>
-        <action-inputs/>
-        <action-outputs> 
-          <query-result type="result-set" mapping="query_result"/> 
-        </action-outputs>
-        <component-definition> 
-          <jndi><![CDATA[verveReportConnection]]></jndi>  
-          <live><![CDATA[false]]></live>  
-          <query><![CDATA[SELECT a.*
-FROM (
-SELECT 0 as "value",'All propertys' as title,'All properties' as name_view, 0 as row_order, 0 as checked
-UNION
-SELECT 
-	property_id as "value",
-	(CASE WHEN property_id=-100 THEN '-100' ELSE property_name||'('||property_id||')' END) as title, 
-	(CASE WHEN property_id=-100 THEN '-100' ELSE property_name||'('||property_id||')' END) as name_view,
-	1 as row_order,
-	0 as checked
-FROM adsops.daily_agg_delivery_publisher_property_v3
-WHERE is_active=true
-GROUP BY "value",title
-) a
-ORDER BY row_order,name_view;]]></query> 
-        </component-definition> 
-      </action-definition>
-  
-      <actions> 
-        <condition><![CDATA[p_publisher_id!=0]]></condition>  
-        <action-definition> 
-          <component-name>TemplateComponent</component-name>
-          <action-type>Message Template</action-type>
-          <action-inputs> 
-            <p_publisher_id type="string"/> 
-          </action-inputs>
-          <action-resources/>
-          <action-outputs> 
-            <output-message type="string" mapping="query"/> 
-          </action-outputs>
-          <component-definition> 
-            <template><![CDATA[SELECT a.*
-FROM (
-SELECT 0 as "value",'All Portals' as title,'All Portals' as name_view, 0 as row_order,0 as checked
-UNION
-SELECT 
-	portal_id as "value",
-	(CASE WHEN portal_id=-100 THEN '-100' ELSE portal_name||'('||portal_id||')' END) as title, 
-	(CASE WHEN portal_id=-100 THEN '-100' ELSE portal_name||'('||portal_id||')' END) as name_view,
-	1 as row_order,
-	0 as checked
-FROM adsops.daily_agg_delivery_publisher_property_v3
-WHERE is_active=true AND publisher_id={p_publisher_id}
-GROUP BY "value",title
-) a
-ORDER BY row_order,name_view;]]></template> 
-          </component-definition> 
-        </action-definition>
-  
-        <action-definition> 
-          <component-name>SQLLookupRule</component-name>
-          <action-type>Relational</action-type>
-          <action-inputs> 
-            <query type="string"/> 
-          </action-inputs>
-          <action-outputs> 
-            <query-result type="result-set" mapping="query_result"/> 
-          </action-outputs>
-          <component-definition> 
-            <jndi><![CDATA[verveReportConnection]]></jndi>  
-            <live><![CDATA[false]]></live> 
-          </component-definition> 
-        </action-definition>
- 
-      </actions>
- 
-    </actions>
-  
-    <actions> 
-      <condition><![CDATA[p_mode==2]]></condition>  
-      <action-definition> 
-        <component-name>TemplateComponent</component-name>
-        <action-type>Message Template</action-type>
-        <action-inputs> 
-          <p_property_id_string type="string"/>  
-          <p_selected_publisher_id_string type="string"/> 
-        </action-inputs>
-        <action-outputs> 
-          <output-message type="string" mapping="query"/> 
-        </action-outputs>
-        <component-definition> 
-          <template><![CDATA[SELECT a.*
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Relational</action-type>
+      <action-inputs> 
+        <p_property_id_string type="string"/>
+        <p_selected_publisher_id_string type="string"/>
+      </action-inputs>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[verveReportConnection]]></jndi>  
+        <live><![CDATA[true]]></live>  
+        <query><![CDATA[SELECT a.*
 FROM (
 SELECT 0 as "value",'All Properties' as title,'All Properties' as name_view, 0 as row_order, 0 as checked
 UNION
@@ -163,31 +71,14 @@ SELECT
 	(CASE 
 		WHEN property_id IN (select unnest(string_to_array('{p_property_id_string}', ','))::int) THEN 1
 		ELSE 0 END) as checked
-FROM adsops.daily_agg_delivery_publisher_property_v3
+FROM rtb.daily_agg_delivery_publisher_property_flight
 WHERE is_active=true 
 AND (publisher_id IN (select unnest(string_to_array( '{p_selected_publisher_id_string}' , ','))::int) OR '0'='{p_selected_publisher_id_string}')
 GROUP BY "value",title
 ) a
-ORDER BY row_order,checked desc,name_view;]]></template> 
-        </component-definition> 
-      </action-definition>
-  
-      <action-definition> 
-        <component-name>SQLLookupRule</component-name>
-        <action-type>Relational</action-type>
-        <action-inputs> 
-          <query type="string"/> 
-        </action-inputs>
-        <action-outputs> 
-          <query-result type="result-set" mapping="query_result"/> 
-        </action-outputs>
-        <component-definition> 
-          <jndi><![CDATA[verveReportConnection]]></jndi>  
-          <live><![CDATA[true]]></live> 
-        </component-definition> 
-      </action-definition>
- 
-    </actions>
+ORDER BY row_order,checked desc,name_view;]]></query>
+      </component-definition> 
+    </action-definition>
   
     <action-definition> 
       <component-name>JavascriptRule</component-name>
