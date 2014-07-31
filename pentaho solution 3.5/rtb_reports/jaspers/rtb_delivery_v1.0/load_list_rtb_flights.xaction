@@ -12,12 +12,6 @@
   </documentation>
 
   <inputs> 
-    <p_publisher_id type="string"> 
-      <sources> 
-        <request>p_publisher_id</request> 
-      </sources>  
-      <default-value><![CDATA[0]]></default-value> 
-    </p_publisher_id>  
     <query_result type="result-set"> 
       <default-value/> 
     </query_result>  
@@ -25,7 +19,7 @@
       <sources> 
         <request>p_name</request> 
       </sources>  
-      <default-value><![CDATA[p_channel_ids]]></default-value> 
+      <default-value><![CDATA[p_rtb_flight_ids]]></default-value> 
     </p_name> 
   </inputs>
 
@@ -52,67 +46,20 @@
         <live><![CDATA[false]]></live>  
         <query><![CDATA[SELECT a.*
 FROM (
-SELECT 0 as "value",'All channels' as title,'All channels' as name_view, 0 as row_order
+SELECT 0 as "value",'All RTB Flights' as title,'All RTB Flights' as name_view, 0 as row_order
 UNION
 SELECT 
-	channel_id as "value",
-	(CASE WHEN channel_id=-100 THEN '-100' ELSE channel_name||'('||channel_id||')' END) as title, 
-	(CASE WHEN channel_id=-100 THEN '-100' ELSE channel_name||'('||channel_id||')' END) as name_view,
+	rtb_flight_id as "value",
+	rtb_flight_id::text as title, 
+	rtb_flight_id::text as name_view,
 	1 as row_order
-FROM adsops.daily_agg_delivery_publisher_property_v3
+FROM rtb.daily_agg_delivery_publisher_property_flight
 WHERE is_active=true
 GROUP BY "value",title
 ) a
 ORDER BY row_order,name_view;]]></query> 
       </component-definition> 
     </action-definition>
-  
-    <actions> 
-      <condition><![CDATA[p_publisher_id!=0]]></condition>  
-      <action-definition> 
-        <component-name>TemplateComponent</component-name>
-        <action-type>Message Template</action-type>
-        <action-inputs> 
-          <p_publisher_id type="string"/> 
-        </action-inputs>
-        <action-resources/>
-        <action-outputs> 
-          <output-message type="string" mapping="query"/> 
-        </action-outputs>
-        <component-definition> 
-          <template><![CDATA[SELECT a.*
-FROM (
-SELECT 0 as "value",'All channels' as title,'All channels' as name_view, 0 as row_order
-UNION
-SELECT 
-	channel_id as "value",
-	(CASE WHEN channel_id=-100 THEN '-100' ELSE channel_name||'('||channel_id||')' END) as title, 
-	(CASE WHEN channel_id=-100 THEN '-100' ELSE channel_name||'('||channel_id||')' END) as name_view,
-	1 as row_order
-FROM adsops.daily_agg_delivery_adnetwork_publisher_beta
-WHERE is_active=true AND publisher_id={p_publisher_id}
-GROUP BY "value",title
-) a
-ORDER BY row_order,name_view;]]></template> 
-        </component-definition> 
-      </action-definition>
-  
-      <action-definition> 
-        <component-name>SQLLookupRule</component-name>
-        <action-type>Relational</action-type>
-        <action-inputs> 
-          <query type="string"/> 
-        </action-inputs>
-        <action-outputs> 
-          <query-result type="result-set" mapping="query_result"/> 
-        </action-outputs>
-        <component-definition> 
-          <jndi><![CDATA[verveReportConnection]]></jndi>  
-          <live><![CDATA[false]]></live> 
-        </component-definition> 
-      </action-definition>
- 
-    </actions>
   
     <action-definition> 
       <component-name>JavascriptRule</component-name>
