@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RTB Weekly Exchange Cost Analysis" pageWidth="1800" pageHeight="1684" columnWidth="1760" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RTB Weekly Exchange Cost Analysis" pageWidth="1810" pageHeight="1684" columnWidth="1770" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="1081"/>
+	<property name="ireport.x" value="1410"/>
 	<property name="ireport.y" value="0"/>
 	<style name="boder">
 		<box leftPadding="5" rightPadding="5">
@@ -119,7 +119,7 @@ ORDER BY  year_week, exchanger;]]>
 - RTB Winrate %: (RTB Wins / RTB Bids) %.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="580" y="20" width="1180" height="80"/>
+				<reportElement x="580" y="20" width="1190" height="80"/>
 				<textElement/>
 				<text><![CDATA[- AdCel - Filled Imps: This is count from AdCel Attributed Request log with rtb.ex is not NULL and status = 'Y'. Group by date, exchange.
 - DFP - Imps: This is from DFP. Using adunit to join with ADM Property on RTB publishers.
@@ -210,7 +210,7 @@ ORDER BY  year_week, exchanger;]]>
 				<text><![CDATA[AdCel - Filled Imps]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="900" y="0" width="180" height="20"/>
+				<reportElement style="boder" x="900" y="0" width="190" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.75"/>
 					<topPen lineWidth="0.75"/>
@@ -224,7 +224,7 @@ ORDER BY  year_week, exchanger;]]>
 				<text><![CDATA[AdCel - Filled Imps / RTB Wins %]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="1080" y="0" width="100" height="20"/>
+				<reportElement style="boder" x="1090" y="0" width="100" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.75"/>
 					<topPen lineWidth="0.75"/>
@@ -238,7 +238,7 @@ ORDER BY  year_week, exchanger;]]>
 				<text><![CDATA[DFP - Imps]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="boder" x="1180" y="0" width="140" height="20"/>
+				<reportElement style="boder" x="1190" y="0" width="140" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.75"/>
 					<topPen lineWidth="0.75"/>
@@ -252,7 +252,7 @@ ORDER BY  year_week, exchanger;]]>
 				<text><![CDATA[DFP - Imps / RTB Wins %]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1320" y="0" width="100" height="20"/>
+				<reportElement x="1330" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -266,7 +266,7 @@ ORDER BY  year_week, exchanger;]]>
 				<text><![CDATA[Evt - Imp]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1420" y="0" width="140" height="20"/>
+				<reportElement x="1430" y="0" width="140" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -280,7 +280,7 @@ ORDER BY  year_week, exchanger;]]>
 				<text><![CDATA[Evt - Adimpinternal]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1560" y="0" width="100" height="20"/>
+				<reportElement x="1570" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -294,7 +294,7 @@ ORDER BY  year_week, exchanger;]]>
 				<text><![CDATA[Event - Clicks]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1660" y="0" width="100" height="20"/>
+				<reportElement x="1670" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -379,7 +379,7 @@ ORDER BY  year_week, exchanger;]]>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{AdCel - Filled Imps}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %">
-				<reportElement style="boder" x="900" y="0" width="180" height="20"/>
+				<reportElement style="boder" x="900" y="0" width="190" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.75"/>
 					<topPen lineWidth="0.75"/>
@@ -393,7 +393,7 @@ ORDER BY  year_week, exchanger;]]>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Adcel - Fill Rate %}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement style="boder" x="1080" y="0" width="100" height="20"/>
+				<reportElement style="boder" x="1090" y="0" width="100" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.75"/>
 					<topPen lineWidth="0.75"/>
@@ -407,7 +407,7 @@ ORDER BY  year_week, exchanger;]]>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{DFP Imps}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %">
-				<reportElement style="boder" x="1180" y="0" width="140" height="20"/>
+				<reportElement style="boder" x="1190" y="0" width="140" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.75"/>
 					<topPen lineWidth="0.75"/>
@@ -421,7 +421,7 @@ ORDER BY  year_week, exchanger;]]>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{DFP - Fill Rate %}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="1320" y="0" width="100" height="20"/>
+				<reportElement x="1330" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -433,7 +433,7 @@ ORDER BY  year_week, exchanger;]]>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{Evt - Imp}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="1420" y="0" width="140" height="20"/>
+				<reportElement x="1430" y="0" width="140" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -445,7 +445,7 @@ ORDER BY  year_week, exchanger;]]>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{Evt - Adimpinternal}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="1560" y="0" width="100" height="20"/>
+				<reportElement x="1570" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -457,7 +457,7 @@ ORDER BY  year_week, exchanger;]]>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{Event - Clicks}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %">
-				<reportElement x="1660" y="0" width="100" height="20"/>
+				<reportElement x="1670" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -595,7 +595,7 @@ ORDER BY  year_week, exchanger;]]>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$V{AdCel - Filled Imps_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %">
-				<reportElement style="boder" x="900" y="0" width="180" height="20"/>
+				<reportElement style="boder" x="900" y="0" width="190" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.75"/>
 					<topPen lineWidth="0.75"/>
@@ -609,7 +609,7 @@ ORDER BY  year_week, exchanger;]]>
 				<textFieldExpression class="java.lang.Double"><![CDATA[($V{AdCel - Filled Imps_1} * 1.0) / $V{Imp Cnt_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement style="boder" x="1080" y="0" width="100" height="20"/>
+				<reportElement style="boder" x="1090" y="0" width="100" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.75"/>
 					<topPen lineWidth="0.75"/>
@@ -623,7 +623,7 @@ ORDER BY  year_week, exchanger;]]>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$V{DFP Imps_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %">
-				<reportElement style="boder" x="1180" y="0" width="140" height="20"/>
+				<reportElement style="boder" x="1190" y="0" width="140" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.75"/>
 					<topPen lineWidth="0.75"/>
@@ -637,7 +637,7 @@ ORDER BY  year_week, exchanger;]]>
 				<textFieldExpression class="java.lang.Double"><![CDATA[($V{DFP Imps_1} * 1.0) / $V{Imp Cnt_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="1320" y="0" width="100" height="20"/>
+				<reportElement x="1330" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -651,7 +651,7 @@ ORDER BY  year_week, exchanger;]]>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$V{Evt - Imp_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="1420" y="0" width="140" height="20"/>
+				<reportElement x="1430" y="0" width="140" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -665,7 +665,7 @@ ORDER BY  year_week, exchanger;]]>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$V{Evt - Adimpinternal_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="1560" y="0" width="100" height="20"/>
+				<reportElement x="1570" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -679,7 +679,7 @@ ORDER BY  year_week, exchanger;]]>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$V{Event - Clicks_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %">
-				<reportElement style="boder" x="1660" y="0" width="100" height="20"/>
+				<reportElement style="boder" x="1670" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
