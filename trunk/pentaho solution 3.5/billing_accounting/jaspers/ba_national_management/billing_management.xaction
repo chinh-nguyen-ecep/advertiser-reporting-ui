@@ -215,7 +215,8 @@
         <component-definition> 
           <query><![CDATA[SELECT io_orders_id, contract_name 
 FROM billing.ba_monthly_national_worksheet 
-WHERE is_active = true and month_since_2005 = {p_month_since_2005}
+WHERE is_active = true 
+--and month_since_2005 IN( {p_month_since_2005})
 AND (UPPER(io_orders_id||' | '||contract_name) LIKE UPPER('%{term}%') OR ''='{term}')
 GROUP BY io_orders_id, contract_name 
 ORDER BY io_orders_id;]]></query>  
@@ -243,7 +244,8 @@ ORDER BY io_orders_id;]]></query>
         <component-definition> 
           <query><![CDATA[select io_line_item_id, io_line_item_name 
 from billing.ba_monthly_national_worksheet 
-where is_active = true and month_since_2005 = {p_month_since_2005} 
+where is_active = true 
+--and month_since_2005 IN( {p_month_since_2005} )
 and (io_orders_id IN ({p_io_orders}) OR '0'='{p_io_orders}') 
 group by io_line_item_id, io_line_item_name 
 order by io_line_item_id
@@ -332,11 +334,11 @@ order by month_since_2005 DESC
 , a.total_billable_units_upto_month as billable_units_to_date
 from  billing.ba_monthly_national_worksheet a
 left join billing.ba_national_dim_io b ON (b.is_active = true AND b.io_orders_id = a.io_orders_id)
-where month_since_2005 = {p_month_since_2005}
+where month_since_2005 IN( {p_month_since_2005})
 AND (a.io_orders_id IN ({p_io_orders}) OR '0'='{p_io_orders}')
 AND (a.io_line_item_id IN ({p_io_line_items}) OR '0'='{p_io_line_items}')
 AND a.is_active=true
-order by advertiser, combined_ids;]]></query> 
+order by advertiser, io_orders_id, month_since_2005 desc, io_line_item_id;]]></query> 
         </component-definition> 
       </action-definition>
  
@@ -486,8 +488,8 @@ and a.io_line_item_id = {p_io_line_item_id}
           <information_control type="string"/>  
           <adjusted_units_control type="string"/>  
           <remaining_budget type="string"/>  
-          <comment type="string"/>
-          <total_billable_units_upto_month type="string"/>
+          <comment type="string"/>  
+          <total_billable_units_upto_month type="string"/> 
         </action-outputs>
         <component-definition> 
           <script><![CDATA[var calendar_year_month=query_result.getValueAt(0,0);
@@ -563,8 +565,8 @@ if(adjusted_units==null){
           <billable_units type="string"/>  
           <dfp_delivered_clicks type="string"/>  
           <organization_name type="string"/>  
-          <comment type="string"/>
-          <total_billable_units_upto_month type="string"/>
+          <comment type="string"/>  
+          <total_billable_units_upto_month type="string"/> 
         </action-inputs>
         <action-resources> 
           <template mapping="template4"/> 
