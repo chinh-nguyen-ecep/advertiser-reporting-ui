@@ -212,12 +212,12 @@
 					$('monthmode').setStyle('display','none');
 				});
 				$('p_date_mode_month').addEvent('click',function(){
-					$('datemode').setStyle('display','none');
-					$('monthmode').setStyle('display','');
-					//$('p_date_mode_date').fireEvent('click');
-					//$('p_date_mode_date').set('checked',true);
-					//$('p_date_mode_month').set('checked',false);
-					//alert('Monthly report have no data!');					
+					//$('datemode').setStyle('display','none');
+					//$('monthmode').setStyle('display','');
+					$('p_date_mode_date').fireEvent('click');
+					$('p_date_mode_date').set('checked',true);
+					$('p_date_mode_month').set('checked',false);
+					alert('Monthly report have no data!');					
 				});						
 				//picker
 				var myElement=$('mydiv');

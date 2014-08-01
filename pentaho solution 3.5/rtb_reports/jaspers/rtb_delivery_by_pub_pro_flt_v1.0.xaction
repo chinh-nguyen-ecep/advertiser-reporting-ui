@@ -58,9 +58,9 @@
       <sources> 
         <request>list_date_mode</request> 
       </sources>  
-      <default-value type="string-list"> 
-        <list-item>date</list-item>  
-        <list-item>month</list-item> 
+      <default-value type="string-list">
+        <list-item>date</list-item>
+        <list-item>month</list-item>
       </default-value> 
     </list_date_mode>  
     <List_output_type type="string-list"> 
@@ -90,12 +90,12 @@
       </sources>  
       <default-value/> 
     </p_property_ids>  
-    <p_channel_ids type="string"> 
+    <p_rtb_flight_ids type="string"> 
       <sources> 
-        <request>p_channel_ids</request> 
+        <request>p_rtb_flight_ids</request> 
       </sources>  
       <default-value/> 
-    </p_channel_ids> 
+    </p_rtb_flight_ids> 
   </inputs>
 
   <outputs> 
@@ -107,7 +107,7 @@
   <resources> 
     <pageTemplate1> 
       <solution-file> 
-        <location>rtb_delivery_v1.0/tp_pub_pro_channel_v2.4.html</location>  
+        <location>rtb_delivery_v1.0/tp_pub_pro_flt_v1.0.html</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </pageTemplate1>  
@@ -257,23 +257,23 @@ if(p_property_ids!= ''){
   
     <action-definition> 
       <component-name>JavascriptRule</component-name>
-      <action-type>Process Channel IDs</action-type>
+      <action-type>Process RTB Flight IDs</action-type>
       <action-inputs> 
-        <p_channel_ids type="string"/> 
+        <p_rtb_flight_ids type="string"/> 
       </action-inputs>
       <action-outputs> 
-        <p_channel_id_list type="string"/> 
+        <p_rtb_flight_id_list type="string"/> 
       </action-outputs>
       <component-definition> 
-        <script><![CDATA[var p_channel_id_list='0';
+        <script><![CDATA[var p_rtb_flight_id_list='0';
 //convert measures
-if(p_channel_ids!= ''){
-	if(p_channel_ids instanceof Array){
-		for(var i=0;i<p_channel_ids.length;i++){
-			p_channel_id_list=p_channel_ids.join(";");			
+if(p_rtb_flight_ids!= ''){
+	if(p_rtb_flight_ids instanceof Array){
+		for(var i=0;i<p_rtb_flight_ids.length;i++){
+			p_rtb_flight_id_list=p_rtb_flight_ids.join(";");			
 		};
 	}else{
-		p_channel_id_list=p_channel_ids;
+		p_rtb_flight_id_list=p_rtb_flight_ids;
 	};
 }]]></script> 
       </component-definition> 
@@ -290,7 +290,7 @@ if(p_channel_ids!= ''){
           <p_publisher_id_list type="string"/>  
           <output-type type="string" mapping="p_output"/>  
           <p_property_id_list type="string"/>  
-          <p_channel_id_list type="string"/> 
+          <p_rtb_flight_id_list type="string"/> 
         </action-inputs>
         <action-resources> 
           <report-definition type="resource"/> 
@@ -312,8 +312,8 @@ if(p_channel_ids!= ''){
           <p_end_month_since_2005 type="string"/>  
           <output-type type="string" mapping="p_output"/>  
           <p_publisher_id_list type="string"/>  
-          <p_channel_id_list type="string"/>  
-          <p_property_id_list type="string"/> 
+          <p_property_id_list type="string"/>  
+          <p_rtb_flight_id_list type="string"/> 
         </action-inputs>
         <action-resources> 
           <report-definition mapping="report-definition1"/> 
