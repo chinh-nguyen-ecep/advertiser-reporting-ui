@@ -172,7 +172,7 @@ function loadChart() {
 			
 			myTable = new drawTableFromArray({
 				table_id : 'winrate_dataTable',
-				table_colums : [ 'Bid Price', 'Bids', 'Wins','Winrate%' ],
+				table_columns : [ 'Bid Price', 'Bids', 'Wins','Winrate%' ],
 				columns_format : [ 'money', 'number', 'number', '%' ],
 				table_data : table_data,
 				page_items : 10,

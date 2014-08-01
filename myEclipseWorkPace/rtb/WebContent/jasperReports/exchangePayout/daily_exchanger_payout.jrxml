@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Daily Advertiser Report" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Daily Advertiser Report" pageWidth="1252" pageHeight="595" orientation="Landscape" columnWidth="1212" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.6528925619834745"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="955"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
@@ -16,7 +16,7 @@
 		<defaultValueExpression><![CDATA[new String("")]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT full_date , avg(ave_paid_price) AS ave_paid_price ,avg(ave_bid_price) AS ave_bid_price ,SUM(paid_amount) AS paid_amount,SUM(wins) as imp_cnt, SUM(adcel_filled_imps) AS adcel_filled_imps ,SUM(event_imps) AS event_imps ,SUM(event_clicks) AS event_clicks
+		<![CDATA[SELECT full_date , avg(ave_paid_price) AS ave_paid_price ,avg(ave_bid_price) AS ave_bid_price ,SUM(paid_amount) AS paid_amount,SUM(wins) as imp_cnt, SUM(adcel_filled_imps) AS adcel_filled_imps ,SUM(event_imps) AS event_imps ,SUM(event_clicks) AS event_clicks,SUM(bids) as bids
 FROM rtb.vw_agg_exchange_cost_analysis
 WHERE full_date BETWEEN $P{p_start_date}::date AND  $P{p_end_date}::date
 AND (exchange=$P{p_exchange} OR 'All Exchanges'=$P{p_exchange})
@@ -31,6 +31,7 @@ ORDER BY full_date]]>
 	<field name="adcel_filled_imps" class="java.math.BigDecimal"/>
 	<field name="event_imps" class="java.math.BigDecimal"/>
 	<field name="event_clicks" class="java.math.BigDecimal"/>
+	<field name="bids" class="java.math.BigDecimal"/>
 	<variable name="paid_amount_1" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{paid_amount}]]></variableExpression>
 	</variable>
@@ -52,6 +53,9 @@ ORDER BY full_date]]>
 	<variable name="event_clicks_1" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{event_clicks}]]></variableExpression>
 	</variable>
+	<variable name="bids_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{bids}]]></variableExpression>
+	</variable>
 	<background>
 		<band/>
 	</background>
@@ -62,14 +66,14 @@ ORDER BY full_date]]>
 				<imageExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"pub_adops_logo.png"]]></imageExpression>
 			</image>
 			<textField pattern="yyyy-MM-dd G &apos;at&apos; HH:mm:ss z">
-				<reportElement x="0" y="20" width="802" height="17"/>
+				<reportElement x="0" y="20" width="1212" height="17"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="73" y="0" width="729" height="20"/>
+				<reportElement x="73" y="0" width="1139" height="20"/>
 				<textElement textAlignment="Right">
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -93,7 +97,7 @@ ORDER BY full_date]]>
 				<text><![CDATA[Date]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="233" y="0" width="90" height="20" backcolor="#CCCCCC"/>
+				<reportElement mode="Opaque" x="274" y="0" width="90" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -106,7 +110,7 @@ ORDER BY full_date]]>
 				<text><![CDATA[Ave. Paid Price]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="323" y="0" width="90" height="20" backcolor="#CCCCCC"/>
+				<reportElement mode="Opaque" x="364" y="0" width="90" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -119,7 +123,7 @@ ORDER BY full_date]]>
 				<text><![CDATA[Ave. Bid Price]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="153" y="0" width="80" height="20" backcolor="#CCCCCC"/>
+				<reportElement mode="Opaque" x="143" y="0" width="131" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -129,10 +133,10 @@ ORDER BY full_date]]>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Paid Amount]]></text>
+				<text><![CDATA[RTB Paid Amount]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="73" y="0" width="80" height="20" forecolor="#000000" backcolor="#CCCCCC"/>
+				<reportElement mode="Opaque" x="73" y="0" width="70" height="20" forecolor="#000000" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -142,10 +146,10 @@ ORDER BY full_date]]>
 				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[Wins]]></text>
+				<text><![CDATA[RTB Wins]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="712" y="0" width="90" height="20" backcolor="#CCCCCC"/>
+				<reportElement mode="Opaque" x="1109" y="0" width="103" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -155,10 +159,10 @@ ORDER BY full_date]]>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Event - CTR]]></text>
+				<text><![CDATA[Event - CTR %]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="413" y="0" width="119" height="20" forecolor="#000000" backcolor="#CCCCCC"/>
+				<reportElement mode="Opaque" x="630" y="0" width="119" height="20" forecolor="#000000" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -171,7 +175,7 @@ ORDER BY full_date]]>
 				<text><![CDATA[AdCel - Filled Imps]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="622" y="0" width="90" height="20" backcolor="#CCCCCC"/>
+				<reportElement mode="Opaque" x="1019" y="0" width="90" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -184,7 +188,7 @@ ORDER BY full_date]]>
 				<text><![CDATA[Event - Clicks]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="532" y="0" width="90" height="20" backcolor="#CCCCCC"/>
+				<reportElement mode="Opaque" x="929" y="0" width="90" height="20" backcolor="#CCCCCC"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -195,6 +199,45 @@ ORDER BY full_date]]>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Event - Imps]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="454" y="0" width="70" height="20" backcolor="#CCCCCC"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RTB Bids]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="749" y="0" width="180" height="20" backcolor="#CCCCCC"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[AdCel - Filled Imps / RTB Wins %]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="524" y="0" width="106" height="20" backcolor="#CCCCCC"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RTB Winrate %]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -212,7 +255,7 @@ ORDER BY full_date]]>
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{full_date}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00">
-				<reportElement x="233" y="0" width="90" height="20"/>
+				<reportElement x="274" y="0" width="90" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -223,7 +266,7 @@ ORDER BY full_date]]>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{ave_paid_price}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00">
-				<reportElement x="323" y="0" width="90" height="20"/>
+				<reportElement x="364" y="0" width="90" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -234,7 +277,7 @@ ORDER BY full_date]]>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{ave_bid_price}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00">
-				<reportElement x="153" y="0" width="80" height="20"/>
+				<reportElement x="143" y="0" width="131" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -245,7 +288,7 @@ ORDER BY full_date]]>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{paid_amount}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="73" y="0" width="80" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="73" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -258,7 +301,7 @@ ORDER BY full_date]]>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{imp_cnt}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="413" y="0" width="119" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="630" y="0" width="119" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -271,7 +314,7 @@ ORDER BY full_date]]>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{adcel_filled_imps}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="532" y="0" width="90" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="929" y="0" width="90" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -284,7 +327,7 @@ ORDER BY full_date]]>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{event_imps}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="622" y="0" width="90" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="1019" y="0" width="90" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -297,7 +340,7 @@ ORDER BY full_date]]>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{event_clicks}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="712" y="0" width="90" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="1109" y="0" width="103" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -307,14 +350,53 @@ ORDER BY full_date]]>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Float"><![CDATA[$F{event_clicks}.floatValue()/$F{event_imps}.floatValue()]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Float"><![CDATA[( $F{event_imps}>0 ? $F{event_clicks}.floatValue()/$F{event_imps}.floatValue() : 0 )]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="454" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{bids}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="749" y="0" width="180" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[( $F{imp_cnt}>0 ? $F{adcel_filled_imps}.floatValue()/$F{imp_cnt}.floatValue() : 0 )]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="524" y="0" width="106" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[( $F{bids}>0 ? $F{imp_cnt}.floatValue()/$F{bids}.floatValue() : 0 )]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<pageFooter>
 		<band height="20">
 			<textField>
-				<reportElement x="0" y="0" width="802" height="20"/>
+				<reportElement x="0" y="0" width="1212" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
@@ -336,7 +418,7 @@ ORDER BY full_date]]>
 				<text><![CDATA[Total]]></text>
 			</staticText>
 			<textField pattern="$ #,##0.00">
-				<reportElement x="153" y="0" width="80" height="20"/>
+				<reportElement x="143" y="0" width="131" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -349,7 +431,7 @@ ORDER BY full_date]]>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{paid_amount_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00">
-				<reportElement x="233" y="0" width="90" height="20"/>
+				<reportElement x="274" y="0" width="90" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -362,7 +444,7 @@ ORDER BY full_date]]>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{ave_paid_price_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00">
-				<reportElement x="323" y="0" width="90" height="20"/>
+				<reportElement x="364" y="0" width="90" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -375,7 +457,7 @@ ORDER BY full_date]]>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{ave_bid_price_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="73" y="0" width="80" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="73" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -388,7 +470,7 @@ ORDER BY full_date]]>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{imp_cnt_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="413" y="0" width="119" height="20"/>
+				<reportElement x="630" y="0" width="119" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -402,7 +484,7 @@ ORDER BY full_date]]>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{adcel_filled_imps_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="532" y="0" width="90" height="20"/>
+				<reportElement x="929" y="0" width="90" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -416,7 +498,7 @@ ORDER BY full_date]]>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{event_imps_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="622" y="0" width="90" height="20"/>
+				<reportElement x="1019" y="0" width="90" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -430,7 +512,7 @@ ORDER BY full_date]]>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{event_clicks_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %">
-				<reportElement x="712" y="0" width="90" height="20"/>
+				<reportElement x="1109" y="0" width="103" height="20"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -442,6 +524,47 @@ ORDER BY full_date]]>
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Float"><![CDATA[$V{event_clicks_1}.floatValue()/$V{event_imps_1}.floatValue()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="454" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{bids_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="524" y="0" width="106" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$V{imp_cnt_1}.floatValue()/$V{bids_1}.floatValue()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="749" y="0" width="180" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$V{adcel_filled_imps_1}.floatValue()/$V{imp_cnt_1}.floatValue()]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>
