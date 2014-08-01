@@ -85,6 +85,12 @@ background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#eeeeee), to(#ddddd
 filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffeeeeee', endColorstr='#ffdddddd', GradientType=0);
 }
 
+tr.month_summary{
+background-color: #FAFAFA;
+background-image: -moz-linear-gradient(top, #eeeeee, #dddddd);
+background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#eeeeee), to(#dddddd));
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffeeeeee', endColorstr='#ffdddddd', GradientType=0);
+}
 .btn {
 border-color: #e6e6e6 #e6e6e6 #bfbfbf;
 border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);

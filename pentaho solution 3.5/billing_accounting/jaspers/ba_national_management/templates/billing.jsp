@@ -43,9 +43,9 @@
 			<div class="modal-body">
 				<form role="form">
 					<div class="form-group">
-						<label for="exampleInputEmail1">Month</label>		   
-						<select class="form-control" id="selectbox-month_sk">			  
-							</select>
+						<label for="exampleInputEmail1">Months</label>
+						<input id="month_list_input" type="text" class="form-control" style="display: none;"/>
+						<div id="month_list" class="form-group" style="overflow: auto;height: 100px;margin-bottom: 10px;"></div>
 					</div>
 					<div class="form-group">
 						<label for="io_order_list">IO Orders</label>
@@ -274,6 +274,7 @@
 	/////////////////////////
 	$( document ).ready(function(){
 		loadBillingDetailFromUrl();
+		
 	}) ;
 	
 	///////////////////////////////////
@@ -290,31 +291,83 @@
 		}
 		
 		if(p_month_since_2005!=''&&p_io_orders!=''&&p_io_line_items!=''){
-			// Load detail table
-			loadBillingDetailTable({
-				p_month_since_2005 : p_month_since_2005,
-				p_io_orders: p_io_orders,
-				p_io_line_items: p_io_line_items,
-				obj_table: $('#detailTable'),
-				success: function(){
-					
-				}
-			});
+			if(p_month_since_2005.indexOf(",")>0 ){
+				$('#page_header').html('National Billing');
+				loadBillingDetailTableInMultipleMonth({
+					p_month_since_2005 : p_month_since_2005,
+					p_io_orders: p_io_orders,
+					p_io_line_items: p_io_line_items,
+					obj_table: $('#detailTable'),
+					success: function(){
+						
+					}
+				});
+			}else{
+				// Load detail table
+				$('#page_header').html('National Billing - ' + p_calendar_year_month);
+				loadBillingDetailTable({
+					p_month_since_2005 : p_month_since_2005,
+					p_io_orders: p_io_orders,
+					p_io_line_items: p_io_line_items,
+					obj_table: $('#detailTable'),
+					success: function(){
+						
+					}
+				});
+			}
+			
 		}	
 	}
 	/////////////////////////
 	// Load list of month
 	/////////////////////////
-	generateBillingMonthListDropDown({
-		p_select_object: $('#selectbox-month_sk'),
+	
+	var loadMonthList=new generateSelect2({
+		inputID: 'month_list_input',
+		divID: 'month_list',
+		name: 'month_since_2005',
+		multi: true,
+		//selectAll: true,
+		ajaxUrl: '/pentaho/ViewAction',
+		data: function(term,page){
+			return {
+				solution: solution,
+				path: path+'/ba_national_management',
+				data: 'json',
+				action: 'billing_management.xaction',
+				term: term, //search term
+				limit: 20, // page size
+				page: page, // page number
+				actions: 'loadListMonths'
+				//p_month_since_2005: $('#selectbox-month_sk').val().join(",")
+			};
+		},
+		result: function(data, page){
+			var results=[];
+			for(var i=0;i<data.length;i++){
+				var row=data[i];
+				var id=row.month_since_2005;
+				var name=row.calendar_year_month ;
+				var dataRow=[id,name];
+				results.push(dataRow);
+			}
+			data.data;
+			var more=false;
+			if(results.length==20){
+				more=true
+			}
+			return {results: results,more: more}
+		},
 		success: function(){
+			//mySearch2.action();
 			loadIoOrders.action();
 		},
-		change: function(){
-	 		loadIoOrders.action();
-	 		loadIoLineItems.clearList();			
+		clickEvent: function(id){
+			//mySearch2.action();
 		}
 	});
+	
+	loadMonthList.action();
 	
 	//////////////////////////////
 	//Load list order
@@ -335,8 +388,8 @@
 				term: term, //search term
 				limit: 20, // page size
 				page: page, // page number
-				actions: 'loadListIoOrders',
-				p_month_since_2005: $('#selectbox-month_sk').val()
+				actions: 'loadListIoOrders'
+				//p_month_since_2005: $('#selectbox-month_sk').val().join(",")
 			};
 		},
 		result: function(data, page){
@@ -385,7 +438,7 @@
 				limit: 20, // page size
 				page: page, // page number
 				actions: 'loadListIoLineItems',
-				p_month_since_2005: $('#selectbox-month_sk').val(),
+				//p_month_since_2005: $('#selectbox-month_sk').val().join(","),
 				p_io_orders: loadIoOrders.getID().join(",")
 			};
 		},
@@ -420,27 +473,33 @@
 	
 	function applyControlPanel(){
 		//get input
-		var p_month_since_2005    = $('#selectbox-month_sk').val();
-		var p_calendar_year_month = $('#selectbox-month_sk option:selected').text();
+		var p_month_since_2005    = loadMonthList.getID().join(",");
+		var p_calendar_year_month = [];
 		var p_io_orders           = loadIoOrders.getID().join(",");
 		var p_io_line_items       = loadIoLineItems.getID().join(",");
-		
-		if (p_calendar_year_month != '') {
-			$('#page_header').html('National Billing - ' + p_calendar_year_month);
-		}
-		
-		if(loadIoOrders.getID().length==0){
+				
+				
+		if(loadMonthList.getID().length==0){
+			alert("Please select Months!");
+			return false;
+		}else if(loadIoOrders.getID().length==0){
 			alert("Please select IO Orders!");
 			return false;
 		}else if(loadIoLineItems.getID().length==0){
 			alert("Please select IO Line Items!");
 			return false;
 		}
+		
+		// get select month value
+		$.each(loadMonthList.getID(),function(index,month_sk){
+			var month=$('#month_list label[for=checkbox_month_since_2005_'+month_sk+']:first').html();
+			p_calendar_year_month.push(month);
+		});
 		//hide modal
 		$('#myModal').modal('hide');
 		//set to url
 		urlMaster.replaceParam('month_sk',p_month_since_2005);
-		urlMaster.replaceParam('year_month',p_calendar_year_month);
+		urlMaster.replaceParam('year_month',p_calendar_year_month.join(","));
 		urlMaster.replaceParam('io_orders',p_io_orders);
 		urlMaster.replaceParam('io_line_items',p_io_line_items);
 		// Load summary table
@@ -696,8 +755,28 @@
 	}
 	
 	////////////////////////////////////////
-	// Show IO Line Item Detail by IO Order
+	// Show/Hide IO Line Item Detail by IO Order
 	////////////////////////////////////////
+	
+	function showDetailGroupOrder(io_order_id){
+		if ($('tr.group_month_' + io_order_id).first().css('display') == 'none') {
+			$('tr.group_month_' + io_order_id).show();
+		} else {
+			$('tr.group_month_' + io_order_id).hide();
+			$('tr[class^=row_' + io_order_id+']').hide();
+			$('tr[class^=row_head_title_' + io_order_id+']').hide();
+		}
+	}
+	
+	function showDetailGroupMonth(key){
+		if ($('tr.row_' + key).first().css('display') == 'none') {
+			$('tr.row_' + key).show();
+			$('tr.row_head_title_' + key).show();
+		} else {
+			$('tr.row_' + key).hide();
+			$('tr.row_head_title_' + key).hide();
+		}
+	}
 	
 	function showDetail(io_order_id){
 		if ($('tr.class' + io_order_id).first().css('display') == 'none') {
