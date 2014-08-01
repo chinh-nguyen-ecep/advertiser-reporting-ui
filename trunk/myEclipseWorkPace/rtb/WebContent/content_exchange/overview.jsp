@@ -78,8 +78,8 @@
 	 	 </div>
 	  <div class="col-md-2">
 			<ul class="pager">
-			  <li><a href="#">Previous</a></li>
-			  <li><a href="#">Next</a></li>
+				  <li><a href="#" onclick="disabledEventPropagation(event);myTable.previous();">Previous</a></li>
+				  <li><a href="#" onclick="disabledEventPropagation(event);myTable.next();">Next</a></li>
 			</ul>	  	
 	  </div>
 	</div>

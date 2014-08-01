@@ -75,7 +75,7 @@
 						<a href="#" onclick="changePage('overview','exchange');">Exchange</a>
 						</li>
 						<li class="">
-						<a href="#" onclick="changePage('overview','winrate')">WinRate</a>
+						<a href="#" onclick="changePage('overview','winrate')">Winrate</a>
 						</li>
 						</ul>
 					</li>

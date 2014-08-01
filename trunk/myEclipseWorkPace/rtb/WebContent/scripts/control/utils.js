@@ -79,7 +79,7 @@ function drawTableFromArray(settings){
 		page: 1,
 		page_items: 10,
 		table_id: 'myTable',
-		table_colums: ['Date','values'],
+		table_columns: ['Date','values'],
 		columns_format:[],
 		table_data: [['2013-01-01',10],['2013-01-01',13],['2013-01-01',12]],
 		sort_by: '',
@@ -91,7 +91,7 @@ function drawTableFromArray(settings){
 	},settings);
 	
 	if(settings.sortable && settings.sort_by==''){
-		settings.sort_by=settings.table_colums[0];
+		settings.sort_by=settings.table_columns[0];
 	}	
 	if(settings.sort_by==''){
 		refreshData();
@@ -136,8 +136,8 @@ function drawTableFromArray(settings){
 		var head=$("<thead></thead>");
 		head.append('<tr>				<th class="buttons" colspan="12"></th>				</tr>');
 		var tr='<tr>';
-		for(var i=0;i<settings.table_colums.length;i++){
-			tr+='<th class="header" title="'+settings.table_colums[i]+'"><a href="#">'+settings.table_colums[i]+'</a><i style="float: right"></i></th>';
+		for(var i=0;i<settings.table_columns.length;i++){
+			tr+='<th class="header" title="'+settings.table_columns[i]+'"><a href="#">'+settings.table_columns[i]+'</a><i style="float: right"></i></th>';
 		}
 		tr+='</tr>';
 		head.append(tr);
@@ -167,6 +167,12 @@ function drawTableFromArray(settings){
 				}else
 				if(settings.columns_format[j]=='money'){
 					tr+='<td align="right">'+accounting.formatMoney(row_data[j])+'</td>';
+				}else
+				if(settings.columns_format[j]=='short date'){
+						tr+='<td align="right">'+verveDateConvert(row_data[j]).format('mmm dd')+'</td>';
+				}else
+				if(settings.columns_format[j]=='date'){
+						tr+='<td align="right">'+verveDateConvert(row_data[j]).format('yyyy-mm-dd')+'</td>';
 				}else{
 					tr+='<td>'+row_data[j]+'</td>';
 				}
@@ -228,7 +234,7 @@ function drawTableFromArray(settings){
 		//get column index
 		
 		var columnIndex=0;
-		$.each(settings.table_colums,function(index,value){
+		$.each(settings.table_columns,function(index,value){
 			if(columnName==value){
 				columnIndex=index;
 			}

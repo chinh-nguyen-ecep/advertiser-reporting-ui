@@ -177,7 +177,7 @@ $(document).ready(function(){
 		  	//generate table
 		  	myTable=new drawTableFromArray({
 		  		table_id: 'daily-advertiser-dataTable',
-		  		table_colums: ['Date','Hour','Wins','Paid Amount','Ave. Paid Price','Ave. Bid Price'],
+		  		table_columns: ['Date','Hour','Wins','Paid Amount','Ave. Paid Price','Ave. Bid Price'],
 		  		columns_format:['','','number','money','money','money'],
 		  		table_data: table_data,
 		  		page_items: 24,
@@ -267,6 +267,7 @@ $(document).ready(function(){
 	                        return s;
 	                    }
 	                },
+	                title: null,
 	                gridLineWidth: 1
 	            },
 	            legend: {
@@ -457,7 +458,7 @@ $(document).ready(function(){
 		//generate table
 	  	myTableSummary=new drawTableFromArray({
 	  		table_id: 'daily-advertiser-dataTable',
-	  		table_colums: ['Hour','Wins','Paid Amount','Ave. Paid Price','Ave. Bid Price'],
+	  		table_columns: ['Hour','Wins','Paid Amount','Ave. Paid Price','Ave. Bid Price'],
 	  		columns_format:['','number','money','money','money'],
 	  		table_data: tableData,
 	  		page_items: 24,
