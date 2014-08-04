@@ -1,8 +1,8 @@
 <script>
 //Set locate
-	urlMaster.replaceParam('page','billing_script');
+	urlMaster.replaceParam('page','billing_script_month_to_date');
 	urlMaster.replaceParam('actionPath','billing_management');
-	activeTab('Billing Worksheet');
+	activeTab('Billing MonthTODate Worksheet');
 </script>
 <div class="page-header">
 
@@ -41,12 +41,7 @@
 				<h4 class="modal-title" id="myModalLabel">Control panel</h4>
 			</div>
 			<div class="modal-body">
-				<form role="form">
-					<div class="form-group">
-						<label for="exampleInputEmail1">Months</label>
-						<input id="month_list_input" type="text" class="form-control" style="display: none;"/>
-						<div id="month_list" class="form-group" style="overflow: auto;height: 100px;margin-bottom: 10px;"></div>
-					</div>
+				<form role="form">					
 					<div class="form-group">
 						<label for="io_order_list">IO Orders</label>
 						<input id="io_order_search_input" type="text" class="form-control"/>
@@ -281,94 +276,25 @@
 	// Load page from param on url
 	////////////////////////////////////
 	function loadBillingDetailFromUrl(){
-		var p_month_since_2005=urlMaster.getParam('month_sk');
-		var p_calendar_year_month=urlMaster.getParam('year_month');
 		var p_io_orders=urlMaster.getParam('io_orders');
 		var p_io_line_items=urlMaster.getParam('io_line_items');
 		
-		if (p_calendar_year_month != '') {
-			$('#page_header').html('Billing Monthly Worksheet - ' + p_calendar_year_month);
-		}
 		
-		if(p_month_since_2005!=''&&p_io_orders!=''&&p_io_line_items!=''){
-		console.log(p_month_since_2005);
-			if(p_month_since_2005.indexOf(",")>0 || p_month_since_2005==0 ){
-				$('#page_header').html('Billing Monthly Worksheet');
-				loadBillingDetailTableInMultipleMonth({
-					p_month_since_2005 : p_month_since_2005,
-					p_io_orders: p_io_orders,
-					p_io_line_items: p_io_line_items,
-					obj_table: $('#detailTable'),
-					success: function(){
-						
-					}
-				});
-			}else{
-				// Load detail table
-				$('#page_header').html('Billing Monthly Worksheet - ' + p_calendar_year_month);
-				loadBillingDetailTable({
-					p_month_since_2005 : p_month_since_2005,
-					p_io_orders: p_io_orders,
-					p_io_line_items: p_io_line_items,
-					obj_table: $('#detailTable'),
-					success: function(){
-						
-					}
-				});
-			}
+		$('#page_header').html('Billing MonthToDate Worksheet');
+		if(p_io_orders!=''&&p_io_line_items!=''){
+		loadBillingDetailTable({
+				p_month_since_2005 : -1,
+				p_io_orders: p_io_orders,
+				p_io_line_items: p_io_line_items,
+				obj_table: $('#detailTable'),
+				success: function(){
+					
+				}
+			});
 			
 		}	
 	}
-	/////////////////////////
-	// Load list of month
-	/////////////////////////
-	
-	var loadMonthList=new generateSelect2({
-		inputID: 'month_list_input',
-		divID: 'month_list',
-		name: 'month_since_2005',
-		multi: true,
-		selectAll: true,
-		ajaxUrl: '/pentaho/ViewAction',
-		data: function(term,page){
-			return {
-				solution: solution,
-				path: path+'/ba_national_management',
-				data: 'json',
-				action: 'billing_management.xaction',
-				term: term, //search term
-				limit: 20, // page size
-				page: page, // page number
-				actions: 'loadListMonths'
-				//p_month_since_2005: $('#selectbox-month_sk').val().join(",")
-			};
-		},
-		result: function(data, page){
-			var results=[];
-			for(var i=0;i<data.length;i++){
-				var row=data[i];
-				var id=row.month_since_2005;
-				var name=row.calendar_year_month ;
-				var dataRow=[id,name];
-				results.push(dataRow);
-			}
-			data.data;
-			var more=false;
-			if(results.length==20){
-				more=true
-			}
-			return {results: results,more: more}
-		},
-		success: function(){
-			//mySearch2.action();
-			loadIoOrders.action();
-		},
-		clickEvent: function(id){
-			//mySearch2.action();
-		}
-	});
-	
-	loadMonthList.action();
+
 	
 	//////////////////////////////
 	//Load list order
@@ -389,8 +315,8 @@
 				term: term, //search term
 				limit: 20, // page size
 				page: page, // page number
-				actions: 'loadListIoOrders'
-				//p_month_since_2005: $('#selectbox-month_sk').val().join(",")
+				actions: 'loadListIoOrders',
+				p_month_since_2005: -1
 			};
 		},
 		result: function(data, page){
@@ -421,7 +347,10 @@
 			
 		}
 	});
-	
+	loadIoOrders.action();
+	//////////////////////////////
+	//Load Io Line Items
+	/////////////////////////////	
 	var loadIoLineItems=new generateSelect2({
 		inputID: 'io_line_item_search_input',
 		divID: 'io_line_item_list',
@@ -473,17 +402,12 @@
 	////////////////////////////////
 	
 	function applyControlPanel(){
-		//get input
-		var p_month_since_2005    = loadMonthList.getID().join(",");
-		var p_calendar_year_month = [];
+		//get input				
 		var p_io_orders           = loadIoOrders.getID().join(",");
 		var p_io_line_items       = loadIoLineItems.getID().join(",");
 				
 				
-		if(loadMonthList.getID().length==0){
-			alert("Please select Months!");
-			return false;
-		}else if(loadIoOrders.getID().length==0){
+		if(loadIoOrders.getID().length==0){
 			alert("Please select IO Orders!");
 			return false;
 		}else if(loadIoLineItems.getID().length==0){
@@ -491,16 +415,10 @@
 			return false;
 		}
 		
-		// get select month value
-		$.each(loadMonthList.getID(),function(index,month_sk){
-			var month=$('#month_list label[for=checkbox_month_since_2005_'+month_sk+']:first').html();
-			p_calendar_year_month.push(month);
-		});
+		
 		//hide modal
 		$('#myModal').modal('hide');
 		//set to url
-		urlMaster.replaceParam('month_sk',p_month_since_2005);
-		urlMaster.replaceParam('year_month',p_calendar_year_month.join(","));
 		urlMaster.replaceParam('io_orders',p_io_orders);
 		urlMaster.replaceParam('io_line_items',p_io_line_items);
 		// Load summary table

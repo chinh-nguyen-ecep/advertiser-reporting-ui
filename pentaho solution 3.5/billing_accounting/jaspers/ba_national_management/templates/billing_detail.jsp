@@ -70,10 +70,10 @@
 			<th>DFP Delivered Clicks</th><td name="dfp_delivered_clicks">{dfp_delivered_clicks}</td>
 		</tr>
 		<tr>
-			<th>DFA Delivered Imps</th><td name="dfa_delivered_imps">{dfa_delivered_imps}</td>
+			<th>3rd Party Delivered Imps</th><td name="dfa_delivered_imps">{dfa_delivered_imps}</td>
 		</tr>
 		<tr>
-			<th>DFA Delivered Clicks</th><td name="dfa_delivered_clicks">{dfa_delivered_clicks}</td>
+			<th>3rd Party Delivered Clicks</th><td name="dfa_delivered_clicks">{dfa_delivered_clicks}</td>
 		</tr>
 		<tr>
 			<th>Adjusted Units</th><td name="adjusted_units">{adjusted_units}</td>
@@ -94,7 +94,7 @@
 			<th>Amount Invoiced ToDate</th><td name="total_amount_invoiced_upto_month">{total_amount_invoiced_upto_month}</td>
 		</tr>
 		<tr>
-			<th>Remaining Units</th><td name="remaining_units">{remaining_units}</td>
+			<th>Remaining Units</th><td name="remaining_units">{billable_remaining_units}</td>
 		</tr>
 		<tr>
 			<th>Remaining Budget</th><td name="remaining_budget">{remaining_budget}</td>
@@ -132,6 +132,6 @@
 	$('#lineItemDetail td[name=total_billable_units_upto_month]').html(accounting.formatNumber({total_billable_units_upto_month}));
 	$('#lineItemDetail td[name=invoice_amount]').html(accounting.formatMoney({invoice_amount}));
 	$('#lineItemDetail td[name=total_amount_invoiced_upto_month]').html(accounting.formatMoney({total_amount_invoiced_upto_month}));
-	$('#lineItemDetail td[name=remaining_units]').html(accounting.formatNumber({remaining_units}));
+	$('#lineItemDetail td[name=remaining_units]').html(accounting.formatNumber({billable_remaining_units}));
 	$('#lineItemDetail td[name=remaining_budget]').html(accounting.formatMoney({remaining_budget}));
 </script>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="detail_at_io_line_item_level" language="groovy" pageWidth="2370" pageHeight="842" orientation="Landscape" columnWidth="2370" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="1226"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="p_month_since_2005" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new String("1")]]></defaultValueExpression>
@@ -27,14 +27,15 @@
 , SUM(a.io_line_item_budget)::float as "Booking Budget"
 , SUM(a.total_billable_units_upto_month)::bigint as "Unit Invoiced ToDate"
 , SUM(ROUND(a.total_amount_invoiced_upto_month::NUMERIC, 2))::float as "Amount Invoiced ToDate"
-, SUM(a.remaining_units)::bigint as "Remaining Units"
+, SUM(a.billable_remaining_units)::bigint as "Remaining Units"
 , SUM(a.remaining_budget)::float as "Remaining Budget"
 from  billing.ba_monthly_national_worksheet a
 left join billing.ba_national_dim_io b ON (b.is_active = true AND b.io_orders_id = a.io_orders_id)
-where month_since_2005 = $P{p_month_since_2005}::int
+where (month_since_2005 IN (select unnest(string_to_array($P{p_month_since_2005}, ','))::int) OR '0'=$P{p_month_since_2005})
 and (a.io_orders_id IN (select unnest(string_to_array($P{p_io_orders}, ','))::int) OR '0'=$P{p_io_orders}::text)
 and (a.io_line_item_id IN (select unnest(string_to_array($P{p_io_line_items}, ','))::int) OR '0'=$P{p_io_line_items}::text)
 and a.is_active = true
+AND a.is_monthly = true
 group by a.calendar_year_month
 , a.month_since_2005
 , a.advertiser_io
@@ -45,7 +46,7 @@ group by a.calendar_year_month
 , a.contract_name
 , a.agency_name
 , b.billing_contact
-order by "Advertiser";]]>
+order by "Advertiser",a.month_since_2005;]]>
 	</queryString>
 	<field name="Month" class="java.lang.String"/>
 	<field name="month_since_2005" class="java.lang.Integer"/>
