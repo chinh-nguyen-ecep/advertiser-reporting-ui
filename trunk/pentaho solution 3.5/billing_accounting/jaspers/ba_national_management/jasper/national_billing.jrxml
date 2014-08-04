@@ -6,7 +6,9 @@
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
-	<parameter name="p_month_since_2005" class="java.lang.String"/>
+	<parameter name="p_month_since_2005" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("0")]]></defaultValueExpression>
+	</parameter>
 	<parameter name="p_io_orders" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new String("0")]]></defaultValueExpression>
 	</parameter>
@@ -18,7 +20,8 @@ FROM (
 SELECT calendar_year_month
      , (max(dt_lastchange)::timestamp with time zone AT TIME ZONE 'America/Los_Angeles')::timestamp with time zone AT TIME ZONE 'America/New_York' AS dt_lastchange
 FROM billing.ba_monthly_national_worksheet
-WHERE month_since_2005 = $P{p_month_since_2005}::int
+WHERE (month_since_2005 IN (select unnest(string_to_array($P{p_month_since_2005}, ','))::int) OR '0'=$P{p_month_since_2005})
+AND is_monthly = true
 GROUP BY calendar_year_month
 ) a
 GROUP BY calendar_year_month]]>

@@ -105,7 +105,7 @@ color: #999999;
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse"data-target="navbar-ex1-collapse">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="navbar-ex1-collapse">
 				<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
@@ -132,7 +132,8 @@ color: #999999;
 	</nav>
 	<div class="container first-tab theme-showcase " id="page-tab">
 		<ul class="nav nav-tabs">
-			<li title="Billing Worksheet" class="active"><a href="#" onclick="goHomePage()">Billing Worksheet</a></li>
+			<li title="Billing Worksheet" class="active"><a href="#" onclick="goHomePage()">Billing Monthly Worksheet</a></li>
+			<li title="Billing MonthTODate Worksheet" class="active"><a href="#" onclick="goMonthToDate()">Billing MonthToDate  Worksheet</a></li>
 			<li title="Information"><a href="#" onclick="goInformationPage()">Information</a></li>
 			<li title="Adjustment"><a href="#" onclick="goAdjustedUnitPage()">Adjustment</a></li>
 		</ul>

@@ -37,7 +37,7 @@ a.calendar_year_month as "Month"
 ,a.dfa_clicks as "DFA Delivered Clicks"
 ,a.adjusted_units as "Adjusted Units"
 ,a.delivered_units as "Delivered Units"
-,a.remaining_units as "Remaining Units"
+,a.billable_remaining_units as "Remaining Units"
 ,a.billable_units as "Billable Units"
 ,a.total_billable_units_upto_month as "Billable Units ToDate"
 ,ROUND(a.invoice_amount::NUMERIC, 2)::float as "Invoiced Amount"
@@ -45,11 +45,12 @@ a.calendar_year_month as "Month"
 ,a.remaining_budget as "Remaining Budget"
 from  billing.ba_monthly_national_worksheet a
 left join billing.ba_national_dim_io b ON (b.is_active = true AND b.io_orders_id = a.io_orders_id)
-where month_since_2005 = $P{p_month_since_2005}::int
+where (month_since_2005 IN (select unnest(string_to_array($P{p_month_since_2005}, ','))::int) OR '0'=$P{p_month_since_2005})
 and (a.io_orders_id IN (select unnest(string_to_array($P{p_io_orders}, ','))::int) OR '0'=$P{p_io_orders}::text)
 and (a.io_line_item_id IN (select unnest(string_to_array($P{p_io_line_items}, ','))::int) OR '0'=$P{p_io_line_items}::text)
 and a.is_active = true
-order by "Advertiser";]]>
+AND a.is_monthly = true
+order by "Advertiser",a.month_since_2005;]]>
 	</queryString>
 	<field name="Month" class="java.lang.String"/>
 	<field name="IO Number" class="java.lang.String"/>

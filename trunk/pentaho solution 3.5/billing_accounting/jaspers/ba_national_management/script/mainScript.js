@@ -91,6 +91,13 @@ function goHomePage() {
 	urlMaster.replaceParam('actionPath', actionPath);
 	loadPage();
 }
+function goMonthToDate() {
+	var page = 'billing_script_month_to_date';
+	var actionPath = 'billing_management';
+	urlMaster.replaceParam('page', page);
+	urlMaster.replaceParam('actionPath', actionPath);
+	loadPage();
+}
 
 function goInformationPage() {
 	var page = 'information_script';

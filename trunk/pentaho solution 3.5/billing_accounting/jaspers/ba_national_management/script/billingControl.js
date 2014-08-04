@@ -138,6 +138,7 @@ function loadBillingDetailTable(input){
 		var total_remaining_units = 0;
 		var total_remaining_budget = 0;
 		var total_billable_units_to_date = 0;
+		var total_billable_remaining_units=0;
 		
 		if (data.length > 0){
 			current_io_orders_id = data[0].io_orders_id;
@@ -178,6 +179,7 @@ function loadBillingDetailTable(input){
 			var information_control     = data[i].information_control;
 			var adjusted_units_control  = data[i].adjusted_units_control;
 			var billable_units_to_date  = data[i].billable_units_to_date;
+			var billable_remaining_units= data[i].billable_remaining_units;
 			
 			total_booking_units           += parseInt(planned_units);
 			total_booking_amount          += parseFloat(contracted_budget);
@@ -186,6 +188,7 @@ function loadBillingDetailTable(input){
 			total_remaining_budget        += parseFloat(remaining_budget);
 			total_remaining_units         += parseInt(remaining_units);
 			total_billable_units_to_date  += parseInt(billable_units_to_date);
+			total_billable_remaining_units+= parseInt(billable_remaining_units);
 			
 			var revision_date = new Date(io_revision_date).format('mmm dd, yyyy');
 			var start_date = new Date(io_line_item_start_date).format('mmm dd');
@@ -216,7 +219,7 @@ function loadBillingDetailTable(input){
 			detail += '<td align="right">' + accounting.formatMoney(invoice_amount) + '</td>';
 			detail += '<td align="right">' + accounting.formatNumber(billable_units_to_date) + '</td>';
 			detail += '<td align="right">' + accounting.formatMoney(amount_invoiced_to_date) + '</td>';
-			detail += '<td align="right">' + accounting.formatMoney(remaining_budget) + '<br/>' + accounting.formatNumber(remaining_units) + '</td>';
+			detail += '<td align="right">' + accounting.formatMoney(remaining_budget) + '<br/>' + accounting.formatNumber(billable_remaining_units) + '</td>';
 			detail += '</tr>';
 			
 			if (current_io_orders_id != io_orders_id){			
@@ -233,6 +236,7 @@ function loadBillingDetailTable(input){
 				total_remaining_budget        = parseFloat(remaining_budget);
 				total_remaining_units         = parseInt(remaining_units);
 				total_billable_units_to_date  = parseInt(billable_units_to_date);
+				total_billable_remaining_units= parseInt(billable_remaining_units);
 			} else {
 				rowDetail += detail;
 			}
@@ -251,7 +255,7 @@ function loadBillingDetailTable(input){
 			rowSummary += '<td align="right"><b>' + accounting.formatMoney(total_booking_amount) + '<br/>' + accounting.formatNumber(total_booking_units) + '</b></td>';
 			rowSummary += '<td align="right"><b>' + accounting.formatNumber(total_billable_units_to_date) + '</b></td>';
 			rowSummary += '<td align="right"><b>' + accounting.formatMoney(total_amount_invoiced_to_date)+ '</b></td>';
-			rowSummary += '<td align="right"><b>' + accounting.formatMoney(total_remaining_budget) + '<br/>'+ accounting.formatNumber(total_remaining_units) + '</b></td>';
+			rowSummary += '<td align="right"><b>' + accounting.formatMoney(total_remaining_budget) + '<br/>'+ accounting.formatNumber(total_billable_remaining_units) + '</b></td>';
 			rowSummary += '</tr>';
 			rowSummary += '<tr class="class' + io_orders_id + '" style="display: none;">';
 			rowSummary += '<td colspan="2"><b>IO Line Item</b></td>';
@@ -358,6 +362,7 @@ function loadBillingDetailTableInMultipleMonth(input){
 			var information_control     = data[i].information_control;
 			var adjusted_units_control  = data[i].adjusted_units_control;
 			var billable_units_to_date  = data[i].billable_units_to_date;
+			var billable_remaining_units= data[i].billable_remaining_units;
 			
 			if(pre_order_id != io_orders_id){
 				order_id_key.push(io_orders_id);
@@ -397,7 +402,7 @@ function loadBillingDetailTableInMultipleMonth(input){
 			detail += '<td align="right">' + accounting.formatMoney(invoice_amount) + '</td>';
 			detail += '<td align="right">' + accounting.formatNumber(billable_units_to_date) + '</td>';
 			detail += '<td align="right">' + accounting.formatMoney(amount_invoiced_to_date) + '</td>';
-			detail += '<td align="right">' + accounting.formatMoney(remaining_budget) + '<br/>' + accounting.formatNumber(remaining_units) + '</td>';
+			detail += '<td align="right">' + accounting.formatMoney(remaining_budget) + '<br/>' + accounting.formatNumber(billable_remaining_units) + '</td>';
 			detail += '</tr>';
 						
 			rows.push(detail);
@@ -419,6 +424,7 @@ function loadBillingDetailTableInMultipleMonth(input){
 			var total_remaining_units = 0;
 			var total_remaining_budget = 0;
 			var total_billable_units_to_date = 0;
+			var total_billable_remaining_units=0;
 			var calendar_year_month = '';
 			var order_id = 0;
 			
@@ -434,6 +440,8 @@ function loadBillingDetailTableInMultipleMonth(input){
 				total_remaining_budget        += parseFloat(row_data.remaining_budget);
 				total_remaining_units         += parseInt(row_data.remaining_units);
 				total_billable_units_to_date  += parseInt(row_data.billable_units_to_date);
+				total_billable_remaining_units+= parseInt(row_data.billable_remaining_units);
+				
 				calendar_year_month            = row_data.calendar_year_month;
 				order_id                       = row_data.io_orders_id;
 			});
@@ -444,7 +452,7 @@ function loadBillingDetailTableInMultipleMonth(input){
 							'<td align="right"><b>' + accounting.formatMoney(total_booking_amount) + '<br/>' + accounting.formatNumber(total_booking_units) + '</b></td>'+
 							'<td align="right"><b>' + accounting.formatNumber(total_billable_units_to_date) + '</b></td>'+
 							'<td align="right"><b>' + accounting.formatMoney(total_amount_invoiced_to_date)+ '</b></td>'+
-							'<td align="right"><b>' + accounting.formatMoney(total_remaining_budget) + '<br/>'+ accounting.formatNumber(total_remaining_units) + '</b></td>'+
+							'<td align="right"><b>' + accounting.formatMoney(total_remaining_budget) + '<br/>'+ accounting.formatNumber(total_billable_remaining_units) + '</b></td>'+
 							'</tr>';
 			rowSummaryByMonth += '<tr class="row_head_title_' + key + '" style="display:none">';
 			rowSummaryByMonth += '<td colspan="2"><b>IO Line Item</b></td>';
@@ -472,6 +480,7 @@ function loadBillingDetailTableInMultipleMonth(input){
 			var total_remaining_units = 0;
 			var total_remaining_budget = 0;
 			var total_billable_units_to_date = 0;
+			var total_billable_remaining_units=0;
 			var io_orders_id;
 			var campaign_name;
 			var campaign_id;
@@ -495,6 +504,8 @@ function loadBillingDetailTableInMultipleMonth(input){
 				total_remaining_budget        += parseFloat(row_data.remaining_budget);
 				total_remaining_units         += parseInt(row_data.remaining_units);
 				total_billable_units_to_date  += parseInt(row_data.billable_units_to_date);
+				total_billable_remaining_units+= parseInt(row_data.billable_remaining_units);
+				
 				io_orders_id    = row_data.io_orders_id;
 				campaign_name   = row_data.campaign_name;
 				campaign_id     = row_data.campaign_id;
@@ -520,7 +531,7 @@ function loadBillingDetailTableInMultipleMonth(input){
 			rowSummary += '<td align="right"><b>' + accounting.formatMoney(total_booking_amount) + '<br/>' + accounting.formatNumber(total_booking_units) + '</b></td>';
 			rowSummary += '<td align="right"><b>' + accounting.formatNumber(total_billable_units_to_date) + '</b></td>';
 			rowSummary += '<td align="right"><b>' + accounting.formatMoney(total_amount_invoiced_to_date)+ '</b></td>';
-			rowSummary += '<td align="right"><b>' + accounting.formatMoney(total_remaining_budget) + '<br/>'+ accounting.formatNumber(total_remaining_units) + '</b></td>';
+			rowSummary += '<td align="right"><b>' + accounting.formatMoney(total_remaining_budget) + '<br/>'+ accounting.formatNumber(total_billable_remaining_units) + '</b></td>';
 			rowSummary += '</tr>';
 			
 			$('tr.group_month_'+io_orders_id+':first').before(rowSummary);
