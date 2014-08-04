@@ -179,13 +179,13 @@ function loadBillingDetailTable(input){
 			var adjusted_units_control  = data[i].adjusted_units_control;
 			var billable_units_to_date  = data[i].billable_units_to_date;
 			
-			total_booking_units += parseInt(planned_units);
-			total_booking_amount += parseFloat(contracted_budget);
-			total_billable_units += parseInt(billable_units);
+			total_booking_units           += parseInt(planned_units);
+			total_booking_amount          += parseFloat(contracted_budget);
+			total_billable_units          += parseInt(billable_units);
 			total_amount_invoiced_to_date += parseFloat(amount_invoiced_to_date);
-			total_remaining_budget += parseFloat(remaining_budget);
-			total_remaining_units += parseInt(remaining_units);
-			total_billable_units_to_date += parseInt(billable_units_to_date);
+			total_remaining_budget        += parseFloat(remaining_budget);
+			total_remaining_units         += parseInt(remaining_units);
+			total_billable_units_to_date  += parseInt(billable_units_to_date);
 			
 			var revision_date = new Date(io_revision_date).format('mmm dd, yyyy');
 			var start_date = new Date(io_line_item_start_date).format('mmm dd');
@@ -359,13 +359,13 @@ function loadBillingDetailTableInMultipleMonth(input){
 			var adjusted_units_control  = data[i].adjusted_units_control;
 			var billable_units_to_date  = data[i].billable_units_to_date;
 			
-			if(pre_order_id!=io_orders_id){
+			if(pre_order_id != io_orders_id){
 				order_id_key.push(io_orders_id);
 				pre_order_id=io_orders_id;
 			}
-			if(pre_order_id_month!=io_orders_id+'_'+month_since_2005){
-				order_id_month_key.push(io_orders_id+'_'+month_since_2005);
-				pre_order_id_month=io_orders_id+'_'+month_since_2005;
+			if(pre_order_id_month != io_orders_id + '_' + month_since_2005){
+				order_id_month_key.push(io_orders_id + '_' + month_since_2005);
+				pre_order_id_month = io_orders_id + '_' + month_since_2005;
 			}
 			
 			var revision_date = new Date(io_revision_date).format('mmm dd, yyyy');
@@ -399,21 +399,19 @@ function loadBillingDetailTableInMultipleMonth(input){
 			detail += '<td align="right">' + accounting.formatMoney(amount_invoiced_to_date) + '</td>';
 			detail += '<td align="right">' + accounting.formatMoney(remaining_budget) + '<br/>' + accounting.formatNumber(remaining_units) + '</td>';
 			detail += '</tr>';
-			
-			
+						
 			rows.push(detail);
 			
 		}
-				
-
+		
 		var htmlTable = rows.join("");
 		input.obj_table.find('tbody').html(htmlTable);
-		console.log(order_id_key);
-		console.log(order_id_month_key);
+		//console.log(order_id_key);
+		//console.log(order_id_month_key);
 		
 		//Insert row group by month
-		for(var i=0;i<order_id_month_key.length;i++){
-			var key=order_id_month_key[i];
+		for(var i = 0; i < order_id_month_key.length; i++){
+			var key = order_id_month_key[i];
 			var total_booking_units = 0;
 			var total_booking_amount = 0;
 			var total_billable_units = 0;
@@ -421,25 +419,26 @@ function loadBillingDetailTableInMultipleMonth(input){
 			var total_remaining_units = 0;
 			var total_remaining_budget = 0;
 			var total_billable_units_to_date = 0;
-			var calendar_year_month='';
-			var order_id=0;
+			var calendar_year_month = '';
+			var order_id = 0;
 			
-			$('tr.row_'+key).each(function(){
-				var row_index_in_data=$( this ).attr('row');
+			$('tr.row_' + key).each(function() {
+				var row_index_in_data = $( this ).attr('row');
 				
-				var row_data=data[row_index_in_data];
+				var row_data = data[row_index_in_data];
 				//console.log(JSON.stringify(row_data));
-				total_booking_units          += parseInt(row_data.planned_units);
+				total_booking_units           += parseInt(row_data.planned_units);
 				total_booking_amount          += parseFloat(row_data.contracted_budget);
-				total_billable_units         += parseInt(row_data.billable_units);
+				total_billable_units          += parseInt(row_data.billable_units);
 				total_amount_invoiced_to_date += parseFloat(row_data.amount_invoiced_to_date);
 				total_remaining_budget        += parseFloat(row_data.remaining_budget);
 				total_remaining_units         += parseInt(row_data.remaining_units);
 				total_billable_units_to_date  += parseInt(row_data.billable_units_to_date);
-				calendar_year_month=row_data.calendar_year_month;
-				order_id=row_data.io_orders_id;
+				calendar_year_month            = row_data.calendar_year_month;
+				order_id                       = row_data.io_orders_id;
 			});
-			rowSummaryByMonth='';
+			
+			rowSummaryByMonth = '';
 			rowSummaryByMonth += '<tr class="month_summary group_month_'+order_id+'" style="display:none">'+
 							'<td colspan="8"><b><a href="#" onclick="showDetailGroupMonth(\''+key+'\')">'+calendar_year_month+'</a></b></td>'+
 							'<td align="right"><b>' + accounting.formatMoney(total_booking_amount) + '<br/>' + accounting.formatNumber(total_booking_units) + '</b></td>'+
@@ -460,7 +459,7 @@ function loadBillingDetailTableInMultipleMonth(input){
 			rowSummaryByMonth += '<td align="right"><b>Remaining Balance</b></td>';
 			rowSummaryByMonth += '</tr>';
 			
-			var target='tr[class=row_'+key+']:first';
+			var target = 'tr[class=row_'+key+']:first';
 			$(target).before(rowSummaryByMonth);
 		}
 		
@@ -489,23 +488,23 @@ function loadBillingDetailTableInMultipleMonth(input){
 				
 				var row_data=data[row_index_in_data];
 				//console.log(JSON.stringify(row_data));
-				total_booking_units          += parseInt(row_data.planned_units);
+				total_booking_units           += parseInt(row_data.planned_units);
 				total_booking_amount          += parseFloat(row_data.contracted_budget);
-				total_billable_units         += parseInt(row_data.billable_units);
+				total_billable_units          += parseInt(row_data.billable_units);
 				total_amount_invoiced_to_date += parseFloat(row_data.amount_invoiced_to_date);
 				total_remaining_budget        += parseFloat(row_data.remaining_budget);
 				total_remaining_units         += parseInt(row_data.remaining_units);
 				total_billable_units_to_date  += parseInt(row_data.billable_units_to_date);
-				io_orders_id=row_data.io_orders_id;
-				campaign_name=row_data.campaign_name;
-				campaign_id=row_data.campaign_id;
-				revision_date=row_data.revision_date;
-				agency=row_data.agency;
-				billing_contact=row_data.billing_contact;
-				advertiser=row_data.advertiser;
-				comment=row_data.comment;
-				io_number=row_data.io_number;
-				revision_date = new Date(row_data.io_revision_date).format('mmm dd, yyyy');
+				io_orders_id    = row_data.io_orders_id;
+				campaign_name   = row_data.campaign_name;
+				campaign_id     = row_data.campaign_id;
+				revision_date   = row_data.revision_date;
+				agency          = row_data.agency;
+				billing_contact = row_data.billing_contact;
+				advertiser      = row_data.advertiser;
+				comment         = row_data.comment;
+				io_number       = row_data.io_number;
+				revision_date   = new Date(row_data.io_revision_date).format('mmm dd, yyyy');
 			});
 			rowSummary = '';
 			rowSummary += '<tr class="summary">';
