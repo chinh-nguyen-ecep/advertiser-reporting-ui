@@ -256,3 +256,14 @@ function generateSelect2(options){
 function loadingDialog(msg){
 	
 }
+
+// input date ex: 2013-12-31 will return date object
+function verveDateConvert(full_date){
+	var value = full_date;
+	var array=value.split("-");
+	var year=parseInt(array[0]);
+	var month=parseInt(array[1])-1;
+	var day=parseInt(array[2]);
+	var date = new Date(year,month,day);
+	return date;
+}
