@@ -169,10 +169,10 @@ function drawTableFromArray(settings){
 					tr+='<td align="right">'+accounting.formatMoney(row_data[j])+'</td>';
 				}else
 				if(settings.columns_format[j]=='short date'){
-						tr+='<td align="right">'+verveDateConvert(row_data[j]).format('mmm dd')+'</td>';
+						tr+='<td align="left">'+verveDateConvert(row_data[j]).format('mmm dd')+'</td>';
 				}else
 				if(settings.columns_format[j]=='date'){
-						tr+='<td align="right">'+verveDateConvert(row_data[j]).format('yyyy-mm-dd')+'</td>';
+						tr+='<td align="left">'+verveDateConvert(row_data[j]).format('yyyy-mm-dd')+'</td>';
 				}else{
 					tr+='<td>'+row_data[j]+'</td>';
 				}
