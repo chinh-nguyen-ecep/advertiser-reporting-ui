@@ -108,9 +108,9 @@
 	var information_control='{information_control}';
 	var adjusted_units_control='{adjusted_units_control}';
 	
-	var revision_date = new Date('{io_revision_date}').format('mmm dd, yyyy');
-	var start_date = new Date('{io_line_item_start_date}').format('mmm dd, yyyy');
-	var end_date = new Date('{io_line_item_end_date}').format('mmm dd, yyyy'); 
+	var revision_date = verveDateConvert('{io_revision_date}').format('mmm dd, yyyy');
+	var start_date = verveDateConvert('{io_line_item_start_date}').format('mmm dd, yyyy');
+	var end_date = verveDateConvert('{io_line_item_end_date}').format('mmm dd, yyyy'); 
 	
 	$('#lineItemDetail td[name=io_revision_date]').html(revision_date);
 	$('#lineItemDetail td[name=io_line_item_start_date]').html(start_date);

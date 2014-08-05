@@ -190,9 +190,9 @@ function loadBillingDetailTable(input){
 			total_billable_units_to_date  += parseInt(billable_units_to_date);
 			total_billable_remaining_units+= parseInt(billable_remaining_units);
 			
-			var revision_date = new Date(io_revision_date).format('mmm dd, yyyy');
-			var start_date = new Date(io_line_item_start_date).format('mmm dd');
-			var end_date = new Date(io_line_item_end_date).format('mmm dd'); 
+			var revision_date = verveDateConvert(io_revision_date).format('mmm dd, yyyy');
+			var start_date = verveDateConvert(io_line_item_start_date).format('mmm dd');
+			var end_date = verveDateConvert(io_line_item_end_date).format('mmm dd'); 
 			var placement_group_truncated = placement_group;
 			if (placement_group.length > 45) {
 				placement_group_truncated = placement_group.substring(0, 45) + '...';
@@ -373,9 +373,9 @@ function loadBillingDetailTableInMultipleMonth(input){
 				pre_order_id_month = io_orders_id + '_' + month_since_2005;
 			}
 			
-			var revision_date = new Date(io_revision_date).format('mmm dd, yyyy');
-			var start_date = new Date(io_line_item_start_date).format('mmm dd');
-			var end_date = new Date(io_line_item_end_date).format('mmm dd'); 
+			var revision_date = verveDateConvert(io_revision_date).format('mmm dd, yyyy');
+			var start_date = verveDateConvert(io_line_item_start_date).format('mmm dd');
+			var end_date = verveDateConvert(io_line_item_end_date).format('mmm dd'); 
 			var placement_group_truncated = placement_group;
 			if (placement_group.length > 45) {
 				placement_group_truncated = placement_group.substring(0, 45) + '...';
@@ -491,47 +491,51 @@ function loadBillingDetailTableInMultipleMonth(input){
 			var billing_contact;
 			var comment;
 			var revision_date;
+			var information_control;
+						
+			var row_index_in_data=$('tr[class^=row_'+value+']:first').attr('row');
+				
+			var row_data=data[row_index_in_data];
+			//console.log(JSON.stringify(row_data));
+			total_booking_units           = parseInt(row_data.planned_units);
+			total_booking_amount          = parseFloat(row_data.contracted_budget);
+			total_billable_units          = parseInt(row_data.billable_units);
+			total_amount_invoiced_to_date = parseFloat(row_data.amount_invoiced_to_date);
+			total_remaining_budget        = parseFloat(row_data.remaining_budget);
+			total_remaining_units         = parseInt(row_data.remaining_units);
+			total_billable_units_to_date  = parseInt(row_data.billable_units_to_date);
+			total_billable_remaining_units= parseInt(row_data.billable_remaining_units);
 			
-			$('tr[class^=row_'+value+']').each(function(){
-				var row_index_in_data=$( this ).attr('row');
-				
-				var row_data=data[row_index_in_data];
-				//console.log(JSON.stringify(row_data));
-				total_booking_units           += parseInt(row_data.planned_units);
-				total_booking_amount          += parseFloat(row_data.contracted_budget);
-				total_billable_units          += parseInt(row_data.billable_units);
-				total_amount_invoiced_to_date += parseFloat(row_data.amount_invoiced_to_date);
-				total_remaining_budget        += parseFloat(row_data.remaining_budget);
-				total_remaining_units         += parseInt(row_data.remaining_units);
-				total_billable_units_to_date  += parseInt(row_data.billable_units_to_date);
-				total_billable_remaining_units+= parseInt(row_data.billable_remaining_units);
-				
-				io_orders_id    = row_data.io_orders_id;
-				campaign_name   = row_data.campaign_name;
-				campaign_id     = row_data.campaign_id;
-				revision_date   = row_data.revision_date;
-				agency          = row_data.agency;
-				billing_contact = row_data.billing_contact;
-				advertiser      = row_data.advertiser;
-				comment         = row_data.comment;
-				io_number       = row_data.io_number;
-				revision_date   = new Date(row_data.io_revision_date).format('mmm dd, yyyy');
-			});
+			io_orders_id    = row_data.io_orders_id;
+			campaign_name   = row_data.campaign_name;
+			campaign_id     = row_data.campaign_id;
+			revision_date   = row_data.revision_date;
+			agency          = row_data.agency;
+			billing_contact = row_data.billing_contact;
+			advertiser      = row_data.advertiser;
+			comment         = row_data.comment;
+			io_number       = row_data.io_number;
+			revision_date   = verveDateConvert(row_data.io_revision_date).format('mmm dd, yyyy');
+			information_control=row_data.information_control;
+			console.log(information_control);
+			
 			rowSummary = '';
 			rowSummary += '<tr class="summary">';
 			rowSummary += '<td colspan="2"><b><a href="#" onclick="showDetailGroupOrder(' + io_orders_id + ');">#' + io_orders_id + '</a></b><br/><i class="muted">#' + io_number + '</i><br/>' + revision_date + '</td>';
 			rowSummary += '<td colspan="3"><b>' + campaign_name + '</b><br/><i class="muted">' + advertiser + '</i><br/>' + agency + '</td>';
 			rowSummary += '<td colspan="3"><b>' + campaign_id + '</b>';
 			if(information_control=='add'){
-				rowSummary += '<button title="" data-toggle="modal" data-target="#addInformationDialog" type="button" class="btn btn-success btn-xs" style="float: right;" title="Add" onclick="loadInfomationAddForm('+i+');"><span class="glyphicon glyphicon-plus"></span></button>';
+				rowSummary += '<button title="" data-toggle="modal" data-target="#addInformationDialog" type="button" class="btn btn-success btn-xs" style="float: right;" title="Add" onclick="loadInfomationAddForm('+row_index_in_data+');"><span class="glyphicon glyphicon-plus"></span></button>';
 			} else if(information_control=='edit'){
-				rowSummary += '<button type="button" data-toggle="modal" data-target="#editInformationDialog" class="btn btn-primary btn-xs" style="float: right;" title="Edit" onclick="loadInfomationEditForm('+i+');"><span class="glyphicon glyphicon-edit"></span></button>';
+				rowSummary += '<button type="button" data-toggle="modal" data-target="#editInformationDialog" class="btn btn-primary btn-xs" style="float: right;" title="Edit" onclick="loadInfomationEditForm('+row_index_in_data+');"><span class="glyphicon glyphicon-edit"></span></button>';
 			}
 			rowSummary += '<br/><i class="muted">' + billing_contact + '</i><br/>' + comment + '</td>';
-			rowSummary += '<td align="right"><b>' + accounting.formatMoney(total_booking_amount) + '<br/>' + accounting.formatNumber(total_booking_units) + '</b></td>';
-			rowSummary += '<td align="right"><b>' + accounting.formatNumber(total_billable_units_to_date) + '</b></td>';
-			rowSummary += '<td align="right"><b>' + accounting.formatMoney(total_amount_invoiced_to_date)+ '</b></td>';
-			rowSummary += '<td align="right"><b>' + accounting.formatMoney(total_remaining_budget) + '<br/>'+ accounting.formatNumber(total_billable_remaining_units) + '</b></td>';
+			
+			
+			rowSummary += $('tr.group_month_'+value+':first td').get(1).outerHTML;
+			rowSummary += $('tr.group_month_'+value+':first td').get(2).outerHTML;
+			rowSummary += $('tr.group_month_'+value+':first td').get(3).outerHTML;
+			rowSummary += $('tr.group_month_'+value+':first td').get(4).outerHTML;
 			rowSummary += '</tr>';
 			
 			$('tr.group_month_'+io_orders_id+':first').before(rowSummary);
@@ -595,3 +599,25 @@ function exportNationalBillingReport(input){
 	window.open(urlExport);
 	
 };
+///////////////////////////////////////////////////////////
+// Get data refresh date in Billing MonthToDate aggregate
+/////////////////////////////////////////////////////////////
+function getRefreshDate(input){
+	input = $.extend({}, {		
+		success : function(refreshDate) {
+		
+		}
+	}, input);
+	$.ajax({
+			url : rootPath_Billing,
+			dataType : 'json',
+			data : {
+				actions: 'getRefreshDateInBillingMonthToDate',
+				data: 'json'				
+			},
+			success : function(data) {
+				var refreshDate=data[0].dt_lastchange;
+				input.success(refreshDate);
+			}
+		});		
+}
