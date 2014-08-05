@@ -111,6 +111,7 @@ function loadBillingDetailTable(input){
 	
 	$.ajax({
 		url : rootPath_Billing,
+		cache : false,
 		dataType : 'json',
 		data : {
 			actions: 'loadBillingDetailTable',
@@ -208,7 +209,8 @@ function loadBillingDetailTable(input){
 			detail += '<td colspan="2">' + accounting.formatMoney(contracted_budget) + '&nbsp;&nbsp;' + accounting.formatNumber(planned_units) + '<br/><span class="muted">' + accounting.formatMoney(rate) + ' ' + rate_type + '</span></td>';
 			detail += '<td align="right">' + accounting.formatNumber(dfp_delivered_imps) + ' imps<br/>' + accounting.formatNumber(dfp_delivered_clicks) + ' clicks</td>';
 			detail += '<td align="right">' + accounting.formatNumber(dfa_delivered_imps) + ' imps<br/>' + accounting.formatNumber(dfa_delivered_clicks) + ' clicks</td>';
-		    detail += '<td align="right">' + adjusted_units;
+		    detail += '<td align="right">' + accounting.formatNumber(adjusted_units);
+			console.log(adjusted_units_control);
 			if(adjusted_units_control=='add'){
 				detail += '<button type="button" data-toggle="modal" data-target="#addAdjustedUnitDialog" class="btn btn-success btn-xs" style="float: left;" title="Add" onclick="loadAdjustedAddForm('+i+');"><span class="glyphicon glyphicon-plus"></span></button>';
 			}else if(adjusted_units_control=='edit'){
@@ -304,6 +306,7 @@ function loadBillingDetailTableInMultipleMonth(input){
 	$.ajax({
 		url : rootPath_Billing,
 		dataType : 'json',
+		cache : false,
 		data : {
 			actions: 'loadBillingDetailTable',
 			data: 'json',
@@ -391,7 +394,7 @@ function loadBillingDetailTableInMultipleMonth(input){
 			detail += '<td colspan="2">' + accounting.formatMoney(contracted_budget) + '&nbsp;&nbsp;' + accounting.formatNumber(planned_units) + '<br/><span class="muted">' + accounting.formatMoney(rate) + ' ' + rate_type + '</span></td>';
 			detail += '<td align="right">' + accounting.formatNumber(dfp_delivered_imps) + ' imps<br/>' + accounting.formatNumber(dfp_delivered_clicks) + ' clicks</td>';
 			detail += '<td align="right">' + accounting.formatNumber(dfa_delivered_imps) + ' imps<br/>' + accounting.formatNumber(dfa_delivered_clicks) + ' clicks</td>';
-		    detail += '<td align="right">' + adjusted_units;
+		    detail += '<td align="right">' + accounting.formatNumber(adjusted_units);
 			if(adjusted_units_control=='add'){
 				detail += '<button type="button" data-toggle="modal" data-target="#addAdjustedUnitDialog" class="btn btn-success btn-xs" style="float: left;" title="Add" onclick="loadAdjustedAddForm('+i+');"><span class="glyphicon glyphicon-plus"></span></button>';
 			}else if(adjusted_units_control=='edit'){
@@ -616,7 +619,7 @@ function getRefreshDate(input){
 				data: 'json'				
 			},
 			success : function(data) {
-				var refreshDate=data[0].dt_lastchange;
+				var refreshDate=data[0].end_full_date;
 				input.success(refreshDate);
 			}
 		});		
