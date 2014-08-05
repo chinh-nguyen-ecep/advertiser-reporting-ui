@@ -265,7 +265,7 @@
                     }
                 },
                 title: {
-                    text: 'Ave. Bids,Paid Price',
+                    text: 'Ave. Bid,Paid Price',
                     style: {
                         color: '#151515'
                     }
