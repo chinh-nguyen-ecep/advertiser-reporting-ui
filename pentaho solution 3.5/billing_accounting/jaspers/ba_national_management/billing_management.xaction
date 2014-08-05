@@ -731,16 +731,10 @@ if(adjusted_units==null){
           <query-result type="result-set" mapping="query_result"/>
         </action-outputs>
         <component-definition>
-          <query><![CDATA[SELECT calendar_year_month
-     , MAX(dt_lastchange)::date AS dt_lastchange
-FROM (
-SELECT calendar_year_month
-     , (max(dt_lastchange)::timestamp with time zone AT TIME ZONE 'America/Los_Angeles')::timestamp with time zone AT TIME ZONE 'America/New_York' AS dt_lastchange
+          <query><![CDATA[SELECT calendar_year_month,end_full_date
 FROM billing.ba_monthly_national_worksheet
 WHERE is_monthly = false
-GROUP BY calendar_year_month
-) a
-GROUP BY calendar_year_month]]></query>
+LIMIT 1]]></query>
           <live><![CDATA[true]]></live>
         </component-definition>
       </action-definition>
