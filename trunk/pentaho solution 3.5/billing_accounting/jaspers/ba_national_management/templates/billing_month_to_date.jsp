@@ -2,7 +2,7 @@
 //Set locate
 	urlMaster.replaceParam('page','billing_script_month_to_date');
 	urlMaster.replaceParam('actionPath','billing_management');
-	activeTab('Billing MonthTODate Worksheet');
+	activeTab('Billing MonthToDate Worksheet');
 </script>
 <div class="page-header">
 
@@ -29,7 +29,7 @@
 		</button>
 	</div>
 	<h1 id="page_header">
-		National Billing
+		Billing MonthToDate Worksheet
 	</h1>
 </div>
 <!-- Control panel -->
@@ -269,7 +269,11 @@
 	/////////////////////////
 	$( document ).ready(function(){
 		loadBillingDetailFromUrl();
-		
+		getRefreshDate({
+			success: function(refreshDate){
+				$('#page_header').html('Billing MonthToDate Worksheet - ' + verveDateConvert(refreshDate).format('mmm dd'));
+			}
+		});
 	}) ;
 	
 	///////////////////////////////////
@@ -278,9 +282,6 @@
 	function loadBillingDetailFromUrl(){
 		var p_io_orders=urlMaster.getParam('io_orders');
 		var p_io_line_items=urlMaster.getParam('io_line_items');
-		
-		
-		$('#page_header').html('Billing MonthToDate Worksheet');
 		if(p_io_orders!=''&&p_io_line_items!=''){
 		loadBillingDetailTable({
 				p_month_since_2005 : -1,
@@ -657,14 +658,13 @@
 	//////////////////////////
 	
 	function exportReport(exportType){
-		var p_month_since_2005=urlMaster.getParam('month_sk',p_month_since_2005);
 		var p_io_orders=urlMaster.getParam('io_orders',p_io_orders);
 		var p_io_line_items=urlMaster.getParam('io_line_items',p_io_line_items);
 		
-		if(p_month_since_2005!=''&&p_io_orders!=''&&p_io_line_items!=''){
+		if(p_io_orders!=''&&p_io_line_items!=''){
 			exportNationalBillingReport({
 				p_export_output: exportType,
-				p_month_since_2005 : p_month_since_2005,
+				p_month_since_2005 : -1,
 				p_io_orders: p_io_orders,
 				p_io_line_items: p_io_line_items
 			});

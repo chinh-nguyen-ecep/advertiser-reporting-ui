@@ -132,8 +132,8 @@ color: #999999;
 	</nav>
 	<div class="container first-tab theme-showcase " id="page-tab">
 		<ul class="nav nav-tabs">
-			<li title="Billing Worksheet" class="active"><a href="#" onclick="goHomePage()">Billing Monthly Worksheet</a></li>
-			<li title="Billing MonthTODate Worksheet" class="active"><a href="#" onclick="goMonthToDate()">Billing MonthToDate  Worksheet</a></li>
+			<li title="Billing Monthly Worksheet" class="active"><a href="#" onclick="goHomePage()">Billing Monthly Worksheet</a></li>
+			<li title="Billing MonthToDate Worksheet" class="active"><a href="#" onclick="goMonthToDate()">Billing MonthToDate Worksheet</a></li>
 			<li title="Information"><a href="#" onclick="goInformationPage()">Information</a></li>
 			<li title="Adjustment"><a href="#" onclick="goAdjustedUnitPage()">Adjustment</a></li>
 		</ul>

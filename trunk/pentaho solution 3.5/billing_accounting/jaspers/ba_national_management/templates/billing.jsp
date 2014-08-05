@@ -2,7 +2,7 @@
 //Set locate
 	urlMaster.replaceParam('page','billing_script');
 	urlMaster.replaceParam('actionPath','billing_management');
-	activeTab('Billing Worksheet');
+	activeTab('Billing Monthly Worksheet');
 </script>
 <div class="page-header">
 
@@ -29,7 +29,7 @@
 		</button>
 	</div>
 	<h1 id="page_header">
-		National Billing
+		Billing Monthly Worksheet
 	</h1>
 </div>
 <!-- Control panel -->

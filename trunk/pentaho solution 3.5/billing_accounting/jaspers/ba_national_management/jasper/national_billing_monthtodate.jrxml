@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Billing Monthly VLMO Revenue" pageWidth="4110" pageHeight="842" orientation="Landscape" columnWidth="4070" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="240"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="76"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
-	</parameter>
-	<parameter name="p_month_since_2005" class="java.lang.String">
-		<defaultValueExpression><![CDATA[new String("0")]]></defaultValueExpression>
 	</parameter>
 	<parameter name="p_io_orders" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new String("0")]]></defaultValueExpression>
@@ -20,8 +17,7 @@ FROM (
 SELECT calendar_year_month
      , (max(dt_lastchange)::timestamp with time zone AT TIME ZONE 'America/Los_Angeles')::timestamp with time zone AT TIME ZONE 'America/New_York' AS dt_lastchange
 FROM billing.ba_monthly_national_worksheet
-WHERE (month_since_2005 IN (select unnest(string_to_array($P{p_month_since_2005}, ','))::int) OR '0'=$P{p_month_since_2005})
-AND is_monthly = true
+WHERE is_monthly = false
 GROUP BY calendar_year_month
 ) a
 GROUP BY calendar_year_month]]>
@@ -38,13 +34,14 @@ GROUP BY calendar_year_month]]>
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Billing Monthly Worksheet]]></text>
+				<text><![CDATA[Billing MonthToDate Worksheet]]></text>
 			</staticText>
-			<textField isBlankWhenNull="true">
+			<textField>
 				<reportElement x="80" y="29" width="3990" height="20"/>
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Month: " + $F{calendar_year_month}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="49" width="280" height="20"/>
@@ -54,7 +51,7 @@ GROUP BY calendar_year_month]]>
 				<text><![CDATA[Refresh Date (ET):]]></text>
 			</staticText>
 			<textField pattern="yyyy-MM-dd">
-				<reportElement x="280" y="49" width="240" height="20"/>
+				<reportElement x="280" y="49" width="3790" height="20"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
@@ -69,28 +66,22 @@ GROUP BY calendar_year_month]]>
 				<subreportParameter name="p_io_orders">
 					<subreportParameterExpression><![CDATA[$P{p_io_orders}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="p_month_since_2005">
-					<subreportParameterExpression><![CDATA[$P{p_month_since_2005}]]></subreportParameterExpression>
-				</subreportParameter>
 				<subreportParameter name="p_io_line_items">
 					<subreportParameterExpression><![CDATA[$P{p_io_line_items}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "sub_io_line_item.jasper"]]></subreportExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "sub_io_line_item_monthtodate.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
 				<reportElement positionType="Float" x="0" y="80" width="4070" height="30"/>
 				<subreportParameter name="p_io_orders">
 					<subreportParameterExpression><![CDATA[$P{p_io_orders}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="p_month_since_2005">
-					<subreportParameterExpression><![CDATA[$P{p_month_since_2005}]]></subreportParameterExpression>
-				</subreportParameter>
 				<subreportParameter name="p_io_line_items">
 					<subreportParameterExpression><![CDATA[$P{p_io_line_items}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "sub_io_order.jasper"]]></subreportExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "sub_io_order_monthtodate.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</title>

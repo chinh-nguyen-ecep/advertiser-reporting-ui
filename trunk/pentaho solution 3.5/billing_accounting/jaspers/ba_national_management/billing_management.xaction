@@ -179,12 +179,18 @@
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </report-definition4>  
-    <template5>
+    <template5> 
+      <solution-file> 
+        <location>templates/billing_month_to_date.jsp</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </template5>  
+    <report-definition5>
       <solution-file>
-        <location>templates/billing_month_to_date.jsp</location>
+        <location>jasper/national_billing_monthtodate.jasper</location>
         <mime-type>text/plain</mime-type>
       </solution-file>
-    </template5>
+    </report-definition5>
   </resources>
   
   <actions> 
@@ -205,39 +211,39 @@
  
     </actions>
   
-    <actions>
-      <condition><![CDATA[actions=='billing_script_month_to_date']]></condition>
-      <action-definition>
+    <actions> 
+      <condition><![CDATA[actions=='billing_script_month_to_date']]></condition>  
+      <action-definition> 
         <component-name>TemplateComponent</component-name>
         <action-type>Message Template</action-type>
         <action-inputs/>
-        <action-resources>
-          <template mapping="template5"/>
+        <action-resources> 
+          <template mapping="template5"/> 
         </action-resources>
-        <action-outputs>
-          <output-message type="string" mapping="returnResult"/>
+        <action-outputs> 
+          <output-message type="string" mapping="returnResult"/> 
         </action-outputs>
-        <component-definition/>
+        <component-definition/> 
       </action-definition>
-
+ 
     </actions>
-
+  
     <actions> 
       <condition><![CDATA[actions=='loadListIoOrders']]></condition>  
-      <actions>
-        <condition><![CDATA[p_month_since_2005=='-1']]></condition>
-        <action-definition>
+      <actions> 
+        <condition><![CDATA[p_month_since_2005=='-1']]></condition>  
+        <action-definition> 
           <component-name>SQLLookupRule</component-name>
           <action-type>Relational</action-type>
-          <action-inputs>
-            <jndi type="string" mapping="connectionName"/>
-            <term type="string"/>
-            <p_month_since_2005 type="string"/>
+          <action-inputs> 
+            <jndi type="string" mapping="connectionName"/>  
+            <term type="string"/>  
+            <p_month_since_2005 type="string"/> 
           </action-inputs>
-          <action-outputs>
-            <query-result type="result-set" mapping="query_result"/>
+          <action-outputs> 
+            <query-result type="result-set" mapping="query_result"/> 
           </action-outputs>
-          <component-definition>
+          <component-definition> 
             <query><![CDATA[SELECT io_orders_id, contract_name 
 FROM billing.ba_monthly_national_worksheet 
 WHERE is_active = true 
@@ -245,15 +251,15 @@ WHERE is_active = true
 AND (UPPER(io_orders_id||' | '||contract_name) LIKE UPPER('%{term}%') OR ''='{term}')
 AND is_monthly = false
 GROUP BY io_orders_id, contract_name 
-ORDER BY io_orders_id;]]></query>
-            <live><![CDATA[true]]></live>
-          </component-definition>
+ORDER BY io_orders_id;]]></query>  
+            <live><![CDATA[true]]></live> 
+          </component-definition> 
         </action-definition>
-
+ 
       </actions>
-
-      <actions>
-        <condition><![CDATA[p_month_since_2005!='-1']]></condition>
+  
+      <actions> 
+        <condition><![CDATA[p_month_since_2005!='-1']]></condition>  
         <action-definition> 
           <component-name>SQLLookupRule</component-name>
           <action-type>Relational</action-type>
@@ -277,7 +283,7 @@ ORDER BY io_orders_id;]]></query>
             <live><![CDATA[true]]></live> 
           </component-definition> 
         </action-definition>
-
+ 
       </actions>
  
     </actions>
@@ -293,7 +299,7 @@ ORDER BY io_orders_id;]]></query>
           <p_io_orders type="string"/>  
           <limit type="string"/>  
           <page type="string"/>  
-          <term type="string"/>
+          <term type="string"/> 
         </action-inputs>
         <action-outputs> 
           <query-result type="result-set" mapping="query_result"/> 
@@ -342,20 +348,20 @@ order by month_since_2005 DESC
   
     <actions> 
       <condition><![CDATA[actions=='loadBillingDetailTable']]></condition>  
-      <actions>
-        <condition><![CDATA[p_month_since_2005=='-1']]></condition>
-        <action-definition>
+      <actions> 
+        <condition><![CDATA[p_month_since_2005=='-1']]></condition>  
+        <action-definition> 
           <component-name>SQLLookupRule</component-name>
           <action-type>Relational</action-type>
-          <action-inputs>
-            <jndi type="string" mapping="connectionName"/>
-            <p_io_orders type="string"/>
-            <p_io_line_items type="string"/>
+          <action-inputs> 
+            <jndi type="string" mapping="connectionName"/>  
+            <p_io_orders type="string"/>  
+            <p_io_line_items type="string"/> 
           </action-inputs>
-          <action-outputs>
-            <query-result type="result-set" mapping="query_result"/>
+          <action-outputs> 
+            <query-result type="result-set" mapping="query_result"/> 
           </action-outputs>
-          <component-definition>
+          <component-definition> 
             <query><![CDATA[select a.calendar_year_month
 , a.month_since_2005
 , a.advertiser_io as io_number
@@ -399,15 +405,15 @@ where (a.io_orders_id IN ({p_io_orders}) OR '0'='{p_io_orders}')
 AND (a.io_line_item_id IN ({p_io_line_items}) OR '0'='{p_io_line_items}')
 AND a.is_active=true
 AND a.is_monthly = false
-order by advertiser, io_orders_id, month_since_2005 desc, io_line_item_id;]]></query>
-            <live><![CDATA[true]]></live>
-          </component-definition>
+order by advertiser, io_orders_id, month_since_2005 desc, io_line_item_id;]]></query>  
+            <live><![CDATA[true]]></live> 
+          </component-definition> 
         </action-definition>
-
+ 
       </actions>
-
-      <actions>
-        <condition><![CDATA[p_month_since_2005!='-1']]></condition>
+  
+      <actions> 
+        <condition><![CDATA[p_month_since_2005!='-1']]></condition>  
         <action-definition> 
           <component-name>SQLLookupRule</component-name>
           <action-type>Relational</action-type>
@@ -469,7 +475,7 @@ AND a.is_monthly = true
 order by advertiser, io_orders_id, month_since_2005 desc, io_line_item_id;]]></query> 
           </component-definition> 
         </action-definition>
-
+ 
       </actions>
  
     </actions>
@@ -578,7 +584,6 @@ where month_since_2005 = {p_month_since_2005}
 and a.is_active = true
 and a.io_orders_id = {p_io_order_id}
 and a.io_line_item_id = {p_io_line_item_id}
-AND a.is_monthly = true
 ;]]></query>  
           <live><![CDATA[true]]></live> 
         </component-definition> 
@@ -714,23 +719,74 @@ if(adjusted_units==null){
  
     </actions>
   
+    <actions>
+      <condition><![CDATA[actions=='getRefreshDateInBillingMonthToDate']]></condition>
+      <action-definition>
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs>
+          <jndi type="string" mapping="connectionName"/>
+        </action-inputs>
+        <action-outputs>
+          <query-result type="result-set" mapping="query_result"/>
+        </action-outputs>
+        <component-definition>
+          <query><![CDATA[SELECT calendar_year_month
+     , MAX(dt_lastchange)::date AS dt_lastchange
+FROM (
+SELECT calendar_year_month
+     , (max(dt_lastchange)::timestamp with time zone AT TIME ZONE 'America/Los_Angeles')::timestamp with time zone AT TIME ZONE 'America/New_York' AS dt_lastchange
+FROM billing.ba_monthly_national_worksheet
+WHERE is_monthly = false
+GROUP BY calendar_year_month
+) a
+GROUP BY calendar_year_month]]></query>
+          <live><![CDATA[true]]></live>
+        </component-definition>
+      </action-definition>
+
+    </actions>
+
     <actions> 
       <condition><![CDATA[actions=='export']]></condition>  
-      <action-definition> 
-        <component-name>JasperReportsComponent</component-name>
-        <action-type>Jasper</action-type>
-        <action-inputs> 
-          <jndi type="string" mapping="connectionName"/>  
-          <output-type type="string" mapping="p_export_output"/>  
-          <p_month_since_2005 type="string"/>  
-          <p_io_orders type="string"/>  
-          <p_io_line_items type="string"/> 
-        </action-inputs>
-        <action-resources> 
-          <report-definition mapping="report-definition4"/> 
-        </action-resources>
-        <component-definition/> 
-      </action-definition>
+      <actions>
+        <condition><![CDATA[p_month_since_2005=='-1']]></condition>
+        <action-definition>
+          <component-name>JasperReportsComponent</component-name>
+          <action-type>Jasper</action-type>
+          <action-inputs>
+            <jndi type="string" mapping="connectionName"/>
+            <output-type type="string" mapping="p_export_output"/>
+            <p_io_orders type="string"/>
+            <p_io_line_items type="string"/>
+          </action-inputs>
+          <action-resources>
+            <report-definition mapping="report-definition5"/>
+          </action-resources>
+          <component-definition/>
+        </action-definition>
+
+      </actions>
+
+      <actions>
+        <condition><![CDATA[p_month_since_2005!='-1']]></condition>
+        <action-definition> 
+          <component-name>JasperReportsComponent</component-name>
+          <action-type>Jasper</action-type>
+          <action-inputs> 
+            <jndi type="string" mapping="connectionName"/>  
+            <output-type type="string" mapping="p_export_output"/>  
+            <p_month_since_2005 type="string"/>  
+            <p_io_orders type="string"/>  
+            <p_io_line_items type="string"/> 
+          </action-inputs>
+          <action-resources> 
+            <report-definition mapping="report-definition4"/> 
+          </action-resources>
+          <component-definition/> 
+        </action-definition>
+
+      </actions>
  
     </actions>
   
