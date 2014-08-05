@@ -144,7 +144,7 @@
 		var adjusted_units = $('#adjusted_units').val();
 		var comment        = $('#comment').val();
 
-		addAjustedUnits({
+		addAdjustedUnits({
 			p_combined_ids: combined_ids,
 			p_io_orders_id: combined_ids.split("-")[0],
 			p_io_line_item_id: combined_ids.split("-")[1],

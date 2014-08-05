@@ -182,7 +182,7 @@
       </div>
 		<div class="modal-footer">
 	    	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	    	<button type="button" class="btn btn-primary" onclick="billingAddAjustedUnits()">Add</button>
+	    	<button type="button" class="btn btn-primary" onclick="billingAddAdjustedUnits()">Add</button>
 	    </div>
     </div>
 
@@ -627,7 +627,7 @@
 	// Add Adjusted Units
 	/////////////////////////////////////
 	
-	function billingAddAjustedUnits(){
+	function billingAddAdjustedUnits(){
 		var adjusted_units  = $('#addAdjustedUnitForm input[name=adjusted_units]').val();
 		var comment         = $('#addAdjustedUnitForm input[name=comment]').val();
 		
@@ -642,7 +642,7 @@
 		}
 		
 		$('#addAdjustedUnitDialog').modal('hide');
-		addAjustedUnits({
+		addAdjustedUnits({
 			p_combined_ids: $('#addAdjustedUnitForm input[name=selectbox-combined_ids]').val(),
 			p_io_orders_id: $('#addAdjustedUnitForm input[name=p_io_orders_id]').val(),
 			p_io_line_item_id: $('#addAdjustedUnitForm input[name=p_io_line_item_id]').val(),

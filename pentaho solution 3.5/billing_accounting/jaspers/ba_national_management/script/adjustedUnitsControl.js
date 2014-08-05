@@ -1,7 +1,7 @@
 // /////////////////////////
-// Add ajusted units
+// Add adjusted units
 // /////////////////////////
-function addAjustedUnits(input) {
+function addAdjustedUnits(input) {
 	this.input = $.extend({}, {
 		p_combined_ids : '',
 		p_io_orders_id : '',
@@ -18,9 +18,9 @@ function addAjustedUnits(input) {
 		alert("Please fill required fields");
 		return false;
 	}
-	// verify ajusted units input
+	// verify adjusted units input
 	if (!$.isNumeric(this.input.p_adjusted_units)) {
-		alert("Ajusted units must be a number!");
+		alert("Adjusted units must be a number!");
 		return false;
 	}
 	// call request to insert information
@@ -70,14 +70,14 @@ function updateAdjustedUnits(input) {
 		success : function(data) {
 		}
 	}, input);
-	console.log("Update Ajusted Units: " + this.input);
+	console.log("Update Adjusted Units: " + this.input);
 	if (this.input.p_combined_ids == '' || this.input.p_ajusted_units == '' || this.input.p_month_sk == '') {
 		alert("Please fill required fields");
 		return false;
 	}
-	// verify ajusted units input
+	// verify adjusted units input
 	if (!$.isNumeric(this.input.p_adjusted_units)) {
-		alert("Ajusted units must be a number!");
+		alert("Adjusted units must be a number!");
 		return false;
 	}
 	// call request to insert information
@@ -125,16 +125,16 @@ function deleteAdjustedUnits(input) {
 		success : function(data) {
 		}
 	}, input);
-	console.log("Update Ajusted Units: " + this.input);
-	console.log("Update Ajusted Units: " + this.input.p_io_orders_id);
-	console.log("Update Ajusted Units: " + this.input.p_io_line_item_id);
-	console.log("Update Ajusted Units: " + this.input.p_month_sk);
-	console.log("Update Ajusted Units: " + this.input.p_comment);
+	//console.log("Update Adjusted Units: " + this.input);
+	//console.log("Update Adjusted Units: " + this.input.p_io_orders_id);
+	//console.log("Update Adjusted Units: " + this.input.p_io_line_item_id);
+	//console.log("Update Adjusted Units: " + this.input.p_month_sk);
+	//console.log("Update Adjusted Units: " + this.input.p_comment);
 	if (input.p_io_orders_id == '' || input.p_io_line_item_id == '' || input.p_month_sk == '' || input.p_comment == '') {
 		alert("Please fill required fields");
 		return false;
 	}
-	// call request to insert information
+	// call request to delete adjustment
 	var request = $.ajax({
 		url : rootPath_AdjustedUnits,
 		type : "POST",
@@ -296,9 +296,9 @@ function loadAdjustmentDetailPage(input){
 		alert("Load detail page need to input param: p_io_line_item_id");
 		return;
 	}
-	console.log("Update Ajusted Units: " + input.p_month_sk);
-	console.log("Update Ajusted Units: " + input.p_io_orders_id);
-	console.log("Update Ajusted Units: " + input.p_io_line_item_id);
+	//console.log("Update Adjusted Units: " + input.p_month_sk);
+	//console.log("Update Adjusted Units: " + input.p_io_orders_id);
+	//console.log("Update Adjusted Units: " + input.p_io_line_item_id);
 	// call request to insert information
 	var request = $.ajax({
 		url : rootPath_AdjustedUnits,
