@@ -144,8 +144,8 @@
 			comment        = dataHistoryTable[i].comment;
 			is_active      = dataHistoryTable[i].is_active;
 			
-			dateFormatted = new Date(created_at).format('mmm dd, yyyy HH:MM:ss');
-			dateDeleted = new Date(updated_at).format('mmm dd, yyyy HH:MM:ss');
+			dateFormatted = verveDateTimeConvert(created_at).format('mmm dd, yyyy HH:MM:ss');
+			dateDeleted = verveDateTimeConvert(updated_at).format('mmm dd, yyyy HH:MM:ss');
 			
 			row = '';
 			row += '<tr>';
@@ -178,7 +178,7 @@
 		comment        = dataHistoryTable[i].comment;
 		is_active      = dataHistoryTable[i].is_active;
 		
-		dateFormatted = new Date(created_at).format('mmm dd, yyyy HH:MM:ss');
+		dateFormatted = verveDateTimeConvert(created_at).format('mmm dd, yyyy HH:MM:ss');
 		
 		row = '';
 		row += '<tr>';
