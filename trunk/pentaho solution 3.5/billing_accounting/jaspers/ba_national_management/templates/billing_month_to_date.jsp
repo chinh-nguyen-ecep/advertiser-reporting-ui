@@ -33,8 +33,8 @@
 	</h1>
 </div>
 <!-- Control panel -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
+<div class="modal  fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width: 800px;">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -45,13 +45,13 @@
 					<div class="form-group">
 						<label for="io_order_list">IO Orders</label>
 						<input id="io_order_search_input" type="text" class="form-control"/>
-						<div id="io_order_list" class="form-group" style="overflow: auto;height: 100px;margin-bottom: 10px;">
+						<div id="io_order_list" class="form-group checkList" style="height: 100px;">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="io_line_item_list">IO Line Items</label>
 						<input id="io_line_item_search_input" type="text" class="form-control"/>
-						<div id="io_line_item_list" class="form-group" style="overflow: auto;height: 100px;">
+						<div id="io_line_item_list" class="form-group checkList" style="height: 100px;">
 						</div>
 					</div>
 				</form>
@@ -369,8 +369,9 @@
 				limit: 20, // page size
 				page: page, // page number
 				actions: 'loadListIoLineItems',
-				//p_month_since_2005: $('#selectbox-month_sk').val().join(","),
+				p_month_since_2005: -1,
 				p_io_orders: loadIoOrders.getID().join(",")
+				
 			};
 		},
 		result: function(data, page){

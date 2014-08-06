@@ -62,41 +62,82 @@ label.required abbr[title] {
 	font-weight: bold;
 }
 tr.selected{
-background: #F8F8F8;
+	background: #F8F8F8;
 }
 
 table thead th.buttons {
-background-color: #e7e7e7;
-background-image: -moz-linear-gradient(top, #eeeeee, #dddddd);
-background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#eeeeee), to(#dddddd));
-/* background-image: -webkit-linear-gradient(top, #eeeeee, #dddddd); */
-background-image: -o-linear-gradient(top, #eeeeee, #dddddd);
-/* background-image: linear-gradient(to bottom, #eeeeee, #dddddd); */
-/* background-repeat: repeat-x; */
-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffeeeeee', endColorstr='#ffdddddd', GradientType=0);
-border-bottom: 1px solid #ccc;
+	background-color: #e7e7e7;
+	background-image: -moz-linear-gradient(top, #eeeeee, #dddddd);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#eeeeee), to(#dddddd));
+	/* background-image: -webkit-linear-gradient(top, #eeeeee, #dddddd); */
+	background-image: -o-linear-gradient(top, #eeeeee, #dddddd);
+	/* background-image: linear-gradient(to bottom, #eeeeee, #dddddd); */
+	/* background-repeat: repeat-x; */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffeeeeee', endColorstr='#ffdddddd', GradientType=0);
+	border-bottom: 1px solid #ccc;
 }
 
 tr.summary {
-background-color: #e7e7e7;
-background-image: -moz-linear-gradient(top, #eeeeee, #dddddd);
-background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#eeeeee), to(#dddddd));
-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffeeeeee', endColorstr='#ffdddddd', GradientType=0);
+	background-color: #e7e7e7;
+	background-image: -moz-linear-gradient(top, #eeeeee, #dddddd);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#eeeeee), to(#dddddd));
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffeeeeee', endColorstr='#ffdddddd', GradientType=0);
 }
 
 tr.month_summary{
-background-color: #FAFAFA;
-background-image: -moz-linear-gradient(top, #eeeeee, #dddddd);
-background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#eeeeee), to(#dddddd));
-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffeeeeee', endColorstr='#ffdddddd', GradientType=0);
+	background-color: #FAFAFA;
+	background-image: -moz-linear-gradient(top, #eeeeee, #dddddd);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#eeeeee), to(#dddddd));
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffeeeeee', endColorstr='#ffdddddd', GradientType=0);
 }
 .btn {
-border-color: #e6e6e6 #e6e6e6 #bfbfbf;
-border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
 
 .muted {
-color: #999999;
+	color: #999999;
+}
+
+div.checkList{
+	padding: 10px;
+	font-size: 9pt;	
+	overflow: auto;
+	margin-bottom: 5px;
+	margin-top: 5px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-shadow: inset 0px 1px 1px rgba(0,0,0,0.075);
+	line-height: 3px;
+	
+}
+div.checkList label{
+	font-weight: normal;
+}
+div.checkList input[type=button]{
+    color: #333333;
+    background-color: #e6e6e6;
+	border-radius: 4px;
+
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0px;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.4285;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+	height: 30px;
+	margin-top: 5px;
 }
 </style>
 </head>

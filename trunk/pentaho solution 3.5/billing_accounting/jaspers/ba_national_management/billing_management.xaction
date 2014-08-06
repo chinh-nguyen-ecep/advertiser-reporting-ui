@@ -185,12 +185,12 @@
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </template5>  
-    <report-definition5>
-      <solution-file>
-        <location>jasper/national_billing_monthtodate.jasper</location>
-        <mime-type>text/plain</mime-type>
-      </solution-file>
-    </report-definition5>
+    <report-definition5> 
+      <solution-file> 
+        <location>jasper/national_billing_monthtodate.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition5> 
   </resources>
   
   <actions> 
@@ -290,22 +290,57 @@ ORDER BY io_orders_id;]]></query>
   
     <actions> 
       <condition><![CDATA[actions=='loadListIoLineItems']]></condition>  
-      <action-definition> 
-        <component-name>SQLLookupRule</component-name>
-        <action-type>Relational</action-type>
-        <action-inputs> 
-          <jndi type="string" mapping="connectionName"/>  
-          <p_month_since_2005 type="string"/>  
-          <p_io_orders type="string"/>  
-          <limit type="string"/>  
-          <page type="string"/>  
-          <term type="string"/> 
-        </action-inputs>
-        <action-outputs> 
-          <query-result type="result-set" mapping="query_result"/> 
-        </action-outputs>
-        <component-definition> 
-          <query><![CDATA[select io_line_item_id, io_line_item_name 
+      <actions>
+        <condition><![CDATA[p_month_since_2005=='-1']]></condition>
+        <action-definition>
+          <component-name>SQLLookupRule</component-name>
+          <action-type>Relational</action-type>
+          <action-inputs>
+            <limit type="string"/>
+            <page type="string"/>
+            <term type="string"/>
+            <p_io_orders type="string"/>
+            <p_month_since_2005 type="string"/>
+            <jndi type="string" mapping="connectionName"/>
+          </action-inputs>
+          <action-outputs>
+            <query-result type="result-set" mapping="query_result"/>
+          </action-outputs>
+          <component-definition>
+            <query><![CDATA[select io_line_item_id, io_line_item_name 
+from billing.ba_monthly_national_worksheet 
+where is_active = true 
+--and month_since_2005 IN( {p_month_since_2005} )
+and (io_orders_id IN ({p_io_orders}) OR '0'='{p_io_orders}') 
+AND (UPPER(io_line_item_id||' | '||io_line_item_name) LIKE UPPER('%{term}%') OR ''='{term}')
+AND is_monthly = false
+group by io_line_item_id, io_line_item_name 
+order by io_line_item_id
+OFFSET ({page}-1)*{limit} LIMIT {limit};]]></query>
+            <live><![CDATA[true]]></live>
+          </component-definition>
+        </action-definition>
+
+      </actions>
+
+      <actions>
+        <condition><![CDATA[p_month_since_2005!='-1']]></condition>
+        <action-definition> 
+          <component-name>SQLLookupRule</component-name>
+          <action-type>Relational</action-type>
+          <action-inputs> 
+            <jndi type="string" mapping="connectionName"/>  
+            <p_month_since_2005 type="string"/>  
+            <p_io_orders type="string"/>  
+            <limit type="string"/>  
+            <page type="string"/>  
+            <term type="string"/> 
+          </action-inputs>
+          <action-outputs> 
+            <query-result type="result-set" mapping="query_result"/> 
+          </action-outputs>
+          <component-definition> 
+            <query><![CDATA[select io_line_item_id, io_line_item_name 
 from billing.ba_monthly_national_worksheet 
 where is_active = true 
 --and month_since_2005 IN( {p_month_since_2005} )
@@ -315,9 +350,11 @@ AND is_monthly = true
 group by io_line_item_id, io_line_item_name 
 order by io_line_item_id
 OFFSET ({page}-1)*{limit} LIMIT {limit};]]></query>  
-          <live><![CDATA[true]]></live> 
-        </component-definition> 
-      </action-definition>
+            <live><![CDATA[true]]></live> 
+          </component-definition> 
+        </action-definition>
+
+      </actions>
  
     </actions>
   
@@ -719,51 +756,51 @@ if(adjusted_units==null){
  
     </actions>
   
-    <actions>
-      <condition><![CDATA[actions=='getRefreshDateInBillingMonthToDate']]></condition>
-      <action-definition>
+    <actions> 
+      <condition><![CDATA[actions=='getRefreshDateInBillingMonthToDate']]></condition>  
+      <action-definition> 
         <component-name>SQLLookupRule</component-name>
         <action-type>Relational</action-type>
-        <action-inputs>
-          <jndi type="string" mapping="connectionName"/>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/> 
         </action-inputs>
-        <action-outputs>
-          <query-result type="result-set" mapping="query_result"/>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
         </action-outputs>
-        <component-definition>
+        <component-definition> 
           <query><![CDATA[SELECT calendar_year_month,end_full_date::date
 FROM billing.ba_monthly_national_worksheet
 WHERE is_monthly = false
-LIMIT 1]]></query>
-          <live><![CDATA[true]]></live>
-        </component-definition>
+LIMIT 1]]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
       </action-definition>
-
+ 
     </actions>
-
+  
     <actions> 
       <condition><![CDATA[actions=='export']]></condition>  
-      <actions>
-        <condition><![CDATA[p_month_since_2005=='-1']]></condition>
-        <action-definition>
+      <actions> 
+        <condition><![CDATA[p_month_since_2005=='-1']]></condition>  
+        <action-definition> 
           <component-name>JasperReportsComponent</component-name>
           <action-type>Jasper</action-type>
-          <action-inputs>
-            <jndi type="string" mapping="connectionName"/>
-            <output-type type="string" mapping="p_export_output"/>
-            <p_io_orders type="string"/>
-            <p_io_line_items type="string"/>
+          <action-inputs> 
+            <jndi type="string" mapping="connectionName"/>  
+            <output-type type="string" mapping="p_export_output"/>  
+            <p_io_orders type="string"/>  
+            <p_io_line_items type="string"/> 
           </action-inputs>
-          <action-resources>
-            <report-definition mapping="report-definition5"/>
+          <action-resources> 
+            <report-definition mapping="report-definition5"/> 
           </action-resources>
-          <component-definition/>
+          <component-definition/> 
         </action-definition>
-
+ 
       </actions>
-
-      <actions>
-        <condition><![CDATA[p_month_since_2005!='-1']]></condition>
+  
+      <actions> 
+        <condition><![CDATA[p_month_since_2005!='-1']]></condition>  
         <action-definition> 
           <component-name>JasperReportsComponent</component-name>
           <action-type>Jasper</action-type>
@@ -779,7 +816,7 @@ LIMIT 1]]></query>
           </action-resources>
           <component-definition/> 
         </action-definition>
-
+ 
       </actions>
  
     </actions>
