@@ -16,7 +16,7 @@
       <sources> 
         <request>calendar_year_month</request> 
       </sources>  
-      <default-value/> 
+      <default-value><![CDATA[2012-Jan]]></default-value> 
     </calendar_year_month>  
     <p_output type="string"> 
       <sources> 
@@ -41,7 +41,8 @@
         <list-item>Millennial Media</list-item>  
         <list-item>Superpages Proxy/Blue</list-item>  
         <list-item>Where/Where HTML</list-item>  
-        <list-item>KlickThru</list-item> 
+        <list-item>KlickThru</list-item>  
+        <list-item>AdMarvel</list-item> 
       </default-value> 
     </List_networks>  
     <p_network type="string"> 
@@ -171,7 +172,13 @@
         <location>ba_monthly_remnant_revenue/monthly_performance_report_citigrid_mobile.jasper</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
-    </report-definition15> 
+    </report-definition15>  
+    <report-definition16> 
+      <solution-file> 
+        <location>ba_monthly_remnant_revenue/monthly_performance_report_admarvel.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition16> 
   </resources>
   
   <actions> 
@@ -234,7 +241,7 @@ ORDER BY month_since_2005 desc]]></query>
           <report-definition type="resource"/> 
         </action-resources>
         <component-definition> 
-          <jndi><![CDATA[verveReportConnection]]></jndi> 
+          <jndi><![CDATA[dw3]]></jndi> 
         </component-definition> 
       </action-definition>
  
@@ -253,7 +260,7 @@ ORDER BY month_since_2005 desc]]></query>
           <report-definition mapping="report-definition1"/> 
         </action-resources>
         <component-definition> 
-          <jndi><![CDATA[verveReportConnection]]></jndi> 
+          <jndi><![CDATA[dw3]]></jndi> 
         </component-definition> 
       </action-definition>
  
@@ -272,7 +279,7 @@ ORDER BY month_since_2005 desc]]></query>
           <report-definition mapping="report-definition2"/> 
         </action-resources>
         <component-definition> 
-          <jndi><![CDATA[verveReportConnection]]></jndi> 
+          <jndi><![CDATA[dw3]]></jndi> 
         </component-definition> 
       </action-definition>
  
@@ -291,7 +298,7 @@ ORDER BY month_since_2005 desc]]></query>
           <report-definition mapping="report-definition3"/> 
         </action-resources>
         <component-definition> 
-          <jndi><![CDATA[verveReportConnection]]></jndi> 
+          <jndi><![CDATA[dw3]]></jndi> 
         </component-definition> 
       </action-definition>
  
@@ -310,7 +317,7 @@ ORDER BY month_since_2005 desc]]></query>
           <report-definition mapping="report-definition4"/> 
         </action-resources>
         <component-definition> 
-          <jndi><![CDATA[verveReportConnection]]></jndi> 
+          <jndi><![CDATA[dw3]]></jndi> 
         </component-definition> 
       </action-definition>
  
@@ -329,7 +336,7 @@ ORDER BY month_since_2005 desc]]></query>
           <report-definition mapping="report-definition5"/> 
         </action-resources>
         <component-definition> 
-          <jndi><![CDATA[verveReportConnection]]></jndi> 
+          <jndi><![CDATA[dw3]]></jndi> 
         </component-definition> 
       </action-definition>
  
@@ -348,7 +355,7 @@ ORDER BY month_since_2005 desc]]></query>
           <report-definition mapping="report-definition6"/> 
         </action-resources>
         <component-definition> 
-          <jndi><![CDATA[verveReportConnection]]></jndi> 
+          <jndi><![CDATA[dw3]]></jndi> 
         </component-definition> 
       </action-definition>
  
@@ -367,7 +374,7 @@ ORDER BY month_since_2005 desc]]></query>
           <report-definition mapping="report-definition7"/> 
         </action-resources>
         <component-definition> 
-          <jndi><![CDATA[verveReportConnection]]></jndi> 
+          <jndi><![CDATA[dw3]]></jndi> 
         </component-definition> 
       </action-definition>
  
@@ -386,7 +393,7 @@ ORDER BY month_since_2005 desc]]></query>
           <report-definition mapping="report-definition12"/> 
         </action-resources>
         <component-definition> 
-          <jndi><![CDATA[verveReportConnection]]></jndi> 
+          <jndi><![CDATA[dw3]]></jndi> 
         </component-definition> 
       </action-definition>
  
@@ -405,7 +412,7 @@ ORDER BY month_since_2005 desc]]></query>
           <report-definition mapping="report-definition13"/> 
         </action-resources>
         <component-definition> 
-          <jndi><![CDATA[verveReportConnection]]></jndi> 
+          <jndi><![CDATA[dw3]]></jndi> 
         </component-definition> 
       </action-definition>
  
@@ -424,7 +431,7 @@ ORDER BY month_since_2005 desc]]></query>
           <report-definition mapping="report-definition8"/> 
         </action-resources>
         <component-definition> 
-          <jndi><![CDATA[verveReportConnection]]></jndi> 
+          <jndi><![CDATA[dw3]]></jndi> 
         </component-definition> 
       </action-definition>
  
@@ -443,7 +450,7 @@ ORDER BY month_since_2005 desc]]></query>
           <report-definition mapping="report-definition9"/> 
         </action-resources>
         <component-definition> 
-          <jndi><![CDATA[verveReportConnection]]></jndi> 
+          <jndi><![CDATA[dw3]]></jndi> 
         </component-definition> 
       </action-definition>
  
@@ -462,7 +469,7 @@ ORDER BY month_since_2005 desc]]></query>
           <report-definition mapping="report-definition10"/> 
         </action-resources>
         <component-definition> 
-          <jndi><![CDATA[verveReportConnection]]></jndi> 
+          <jndi><![CDATA[dw3]]></jndi> 
         </component-definition> 
       </action-definition>
  
@@ -481,7 +488,7 @@ ORDER BY month_since_2005 desc]]></query>
           <report-definition mapping="report-definition14"/> 
         </action-resources>
         <component-definition> 
-          <jndi><![CDATA[verveReportConnection]]></jndi> 
+          <jndi><![CDATA[dw3]]></jndi> 
         </component-definition> 
       </action-definition>
  
@@ -500,8 +507,26 @@ ORDER BY month_since_2005 desc]]></query>
           <report-definition mapping="report-definition15"/> 
         </action-resources>
         <component-definition> 
-          <jndi><![CDATA[verveReportConnection]]></jndi> 
+          <jndi><![CDATA[dw3]]></jndi> 
         </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_network=='AdMarvel']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connection_name"/>  
+          <output-type type="string" mapping="p_output"/>  
+          <calendar_year_month type="string"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition16"/> 
+        </action-resources>
+        <component-definition/> 
       </action-definition>
  
     </actions>
