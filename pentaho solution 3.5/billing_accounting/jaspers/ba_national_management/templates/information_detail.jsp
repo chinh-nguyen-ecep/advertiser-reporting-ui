@@ -103,7 +103,7 @@
 			updated_at      = dataHistoryTable[i].updated_at;
 			comment         = dataHistoryTable[i].comment;
 			
-			dateFormatted = new Date(created_at).format('mmm dd, yyyy HH:MM:ss');
+			dateFormatted = verveDateTimeConvert(created_at).format('mmm dd, yyyy HH:MM:ss');
 			
 			row = '';
 			row += '<tr>';
@@ -135,7 +135,7 @@
 		updated_at      = dataHistoryTable[i].updated_at;
 		comment         = dataHistoryTable[i].comment;
 		
-		dateFormatted = new Date(created_at).format('mmm dd, yyyy HH:MM:ss');
+		dateFormatted = verveDateTimeConvert(created_at).format('mmm dd, yyyy HH:MM:ss');
 		
 		row = '';
 		row += '<tr>';

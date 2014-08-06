@@ -113,6 +113,7 @@ function loadInformationDetailPage(input){
 	var request = $.ajax({
 		url : rootPath_Information,
 		type : "POST",
+		cache : false,
 		data : {
 			actions : 'LoadInformatinoDetailPage',
 			data : 'html',
