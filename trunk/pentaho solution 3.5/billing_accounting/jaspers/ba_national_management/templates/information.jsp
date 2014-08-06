@@ -49,6 +49,7 @@
 	$.ajax({
 		url : rootPath_Information,
 		dataType : 'json',
+		cache : false,
 		data : {
 			actions: 'loadInfomationTable',
 			data: 'json'

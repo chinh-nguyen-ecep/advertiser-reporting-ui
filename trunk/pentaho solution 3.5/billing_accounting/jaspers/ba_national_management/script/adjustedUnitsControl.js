@@ -181,6 +181,7 @@ function loadAdjustedUnits(input){
 	loadAdjustedUnitsRequest=$.ajax({
 		url : rootPath_AdjustedUnits,
 		dataType : 'json',
+		cache : false,
 		data : {
 			actions: 'loadListAjustedUnit',
 			data: 'json',
