@@ -22,7 +22,7 @@
       <sources> 
         <request>group_process</request> 
       </sources>  
-      <default-value/> 
+      <default-value><![CDATA[other]]></default-value> 
     </group_process>  
     <rs_total_file type="result-set"> 
       <default-value/> 
@@ -43,7 +43,7 @@
       <sources> 
         <request>data_file_ids</request> 
       </sources>  
-      <default-value/> 
+      <default-value><![CDATA[0]]></default-value> 
     </data_file_ids> 
   </inputs>
 
