@@ -72,6 +72,7 @@ MetaLayer = {
 				$('#adm20').empty();
 				$('#adcel').empty();
 				$('#vlmo').empty();
+				$('#rtb').empty();
 			}
 			
 			var loadingNote='<tr><td colspan="8" style="text-align: left"><img src="/verve_style/images/loading.gif" /></td></tr>';
@@ -81,6 +82,7 @@ MetaLayer = {
 				$('#adm20').append(loadingNote);
 				$('#adcel').append(loadingNote);
 				$('#vlmo').append(loadingNote);
+				$('#rtb').append(loadingNote);
 			}
 
 		  },
@@ -91,6 +93,7 @@ MetaLayer = {
 				$('#adm20').empty();
 				$('#adcel').empty();
 				$('#vlmo').empty();
+				$('#rtb').empty();
 			}
 
 			var dataArray=json.adata;
@@ -102,6 +105,7 @@ MetaLayer = {
 					$('#adm20').append(noData);
 					$('#adcel').append(noData);
 					$('#vlmo').append(noData);
+					$('#rtb').append(noData);
 				}
 
 			}
@@ -157,6 +161,8 @@ MetaLayer = {
 					$('#adcel').append(node);
 				}else if (group_process_name=='VLMO' && host == 'dw3dw3'){
 					$('#vlmo').append(node);
+				}else if (group_process_name=='RTB' && host == 'dw3dw3'){
+					$('#rtb').append(node);
 				}
 			}
 			bumpboxInstall();
@@ -274,6 +280,9 @@ MetaLayer = {
 		},4000);
 		setTimeout(function(){
 			MetaLayer.loadETLStatus($('#vlmo_etl_status'),'VLMO',dateBefore,defaultServer);
+		},5000);
+		setTimeout(function(){
+			MetaLayer.loadETLStatus($('#rtb_etl_status'),'other',dateBefore,defaultServer,'152, 206, 209, 210, 211');
 		},5000);
 				
 	}
