@@ -87,7 +87,7 @@ sub main{
 		#run param 23
 		writelog("Run param 23");	
 		runParam(23);
-		checkParam(23,15);
+		checkParam(23,9);
 		promote(23);
 		
 		#run param 29
