@@ -1,22 +1,14 @@
 @CHARSET "ISO-8859-1";
-body {
-  	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-	font-size: 14px;
-	line-height: 20px;
-}
-html{
-	min-height: 100%;
-}
-body .container {
+div.container {
 	max-width: 1200px;
-	height: auto;
-	min-height: 100%;
-	overflow: hidden;
 }
 .summary_well{
 	height: 200px;
 }
-
+#index_container{
+	min-height: 200px;
+	padding-bottom: 70px;
+}
 .dataTable{
 	margin: 0px;
 	border: 0px;
@@ -386,27 +378,29 @@ li a{
 	background-color: rgb(241, 241, 241);
 }
 
-footer {
+div.footer {
 background-color: #104271;
 color: #ffffff;
 min-height: 120px;
+margin-top: 30px;
+border-top: 8px solid #0b6ca6;
 }
-footer .footer-wrap {
+div.footer .footer-wrap {
 border-top: 8px solid #0b6ca6;
 }
 
-footer .container {
+div.footer .container {
 padding: 10px 0;
 }
-footer .footer-right {
+div.footer .footer-right {
 text-align: right;
 }
 
-footer .footer-right a{
+div.footer .footer-right a{
 	margin-left: 10px;
 }
 
-footer a, footer a:hover {
+div.footer a, footer a:hover {
 color: #d1e6f5;
 }
 [class*="span"] {
@@ -416,4 +410,69 @@ margin-left: 30px;
 }
 .span6 {
 width: 570px;
+}
+
+span.string{
+	background-color: rgb(48, 243, 181);
+}
+span.date{
+	background-color: rgb(14, 146, 207);
+}
+span.integer{
+	background-color: rgb(173, 162, 146);
+}
+span.boolean{
+	background-color: #F76F6F;
+}
+span.double{
+	background-color: #22BECC;
+}
+span.timestamp{
+	background-color: rgb(17, 123, 156);
+}
+
+
+.subbar-inner {
+height: 33px;
+margin-top: -31px;
+background-color: #0b6ca6;
+border-top: 1px solid #327DB3;
+border-bottom: 1px solid #104271;
+}
+
+.subbar-inner .collapse {
+display: inherit;
+}
+
+.subbar-inner .nav {
+	position: relative;
+	left: 0;
+	display: block;
+	float: left;
+	margin: 0 0 0 0;
+	border-left: 1px solid #104271;
+}
+.subbar-inner .nav>li {
+	float: left;
+	line-height: 10px;
+}
+.subbar-inner .nav>li>a {
+border-left: 1px solid #327DB3;
+border-right: 1px solid #104271;
+color: #d1e6f5;
+text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+.subbar-inner .nav>li>a:hover, .subbar-inner .nav>li>a:focus{
+background-color: transparent;
+color: white;
+}
+
+.highcharts-tooltip>span {
+	background: #FAFAFA;
+	border: 1px solid silver;
+	border-radius: 3px;
+	box-shadow: 1px 1px 2px #888;
+	padding: 8px;
+	z-index: 2;
 }

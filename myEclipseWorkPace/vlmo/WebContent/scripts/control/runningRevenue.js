@@ -1,6 +1,7 @@
 setTabActive("Running Revenue");
 
-var runningRevenueApiUrl=apiRootUrl+'/dailyAggRunningRevenue';
+var runningRevenueApiUrl=apiRootUrl+'/runningRevenueOverview';
+var runningRevenueAgencyApiUrl=apiRootUrl+'/agenciesRunningRevenue';
 var runningTierRateApiUrl=apiRootUrl+'/LookupAgencyTierRate';
 var runningDate;
 
@@ -34,6 +35,7 @@ function loadRunningDate(){
 	$.ajax({
 		url : runningRevenueApiUrl,
 		dataType : 'json',
+		cache: false,
 		data : {
 			select: 'full_date',
 			order: 'full_date.desc'
@@ -51,11 +53,12 @@ function loadRunningDate(){
 
 function loadRunningSummary(){
 	$.ajax({
-		url : runningRevenueApiUrl,
+		url : runningRevenueAgencyApiUrl,
 		dataType : 'json',
+		cache: false,
 		data : {
 			select: 'full_date|network_id|network_title|publisher_id|billable_rate',
-			by: 'billable_imps',
+			by: 'billable_imps|pub_net_revenue|profit_margin',
 			'where[full_date]': runningDate,
 			order: 'publisher_id'
 		},
@@ -76,13 +79,16 @@ function loadRunningSummary(){
 			var billable_rate=data[i][4];
 			var billable_imps=data[i][5];
 			var gross_revenue=(parseFloat(billable_imps)/1000)*parseFloat(billable_rate);
-			
+			var pub_net_revenue=data[i][6];
+			var profit_margin=data[i][7];
 			var row='<tr>'
 					+	'<td><a href="#" onclick="urlMaster.replaceParam(\'rate\','+billable_rate+');urlMaster.replaceParam(\'network_id\','+network_id+');urlMaster.replaceParam(\'account_id\','+account_id+');urlMaster.replaceParam(\'page\','+1+');loadRunningDetail()"><b>'+network_title+'</b></a></td>'
 					+	'<td>'+account_id+'</td>'
 					+	'<td align="right">'+accounting.formatNumber(billable_imps)+'</td>'
 					+	'<td align="right">'+accounting.formatMoney(billable_rate)+'</td>'
 					+	'<td align="right">'+accounting.formatMoney(gross_revenue)+'</td>'
+					+	'<td align="right">'+accounting.formatMoney(pub_net_revenue)+'</td>'
+					+	'<td align="right">'+accounting.formatMoney(profit_margin)+'</td>'
 					+	'</tr>';
 			rows.push(row);
 			rowsOption.push('<option value="'+network_id+'">'+network_title+'</option>');
@@ -157,6 +163,7 @@ function loadRunningDetail(){
 	$.ajax({
 		url : runningRevenueApiUrl,
 		dataType : 'json',
+		cache: false,
 		data : {
 			select: selectStament,
 			by: 'booked_imps|imps|clicks|billable_imps',

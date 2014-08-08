@@ -111,7 +111,7 @@ function loadChart() {
 	}
 	
 	var url = apiRootUrl
-				+ '/dailyAggDemandByOffer?select=full_date&limit=2000&'
+				+ '/offersOverview?select=full_date&limit=2000&'
 				+ dateRange_value + "&by=imps|clicks"+agencyFilter;
 	console.log('Url: ' + url);
 	if (myAjaxStore.isLoading(url)) {

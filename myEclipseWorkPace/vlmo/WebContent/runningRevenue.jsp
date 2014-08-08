@@ -17,14 +17,16 @@
 	class="table table-bordered table-striped table-hover">
 	<thead>
 		<tr>
-			<th class="buttons" colspan="5">Summary</th>
+			<th class="buttons" colspan="7">Summary</th>
 		</tr>
 		<tr>
-			<th class="col-md-4">VLMO Agency</th>
-			<th class="col-md-2">ADM Account ID</th>
-			<th class="col-md-2">Billable Imps</th>
-			<th class="col-md-2">Billable Rate</th>
+			<th class="col-md-3">VLMO Agency</th>
+			<th class="col-md-1">ADM Account ID</th>
+			<th class="col-md-1">Billable Imps</th>
+			<th class="col-md-1">Billable Rate</th>
 			<th class="col-md-2">Gross Revenue</th>
+			<th class="col-md-2">Pub Net Revenue</th>
+			<th class="col-md-2">Profit Margin</th>
 		</tr>
 	</thead>
 	<tbody>

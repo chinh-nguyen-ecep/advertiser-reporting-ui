@@ -11,14 +11,14 @@ import vlmoui.bean.ApiResponseResultSetInfo;
 import vlmoui.utils.Configure;
 
 
-public class DailyAggDemandByOffer extends MainApi{
+public class RunningRevenueOverview extends MainApi{
 
-	public DailyAggDemandByOffer() {
+	public RunningRevenueOverview() {
 		super();
 		// TODO Auto-generated constructor stub
-		this.setDataSourceTableName("vlmo_dw.daily_agg_demand_by_offer");
-		this.setDefaultDimensions(new String[]{"full_date"});
-		this.setDefaultMeasures(new String[]{"imps","clicks","cta_any"});
+		this.setDataSourceTableName("vlmo_dw.daily_agg_running_revenue");
+		this.setDefaultDimensions(new String[]{"full_date","network_title"});
+		this.setDefaultMeasures(new String[]{"booked_imps","adimpinternals","imps","clicks","remaining_imps","billable_imps"});
 		this.setDataSourceJNDIConn("verveReportConnection");
 	}
 	@Override
@@ -26,7 +26,7 @@ public class DailyAggDemandByOffer extends MainApi{
 		ApiResponseResultSetInfo info = new ApiResponseResultSetInfo();
 		String hosting=Configure.getConfig("hosting");
 		String appName=Configure.getConfig("appName");
-		String apiUrl = Configure.getConfig("dailyAggDemandByOfferUrl");
+		String apiUrl = Configure.getConfig("runningRevenueOverviewUrl");
 		String rootUrl=hosting+"/"+appName+apiUrl;
 		info.setRootUrl("Get " + rootUrl);
 		// get date example

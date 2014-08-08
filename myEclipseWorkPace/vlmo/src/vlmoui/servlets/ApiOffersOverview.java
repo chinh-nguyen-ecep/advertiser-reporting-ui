@@ -8,22 +8,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import vlmoui.api.DailyAggDemandByOffer;
-import vlmoui.api.DailyAggRunningRevenue;
+import vlmoui.api.OffersOverview;
 import vlmoui.api.QueryApi;
 import vlmoui.bean.ApiResponseResultSet;
 import vlmoui.bean.ApiResponseResultSetInfo;
 
 /**
- * Servlet implementation class ApiDailyAggRuningRevenue
+ * Servlet implementation class ApiAdvertiserCreativesByHour
  */
-public class ApiDailyAggRunningRevenue extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ApiDailyAggRunningRevenue() {
+@SuppressWarnings("serial")
+public class ApiOffersOverview extends HttpServlet {
+	
+    public ApiOffersOverview() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,7 +35,7 @@ public class ApiDailyAggRunningRevenue extends HttpServlet {
 		PrintWriter pw=response.getWriter();
 		
 		ApiResponseResultSet apiResponse=new ApiResponseResultSet();
-		api=new DailyAggRunningRevenue();
+		api=new OffersOverview();
 		//get info param
 		String info=request.getParameter("info");
 		if(info!=null){
