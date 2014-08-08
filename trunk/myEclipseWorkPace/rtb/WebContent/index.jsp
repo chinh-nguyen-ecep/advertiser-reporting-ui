@@ -75,8 +75,9 @@
 						var page = urlMaster.getParam('p');
 						var workbook = urlMaster.getParam('wb');
 						if (workbook == ''){
+							urlMaster.clear();
 							workbook = 'exchange';
-							urlMaster.addParam('wb',workbook);
+							urlMaster.replaceParam('wb',workbook);
 						}
 						loadPage(workbook);
 					}
