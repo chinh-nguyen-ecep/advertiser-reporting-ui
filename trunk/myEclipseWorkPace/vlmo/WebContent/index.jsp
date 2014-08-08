@@ -40,10 +40,10 @@
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <!--  control scripts -->
 <script type="text/javascript" src="scripts/control/utils.js"></script>
+<link href="css/sticky-footer-navbar.css" rel="stylesheet" media="screen">
 <link href="css/web.css" rel="stylesheet" media="screen">
 </head>
 <body>
-	<!--   <iframe id="apipage" style="display: none;" src="/vlmoApi"></iframe> -->
 	<jsp:include page="/header.jsp" />
 	<div id="index_container" class="container theme-showcase loadingDots"></div>
 	<jsp:include page="/footer.jsp" />
@@ -52,24 +52,11 @@
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="scripts/bootstrap-3.0.0/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
-		// Callback funtion when apipage are loaded by iframe
-		//document.getElementById('apipage').contentWindow.callBackParent = doStuff();
-		/* function doStuff(){
-			console.log('Api page load completed...');
-			$(document).ready(function(){ 
-				
-				//loadPage(page);
-				verifyApiPageConnection();
-			});
-		} */
-
 		$(document).ready(function() {
-
-			//loadPage(page);
 			verifyApiPageConnection();
 		});
 		function verifyApiPageConnection() {
-			var urlToVarify = apiRootUrl + "/dailyAggDemandByOffer?info";
+			var urlToVarify = apiRootUrl + "/offersOverview?info";
 			$.ajax({
 				url : urlToVarify,
 				dataType : "json",

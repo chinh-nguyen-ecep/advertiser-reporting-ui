@@ -30,7 +30,7 @@
 	    </div>
 	  </div>
 	</div>
-      <div class='container'>
+      <div id="index_container" class='container' style="margin-top: 100px;">
          <div class='content'>
             <nav>
                <ul class='breadcrumb'>
@@ -281,10 +281,8 @@
                </div>
             </div>
          </div>
-         <footer>
-         
-         </footer>
       </div>
+            <jsp:include page="/footer.jsp" />
             <script src="../../scripts/bootstrap-3.0.0/js/bootstrap.min.js"></script>
 	  <script>
 	  var apiRequest=null;

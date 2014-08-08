@@ -1,7 +1,7 @@
-	<footer>
-	<div class="footer-wrap">
-		<div class="container">
-			<div class="row">
+
+    <div class="footer">
+      <div class="container">
+        <div class="row">
 				<div class="span6">
 					<p>
 						Copyright ©2014 Verve Wireless, Inc. All rights reserved. Read <a
@@ -30,7 +30,5 @@
 					</h3>
 				</div>
 			</div>
-		</div>
-
-	</div>
-	</footer>
+      </div>
+    </div>

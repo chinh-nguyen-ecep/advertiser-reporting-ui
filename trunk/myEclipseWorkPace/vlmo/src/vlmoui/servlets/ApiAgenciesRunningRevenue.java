@@ -8,18 +8,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import vlmoui.api.DailyAggDemandByOffer;
+import vlmoui.api.AgenciesRunningRevenue;
 import vlmoui.api.QueryApi;
 import vlmoui.bean.ApiResponseResultSet;
 import vlmoui.bean.ApiResponseResultSetInfo;
 
 /**
- * Servlet implementation class ApiAdvertiserCreativesByHour
+ * Servlet implementation class ApiDailyAggRunningRevenueAgency
  */
-@SuppressWarnings("serial")
-public class ApiDailyAggDemandByOffer extends HttpServlet {
-	
-    public ApiDailyAggDemandByOffer() {
+public class ApiAgenciesRunningRevenue extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public ApiAgenciesRunningRevenue() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,13 +32,12 @@ public class ApiDailyAggDemandByOffer extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		// TODO Auto-generated method stub
 		QueryApi api=null;
 		response.setContentType("text/plain");
 		PrintWriter pw=response.getWriter();
 		
 		ApiResponseResultSet apiResponse=new ApiResponseResultSet();
-		api=new DailyAggDemandByOffer();
+		api=new AgenciesRunningRevenue();
 		//get info param
 		String info=request.getParameter("info");
 		if(info!=null){
