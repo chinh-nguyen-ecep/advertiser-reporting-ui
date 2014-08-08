@@ -164,7 +164,7 @@ sub checkSU{
 sub promote{
 	my $param=shift;
 	print "promoting $param \n";
-	if($param==73){
+	if($param==78){
 		#promote daily cumulative
 		runPGFuntion("staging.fn_promote_daily_rtb_report");
 		dw3_writelog($logFile,"Promoted daily rtb report");
