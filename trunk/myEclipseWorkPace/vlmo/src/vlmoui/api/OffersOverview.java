@@ -16,9 +16,9 @@ public class OffersOverview extends MainApi{
 	public OffersOverview() {
 		super();
 		// TODO Auto-generated constructor stub
-		this.setDataSourceTableName("vlmo_dw.daily_agg_demand_by_offer");
+		this.setDataSourceTableName("vlmo_dw.vw_vlmo_fct_demand");
 		this.setDefaultDimensions(new String[]{"full_date"});
-		this.setDefaultMeasures(new String[]{"imps","clicks","cta_any"});
+		this.setDefaultMeasures(new String[]{"imps","clicks"});
 		this.setDataSourceJNDIConn("verveReportConnection");
 	}
 	@Override
@@ -40,33 +40,31 @@ public class OffersOverview extends MainApi{
 
 		// add dimensions
 		info.addDimension(new String[] { "full_date", "", "date" });
-		info.addDimension(new String[] { "calendar_year_month", "", "string" });
-		info.addDimension(new String[] { "month_since_2005", "", "integer" });
 		info.addDimension(new String[] { "network_id", "", "integer" });
 		info.addDimension(new String[] { "network_title", "", "string" });
-		info.addDimension(new String[] { "publisher_id", "", "integer" });
+		info.addDimension(new String[] { "account_id", "", "integer" });
 		info.addDimension(new String[] { "merchant_id", "", "integer" });
 		info.addDimension(new String[] { "merchant_name", "", "string" });
-		info.addDimension(new String[] { "external_id", "", "integer" });
-		info.addDimension(new String[] { "offer_id", "", "integer" });
-		info.addDimension(new String[] { "offer_title", "", "string" });
-		info.addDimension(new String[] { "campaign_id", "", "integer" });
-		info.addDimension(new String[] { "campaign_title", "", "string" });
+		info.addDimension(new String[] { "billable_rate", "", "double" });
 		
 		// add measures
 		info.addMeasures(new String[] { "adimpinternals", "", "integer"});
 		info.addMeasures(new String[] { "imps", "", "integer" });
 		info.addMeasures(new String[] { "clicks", "", "integer" });
 		info.addMeasures(new String[] { "cta_any", "", "integer" });
+		info.addMeasures(new String[] { "gross_revenue", "", "double" });
+		info.addMeasures(new String[] { "pub_net_revenue", "", "double" });
+		info.addMeasures(new String[] { "profit_margin", "", "double" });
 
 		// add constraint
 		info.addConstraint(new String[] { "full_date", "date",currentDateExample });
 		info.addConstraint(new String[] { "full_date.between", "date",reportDateExample + ".." + currentDateExample });
-		info.addConstraint(new String[] { "calendar_year_month", "string","2014-Jan" });
-		info.addConstraint(new String[] { "calendar_year_month.in", "string","2014-Jan,2014-Feb" });		
-		info.addConstraint(new String[] { "month_since_2005", "integer","109" });
-		info.addConstraint(new String[] { "publisher_id", "integer","1" });
-		info.addConstraint(new String[] { "publisher_id.in", "integer","1,2,3" });
+		info.addConstraint(new String[] { "network_id", "integer","1" });
+		info.addConstraint(new String[] { "network_id.in", "integer","1,2,3" });
+		info.addConstraint(new String[] { "network_title", "string","Yahoo" });
+		info.addConstraint(new String[] { "network_title.in", "string","Shooger,Yahoo" });
+		info.addConstraint(new String[] { "account_id", "integer","1" });
+		info.addConstraint(new String[] { "account_id.in", "integer","1,2,3" });
 		info.addConstraint(new String[] { "merchant_id", "integer","1" });
 		info.addConstraint(new String[] { "merchant_id.in", "integer","1,2,3" });
 		info.addConstraint(new String[] { "merchant_name", "string","Blossom Park Dental Care" });
@@ -74,16 +72,19 @@ public class OffersOverview extends MainApi{
 
 		// add select example
 		info.addSelectExample("GET " + rootUrl + "?select=full_date");
-		info.addSelectExample("GET " + rootUrl + "?select=full_date|merchant_name");
+		info.addSelectExample("GET " + rootUrl + "?select=full_date|network_id|network_title");
+		
 		// add by example
 		info.addByExample("GET " + rootUrl + "?by=imps");
 		info.addByExample("GET " + rootUrl + "?by=imps|clicks");
-		info.addByExample("GET " + rootUrl + "?select=full_date|merchant_name&by=imps");
+		info.addByExample("GET " + rootUrl + "?select=full_date|network_id|network_title&by=imps");
+		
 		// add where example
 		info.addWhereExample("GET " + rootUrl + "?where[full_date]="+ currentDateExample);
 		info.addWhereExample("GET " + rootUrl + "?where[full_date.between]="+ reportDateExample + ".." + currentDateExample);
-		info.addWhereExample("GET " + rootUrl + "?where[full_date]="	+ currentDateExample + "&where[merchant_id.in]=1,2,3");
+		info.addWhereExample("GET " + rootUrl + "?where[full_date]="	+ currentDateExample + "&where[network_id.in]=1,2,3");
 		info.addWhereExample("GET " + rootUrl + "?select=full_date&by=imps&where[full_date]="	+ currentDateExample);
+		
 		// add order example
 		info.addOrderExample("GET " + rootUrl + "?order=full_date.desc");
 		info.addOrderExample("GET " + rootUrl + "?select=full_date&by=imps&where[full_date]="	+ currentDateExample + "&order=full_date.desc");

@@ -40,7 +40,7 @@ public class ConnectionUtils {
 		if(!wheres.equals("")){
 			query+=wheres+" ";
 		}
-		query+="GROUP BY "+dimensions+" ";	
+		//query+="GROUP BY "+dimensions+" ";	
 		if(!orders.equals("")){
 			query+=orders+" ";
 		}
