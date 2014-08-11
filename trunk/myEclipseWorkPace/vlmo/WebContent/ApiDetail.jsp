@@ -88,7 +88,7 @@
                      </dd>
                      <dt><var>limit</var></dt>
                      <dd>
-                        Limits to the result to <var>n</var> records; Default: <var>100</var>
+                        Limits to the result to <var>n</var> records; Default: <var>10</var>
                      </dd>
                      <dt><var>page</var></dt>
                      <dd>

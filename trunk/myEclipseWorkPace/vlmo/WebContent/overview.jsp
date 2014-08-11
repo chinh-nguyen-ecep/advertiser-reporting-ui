@@ -32,11 +32,10 @@
 	  		<h2 style="margin-top: 0px;">Summary</h2>
 <!-- 	  		<p>The average values </p> -->
 	  		<ul class="list-group">
-	  			<li class="list-group-item">Impressions/Day<span class="badge av-impression">0</span></li>
+	  			<li class="list-group-item">Impressions/Day<span class="badge av-impressions">0</span></li>
 	  			<li class="list-group-item">Clicks/Day<span class="badge av-clicks">0</span></li>
-	  			<!--<li class="list-group-item">Cta any/Day<span class="badge av-cta-any">0</span></li>-->
-			  	<!-- li class="list-group-item">Avg Bid Price/Day<span class="badge av-bid-price">0</span></li-->
-			  	
+	  			<li class="list-group-item">Pub Net Revenue/Day<span class="badge av-pub-net-revenue">0</span></li>
+			  	<li class="list-group-item">Profit Margin/Day<span class="badge av-profit-margin">0</span></li>
 			</ul>
 	  	</div>
 	  </div>	 

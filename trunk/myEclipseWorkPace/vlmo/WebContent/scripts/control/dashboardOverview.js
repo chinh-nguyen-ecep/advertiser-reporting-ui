@@ -66,7 +66,7 @@ function generateDateBox(){
 // load agency filter
 ////////////////////////////
 function generateAngencyFilter(){
-	var url=apiRootUrl+'/LookupNetworks?select=network_id|title&where[dt_expire]=9999-12-31';
+	var url=apiRootUrl+'/LookupNetworks?select=network_id|title&limit=1000';
 	$.ajax({
 		dataType : "json",
 		url : url,
@@ -112,7 +112,7 @@ function loadChart() {
 	
 	var url = apiRootUrl
 				+ '/offersOverview?select=full_date&limit=2000&'
-				+ dateRange_value + "&by=imps|clicks"+agencyFilter;
+				+ dateRange_value + "&by=imps|clicks|pub_net_revenue|profit_margin"+agencyFilter;
 	console.log('Url: ' + url);
 	if (myAjaxStore.isLoading(url)) {
 		console.log('Your request is loading...');
@@ -131,7 +131,7 @@ function loadChart() {
 		$.ajax({
 			dataType : "json",
 			url : url,
-			timeout : 10000,
+			timeout : 50000,
 			xhrFields : {
 				withCredentials : true
 			},
@@ -187,13 +187,15 @@ function loadChart() {
 					var imp=data[i][1];
 					var click=data[i][2];
 					var ctr=parseFloat(click)/parseFloat(imp);
-					table_data[i]=[date,imp,click,ctr];
+					var pub_net_revenue=data[i][3];
+					var profit_margin=data[i][4];
+					table_data[i]=[date,imp,click,ctr,pub_net_revenue,profit_margin];
 			}
 			
 			myTable = new drawTableFromArray({
 				table_id : 'dashboard-overview-dataTable',
-				table_colums : [ 'Date', 'Impressions', 'Clicks', 'CTR' ],
-				columns_format : [ '', 'number', 'number', '%' ],
+				table_colums : [ 'Date', 'Impressions', 'Clicks', 'CTR', 'Pub Net Revenue', 'Profit Margin' ],
+				columns_format : [ '', 'number', 'number', '%', 'money', 'money' ],
 				table_data : table_data,
 				page_items : 31,
 				paging : true,
@@ -233,36 +235,26 @@ function loadChart() {
 			// Caculate Average Values
 			var temp_data = table_data;
 			temp_data.reverse();
-			var total_first_value = 0;
-			var total_second_value = 0;
-			//var total_third_value = 0;
-			//var total_four_value = 0;
+			var total_impressions = 0;
+			var total_clicks = 0;
+			var total_pub_net_revenue = 0;
+			var total_profit_margin = 0;
 			$.each(temp_data,
 					function(index, row) {
-						var first_value = row[1];
-						var second_value = row[2];
-						var third_value = row[3];
-						// var four_value=row[4];
-						total_first_value = total_first_value
-								+ parseFloat(first_value);
-						total_second_value = total_second_value
-								+ parseFloat(second_value);
-						//total_third_value = total_third_value + parseFloat(third_value);
-						// total_four_value=total_four_value+parseFloat(four_value);
+						var impressions = row[1];
+						var clicks = row[2];
+						var pub_net_revenue = row[4];
+						var profit_margin =row[5];
+						total_impressions = total_impressions + parseFloat(impressions);
+						total_clicks = total_clicks + parseFloat(clicks);
+						total_pub_net_revenue = total_pub_net_revenue + parseFloat(pub_net_revenue);
+						total_profit_margin = total_profit_margin + parseFloat(profit_margin);
 					});
 			// Set average value
-			$('span.av-impression').html(
-					''
-							+ accounting.formatNumber(total_first_value
-									/ temp_data.length));
-			$('span.av-clicks').html(
-					''
-							+ accounting.formatNumber(total_second_value
-									/ temp_data.length));
-			//$('span.av-cta-any').html(
-			//				+ accounting.formatNumber(total_third_value
-			//						/ temp_data.length));
-			// $('span.av-bid-price').html(''+accounting.formatMoney(total_four_value/temp_data.length));
+			$('span.av-impressions').html('' + accounting.formatNumber(total_impressions / temp_data.length));
+			$('span.av-clicks').html('' + accounting.formatNumber(total_clicks / temp_data.length));
+			$('span.av-pub-net-revenue').html('' + accounting.formatMoney(total_pub_net_revenue / temp_data.length));
+			$('span.av-profit-margin').html('' + accounting.formatMoney(total_profit_margin / temp_data.length));
 
 		}
 		// unable date range input
