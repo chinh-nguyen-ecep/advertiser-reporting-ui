@@ -44,7 +44,7 @@ public class DailyExchangeCostAnalysisByHour extends MainApi{
 		info.addDimension(new String[] { "exchange", "", "string" });
 		// add measures
 		info.addMeasures(new String[] { "wins", "", "integer" });
-		info.addMeasures(new String[] { "ave_paid_price", "", "double"});
+		info.addMeasures(new String[] { "ave_won_price", "", "double"});
 		info.addMeasures(new String[] { "ave_bid_price", "", "double" });
 		info.addMeasures(new String[] { "paid_amount", "", "double" });
 		// add constraint
@@ -61,17 +61,17 @@ public class DailyExchangeCostAnalysisByHour extends MainApi{
 		info.addSelectExample("GET " + rootUrl + "?select=full_date|exchange");
 		// add by example
 		info.addByExample("GET " + rootUrl + "?by=paid_amount");
-		info.addByExample("GET " + rootUrl + "?by=ave_paid_price.avg");
-		info.addByExample("GET " + rootUrl + "?by=ave_paid_price.avg|ave_bid_price.avg");
-		info.addByExample("GET " + rootUrl + "?select=full_date|exchange&by=ave_paid_price.avg");
+		info.addByExample("GET " + rootUrl + "?by=ave_won_price.avg");
+		info.addByExample("GET " + rootUrl + "?by=ave_won_price.avg|ave_bid_price.avg");
+		info.addByExample("GET " + rootUrl + "?select=full_date|exchange&by=ave_won_price.avg");
 		// add where example
 		info.addWhereExample("GET " + rootUrl + "?where[full_date]="+ currentDateExample);
 		info.addWhereExample("GET " + rootUrl + "?where[full_date.between]="+ reportDateExample + ".." + currentDateExample);
 		info.addWhereExample("GET " + rootUrl + "?where[full_date]="	+ currentDateExample + "&where[exchange.in]=nexage,mopub");
-		info.addWhereExample("GET " + rootUrl + "?select=full_date&by=ave_paid_price.avg&where[full_date]="	+ currentDateExample);
+		info.addWhereExample("GET " + rootUrl + "?select=full_date&by=ave_won_price.avg&where[full_date]="	+ currentDateExample);
 		// add order example
 		info.addOrderExample("GET " + rootUrl + "?order=full_date.desc");
-		info.addOrderExample("GET " + rootUrl + "?select=full_date&by=ave_paid_price.avg&where[full_date]="	+ currentDateExample + "&order=full_date.desc");
+		info.addOrderExample("GET " + rootUrl + "?select=full_date&by=ave_won_price.avg&where[full_date]="	+ currentDateExample + "&order=full_date.desc");
 		return info;
 	}
 
