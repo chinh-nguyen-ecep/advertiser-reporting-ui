@@ -17,6 +17,11 @@
 				<td>offer</td>
 			</tr>
 			<tr>
+				<td><a href="apiDetail?api=offersEventOverview">Offers Event
+						Overview</a></td>
+				<td>offer</td>
+			</tr>
+			<tr>
 				<th colspan='2'>Supply Sites</th>
 			</tr>
 			<tr>

@@ -24,10 +24,13 @@
 	</nav>
 	
 	<div class="row">
-	  <div class="col-md-9">
+	  <div class="col-md-6">
 	  	<div id="container" style="min-width: 310px; height: 350px; margin: 0 auto"></div>
 	  </div>
-	  <div class="col-md-3">
+	  <div class="col-md-6">
+	  	<div id="container2" style="min-width: 310px; height: 350px; margin: 0 auto"></div>
+	  </div>
+	  <div class="col-md-3" style="display: none;">
 	  	<div class="well well-sm summary_well" >
 	  		<h2 style="margin-top: 0px;">Summary</h2>
 <!-- 	  		<p>The average values </p> -->
@@ -40,12 +43,12 @@
 	  	</div>
 	  </div>	 
 	</div>
-		<div class="row">
+	<div class="row">
 	<div class="col-md-10">
 
  	 </div>
 	  <div class="col-md-2">
- 		<div id="exportBt" class="btn-group btn-group-sm" style="float: right;margin-bottom: 10px;">
+ 		<div id="exportBt" class="btn-group btn-group-sm" style="float: right;margin-bottom: 10px;margin-top: 10px;">
 		  <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
 		    Export Data<span class="caret"></span>
 		  </button>
