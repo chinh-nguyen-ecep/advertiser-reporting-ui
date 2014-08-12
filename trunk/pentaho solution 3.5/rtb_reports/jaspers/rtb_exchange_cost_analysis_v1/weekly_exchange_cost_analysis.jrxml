@@ -114,7 +114,7 @@ ORDER BY  year_week, exchanger;]]>
 				<text><![CDATA[- RTB Wins: It is the sum of unique count (group by date, exchange, price, bid) from Win log.
 - RTB Won Price: It is price (vrv.price) field in Win log.
 - RTB Bid Price: It is bid (vrv.bid) field in Win log.
-- RTB Won Amount: RTB Won Price * (RTB Wins / 1000).
+- RTB Paid Amount: RTB Won Price * (RTB Wins / 1000).
 - RTB Bids: This is count from Bidresp log. Group by date, exchange.
 - RTB Winrate %: (RTB Wins / RTB Bids) %.]]></text>
 			</staticText>
@@ -158,7 +158,7 @@ ORDER BY  year_week, exchanger;]]>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[RTB Won Amount]]></text>
+				<text><![CDATA[RTB Paid Amount]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="boder" mode="Transparent" x="380" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
