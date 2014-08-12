@@ -91,7 +91,7 @@ ORDER BY full_date,hour24_of_day]]>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Ave. Paid Price]]></text>
+				<text><![CDATA[Ave. Win Price]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="514" y="0" width="111" height="20" backcolor="#CCCCCC"/>

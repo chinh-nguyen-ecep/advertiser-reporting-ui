@@ -25,7 +25,7 @@ var categories=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23];	
 var p_dma_ids=[];// array content list of dma ids user selected
 var series_1=[]; // Wins data
 var series_2=[]; // pay amount data
-var series_3=[]; // Ave. paid price data
+var series_3=[]; // Ave. Win price data
 var series_4=[]; // Ave. Bid Price
 var table_data=[]; // data to show by table
 var myTable; // table object
@@ -177,7 +177,7 @@ $(document).ready(function(){
 		  	//generate table
 		  	myTable=new drawTableFromArray({
 		  		table_id: 'daily-advertiser-dataTable',
-		  		table_columns: ['Date','Hour','Wins','Paid Amount','Ave. Paid Price','Ave. Bid Price'],
+		  		table_columns: ['Date','Hour','Wins','Paid Amount','Ave. Win price','Ave. Bid Price'],
 		  		columns_format:['','','number','money','money','money'],
 		  		table_data: table_data,
 		  		page_items: 24,
@@ -343,9 +343,9 @@ $(document).ready(function(){
 		}else if(measure=='Paid Amount'){
 			series=series_2;
 			title+=" Paid Amount ";
-		}else if(measure=='Ave. Paid Price'){
+		}else if(measure=='Ave. Win price'){
 			series=series_3;
-			title+=" Ave. Paid Price ";
+			title+=" Ave. Win price ";
 		}else if(measure=='Ave. Bid Price'){
 			series=series_4;
 			title+=" Ave. Bid Price ";
@@ -428,7 +428,7 @@ $(document).ready(function(){
 		var combine_series=[
 		            {name: 'Paid Amount',data:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},
 		            {name: 'Paid Amount',data:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},
-		            {name: 'Ave. Paid Price',data:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},
+		            {name: 'Ave. Win price',data:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},
 		            {name: 'Ave. Bid Price',data:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}
 		];
 		var tableData=[];
@@ -458,7 +458,7 @@ $(document).ready(function(){
 		//generate table
 	  	myTableSummary=new drawTableFromArray({
 	  		table_id: 'daily-advertiser-dataTable',
-	  		table_columns: ['Hour','Wins','Paid Amount','Ave. Paid Price','Ave. Bid Price'],
+	  		table_columns: ['Hour','Wins','Paid Amount','Ave. Win price','Ave. Bid Price'],
 	  		columns_format:['','number','money','money','money'],
 	  		table_data: tableData,
 	  		page_items: 24,
@@ -534,7 +534,7 @@ $(document).ready(function(){
 	                    }
 	                },
 	                title: {
-	                    text: 'Ave. Bid/Paid Price',
+	                    text: 'Ave. Bid/Win price',
 	                    style: {
 	                        color: '#151515'
 	                    }
@@ -572,7 +572,7 @@ $(document).ready(function(){
 	                    	}else if(point.series.name=='Avg Bid Price'){
 	                    		s += '<br/><font style="color: #0489B1;">'+ point.series.name +': '+
 	                            accounting.formatMoney(point.y)+'</font>';                    		
-	                    	}else if(point.series.name=='Avg Paid Price'){
+	                    	}else if(point.series.name=='Avg Win price'){
 	                    		s += '<br/><font style="color: #FA5858;">'+ point.series.name +': '+
 	                            accounting.formatMoney(point.y)+'</font>';                    		
 	                    	}else{
@@ -611,7 +611,7 @@ $(document).ready(function(){
 	                yAxis: 1,
 	                data: combine_series[3].data
 	            },{
-	                name: 'Ave. Paid Price',
+	                name: 'Ave. Win price',
 	                color: '#FA5858',
 	                type: 'line',
 	                yAxis: 1,
