@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import vlmoui.bean.ApiResponseResultSetInfo;
 import vlmoui.utils.Configure;
 
-public class OfferEventOverview extends MainApi {
-	public OfferEventOverview() {
+public class OffersEventOverview extends MainApi {
+	public OffersEventOverview() {
 		super();
 		// TODO Auto-generated constructor stub
 		this.setDataSourceTableName("vlmo_dw.vw_vlmo_fct_event");
@@ -24,7 +24,7 @@ public class OfferEventOverview extends MainApi {
 		ApiResponseResultSetInfo info = new ApiResponseResultSetInfo();
 		String hosting = Configure.getConfig("hosting");
 		String appName = Configure.getConfig("appName");
-		String apiUrl  = Configure.getConfig("offerEventOverviewUrl");
+		String apiUrl  = Configure.getConfig("offersEventOverviewUrl");
 		String rootUrl = hosting + "/" + appName + apiUrl;
 		
 		info.setRootUrl("Get " + rootUrl);

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import vlmoui.api.AgenciesRunningRevenue;
-import vlmoui.api.OfferEventOverview;
+import vlmoui.api.OffersEventOverview;
 import vlmoui.api.QueryApi;
 import vlmoui.bean.ApiResponseResultSet;
 import vlmoui.bean.ApiResponseResultSetInfo;
@@ -17,13 +17,13 @@ import vlmoui.bean.ApiResponseResultSetInfo;
 /**
  * Servlet implementation class ApiOfferEventOverview
  */
-public class ApiOfferEventOverview extends HttpServlet {
+public class ApiOffersEventOverview extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ApiOfferEventOverview() {
+    public ApiOffersEventOverview() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,7 +38,7 @@ public class ApiOfferEventOverview extends HttpServlet {
 		PrintWriter pw=response.getWriter();
 		
 		ApiResponseResultSet apiResponse=new ApiResponseResultSet();
-		api=new OfferEventOverview();
+		api=new OffersEventOverview();
 		//get info param
 		String info=request.getParameter("info");
 		if(info!=null){

@@ -10,7 +10,7 @@
     </init-param>
     <init-param>
       <param-name>serverName</param-name>
-      <param-value>reporting.vervemobile.com</param-value>
+      <param-value>localhost:8081</param-value>
     </init-param>
     <init-param>
       <param-name>renew</param-name>
@@ -30,7 +30,7 @@
     </init-param>
     <init-param>
       <param-name>serverName</param-name>
-      <param-value>reporting.vervemobile.com</param-value>
+      <param-value>localhost:8081</param-value>
     </init-param>
   </filter>
   <filter>
@@ -144,6 +144,16 @@
     <servlet-name>ApiLookupNetworks</servlet-name>
     <servlet-class>vlmoui.servlets.ApiLookupNetworks</servlet-class>
   </servlet>
+   <servlet>
+    <description></description>
+    <display-name>ApiOfferEventOverview</display-name>
+    <servlet-name>ApiOfferEventOverview</servlet-name>
+    <servlet-class>vlmoui.servlets.ApiOffersEventOverview</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ApiOfferEventOverview</servlet-name>
+    <url-pattern>/api/v1/offersEventOverview</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>ApiLookupNetworks</servlet-name>
     <url-pattern>/api/v1/LookupNetworks</url-pattern>

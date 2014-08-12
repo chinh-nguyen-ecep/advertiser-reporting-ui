@@ -80,6 +80,7 @@ function drawTableFromArray(settings){
 		page_items: 10,
 		table_id: 'myTable',
 		table_colums: ['Date','values'],
+		columns_width: [],
 		columns_format:[],
 		table_data: [['2013-01-01',10],['2013-01-01',13],['2013-01-01',12]],
 		sort_by: '',
@@ -136,7 +137,12 @@ function drawTableFromArray(settings){
 		head.append('<tr>				<th class="buttons" colspan="12"></th>				</tr>');
 		var tr='<tr>';
 		for(var i=0;i<settings.table_colums.length;i++){
-			tr+='<th class="header" title="'+settings.table_colums[i]+'"><a href="#">'+settings.table_colums[i]+'</a><i style="float: right"></i></th>';
+			var row='<th class="header" title="'+settings.table_colums[i]+'"><a href="#">'+settings.table_colums[i]+'</a><i style="float: right"></i></th>';
+			
+			if(settings.columns_width.length>0){
+				row='<th class="header col-md-'+settings.columns_width[i]+'" title="'+settings.table_colums[i]+'"><a href="#">'+settings.table_colums[i]+'</a><i style="float: right"></i></th>';
+			}
+			tr+=row;
 		}
 		tr+='</tr>';
 		head.append(tr);

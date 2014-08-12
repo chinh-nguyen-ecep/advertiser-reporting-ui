@@ -20,6 +20,7 @@ if (urlMaster.getParam('where[full_date.between]') == '') {
 // register variable
 ///////////////////////
 var chart;// chart object
+var chart2;// chart object
 var subtitle; // subtitle of chart
 var title; // titile of chart
 var categories = [ '2013/10/01', '2013/10/02', '2013/10/03', '2013/10/04',
@@ -120,8 +121,9 @@ function loadChart() {
 		});
 		return;
 	}
-	if (chart != null) {
+	if (chart != null && chart2 != null) {
 		chart.showLoading();
+		chart2.showLoading();
 	}
 	var ajaxData = myAjaxStore.get(url);
 	if (ajaxData == null) {
@@ -195,6 +197,7 @@ function loadChart() {
 				table_id : 'dashboard-overview-dataTable',
 				table_colums : [ 'Date', 'Impressions', 'Clicks', 'CTR', 'Gross Revenue', 'Pub Net Revenue', 'Profit Margin' ],
 				columns_format : [ '', 'number', 'number', '%', 'money', 'money', 'money' ],
+				columns_width: [3,1,1,1,2,2,2],
 				table_data : table_data,
 				page_items : 31,
 				paging : true,
@@ -297,24 +300,24 @@ function rawChart() {
 						}
 					}
 				} ],
-				yAxis : [  { // Tertiary
+				yAxis : [{ // Primary 
 					labels : {
 						formatter : function() {
-							return accounting.formatMoney(this.value);
+							return accounting.formatNumber(this.value);
 						},
 						style : {
-							color : '#424242'
+							color : '#FA5858'
 						}
 					},
 					title : {
-						text : 'Pub Net Revenue, Profit Margin',
+						text : 'Impressions',
 						style : {
-							color : '#424242'
+							color : '#FA5858'
 						}
 					},
 					
 					
-				},{ // Primary
+				}, { // Tertiary
 					labels : {
 						formatter : function() {
 							return accounting.formatNumber(this.value);
@@ -330,25 +333,7 @@ function rawChart() {
 						}
 					},
 					opposite : true
-
-				}, { // Tertiary
-					labels : {
-						formatter : function() {
-							return accounting.formatNumber(this.value);
-						},
-						style : {
-							color : '#FA5858'
-						}
-					},
-					title : {
-						text : 'Impressions',
-						style : {
-							color : '#FA5858'
-						}
-					},
-					opposite : true
-					
-				} ],
+				}],
 				tooltip : {
 					shared : true,
 					formatter : function() {
@@ -367,12 +352,102 @@ function rawChart() {
 										+ point.series.name + ': '
 										+ accounting.formatNumber(point.y)
 										+ '</font>';
-							} else if (point.series.name == 'Cta any') {
-								s += '<br/><font style="color: #80FF00;">'
-										+ point.series.name + ': '
-										+ accounting.formatNumber(point.y)
-										+ '</font>';
-							} else if (point.series.name == 'Pub Net Revenue') {
+							} else {
+								s += '<br/>' + point.series.name + ': '
+										+ accounting.formatMoney(point.y);
+							}
+
+						});
+						return s;
+					}
+				},
+				legend : {
+					// layout: 'vertical',
+					// align: 'left',
+					// x: 100,
+					// verticalAlign: 'top',
+					// y: 0,
+					// floating: true,
+					backgroundColor : '#FFFFFF'
+				},
+				series : [{
+					name : 'Impressions',
+					color : '#FA5858',
+					type : 'line',					
+					data : firstData
+				} ,
+				{
+					name : 'Clicks',
+					color : '#0489B1',
+					type : 'line',
+					data : secondData,
+					yAxis : 1
+				}]
+			});
+	chart = $('#container').highcharts();
+	rawRevenueChart();
+}
+
+function rawRevenueChart() {
+	var chart_title = "VLMO";
+	$('#container2').highcharts(
+			{
+				chart : {
+					zoomType : 'xy'
+				},
+				title : {
+					text : chart_title
+				},
+				subtitle : {
+					text : 'From ' + selectStartDate.format('yyyy-mm-dd')
+							+ ' To ' + selectEndDate.format('yyyy-mm-dd')
+				},
+				credits : {
+					href : 'http://www.vervemobile.com',
+					text : 'vervemobile.com'
+				},
+				xAxis : [ {
+					categories : categories,
+					// tickmarkPlacement: 'on',
+					title : {
+						enabled : false
+					},
+					// gridLineWidth: 1,
+					labels : {
+						rotation : -45,
+						formatter : function() {
+							var value = this.value;							
+							var now = verveDateConvert(value);
+							return now.format("mmm dd");
+						}
+					}
+				} ],
+				yAxis : [  { // Tertiary
+					labels : {
+						formatter : function() {
+							return accounting.formatMoney(this.value);
+						},
+						style : {
+							color : '#424242'
+						}
+					},
+					title : {
+						text : 'Revenue',
+						style : {
+							color : '#424242'
+						}
+					}
+					
+				} ],
+				tooltip : {
+					shared : true,
+					formatter : function() {
+						console.log(this.x);
+						var date_Value = verveDateConvert(this.x);
+						var s = '<b>' + date_Value.format('mmm d, yyyy')
+								+ '</b>';
+						$.each(this.points, function(i, point) {
+							if (point.series.name == 'Gross Revenue') {
 								s += '<br/><font style="color: #DBA901;">'
 									+ point.series.name + ': '
 									+ accounting.formatMoney(point.y)
@@ -396,32 +471,19 @@ function rawChart() {
 					backgroundColor : '#FFFFFF'
 				},
 				series : [ {
-					name : 'Pub Net Revenue',
+					name : 'Gross Revenue',
 					color : '#DBA901',
 					type : 'areaspline',					
 					data : thirdData
 					
 				},{
-					name : 'Profit Margin',
+					name : 'Pub Net Revenue',
 					color : '#6E6E6E',
 					type : 'column',					
 					data : fourData
-				},{
-					name : 'Impressions',
-					color : '#FA5858',
-					type : 'line',					
-					data : firstData,
-					yAxis : 2
-				} ,
-				{
-					name : 'Clicks',
-					color : '#0489B1',
-					type : 'line',
-					data : secondData,
-					yAxis : 1
 				}]
 			});
-	chart = $('#container').highcharts();
+	chart2 = $('#container2').highcharts();
 }
 /////////////////////////////////////////////
 // function load data for hour level
@@ -472,7 +534,7 @@ function reviewExportData() {
 	var randomID = new Date().valueOf();
 	mydialog.setContent('<div title="' + randomID
 			+ '" class="loadingDots" style=""></div>');
-	mydialog.setWidth(700);
+	mydialog.setWidth(830);
 	mydialog.open();
 
 	mydialog.setTitle('Daily VLMO by Date From '
