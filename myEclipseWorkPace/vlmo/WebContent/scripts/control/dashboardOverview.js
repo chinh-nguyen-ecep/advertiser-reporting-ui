@@ -24,10 +24,8 @@ var subtitle; // subtitle of chart
 var title; // titile of chart
 var categories = [ '2013/10/01', '2013/10/02', '2013/10/03', '2013/10/04',
 		'2013/10/05', '2013/10/06', '2013/10/07' ];
-var firstData = [ 75210.53, 60458.54, 59711.42, 48817.37, 77542.50, 75413.57,
-		76140.97 ];
-var secondData = [ 49077790, 69571356, 60724855, 73158140, 53020304, 81620436,
-		74791664 ];
+var firstData = [ 75210.53, 60458.54, 59711.42, 48817.37, 77542.50, 75413.57,76140.97 ];
+var secondData = [ 49077790, 69571356, 60724855, 73158140, 53020304, 81620436,74791664 ];
 var thirdData = [ 49077790, 69571356, 0, 73158140, 53020304, 81620436, 74791664 ];
 var fourData = [ 49077790, 69571356, 0, 73158140, 53020304, 81620436, 74791664 ];
 var table_data = []; // data to show by table
@@ -210,8 +208,8 @@ function loadChart() {
 			categories = [];
 			firstData = [];
 			secondData = [];
-			//thirdData = [];
-			//fourData = [];
+			thirdData = [];
+			fourData = [];
 			var temp_data = table_data;
 			temp_data.reverse();
 			$.each(temp_data, function(index, row) {
@@ -219,12 +217,12 @@ function loadChart() {
 				categories.push(category_value);
 				var first_value = parseFloat(row[1]);
 				var second_value = parseFloat(row[2]);
-				//var third_value = parseFloat(row[3]);
-				// var four_value=parseFloat(row[4]);
+				var third_value = parseFloat(row[4]);
+				var four_value=parseFloat(row[5]);
 				firstData.push(first_value);
 				secondData.push(second_value);
-				//thirdData.push(third_value);
-				// fourData.push(four_value);
+				thirdData.push(third_value);
+				fourData.push(four_value);
 			});
 			// draw chart
 			if (chart) {
@@ -298,19 +296,36 @@ function rawChart() {
 						}
 					}
 				} ],
-				yAxis : [ { // Primary
+				yAxis : [  { // Tertiary
+					labels : {
+						formatter : function() {
+							return accounting.formatMoney(this.value);
+						},
+						style : {
+							color : '#424242'
+						}
+					},
+					title : {
+						text : 'Pub Net Revenue, Profit Margin',
+						style : {
+							color : '#424242'
+						}
+					},
+					
+					
+				},{ // Primary
 					labels : {
 						formatter : function() {
 							return accounting.formatNumber(this.value);
 						},
 						style : {
-							color : '#58ACFA '
+							color : '#0489B1 '
 						}
 					},
 					title : {
 						text : 'Clicks',
 						style : {
-							color : '#58ACFA'
+							color : '#0489B1'
 						}
 					},
 					opposite : true
@@ -321,15 +336,16 @@ function rawChart() {
 							return accounting.formatNumber(this.value);
 						},
 						style : {
-							color : '#848484'
+							color : '#FA5858'
 						}
 					},
 					title : {
 						text : 'Impressions',
 						style : {
-							color : '#848484'
+							color : '#FA5858'
 						}
-					}
+					},
+					opposite : true
 					
 				} ],
 				tooltip : {
@@ -341,12 +357,12 @@ function rawChart() {
 								+ '</b>';
 						$.each(this.points, function(i, point) {
 							if (point.series.name == 'Impressions') {
-								s += '<br/><font style="color: #848484;">'
+								s += '<br/><font style="color: #FA5858;">'
 										+ point.series.name + ': '
 										+ accounting.formatNumber(point.y)
 										+ '</font>';
 							} else if (point.series.name == 'Clicks') {
-								s += '<br/><font style="color: #58ACFA;">'
+								s += '<br/><font style="color: #0489B1;">'
 										+ point.series.name + ': '
 										+ accounting.formatNumber(point.y)
 										+ '</font>';
@@ -355,6 +371,11 @@ function rawChart() {
 										+ point.series.name + ': '
 										+ accounting.formatNumber(point.y)
 										+ '</font>';
+							} else if (point.series.name == 'Pub Net Revenue') {
+								s += '<br/><font style="color: #DBA901;">'
+									+ point.series.name + ': '
+									+ accounting.formatMoney(point.y)
+									+ '</font>';
 							} else {
 								s += '<br/>' + point.series.name + ': '
 										+ accounting.formatMoney(point.y);
@@ -374,17 +395,29 @@ function rawChart() {
 					backgroundColor : '#FFFFFF'
 				},
 				series : [ {
-					name : 'Impressions',
-					color : '#848484',
+					name : 'Pub Net Revenue',
+					color : '#DBA901',
+					type : 'areaspline',					
+					data : thirdData
+					
+				},{
+					name : 'Profit Margin',
+					color : '#6E6E6E',
 					type : 'column',					
+					data : fourData
+				},{
+					name : 'Impressions',
+					color : '#FA5858',
+					type : 'line',					
 					data : firstData,
-					yAxis : 1
+					yAxis : 2
 				} ,
 				{
 					name : 'Clicks',
-					color : '#58ACFA',
+					color : '#0489B1',
 					type : 'line',
-					data : secondData
+					data : secondData,
+					yAxis : 1
 				}]
 			});
 	chart = $('#container').highcharts();
