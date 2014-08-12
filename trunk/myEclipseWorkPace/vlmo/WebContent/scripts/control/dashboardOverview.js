@@ -109,8 +109,8 @@ function loadChart() {
 	}
 	
 	var url = apiRootUrl
-				+ '/offersOverview?select=full_date&limit=2000&'
-				+ dateRange_value + "&by=imps|clicks|pub_net_revenue|profit_margin"+agencyFilter;
+				+ '/offersOverview?select=full_date&limit=180&'
+				+ dateRange_value + "&by=imps|clicks|gross_revenue|pub_net_revenue|profit_margin"+agencyFilter;
 	console.log('Url: ' + url);
 	if (myAjaxStore.isLoading(url)) {
 		console.log('Your request is loading...');
@@ -185,15 +185,16 @@ function loadChart() {
 					var imp=data[i][1];
 					var click=data[i][2];
 					var ctr=parseFloat(click)/parseFloat(imp);
-					var pub_net_revenue=data[i][3];
-					var profit_margin=data[i][4];
-					table_data[i]=[date,imp,click,ctr,pub_net_revenue,profit_margin];
+					var gross_revenue=data[i][3];
+					var pub_net_revenue=data[i][4];
+					var profit_margin=data[i][5];
+					table_data[i]=[date,imp,click,ctr,gross_revenue,pub_net_revenue,profit_margin];
 			}
 			
 			myTable = new drawTableFromArray({
 				table_id : 'dashboard-overview-dataTable',
-				table_colums : [ 'Date', 'Impressions', 'Clicks', 'CTR', 'Pub Net Revenue', 'Profit Margin' ],
-				columns_format : [ '', 'number', 'number', '%', 'money', 'money' ],
+				table_colums : [ 'Date', 'Impressions', 'Clicks', 'CTR', 'Gross Revenue', 'Pub Net Revenue', 'Profit Margin' ],
+				columns_format : [ '', 'number', 'number', '%', 'money', 'money', 'money' ],
 				table_data : table_data,
 				page_items : 31,
 				paging : true,
