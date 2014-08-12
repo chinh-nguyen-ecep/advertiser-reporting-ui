@@ -131,7 +131,7 @@
 			  	console.log(table_data);
 			  	myTable=new drawTableFromArray({
 			  		table_id: 'dashboard-overview-dataTable',
-			  		table_columns: ['Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;','Wins','Paid Amount','Ave. Paid Price','Ave. Bid Price','Bids','Winrate %','AdCel - Filled Imps','(AdCel - Filled Imps/ Wins) %','Event - Imps','Event - Clicks','Event - CTR'],
+			  		table_columns: ['Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;','Wins','Paid Amount','Ave. Win price','Ave. Bid Price','Bids','Winrate %','AdCel - Filled Imps','(AdCel - Filled Imps/ Wins) %','Event - Imps','Event - Clicks','Event - CTR'],
 			  		columns_format:['date','number','money','money','money','number','%','number','%','number','number','%'],
 			  		table_data: table_data,
 			  		page_items: 31,
@@ -265,7 +265,7 @@
                     }
                 },
                 title: {
-                    text: 'Ave. Bid,Paid Price',
+                    text: 'Ave. Bid,Win price',
                     style: {
                         color: '#151515'
                     }
@@ -303,7 +303,7 @@
                     	}else if(point.series.name=='Ave. Bid Price'){
                     		s += '<br/><font style="color: #0489B1;">'+ point.series.name +': '+
                             accounting.formatMoney(point.y)+'</font>';                    		
-                    	}else if(point.series.name=='Ave. Paid Price'){
+                    	}else if(point.series.name=='Ave. Win price'){
                     		s += '<br/><font style="color: #FA5858;">'+ point.series.name +': '+
                             accounting.formatMoney(point.y)+'</font>';                    		
                     	}else{
@@ -342,7 +342,7 @@
                 yAxis: 1,
                 data: fourData
             },{
-                name: 'Ave. Paid Price',
+                name: 'Ave. Win price',
                 color: '#FA5858',
                 type: 'line',
                 yAxis: 1,

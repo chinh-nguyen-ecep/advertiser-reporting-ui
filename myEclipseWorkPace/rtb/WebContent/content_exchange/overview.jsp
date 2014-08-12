@@ -38,7 +38,7 @@
 	  		<ul class="list-group">
 	  			<li class="list-group-item">Wins/Day<span class="badge av-impression">0</span></li>
 	  			<li class="list-group-item">Paid Amount/Day<span class="badge av-paid-amount">0</span></li>
-	  			<li class="list-group-item">Ave. Paid Price/Day<span class="badge av-paid-price">0</span></li>
+	  			<li class="list-group-item">Ave. Win price/Day<span class="badge av-paid-price">0</span></li>
 			  	<li class="list-group-item">Ave. Bid Price/Day<span class="badge av-bid-price">0</span></li>
 			</ul>
 	  	</div>

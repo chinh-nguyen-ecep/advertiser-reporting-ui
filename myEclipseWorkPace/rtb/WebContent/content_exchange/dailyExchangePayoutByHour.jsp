@@ -9,7 +9,7 @@
 						<div id="measuresBt" class="btn-group btn-group-sm">
 							<button type="button" class="btn btn-default active" onclick="changeMeasure(this);">Wins</button>
 							<button type="button" class="btn btn-default" onclick="changeMeasure(this);">Paid Amount</button>
-							<button type="button" class="btn btn-default" onclick="changeMeasure(this);">Ave. Paid Price</button>
+							<button type="button" class="btn btn-default" onclick="changeMeasure(this);">Ave. Win price</button>
 							<button type="button" class="btn btn-default" onclick="changeMeasure(this);">Ave. Bid Price</button>
 						</div>
 						<button id="combineBt" type="button" class="btn btn-sm btn-default" onclick="combineAllValues()">Combine</button>

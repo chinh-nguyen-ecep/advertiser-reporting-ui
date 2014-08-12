@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Daily Advertiser Report" pageWidth="1252" pageHeight="595" orientation="Landscape" columnWidth="1212" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.6528925619834745"/>
-	<property name="ireport.x" value="955"/>
+	<property name="ireport.x" value="938"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
@@ -107,7 +107,7 @@ ORDER BY full_date]]>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Ave. Paid Price]]></text>
+				<text><![CDATA[Ave. Win Price]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="364" y="0" width="90" height="20" backcolor="#CCCCCC"/>
