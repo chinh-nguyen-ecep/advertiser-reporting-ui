@@ -152,7 +152,10 @@ function generateSelect2(options){
 				var row=[options.selectAllValue,'All'];
 				data.unshift(row);
 			}
-			
+			if(options.selectAll&&data.length==0&&term==''){
+				var row=[options.selectAllValue,'All'];
+				data.unshift(row);
+			}
 		}
 		$.each(data,function(index,temp){
 			var id=temp[0];
@@ -265,5 +268,24 @@ function verveDateConvert(full_date){
 	var month=parseInt(array[1])-1;
 	var day=parseInt(array[2]);
 	var date = new Date(year,month,day);
+	return date;
+}
+
+// input date ex: 2013-12-31 23:06:09.34567889 will return date object
+function verveDateTimeConvert(full_date_time){
+	var value = full_date_time.trim();
+	var array=value.split(" ");
+	var date=array[0];
+	var time=array[1];
+	
+	var year=parseInt(date.split("-")[0]);
+	var month=parseInt(date.split("-")[1])-1;
+	var day=parseInt(date.split("-")[2]);
+	
+	var hour=parseInt(time.split(":")[0]);
+	var minutes=parseInt(time.split(":")[1]);
+	var seconds=parseInt(time.split(":")[2].split(".")[0]);
+	var milliseconds=parseInt(time.split(":")[2].split(".")[1]);
+	var date = new Date(year,month,day,hour,minutes,seconds,milliseconds);
 	return date;
 }
