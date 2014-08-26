@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>loadDimensions</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author/>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <result type="string"> 
+      <sources> 
+        <request>result</request> 
+      </sources>  
+      <default-value/> 
+    </result>  
+    <page type="string"> 
+      <sources> 
+        <request>page</request> 
+      </sources>  
+      <default-value/> 
+    </page>  
+    <term type="string"> 
+      <sources> 
+        <request>term</request> 
+      </sources>  
+      <default-value/> 
+    </term>  
+    <limit type="string"> 
+      <sources> 
+        <request>limit</request> 
+      </sources>  
+      <default-value><![CDATA[10]]></default-value> 
+    </limit>  
+    <mode type="string"> 
+      <sources> 
+        <request>mode</request> 
+      </sources>  
+      <default-value/> 
+    </mode>  
+    <query_result type="result-set"> 
+      <sources> 
+        <request>query_result</request> 
+      </sources>  
+      <default-value/> 
+    </query_result>  
+    <ConnectionName type="string"> 
+      <sources> 
+        <request>ConnectionName</request> 
+      </sources>  
+      <default-value><![CDATA[verveReportConnection]]></default-value> 
+    </ConnectionName>  
+    <publisher_ids type="string"> 
+      <sources> 
+        <request>publisher_ids</request> 
+      </sources>  
+      <default-value><![CDATA[-100]]></default-value> 
+    </publisher_ids>  
+    <property_ids type="string"> 
+      <sources> 
+        <request>property_ids</request> 
+      </sources>  
+      <default-value><![CDATA[-100]]></default-value> 
+    </property_ids> 
+  </inputs>
+
+  <outputs> 
+    <result type="string"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </result> 
+  </outputs>
+
+  <resources/>
+  
+  <actions> 
+    <actions> 
+      <condition><![CDATA[mode=='publisher']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="ConnectionName"/>  
+          <limit type="string"/>  
+          <page type="string"/>  
+          <term type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
+        </action-outputs>
+        <component-definition> 
+          <live><![CDATA[false]]></live>  
+          <query><![CDATA[SELECT publisher_id,publisher_name||' ('||publisher_id||')' as name 
+FROM adsops.weekly_agg_publisher_performance_remnant
+WHERE lower(publisher_name||' ('||publisher_id||')') LIKE lower('%{term}%') 
+GROUP BY publisher_id,publisher_name
+ORDER BY publisher_name
+LIMIT {limit} OFFSET ({page}-1)*10 ;]]></query> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[mode=='property']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="ConnectionName"/>  
+          <limit type="string"/>  
+          <page type="string"/>  
+          <term type="string"/>  
+          <publisher_ids type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
+        </action-outputs>
+        <component-definition> 
+          <live><![CDATA[false]]></live>  
+          <query><![CDATA[SELECT property_id,property_name||' ('||property_id||')' as name 
+FROM adsops.weekly_agg_publisher_performance_remnant
+WHERE lower(property_name||' ('||property_id||')') LIKE lower('%{term}%') 
+AND (publisher_id IN ({publisher_ids}) OR '0'='{publisher_ids}')
+GROUP BY property_id,property_name
+ORDER BY property_name
+LIMIT {limit} OFFSET ({page}-1)*10 ;]]></query> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[mode=='channel']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="ConnectionName"/>  
+          <limit type="string"/>  
+          <property_ids type="string"/>  
+          <page type="string"/>  
+          <term type="string"/>  
+          <publisher_ids type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
+        </action-outputs>
+        <component-definition> 
+          <live><![CDATA[true]]></live>  
+          <query><![CDATA[SELECT channel_id,channel_name||' ('||channel_id||')' as name 
+FROM adsops.weekly_agg_publisher_performance_remnant
+WHERE lower(channel_name||' ('||channel_id||')') LIKE lower('%{term}%') 
+AND (publisher_id IN ({publisher_ids}) OR '0'='{publisher_ids}')
+AND (property_id IN({property_ids}) OR '0'='{property_ids}')
+GROUP BY channel_id,channel_name
+ORDER BY channel_name
+LIMIT {limit} OFFSET ({page}-1)*10 ;]]></query> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>convert data set to jsoin</action-type>
+      <action-inputs> 
+        <query_result type="result-set"/>  
+        <result type="string"/>  
+        <limit type="string"/>  
+        <page type="string"/>  
+        <term type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <result type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[result='{"data":[';
+for(var i=0;i<query_result.getRowCount();i++){
+	var item='';
+	if(i>0){
+		item+=',';
+	}
+	item+='[';
+	for(var j=0;j<query_result.getColumnCount();j++){ 
+		var value=query_result.getValueAt(i,j);
+		if(j>0){
+			item+=',';
+		}
+		item+='"'+value+'"';
+	}
+	item+=']';
+	result+=item;
+}
+result+='],"limit": '+limit+',"page": '+page+',"term":"'+term+'"}';]]></script> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>
