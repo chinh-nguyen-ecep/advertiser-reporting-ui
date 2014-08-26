@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Redshift Daily Row Count Summary</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>chinhnguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type>report</result-type>  
+    <icon>chart_1(2).png|chart_1(2).png</icon> 
+  </documentation>
+
+  <inputs> 
+    <p_output type="string"> 
+      <sources> 
+        <request>p_output</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </p_output>  
+    <p_month_year type="string"> 
+      <sources> 
+        <request>p_month_year</request> 
+      </sources>  
+      <default-value/> 
+    </p_month_year>  
+    <List_output type="string-list"> 
+      <sources> 
+        <request>List_output</request> 
+      </sources>  
+      <default-value type="string-list"> 
+        <list-item>csv</list-item>  
+        <list-item>html</list-item>  
+        <list-item>pdf</list-item>  
+        <list-item>xls</list-item> 
+      </default-value> 
+    </List_output>  
+    <connection_name type="string"> 
+      <sources> 
+        <request>connection_name</request> 
+      </sources>  
+      <default-value><![CDATA[verveReportConnection]]></default-value> 
+    </connection_name>  
+    <p_mailTo type="string"> 
+      <sources> 
+        <request>p_mailTo</request> 
+      </sources>  
+      <default-value><![CDATA[chinh.nguyen@ecepvn.org]]></default-value> 
+    </p_mailTo>  
+    <p_emailMode type="string"> 
+      <sources> 
+        <request>p_emailMode</request> 
+      </sources>  
+      <default-value><![CDATA[false]]></default-value> 
+    </p_emailMode>  
+    <p_emailExportFileType type="string"> 
+      <sources> 
+        <request>p_emailExportFileType</request> 
+      </sources>  
+      <default-value><![CDATA[pdf]]></default-value> 
+    </p_emailExportFileType>  
+    <parameter_string type="string"> 
+      <sources> 
+        <request>parameter_string</request> 
+      </sources>  
+      <default-value/> 
+    </parameter_string>  
+    <p_output2 type="string">
+      <sources>
+        <request>p_output2</request>
+      </sources>
+      <default-value/>
+    </p_output2>
+  </inputs>
+
+  <outputs/>
+
+  <resources> 
+    <report-definition> 
+      <solution-file> 
+        <location>redshift_daily_row_count_summary/redshift_daily_row_count_summary.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition>  
+    <pageTemplate> 
+      <solution-file> 
+        <location>redshift_daily_row_count_summary/redshift_daily_row_count_summary.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </pageTemplate>  
+    <report-definition1> 
+      <solution-file> 
+        <location>redshift_daily_row_count_summary/redshift_daily_row_count_summary_csv.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition1>  
+    <report-definition2> 
+      <solution-file> 
+        <location>redshift_daily_row_count_summary/redshift_daily_row_count_summary_csv.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition2>  
+    <report-definition3> 
+      <solution-file> 
+        <location>redshift_daily_row_count_summary/redshift_daily_row_count_summary.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition3>  
+    <report-definition4> 
+      <solution-file> 
+        <location>redshift_daily_row_count_summary/redshift_daily_row_count_summary.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition4> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get max min date data</action-type>
+      <action-inputs> 
+        <jndi type="string" mapping="connection_name"/> 
+      </action-inputs>
+      <action-outputs> 
+        <query-result type="result-set" mapping="q_max_min_date"/>  
+        <max_full_date type="string"/>  
+        <min_full_date type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <query><![CDATA[SELECT now()::date-7 as min_full_date, now()::date-1 as max_full_date]]></query>  
+        <live><![CDATA[false]]></live> 
+      </component-definition> 
+    </action-definition>
+  
+    <actions> 
+      <condition><![CDATA[p_emailMode=='false']]></condition>  
+      <action-definition> 
+        <component-name>SecureFilterComponent</component-name>
+        <action-type>Prompt/Secure Filter</action-type>
+        <action-inputs> 
+          <p_output2 type="string"/>
+        </action-inputs>
+        <action-resources> 
+          <pageTemplate type="resource"/> 
+        </action-resources>
+        <component-definition> 
+          <selections> 
+            <p_output2 filter="none"/>
+          </selections>  
+          <xsl><![CDATA[pageTemplate]]></xsl> 
+        </component-definition> 
+      </action-definition>
+  
+      <actions> 
+        <condition><![CDATA[p_output=='csv']]></condition>  
+        <action-definition> 
+          <component-name>JasperReportsComponent</component-name>
+          <action-type>Jasper</action-type>
+          <action-inputs> 
+            <jndi type="string" mapping="connection_name"/> 
+          </action-inputs>
+          <action-resources> 
+            <report-definition mapping="report-definition2"/> 
+          </action-resources>
+          <component-definition> 
+            <output-type><![CDATA[csv]]></output-type> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+  
+      <actions> 
+        <condition><![CDATA[p_output!='csv']]></condition>  
+        <action-definition> 
+          <component-name>JasperReportsComponent</component-name>
+          <action-type>Jasper</action-type>
+          <action-inputs> 
+            <output-type type="string" mapping="p_output"/>  
+            <jndi type="string" mapping="connection_name"/> 
+          </action-inputs>
+          <action-resources> 
+            <report-definition type="resource"/> 
+          </action-resources>
+          <component-definition/> 
+        </action-definition>
+ 
+      </actions>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_emailMode == 'true']]></condition>  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>Process report input</action-type>
+        <action-inputs> 
+          <p_emailExportFileType type="string"/>  
+          <parameter_string type="string"/>  
+          <q_max_min_date type="result-set"/> 
+        </action-inputs>
+        <action-outputs> 
+          <reportName type="string"/>  
+          <p_date type="string"/>  
+          <reportNameCsv type="string"/>  
+          <p_mailTextMessage type="string"/>  
+          <p_mailTitle type="string"/>  
+          <reportNameHtml type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var reportName='';
+var p_date='';
+p_date=q_max_min_date.getValueAt(0,1);
+reportName='Redshift_Daily_Row_Count_Summary_'+p_date+'.'+p_emailExportFileType;
+reportNameCsv='Redshift_Daily_Row_Count_Summary_'+p_date+'.csv';
+var reportNameHtml='Redshift_Daily_Row_Count_Summary_'+p_date+'.html';
+var p_mailTextMessage='Attached is Redshift Daily Row Count Summary '+p_date;
+var p_mailTitle='Redshift Daily Row Count Summary - '+p_date;]]></script> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <output-type type="string" mapping="p_emailExportFileType"/>  
+          <jndi type="string" mapping="connection_name"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition3"/> 
+        </action-resources>
+        <action-outputs> 
+          <report-output type="content" mapping="daily_ad_serving_statistics_summary"/> 
+        </action-outputs>
+        <component-definition/> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connection_name"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition1"/> 
+        </action-resources>
+        <action-outputs> 
+          <report-output type="content" mapping="report_ou_csv"/> 
+        </action-outputs>
+        <component-definition> 
+          <output-type><![CDATA[csv]]></output-type> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connection_name"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition4"/> 
+        </action-resources>
+        <action-outputs> 
+          <report-output type="content" mapping="report_out_html"/> 
+        </action-outputs>
+        <component-definition> 
+          <output-type><![CDATA[html]]></output-type> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>EmailComponent</component-name>
+        <action-type>E-Mail</action-type>
+        <action-inputs> 
+          <to type="string" mapping="p_mailTo"/>  
+          <daily_ad_serving_statistics_summary type="content"/>  
+          <attach_name_1 type="string" mapping="reportName"/>  
+          <subject type="string" mapping="p_mailTitle"/>  
+          <message-plain type="string" mapping="p_mailTextMessage"/>  
+          <report_ou_csv type="content"/>  
+          <attach_name_2 type="string" mapping="reportNameCsv"/>  
+          <message-html type="string" mapping="report_out_html"/> 
+        </action-inputs>
+        <component-definition> 
+          <attachment-ref name-param="attach_name_1" input-param="daily_ad_serving_statistics_summary"/>  
+          <attachment-ref name-param="attach_name_2" input-param="report_ou_csv"/> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+ 
+  </actions> 
+</action-sequence>
