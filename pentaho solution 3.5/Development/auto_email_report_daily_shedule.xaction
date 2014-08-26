@@ -284,12 +284,28 @@ WHERE schedule_id={schedule_id};]]></query>
             </component-definition> 
           </action-definition>
   
+          <action-definition>
+            <component-name>SQLLookupRule</component-name>
+            <action-type>Load hour type count</action-type>
+            <action-inputs>
+              <prepared_component type="sql-connection" mapping="shared_sql_connection"/>
+            </action-inputs>
+            <action-outputs>
+              <query-result type="result-set" mapping="query_result_hour_type"/>
+            </action-outputs>
+            <component-definition>
+              <query><![CDATA[SELECT SUM(day_1) FROM adsops.daily_infobright_counts  WHERE full_date=now()::date-1 AND group_type='hour']]></query>
+              <live><![CDATA[false]]></live>
+            </component-definition>
+          </action-definition>
+
           <action-definition> 
             <component-name>JavascriptRule</component-name>
             <action-type>Process Loading data</action-type>
             <action-inputs> 
               <query_result_event_type type="result-set"/>  
-              <query_result_group_type type="result-set"/> 
+              <query_result_group_type type="result-set"/>  
+              <query_result_hour_type type="result-set"/>
             </action-inputs>
             <action-outputs> 
               <resend type="string"/> 
@@ -300,9 +316,10 @@ resend='false';
 var now_hour=query_result_event_type.getValueAt(0,0);
 var eventCount=query_result_event_type.getValueAt(0,1);
 var groupCount=query_result_group_type.getValueAt(0,0);
+var hourCount=query_result_hour_type.getValueAt(0,0);
 if(now_hour>9){
 	resend='false';
-}else if(eventCount==0 || groupCount==0){
+}else if(eventCount==0 || groupCount==0 || hourCount==0){
 	resend='true'
 }]]></script> 
             </component-definition> 
