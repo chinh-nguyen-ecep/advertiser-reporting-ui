@@ -284,28 +284,28 @@ WHERE schedule_id={schedule_id};]]></query>
             </component-definition> 
           </action-definition>
   
-          <action-definition>
+          <action-definition> 
             <component-name>SQLLookupRule</component-name>
             <action-type>Load hour type count</action-type>
-            <action-inputs>
-              <prepared_component type="sql-connection" mapping="shared_sql_connection"/>
+            <action-inputs> 
+              <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
             </action-inputs>
-            <action-outputs>
-              <query-result type="result-set" mapping="query_result_hour_type"/>
+            <action-outputs> 
+              <query-result type="result-set" mapping="query_result_hour_type"/> 
             </action-outputs>
-            <component-definition>
-              <query><![CDATA[SELECT SUM(day_1) FROM adsops.daily_infobright_counts  WHERE full_date=now()::date-1 AND group_type='hour']]></query>
-              <live><![CDATA[false]]></live>
-            </component-definition>
+            <component-definition> 
+              <query><![CDATA[SELECT SUM(day_1) FROM adsops.daily_infobright_counts  WHERE full_date=now()::date-1 AND group_type='hour']]></query>  
+              <live><![CDATA[false]]></live> 
+            </component-definition> 
           </action-definition>
-
+  
           <action-definition> 
             <component-name>JavascriptRule</component-name>
             <action-type>Process Loading data</action-type>
             <action-inputs> 
               <query_result_event_type type="result-set"/>  
               <query_result_group_type type="result-set"/>  
-              <query_result_hour_type type="result-set"/>
+              <query_result_hour_type type="result-set"/> 
             </action-inputs>
             <action-outputs> 
               <resend type="string"/> 
@@ -355,7 +355,7 @@ WHERE schedule_id={schedule_id};]]></query>
               </action-inputs>
               <component-definition> 
                 <query><![CDATA[UPDATE control.emaill_reports_schedule
-SET next_fire_time=now()::date + interval '1 day' + time '07:00'
+SET next_fire_time=now()::date + interval '1 day' + time '07:30'
 WHERE schedule_id={schedule_id};]]></query>  
                 <force_single_statement><![CDATA[true]]></force_single_statement> 
               </component-definition> 
