@@ -58,9 +58,10 @@ sub checkAggIsVailable{
 sub runAgg{
         note("*Run agg");
         #monthly_agg_adm_data_feed
-	        runPostgresComand("select adsops.fn_build_weekly_new_booked($p_start_date_sk ,$p_end_date_sk, 0, 'PS')");
+	    runPostgresComand("select adsops.fn_build_weekly_new_booked($p_start_date_sk ,$p_end_date_sk, 0, 'PS')");
 		runPostgresComand("select adsops.fn_build_weekly_agg_advance_digital($p_start_date_sk ,$p_end_date_sk, 0, 'PS')");
 		runPostgresComand("select adsops.fn_build_weekly_agg_flight_missing_vendor($p_start_date_sk ,$p_end_date_sk, 0, 'PS')");
+		
 		
 		# Weekly publisher performance report
 		runPostgresComand("select adsops.fn_build_daily_agg_publisher_performance($p_end_date_sk-6, 0, 'PS')");
@@ -72,6 +73,16 @@ sub runAgg{
 		runPostgresComand("select adsops.fn_build_daily_agg_publisher_performance($p_end_date_sk, 0, 'PS')");
         ##runPostgresComand("select staging.fn_ba_monthly_agg_adm_data_feed($p_date_sk_start,$p_date_sk_end,$year_week,'PS')");
         ##runPostgresComand("update  adm.monthly_agg_adm_data_feed set is_active=true where month_since_2005=$year_week");
+		
+		# Weekly publisher performance vlmo report
+		runPostgresComand("select adsops.fn_build_daily_agg_publisher_performance_vlmo($p_end_date_sk-6, 0, 'PS')");
+		runPostgresComand("select adsops.fn_build_daily_agg_publisher_performance_vlmo($p_end_date_sk-5, 0, 'PS')");
+		runPostgresComand("select adsops.fn_build_daily_agg_publisher_performance_vlmo($p_end_date_sk-4, 0, 'PS')");
+		runPostgresComand("select adsops.fn_build_daily_agg_publisher_performance_vlmo($p_end_date_sk-3, 0, 'PS')");
+		runPostgresComand("select adsops.fn_build_daily_agg_publisher_performance_vlmo($p_end_date_sk-2, 0, 'PS')");
+		runPostgresComand("select adsops.fn_build_daily_agg_publisher_performance_vlmo($p_end_date_sk-1, 0, 'PS')");
+		runPostgresComand("select adsops.fn_build_daily_agg_publisher_performance_vlmo($p_end_date_sk, 0, 'PS')");
+		
 
 }
 
@@ -92,6 +103,13 @@ sub transferFinalData{
 		my $comand=" cd /opt/temp/autoscripts/transformer/;perl main.pl table $host $transferToHost adsops.weekly_agg_publisher_performance_national_non_engagement";
 		system($comand);
 		my $comand=" cd /opt/temp/autoscripts/transformer/;perl main.pl table $host $transferToHost adsops.weekly_agg_publisher_performance_remnant";
+		system($comand);
+		# weekly publisher performance vlmo report 
+		my $comand=" cd /opt/temp/autoscripts/transformer/;perl main.pl table $host $transferToHost adsops.fn_build_daily_agg_publisher_performance_vlmo";
+		system($comand);
+		my $comand=" cd /opt/temp/autoscripts/transformer/;perl main.pl table $host $transferToHost adsops.weekly_agg_publisher_performance_vlmo_exclusion";
+		system($comand);
+		my $comand=" cd /opt/temp/autoscripts/transformer/;perl main.pl table $host $transferToHost adsops.weekly_agg_publisher_performance_vlmo_non_engagement";
 		system($comand);
 }
 sub runPostgresComand{
