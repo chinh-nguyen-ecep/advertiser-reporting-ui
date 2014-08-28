@@ -45,7 +45,7 @@ sub main{
 		runParam(70);		
 		dw3_writelog($logFile,"Run function param 70");		
 		#check param 70
-		checkParam(70,3);	
+		checkParam(70,4);	
 		#promote adm data feed		
 		promote(70);
 		
@@ -286,6 +286,7 @@ sub promote{
 		#tranfer data to dw10
 		system("cd /opt/temp/autoscripts/transformer && perl main.pl daily $master_host $master_report_host adsops.daily_agg_low_rate $report_date admDfpAutodaily.pl");
 		system("cd /opt/temp/autoscripts/transformer && perl main.pl daily $master_host $master_report_host adsops.daily_agg_local_zero_delivered_v1 $report_date admDfpAutodaily.pl");
+		system("cd /opt/temp/autoscripts/transformer && perl main.pl table $master_host $master_report_host adsops.daily_agg_io_line_item_report_map_stag admDfpAutodaily.pl");
 	}
 }
 
