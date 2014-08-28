@@ -53,8 +53,8 @@ sub main{
 		checkParam(28,4);				
 		promote(28);
 		
-		# Check param 69 from admDFP before continue
-		checkParam(69,5);	
+		# Check param 70 from admDFP before continue
+		checkParam(70,3);	
 
 		#run param 34 transfer data to network data mark
 		##writelog("Run param 34");	
@@ -239,6 +239,7 @@ sub checkEstimateTableToTransfer{
 		print "$tableName has been have data today...\n";
 	}
 }
+
 
 
 
