@@ -11,7 +11,7 @@ main();
 
 sub main{
 	#Check log files
-	my $error=checkSU(1,'53,126',$mailTile);
+	my $error=checkSU(1,'126',$mailTile);
 	my $time=getTime();
 	sendMail("Dear all,<p />$time# City grid Log files Extracting completed. Begin start param 41.<p />Thanks,<br />send by auto mail.",$mailTile);
 	writelog("City grid Log files Extracting completed");	
