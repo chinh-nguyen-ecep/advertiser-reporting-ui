@@ -54,7 +54,7 @@ sub main{
 		promote(28);
 		
 		# Check param 70 from admDFP before continue
-		checkParam(70,3);	
+		checkParam(70,4);	
 
 		#run param 34 transfer data to network data mark
 		##writelog("Run param 34");	
