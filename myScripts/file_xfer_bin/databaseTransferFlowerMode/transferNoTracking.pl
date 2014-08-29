@@ -289,7 +289,10 @@ sub export{
 				$file_size=$values[0];
 				note("\tExport file:\t$export_file_name");
 				note("\tExported file size:\t$file_size K");	
-				$export_file_size=$file_size		
+				$export_file_size=$file_size;
+				if($export_file_size<5){
+					sendMail("chinh.nguyen\@ecepvn.org","Export file is zero","Export host: $exportHostName<br/>File name: $export_file_name<br/>File size: $file_size");
+				}
 			}
 		}else{
 			printTime("Export failed!");
