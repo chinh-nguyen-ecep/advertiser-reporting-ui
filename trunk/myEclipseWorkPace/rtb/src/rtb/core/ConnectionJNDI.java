@@ -6,10 +6,11 @@ import java.sql.SQLException;
 
 import javax.naming.NamingException;
 
+import rtb.database.JNDIConnection;
 
 
 
-import database.JNDIConnection;
+
 
 public class ConnectionJNDI {
 

@@ -1,4 +1,4 @@
-package rtb.api;
+package rtb.api.v1;
 
 
 import java.text.DateFormat;
@@ -7,16 +7,18 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
+import rtb.bean.ApiInfo;
 import rtb.bean.ApiResponseResultSetInfo;
+import rtb.core.MainApi;
 import rtb.utils.Configure;
 
 
-public class DailyWinRateByHour extends MainApi{
+public class DailyWinRate extends MainApi{
 
-	public DailyWinRateByHour() {
+	public DailyWinRate() {
 		super();
 		// TODO Auto-generated constructor stub
-		this.setDataSourceTableName("rtb.daily_agg_winrate_by_hour");
+		this.setDataSourceTableName("rtb.daily_agg_winrate");
 		this.setDefaultDimensions(new String[]{"full_date"});
 		this.setDefaultMeasures(new String[]{"bid_price"});
 		this.setDataSourceJNDIConn("verveReportConnection");
@@ -24,10 +26,7 @@ public class DailyWinRateByHour extends MainApi{
 	@Override
 	public ApiResponseResultSetInfo getInfo(HttpServletRequest request) {
 		ApiResponseResultSetInfo info = new ApiResponseResultSetInfo();
-		String hosting=Configure.getConfig("hosting");
-		String appName=Configure.getConfig("appName");
-		String apiUrl = Configure.getConfig("dailyWinRateByHourAPIUrl");
-		String rootUrl=hosting+"/"+appName+apiUrl;
+		String rootUrl=request.getRequestURL().toString().split("\\?")[0];
 		info.setRootUrl("Get " + rootUrl);
 		// get date example
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -42,7 +41,6 @@ public class DailyWinRateByHour extends MainApi{
 		info.addDimension(new String[] { "full_date", "", "date" });
 		info.addDimension(new String[] { "calendar_year_month", "", "string" });
 		info.addDimension(new String[] { "month_since_2005", "", "integer" });
-		info.addDimension(new String[] { "hour24_of_day", "", "integer" });
 		info.addDimension(new String[] { "exchanger", "", "string" });
 		info.addDimension(new String[] { "pub_id", "", "string" });
 		info.addDimension(new String[] { "pub_name", "", "string" });
@@ -73,7 +71,7 @@ public class DailyWinRateByHour extends MainApi{
 		info.addConstraint(new String[] { "src_name", "string","1" });
 		// add select example
 		info.addSelectExample("GET " + rootUrl + "?select=full_date");
-		info.addSelectExample("GET " + rootUrl + "?select=full_date|hour24_of_day|exchanger");
+		info.addSelectExample("GET " + rootUrl + "?select=full_date|exchanger");
 		// add by example
 		info.addByExample("GET " + rootUrl + "?by=bid_price");
 		info.addByExample("GET " + rootUrl + "?by=bid_price|bid_winrate");
@@ -89,5 +87,12 @@ public class DailyWinRateByHour extends MainApi{
 		info.addOrderExample("GET " + rootUrl + "?select=full_date&by=bid_price&where[full_date]="	+ currentDateExample + "&order=full_date.desc");
 		return info;
 	}
-
+	@Override
+	public ApiInfo getApiInfo() {
+		// TODO Auto-generated method stub
+		ApiInfo apiInfo=new ApiInfo();
+		apiInfo.group="";
+		apiInfo.isActive=false;
+		return apiInfo;
+	}
 }

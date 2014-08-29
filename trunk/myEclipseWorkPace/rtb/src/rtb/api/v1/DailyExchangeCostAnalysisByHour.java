@@ -1,4 +1,4 @@
-package rtb.api;
+package rtb.api.v1;
 
 
 import java.text.DateFormat;
@@ -7,7 +7,9 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
+import rtb.bean.ApiInfo;
 import rtb.bean.ApiResponseResultSetInfo;
+import rtb.core.MainApi;
 import rtb.utils.Configure;
 
 
@@ -24,10 +26,7 @@ public class DailyExchangeCostAnalysisByHour extends MainApi{
 	@Override
 	public ApiResponseResultSetInfo getInfo(HttpServletRequest request) {
 		ApiResponseResultSetInfo info = new ApiResponseResultSetInfo();
-		String hosting=Configure.getConfig("hosting");
-		String appName=Configure.getConfig("appName");
-		String apiUrl = Configure.getConfig("revenueByHourAPIUrl");
-		String rootUrl=hosting+"/"+appName+apiUrl;
+		String rootUrl=request.getRequestURL().toString().split("\\?")[0];
 		info.setRootUrl("Get " + rootUrl);
 		// get date example
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -74,5 +73,12 @@ public class DailyExchangeCostAnalysisByHour extends MainApi{
 		info.addOrderExample("GET " + rootUrl + "?select=full_date&by=ave_won_price.avg&where[full_date]="	+ currentDateExample + "&order=full_date.desc");
 		return info;
 	}
-
+	@Override
+	public ApiInfo getApiInfo() {
+		// TODO Auto-generated method stub
+		ApiInfo apiInfo=new ApiInfo();
+		apiInfo.group="";
+		apiInfo.isActive=true;
+		return apiInfo;
+	}
 }

@@ -10,7 +10,7 @@
     </init-param>
     <init-param>
       <param-name>serverName</param-name>
-      <param-value>localhost:8081</param-value>
+      <param-value>reporting.vervemobile.com</param-value>
     </init-param>
     <init-param>
       <param-name>renew</param-name>
@@ -30,7 +30,7 @@
     </init-param>
     <init-param>
       <param-name>serverName</param-name>
-      <param-value>localhost:8081</param-value>
+      <param-value>reporting.vervemobile.com</param-value>
     </init-param>
   </filter>
   <filter>
@@ -108,54 +108,23 @@
     <servlet-name>apidetail</servlet-name>
     <url-pattern>/api/v1/apiDetail</url-pattern>
   </servlet-mapping>
-  <servlet>
+   <servlet>
     <description></description>
-    <display-name>ApiDailyExchangeCostAnalysisByHour</display-name>
-    <servlet-name>ApiDailyExchangeCostAnalysisByHour</servlet-name>
-    <servlet-class>rtb.servlets.ApiDailyExchangeCostAnalysisByHour</servlet-class>
+    <display-name>ApiV1</display-name>
+    <servlet-name>ApiV1</servlet-name>
+    <servlet-class>rtb.servlets.ApiV1</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ApiDailyExchangeCostAnalysisByHour</servlet-name>
-    <url-pattern>/api/v1/dailyExchangeCostAnalysisByHour</url-pattern>
+    <servlet-name>ApiV1</servlet-name>
+    <url-pattern>/api/v1/*</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>ApiDailyExchangeCostAnalysis</display-name>
-    <servlet-name>ApiDailyExchangeCostAnalysis</servlet-name>
-    <servlet-class>rtb.servlets.ApiDailyExchangeCostAnalysis</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ApiDailyExchangeCostAnalysis</servlet-name>
-    <url-pattern>/api/v1/dailyExchangeCostAnalysis</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>ApiDailyWinRate</display-name>
-    <servlet-name>ApiDailyWinRate</servlet-name>
-    <servlet-class>rtb.servlets.ApiDailyWinRate</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ApiDailyWinRate</servlet-name>
-    <url-pattern>/api/v1/dailyWinRate</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>ApiDailyWinRateByHour</display-name>
-    <servlet-name>ApiDailyWinRateByHour</servlet-name>
-    <servlet-class>rtb.servlets.ApiDailyWinRateByHour</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ApiDailyWinRateByHour</servlet-name>
-    <url-pattern>/api/v1/dailyWinRateByHour</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>ApiDailyExchangeWinrate</display-name>
-    <servlet-name>ApiDailyExchangeWinrate</servlet-name>
-    <servlet-class>rtb.servlets.ApiDailyExchangeWinrate</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ApiDailyExchangeWinrate</servlet-name>
-    <url-pattern>/api/v1/dailyExchangeWinrate</url-pattern>
-  </servlet-mapping>
+  	<!-- ========================================================== -->
+	<!-- Error Handler -->
+	<!-- ========================================================== -->
+
+	<!-- Define an error handler for 404 pages -->
+	<error-page>
+		<error-code>404</error-code>
+		<location>/404.jsp</location>
+	</error-page>
 </web-app>
