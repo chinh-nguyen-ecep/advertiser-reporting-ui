@@ -138,7 +138,7 @@ var next_fire_time=query_result_schedule_list.getValueAt(v_loop,9);]]></script>
           <query><![CDATA[SELECT
  (CASE 
 	WHEN '{report_agg_table}'!='refer.date_dim' AND max(full_date)::date >= now()::date-1 THEN 'vailable' 
-	WHEN '{report_agg_table}'='refer.date_dim' AND now()::date>= '{next_fire_time}'::date AND EXTRACT(HOUR FROM TIMESTAMP '{next_fire_time}') <= EXTRACT(HOUR FROM now()::TIMESTAMP) THEN 'vailable' 
+	WHEN '{report_agg_table}'='refer.date_dim' AND '{next_fire_time}'::TIMESTAMP <=  now()::TIMESTAMP THEN 'vailable' 
 	ELSE 'non-vailable' END),
 	max(full_date)::date,
 	now() as now
