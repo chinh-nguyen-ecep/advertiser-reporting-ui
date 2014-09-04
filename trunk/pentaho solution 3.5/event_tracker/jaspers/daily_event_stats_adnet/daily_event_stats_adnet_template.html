@@ -76,7 +76,7 @@
    <div id="toolbar2">	   
 		   <div class="leftGroup">
 		   <img id="open" title="Open control panel" src="/verve_style/images/preferences_system_windows_actions.png"/>		   
-		   <a target="_blank" href="ViewAction?solution=event_tracker&amp;path=jaspers&amp;action=daily_event_stats_adnet.xaction"><img id="Open full windown" title="Open full windown" src="/verve_style/images/fullscreen.png"/></a>
+		   <!--a target="_blank" href="ViewAction?solution=event_tracker&amp;path=jaspers&amp;action=daily_event_stats_adnet.xaction"><img id="Open full windown" title="Open full windown" src="/verve_style/images/fullscreen.png"/></a-->
 		   </div>	  
    </div>
       <div style="min-height: 380px;width: 100%;display: none;" id="mydiv">
@@ -226,7 +226,7 @@
             }); 
 			function reloadFlightID(){
 				$('dimesion').set('html','loading...');					
-					var theInnerHTML = pentahoAction( "event_tracker", "jaspers/daily_event_stats_adnet", "loadListOfReportName.xaction");	
+					var theInnerHTML = pentahoAction( solution, path+"/daily_event_stats_adnet", "loadListOfReportName.xaction");	
 					$('dimesion').set('html',theInnerHTML);
 					new Fillter('dimesion_fillter','dimesion','title','single');	
 					var list=$('dimesion').getElements('input');
@@ -258,7 +258,7 @@
 					});
 					//alert(param);
 
-					var theInnerHTML = pentahoAction( "event_tracker", "jaspers/daily_event_stats_adnet", "load_list_event_name.xaction",param);	
+					var theInnerHTML = pentahoAction( solution, path+"/daily_event_stats_adnet", "load_list_event_name.xaction",param);	
 					$('dimesion2').set('html',theInnerHTML);
 					new Fillter('dimesion_fillter2','dimesion2','','muti all check');	
 			}

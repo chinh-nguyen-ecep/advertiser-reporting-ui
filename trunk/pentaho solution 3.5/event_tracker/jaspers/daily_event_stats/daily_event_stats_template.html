@@ -76,7 +76,7 @@
    <div id="toolbar2">	   
 		   <div class="leftGroup">
 		   <img id="open" title="Open control panel" src="/verve_style/images/preferences_system_windows_actions.png"/>		   
-		   <a target="_blank" href="ViewAction?solution=event_tracker&amp;path=jaspers&amp;action=daily_event_stats.xaction"><img id="Open full windown" title="Open full windown" src="/verve_style/images/fullscreen.png"/></a>
+		   <!--a target="_blank" href="ViewAction?solution=event_tracker&amp;path=jaspers&amp;action=daily_event_stats.xaction"><img id="Open full windown" title="Open full windown" src="/verve_style/images/fullscreen.png"/></a-->
 		   </div>	  
    </div>
       <div style="min-height: 380px;width: 100%;display: none;" id="mydiv">
@@ -237,7 +237,7 @@
 							param[2]=para_item;							
 							//alert(param);
 							delay_timeout(1000,function(){
-								var theInnerHTML = pentahoAction( "event_tracker", "jaspers", "daily_event_stats.xaction",param);	
+								var theInnerHTML = pentahoAction( solution, path, "daily_event_stats.xaction",param);	
 								$('dimesion').set('html',theInnerHTML);
 								new Fillter('dimesion_fillter','dimesion','','single');		
 							});	
