@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Daily Event Stats By ID</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>chinhnguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type>report</result-type>  
+    <icon>chart_1(2).png|chart_1(2).png</icon> 
+  </documentation>
+
+  <inputs> 
+    <p_start_date type="string"> 
+      <sources> 
+        <request>p_start_date</request> 
+      </sources>  
+      <default-value><![CDATA[2013-01-01]]></default-value> 
+    </p_start_date>  
+    <p_end_date type="string"> 
+      <sources> 
+        <request>p_end_date</request> 
+      </sources>  
+      <default-value><![CDATA[9999-12-31]]></default-value> 
+    </p_end_date>  
+    <v_max_date type="string"> 
+      <sources> 
+        <request>v_max_date</request> 
+      </sources>  
+      <default-value/> 
+    </v_max_date>  
+    <v_min_date type="string"> 
+      <sources> 
+        <request>v_min_date</request> 
+      </sources>  
+      <default-value/> 
+    </v_min_date>  
+    <List_report_type type="result-set"> 
+      <default-value type="result-set"> 
+        <row> 
+          <name>Metro</name>  
+          <value>Metro</value> 
+        </row>  
+        <row> 
+          <name>Site</name>  
+          <value>Site</value> 
+        </row> 
+      </default-value>  
+      <columns> 
+        <name type="string"/>  
+        <value type="string"/> 
+      </columns> 
+    </List_report_type>  
+    <p_report_type type="string"> 
+      <sources> 
+        <request>p_report_type</request> 
+      </sources>  
+      <default-value><![CDATA[Site]]></default-value> 
+    </p_report_type>  
+    <List_output_type type="string-list"> 
+      <default-value type="string-list"> 
+        <list-item>html</list-item>  
+        <list-item>pdf</list-item>  
+        <list-item>xls</list-item>  
+        <list-item>rtf</list-item>  
+        <list-item>csv</list-item> 
+      </default-value> 
+    </List_output_type>  
+    <p_output type="string"> 
+      <sources> 
+        <request>p_output</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </p_output>  
+    <p_flight_id type="string"> 
+      <sources> 
+        <request>p_flight_id</request> 
+      </sources>  
+      <default-value><![CDATA[0]]></default-value> 
+    </p_flight_id>  
+    <actions type="string">
+      <sources>
+        <request>actions</request>
+      </sources>
+      <default-value/>
+    </actions>
+    <connectionName type="string">
+      <sources>
+        <request>connectionName</request>
+      </sources>
+      <default-value><![CDATA[verveReportConnection]]></default-value>
+    </connectionName>
+    <output_result type="string">
+      <sources>
+        <request>output_result</request>
+      </sources>
+      <default-value><![CDATA[assadasd]]></default-value>
+    </output_result>
+  </inputs>
+
+  <outputs>
+    <output_result type="string">
+      <destinations>
+        <response>content</response>
+      </destinations>
+    </output_result>
+  </outputs>
+
+  <resources> 
+    <pageTemplate1> 
+      <solution-file> 
+        <location>daily_event_stats/daily_event_stats_template.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </pageTemplate1>  
+    <report-definition> 
+      <solution-file> 
+        <location>daily_event_stats/daily_event_stats_by_date_range.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition>  
+    <report-definition1> 
+      <solution-file> 
+        <location>daily_event_stats/daily_event_stats_by_hour.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition1> 
+  </resources>
+  
+  <actions> 
+    <actions>
+      <condition><![CDATA[actions=='']]></condition>
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Get max min date data</action-type>
+        <action-outputs> 
+          <query-result type="result-set" mapping="q_max_min_date"/>  
+          <max_full_date type="string"/>  
+          <min_full_date type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <jndi><![CDATA[dw3]]></jndi>  
+          <live><![CDATA[false]]></live>  
+          <query><![CDATA[SELECT b.min_full_date, b.max_full_date
+FROM refer.date_dim a,
+(SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM evttracker.daily_event_stats WHERE is_active=true) b
+WHERE a.full_date = b.min_full_date OR a.full_date = b.max_full_date;]]></query> 
+        </component-definition> 
+      </action-definition>
+
+      <action-definition> 
+        <component-name>SecureFilterComponent</component-name>
+        <action-type>Prompt/Secure Filter</action-type>
+        <action-inputs> 
+          <p_start_date type="string"/>  
+          <p_end_date type="string"/>  
+          <v_max_date type="string"/>  
+          <v_min_date type="string"/>  
+          <q_max_min_date type="result-set"/>  
+          <p_output type="string"/>  
+          <List_output_type type="string-list"/> 
+        </action-inputs>
+        <action-resources> 
+          <pageTemplate mapping="pageTemplate1"/> 
+        </action-resources>
+        <component-definition> 
+          <selections> 
+            <p_start_date filter="none" style="text-box"/>  
+            <p_end_date filter="none" style="text-box"/>  
+            <v_max_date style="select"> 
+              <filter value-col-name="max_full_date" display-col-name="max_full_date">q_max_min_date</filter> 
+            </v_max_date>  
+            <v_min_date style="select"> 
+              <filter value-col-name="min_full_date" display-col-name="min_full_date">q_max_min_date</filter> 
+            </v_min_date>  
+            <p_output style="select"> 
+              <filter>List_output_type</filter> 
+            </p_output> 
+          </selections>  
+          <xsl><![CDATA[pageTemplate]]></xsl> 
+        </component-definition> 
+      </action-definition>
+
+      <actions> 
+        <condition><![CDATA[p_start_date!=p_end_date]]></condition>  
+        <action-definition> 
+          <component-name>JasperReportsComponent</component-name>
+          <action-type>Jasper</action-type>
+          <action-inputs> 
+            <p_start_date type="string"/>  
+            <p_end_date type="string"/>  
+            <p_flight_id type="string"/>  
+            <output-type type="string" mapping="p_output"/> 
+          </action-inputs>
+          <action-resources> 
+            <report-definition type="resource"/> 
+          </action-resources>
+          <component-definition> 
+            <jndi><![CDATA[dw3]]></jndi> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+
+      <actions> 
+        <condition><![CDATA[p_start_date==p_end_date]]></condition>  
+        <action-definition> 
+          <component-name>JasperReportsComponent</component-name>
+          <action-type>Jasper</action-type>
+          <action-inputs> 
+            <p_start_date type="string"/>  
+            <p_flight_id type="string"/>  
+            <output-type type="string" mapping="p_output"/> 
+          </action-inputs>
+          <action-resources> 
+            <report-definition mapping="report-definition1"/> 
+          </action-resources>
+          <component-definition> 
+            <jndi><![CDATA[dw3]]></jndi> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+
+    </actions>
+  
+    <actions>
+      <condition><![CDATA[actions=='listFlightID']]></condition>
+      <action-definition>
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs>
+          <p_start_date type="string"/>
+          <jndi type="string" mapping="connectionName"/>
+          <p_end_date type="string"/>
+        </action-inputs>
+        <action-outputs>
+          <query-result type="result-set" mapping="query_result"/>
+        </action-outputs>
+        <component-definition>
+          <query><![CDATA[SELECT flight_id as name
+FROM evttracker.daily_event_stats 
+WHERE is_active=true
+AND full_date BETWEEN '{p_start_date}'::date AND '{p_end_date}'::date
+GROUP BY name
+ORDER BY name]]></query>
+          <live><![CDATA[false]]></live>
+        </component-definition>
+      </action-definition>
+
+      <action-definition>
+        <component-name>JavascriptRule</component-name>
+        <action-type>JavaScript</action-type>
+        <action-inputs>
+          <query_result type="result-set"/>
+          <output_result type="string"/>
+        </action-inputs>
+        <action-outputs>
+          <output_result type="string"/>
+        </action-outputs>
+        <component-definition>
+          <script><![CDATA[output_result='<table><tr></tr>';
+
+for(var i=0;i<query_result.getRowCount();i++){
+	var name=query_result.getValueAt(i,0);
+	if(i==0){
+	output_result+='<tr><td><input id="event_'+name+'" class="portlet-form-field" type="checkbox" name="p_flight_id" value="'+name+'" title=""><span id="device-label" class="portlet-form-field-label">'+name+'</span></td></tr>';
+	}else{
+	output_result+='<tr><td><input id="event_'+name+'" class="portlet-form-field" type="checkbox" name="p_flight_id" value="'+name+'" title=""><span id="device-label" class="portlet-form-field-label">'+name+'</span></td></tr>';
+	};
+	
+};
+output_result+='</table>';]]></script>
+        </component-definition>
+      </action-definition>
+
+    </actions>
+
+  </actions> 
+</action-sequence>
