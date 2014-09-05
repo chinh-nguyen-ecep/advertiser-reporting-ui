@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_adcel_geo_quality_by_partner" language="groovy" pageWidth="1030" pageHeight="802" columnWidth="1030" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="4.0"/>
-	<property name="ireport.x" value="2646"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="p_publisher_id_list" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new String("")]]></defaultValueExpression>
@@ -31,16 +31,10 @@ SELECT
 	, portal_name
 	, SUM(trxids_count) as total_imp
 	, SUM(filled_count)::float/SUM(trxids_count) as fill_rate
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_0)::float/sum(filled_count) end as na_no_score
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_5)::float/sum(filled_count) end as foreign_content_ip_score_5
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_10)::float/sum(filled_count) end as mobile_ip_score_10
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_20)::float/sum(filled_count) end as content_location_score_20
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_45)::float/sum(filled_count) end as us_postal_score_45
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_50)::float/sum(filled_count) end as non_us_terr_ip_score_50
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_100)::float/sum(filled_count) end as lat_long_score_100
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_1_48)::float/sum(filled_count) end as quality_1_48
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_49_50)::float/sum(filled_count) end as quality_49_50
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_51_100)::float/sum(filled_count) end as quality_51_100
+	, case sum(trxids_count) when 0 then 0 else sum(location_quality_0)::float/sum(trxids_count) end as na_no_score
+	, case sum(trxids_count) when 0 then 0 else sum(location_quality_1_48)::float/sum(trxids_count) end as quality_1_48
+	, case sum(trxids_count) when 0 then 0 else sum(location_quality_49_50)::float/sum(trxids_count) end as quality_49_50
+	, case sum(trxids_count) when 0 then 0 else sum(location_quality_51_100)::float/sum(trxids_count) end as quality_51_100
 	, case sum(filled_count) when 0 then 0 else sum(country_us)::float/sum(filled_count) end as us
 	, case sum(filled_count) when 0 then 0 else sum(country_international)::float/sum(filled_count) end as international
 FROM adstraffic.daily_geo_quality
@@ -61,16 +55,10 @@ SELECT
 	, portal_name
 	, SUM(trxids_count) as total_imp
 	, SUM(filled_count)::float/SUM(trxids_count) as fill_rate
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_0)::float/sum(filled_count) end as na_no_score
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_5)::float/sum(filled_count) end as foreign_content_ip_score_5
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_10)::float/sum(filled_count) end as mobile_ip_score_10
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_20)::float/sum(filled_count) end as content_location_score_20
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_45)::float/sum(filled_count) end as us_postal_score_45
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_50)::float/sum(filled_count) end as non_us_terr_ip_score_50
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_100)::float/sum(filled_count) end as lat_long_score_100
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_1_48)::float/sum(filled_count) end as quality_1_48
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_49_50)::float/sum(filled_count) end as quality_49_50
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_51_100)::float/sum(filled_count) end as quality_51_100
+	, case sum(trxids_count) when 0 then 0 else sum(location_quality_0)::float/sum(trxids_count) end as na_no_score
+	, case sum(trxids_count) when 0 then 0 else sum(location_quality_1_48)::float/sum(trxids_count) end as quality_1_48
+	, case sum(trxids_count) when 0 then 0 else sum(location_quality_49_50)::float/sum(trxids_count) end as quality_49_50
+	, case sum(trxids_count) when 0 then 0 else sum(location_quality_51_100)::float/sum(trxids_count) end as quality_51_100
 	, case sum(filled_count) when 0 then 0 else sum(country_us)::float/sum(filled_count) end as us
 	, case sum(filled_count) when 0 then 0 else sum(country_international)::float/sum(filled_count) end as international
 FROM adstraffic.daily_geo_quality
@@ -91,16 +79,10 @@ SELECT
 	, portal_name
 	, SUM(trxids_count) as total_imp
 	, SUM(filled_count)::float/SUM(trxids_count) as fill_rate
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_0)::float/sum(filled_count) end as na_no_score
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_5)::float/sum(filled_count) end as foreign_content_ip_score_5
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_10)::float/sum(filled_count) end as mobile_ip_score_10
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_20)::float/sum(filled_count) end as content_location_score_20
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_45)::float/sum(filled_count) end as us_postal_score_45
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_50)::float/sum(filled_count) end as non_us_terr_ip_score_50
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_100)::float/sum(filled_count) end as lat_long_score_100
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_1_48)::float/sum(filled_count) end as quality_1_48
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_49_50)::float/sum(filled_count) end as quality_49_50
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_51_100)::float/sum(filled_count) end as quality_51_100
+	, case sum(trxids_count) when 0 then 0 else sum(location_quality_0)::float/sum(trxids_count) end as na_no_score
+	, case sum(trxids_count) when 0 then 0 else sum(location_quality_1_48)::float/sum(trxids_count) end as quality_1_48
+	, case sum(trxids_count) when 0 then 0 else sum(location_quality_49_50)::float/sum(trxids_count) end as quality_49_50
+	, case sum(trxids_count) when 0 then 0 else sum(location_quality_51_100)::float/sum(trxids_count) end as quality_51_100
 	, case sum(filled_count) when 0 then 0 else sum(country_us)::float/sum(filled_count) end as us
 	, case sum(filled_count) when 0 then 0 else sum(country_international)::float/sum(filled_count) end as international
 FROM adstraffic.daily_geo_quality
@@ -121,16 +103,10 @@ SELECT
 	, portal_name
 	, SUM(trxids_count) as total_imp
 	, SUM(filled_count)::float/SUM(trxids_count) as fill_rate
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_0)::float/sum(filled_count) end as na_no_score
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_5)::float/sum(filled_count) end as foreign_content_ip_score_5
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_10)::float/sum(filled_count) end as mobile_ip_score_10
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_20)::float/sum(filled_count) end as content_location_score_20
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_45)::float/sum(filled_count) end as us_postal_score_45
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_50)::float/sum(filled_count) end as non_us_terr_ip_score_50
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_100)::float/sum(filled_count) end as lat_long_score_100
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_1_48)::float/sum(filled_count) end as quality_1_48
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_49_50)::float/sum(filled_count) end as quality_49_50
-	, case sum(filled_count) when 0 then 0 else sum(location_quality_51_100)::float/sum(filled_count) end as quality_51_100
+	, case sum(trxids_count) when 0 then 0 else sum(location_quality_0)::float/sum(trxids_count) end as na_no_score
+	, case sum(trxids_count) when 0 then 0 else sum(location_quality_1_48)::float/sum(trxids_count) end as quality_1_48
+	, case sum(trxids_count) when 0 then 0 else sum(location_quality_49_50)::float/sum(trxids_count) end as quality_49_50
+	, case sum(trxids_count) when 0 then 0 else sum(location_quality_51_100)::float/sum(trxids_count) end as quality_51_100
 	, case sum(filled_count) when 0 then 0 else sum(country_us)::float/sum(filled_count) end as us
 	, case sum(filled_count) when 0 then 0 else sum(country_international)::float/sum(filled_count) end as international
 FROM adstraffic.daily_geo_quality
@@ -152,12 +128,6 @@ ORDER BY eastern_date_sk,publisher_name,partner_name, portal_name]]>
 	<field name="total_imp" class="java.lang.Long"/>
 	<field name="fill_rate" class="java.lang.Double"/>
 	<field name="na_no_score" class="java.lang.Double"/>
-	<field name="foreign_content_ip_score_5" class="java.lang.Double"/>
-	<field name="mobile_ip_score_10" class="java.lang.Double"/>
-	<field name="content_location_score_20" class="java.lang.Double"/>
-	<field name="us_postal_score_45" class="java.lang.Double"/>
-	<field name="non_us_terr_ip_score_50" class="java.lang.Double"/>
-	<field name="lat_long_score_100" class="java.lang.Double"/>
 	<field name="quality_1_48" class="java.lang.Double"/>
 	<field name="quality_49_50" class="java.lang.Double"/>
 	<field name="quality_51_100" class="java.lang.Double"/>
