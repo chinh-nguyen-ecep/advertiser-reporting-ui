@@ -9,52 +9,40 @@
 	  {xform-header}
    </head>
    <body class="pentaho">
-      <div name="dialog-form" title="Control Panel" style="width: 460px;overflow: auto;">	
+	 <div name="dialog-form" title="Control Panel" style="width: 460px;height: 520px;">		
          <form name="parameter-form" id="parameter-form" method="GET">
-         <table class="tableForm">
-         <tbody>
-			 <tr>
-		         <th></th>
-		         <td>Don't need input.</td>
-	         </tr>
-         </tbody>
-         </table>
+             <label style="margin-left: 0px;">Month:</label> {calendar_year_month}
 		 <div id="hide_in_form" style="display:none">
-			{v_max_date}
-			{v_min_date} 
 			{solution}
 			{action}
 			{path}
-		 </div> 
+		 </div>  
 	    </form>
-      </div>    
+	</div> 
 	<script> <![CDATA[		 
 			$(document).ready(function(){
 				initJasperPageTemplate({
 					controlPanle_width: 300,
-					//controlPanle_height: 300,
+					//controlPanle_height: 140,
 					generateFormContent: generateFormContent,
 					formValidation:formValidation,
-					reportName:'IO Billing Line Item',
-					miniMode: true
-					
+					reportName:'Billing - Monthly VLMO Publisher Share',
+					miniMode:true,
+					iframeMode: true
 				});
 			});
 			
 			var generateFormContent=function(domContentForm,completedFn){
-
-				
-
+				$('option[value=]').remove();
 			}
 			
 			var formValidation=function(domContentForm,divResult){
 				var form=domContentForm.children('form');
 				var validate=true;
-				
 				return true;
 			}
 	]]>
-	</script>
+	</script>	
    </body>
      
 </html>
