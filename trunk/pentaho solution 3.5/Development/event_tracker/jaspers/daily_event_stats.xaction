@@ -79,32 +79,32 @@
       </sources>  
       <default-value><![CDATA[0]]></default-value> 
     </p_flight_id>  
-    <actions type="string">
-      <sources>
-        <request>actions</request>
-      </sources>
-      <default-value/>
-    </actions>
-    <connectionName type="string">
-      <sources>
-        <request>connectionName</request>
-      </sources>
-      <default-value><![CDATA[verveReportConnection]]></default-value>
-    </connectionName>
-    <output_result type="string">
-      <sources>
-        <request>output_result</request>
-      </sources>
-      <default-value><![CDATA[assadasd]]></default-value>
-    </output_result>
+    <actions type="string"> 
+      <sources> 
+        <request>actions</request> 
+      </sources>  
+      <default-value/> 
+    </actions>  
+    <connectionName type="string"> 
+      <sources> 
+        <request>connectionName</request> 
+      </sources>  
+      <default-value><![CDATA[verveReportConnection]]></default-value> 
+    </connectionName>  
+    <output_result type="string"> 
+      <sources> 
+        <request>output_result</request> 
+      </sources>  
+      <default-value><![CDATA[assadasd]]></default-value> 
+    </output_result> 
   </inputs>
 
-  <outputs>
-    <output_result type="string">
-      <destinations>
-        <response>content</response>
-      </destinations>
-    </output_result>
+  <outputs> 
+    <output_result type="string"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </output_result> 
   </outputs>
 
   <resources> 
@@ -129,8 +129,8 @@
   </resources>
   
   <actions> 
-    <actions>
-      <condition><![CDATA[actions=='']]></condition>
+    <actions> 
+      <condition><![CDATA[actions=='']]></condition>  
       <action-definition> 
         <component-name>SQLLookupRule</component-name>
         <action-type>Get max min date data</action-type>
@@ -148,7 +148,7 @@ FROM refer.date_dim a,
 WHERE a.full_date = b.min_full_date OR a.full_date = b.max_full_date;]]></query> 
         </component-definition> 
       </action-definition>
-
+  
       <action-definition> 
         <component-name>SecureFilterComponent</component-name>
         <action-type>Prompt/Secure Filter</action-type>
@@ -181,7 +181,7 @@ WHERE a.full_date = b.min_full_date OR a.full_date = b.max_full_date;]]></query>
           <xsl><![CDATA[pageTemplate]]></xsl> 
         </component-definition> 
       </action-definition>
-
+  
       <actions> 
         <condition><![CDATA[p_start_date!=p_end_date]]></condition>  
         <action-definition> 
@@ -202,7 +202,7 @@ WHERE a.full_date = b.min_full_date OR a.full_date = b.max_full_date;]]></query>
         </action-definition>
  
       </actions>
-
+  
       <actions> 
         <condition><![CDATA[p_start_date==p_end_date]]></condition>  
         <action-definition> 
@@ -222,44 +222,44 @@ WHERE a.full_date = b.min_full_date OR a.full_date = b.max_full_date;]]></query>
         </action-definition>
  
       </actions>
-
+ 
     </actions>
   
-    <actions>
-      <condition><![CDATA[actions=='listFlightID']]></condition>
-      <action-definition>
+    <actions> 
+      <condition><![CDATA[actions=='listFlightID']]></condition>  
+      <action-definition> 
         <component-name>SQLLookupRule</component-name>
         <action-type>Relational</action-type>
-        <action-inputs>
-          <p_start_date type="string"/>
-          <jndi type="string" mapping="connectionName"/>
-          <p_end_date type="string"/>
+        <action-inputs> 
+          <p_start_date type="string"/>  
+          <jndi type="string" mapping="connectionName"/>  
+          <p_end_date type="string"/> 
         </action-inputs>
-        <action-outputs>
-          <query-result type="result-set" mapping="query_result"/>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
         </action-outputs>
-        <component-definition>
+        <component-definition> 
           <query><![CDATA[SELECT flight_id as name
 FROM evttracker.daily_event_stats 
 WHERE is_active=true
 AND full_date BETWEEN '{p_start_date}'::date AND '{p_end_date}'::date
 GROUP BY name
-ORDER BY name]]></query>
-          <live><![CDATA[false]]></live>
-        </component-definition>
+ORDER BY name]]></query>  
+          <live><![CDATA[false]]></live> 
+        </component-definition> 
       </action-definition>
-
-      <action-definition>
+  
+      <action-definition> 
         <component-name>JavascriptRule</component-name>
         <action-type>JavaScript</action-type>
-        <action-inputs>
-          <query_result type="result-set"/>
-          <output_result type="string"/>
+        <action-inputs> 
+          <query_result type="result-set"/>  
+          <output_result type="string"/> 
         </action-inputs>
-        <action-outputs>
-          <output_result type="string"/>
+        <action-outputs> 
+          <output_result type="string"/> 
         </action-outputs>
-        <component-definition>
+        <component-definition> 
           <script><![CDATA[output_result='<table><tr></tr>';
 
 for(var i=0;i<query_result.getRowCount();i++){
@@ -271,11 +271,11 @@ for(var i=0;i<query_result.getRowCount();i++){
 	};
 	
 };
-output_result+='</table>';]]></script>
-        </component-definition>
+output_result+='</table>';]]></script> 
+        </component-definition> 
       </action-definition>
-
+ 
     </actions>
-
+ 
   </actions> 
 </action-sequence>

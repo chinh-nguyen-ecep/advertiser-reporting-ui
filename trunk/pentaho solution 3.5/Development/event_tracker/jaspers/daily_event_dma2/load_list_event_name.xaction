@@ -64,7 +64,7 @@
         <component-definition> 
           <template><![CDATA[SELECT a.*
 FROM (
-	SELECT 'All Event Names' as name, 0 as row_order,0 as event_count
+	SELECT 'All Event Names' as name, 0 as row_order, 0 as event_count
 	UNION
 SELECT b.event_name, 1 as row_order,sum(event_count) as event_count
 	FROM evttracker.daily_event_dma  b
@@ -87,8 +87,8 @@ ORDER BY row_order, name;]]></template>
           <query-result type="result-set" mapping="query_result_event_name"/> 
         </action-outputs>
         <component-definition> 
-          <jndi><![CDATA[dw3]]></jndi>  
-          <live><![CDATA[true]]></live> 
+          <live><![CDATA[true]]></live>  
+          <jndi><![CDATA[verveReportConnection]]></jndi>
         </component-definition> 
       </action-definition>
  
@@ -161,8 +161,8 @@ ORDER BY row_order, name;]]></template>
           <query-result type="result-set" mapping="query_result_event_name"/> 
         </action-outputs>
         <component-definition> 
-          <jndi><![CDATA[dw3]]></jndi>  
-          <live><![CDATA[false]]></live> 
+          <live><![CDATA[false]]></live>  
+          <jndi><![CDATA[verveReportConnection]]></jndi>
         </component-definition> 
       </action-definition>
  

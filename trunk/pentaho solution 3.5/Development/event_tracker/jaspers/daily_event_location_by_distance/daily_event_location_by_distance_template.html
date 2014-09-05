@@ -383,7 +383,8 @@
 					});
 					//alert(param);
 
-					var theInnerHTML = pentahoAction( "event_tracker", "jaspers/daily_event_location_by_distance", "load_list_event_name.xaction",param);	
+					//var theInnerHTML = pentahoAction( "event_tracker", "jaspers/daily_event_location_by_distance", "load_list_event_name.xaction",param);	
+					var theInnerHTML = pentahoAction( solution,path+"/daily_event_location_by_distance", "load_list_event_name.xaction",param);	
 					$('dimesion2').set('html',theInnerHTML);
 					new Fillter('dimesion_fillter2','dimesion2','','muti all check');	
 			}					
