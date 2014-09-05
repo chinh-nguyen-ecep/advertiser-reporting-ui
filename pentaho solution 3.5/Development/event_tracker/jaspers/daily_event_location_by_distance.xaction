@@ -191,7 +191,7 @@
         <row_order type="string"/> 
       </action-outputs>
       <component-definition> 
-        <jndi><![CDATA[dw3]]></jndi>  
+        <jndi><![CDATA[verveReportConnection]]></jndi>  
         <live><![CDATA[true]]></live>  
         <query><![CDATA[SELECT a.*
 FROM (
@@ -201,6 +201,7 @@ FROM (
 	FROM evttracker.daily_event_location_by_distance  b
 	WHERE b.is_active=true
 	GROUP BY "value" 	
+	LIMIT 10
 	) a
 ORDER BY row_order,"value";]]></query> 
       </component-definition> 

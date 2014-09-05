@@ -191,24 +191,26 @@
     <action-definition> 
       <component-name>SQLLookupRule</component-name>
       <action-type>Get list Flight id</action-type>
+      <action-inputs/>
       <action-outputs> 
         <query-result type="result-set" mapping="q_list_flight_id"/>  
         <value type="string"/>  
         <row_order type="string"/> 
       </action-outputs>
       <component-definition> 
-        <jndi><![CDATA[dw3]]></jndi>  
         <live><![CDATA[true]]></live>  
+        <jndi><![CDATA[verveReportConnection]]></jndi>
         <query><![CDATA[SELECT a.*
 FROM (
 	SELECT 'All Flight ID' as "value", 0 as row_order
 	UNION
 	SELECT b.flight_id as "value", 1 as row_order
 	FROM evttracker.daily_event_by_distance  b
-	WHERE b.is_active=true
-	GROUP BY "value" 	
+	WHERE b.is_active = true
+	GROUP BY "value"
+	LIMIT 20
 	) a
-ORDER BY row_order,"value";]]></query> 
+ORDER BY row_order,"value";]]></query>
       </component-definition> 
     </action-definition>
   

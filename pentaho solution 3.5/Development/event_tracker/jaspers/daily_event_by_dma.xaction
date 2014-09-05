@@ -121,11 +121,11 @@ WHERE a.full_date = b.min_full_date OR a.full_date = b.max_full_date;]]></query>
       <action-inputs> 
         <p_start_date type="string"/>  
         <p_end_date type="string"/>  
-        <v_min_date type="string"/>
-        <q_max_min_date type="result-set"/>
-        <v_max_date type="string"/>
-        <p_output type="string"/>
-        <p_output_list type="string-list"/>
+        <v_min_date type="string"/>  
+        <q_max_min_date type="result-set"/>  
+        <v_max_date type="string"/>  
+        <p_output type="string"/>  
+        <p_output_list type="string-list"/> 
       </action-inputs>
       <action-resources> 
         <pageTemplate mapping="pageTemplate1"/> 
@@ -134,15 +134,15 @@ WHERE a.full_date = b.min_full_date OR a.full_date = b.max_full_date;]]></query>
         <selections> 
           <p_start_date filter="none" style="text-box"/>  
           <p_end_date filter="none" style="text-box"/>  
-          <v_min_date style="select">
-            <filter value-col-name="min_full_date" display-col-name="min_full_date">q_max_min_date</filter>
-          </v_min_date>
-          <v_max_date style="select">
-            <filter value-col-name="max_full_date" display-col-name="max_full_date">q_max_min_date</filter>
-          </v_max_date>
-          <p_output style="select">
-            <filter>p_output_list</filter>
-          </p_output>
+          <v_min_date style="select"> 
+            <filter value-col-name="min_full_date" display-col-name="min_full_date">q_max_min_date</filter> 
+          </v_min_date>  
+          <v_max_date style="select"> 
+            <filter value-col-name="max_full_date" display-col-name="max_full_date">q_max_min_date</filter> 
+          </v_max_date>  
+          <p_output style="select"> 
+            <filter>p_output_list</filter> 
+          </p_output> 
         </selections>  
         <xsl><![CDATA[pageTemplate]]></xsl> 
       </component-definition> 

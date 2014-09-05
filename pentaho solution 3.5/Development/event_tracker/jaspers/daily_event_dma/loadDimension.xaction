@@ -52,7 +52,7 @@
       <sources> 
         <request>ConnectionName</request> 
       </sources>  
-      <default-value><![CDATA[dw3dw3]]></default-value> 
+      <default-value><![CDATA[verveReportConnection]]></default-value> 
     </ConnectionName>  
     <flight_id type="string"> 
       <sources> 
@@ -60,18 +60,18 @@
       </sources>  
       <default-value><![CDATA[-100]]></default-value> 
     </flight_id>  
-    <p_start_date type="string">
-      <sources>
-        <request>p_start_date</request>
-      </sources>
-      <default-value/>
-    </p_start_date>
-    <p_end_date type="string">
-      <sources>
-        <request>p_end_date</request>
-      </sources>
-      <default-value/>
-    </p_end_date>
+    <p_start_date type="string"> 
+      <sources> 
+        <request>p_start_date</request> 
+      </sources>  
+      <default-value/> 
+    </p_start_date>  
+    <p_end_date type="string"> 
+      <sources> 
+        <request>p_end_date</request> 
+      </sources>  
+      <default-value/> 
+    </p_end_date> 
   </inputs>
 
   <outputs> 
@@ -91,12 +91,12 @@
         <component-name>SQLLookupRule</component-name>
         <action-type>Relational</action-type>
         <action-inputs> 
-          <jndi type="string" mapping="ConnectionName"/>  
-          <limit type="string"/>
-          <page type="string"/>
-          <term type="string"/>
-          <p_start_date type="string"/>
-          <p_end_date type="string"/>
+          <limit type="string"/>  
+          <page type="string"/>  
+          <term type="string"/>  
+          <p_start_date type="string"/>  
+          <p_end_date type="string"/>  
+          <jndi type="string" mapping="ConnectionName"/>
         </action-inputs>
         <action-outputs> 
           <query-result type="result-set" mapping="query_result"/> 
@@ -109,7 +109,7 @@ WHERE is_active=true AND lower(flight_id) LIKE lower('%{term}%')
 AND full_date BETWEEN '{p_start_date}'::date AND '{p_end_date}'::date
 GROUP BY flight_id
 ORDER BY flight_id
-LIMIT {limit} OFFSET ({page}-1)*10 ;]]></query>
+LIMIT {limit} OFFSET ({page}-1)*10 ;]]></query> 
         </component-definition> 
       </action-definition>
  
@@ -122,12 +122,12 @@ LIMIT {limit} OFFSET ({page}-1)*10 ;]]></query>
         <action-type>Relational</action-type>
         <action-inputs> 
           <jndi type="string" mapping="ConnectionName"/>  
-          <limit type="string"/>
-          <p_start_date type="string"/>
-          <page type="string"/>
-          <p_end_date type="string"/>
-          <term type="string"/>
-          <flight_id type="string"/>
+          <limit type="string"/>  
+          <p_start_date type="string"/>  
+          <page type="string"/>  
+          <p_end_date type="string"/>  
+          <term type="string"/>  
+          <flight_id type="string"/> 
         </action-inputs>
         <action-outputs> 
           <query-result type="result-set" mapping="query_result"/> 
@@ -141,7 +141,7 @@ AND full_date BETWEEN '{p_start_date}'::date AND '{p_end_date}'::date
 AND flight_id='{flight_id}'
 GROUP BY event_name
 ORDER BY event_name
-LIMIT {limit} OFFSET ({page}-1)*10 ;]]></query>
+LIMIT {limit} OFFSET ({page}-1)*10 ;]]></query> 
         </component-definition> 
       </action-definition>
  
