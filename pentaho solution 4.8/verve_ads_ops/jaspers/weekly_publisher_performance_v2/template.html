@@ -99,6 +99,12 @@
         <div title="Remnant" data-options="" style="padding:10px">
 			<iframe class="iframe" id="mainFrame3" name="theoutput2" frameborder="0" scrolling="yes" style="overflow-x:hidden;"></iframe>
         </div>
+		<div title="VLMO Engagement" data-options="" style="padding:10px">
+			<iframe class="iframe" id="mainFrame4" name="theoutput2" frameborder="0" scrolling="yes" style="overflow-x:hidden;"></iframe>
+        </div>
+		<div title="VLMO Non Engagement" data-options="" style="padding:10px">
+			<iframe class="iframe" id="mainFrame5" name="theoutput2" frameborder="0" scrolling="yes" style="overflow-x:hidden;"></iframe>
+        </div>
     </div>
    
    
@@ -332,6 +338,18 @@
 		urlData=$.extend({},$( "#parameter-form" ).serializeObject(),urlData); 
 		var url='/pentaho/ViewAction?'+$.param(urlData);
 		$('#mainFrame3').attr('src',url);
+		
+		//set data for VLMO Engagement
+		urlData.p_report_type=4;
+		urlData=$.extend({},$( "#parameter-form" ).serializeObject(),urlData); 
+		var url='/pentaho/ViewAction?'+$.param(urlData);
+		$('#mainFrame4').attr('src',url);	
+
+		//set data for Non VLMO Engagement
+		urlData.p_report_type=5;
+		urlData=$.extend({},$( "#parameter-form" ).serializeObject(),urlData); 
+		var url='/pentaho/ViewAction?'+$.param(urlData);
+		$('#mainFrame5').attr('src',url);	
 		
 		return true;
 	}
