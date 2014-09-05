@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="National Non Engagement Performance" pageWidth="3400" pageHeight="1684" orientation="Landscape" columnWidth="3360" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="0.9313819845887333"/>
-	<property name="ireport.x" value="694"/>
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="boder">
 		<box leftPadding="5" rightPadding="5">
@@ -111,10 +111,10 @@ ORDER BY  publisher_name, property_name, partner_keyword, channel_name, ad_netwo
 - Deliveries is all requests with disposition = 'Y' appropriate to the group
 - Impressions: Using e=&imp for the count
 - Clicks: Using e=&click for the count
-- Exclude all flights data points that have Clicks = 0 for the last 90days
-- Exclude all flights data points that have sum impressions <10,000 for the last 90 days
-- Exclude all interstitial flights: interstitial flights have Clicks = cta_any (group at flight level for the last 90days)
-- National none-engagement flight is defined : ADM flight.network_id = 2, cta_any = 0 (group at flight level for the last 90days)]]></text>
+- Exclude all flights data points that have Clicks = 0 for the last 365 days
+- Exclude all flights data points that have sum impressions <10,000 for the last 365 days
+- Exclude all interstitial flights: interstitial flights have Clicks = cta_any (group at flight level for the last 365 days)
+- National none-engagement flight is defined : ADM flight.network_id = 2, cta_any = 0 (group at flight level for the last 365 days)]]></text>
 			</staticText>
 		</band>
 	</title>
