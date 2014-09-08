@@ -291,7 +291,7 @@ sub export{
 				note("\tExported file size:\t$file_size K");	
 				$export_file_size=$file_size;
 				if($export_file_size<5){
-					sendMail("chinh.nguyen\@ecepvn.org","Export file is zero","Export host: $exportHostName<br/>File name: $export_file_name<br/>File size: $file_size");
+					sendMail("chinh.nguyen\@ecepvn.org","Export file is zero","Export host: $exportHostName<br/>File name: $export_file_name<br/>File size: $file_size<p/>perl main.pl daily dw10:analyticsdb dw10 $export_table_name $report_date missData<br/>perl main.pl daily dw10:analyticsdb dw3 $export_table_name $report_date missData");
 				}
 			}
 		}else{
