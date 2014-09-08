@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_operational_debugging" pageWidth="1960" pageHeight="1684" orientation="Landscape" columnWidth="1960" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="49"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
@@ -76,17 +76,16 @@ ORDER BY a.full_date]]>
 				<reportElement x="0" y="20" width="1960" height="140"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement/>
-				<text><![CDATA[- RTBM-ADM Flight ID is using ADM Flight ID to get it from RTBM Flight.
+				<text><![CDATA[- RTBM-ADM Flight ID is from RTBM database using RTB Flight ID
 - RTB Flight ID is from the AdCel Attributed Request log.
 - DFP Line Item ID is from the AdCel Attributed Request log.
-- DFP-ADM Flight ID is using dfp_line_item_id to get it from ADM Flight.
+- DFP-ADM Flight ID is from ADM database using DFP Line Item ID
 - Total AdCel Requests is unique request count from AdCel Attributed Request log.
 - Total AdCel Filled Reqs is unique request count from AdCel Attributed Request log with status = 'Y'.
 - Total AdCel Unfilled Reqs is unique request count from AdCel Attributed Request log with status <> 'Y'.
-- Displayed Impressions is count from Event Tracker log and AdCel Attributed Request log with status = 'Y' and e=&imp.
-- Undisplayed Impressions = Total AdCel Filled Reqs - Displayed Impessions.
-- Pub Filled %: Displayed Impressions / Total AdCel Filled Reqs %
-]]></text>
+- Displayed Impressions is count from Event Tracker log and AdCel Attributed Request log with status = 'Y' and e=&adimpinternal.
+- Undisplayed Impressions = Total AdCel Filled Reqs - Displayed Impessions
+- Pub Fill %: Displayed Impressions / Total AdCel Filled Reqs, as a percentage]]></text>
 			</staticText>
 		</band>
 	</title>
