@@ -90,18 +90,18 @@
       </sources>  
       <default-value><![CDATA[true]]></default-value> 
     </p_is_active>  
-    <p_fire_date type="string">
-      <sources>
-        <request>p_fire_date</request>
-      </sources>
-      <default-value><![CDATA[2013-01-01]]></default-value>
-    </p_fire_date>
-    <p_schedule_type type="string">
-      <sources>
-        <request>p_schedule_type</request>
-      </sources>
-      <default-value><![CDATA[daily]]></default-value>
-    </p_schedule_type>
+    <p_fire_date type="string"> 
+      <sources> 
+        <request>p_fire_date</request> 
+      </sources>  
+      <default-value><![CDATA[2013-01-01]]></default-value> 
+    </p_fire_date>  
+    <p_schedule_type type="string"> 
+      <sources> 
+        <request>p_schedule_type</request> 
+      </sources>  
+      <default-value><![CDATA[daily]]></default-value> 
+    </p_schedule_type> 
   </inputs>
 
   <outputs> 
@@ -265,6 +265,14 @@
 		<div>
 			<label for="name">Table source:</label>
 			<input name="p_table_source" value="refer.date_dim" class="easyui-validatebox" data-options="required:true" style="width:300px"/>
+		</div>
+		<div>
+			<label for="name">Fire Date:</label>
+			<input name="p_fire_date" class="easyui-datebox" style="width:150px"/>
+		</div>	
+		<div>
+			<label for="name">Fire Time:</label>
+			<input name="p_fire_time" value="09:00" class="easyui-timespinner" data-options="required:true" style="width:150px"/>
 		</div>
 		<div>
 			<label for="name">Email to:</label>
@@ -583,7 +591,9 @@ var openEditSchedule=function(){
 		p_solution:checkedRows[0].solution,
 		p_email_to:checkedRows[0].email_to,
 		p_path:checkedRows[0].path,
-		p_table_source:checkedRows[0].report_agg_table
+		p_table_source:checkedRows[0].report_agg_table,
+		p_fire_date: checkedRows[0].next_fire_date,
+		p_fire_time: checkedRows[0].next_fire_hour,
 	});
 	//Set value for form
 	$('#edit_form').form('validate');	
@@ -671,13 +681,13 @@ var viewDetail=function(){
           <query-result type="result-set" mapping="query_result"/> 
         </action-outputs>
         <component-definition> 
+          <live><![CDATA[false]]></live>  
           <query><![CDATA[SELECT schedule_id, schedule_type, email_to, report_file_type, report_name, 
        solution, path, xaction_file, parameter_string, next_fire_time, 
        last_fire_time, report_agg_table, report_group, parameter_string_example, 
-       is_active
+       is_active,next_fire_time::date as next_fire_date, EXTRACT(HOUR FROM next_fire_time)||':'||EXTRACT(MINUTE FROM next_fire_time) as next_fire_hour
   FROM control.emaill_reports_schedule 
-  ORDER BY is_active desc,report_name;]]></query>  
-          <live><![CDATA[false]]></live> 
+  ORDER BY is_active desc,report_name;]]></query>
         </component-definition> 
       </action-definition>
  
@@ -697,8 +707,8 @@ var viewDetail=function(){
           <p_report_name type="string"/>  
           <p_email_to type="string"/>  
           <p_path type="string"/>  
-          <p_fire_date type="string"/>
-          <p_schedule_type type="string"/>
+          <p_fire_date type="string"/>  
+          <p_schedule_type type="string"/> 
         </action-inputs>
         <action-outputs> 
           <query-result type="result-set" mapping="query_result"/> 
@@ -781,7 +791,9 @@ SET is_active={p_is_active}
           <p_solution type="string"/>  
           <p_path type="string"/>  
           <p_email_to type="string"/>  
-          <p_table_source type="string"/> 
+          <p_table_source type="string"/>  
+          <p_fire_date type="string"/>
+          <p_fire_time type="string"/>
         </action-inputs>
         <action-outputs> 
           <query-result type="result-set" mapping="query_result"/> 
@@ -793,6 +805,7 @@ SET report_name='{p_report_name}'
 ,solution='{p_solution}'
 ,path='{p_path}'
 ,report_agg_table='{p_table_source}'
+,next_fire_time='{p_fire_date} {p_fire_time}:00'
  WHERE schedule_id={p_schedule_id};]]></query>  
           <live><![CDATA[false]]></live> 
         </component-definition> 

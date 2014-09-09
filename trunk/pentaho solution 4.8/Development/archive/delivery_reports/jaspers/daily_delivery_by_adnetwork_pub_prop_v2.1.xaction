@@ -63,6 +63,15 @@
         <list-item>month</list-item> 
       </default-value> 
     </list_date_mode>  
+    <List_output_type type="string-list"> 
+      <default-value type="string-list"> 
+        <list-item>html</list-item>  
+        <list-item>pdf</list-item>  
+        <list-item>xls</list-item>  
+        <list-item>rtf</list-item>  
+        <list-item>csv</list-item> 
+      </default-value> 
+    </List_output_type>  
     <p_output type="string"> 
       <sources> 
         <request>p_output</request> 
@@ -75,6 +84,12 @@
       </sources>  
       <default-value/> 
     </p_adnetwork_ids>  
+    <p_adnetwork_id_list type="string"> 
+      <sources> 
+        <request>p_adnetwork_id_list</request> 
+      </sources>  
+      <default-value><![CDATA[0]]></default-value> 
+    </p_adnetwork_id_list>  
     <p_property_ids type="string"> 
       <sources> 
         <request>p_property_ids</request> 
@@ -204,13 +219,14 @@ ORDER BY month_since_2005 desc]]></query>
       <component-name>JavascriptRule</component-name>
       <action-type>Process Adnetwork IDs</action-type>
       <action-inputs> 
-        <p_adnetwork_ids type="string"/> 
+        <p_adnetwork_ids type="string"/>  
+        <p_adnetwork_id_list type="string"/> 
       </action-inputs>
       <action-outputs> 
         <p_adnetwork_id_list type="string"/> 
       </action-outputs>
       <component-definition> 
-        <script><![CDATA[var p_adnetwork_id_list='';
+        <script><![CDATA[p_adnetwork_id_list='';
 //convert measures
 if(p_adnetwork_ids!= ''){
 	if(p_adnetwork_ids instanceof Array){
@@ -232,16 +248,17 @@ if(p_adnetwork_ids!= ''){
       <action-type>Process Publisher IDs</action-type>
       <action-inputs> 
         <p_publisher_ids type="string"/> 
+        <p_publisher_id_list type="string"/> 
       </action-inputs>
       <action-outputs> 
         <p_publisher_id_list type="string"/> 
       </action-outputs>
       <component-definition> 
-        <script><![CDATA[var p_publisher_id_list='';
+        <script><![CDATA[var p_publisher_id_list='0';
 //convert measures
 if(p_publisher_ids!= ''){
 	if(p_publisher_ids instanceof Array){		
-		p_publisher_id_list=p_publisher_ids.join(";");
+		p_publisher_id_list=p_publisher_ids.join();
 	}else{
 		p_publisher_id_list=p_publisher_ids;
 	};
@@ -253,13 +270,14 @@ if(p_publisher_ids!= ''){
       <component-name>JavascriptRule</component-name>
       <action-type>Process Property IDs</action-type>
       <action-inputs> 
-        <p_property_ids type="string"/> 
+        <p_property_ids type="string"/>  
+        <p_property_id_list type="string"/> 
       </action-inputs>
       <action-outputs> 
         <p_property_id_list type="string"/> 
       </action-outputs>
       <component-definition> 
-        <script><![CDATA[var p_property_id_list='';
+        <script><![CDATA[p_property_id_list='';
 //convert measures
 if(p_property_ids!= ''){
 	if(p_property_ids instanceof Array){

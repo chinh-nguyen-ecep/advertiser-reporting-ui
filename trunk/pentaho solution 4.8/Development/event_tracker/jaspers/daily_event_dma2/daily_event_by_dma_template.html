@@ -1,0 +1,203 @@
+<html xmlns:xf="http://www.w3.org/2002/xforms">
+   <head>
+	<!-- do not include a <meta> tag -->
+	<title></title>
+      <link rel="stylesheet" type="text/css" href="/verve-lib/css/jasperReportCommonScript.css"></link>
+	  <script src="/verve-lib/scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+	  <script src="/verve-lib/scripts/verve-script-jquery.js" type="text/javascript"></script>
+      <script src="/verve-lib/scripts/jasperReportCommonScript.js" type="text/javascript"></script>
+	  {xform-header}
+   </head>
+   <body class="pentaho">
+      <div name="dialog-form" title="Control Panel" style="width: 460px;height: 520px;">
+         <form name="parameter-form" id="parameter-form" method="GET">
+         <table class="tableForm">
+         <tbody>
+	         <tr>
+		         <th>Range from:</th>
+		         <td><div id="datemode" style="float: left;">
+		             <label style="margin-left: 0px;"></label> {p_start_date}
+		             <label style="margin-left: 0px;">To:</label> {p_end_date}
+		             </div>
+		             <div id="monthmode" style="display: none;float: left;">
+		             <label style="margin-left: 0px;"></label> {p_start_month}
+		             <label style="margin-left: 0px;">To:</label> {p_end_month}
+		             </div>
+		        </td>
+	         </tr>
+	         <tr>
+				 <th>ID Filter:</th>
+				 <td>
+					<input name="dimension_fillter" type="text" class="dimension"/>
+					<div name="dimension" class="dimension">
+					
+					</div>
+				 </td>
+			 </tr>
+			 <tr>
+				 <th>Event names:</th>
+				 <td>
+					<input name="dimension_fillter2" type="text" class="dimension"/>
+					<div name="dimension2" class="dimension">
+					
+					</div>
+				 </td>
+			 </tr> 
+         </tbody>
+         </table>		 
+		 <div id="hide_in_form" style="display:none">
+			{v_max_date}
+			{v_min_date} 
+			{solution}
+			{action}
+			{path}
+		 </div> 
+	    </form>
+      </div>    
+	<script> <![CDATA[		 
+			$(document).ready(function(){
+				initJasperPageTemplate({
+					controlPanle_width: 460,
+					//controlPanle_height: 530,
+					generateFormContent: generateFormContent,
+					formValidation:formValidation,
+					reportName:'Daily Event by DMA Summary w/0 hrs',
+					//miniMode: true,
+					iframeMode:true
+				});
+			});
+			
+			var generateFormContent=function(domContentForm,completedFn){
+				$('option[value=]').remove();
+				var firstRun=true;
+				var form=domContentForm.children('form');
+				var max_date=form.find('select[name=v_max_date] option:first-child').attr('value');
+				var min_date=form.find('select[name=v_min_date] option:first-child').attr('value');
+				var arrayDate=max_date.split('-');
+				var myDate=new Date(arrayDate[0],(arrayDate[1]/1)-1,arrayDate[2]/1);
+				var date = myDate;
+				date.setDate(date.getDate()-0);
+				var previous_date=parseDate(date);				
+				//Get date dom
+				var input_start_date=form.find('input[name=p_start_date]');
+				input_start_date.removeAttr('id');
+				//var new_ID=domContentForm.attr('name')+'_'+input_start_date.attr('id');
+				//input_start_date.attr('id',new_ID);
+				var input_end_date=form.find('input[name=p_end_date]');
+				input_end_date.removeAttr('id');
+				//var new_ID=domContentForm.attr('name')+'_'+input_end_date.attr('id');
+				//input_end_date.attr('id',new_ID);
+				
+				//create calendar
+				input_start_date.attr('value',previous_date);
+				input_start_date.datepicker({
+					defaultDate: previous_date,
+					dateFormat: 'yy-mm-dd',
+					regional: ["en-GB"],
+					maxDate: max_date,
+					minDate: min_date,
+					onSelect: function(dateText, inst) { 
+						input_end_date.datepicker( "option", "minDate", dateText );
+					}
+				});
+				//create calendar end date
+				input_end_date.attr('value',max_date);
+				input_end_date.datepicker({
+					defaultDate: max_date,
+					dateFormat: 'yy-mm-dd',
+					regional: ["en-GB"],
+					maxDate: max_date,
+					minDate: min_date,
+					onSelect: function(dateText, inst) { 
+						input_start_date.datepicker( "option", "maxDate", dateText );
+					}
+				});	
+				//
+				var loadFlightID=function(){
+					loadParam({
+						text:'Loading ID',
+						p_table:'evttracker.daily_event_dma',
+						p_value_field:'flight_id',
+						p_name_field:'flight_id',
+						p_condition:'is_active=true',
+						p_all_name:'',
+						p_all_value:'0', //default 0
+						p_prompt_stype:'Scrolling Check List', //pulldown or Scrolling Check List
+						p_param_name:'p_flight_id',
+						dom_content_result:$('div[name=dimension]'),
+						success: function(){
+							createFillter({
+								box_filter:$('input[name=dimension_fillter]'),
+								check_box_list:$('div[name=dimension]'),
+								fillter_by:'name',//option name,title,value
+								select_type:''//option check_all,single_mode
+							});	
+							if(firstRun==true){
+								loadEventName();
+							}
+							//add action when select ID
+							$('input[name=p_flight_id]').change(function(){
+								delay_timeout(1000,function(){
+									loadEventName();
+								});
+							})
+						}						
+					});
+				}	
+				var loadEventName=function(){	
+					var flightID=checkBoxSelected('p_flight_id');
+					var start_date=$('input[name=p_start_date]').attr('value');
+					var end_date=$('input[name=p_end_date]').attr('value');
+					var condition='';
+						condition='is_active=true';
+						condition+=' AND event_count>0';
+						condition+=' AND flight_id IN (select unnest(string_to_array(\''+flightID+'\',\'\,\')))';
+						condition+=' AND full_date BETWEEN \''+start_date+'\'::date AND \''+end_date+'\'::date';
+										
+					loadParam({
+						text:'Loading Events',
+						p_table:'evttracker.daily_event_dma',
+						p_value_field:'event_name',
+						p_name_field:'event_name',
+						p_condition:condition,
+						p_all_name:'All Event Names',
+						p_all_value:'All Event Names', //default 0
+						p_prompt_stype:'Scrolling Check List', //pulldown or Scrolling Check List
+						p_param_name:'p_event_name',
+						dom_content_result:$('div[name=dimension2]'),
+						success: function(){
+							createFillter({
+								box_filter:$('input[name=dimension_fillter2]'),
+								check_box_list:$('div[name=dimension2]'),
+								fillter_by:'name',//option name,title,value
+								select_type:'check_all'//option check_all,single_mode
+							});	
+							firstRun=false;	
+						}						
+					});					
+				}
+				loadFlightID();
+			}
+			
+			var formValidation=function(domContentForm,divResult){
+				var form=domContentForm.children('form');
+				var validate=true;
+				//check select flight
+				var dimesion=form.find('div[name=dimension] input:checked');
+				if(dimesion.length==0){
+					alertText('Please select Flight!');
+					return false;
+				}
+				//check select Event
+				var dimesion=form.find('div[name=dimension2] input:checked');
+				if(dimesion.length==0){
+					alertText('Please select Event!');
+					return false;
+				}
+				return true;
+			}
+	]]>
+	</script>
+   </body>
+     
+</html>

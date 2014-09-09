@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>get_control_on_publisher_daily_report</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>chinhnguyen</author>  
+    <description>get control from table adm.daily_agg_adm_data_feed</description>  
+    <help/>  
+    <result-type>report</result-type>  
+    <icon/> 
+  </documentation>
+
+  <inputs/>
+
+  <outputs> 
+    <mssg type="string"> 
+      <destinations> 
+        <response>Content</response> 
+      </destinations> 
+    </mssg> 
+  </outputs>
+
+  <resources/>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get list of publisher</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result_publishers"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[dw3]]></jndi>  
+        <live><![CDATA[false]]></live>  
+        <query><![CDATA[SELECT a.*
+FROM (
+SELECT 'All Publishers' as name, 0 as row_order
+UNION
+SELECT c.publisher_name as name , 1 as row_order
+FROM adm.daily_agg_network_performance c
+WHERE c.is_active=true GROUP by name
+) a
+ORDER BY row_order, name;]]></query>
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>JavaScript</action-type>
+      <action-inputs> 
+        <query_result_publishers type="result-set"/>
+      </action-inputs>
+      <action-outputs> 
+        <resultPublisher type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var resultPublisher;
+
+resultPublisher='<select id="p_Publisher" name="p_Publisher" size="1" title="" class="portlet-form-field">';
+
+for(var i=0;i<query_result_publishers.getRowCount();i++){
+	var name=query_result_publishers.getValueAt(i,0);
+	resultPublisher+='<option value="'+name+'">'+name+'</option>';
+};	
+resultPublisher+='</select>';]]></script>
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>TemplateComponent</component-name>
+      <action-type>Message Template</action-type>
+      <action-inputs> 
+        <resultPublisher type="string"/>
+      </action-inputs>
+      <action-outputs> 
+        <output-message type="string" mapping="mssg"/> 
+      </action-outputs>
+      <component-definition> 
+        <template><![CDATA[<table class="tableForm">
+         <tbody>
+				<tr>
+					 <th>Publishers:</th>
+					 <td>		        
+					 {resultPublisher}        
+					 </td>
+				 </tr>			
+				 
+				 <tr>
+					 <th>Properties:</th>
+					 <td>
+						<input id="dimesion_fillter" type="text" style="width: 300px;"/>
+						<div id="dimesion" style="width: 300px;border: 1px solid gray;height: 145px;overflow: auto">
+						loading...
+						</div>
+					 </td>
+				 </tr>
+			</tbody>
+		 </table>]]></template>
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>load list event name</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>chinhnguyen</author>  
+    <description>get control from table adm.daily_agg_adm_data_feed</description>  
+    <help/>  
+    <result-type>report</result-type>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <p_flight_id type="string"> 
+      <sources> 
+        <request>p_flight_id</request> 
+      </sources>  
+      <default-value><![CDATA[All Flight ID]]></default-value> 
+    </p_flight_id>  
+    <mssg type="string"> 
+      <sources> 
+        <request>mssg</request> 
+      </sources>  
+      <default-value/> 
+    </mssg>  
+    <p_startdate type="string"> 
+      <sources> 
+        <request>p_startdate</request> 
+      </sources>  
+      <default-value><![CDATA[2011-11-05]]></default-value> 
+    </p_startdate>  
+    <p_enddate type="string"> 
+      <sources> 
+        <request>p_enddate</request> 
+      </sources>  
+      <default-value><![CDATA[2011-11-10]]></default-value> 
+    </p_enddate> 
+  </inputs>
+
+  <outputs> 
+    <mssg type="string"> 
+      <destinations> 
+        <response>Content</response> 
+      </destinations> 
+    </mssg> 
+  </outputs>
+
+  <resources/>
+  
+  <actions> 
+    <actions> 
+      <condition><![CDATA[p_flight_id=='All Flight ID']]></condition>  
+      <action-definition> 
+        <component-name>TemplateComponent</component-name>
+        <action-type>Message Template</action-type>
+        <action-inputs> 
+          <p_enddate type="string"/>  
+          <p_startdate type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <output-message type="string" mapping="querry"/> 
+        </action-outputs>
+        <component-definition> 
+          <template><![CDATA[SELECT a.*
+FROM (
+	SELECT 'All Event Names' as name, 0 as row_order,0 as event_count
+	UNION
+SELECT b.event_name, 1 as row_order,sum(event_count) as event_count
+	FROM evttracker.daily_event_dma  b
+	WHERE b.is_active=true AND
+	full_date between trim(both ' ' from  ' {p_startdate}')::date and trim(both ' ' from  ' {p_enddate}')::date	
+ AND event_count>0
+GROUP BY b.event_name
+	) a
+ORDER BY row_order, name;]]></template> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Get list of even name</action-type>
+        <action-inputs> 
+          <query type="string" mapping="querry"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result_event_name"/> 
+        </action-outputs>
+        <component-definition> 
+          <jndi><![CDATA[dw3]]></jndi>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_flight_id!='All Flight ID']]></condition>  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>Get ID</action-type>
+        <action-inputs> 
+          <p_flight_id type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <list_id type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var list_id;
+list_id='';
+//convert measures
+if(p_flight_id!= ''){
+	if(p_flight_id instanceof Array){
+		for(var i=0;i<p_flight_id.length;i++){
+			if(i>0){
+			list_id+=',';
+			};
+			list_id+='\''+p_flight_id[i]+'\'';
+		};
+	}else{
+		list_id+='\''+p_flight_id+'\'';
+	};
+}]]></script> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>TemplateComponent</component-name>
+        <action-type>Message Template</action-type>
+        <action-inputs> 
+          <list_id type="string"/>  
+          <p_startdate type="string"/>  
+          <p_enddate type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <output-message type="string" mapping="query"/> 
+        </action-outputs>
+        <component-definition> 
+          <template><![CDATA[SELECT a.*
+FROM (
+	SELECT 'All Event Names' as name, 0 as row_order,0 as event_count
+	UNION
+SELECT b.event_name, 1 as row_order,sum(event_count) as event_count
+	FROM evttracker.daily_event_dma  b
+	WHERE b.is_active=true AND b.flight_id IN ( {list_id} ) AND
+	full_date between trim(both ' ' from  ' {p_startdate}')::date and trim(both ' ' from  ' {p_enddate}')::date	
+ AND event_count>0
+GROUP BY b.event_name
+	) a
+ORDER BY row_order, name;]]></template> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Get list of even name</action-type>
+        <action-inputs> 
+          <query type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result_event_name"/> 
+        </action-outputs>
+        <component-definition> 
+          <jndi><![CDATA[dw3]]></jndi>  
+          <live><![CDATA[false]]></live> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>JavaScript</action-type>
+      <action-inputs> 
+        <query_result_event_name type="result-set"/> 
+      </action-inputs>
+      <action-outputs> 
+        <resultEventName type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var resultEventName;
+
+resultEventName='<table><tr></tr>';
+
+for(var i=0;i<query_result_event_name.getRowCount();i++){
+	var name=query_result_event_name.getValueAt(i,0);
+	if(i==0){
+	resultEventName+='<tr><td><input id="event_'+name+'" class="portlet-form-field" type="checkbox" name="p_event_name" value="'+name+'" title=""><span id="device-label" class="portlet-form-field-label">'+name+'</span></td></tr>';
+	}else{
+	resultEventName+='<tr><td><input id="event_'+name+'" class="portlet-form-field" type="checkbox" name="p_event_name" value="'+name+'" title=""><span id="device-label" class="portlet-form-field-label">'+name+'</span></td></tr>';
+	};
+	
+};
+resultEventName+='</table>';]]></script> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>TemplateComponent</component-name>
+      <action-type>Message Template</action-type>
+      <action-inputs> 
+        <resultEventName type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <output-message type="string" mapping="mssg"/> 
+      </action-outputs>
+      <component-definition> 
+        <template><![CDATA[{resultEventName}]]></template> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

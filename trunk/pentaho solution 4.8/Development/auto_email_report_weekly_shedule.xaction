@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Auto Email Report Weekly</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>chinhnguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <v_loop type="integer"> 
+      <sources> 
+        <request>v_loop</request> 
+      </sources>  
+      <default-value><![CDATA[0]]></default-value> 
+    </v_loop>  
+    <v_test type="string"> 
+      <sources> 
+        <request>v_test</request> 
+      </sources>  
+      <default-value/> 
+    </v_test>  
+    <p_mailTo type="string"> 
+      <sources> 
+        <request>p_mailTo</request> 
+      </sources>  
+      <default-value><![CDATA[chinh.nguyen@ecepvn.org]]></default-value> 
+    </p_mailTo>  
+    <p_emailExportFileType type="string"> 
+      <sources> 
+        <request>p_emailExportFileType</request> 
+      </sources>  
+      <default-value><![CDATA[pdf]]></default-value> 
+    </p_emailExportFileType>  
+    <v_jndi_name type="string"> 
+      <sources> 
+        <request>v_jndi_name</request> 
+      </sources>  
+      <default-value><![CDATA[verveReportConnection]]></default-value> 
+    </v_jndi_name> 
+  </inputs>
+
+  <outputs> 
+    <v_test type="string"/> 
+  </outputs>
+
+  <resources/>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Relational Connection</action-type>
+      <action-inputs> 
+        <jndi type="string" mapping="v_jndi_name"/> 
+      </action-inputs>
+      <action-outputs> 
+        <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
+      </action-outputs>
+      <component-definition/> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get list of schedules</action-type>
+      <action-inputs> 
+        <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
+      </action-inputs>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result_schedule_list"/> 
+      </action-outputs>
+      <component-definition> 
+        <query><![CDATA[SELECT 
+schedule_id, email_to, report_file_type, report_name, 
+solution, path, xaction_file, parameter_string
+,report_agg_table,next_fire_time
+FROM 
+control.emaill_reports_schedule
+WHERE 
+next_fire_time::date<=now()::date
+AND schedule_type='weekly'
+AND is_active=true
+ORDER BY schedule_id]]></query>  
+        <live><![CDATA[false]]></live> 
+      </component-definition> 
+    </action-definition>
+  
+    <actions loop-on="query_result_schedule_list"> 
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>Get schedule item</action-type>
+        <action-inputs> 
+          <query_result_schedule_list type="result-set"/>  
+          <v_loop type="integer"/> 
+        </action-inputs>
+        <action-outputs> 
+          <schedule_id type="integer"/>  
+          <email_to type="string"/>  
+          <report_file_type type="string"/>  
+          <report_name type="string"/>  
+          <solution type="string"/>  
+          <path type="string"/>  
+          <xaction_file type="string"/>  
+          <parameter_string type="string"/>  
+          <report_agg_table type="string"/>  
+          <next_fire_time type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var schedule_id=query_result_schedule_list.getValueAt(v_loop,0);
+var email_to=query_result_schedule_list.getValueAt(v_loop,1);
+var report_file_type=query_result_schedule_list.getValueAt(v_loop,2);
+var report_name=query_result_schedule_list.getValueAt(v_loop,3);
+var solution=query_result_schedule_list.getValueAt(v_loop,4);
+var path=query_result_schedule_list.getValueAt(v_loop,5);
+var xaction_file=query_result_schedule_list.getValueAt(v_loop,6);
+var parameter_string=query_result_schedule_list.getValueAt(v_loop,7);
+var report_agg_table=query_result_schedule_list.getValueAt(v_loop,8);
+var next_fire_time=query_result_schedule_list.getValueAt(v_loop,9);]]></script> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Check vailable data</action-type>
+        <action-inputs> 
+          <prepared_component type="sql-connection" mapping="shared_sql_connection"/>  
+          <next_fire_time type="string"/>  
+          <report_agg_table type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result_check_agg_table"/> 
+        </action-outputs>
+        <component-definition> 
+          <live><![CDATA[false]]></live>  
+          <query><![CDATA[SELECT
+ (CASE 
+	WHEN '{report_agg_table}'!='refer.date_dim' AND max(end_week)::date >= now()::date-7 THEN 'vailable' 
+	WHEN '{report_agg_table}'='refer.date_dim' AND now()::date>= '{next_fire_time}'::date AND EXTRACT(HOUR FROM TIMESTAMP '{next_fire_time}') <= EXTRACT(HOUR FROM now()::TIMESTAMP) THEN 'vailable' 
+	ELSE 'non-vailable' END),
+	max(end_week)::date,
+	now() as now
+FROM {report_agg_table}]]></query> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>Get vailable status</action-type>
+        <action-inputs> 
+          <query_result_check_agg_table type="result-set"/>  
+          <v_loop type="integer"/>  
+          <v_test type="string"/>  
+          <schedule_id type="integer"/>  
+          <email_to type="string"/>  
+          <report_agg_table type="string"/>  
+          <report_name type="string"/>  
+          <next_fire_time type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <data_vailable type="string"/>  
+          <v_test type="string"/>  
+          <v_loop type="integer"/>  
+          <report_date type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var data_vailable='';
+var report_date='';
+data_vailable=query_result_check_agg_table.getValueAt(0,0);
+report_date=query_result_check_agg_table.getValueAt(0,1);
+if(v_loop>0){
+	v_test+='<br/>'
+}
+v_test+=data_vailable+' | '+schedule_id+' | '+report_name+' | '+report_agg_table+' | '+next_fire_time;
+v_loop++]]></script> 
+        </component-definition> 
+      </action-definition>
+  
+      <actions> 
+        <condition><![CDATA[data_vailable=='vailable']]></condition>  
+        <action-definition> 
+          <component-name>JavascriptRule</component-name>
+          <action-type>Process Job input</action-type>
+          <action-inputs> 
+            <report_name type="string"/>  
+            <schedule_id type="integer"/>  
+            <p_mailTo type="string"/>  
+            <p_emailExportFileType type="string"/>  
+            <email_to type="string"/>  
+            <report_file_type type="string"/>  
+            <report_date type="string"/> 
+          </action-inputs>
+          <action-outputs> 
+            <job_name type="string"/>  
+            <p_mailTo type="string"/>  
+            <p_emailExportFileType type="string"/>  
+            <p_emailMode type="string"/>  
+            <trigger_name type="string"/>  
+            <p_mailTitle type="string"/>  
+            <p_mailTextMessage type="string"/> 
+          </action-outputs>
+          <component-definition> 
+            <script><![CDATA[var job_name='';
+var p_emailMode='true';
+var trigger_name='trigger-'+report_name+'-'+schedule_id;
+var p_mailTitle=report_name;
+var p_mailTextMessage='Attached is the'+report_name;
+job_name=report_name+'-'+schedule_id;
+p_mailTo=email_to;
+p_emailExportFileType=report_file_type;]]></script> 
+          </component-definition> 
+        </action-definition>
+  
+        <action-definition> 
+          <component-name>JobSchedulerComponent</component-name>
+          <action-type>Add Job</action-type>
+          <action-inputs> 
+            <jobName type="string" mapping="job_name"/>  
+            <solution type="string"/>  
+            <path type="string"/>  
+            <action type="string" mapping="xaction_file"/>  
+            <parameter_string type="string"/>  
+            <p_emailMode type="string"/>  
+            <p_mailTo type="string"/>  
+            <p_emailExportFileType type="string"/>  
+            <triggerName type="string" mapping="job_name"/>  
+            <p_mailTitle type="string"/>  
+            <p_mailTextMessage type="string"/> 
+          </action-inputs>
+          <component-definition> 
+            <jobAction>startJob</jobAction>  
+            <repeatCount><![CDATA[0]]></repeatCount>  
+            <triggerType><![CDATA[simple]]></triggerType>  
+            <repeatInterval><![CDATA[60]]></repeatInterval> 
+          </component-definition> 
+        </action-definition>
+  
+        <action-definition> 
+          <component-name>SQLExecute</component-name>
+          <action-type>Update schedule status</action-type>
+          <action-inputs> 
+            <schedule_id type="string"/>  
+            <jndi type="string" mapping="v_jndi_name"/> 
+          </action-inputs>
+          <component-definition> 
+            <query><![CDATA[UPDATE control.emaill_reports_schedule
+SET last_fire_time=now(),next_fire_time=now() + interval '7 day'
+WHERE schedule_id={schedule_id};]]></query>  
+            <force_single_statement><![CDATA[true]]></force_single_statement> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+ 
+    </actions>
+ 
+  </actions> 
+</action-sequence>

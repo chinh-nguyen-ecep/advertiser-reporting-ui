@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Get_control_on_site_report</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author/>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs/>
+
+  <outputs> 
+    <webpage type="string"> 
+      <destinations> 
+        <response>Content</response> 
+      </destinations> 
+    </webpage> 
+  </outputs>
+
+  <resources/>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get list of site name</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[dw3]]></jndi>  
+        <query><![CDATA[SELECT a.*
+FROM (
+SELECT 'All Sites' as site_name, 0 as row_order
+UNION
+SELECT site_name, 1 as row_order
+FROM dbclk.daily_agg_site_day
+WHERE is_active=true GROUP by site_name
+) a
+ORDER BY row_order, site_name;]]></query>  
+        <live><![CDATA[false]]></live> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>JavaScript</action-type>
+      <action-inputs> 
+        <query_result type="result-set"/> 
+      </action-inputs>
+      <action-outputs> 
+        <result type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var result;
+result='<table><tr></tr>';
+
+for(var i=0;i<query_result.getRowCount();i++){
+	var name=query_result.getValueAt(i,0);
+	if(i==0){
+	result+='<tr><td><input id="site_'+name+'" class="portlet-form-field" type="checkbox" name="p_Site" value="'+name+'" title="" checked><span id="device-label" class="portlet-form-field-label">'+name+'</span></td></tr>';
+	}else{
+	result+='<tr><td><input id="site_'+name+'" class="portlet-form-field" type="checkbox" name="p_Site" value="'+name+'" title=""><span id="device-label" class="portlet-form-field-label">'+name+'</span></td></tr>';
+	}
+	
+}
+
+result+='</table>';]]></script> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>TemplateComponent</component-name>
+      <action-type>Message Template</action-type>
+      <action-inputs> 
+        <result type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <output-message type="string" mapping="webpage"/> 
+      </action-outputs>
+      <component-definition> 
+        <template><![CDATA[<table class="tableForm">
+         <tbody>
+				<tr>
+					 <th>Sites:</th>
+					 <td>
+						<input id="dimesion_fillter" type="text" style="width: 302px;"/>
+						<div id="dimesion" style="width: 300px;border: 1px solid gray;height: 145px;overflow: auto;">
+						{result}
+						</div>
+					 </td>
+				 </tr>
+			</tbody>
+		 </table>]]></template> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>
