@@ -105,7 +105,7 @@ sub transferFinalData{
 		my $comand=" cd /opt/temp/autoscripts/transformer/;perl main.pl table $host $transferToHost adsops.weekly_agg_publisher_performance_remnant";
 		system($comand);
 		# weekly publisher performance vlmo report 
-		my $comand=" cd /opt/temp/autoscripts/transformer/;perl main.pl table $host $transferToHost adsops.fn_build_daily_agg_publisher_performance_vlmo";
+		my $comand=" cd /opt/temp/autoscripts/transformer/;perl main.pl table $host $transferToHost adsops.weekly_agg_publisher_performance_vlmo_engagement";
 		system($comand);
 		my $comand=" cd /opt/temp/autoscripts/transformer/;perl main.pl table $host $transferToHost adsops.weekly_agg_publisher_performance_vlmo_exclusion";
 		system($comand);
