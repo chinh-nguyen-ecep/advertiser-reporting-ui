@@ -163,7 +163,7 @@ ORDER BY  publisher_name, property_name, partner_keyword, channel_name, ad_netwo
 		<band/>
 	</background>
 	<title>
-		<band height="170">
+		<band height="168">
 			<staticText>
 				<reportElement x="0" y="0" width="8380" height="20"/>
 				<textElement>
@@ -172,19 +172,19 @@ ORDER BY  publisher_name, property_name, partner_keyword, channel_name, ad_netwo
 				<text><![CDATA[Notes:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="20" width="8380" height="150"/>
+				<reportElement x="0" y="20" width="8380" height="148"/>
 				<textElement/>
-				<text><![CDATA[- Requests is all incoming requests appropriate to the group
-- Deliveries is all requests with disposition = 'Y' appropriate to the group
+				<text><![CDATA[- Requests are all incoming requests appropriate to the group
+- Deliveries are all requests with disposition = 'Y' appropriate to the group
 - Impressions: Using e=&imp for the count
 - Clicks: Using e=&click for the count
-- cta_any: Sum of all event start with 'cta_' defined in this report
-- cta_any per 1000_national engagement impressions: cta_any/Impressions/1000
+- cta_any: Sum of all events start with 'cta_' defined in this report
+- cta_any per 1000_national engagement impressions: cta_any/(Impressions/1000)
 - cta_any per national engagement clicks: cta_any/Clicks
-- Exclude all flights data points that have cta_any = 0 for the last 365 days
-- Exclude all flights data points that have sum impressions <10,000 for the last 365 days
-- Exclude all interstitial flights: interstitial flights have Clicks = cta_any (group at flight level for the last 365 days)
-- National engagement flight is defined: ADM flight.network_id = 2, cta_any > 0  (group at flight level for the last 365 days)]]></text>
+- Exclude all flights data points where flights have cta_any = 0 for the last 365 days
+- Exclude all flights data points where flights have sum impressions <10,000 for the last 365 days
+- Exclude all interstitial flights: interstitial flights have Clicks > cta_lp (group at flight level for the last 365 days)
+- National engagement flight is defined: ADM flight.network_id = 2, cta_any > 0 (group at flight level for the last 365 days)]]></text>
 			</staticText>
 		</band>
 	</title>

@@ -111,18 +111,18 @@
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </pageTemplate1>  
-    <report-definition>
-      <solution-file>
-        <location>weekly_publisher_performance_v2/weekly_vlmo_engagement.jasper</location>
-        <mime-type>text/plain</mime-type>
-      </solution-file>
-    </report-definition>
-    <report-definition4>
-      <solution-file>
-        <location>weekly_publisher_performance_v2/weekly_vlmo_non_engagement.jasper</location>
-        <mime-type>text/plain</mime-type>
-      </solution-file>
-    </report-definition4>
+    <report-definition> 
+      <solution-file> 
+        <location>weekly_publisher_performance_v2/weekly_vlmo_engagement.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition>  
+    <report-definition4> 
+      <solution-file> 
+        <location>weekly_publisher_performance_v2/weekly_vlmo_non_engagement.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition4> 
   </resources>
   
   <actions> 
@@ -242,79 +242,98 @@ GROUP BY year_week,start_date_sk,end_date_sk,b.full_date ORDER BY start_date_sk 
  
       </actions>
   
-      <actions>
-        <condition><![CDATA[p_report_type=='4']]></condition>
-        <action-definition>
+      <actions> 
+        <condition><![CDATA[p_report_type=='4']]></condition>  
+        <action-definition> 
           <component-name>JasperReportsComponent</component-name>
           <action-type>Jasper</action-type>
-          <action-inputs>
-            <jndi type="string" mapping="connectionName"/>
-            <output-type type="string" mapping="p_output"/>
-            <p_start_date_sk type="string"/>
-            <p_publisher_ids type="string"/>
-            <p_property_ids type="string"/>
-            <p_channel_ids type="string"/>
+          <action-inputs> 
+            <jndi type="string" mapping="connectionName"/>  
+            <output-type type="string" mapping="p_output"/>  
+            <p_start_date_sk type="string"/>  
+            <p_publisher_ids type="string"/>  
+            <p_property_ids type="string"/>  
+            <p_channel_ids type="string"/> 
           </action-inputs>
-          <action-resources>
-            <report-definition type="resource"/>
+          <action-resources> 
+            <report-definition type="resource"/> 
           </action-resources>
-          <component-definition/>
+          <component-definition/> 
         </action-definition>
-
+ 
       </actions>
-
-      <actions>
-        <condition><![CDATA[p_report_type=='5']]></condition>
-        <action-definition>
+  
+      <actions> 
+        <condition><![CDATA[p_report_type=='5']]></condition>  
+        <action-definition> 
           <component-name>JasperReportsComponent</component-name>
           <action-type>Jasper</action-type>
-          <action-inputs>
-            <jndi type="string" mapping="connectionName"/>
-            <p_publisher_ids type="string"/>
-            <p_property_ids type="string"/>
-            <p_channel_ids type="string"/>
-            <p_start_date_sk type="string"/>
-            <output-type type="string" mapping="p_output"/>
+          <action-inputs> 
+            <jndi type="string" mapping="connectionName"/>  
+            <p_publisher_ids type="string"/>  
+            <p_property_ids type="string"/>  
+            <p_channel_ids type="string"/>  
+            <p_start_date_sk type="string"/>  
+            <output-type type="string" mapping="p_output"/> 
           </action-inputs>
-          <action-resources>
-            <report-definition mapping="report-definition4"/>
+          <action-resources> 
+            <report-definition mapping="report-definition4"/> 
           </action-resources>
-          <component-definition/>
+          <component-definition/> 
         </action-definition>
-
+ 
       </actions>
-
+ 
     </actions>
   
     <actions> 
       <condition><![CDATA[p_emailMode=='true']]></condition>  
+      <action-definition>
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Get subcription id</action-type>
+        <action-inputs>
+          <jndi type="string" mapping="connectionName"/>
+        </action-inputs>
+        <action-outputs>
+          <query-result type="result-set" mapping="query_result"/>
+        </action-outputs>
+        <component-definition>
+          <query><![CDATA[SELECT now()::date as report_date,subscription_key FROM control.spctl_pub_customer_subscription WHERE subscription_name LIKE 'Weekly Publisher Performance Report v2']]></query>
+          <live><![CDATA[true]]></live>
+        </component-definition>
+      </action-definition>
+
       <action-definition> 
         <component-name>JavascriptRule</component-name>
-        <action-type>JavaScript</action-type>
+        <action-type>Process input</action-type>
         <action-inputs> 
-          <query_result_list_weekls type="result-set"/> 
+          <query_result_list_weekls type="result-set"/>  
+          <query_result type="result-set"/>
         </action-inputs>
         <action-outputs> 
-          <p_full_date type="string"/> 
+          <p_full_date type="string"/>  
+          <sub_key type="string"/>
         </action-outputs>
         <component-definition> 
           <script><![CDATA[var p_full_date;
-p_full_date=query_result_list_weekls.getValueAt(0,3);]]></script> 
+p_full_date=query_result_list_weekls.getValueAt(0,3);
+var sub_key=query_result.getValueAt(0,1);]]></script> 
         </component-definition> 
       </action-definition>
   
       <action-definition> 
         <component-name>SQLLookupRule</component-name>
-        <action-type>Relational</action-type>
+        <action-type>Insert subscription process</action-type>
         <action-inputs> 
           <jndi type="string" mapping="connectionName"/>  
-          <p_full_date type="string"/> 
+          <p_full_date type="string"/>  
+          <sub_key type="string"/>
         </action-inputs>
         <action-outputs> 
           <query-result type="result-set" mapping="query_result"/> 
         </action-outputs>
         <component-definition> 
-          <query><![CDATA[SELECT * FROM control.fn_spctl_insert_subscription_to_process(31,'date={p_full_date}',true);]]></query>  
+          <query><![CDATA[SELECT * FROM control.fn_spctl_insert_subscription_to_process({sub_key},'date={p_full_date}',true);]]></query>  
           <live><![CDATA[true]]></live> 
         </component-definition> 
       </action-definition>
