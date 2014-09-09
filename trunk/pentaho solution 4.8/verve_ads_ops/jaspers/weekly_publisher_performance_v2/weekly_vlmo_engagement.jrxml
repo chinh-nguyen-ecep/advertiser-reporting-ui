@@ -58,14 +58,14 @@
      , SUM(cta_any_365) as "365days_cta_any"
      , SUM(cta_any_30) as "30days_cta_any"
      , SUM(cta_any_07) as "7days_cta_any"
-     , (CASE WHEN SUM(imp_cnt_90) > 0 THEN (SUM(cta_any_90) / (SUM(imp_cnt_90)::FLOAT / 1000)) ELSE 0 END) as "90days_cta_any per 1000_national engagement impressions"
-     , (CASE WHEN SUM(imp_cnt_365) > 0 THEN (SUM(cta_any_365) / (SUM(imp_cnt_365)::FLOAT / 1000)) ELSE 0 END) as "365days_cta_any per 1000_national engagement impressions"
-     , (CASE WHEN SUM(imp_cnt_30) > 0 THEN (SUM(cta_any_30) / (SUM(imp_cnt_30)::FLOAT / 1000)) ELSE 0 END) as "30days_cta_any per 1000_national engagement impressions"
-     , (CASE WHEN SUM(imp_cnt_07) > 0 THEN (SUM(cta_any_07) / (SUM(imp_cnt_07)::FLOAT / 1000)) ELSE 0 END) as "7days_cta_any per 1000_national engagement impressions"
-     , (CASE WHEN SUM(click_cnt_90) > 0 THEN SUM(cta_any_90) / SUM(click_cnt_90) ELSE 0 END) as "90days_cta_any per national engagement clicks"
-     , (CASE WHEN SUM(click_cnt_365) > 0 THEN SUM(cta_any_365) / SUM(click_cnt_365) ELSE 0 END) as "365days_cta_any per national engagement clicks"
-     , (CASE WHEN SUM(click_cnt_30) > 0 THEN SUM(cta_any_30) / SUM(click_cnt_30) ELSE 0 END) as "30days_cta_any per national engagement clicks"
-     , (CASE WHEN SUM(click_cnt_07) > 0 THEN SUM(cta_any_07) / SUM(click_cnt_07) ELSE 0 END) as "7days_cta_any per national engagement clicks"
+     , (CASE WHEN SUM(imp_cnt_90) > 0 THEN (SUM(cta_any_90) / (SUM(imp_cnt_90)::FLOAT / 1000)) ELSE 0 END) as "90days_cta_any per 1000_VLMO engagement impressions"
+     , (CASE WHEN SUM(imp_cnt_365) > 0 THEN (SUM(cta_any_365) / (SUM(imp_cnt_365)::FLOAT / 1000)) ELSE 0 END) as "365days_cta_any per 1000_VLMO engagement impressions"
+     , (CASE WHEN SUM(imp_cnt_30) > 0 THEN (SUM(cta_any_30) / (SUM(imp_cnt_30)::FLOAT / 1000)) ELSE 0 END) as "30days_cta_any per 1000_VLMO engagement impressions"
+     , (CASE WHEN SUM(imp_cnt_07) > 0 THEN (SUM(cta_any_07) / (SUM(imp_cnt_07)::FLOAT / 1000)) ELSE 0 END) as "7days_cta_any per 1000_VLMO engagement impressions"
+     , (CASE WHEN SUM(click_cnt_90) > 0 THEN SUM(cta_any_90) / SUM(click_cnt_90) ELSE 0 END) as "90days_cta_any per VLMO engagement clicks"
+     , (CASE WHEN SUM(click_cnt_365) > 0 THEN SUM(cta_any_365) / SUM(click_cnt_365) ELSE 0 END) as "365days_cta_any per VLMO engagement clicks"
+     , (CASE WHEN SUM(click_cnt_30) > 0 THEN SUM(cta_any_30) / SUM(click_cnt_30) ELSE 0 END) as "30days_cta_any per VLMO engagement clicks"
+     , (CASE WHEN SUM(click_cnt_07) > 0 THEN SUM(cta_any_07) / SUM(click_cnt_07) ELSE 0 END) as "7days_cta_any per VLMO engagement clicks"
      , SUM(e_refresh) as "refresh"
      , SUM(e_cta_tap_refresh) as "cta_tap_refresh"
      , SUM(e_cta_map) as "cta_map"
@@ -129,14 +129,14 @@ ORDER BY  publisher_name, property_name, partner_keyword, channel_name, ad_netwo
 	<field name="365days_cta_any" class="java.math.BigDecimal"/>
 	<field name="30days_cta_any" class="java.math.BigDecimal"/>
 	<field name="7days_cta_any" class="java.math.BigDecimal"/>
-	<field name="90days_cta_any per 1000_national engagement impressions" class="java.lang.Double"/>
-	<field name="365days_cta_any per 1000_national engagement impressions" class="java.lang.Double"/>
-	<field name="30days_cta_any per 1000_national engagement impressions" class="java.lang.Double"/>
-	<field name="7days_cta_any per 1000_national engagement impressions" class="java.lang.Double"/>
-	<field name="90days_cta_any per national engagement clicks" class="java.math.BigDecimal"/>
-	<field name="365days_cta_any per national engagement clicks" class="java.math.BigDecimal"/>
-	<field name="30days_cta_any per national engagement clicks" class="java.math.BigDecimal"/>
-	<field name="7days_cta_any per national engagement clicks" class="java.math.BigDecimal"/>
+	<field name="90days_cta_any per 1000_VLMO engagement impressions" class="java.lang.Double"/>
+	<field name="365days_cta_any per 1000_VLMO engagement impressions" class="java.lang.Double"/>
+	<field name="30days_cta_any per 1000_VLMO engagement impressions" class="java.lang.Double"/>
+	<field name="7days_cta_any per 1000_VLMO engagement impressions" class="java.lang.Double"/>
+	<field name="90days_cta_any per VLMO engagement clicks" class="java.math.BigDecimal"/>
+	<field name="365days_cta_any per VLMO engagement clicks" class="java.math.BigDecimal"/>
+	<field name="30days_cta_any per VLMO engagement clicks" class="java.math.BigDecimal"/>
+	<field name="7days_cta_any per VLMO engagement clicks" class="java.math.BigDecimal"/>
 	<field name="refresh" class="java.math.BigDecimal"/>
 	<field name="cta_tap_refresh" class="java.math.BigDecimal"/>
 	<field name="cta_map" class="java.math.BigDecimal"/>
@@ -163,7 +163,7 @@ ORDER BY  publisher_name, property_name, partner_keyword, channel_name, ad_netwo
 		<band/>
 	</background>
 	<title>
-		<band height="140">
+		<band height="159">
 			<staticText>
 				<reportElement x="0" y="0" width="8480" height="20"/>
 				<textElement>
@@ -172,17 +172,18 @@ ORDER BY  publisher_name, property_name, partner_keyword, channel_name, ad_netwo
 				<text><![CDATA[Notes:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="20" width="8480" height="120"/>
+				<reportElement x="0" y="20" width="8480" height="139"/>
 				<textElement/>
-				<text><![CDATA[- Requests is all incoming requests appropriate to the group
-- Deliveries is all requests with disposition = 'Y' appropriate to the group
+				<text><![CDATA[- Requests are all incoming requests appropriate to the group
+- Deliveries are all requests with disposition = 'Y' appropriate to the group
 - Impressions: Using e=&imp for the count
 - Clicks: Using e=&click for the count
-- cta_any: Sum of all event start with 'cta_' defined in this report
-- cta_any per 1000_national engagement impressions: cta_any/Impressions/1000
-- cta_any per national engagement clicks: cta_any/Clicks
-- Exclude all flights data points that have cta_any = 0 for the last 365 days
-- National engagement flight is defined:  cta_any > 0  (group at flight/offer level for the last 365days)]]></text>
+- cta_any: Sum of all events start with 'cta_' defined in this report
+- cta_any per 1000_VLMO engagement impressions: cta_any/(Impressions/1000)
+- cta_any per VLMO engagement clicks: cta_any/Clicks
+- Exclude all flights data points where flights have cta_any = 0 for the last 365 days
+- VLMO engagement flight is defined: cta_any > 0 (group at flight/offer level for the last 365days)
+- Using ad_network_id = 44 for VLMO data]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -524,7 +525,7 @@ ORDER BY  publisher_name, property_name, partner_keyword, channel_name, ad_netwo
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[90days_cta_any per 1000_national engagement impressions]]></text>
+				<text><![CDATA[90days_cta_any per 1000_VLMO engagement impressions]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="4580" y="0" width="330" height="20"/>
@@ -537,7 +538,7 @@ ORDER BY  publisher_name, property_name, partner_keyword, channel_name, ad_netwo
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[30days_cta_any per 1000_national engagement impressions]]></text>
+				<text><![CDATA[30days_cta_any per 1000_VLMO engagement impressions]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="5500" y="0" width="260" height="20"/>
@@ -550,7 +551,7 @@ ORDER BY  publisher_name, property_name, partner_keyword, channel_name, ad_netwo
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[90days_cta_any per national engagement clicks]]></text>
+				<text><![CDATA[90days_cta_any per VLMO engagement clicks]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="5760" y="0" width="260" height="20"/>
@@ -563,7 +564,7 @@ ORDER BY  publisher_name, property_name, partner_keyword, channel_name, ad_netwo
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[30days_cta_any per national engagement clicks]]></text>
+				<text><![CDATA[30days_cta_any per VLMO engagement clicks]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="6020" y="0" width="260" height="20"/>
@@ -576,7 +577,7 @@ ORDER BY  publisher_name, property_name, partner_keyword, channel_name, ad_netwo
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[7days_cta_any per national engagement clicks]]></text>
+				<text><![CDATA[7days_cta_any per VLMO engagement clicks]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="6280" y="0" width="100" height="20"/>
@@ -901,7 +902,7 @@ ORDER BY  publisher_name, property_name, partner_keyword, channel_name, ad_netwo
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[365days_cta_any per 1000_national engagement impressions]]></text>
+				<text><![CDATA[365days_cta_any per 1000_VLMO engagement impressions]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="5240" y="0" width="260" height="20"/>
@@ -914,7 +915,7 @@ ORDER BY  publisher_name, property_name, partner_keyword, channel_name, ad_netwo
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[365days_cta_any per national engagement clicks]]></text>
+				<text><![CDATA[365days_cta_any per VLMO engagement clicks]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="8380" y="0" width="100" height="20"/>
@@ -940,7 +941,7 @@ ORDER BY  publisher_name, property_name, partner_keyword, channel_name, ad_netwo
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[7days_cta_any per 1000_national engagement impressions]]></text>
+				<text><![CDATA[7days_cta_any per 1000_VLMO engagement impressions]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="1640" y="0" width="120" height="20"/>
@@ -1243,7 +1244,7 @@ ORDER BY  publisher_name, property_name, partner_keyword, channel_name, ad_netwo
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{90days_cta_any per 1000_national engagement impressions}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{90days_cta_any per 1000_VLMO engagement impressions}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="4580" y="0" width="330" height="20"/>
@@ -1254,7 +1255,7 @@ ORDER BY  publisher_name, property_name, partner_keyword, channel_name, ad_netwo
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{30days_cta_any per 1000_national engagement impressions}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{30days_cta_any per 1000_VLMO engagement impressions}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="5500" y="0" width="260" height="20"/>
@@ -1265,7 +1266,7 @@ ORDER BY  publisher_name, property_name, partner_keyword, channel_name, ad_netwo
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{90days_cta_any per national engagement clicks}]]></textFieldExpression>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{90days_cta_any per VLMO engagement clicks}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="5760" y="0" width="260" height="20"/>
@@ -1276,7 +1277,7 @@ ORDER BY  publisher_name, property_name, partner_keyword, channel_name, ad_netwo
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{30days_cta_any per national engagement clicks}]]></textFieldExpression>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{30days_cta_any per VLMO engagement clicks}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="6020" y="0" width="260" height="20"/>
@@ -1287,7 +1288,7 @@ ORDER BY  publisher_name, property_name, partner_keyword, channel_name, ad_netwo
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{7days_cta_any per national engagement clicks}]]></textFieldExpression>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{7days_cta_any per VLMO engagement clicks}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
 				<reportElement x="6280" y="0" width="100" height="20"/>
@@ -1562,7 +1563,7 @@ ORDER BY  publisher_name, property_name, partner_keyword, channel_name, ad_netwo
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{365days_cta_any per 1000_national engagement impressions}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{365days_cta_any per 1000_VLMO engagement impressions}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="5240" y="0" width="260" height="20"/>
@@ -1573,7 +1574,7 @@ ORDER BY  publisher_name, property_name, partner_keyword, channel_name, ad_netwo
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{365days_cta_any per national engagement clicks}]]></textFieldExpression>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{365days_cta_any per VLMO engagement clicks}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
 				<reportElement x="8380" y="0" width="100" height="20"/>
@@ -1595,7 +1596,7 @@ ORDER BY  publisher_name, property_name, partner_keyword, channel_name, ad_netwo
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{7days_cta_any per 1000_national engagement impressions}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{7days_cta_any per 1000_VLMO engagement impressions}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
 				<reportElement x="1640" y="0" width="120" height="20"/>
