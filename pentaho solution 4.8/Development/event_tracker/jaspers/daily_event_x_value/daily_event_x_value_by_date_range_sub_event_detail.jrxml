@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_event_stats_by_date_range_sub_event_detail" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="p_flight_id" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_start_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("9999-12-31")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_end_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("9999-12-31")]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT *
+FROM (
+SELECT	full_date,
+	hour24_of_day,
+	day_of_week,
+	x_value,
+	adimp_count,
+	expandimp_count,
+	adimp2_count,
+	ctaclick_count
+FROM evttracker.daily_event_x_value_report
+WHERE is_active=true
+  AND flight_id=$P{p_flight_id}
+  AND full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
+UNION ALL
+SELECT	full_date,
+	hour24_of_day,
+	day_of_week,
+	x_value,
+	adimp_count,
+	expandimp_count,
+	adimp2_count,
+	ctaclick_count
+FROM evttracker.daily_event_x_value_report
+WHERE $P{p_flight_id} = 'All Flight ID'
+  AND is_active=true
+  AND full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
+) a
+ORDER BY full_date, hour24_of_day, x_value]]>
+	</queryString>
+	<field name="full_date" class="java.sql.Date"/>
+	<field name="hour24_of_day" class="java.lang.Integer"/>
+	<field name="day_of_week" class="java.lang.String"/>
+	<field name="x_value" class="java.lang.String"/>
+	<field name="adimp_count" class="java.lang.Integer"/>
+	<field name="expandimp_count" class="java.lang.Integer"/>
+	<field name="adimp2_count" class="java.lang.Integer"/>
+	<field name="ctaclick_count" class="java.lang.Integer"/>
+	<variable name="CTAClick_Total" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{ctaclick_count}]]></variableExpression>
+	</variable>
+	<variable name="adimp2_Total" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{adimp2_count}]]></variableExpression>
+	</variable>
+	<variable name="ExpandImp_Total" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{expandimp_count}]]></variableExpression>
+	</variable>
+	<variable name="AdImp_Total" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{adimp_count}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="70" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="22" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="190" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[X value]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="0" width="40" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hour]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="-1" width="80" height="20"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Day of Week]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="295" y="0" width="60" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AdImp]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="0" width="60" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ExpandImp]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="425" y="0" width="60" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[adimp]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="490" y="0" width="60" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CTAClick]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField pattern="#,##0">
+				<reportElement x="490" y="0" width="60" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{ctaclick_count}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="70" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{full_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="190" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{x_value}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="0" width="40" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{hour24_of_day}+"h"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="110" y="0" width="80" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{day_of_week}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="295" y="0" width="60" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{adimp_count}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="360" y="0" width="60" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{expandimp_count}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="425" y="0" width="60" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{adimp2_count}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="43" splitType="Stretch">
+			<textField pattern="#,##0">
+				<reportElement x="490" y="3" width="60" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{CTAClick_Total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="3" width="270" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1"/>
+			</line>
+			<textField pattern="#,##0">
+				<reportElement x="425" y="3" width="60" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{adimp2_Total}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="360" y="3" width="60" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{ExpandImp_Total}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="295" y="3" width="60" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{AdImp_Total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

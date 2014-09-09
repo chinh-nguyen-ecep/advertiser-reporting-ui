@@ -34,7 +34,7 @@
       <sources> 
         <request>connectionName</request> 
       </sources>  
-      <default-value><![CDATA[analyticsdbVPC]]></default-value> 
+      <default-value><![CDATA[verveReportConnection]]></default-value> 
     </connectionName>  
     <p_customer_key type="string"> 
       <sources> 

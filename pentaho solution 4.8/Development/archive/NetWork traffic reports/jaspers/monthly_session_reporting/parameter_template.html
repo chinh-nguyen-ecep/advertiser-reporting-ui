@@ -1,0 +1,41 @@
+<html xmlns:xf="http://www.w3.org/2002/xforms">
+   <head>
+	<!-- do not include a <meta> tag -->
+      <link rel="stylesheet" type="text/css" href="/pentaho-style/active/default.css"></link>
+      <link rel="stylesheet" type="text/css" href="/pentaho-style/chinhnd/css/default.css"></link>
+      <title>Daily Partner Traffic Activity</title>
+            			
+						<script src="js/parameters.js" type="text/javascript"></script>
+						<script src="/pentaho-style/chinhnd/scripts/doform1.js" type="text/javascript"></script>
+      			<script><![CDATA[      			  
+      			  
+      			]]></script>
+      		
+	{xform-header}
+
+   </head>
+   <body>
+      <div class="divform" style="height: 19%;">
+      <img src="/pentaho-style/chinhnd/images/vervelogo.png" class="logo" width="80"/>
+      <div class="title">Monthly Session Reporting</div>
+         <form name="parameter-form" id="parameter-form" method="GET">
+             <label style="margin-left: 0px;">Month:</label> {calendar_year_month}
+			 <label style="">Partner:</label> {partner_id}		 
+			 <label style="">Output:</label> {output}
+             <input type="button" name="go" class="portlet-form-button" value="Run..." onClick="doForm('html')"/>            
+		{solution}
+		{action}
+		{path}
+	    </form>
+      </div>    
+   <div>
+   <iframe width="100%" height="80%" name="theoutput" frameborder="0" scrolling="yes" style="overflow-x:hidden;"></iframe>
+   </div>
+	<script>
+	setDefaultValueOfList('calendar_year_month',1);
+	setDefaultValueOfList('partner_id',1);
+
+	</script>
+   </body>
+     
+</html>

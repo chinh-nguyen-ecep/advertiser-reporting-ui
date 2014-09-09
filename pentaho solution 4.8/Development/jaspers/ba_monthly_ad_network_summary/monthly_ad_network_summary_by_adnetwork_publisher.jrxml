@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dail_ad_network_summary_subreport1" language="groovy" pageWidth="902" pageHeight="842" orientation="Landscape" columnWidth="902" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.6500000000000032"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="calendar_year_month" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="total_adcel_total" class="java.lang.Long"/>
+	<parameter name="total_adcel_yes" class="java.lang.Long"/>
+	<parameter name="requests" class="java.lang.Long"/>
+	<parameter name="paid_impressions" class="java.lang.Long"/>
+	<parameter name="clicks" class="java.lang.Long"/>
+	<parameter name="net_revenue" class="java.lang.Double"/>
+	<queryString>
+		<![CDATA[SELECT
+--a.adname
+a.publisher
+,a.partner_id
+,sum(paid_impressions) as paid_impressions
+,sum(a.gross_revenue) as gross_revenue
+,sum(a.p_net_revenue) as p_net_revenue
+,sum(a.v_net_revenue) as v_net_revenue
+,sum(a.fullfilled_code_y) as fullfilled_code_y
+,sum(a.total_billable_impressions) as total_billable_impressions
+,max(a.dt_lastchange) as dt_lastchange
+FROM (
+/* AdSense DBCLK Channel */
+SELECT      'AdSense DBCLK Channel (-1)' as adname
+		,parent1_name  as publisher,
+            partner_id,
+            sum(impressions_delivered) as paid_impressions,
+            sum(gross_revenue) as gross_revenue,
+            sum(p_net_revenue) as p_net_revenue,
+            sum(v_net_revenue) as v_net_revenue,
+            sum(fullfilled_code_y) as fullfilled_code_y,
+            sum(total_billable_impressions) as total_billable_impressions,
+            max(dt_lastchange) as dt_lastchange
+FROM        adnetwork.ba_monthly_adsense_dbclk_channel
+WHERE       is_active = true
+AND calendar_year_month=$P{calendar_year_month}::text
+GROUP BY adname,publisher,partner_id,calendar_year_month
+UNION
+/* City Grid */
+SELECT
+'City Grid/City Grid Proxy (20,29)' as adname
+,parent1_name  as publisher,
+            partner_id,
+            sum(paid_impressions) as paid_impressions,
+            sum(gross_revenue) as gross_revenue,
+            sum(p_net_revenue) as p_net_revenue,
+            sum(v_net_revenue) as v_net_revenue,
+            sum(fullfilled_code_y) as fullfilled_code_y,
+            sum(total_billable_impressions) as total_billable_impressions,
+            max(dt_lastchange) as dt_lastchange
+FROM        adnetwork.ba_monthly_cg_performance
+WHERE       is_active = true
+AND calendar_year_month=$P{calendar_year_month}::text
+GROUP BY adname,publisher,partner_id,calendar_year_month
+UNION
+/* iTunes */
+SELECT
+'iTunes (-1)' as adname
+,parent1_name  as publisher,
+            partner_id,
+            sum(impressions) as paid_impressions,
+            sum(gross_revenue) as gross_revenue,
+            sum(p_net_revenue) as p_net_revenue,
+            sum(v_net_revenue) as v_net_revenue,
+            0 as fullfilled_code_y,
+            sum(impressions) as total_billable_impressions,
+            max(dt_lastchange) as dt_lastchange
+FROM        adnetwork.ba_monthly_it_performance
+WHERE       is_active = true
+AND calendar_year_month=$P{calendar_year_month}::text
+GROUP BY adname,publisher,partner_id,calendar_year_month
+UNION
+/* JumpTap */
+SELECT
+'JumpTap (11)' as adname
+,parent1_name  as publisher,
+            partner_id,
+            sum(paid_impressions) as paid_impressions,
+            sum(gross_revenue) as gross_revenue,
+            sum(p_net_revenue) as p_net_revenue,
+            sum(v_net_revenue) as v_net_revenue,
+            sum(fullfilled_code_y) as fullfilled_code_y,
+            sum(total_billable_impressions) as total_billable_impressions,
+            max(dt_lastchange) as dt_lastchange
+FROM        adnetwork.ba_monthly_jt_performance
+WHERE       is_active = true
+AND calendar_year_month=$P{calendar_year_month}::text
+GROUP BY adname,publisher,partner_id,calendar_year_month
+UNION
+/* Millennial Media */
+SELECT
+'Millennial Media (4)' as adname
+,parent1_name  as publisher,
+            partner_id,
+            sum(ads_served) as paid_impressions,
+            sum(gross_revenue) as gross_revenue,
+            sum(p_net_revenue) as p_net_revenue,
+            sum(v_net_revenue) as v_net_revenue,
+            sum(fullfilled_code_y) as fullfilled_code_y,
+            sum(total_billable_impressions) as total_billable_impressions,
+            max(dt_lastchange) as dt_lastchange
+FROM        adnetwork.ba_monthly_mm_performance
+WHERE       is_active = true
+AND calendar_year_month=$P{calendar_year_month}::text AND requests > 0
+GROUP BY adname,publisher,partner_id,calendar_year_month
+UNION
+/* Marchex */
+SELECT
+'Marchex/Marchex Proxy (21,28)' as adname
+,parent1_name  as publisher,
+            partner_id,
+            sum(paid_impressions) as paid_impressions,
+            sum(gross_revenue) as gross_revenue,
+            sum(p_net_revenue) as p_net_revenue,
+            sum(v_net_revenue) as v_net_revenue,
+            sum(fullfilled_code_y) as fullfilled_code_y,
+            sum(total_billable_impressions) as total_billable_impressions,
+            max(dt_lastchange) as dt_lastchange
+FROM        adnetwork.ba_monthly_mx_performance
+WHERE       is_active = true
+AND calendar_year_month=$P{calendar_year_month}::text
+GROUP BY adname,publisher,partner_id,calendar_year_month
+UNION
+/* Superpages Proxy/Blue */
+SELECT
+'Superpages Prpoxy/Blue (30,26)' as adname
+,parent1_name  as publisher,
+            partner_id,
+            sum(paid_impressions) as paid_impressions,
+            sum(gross_revenue) as gross_revenue,
+            sum(p_net_revenue) as p_net_revenue,
+            sum(v_net_revenue) as v_net_revenue,
+            sum(fullfilled_code_y) as fullfilled_code_y,
+            sum(total_billable_impressions) as total_billable_impressions,
+            max(dt_lastchange) as dt_lastchange
+FROM        adnetwork.ba_monthly_sp_blue_performance
+WHERE       is_active = true
+AND calendar_year_month=$P{calendar_year_month}::text
+GROUP BY adname,publisher,partner_id,calendar_year_month
+UNION
+/* Where */
+SELECT
+'Where/Where HTML (23,25)' as adname
+,parent1_name  as publisher,
+            partner_id,
+            sum(filled) as paid_impressions,
+            sum(gross_revenue) as gross_revenue,
+            sum(p_net_revenue) as p_net_revenue,
+            sum(v_net_revenue) as v_net_revenue,
+            sum(fullfilled_code_y) as fullfilled_code_y,
+            sum(total_billable_impressions) as total_billable_impressions,
+            max(dt_lastchange) as dt_lastchange
+FROM        adnetwork.ba_monthly_wh_performance
+WHERE       is_active = true
+AND calendar_year_month=$P{calendar_year_month}::text
+--AND requests > 0
+GROUP BY adname,publisher,partner_id,calendar_year_month
+UNION
+/* AT&T Yellowpages */
+SELECT
+'AT&T Yellowpages (27)' as adname
+,parent1_name  as publisher,
+            partner_id,
+            sum(impressions) as paid_impressions,
+            sum(gross_revenue) as gross_revenue,
+            sum(p_net_revenue) as p_net_revenue,
+            sum(v_net_revenue) as v_net_revenue,
+            sum(fullfilled_code_y) as fullfilled_code_y,
+            sum(total_billable_impressions) as total_billable_impressions,
+            max(dt_lastchange) as dt_lastchange
+FROM        adnetwork.ba_monthly_yp_performance
+WHERE       is_active = true
+AND calendar_year_month=$P{calendar_year_month}::text
+GROUP BY adname,publisher,partner_id,calendar_year_month
+UNION
+/* AT&T Static Banner Yellowpages */
+SELECT
+'AT&T Static Banner Yellowpages (32)' as adname
+,parent1_name  as publisher,
+            partner_id,
+            sum(impressions) as paid_impressions,
+            sum(gross_revenue) as gross_revenue,
+            sum(p_net_revenue) as p_net_revenue,
+            sum(v_net_revenue) as v_net_revenue,
+            sum(fullfilled_code_y) as fullfilled_code_y,
+            sum(total_billable_impressions) as total_billable_impressions,
+            max(dt_lastchange) as dt_lastchange
+FROM        adnetwork.ba_monthly_yp_sb_performance
+WHERE       is_active = true
+AND calendar_year_month=$P{calendar_year_month}::text
+GROUP BY adname,publisher,partner_id,calendar_year_month
+UNION
+/* AT&T No Logo Yellowpages */
+SELECT
+'AT&T No Logo(Yellowpages)(32)' as adname
+,parent1_name  as publisher,
+            partner_id,
+            sum(impressions) as paid_impressions,
+            sum(gross_revenue) as gross_revenue,
+            sum(p_net_revenue) as p_net_revenue,
+            sum(v_net_revenue) as v_net_revenue,
+            sum(fullfilled_code_y) as fullfilled_code_y,
+            sum(total_billable_impressions) as total_billable_impressions,
+            max(dt_lastchange) as dt_lastchange
+FROM        adnetwork.ba_monthly_yp_no_performance
+WHERE       is_active = true
+AND calendar_year_month=$P{calendar_year_month}::text
+GROUP BY adname,publisher,partner_id,calendar_year_month
+) a
+WHERE a.paid_impressions>0 OR gross_revenue>0 OR a.p_net_revenue>0 OR a.v_net_revenue>0 OR a.fullfilled_code_y>0
+GROUP BY
+a.publisher
+,a.partner_id
+ORDER BY a.publisher]]>
+	</queryString>
+	<field name="publisher" class="java.lang.String"/>
+	<field name="partner_id" class="java.lang.Integer"/>
+	<field name="paid_impressions" class="java.lang.Double"/>
+	<field name="gross_revenue" class="java.lang.Double"/>
+	<field name="p_net_revenue" class="java.lang.Double"/>
+	<field name="v_net_revenue" class="java.lang.Double"/>
+	<field name="fullfilled_code_y" class="java.math.BigDecimal"/>
+	<field name="total_billable_impressions" class="java.lang.Double"/>
+	<field name="dt_lastchange" class="java.sql.Timestamp"/>
+	<variable name="total_gross_rev" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{gross_revenue}]]></variableExpression>
+	</variable>
+	<variable name="total_p_net_rev" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{p_net_revenue}]]></variableExpression>
+	</variable>
+	<variable name="total_v_net_rev" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{v_net_revenue}]]></variableExpression>
+	</variable>
+	<variable name="total_paid_imp" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{paid_impressions}]]></variableExpression>
+	</variable>
+	<variable name="AdCel Yes sum" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{fullfilled_code_y}]]></variableExpression>
+	</variable>
+	<variable name="total_billable_impressions_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{total_billable_impressions}]]></variableExpression>
+	</variable>
+	<columnHeader>
+		<band height="59" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="55" width="902" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="0" width="295" height="22"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Performance by Publishers by PartnerID:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="22" width="174" height="30"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Publisher]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="174" y="22" width="60" height="30"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Share %]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="235" y="22" width="60" height="30"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Partner
+ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="537" y="22" width="70" height="30" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Gross
+Revenue]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="832" y="22" width="70" height="30" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Delta
+Revenue]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="295" y="22" width="70" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Paid
+Impressions]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="692" y="22" width="70" height="30" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Verve Net
+Revenue]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="762" y="22" width="70" height="30" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Total Net
+Revenue]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="365" y="22" width="70" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Adcel's Yes Responses]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="607" y="22" width="85" height="30" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Publisher Net Revenue]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="435" y="22" width="102" height="30"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total  Billable Impressions]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="174" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{publisher}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="235" y="0" width="60" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{partner_id}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0 %" isBlankWhenNull="true">
+				<reportElement x="174" y="0" width="61" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{p_net_revenue}/$F{gross_revenue}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="762" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{v_net_revenue}+$F{p_net_revenue}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="295" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{paid_impressions}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="607" y="0" width="85" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{p_net_revenue}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="365" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{fullfilled_code_y}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="537" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{gross_revenue}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="832" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{gross_revenue}-($F{p_net_revenue}+$F{v_net_revenue})]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="692" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{v_net_revenue}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="435" y="0" width="102" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{total_billable_impressions}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="43">
+			<line>
+				<reportElement x="0" y="1" width="902" height="1"/>
+			</line>
+			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="832" y="2" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total_gross_rev}-($V{total_v_net_rev}+$V{total_p_net_rev})]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="537" y="2" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total_gross_rev}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="762" y="2" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total_v_net_rev}+$V{total_p_net_rev}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="607" y="2" width="85" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total_p_net_rev}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0;-#,##0" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="365" y="2" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{AdCel Yes sum}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0;-#,##0" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="295" y="2" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{total_paid_imp}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="692" y="2" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total_v_net_rev}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0;-#,##0" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="435" y="2" width="102" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total_billable_impressions_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>IO Billing Line Item V2</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>chinhnguyen</author>  
+    <description>IO Billing Line Item Report for Billing RDW-116 Update data from database</description>  
+    <help/>  
+    <result-type>report</result-type>  
+    <icon>chart_1(2).png|chart_1(2).png</icon> 
+  </documentation>
+
+  <inputs> 
+    <p_output type="string"> 
+      <sources> 
+        <request>p_output</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </p_output>  
+    <List_output type="string-list"> 
+      <sources> 
+        <request>List_output</request> 
+      </sources>  
+      <default-value type="string-list"> 
+        <list-item>csv</list-item>  
+        <list-item>html</list-item>  
+        <list-item>pdf</list-item>  
+        <list-item>xls</list-item> 
+      </default-value> 
+    </List_output>  
+    <connection_name type="string"> 
+      <sources> 
+        <request>connection_name</request> 
+      </sources>  
+      <default-value><![CDATA[verveReportConnection]]></default-value> 
+    </connection_name>  
+    <p_mailTo type="string"> 
+      <sources> 
+        <request>p_mailTo</request> 
+      </sources>  
+      <default-value><![CDATA[chinh.nguyen@ecepvn.org]]></default-value> 
+    </p_mailTo>  
+    <p_emailMode type="string"> 
+      <sources> 
+        <request>p_emailMode</request> 
+      </sources>  
+      <default-value><![CDATA[false]]></default-value> 
+    </p_emailMode>  
+    <p_emailExportFileType type="string"> 
+      <sources> 
+        <request>p_emailExportFileType</request> 
+      </sources>  
+      <default-value><![CDATA[pdf]]></default-value> 
+    </p_emailExportFileType>  
+    <parameter_string type="string"> 
+      <sources> 
+        <request>parameter_string</request> 
+      </sources>  
+      <default-value/> 
+    </parameter_string>  
+    <p_month_sk type="string"> 
+      <sources> 
+        <request>p_month_sk</request> 
+      </sources>  
+      <default-value/> 
+    </p_month_sk>  
+    <p_all type="string"> 
+      <sources> 
+        <request>p_all</request> 
+      </sources>  
+      <default-value><![CDATA[month]]></default-value> 
+    </p_all>  
+    <connection_name_2 type="string"> 
+      <sources> 
+        <request>connection_name_2</request> 
+      </sources>  
+      <default-value><![CDATA[dw3dw3]]></default-value> 
+    </connection_name_2>  
+    <List_mode type="result-set"> 
+      <sources> 
+        <request>List_mode</request> 
+      </sources>  
+      <default-value type="result-set"> 
+        <row> 
+          <name>All</name>  
+          <values>all</values> 
+        </row>  
+        <row> 
+          <name>Month</name>  
+          <values>month</values> 
+        </row>  
+        <row> 
+          <name>Current Month</name>  
+          <values>current_month</values> 
+        </row> 
+      </default-value>  
+      <columns> 
+        <name type="string"/>  
+        <values type="string"/> 
+      </columns> 
+    </List_mode> 
+  </inputs>
+
+  <outputs/>
+
+  <resources> 
+    <report-definition> 
+      <solution-file> 
+        <location>ba_monthly_io_billing_line_item/ba_monthly_io_billing_line_item_xls.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition>  
+    <pageTemplate> 
+      <solution-file> 
+        <location>ba_monthly_io_billing_line_item/ba_monthly_io_billing_line_item.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </pageTemplate>  
+    <report-definition1> 
+      <solution-file> 
+        <location>ba_monthly_io_billing_line_item/ba_monthly_io_billing_line_item_csv.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition1>  
+    <report-definition2> 
+      <solution-file> 
+        <location>ba_monthly_io_billing_line_item/ba_monthly_io_billing_line_item_csv.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition2>  
+    <report-definition3> 
+      <solution-file> 
+        <location>ba_monthly_io_billing_line_item/ba_monthly_io_billing_line_item.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition3>  
+    <report-definition4> 
+      <solution-file> 
+        <location>ba_monthly_io_billing_line_item/ba_monthly_io_billing_line_item.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition4>  
+    <report-definition5> 
+      <solution-file> 
+        <location>ba_monthly_io_billing_line_item/ba_monthly_io_billing_line_item.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition5>  
+    <report-definition6> 
+      <solution-file> 
+        <location>ba_monthly_io_billing_line_item/ba_monthly_io_billing_line_item_xls.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition6>  
+    <report-definition7> 
+      <solution-file> 
+        <location>ba_monthly_io_billing_line_item/io_billing_line_item/io_billing_line_item_csv.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition7>  
+    <report-definition8> 
+      <solution-file> 
+        <location>ba_monthly_io_billing_line_item/io_billing_line_item/io_billing_line_item_xls.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition8>  
+    <report-definition9> 
+      <solution-file> 
+        <location>ba_monthly_io_billing_line_item/io_billing_line_item/io_billing_line_item.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition9>  
+    <report-definition10> 
+      <solution-file> 
+        <location>ba_monthly_io_billing_line_item/io_billing_line_item/io_billing_line_item.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition10>  
+    <report-definition11> 
+      <solution-file> 
+        <location>ba_monthly_io_billing_line_item/io_billing_line_item_cuurent_month/io_billing_line_item.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition11> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get calendar year month</action-type>
+      <action-inputs> 
+        <jndi type="string" mapping="connection_name"/> 
+      </action-inputs>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result"/>  
+        <calendar_year_month type="string"/>  
+        <month_since_2005 type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <live><![CDATA[false]]></live>  
+        <query><![CDATA[SELECT DISTINCT calendar_year_month, month_since_2005
+FROM billing.ba_monthly_io_line_item
+WHERE is_active = true
+ORDER BY month_since_2005 desc]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <actions> 
+      <condition><![CDATA[p_emailMode=='false']]></condition>  
+      <action-definition> 
+        <component-name>SecureFilterComponent</component-name>
+        <action-type>Prompt/Secure Filter</action-type>
+        <action-inputs> 
+          <p_month_sk type="string"/>  
+          <query_result type="result-set"/>  
+          <p_all type="string"/>  
+          <List_mode type="result-set"/> 
+        </action-inputs>
+        <action-resources> 
+          <pageTemplate type="resource"/> 
+        </action-resources>
+        <component-definition> 
+          <selections> 
+            <p_month_sk style="select"> 
+              <filter value-col-name="month_since_2005" display-col-name="calendar_year_month">query_result</filter> 
+            </p_month_sk>  
+            <p_all style="radio"> 
+              <filter value-col-name="values" display-col-name="name">List_mode</filter> 
+            </p_all> 
+          </selections>  
+          <xsl><![CDATA[pageTemplate]]></xsl> 
+        </component-definition> 
+      </action-definition>
+  
+      <actions> 
+        <condition><![CDATA[p_all=='month']]></condition>  
+        <actions> 
+          <condition><![CDATA[p_output=='csv']]></condition>  
+          <action-definition> 
+            <component-name>JasperReportsComponent</component-name>
+            <action-type>Jasper</action-type>
+            <action-inputs> 
+              <jndi type="string" mapping="connection_name"/>  
+              <p_month_sk type="string"/> 
+            </action-inputs>
+            <action-resources> 
+              <report-definition mapping="report-definition2"/> 
+            </action-resources>
+            <component-definition> 
+              <output-type><![CDATA[csv]]></output-type> 
+            </component-definition> 
+          </action-definition>
+ 
+        </actions>
+  
+        <actions> 
+          <condition><![CDATA[p_output=='xls']]></condition>  
+          <action-definition> 
+            <component-name>JasperReportsComponent</component-name>
+            <action-type>Jasper</action-type>
+            <action-inputs> 
+              <jndi type="string" mapping="connection_name"/>  
+              <p_month_sk type="string"/> 
+            </action-inputs>
+            <action-resources> 
+              <report-definition type="resource"/> 
+            </action-resources>
+            <component-definition> 
+              <output-type><![CDATA[xls]]></output-type> 
+            </component-definition> 
+          </action-definition>
+ 
+        </actions>
+  
+        <actions> 
+          <condition><![CDATA[p_output=='pdf']]></condition>  
+          <action-definition> 
+            <component-name>JasperReportsComponent</component-name>
+            <action-type>Jasper</action-type>
+            <action-inputs> 
+              <jndi type="string" mapping="connection_name"/>  
+              <p_month_sk type="string"/> 
+            </action-inputs>
+            <action-resources> 
+              <report-definition mapping="report-definition3"/> 
+            </action-resources>
+            <component-definition> 
+              <output-type><![CDATA[pdf]]></output-type> 
+            </component-definition> 
+          </action-definition>
+ 
+        </actions>
+  
+        <actions> 
+          <condition><![CDATA[p_output=='html']]></condition>  
+          <action-definition> 
+            <component-name>JasperReportsComponent</component-name>
+            <action-type>Jasper</action-type>
+            <action-inputs> 
+              <jndi type="string" mapping="connection_name"/>  
+              <p_month_sk type="string"/> 
+            </action-inputs>
+            <action-resources> 
+              <report-definition mapping="report-definition5"/> 
+            </action-resources>
+            <component-definition> 
+              <output-type>html</output-type> 
+            </component-definition> 
+          </action-definition>
+ 
+        </actions>
+ 
+      </actions>
+  
+      <actions> 
+        <condition><![CDATA[p_all=='all']]></condition>  
+        <actions> 
+          <condition><![CDATA[p_output=='csv']]></condition>  
+          <action-definition> 
+            <component-name>JasperReportsComponent</component-name>
+            <action-type>Jasper</action-type>
+            <action-inputs> 
+              <jndi type="string" mapping="connection_name_2"/> 
+            </action-inputs>
+            <action-resources> 
+              <report-definition mapping="report-definition7"/> 
+            </action-resources>
+            <component-definition> 
+              <output-type><![CDATA[csv]]></output-type> 
+            </component-definition> 
+          </action-definition>
+ 
+        </actions>
+  
+        <actions> 
+          <condition><![CDATA[p_output=='xls']]></condition>  
+          <action-definition> 
+            <component-name>JasperReportsComponent</component-name>
+            <action-type>Jasper</action-type>
+            <action-inputs> 
+              <jndi type="string" mapping="connection_name_2"/> 
+            </action-inputs>
+            <action-resources> 
+              <report-definition type="resource" mapping="report-definition8"/> 
+            </action-resources>
+            <component-definition> 
+              <output-type><![CDATA[xls]]></output-type> 
+            </component-definition> 
+          </action-definition>
+ 
+        </actions>
+  
+        <actions> 
+          <condition><![CDATA[p_output=='pdf']]></condition>  
+          <action-definition> 
+            <component-name>JasperReportsComponent</component-name>
+            <action-type>Jasper</action-type>
+            <action-inputs> 
+              <jndi type="string" mapping="connection_name_2"/> 
+            </action-inputs>
+            <action-resources> 
+              <report-definition mapping="report-definition9"/> 
+            </action-resources>
+            <component-definition> 
+              <output-type><![CDATA[pdf]]></output-type> 
+            </component-definition> 
+          </action-definition>
+ 
+        </actions>
+  
+        <actions> 
+          <condition><![CDATA[p_output=='html']]></condition>  
+          <action-definition> 
+            <component-name>JasperReportsComponent</component-name>
+            <action-type>Jasper</action-type>
+            <action-inputs> 
+              <jndi type="string" mapping="connection_name_2"/> 
+            </action-inputs>
+            <action-resources> 
+              <report-definition mapping="report-definition10"/> 
+            </action-resources>
+            <component-definition> 
+              <output-type>html</output-type> 
+            </component-definition> 
+          </action-definition>
+ 
+        </actions>
+ 
+      </actions>
+  
+      <actions> 
+        <condition><![CDATA[p_all=='current_month']]></condition>  
+        <action-definition> 
+          <component-name>JasperReportsComponent</component-name>
+          <action-type>Jasper</action-type>
+          <action-inputs> 
+            <output-type type="string" mapping="p_output"/>  
+            <jndi type="string" mapping="connection_name_2"/> 
+          </action-inputs>
+          <action-resources> 
+            <report-definition mapping="report-definition11"/> 
+          </action-resources>
+          <component-definition/> 
+        </action-definition>
+ 
+      </actions>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_emailMode == 'true']]></condition>  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>Process report input</action-type>
+        <action-inputs> 
+          <p_emailExportFileType type="string"/>  
+          <parameter_string type="string"/>  
+          <query_result type="result-set"/>  
+          <p_month_sk type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <reportName type="string"/>  
+          <p_month_sk type="string"/>  
+          <reportNameCsv type="string"/>  
+          <p_mailTextMessage type="string"/>  
+          <p_mailTitle type="string"/>  
+          <reportNameHtml type="string"/>  
+          <reportNamePdf type="string"/>  
+          <reportNameXls type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var reportName='';
+var p_date='';
+p_month_sk=query_result.getValueAt(0,1);
+reportName='io_billing_line_item_'+p_date+'.'+p_emailExportFileType;
+var reportNameCsv='io_billing_line_item_'+p_date+'.csv';
+var reportNamePdf='io_billing_line_item_'+p_date+'.pdf';
+var reportNameHtml='io_billing_line_item_'+p_date+'.html';
+var reportNameXls='io_billing_line_item_'+p_date+'.xls';
+var p_mailTextMessage='Attached is IO Billing Line Item '+p_date;
+var p_mailTitle='IO Billing Line Item - '+p_date;]]></script> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper Csv</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connection_name"/>  
+          <p_month_sk type="string"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition1"/> 
+        </action-resources>
+        <action-outputs> 
+          <report-output type="content" mapping="report_ou_csv"/> 
+        </action-outputs>
+        <component-definition> 
+          <output-type><![CDATA[csv]]></output-type> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper pdf</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connection_name"/>  
+          <p_month_sk type="string"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition4"/> 
+        </action-resources>
+        <action-outputs> 
+          <report-output type="content" mapping="report_out_pdf"/> 
+        </action-outputs>
+        <component-definition> 
+          <output-type><![CDATA[pdf]]></output-type> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper xls</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connection_name"/>  
+          <p_month_sk type="string"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition6"/> 
+        </action-resources>
+        <action-outputs> 
+          <report-output type="content" mapping="reportout_xlsx"/> 
+        </action-outputs>
+        <component-definition> 
+          <output-type><![CDATA[xls]]></output-type> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>EmailComponent</component-name>
+        <action-type>E-Mail</action-type>
+        <action-inputs> 
+          <to type="string" mapping="p_mailTo"/>  
+          <subject type="string" mapping="p_mailTitle"/>  
+          <message-plain type="string" mapping="p_mailTextMessage"/>  
+          <report_ou_csv type="content"/>  
+          <attach_name_2 type="string" mapping="reportNameCsv"/>  
+          <report_out_pdf type="content"/>  
+          <attach_name_1 type="string" mapping="reportNamePdf"/>  
+          <reportout_xlsx type="content"/>  
+          <attach_name_3 type="string" mapping="reportNameXls"/> 
+        </action-inputs>
+        <component-definition> 
+          <attachment-ref name-param="attach_name_2" input-param="report_ou_csv"/>  
+          <attachment-ref name-param="attach_name_1" input-param="report_out_pdf"/>  
+          <attachment-ref name-param="attach_name_3" input-param="reportout_xlsx"/> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+ 
+  </actions> 
+</action-sequence>

@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Weekly McClatchy Off" pageWidth="3600" pageHeight="842" orientation="Landscape" columnWidth="3560" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.6528925619834764"/>
+	<property name="ireport.x" value="2254"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_year_week" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("2013-W24")]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+start_week
+,end_week
+,order_id
+,order_name
+,dfp_order_id
+,publisher_name as adm_publisher_name
+,publisher_email as adm_publisher_email
+,organization_name as adm_organization_name
+,property_id as adm_property_id
+,property_name as adm_property_name
+,flight_id as ADM_Flight_ID
+,dfp_flight_id as DFP_flight_id
+,flight_name as adm_flight_name
+,flight_start_date as adm_flight_start_date
+,flight_end_date as adm_flight_end_date
+,flight_quantity as booked_impressions
+,Case network_id when 1 THEN 'Local' WHEN 4 THEN 'VLM' END as "Network"
+,delivery_impressions
+,flight_metric as metric
+,creative_id as adm_creative_id
+,dfp_creative_id
+,dfp_creative_name
+,dfp_ads_size as ads_size
+,creative_click_through_url as adm_Click_through_url
+,dfp_placement as dfp_Placement
+,dfp_targeting_citeria as Targeting_citeria
+,max(dt_lastchange) as dt_lastchange
+FROM adsops.weekly_agg_mcclatchy_off
+WHERE is_active=true AND year_week=$P{p_year_week}
+GROUP BY
+start_week
+,end_week
+,order_id
+,order_name
+,dfp_order_id
+,publisher_name
+,publisher_email
+,organization_name
+,property_id
+,property_name
+,flight_id
+,dfp_flight_id
+,flight_name
+,flight_start_date
+,flight_end_date
+,flight_quantity
+,delivery_impressions
+,flight_metric
+,creative_id
+,dfp_creative_id
+,dfp_creative_name
+,dfp_ads_size
+,creative_click_through_url
+,dfp_placement
+,dfp_targeting_citeria
+,network_id]]>
+	</queryString>
+	<field name="start_week" class="java.sql.Date"/>
+	<field name="end_week" class="java.sql.Date"/>
+	<field name="order_id" class="java.lang.Integer"/>
+	<field name="order_name" class="java.lang.String"/>
+	<field name="dfp_order_id" class="java.lang.Long"/>
+	<field name="adm_publisher_name" class="java.lang.String"/>
+	<field name="adm_publisher_email" class="java.lang.String"/>
+	<field name="adm_organization_name" class="java.lang.String"/>
+	<field name="adm_property_id" class="java.lang.Integer"/>
+	<field name="adm_property_name" class="java.lang.String"/>
+	<field name="adm_flight_id" class="java.lang.Integer"/>
+	<field name="dfp_flight_id" class="java.lang.Long"/>
+	<field name="adm_flight_name" class="java.lang.String"/>
+	<field name="adm_flight_start_date" class="java.sql.Timestamp"/>
+	<field name="adm_flight_end_date" class="java.sql.Timestamp"/>
+	<field name="booked_impressions" class="java.lang.Integer"/>
+	<field name="Network" class="java.lang.String"/>
+	<field name="delivery_impressions" class="java.lang.Integer"/>
+	<field name="metric" class="java.lang.String"/>
+	<field name="adm_creative_id" class="java.lang.Integer"/>
+	<field name="dfp_creative_id" class="java.lang.Long"/>
+	<field name="dfp_creative_name" class="java.lang.String"/>
+	<field name="ads_size" class="java.lang.String"/>
+	<field name="adm_click_through_url" class="java.lang.String"/>
+	<field name="dfp_placement" class="java.lang.String"/>
+	<field name="targeting_citeria" class="java.lang.String"/>
+	<field name="dt_lastchange" class="java.sql.Timestamp"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="94">
+			<image>
+				<reportElement x="0" y="9" width="64" height="40"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"../vervelogo.jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="64" y="29" width="3496" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["From "+ new SimpleDateFormat("yyyy-MM-dd").format($F{start_week})+" To "+new SimpleDateFormat("yyyy-MM-dd").format($F{end_week})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="49" width="3560" height="25"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Refresh date: "+new SimpleDateFormat("yyyy-MM-dd").format($F{dt_lastchange})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="64" y="9" width="3496" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Weekly McClatchy Off]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="74" width="3560" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20">
+			<staticText>
+				<reportElement x="0" y="0" width="64" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[order_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="64" y="0" width="153" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[order_name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="217" y="0" width="99" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[dfp_order_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="316" y="0" width="130" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[adm_publisher_name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="446" y="0" width="138" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[adm_publisher_email]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="584" y="0" width="201" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[adm_organization_name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="785" y="0" width="99" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[adm_property_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="884" y="0" width="232" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[adm_property_name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1116" y="0" width="80" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[adm_flight_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1196" y="0" width="80" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[dfp_flight_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1276" y="0" width="200" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[adm_flight_name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1476" y="0" width="125" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[adm_flight_start_date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1601" y="0" width="125" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[adm_flight_end_date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1726" y="0" width="120" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[booked_impressions]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1846" y="0" width="68" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Network]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1914" y="0" width="116" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[delivery_impressions]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2030" y="0" width="70" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[metric]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2100" y="0" width="99" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[adm_creative_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2199" y="0" width="80" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[dfp_creative_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2279" y="0" width="205" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[dfp_creative_name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2484" y="0" width="69" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ads_size]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2553" y="0" width="500" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[adm_click_through_url]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3054" y="0" width="99" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[dfp_placement]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3153" y="0" width="407" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[targeting_citeria]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30">
+			<textField>
+				<reportElement x="0" y="0" width="64" height="30"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{order_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="64" y="0" width="153" height="30"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{order_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="217" y="0" width="99" height="30"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{dfp_order_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="316" y="0" width="130" height="30"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{adm_publisher_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="446" y="0" width="138" height="30"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{adm_publisher_email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="584" y="0" width="201" height="30"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{adm_organization_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="785" y="0" width="99" height="30"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{adm_property_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="884" y="0" width="232" height="30"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{adm_property_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1116" y="0" width="80" height="30"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{adm_flight_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1196" y="0" width="80" height="30"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{dfp_flight_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1276" y="0" width="200" height="30"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{adm_flight_name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd">
+				<reportElement x="1476" y="0" width="125" height="30"/>
+				<textElement/>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{adm_flight_start_date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy-MM-dd">
+				<reportElement x="1601" y="0" width="125" height="30"/>
+				<textElement/>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{adm_flight_end_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1726" y="0" width="120" height="30"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{booked_impressions}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1846" y="0" width="68" height="30"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Network}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1914" y="0" width="116" height="30"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{delivery_impressions}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2030" y="0" width="70" height="30"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{metric}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2100" y="0" width="99" height="30"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{adm_creative_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2199" y="0" width="80" height="30"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{dfp_creative_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2279" y="0" width="205" height="30"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{dfp_creative_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2484" y="0" width="69" height="30"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ads_size}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2553" y="0" width="500" height="30"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{adm_click_through_url}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3054" y="0" width="99" height="30"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{dfp_placement}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3153" y="0" width="407" height="30"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{targeting_citeria}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="26">
+			<textField>
+				<reportElement x="0" y="6" width="446" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="6" width="3015" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="3470" y="6" width="90" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="3" width="3560" height="1"/>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

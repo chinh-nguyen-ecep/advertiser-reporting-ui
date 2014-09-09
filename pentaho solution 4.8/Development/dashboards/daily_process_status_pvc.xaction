@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <action-sequence> 
-  <title>Daily process status 2.0 pvc</title>
+  <title>Daily process status 2.0 VPC</title>
   <version>1</version>
   <logging-level>ERROR</logging-level>
   <documentation> 

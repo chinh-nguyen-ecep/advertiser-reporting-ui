@@ -22,7 +22,7 @@
       <sources> 
         <request>connection_name</request> 
       </sources>  
-      <default-value><![CDATA[analyticsdbVPC]]></default-value> 
+      <default-value><![CDATA[verveReportConnection]]></default-value> 
     </connection_name>  
     <returnResult type="string"> 
       <sources> 

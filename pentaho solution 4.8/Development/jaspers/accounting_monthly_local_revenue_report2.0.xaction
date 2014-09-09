@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Billing - Monthly Revenue by DFP Ad Source - beta 2.0</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>Chinh nguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <calendar_year_month type="string"> 
+      <sources> 
+        <request>calendar_year_month</request> 
+      </sources>  
+      <default-value/> 
+    </calendar_year_month>  
+    <output type="string"> 
+      <sources> 
+        <request>output</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </output>  
+    <List_dates type="string-list"> 
+      <sources> 
+        <request>List_dates</request> 
+      </sources>  
+      <default-value type="string-list"> 
+        <list-item>2012-Jan</list-item>  
+        <list-item>2011-Dec</list-item> 
+      </default-value> 
+    </List_dates>  
+    <p_network_id type="string"> 
+      <sources> 
+        <request>p_network_id</request> 
+      </sources>  
+      <default-value><![CDATA[1]]></default-value> 
+    </p_network_id>  
+    <List_network type="result-set"> 
+      <sources> 
+        <request>List_network</request> 
+      </sources>  
+      <default-value type="result-set">
+        <row>
+          <Value>1</Value>
+          <NetworkName>Local</NetworkName>
+        </row>
+        <row>
+          <Value>2</Value>
+          <NetworkName>National</NetworkName>
+        </row>
+        <row>
+          <Value>4</Value>
+          <NetworkName>VLM</NetworkName>
+        </row>
+      </default-value>  
+      <columns>
+        <Value type="string"/>
+        <NetworkName type="string"/>
+      </columns>
+    </List_network> 
+  </inputs>
+
+  <outputs/>
+
+  <resources> 
+    <pageTemplate> 
+      <solution-file> 
+        <location>accounting_monthly_local_revenue_report2.0/parameter_template.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </pageTemplate>  
+    <report-definition10> 
+      <solution-file> 
+        <location>accounting_monthly_local_revenue_report2.0/accounting_monthly_local_revenue_report.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition10> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get calendar year month</action-type>
+      <action-inputs/>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result"/>  
+        <calendar_year_month type="string"/>  
+        <month_since_2005 type="integer"/> 
+      </action-outputs>
+      <component-definition> 
+        <jndi><![CDATA[verveReportConnection]]></jndi>  
+        <live><![CDATA[true]]></live>  
+        <query><![CDATA[SELECT DISTINCT calendar_year_month, month_since_2005
+FROM adm.monthly_agg_adm_dbclk_revenue
+WHERE is_active = true
+ORDER BY month_since_2005 desc]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Prompt/Secure Filter</action-type>
+      <action-inputs> 
+        <calendar_year_month type="string"/>  
+        <p_network_id type="string"/>  
+        <List_network type="result-set"/>  
+        <query_result type="result-set"/> 
+      </action-inputs>
+      <action-resources> 
+        <pageTemplate type="resource"/> 
+      </action-resources>
+      <component-definition> 
+        <selections> 
+          <calendar_year_month style="select"> 
+            <filter value-col-name="calendar_year_month" display-col-name="calendar_year_month">query_result</filter>  
+            <title>Month</title> 
+          </calendar_year_month>  
+          <p_network_id style="select"> 
+            <filter value-col-name="Value" display-col-name="NetworkName">List_network</filter> 
+          </p_network_id> 
+        </selections>  
+        <xsl><![CDATA[pageTemplate]]></xsl> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JasperReportsComponent</component-name>
+      <action-type>Jasper</action-type>
+      <action-inputs> 
+        <calendar_year_month type="string"/>  
+        <output-type type="string" mapping="output"/>  
+        <p_network_id type="string"/> 
+      </action-inputs>
+      <action-resources> 
+        <report-definition mapping="report-definition10"/> 
+      </action-resources>
+      <component-definition> 
+        <jndi><![CDATA[verveReportConnection]]></jndi> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

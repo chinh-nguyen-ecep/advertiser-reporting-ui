@@ -13,35 +13,35 @@
 
   <inputs/>
 
-  <outputs> 
-    <web type="string"> 
-      <destinations> 
-        <response>content</response> 
-      </destinations> 
-    </web> 
+  <outputs>
+    <web type="string">
+      <destinations>
+        <response>content</response>
+      </destinations>
+    </web>
   </outputs>
 
-  <resources> 
-    <template> 
-      <solution-file> 
-        <location>daily_process_status/templateOnAWS.html</location>  
-        <mime-type>text/plain</mime-type> 
-      </solution-file> 
-    </template> 
+  <resources>
+    <template>
+      <solution-file>
+        <location>daily_process_status/templatev2.html</location>
+        <mime-type>text/plain</mime-type>
+      </solution-file>
+    </template>
   </resources>
   
   <actions> 
-    <action-definition> 
+    <action-definition>
       <component-name>TemplateComponent</component-name>
       <action-type>Message Template</action-type>
-      <action-resources> 
-        <template type="resource"/> 
+      <action-resources>
+        <template type="resource"/>
       </action-resources>
-      <action-outputs> 
-        <output-message type="string" mapping="web"/> 
+      <action-outputs>
+        <output-message type="string" mapping="web"/>
       </action-outputs>
-      <component-definition/> 
+      <component-definition/>
     </action-definition>
- 
+
   </actions> 
 </action-sequence>
