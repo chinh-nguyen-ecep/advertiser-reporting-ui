@@ -182,7 +182,7 @@ ORDER BY  publisher_name, property_name, partner_keyword, channel_name, ad_netwo
 - cta_any per 1000_VLMO engagement impressions: cta_any/(Impressions/1000)
 - cta_any per VLMO engagement clicks: cta_any/Clicks
 - Exclude all flights data points where flights have cta_any = 0 for the last 365 days
-- VLMO engagement flight is defined: cta_any > 0 (group at flight/offer level for the last 365days)
+- VLMO engagement flight is defined: cta_any > 0 (group at flight/offer level for the last 365 days)
 - Using ad_network_id = 44 for VLMO data]]></text>
 			</staticText>
 		</band>
