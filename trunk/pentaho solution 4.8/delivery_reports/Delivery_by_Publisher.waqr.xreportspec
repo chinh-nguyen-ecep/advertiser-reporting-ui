@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report-spec tool='waqr' tool-version='1.0' template-name='Pentaho'>
+<jndi-source><![CDATA[SampleData]]></jndi-source>
+<report-name><![CDATA[Delivery_by_Publisher]]></report-name>
+<report-desc><![CDATA[Created by the Web-based Adhoc Query and Reporting Client]]></report-desc>
+<query>
+<mql>
+<domain_type>relational</domain_type>
+<domain_id><![CDATA[delivery_reports/metadata.xmi]]></domain_id><model_id><![CDATA[BV_MODEL_DELIVERY_PUBLISHER]]></model_id>
+<options>
+<disable_distinct>false</disable_distinct>
+</options>
+<selections>
+<selection><view>BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA</view><column>BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_FULL_DATE</column></selection>
+<selection><view>BC_ADM_DIM_PUBLISHERS_VIEW</view><column>BC_PUBLISHER_PUBLISHER_NAME</column></selection>
+<selection><view>BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA</view><column>BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_FULLFILLED_CODE_COUNT</column></selection>
+<selection><view>BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA</view><column>BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_FULLFILLED_CODE_Y</column></selection>
+<selection><view>BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA</view><column>BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_FULLFILLED_CODE_N</column></selection>
+<selection><view>BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA</view><column>BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_FULLFILLED_CODE_E</column></selection>
+<selection><view>BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA</view><column>BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_UNDISPLAYED_IMPRESSIONS</column></selection>
+</selections>
+<constraints>
+<constraint><operator></operator><condition><![CDATA[[BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA.BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_FULL_DATE] = DATEVALUE("2013-05-14")]]></condition></constraint>
+</constraints>
+<orders>
+<order><direction>asc</direction><view_id>BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA</view_id><column_id>BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_FULL_DATE</column_id></order>
+<order><direction>desc</direction><view_id>BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA</view_id><column_id>BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_UNDISPLAYED_IMPRESSIONS</column_id></order>
+</orders>
+</mql>
+</query>
+<field-mapping key="reportheader" value="Delivery Report"/><field-mapping key="reportfooter" value=""/><field-mapping key="pageheader" value="Verve mobile"/><field-mapping key="pagefooter" value=""/><page-format><![CDATA[LETTER]]></page-format>
+<orientation><![CDATA[landscape]]></orientation>
+<use-row-banding><![CDATA[true]]></use-row-banding>
+<row-banding-color><![CDATA[#e7e7e7]]></row-banding-color>
+<use-column-header-background-color><![CDATA[true]]></use-column-header-background-color>
+<column-header-background-color><![CDATA[#9eaa36]]></column-header-background-color>
+<grand-totals-label><![CDATA[Grand Total]]></grand-totals-label>
+<grand-totals-horizontal-alignment><![CDATA[left]]></grand-totals-horizontal-alignment>
+<use-dummy-group-footer-background-color><![CDATA[true]]></use-dummy-group-footer-background-color>
+<dummy-group-footer-background-color><![CDATA[#e0d0c0]]></dummy-group-footer-background-color>
+<use-horizontal-gridlines><![CDATA[true]]></use-horizontal-gridlines>
+<use-vertical-gridlines><![CDATA[true]]></use-vertical-gridlines>
+<horizontal-gridlines-color><![CDATA[#c0c0c0]]></horizontal-gridlines-color>
+<vertical-gridlines-color><![CDATA[#c0c0c0]]></vertical-gridlines-color>
+<group-header-font-name><![CDATA[Arial]]></group-header-font-name>
+<group-header-font-style><![CDATA[1]]></group-header-font-style>
+<group-header-font-size><![CDATA[12]]></group-header-font-size>
+<group-header-font-color><![CDATA[#767676]]></group-header-font-color>
+<group-footer-font-name><![CDATA[Arial]]></group-footer-font-name>
+<group-footer-font-style><![CDATA[1]]></group-footer-font-style>
+<group-footer-font-size><![CDATA[12]]></group-footer-font-size>
+<group-footer-font-color><![CDATA[#ff7d17]]></group-footer-font-color>
+<column-header-font-name><![CDATA[Arial]]></column-header-font-name>
+<column-header-font-style><![CDATA[0]]></column-header-font-style>
+<column-header-font-size><![CDATA[10]]></column-header-font-size>
+<column-header-font-color><![CDATA[#ffffff]]></column-header-font-color>
+<column-header-gap><![CDATA[1]]></column-header-gap>
+<items-font-name><![CDATA[Arial]]></items-font-name>
+<items-font-style><![CDATA[0]]></items-font-style>
+<items-font-size><![CDATA[9]]></items-font-size>
+<items-font-color><![CDATA[#000000]]></items-font-color>
+<field is-detail="false" name="BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_FULL_DATE" horizontal-alignment="left" format="" type="91" repeat-group-header="false" level-name="" group-totals-label="Total $(BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_FULL_DATE)" page-break-before-header="false" page-break-after-header="false" page-break-before-footer="false" page-break-after-footer="false" calculate-group-totals="true" create-group-header="true" vertical-alignment="top"/>
+<field is-detail="true" name="BC_PUBLISHER_PUBLISHER_NAME" horizontal-alignment="left" expression="none" type="12"/>
+<field is-detail="true" name="BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_FULLFILLED_CODE_COUNT" horizontal-alignment="right" format="#,###;(#,###)" expression="sum" type="2"/>
+<field is-detail="true" name="BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_FULLFILLED_CODE_Y" horizontal-alignment="right" format="#,###;(#,###)" expression="sum" type="2"/>
+<field is-detail="true" name="BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_FULLFILLED_CODE_N" horizontal-alignment="right" format="#,###;(#,###)" expression="sum" type="2"/>
+<field is-detail="true" name="BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_FULLFILLED_CODE_E" horizontal-alignment="right" format="#,###;(#,###)" expression="sum" type="2"/>
+<field is-detail="true" name="BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_UNDISPLAYED_IMPRESSIONS" horizontal-alignment="right" format="#,###;(#,###)" expression="sum" type="2"/>
+</report-spec>

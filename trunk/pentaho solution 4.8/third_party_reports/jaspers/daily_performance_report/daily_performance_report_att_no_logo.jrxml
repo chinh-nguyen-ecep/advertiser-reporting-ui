@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_performance_report_att_no_logo" pageWidth="1350" pageHeight="842" orientation="Landscape" columnWidth="1310" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="537"/>
+	<property name="ireport.y" value="528"/>
 	<parameter name="eastern_date_sk" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new String("0")]]></defaultValueExpression>
 	</parameter>
@@ -22,7 +22,7 @@
         ,sum(case fullfilled_code_y when -1 then 0 else fullfilled_code_y end) as total_adcel_yes
         ,sum(case fullfilled_code_count when -1 then 0 else fullfilled_code_count end) as total_adcel_total
 	,sum(today_estimate_revenue) as today_estimate_revenue
-	,sum(displayed_impressions) as today_displayed_impressions
+	,sum(event_count) as today_event_count
 FROM adnetwork.daily_yp_no_performance a
 WHERE eastern_date_sk=$P{eastern_date_sk}::int
   AND is_active=true
@@ -37,7 +37,7 @@ GROUP BY full_date]]>
 	<field name="total_adcel_yes" class="java.lang.Long"/>
 	<field name="total_adcel_total" class="java.lang.Long"/>
 	<field name="today_estimate_revenue" class="java.lang.Double"/>
-	<field name="today_displayed_impressions" class="java.lang.Long"/>
+	<field name="today_event_count" class="java.lang.Long"/>
 	<background>
 		<band/>
 	</background>
@@ -97,6 +97,9 @@ GROUP BY full_date]]>
 				<subreportParameter name="total_requests">
 					<subreportParameterExpression><![CDATA[$F{requests}]]></subreportParameterExpression>
 				</subreportParameter>
+				<subreportParameter name="total_event_count">
+					<subreportParameterExpression><![CDATA[$F{today_event_count}]]></subreportParameterExpression>
+				</subreportParameter>
 				<subreportParameter name="total_clicks">
 					<subreportParameterExpression><![CDATA[$F{clicks}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -105,9 +108,6 @@ GROUP BY full_date]]>
 				</subreportParameter>
 				<subreportParameter name="total_imps">
 					<subreportParameterExpression><![CDATA[$F{paid_impressions}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="total_displayed_imps">
-					<subreportParameterExpression><![CDATA[$F{today_displayed_impressions}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="total_adcel_total">
 					<subreportParameterExpression><![CDATA[$F{total_adcel_total}]]></subreportParameterExpression>
@@ -204,7 +204,7 @@ GROUP BY full_date]]>
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>
-				<text><![CDATA[1- Estimates for individual ATT No Logo-YP's sites are based on Adcel's Y-responses daily distribution (%)]]></text>
+				<text><![CDATA[1- Estimates for individual ATT No Logo-YP's sites are based on bannerclk daily distribution (%)]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="313" width="1310" height="20"/>
@@ -232,14 +232,14 @@ GROUP BY full_date]]>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Long"><![CDATA[$F{today_displayed_impressions}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{today_event_count}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="240" width="143" height="20"/>
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>
-				<text><![CDATA[Total Displayed Impressions:]]></text>
+				<text><![CDATA[Total bannerclk Count:]]></text>
 			</staticText>
 		</band>
 	</title>

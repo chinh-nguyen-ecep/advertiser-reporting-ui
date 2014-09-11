@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_delivery_advertiser_subreport1" language="groovy" pageWidth="2100" pageHeight="802" columnWidth="2100" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="1.0000000000000016"/>
-	<property name="ireport.x" value="1278"/>
+	<property name="ireport.x" value="956"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="p_order_id_list" class="java.lang.String"/>
 	<parameter name="p_advertiser_id_list" class="java.lang.String">
@@ -32,7 +32,7 @@
 ,clicks as clicks
 ,ctr as ctr
 ,flight_metric
-FROM adsops.daily_agg_delivery_advertiser
+FROM adsops.daily_agg_delivery_advertiser_beta
 WHERE is_active = true
 AND full_date = $P{full_date}
 AND (order_id IN (select unnest(string_to_array($P{p_order_id_list}, ','))::int) OR '0'=$P{p_order_id_list})

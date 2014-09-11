@@ -29,13 +29,7 @@
         <request>p_output</request> 
       </sources>  
       <default-value><![CDATA[html]]></default-value> 
-    </p_output>  
-    <connection_name type="string">
-      <sources>
-        <request>connection_name</request>
-      </sources>
-      <default-value><![CDATA[verveReportConnection]]></default-value>
-    </connection_name>
+    </p_output> 
   </inputs>
 
   <outputs/>
@@ -47,21 +41,18 @@
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </pageTemplate>  
-    <report-definition> 
-      <solution-file> 
-        <location>daily_adcel_network_summary/daily_adcel_network_summary.jasper</location>  
-        <mime-type>text/plain</mime-type> 
-      </solution-file> 
-    </report-definition> 
+    <report-definition>
+      <solution-file>
+        <location>daily_adcel_network_summary/daily_adcel_network_summary.jasper</location>
+        <mime-type>text/plain</mime-type>
+      </solution-file>
+    </report-definition>
   </resources>
   
   <actions> 
     <action-definition> 
       <component-name>SQLLookupRule</component-name>
       <action-type>Get Date list</action-type>
-      <action-inputs>
-        <jndi type="string" mapping="connection_name"/>
-      </action-inputs>
       <action-outputs> 
         <query-result type="result-set" mapping="query_result"/>  
         <eastern_date_sk type="integer"/>  
@@ -69,6 +60,7 @@
         <distinct type="string"/> 
       </action-outputs>
       <component-definition> 
+        <jndi><![CDATA[dw3]]></jndi>  
         <live><![CDATA[true]]></live>  
         <query><![CDATA[select distinct eastern_date_sk, full_date from adstraffic.daily_ad_serving_stats where is_active = true order by eastern_date_sk desc]]></query> 
       </component-definition> 
@@ -95,19 +87,20 @@
       </component-definition> 
     </action-definition>
   
-    <action-definition> 
+    <action-definition>
       <component-name>JasperReportsComponent</component-name>
       <action-type>Jasper</action-type>
-      <action-inputs> 
-        <eastern_date_sk type="string"/>  
-        <output-type type="string" mapping="p_output"/>  
-        <jndi type="string" mapping="connection_name"/>
+      <action-inputs>
+        <eastern_date_sk type="string"/>
+        <output-type type="string" mapping="p_output"/>
       </action-inputs>
-      <action-resources> 
-        <report-definition type="resource"/> 
+      <action-resources>
+        <report-definition type="resource"/>
       </action-resources>
-      <component-definition/> 
+      <component-definition>
+        <jndi><![CDATA[verveReportConnection]]></jndi>
+      </component-definition>
     </action-definition>
- 
+
   </actions> 
 </action-sequence>

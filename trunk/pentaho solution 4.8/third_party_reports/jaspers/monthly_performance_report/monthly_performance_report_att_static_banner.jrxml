@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="monthly_performance_report_att_static_banner" pageWidth="1300" pageHeight="842" orientation="Landscape" columnWidth="1260" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="288"/>
+	<property name="ireport.y" value="389"/>
 	<parameter name="calendar_year_month" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new String("")]]></defaultValueExpression>
 	</parameter>
@@ -20,7 +20,7 @@ sum(clicks) as clicks,
 sum(revenue) as net_revenue,
 sum(case fullfilled_code_count when -1 then 0 else fullfilled_code_count end) as total_adcel_total,
 sum(case fullfilled_code_y when -1 then 0 else fullfilled_code_y end) as total_adcel_yes,
-sum(displayed_impressions) as total_displayed_impressions
+sum(event_count) as total_event_count
   FROM adnetwork.monthly_yp_sb_performance a
   WHERE calendar_year_month=$P{calendar_year_month} AND is_active=true
   GROUP BY calendar_year_month]]>
@@ -33,7 +33,7 @@ sum(displayed_impressions) as total_displayed_impressions
 	<field name="net_revenue" class="java.lang.Double"/>
 	<field name="total_adcel_total" class="java.lang.Long"/>
 	<field name="total_adcel_yes" class="java.lang.Long"/>
-	<field name="total_displayed_impressions" class="java.lang.Long"/>
+	<field name="total_event_count" class="java.lang.Long"/>
 	<background>
 		<band/>
 	</background>
@@ -190,7 +190,7 @@ sum(displayed_impressions) as total_displayed_impressions
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>
-				<text><![CDATA[1- Estimates for individual AT&T Static Banner-YP's sites are based on Adcel's Y-responses daily distribution (%)]]></text>
+				<text><![CDATA[1- Estimates for individual AT&T Static Banner-YP's sites are based on bannerclk daily distribution (%)]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="260" width="205" height="20"/>
@@ -204,14 +204,14 @@ sum(displayed_impressions) as total_displayed_impressions
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Long"><![CDATA[$F{total_displayed_impressions}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{total_event_count}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="220" width="135" height="20"/>
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>
-				<text><![CDATA[Total Displayed Impressions:]]></text>
+				<text><![CDATA[Total bannerclk Count:]]></text>
 			</staticText>
 		</band>
 	</title>

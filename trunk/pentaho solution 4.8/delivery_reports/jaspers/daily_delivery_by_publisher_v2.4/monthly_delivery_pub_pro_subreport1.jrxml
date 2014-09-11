@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="monthly_delivery_pub_pro_subreport1" language="groovy" pageWidth="5236" pageHeight="802" columnWidth="5236" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="1.241842646118316"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="1749"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="p_publisher_id_list" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new String("0")]]></defaultValueExpression>
@@ -31,88 +31,93 @@
 		<defaultValueExpression><![CDATA[new String("0")]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT a.calendar_year_month,a.publisher_id,a.publisher_name,a.property_id,a.property_name,
-	SUM(a.adcel_requests) AS adcel_requests,
-	SUM(a.filled_requests) AS filled_requests,
-	SUM(a.unfilled_requests) AS unfilled_requests,
-	SUM(a.bannerclick_events) as bannerclick_events,
-	SUM(a.fullfilled_code_count) as adcel_response,
-       (CASE WHEN SUM(a.adcel_requests)>0 THEN SUM(a.filled_requests)::float/SUM(a.adcel_requests) ELSE 0 END) as response_percentage,
-       SUM(a.filled_requests)-SUM(a.verve_impressions) as undisplayed_impressions,
-       SUM(a.verve_impressions) as verve_impressions,
-       SUM(a.reported_impressions) as reported_impressions,
-       (CASE WHEN SUM(a.adcel_requests)>0 THEN SUM(a.verve_impressions)::float/SUM(a.adcel_requests) ELSE 0 END) as pub_fill_percentage,
-       (CASE WHEN SUM(a.filled_requests)>0 THEN SUM(a.undisplayed_impressions)::float/SUM(a.filled_requests) ELSE 0 END) as undisplayed_percentage,
-       (CASE WHEN SUM(a.verve_impressions)>0 THEN SUM(a.reported_impressions)::float/SUM(a.verve_impressions) ELSE 0 END) as impressions_discrepancy_percentage,
-       SUM(a.clicks) as clicks,
-       (CASE WHEN SUM(a.verve_impressions)> 0 THEN SUM(a.clicks)::float/SUM(a.verve_impressions) ELSE 0 END) as ctr,
-       (CASE WHEN SUM(a.verve_impressions)>0 THEN SUM(a.total_revenue)::float*1000/SUM(a.verve_impressions) ELSE 0 END) as cpm,
-       SUM(a.unreported_revenue) as unreported_revenuem,
-       SUM(a.reported_revenue) as reported_revenue,
-       SUM(a.total_revenue) as total_revenue,
-       SUM(a.verve_revenue) as verve_revenue,
-       (CASE WHEN SUM(a.verve_impressions)>0 THEN SUM(a.verve_revenue)::float*1000/SUM(a.verve_impressions) ELSE 0 END) as verve_rpm,
-       SUM(a.pub_revenue) as pub_revenue,
-       (CASE WHEN SUM(a.verve_impressions)>0 THEN SUM(a.pub_revenue)::float*1000/SUM(a.verve_impressions) ELSE 0 END) as pub_rpm,
-       (CASE WHEN  $P{report_total_reported_revenue}>0 THEN SUM(a.total_revenue)::float/$P{report_total_reported_revenue} ELSE 0 END) as daily_rev_percentage
-       	,SUM(b.total_requests)::bigint as api_total_requests
-	,SUM(b.total_filled_requests)::bigint as api_total_filled_requests
-	,SUM(b.total_revenue) as api_total_revenue
-	,SUM(b.total_net_revenue) as api_total_net_revenue
-	, CASE WHEN SUM(b.total_filled_requests) > 0 THEN SUM(b.total_revenue)*1000/SUM(b.total_filled_requests) ELSE 0 END AS api_total_ecpm
-	, CASE WHEN SUM(b.total_filled_requests) > 0 THEN SUM(b.total_net_revenue)*1000/SUM(b.total_filled_requests) ELSE 0 END AS api_total_net_ecpm
-	,SUM(b.local_impressions)::bigint as api_local_impressions
-	,SUM(b.local_revenue) as api_local_revenue
-	,SUM(b.local_net_revenue) as api_local_net_revenue
-	--API
-	, CASE WHEN SUM(b.local_impressions) > 0 THEN SUM(b.local_revenue)*1000/SUM(b.local_impressions) ELSE 0 END AS api_local_ecpm
-	, CASE WHEN SUM(b.local_impressions) > 0 THEN SUM(b.local_net_revenue)*1000/SUM(b.local_impressions) ELSE 0 END AS api_local_net_ecpm
-	, CASE WHEN SUM(b.local_revenue) > 0 THEN SUM(b.local_net_revenue)/SUM(b.local_revenue) ELSE 0 END AS api_local_rev_share
-	,SUM(b.vlm_impressions)::bigint as api_vlm_impressions
-	,SUM(b.vlm_revenue) as api_vlm_revenue
-	,SUM(b.vlm_net_revenue) as api_vlm_net_revenue
-	, CASE WHEN SUM(b.vlm_impressions) > 0 THEN SUM(b.vlm_revenue)*1000/SUM(b.vlm_impressions) ELSE 0 END AS api_vlm_ecpm
-	, CASE WHEN SUM(b.vlm_impressions) > 0 THEN SUM(b.vlm_net_revenue)*1000/SUM(b.vlm_impressions) ELSE 0 END AS api_vlm_net_ecpm
-	, CASE WHEN SUM(b.vlm_revenue) > 0 THEN SUM(b.vlm_net_revenue)/SUM(b.vlm_revenue) ELSE 0 END AS api_vlm_rev_share
-	--national
-	,SUM(b.national_impressions)::bigint as api_national_impressions
-	,SUM(b.national_revenue) as api_national_revenue
-	,SUM(b.national_net_revenue) as api_national_net_revenue
-	, CASE WHEN SUM(b.national_impressions) > 0 THEN SUM(b.national_revenue)*1000/SUM(b.national_impressions) ELSE 0 END AS api_national_ecpm
-	, CASE WHEN SUM(b.national_impressions) > 0 THEN SUM(b.national_net_revenue)*1000/SUM(b.national_impressions) ELSE 0 END AS api_national_net_ecpm
-	, CASE WHEN SUM(b.national_revenue) > 0 THEN SUM(b.national_net_revenue)/SUM(b.national_revenue) ELSE 0 END AS api_national_rev_share
-	--remnant
-	,SUM(b.remnant_impressions)::bigint as api_remnant_impressions
-	,SUM(b.remnant_revenue) as api_remnant_revenue
-	,SUM(b.remnant_net_revenue) as api_remnant_net_revenue
-	, CASE WHEN SUM(b.remnant_impressions) > 0 THEN SUM(b.remnant_revenue)*1000/SUM(b.remnant_impressions) ELSE 0 END AS api_remnant_ecpm
-	, CASE WHEN SUM(b.remnant_impressions) > 0 THEN SUM(b.remnant_net_revenue)*1000/SUM(b.remnant_impressions) ELSE 0 END AS api_remnant_net_ecpm
-	, CASE WHEN SUM(b.remnant_revenue) > 0 THEN SUM(b.remnant_net_revenue)/SUM(b.remnant_revenue) ELSE 0 END AS api_remnant_rev_share
-	--vpc
-	,SUM(b.vpc_impressions)::bigint as api_vpc_impressions
-	,SUM(b.vpc_revenue) as api_vpc_revenue
-	,SUM(b.vpc_net_revenue) as api_vpc_net_revenue
-	, CASE WHEN SUM(b.vpc_impressions) > 0 THEN SUM(b.vpc_revenue)*1000/SUM(b.vpc_impressions) ELSE 0 END AS api_vpc_ecpm
-	, CASE WHEN SUM(b.vpc_impressions) > 0 THEN SUM(b.vpc_net_revenue)*1000/SUM(b.vpc_impressions) ELSE 0 END AS api_vpc_net_ecpm
-	, CASE WHEN SUM(b.vpc_revenue) > 0 THEN SUM(b.vpc_net_revenue)/SUM(b.vpc_revenue) ELSE 0 END AS api_vpc_rev_share
-	--fill rate
-	, CASE WHEN SUM(b.total_requests) > 0 THEN SUM(b.local_impressions)::float/SUM(b.total_requests) ELSE 0 END AS api_local_fill_rate
-	, CASE WHEN SUM(b.total_requests) > 0 THEN SUM(b.vlm_impressions)::float/SUM(b.total_requests) ELSE 0 END AS api_vlm_fill_rate
-	, CASE WHEN SUM(b.total_requests) > 0 THEN SUM(b.national_impressions)::float/SUM(b.total_requests) ELSE 0 END AS api_national_fill_rate
-	, CASE WHEN SUM(b.total_requests) > 0 THEN SUM(b.vpc_impressions)::float/SUM(b.total_requests) ELSE 0 END AS api_vpc_fill_rate
-	, CASE WHEN SUM(b.total_requests) > 0 THEN SUM(b.total_filled_requests)::float/SUM(b.total_requests) ELSE 0 END AS api_total_fill_rate
-	--GEO
-	, CASE WHEN SUM(filled_count) > 0 THEN SUM(location_quality_0)::float/SUM(filled_count) ELSE 0 END AS location_quality_0
-	, CASE WHEN SUM(filled_count) > 0 THEN SUM(location_quality_1_48)::float/SUM(filled_count) ELSE 0 END AS location_quality_1_48
-	, CASE WHEN SUM(filled_count) > 0 THEN SUM(location_quality_49_50)::float/SUM(filled_count) ELSE 0 END AS location_quality_49_50
-	, CASE WHEN SUM(filled_count) > 0 THEN SUM(location_quality_51_100)::float/SUM(filled_count) ELSE 0 END AS location_quality_51_100
-	, CASE WHEN SUM(filled_count) > 0 THEN SUM(country_us)::float/SUM(filled_count) ELSE 0 END AS geo_us
-	, CASE WHEN SUM(filled_count) > 0 THEN SUM(country_international)::float/SUM(filled_count) ELSE 0 END AS geo_international
-	, SUM(ui_count) AS ui_count
+		<![CDATA[SELECT a.calendar_year_month
+, a.publisher_id
+, a.publisher_name
+, a.property_id
+, a.property_name
+, SUM(a.adcel_requests)::bigint AS adcel_requests
+, SUM(a.filled_requests)::bigint AS filled_requests
+, SUM(a.unfilled_requests)::bigint AS unfilled_requests
+, SUM(a.bannerclick_events) as bannerclick_events
+, SUM(a.fullfilled_code_count)::bigint as adcel_response
+, (CASE WHEN SUM(a.adcel_requests)>0 THEN SUM(a.filled_requests)::float/SUM(a.adcel_requests) ELSE 0 END) as response_percentage
+, SUM(a.filled_requests)::bigint-SUM(a.verve_impressions)::bigint as undisplayed_impressions
+, SUM(a.verve_impressions) as verve_impressions
+, SUM(a.reported_impressions) as reported_impressions
+, (CASE WHEN SUM(a.adcel_requests)>0 THEN SUM(a.verve_impressions)::float/SUM(a.adcel_requests) ELSE 0 END) as pub_fill_percentage
+, (CASE WHEN SUM(a.filled_requests)>0 THEN SUM(a.undisplayed_impressions)::float/SUM(a.filled_requests) ELSE 0 END) as undisplayed_percentage
+, (CASE WHEN SUM(a.verve_impressions)>0 THEN SUM(a.reported_impressions)::float/SUM(a.verve_impressions) ELSE 0 END) as impressions_discrepancy_percentage
+, SUM(a.clicks) as clicks
+, (CASE WHEN SUM(a.verve_impressions)> 0 THEN SUM(a.clicks)::float/SUM(a.verve_impressions) ELSE 0 END) as ctr
+, (CASE WHEN SUM(a.verve_impressions)>0 THEN SUM(a.total_revenue)::float*1000/SUM(a.verve_impressions) ELSE 0 END) as cpm
+, SUM(a.unreported_revenue) as unreported_revenue
+, SUM(a.reported_revenue) as reported_revenue
+, SUM(a.total_revenue) as total_revenue
+, SUM(a.verve_revenue) as verve_revenue
+, (CASE WHEN SUM(a.verve_impressions)>0 THEN SUM(a.verve_revenue)::float*1000/SUM(a.verve_impressions) ELSE 0 END) as verve_rpm
+, SUM(a.pub_revenue) as pub_revenue
+, (CASE WHEN SUM(a.verve_impressions)>0 THEN SUM(a.pub_revenue)::float*1000/SUM(a.verve_impressions) ELSE 0 END) as pub_rpm
+, (CASE WHEN  $P{report_total_reported_revenue}>0 THEN SUM(a.total_revenue)::float/$P{report_total_reported_revenue} ELSE 0 END) as daily_rev_percentage
+--API
+, SUM(b.total_requests)::bigint as api_total_requests
+, SUM(b.total_filled_requests)::bigint as api_total_filled_requests
+, SUM(b.total_revenue) as api_total_revenue
+, SUM(b.total_net_revenue) as api_total_net_revenue
+, CASE WHEN SUM(b.total_filled_requests) > 0 THEN SUM(b.total_revenue)*1000/SUM(b.total_filled_requests) ELSE 0 END AS api_total_ecpm
+, CASE WHEN SUM(b.total_filled_requests) > 0 THEN SUM(b.total_net_revenue)*1000/SUM(b.total_filled_requests) ELSE 0 END AS api_total_net_ecpm
+--Local
+, SUM(b.local_impressions)::bigint as api_local_impressions
+, SUM(b.local_revenue) as api_local_revenue
+, SUM(b.local_net_revenue) as api_local_net_revenue
+, CASE WHEN SUM(b.local_impressions) > 0 THEN SUM(b.local_revenue)*1000/SUM(b.local_impressions) ELSE 0 END AS api_local_ecpm
+, CASE WHEN SUM(b.local_impressions) > 0 THEN SUM(b.local_net_revenue)*1000/SUM(b.local_impressions) ELSE 0 END AS api_local_net_ecpm
+, CASE WHEN SUM(b.local_revenue) > 0 THEN SUM(b.local_net_revenue)/SUM(b.local_revenue) ELSE 0 END AS api_local_rev_share
+--VLM
+, SUM(b.vlm_impressions)::bigint as api_vlm_impressions
+, SUM(b.vlm_revenue) as api_vlm_revenue
+, SUM(b.vlm_net_revenue) as api_vlm_net_revenue
+, CASE WHEN SUM(b.vlm_impressions) > 0 THEN SUM(b.vlm_revenue)*1000/SUM(b.vlm_impressions) ELSE 0 END AS api_vlm_ecpm
+, CASE WHEN SUM(b.vlm_impressions) > 0 THEN SUM(b.vlm_net_revenue)*1000/SUM(b.vlm_impressions) ELSE 0 END AS api_vlm_net_ecpm
+, CASE WHEN SUM(b.vlm_revenue) > 0 THEN SUM(b.vlm_net_revenue)/SUM(b.vlm_revenue) ELSE 0 END AS api_vlm_rev_share
+--National
+, SUM(b.national_impressions)::bigint as api_national_impressions
+, SUM(b.national_revenue) as api_national_revenue
+, SUM(b.national_net_revenue) as api_national_net_revenue
+, CASE WHEN SUM(b.national_impressions) > 0 THEN SUM(b.national_revenue)*1000/SUM(b.national_impressions) ELSE 0 END AS api_national_ecpm
+, CASE WHEN SUM(b.national_impressions) > 0 THEN SUM(b.national_net_revenue)*1000/SUM(b.national_impressions) ELSE 0 END AS api_national_net_ecpm
+, CASE WHEN SUM(b.national_revenue) > 0 THEN SUM(b.national_net_revenue)/SUM(b.national_revenue) ELSE 0 END AS api_national_rev_share
+--Remnant
+, SUM(b.remnant_impressions)::bigint as api_remnant_impressions
+, SUM(b.remnant_revenue) as api_remnant_revenue
+, SUM(b.remnant_net_revenue) as api_remnant_net_revenue
+, CASE WHEN SUM(b.remnant_impressions) > 0 THEN SUM(b.remnant_revenue)*1000/SUM(b.remnant_impressions) ELSE 0 END AS api_remnant_ecpm
+, CASE WHEN SUM(b.remnant_impressions) > 0 THEN SUM(b.remnant_net_revenue)*1000/SUM(b.remnant_impressions) ELSE 0 END AS api_remnant_net_ecpm
+, CASE WHEN SUM(b.remnant_revenue) > 0 THEN SUM(b.remnant_net_revenue)/SUM(b.remnant_revenue) ELSE 0 END AS api_remnant_rev_share
+--VPC
+, SUM(b.vpc_impressions)::bigint as api_vpc_impressions
+, SUM(b.vpc_revenue) as api_vpc_revenue
+, SUM(b.vpc_net_revenue) as api_vpc_net_revenue
+, CASE WHEN SUM(b.vpc_impressions) > 0 THEN SUM(b.vpc_revenue)*1000/SUM(b.vpc_impressions) ELSE 0 END AS api_vpc_ecpm
+, CASE WHEN SUM(b.vpc_impressions) > 0 THEN SUM(b.vpc_net_revenue)*1000/SUM(b.vpc_impressions) ELSE 0 END AS api_vpc_net_ecpm
+, CASE WHEN SUM(b.vpc_revenue) > 0 THEN SUM(b.vpc_net_revenue)/SUM(b.vpc_revenue) ELSE 0 END AS api_vpc_rev_share
+--fill rate
+, CASE WHEN SUM(b.total_requests) > 0 THEN SUM(b.local_impressions)::float/SUM(b.total_requests) ELSE 0 END AS api_local_fill_rate
+, CASE WHEN SUM(b.total_requests) > 0 THEN SUM(b.vlm_impressions)::float/SUM(b.total_requests) ELSE 0 END AS api_vlm_fill_rate
+, CASE WHEN SUM(b.total_requests) > 0 THEN SUM(b.national_impressions)::float/SUM(b.total_requests) ELSE 0 END AS api_national_fill_rate
+, CASE WHEN SUM(b.total_requests) > 0 THEN SUM(b.vpc_impressions)::float/SUM(b.total_requests) ELSE 0 END AS api_vpc_fill_rate
+, CASE WHEN SUM(b.total_requests) > 0 THEN SUM(b.total_filled_requests)::float/SUM(b.total_requests) ELSE 0 END AS api_total_fill_rate
+--GEO
+, CASE WHEN SUM(trxids_count) > 0 THEN SUM(location_quality_0)::float/SUM(trxids_count) ELSE 0 END AS location_quality_0
+, CASE WHEN SUM(trxids_count) > 0 THEN SUM(location_quality_1_48)::float/SUM(trxids_count) ELSE 0 END AS location_quality_1_48
+, CASE WHEN SUM(trxids_count) > 0 THEN SUM(location_quality_49_50)::float/SUM(trxids_count) ELSE 0 END AS location_quality_49_50
+, CASE WHEN SUM(trxids_count) > 0 THEN SUM(location_quality_51_100)::float/SUM(trxids_count) ELSE 0 END AS location_quality_51_100
+, CASE WHEN SUM(filled_count) > 0 THEN SUM(country_us)::float/SUM(filled_count) ELSE 0 END AS geo_us
+, CASE WHEN SUM(filled_count) > 0 THEN SUM(country_international)::float/SUM(filled_count) ELSE 0 END AS geo_international
+, SUM(ui_count) AS ui_count
 FROM adsops.monthly_agg_delivery_publisher_property_v3 a
 LEFT JOIN (
-	SELECT
-		 month_since_2005
+	SELECT month_since_2005
 		 , partner_id
 		 , channel_id
 		 , SUM(COALESCE(total_requests,0)) AS total_requests
@@ -136,32 +141,29 @@ LEFT JOIN (
 		 , SUM(COALESCE(remnant_net_revenue,0)) AS remnant_net_revenue
 	FROM adm.daily_agg_api_revenue_by_partner_v4 a
 	WHERE a.is_active = true AND month_since_2005::int=$P{p_month_since_2005}::int
-	GROUP BY
-		 month_since_2005
+	GROUP BY month_since_2005
 		 , partner_id
 		 , channel_id
-	) b ON a.partner_id=b.partner_id AND a.channel_id=b.channel_id AND a.month_since_2005=b.month_since_2005
-	LEFT JOIN(
-		SELECT
-			month_since_2005
-			, partner_id
-			, b.channel_id
-			, SUM(trxids_count) as trxids_count
-			, SUM(filled_count)::float as filled_count
-			, SUM(location_quality_0)::float as location_quality_0
-			, SUM(location_quality_1_48)::float as location_quality_1_48
-			, SUM(location_quality_49_50)::float as location_quality_49_50
-			, SUM(location_quality_51_100)::float as location_quality_51_100
-			, SUM(country_us)::float as country_us
-			, SUM(country_international)::float as country_international
-		FROM adstraffic.daily_geo_quality a
-		LEFT JOIN refer.adm_mapping_portals b ON b.dt_expire='9999-12-31' AND b.portal_id=a.portal_id
-		WHERE is_active=true AND month_since_2005::int=$P{p_month_since_2005}::int
-		GROUP BY
-			month_since_2005
-			, partner_id
-			, b.channel_id
-	) c ON c.month_since_2005 = a.month_since_2005 AND c.partner_id=a.partner_id AND c.channel_id=a.channel_id
+) b ON a.partner_id=b.partner_id AND a.channel_id=b.channel_id AND a.month_since_2005=b.month_since_2005
+LEFT JOIN(
+    SELECT month_since_2005
+        , partner_id
+        , b.channel_id
+        , SUM(trxids_count) as trxids_count
+        , SUM(filled_count)::float as filled_count
+        , SUM(location_quality_0)::float as location_quality_0
+        , SUM(location_quality_1_48)::float as location_quality_1_48
+        , SUM(location_quality_49_50)::float as location_quality_49_50
+        , SUM(location_quality_51_100)::float as location_quality_51_100
+        , SUM(country_us)::float as country_us
+        , SUM(country_international)::float as country_international
+    FROM adstraffic.daily_geo_quality a
+    LEFT JOIN refer.adm_mapping_portals b ON b.dt_expire='9999-12-31' AND b.portal_id=a.portal_id
+    WHERE is_active=true AND month_since_2005::int=$P{p_month_since_2005}::int
+    GROUP BY month_since_2005
+        , partner_id
+        , b.channel_id
+) c ON c.month_since_2005 = a.month_since_2005 AND c.partner_id=a.partner_id AND c.channel_id=a.channel_id
 INNER JOIN refer.month_dim d ON d.month_since_2005=a.month_since_2005 AND d.month_since_2005=$P{p_month_since_2005}
 WHERE a.is_active=true
 AND (a.publisher_id IN (select unnest(string_to_array($P{p_publisher_id_list}, ';'))::int) OR '0'=$P{p_publisher_id_list})
@@ -174,7 +176,7 @@ ORDER BY a.calendar_year_month,undisplayed_impressions desc, ctr desc;]]>
 	<field name="publisher_name" class="java.lang.String"/>
 	<field name="property_id" class="java.lang.Integer"/>
 	<field name="property_name" class="java.lang.String"/>
-	<field name="adcel_requests" class="java.math.BigDecimal"/>
+	<field name="adcel_requests" class="java.lang.Long"/>
 	<field name="filled_requests" class="java.lang.Long"/>
 	<field name="unfilled_requests" class="java.lang.Long"/>
 	<field name="bannerclick_events" class="java.lang.Long"/>
@@ -189,7 +191,7 @@ ORDER BY a.calendar_year_month,undisplayed_impressions desc, ctr desc;]]>
 	<field name="clicks" class="java.lang.Long"/>
 	<field name="ctr" class="java.lang.Double"/>
 	<field name="cpm" class="java.lang.Double"/>
-	<field name="unreported_revenuem" class="java.lang.Double"/>
+	<field name="unreported_revenue" class="java.lang.Double"/>
 	<field name="reported_revenue" class="java.lang.Double"/>
 	<field name="total_revenue" class="java.lang.Double"/>
 	<field name="verve_revenue" class="java.lang.Double"/>
@@ -346,7 +348,7 @@ ORDER BY a.calendar_year_month,undisplayed_impressions desc, ctr desc;]]>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{unreported_revenuem}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{unreported_revenue}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00">
 				<reportElement x="1871" y="0" width="85" height="20"/>

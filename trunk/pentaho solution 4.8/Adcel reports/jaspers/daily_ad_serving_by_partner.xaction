@@ -90,13 +90,7 @@
         <request>p_publisher</request> 
       </sources>  
       <default-value/> 
-    </p_publisher>  
-    <connection_name type="string">
-      <sources>
-        <request>connection_name</request>
-      </sources>
-      <default-value><![CDATA[verveReportConnection]]></default-value>
-    </connection_name>
+    </p_publisher> 
   </inputs>
 
   <outputs/>
@@ -120,44 +114,35 @@
     <action-definition> 
       <component-name>SQLLookupRule</component-name>
       <action-type>Get date list</action-type>
-      <action-inputs>
-        <jndi type="string" mapping="connection_name"/>
-      </action-inputs>
       <action-outputs> 
         <query-result type="result-set" mapping="q_date_list"/>  
         <full_date type="string"/>  
         <eastern_date_sk type="integer"/> 
       </action-outputs>
       <component-definition> 
-        <live><![CDATA[true]]></live>  
-        <query><![CDATA[SELECT full_date,eastern_date_sk 
+        <jndi><![CDATA[dw3]]></jndi>  
+        <query><![CDATA[SELECT DISTINCT full_date,eastern_date_sk 
 FROM adstraffic.daily_ad_serving_stats
-WHERE is_active=true
-AND full_date>'2013-01-01'
-GROUP BY full_date,eastern_date_sk 
-ORDER BY eastern_date_sk desc]]></query>
+ORDER BY eastern_date_sk desc]]></query>  
+        <live><![CDATA[true]]></live> 
       </component-definition> 
     </action-definition>
   
     <action-definition> 
       <component-name>SQLLookupRule</component-name>
       <action-type>Get group name</action-type>
-      <action-inputs>
-        <jndi type="string" mapping="connection_name"/>
-      </action-inputs>
       <action-outputs> 
         <query-result type="result-set" mapping="q_group_name"/>  
         <id type="integer"/>  
         <name type="string"/> 
       </action-outputs>
       <component-definition> 
+        <jndi><![CDATA[dw3]]></jndi>  
         <live><![CDATA[true]]></live>  
         <query><![CDATA[SELECT parent1_id as id,parent1_name||' ('||parent1_id||')' as name
   FROM adstraffic.daily_ad_serving_stats
-  WHERE is_active=true
-	AND full_date>'2013-01-01'
   GROUP BY parent1_id,parent1_name
-  ORDER BY parent1_name]]></query>
+  ORDER BY parent1_name]]></query> 
       </component-definition> 
     </action-definition>
   
@@ -193,14 +178,15 @@ ORDER BY eastern_date_sk desc]]></query>
         <p_partner type="string"/>  
         <p_eastern_date_sk type="string"/>  
         <output-type type="string" mapping="p_output"/>  
-        <p_publisher type="string"/>  
-        <jndi type="string" mapping="connection_name"/>
+        <p_publisher type="string"/> 
       </action-inputs>
       <action-resources> 
         <report-definition type="resource"/> 
       </action-resources>
       <action-outputs/>
-      <component-definition/> 
+      <component-definition> 
+        <jndi><![CDATA[verveReportConnection]]></jndi>
+      </component-definition> 
     </action-definition>
  
   </actions> 
