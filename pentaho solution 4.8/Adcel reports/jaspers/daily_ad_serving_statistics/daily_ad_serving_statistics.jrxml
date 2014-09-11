@@ -136,7 +136,7 @@ fullfilled_code_t desc]]>
 		</band>
 	</title>
 	<detail>
-		<band height="355">
+		<band height="315">
 			<textField>
 				<reportElement x="0" y="15" width="555" height="20"/>
 				<textElement>
@@ -319,64 +319,6 @@ fullfilled_code_t desc]]>
 			</subreport>
 			<subreport>
 				<reportElement positionType="Float" x="0" y="290" width="922" height="20"/>
-				<subreportParameter name="eastern_date_sk">
-					<subreportParameterExpression><![CDATA[new Integer($P{eastern_date_sk})]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="total_location_quality_100">
-					<subreportParameterExpression><![CDATA[$F{location_quality_100}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="total_fullfilled_code_t">
-					<subreportParameterExpression><![CDATA[$F{fullfilled_code_t}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="total_fullfilled_code_e">
-					<subreportParameterExpression><![CDATA[$F{fullfilled_code_e}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="ad_network_id">
-					<subreportParameterExpression><![CDATA[$F{ad_network_id}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="total_fullfilled_code_count">
-					<subreportParameterExpression><![CDATA[$F{fullfilled_code_count}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="total_fullfilled_code_y">
-					<subreportParameterExpression><![CDATA[$F{fullfilled_code_y}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="total_fullfilled_code_n">
-					<subreportParameterExpression><![CDATA[$F{fullfilled_code_n}]]></subreportParameterExpression>
-				</subreportParameter>
-				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"subreport_by_device_organic.jasper"]]></subreportExpression>
-			</subreport>
-			<subreport>
-				<reportElement positionType="Float" x="0" y="310" width="922" height="20"/>
-				<subreportParameter name="eastern_date_sk">
-					<subreportParameterExpression><![CDATA[new Integer($P{eastern_date_sk})]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="total_location_quality_100">
-					<subreportParameterExpression><![CDATA[$F{location_quality_100}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="total_fullfilled_code_t">
-					<subreportParameterExpression><![CDATA[$F{fullfilled_code_t}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="total_fullfilled_code_e">
-					<subreportParameterExpression><![CDATA[$F{fullfilled_code_e}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="ad_network_id">
-					<subreportParameterExpression><![CDATA[$F{ad_network_id}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="total_fullfilled_code_count">
-					<subreportParameterExpression><![CDATA[$F{fullfilled_code_count}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="total_fullfilled_code_y">
-					<subreportParameterExpression><![CDATA[$F{fullfilled_code_y}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="total_fullfilled_code_n">
-					<subreportParameterExpression><![CDATA[$F{fullfilled_code_n}]]></subreportParameterExpression>
-				</subreportParameter>
-				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"subreport_by_device_vendor.jasper"]]></subreportExpression>
-			</subreport>
-			<subreport>
-				<reportElement positionType="Float" x="0" y="330" width="922" height="20"/>
 				<subreportParameter name="eastern_date_sk">
 					<subreportParameterExpression><![CDATA[new Integer($P{eastern_date_sk})]]></subreportParameterExpression>
 				</subreportParameter>

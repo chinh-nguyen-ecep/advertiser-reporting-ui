@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_performance_report_att_no_logo_subreport1" language="groovy" pageWidth="1310" pageHeight="1150" columnWidth="1310" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="584"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="eastern_date_sk" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -11,7 +11,7 @@
 	<parameter name="total_requests" class="java.lang.Long"/>
 	<parameter name="total_imps" class="java.lang.Long"/>
 	<parameter name="total_clicks" class="java.lang.Long"/>
-	<parameter name="total_displayed_imps" class="java.lang.Long"/>
+	<parameter name="total_event_count" class="java.lang.Long"/>
 	<queryString>
 		<![CDATA[SELECT 	full_date,
        	partner_name as site ,
@@ -28,7 +28,7 @@
 	portal_keyword,
 	last_known_ecpm as ecpm,
 	today_estimate_revenue as today_estimate_revenue,
-	displayed_impressions
+	event_count
 FROM  adnetwork.daily_yp_no_performance
 WHERE eastern_date_sk=$P{eastern_date_sk}::int
   AND is_active=true
@@ -49,7 +49,7 @@ ORDER BY site]]>
 	<field name="portal_keyword" class="java.lang.String"/>
 	<field name="ecpm" class="java.lang.Double"/>
 	<field name="today_estimate_revenue" class="java.lang.Double"/>
-	<field name="displayed_impressions" class="java.lang.Integer"/>
+	<field name="event_count" class="java.lang.Integer"/>
 	<variable name="Revenue sum" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{net_revenue}]]></variableExpression>
 	</variable>
@@ -58,9 +58,6 @@ ORDER BY site]]>
 	</variable>
 	<variable name="tt_TD_Es_Rev" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{today_estimate_revenue}]]></variableExpression>
-	</variable>
-	<variable name="v_displayed_impressions" class="java.lang.Integer" calculation="Sum">
-		<variableExpression><![CDATA[$F{displayed_impressions}]]></variableExpression>
 	</variable>
 	<columnHeader>
 		<band height="66" splitType="Stretch">
@@ -178,8 +175,8 @@ Revenue]]></text>
 				<textElement textAlignment="Right" verticalAlignment="Top">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Displayed
-Imps]]></text>
+				<text><![CDATA[bannerclk
+Count]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -288,7 +285,7 @@ Imps]]></text>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{displayed_impressions}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{event_count}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -351,7 +348,7 @@ Imps]]></text>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Long"><![CDATA[$P{total_displayed_imps}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$P{total_event_count}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subreport_att_static_banner_performance_by_site" language="groovy" pageWidth="1260" pageHeight="842" orientation="Landscape" columnWidth="1260" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="3.0"/>
-	<property name="ireport.x" value="1638"/>
-	<property name="ireport.y" value="30"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="45"/>
 	<parameter name="calendar_year_month" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new String("")]]></defaultValueExpression>
 	</parameter>
@@ -17,7 +17,7 @@
        parent1_name,parent1_id,partner_id,
        partner_keyword,
        portal_keyword,
-       displayed_impressions
+       event_count
   FROM adnetwork.monthly_yp_sb_performance
   WHERE calendar_year_month=$P{calendar_year_month} AND is_active=true
   ORDER BY site]]>
@@ -34,7 +34,7 @@
 	<field name="partner_id" class="java.lang.Integer"/>
 	<field name="partner_keyword" class="java.lang.String"/>
 	<field name="portal_keyword" class="java.lang.String"/>
-	<field name="displayed_impressions" class="java.lang.Integer"/>
+	<field name="event_count" class="java.lang.Integer"/>
 	<variable name="Total Ad Requests sum" class="java.lang.Integer" calculation="Sum">
 		<variableExpression><![CDATA[$F{requests}]]></variableExpression>
 	</variable>
@@ -53,8 +53,8 @@
 	<variable name="Adcel_Yes" class="java.lang.Integer" calculation="Sum">
 		<variableExpression><![CDATA[$F{adcel_y_ad_responses}]]></variableExpression>
 	</variable>
-	<variable name="Displayed_Imps" class="java.lang.Integer" calculation="Sum">
-		<variableExpression><![CDATA[$F{displayed_impressions}]]></variableExpression>
+	<variable name="bannerclk_Count" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{event_count}]]></variableExpression>
 	</variable>
 	<columnHeader>
 		<band height="45" splitType="Stretch">
@@ -157,7 +157,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Adcel's Ys]]></text>
+				<text><![CDATA[bannerclk Count]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -250,7 +250,7 @@
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{displayed_impressions}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{event_count}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -306,7 +306,7 @@
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{Displayed_Imps}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{bannerclk_Count}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

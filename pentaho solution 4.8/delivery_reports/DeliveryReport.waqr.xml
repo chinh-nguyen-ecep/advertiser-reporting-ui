@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE report PUBLIC "-//JFreeReport//DTD report definition//EN//simple/version 0.8.5" "http://jfreereport.sourceforge.net/report-085.dtd">
+
+<report bottommargin="10" topmargin="10" rightmargin="10" leftmargin="10" pageformat="LETTER" orientation="landscape" name="DeliveryReport">
+  <parser-config>
+    <property name="reportfooter">
+      <!-- label -->
+    </property>
+    <property name="pagefooter">
+      <!-- label -->
+    </property>
+    <property name="reportheader">Report</property>
+    <property name="pageheader">Verve mobile</property>
+  </parser-config>
+  <reportheader color="black" fontname="Arial" fontsize="16">
+    <message-field alignment="left" height="18" vertical-alignment="middle" width="100%" x="0%" y="0">${reportheader}</message-field>
+  </reportheader>
+  <reportfooter color="black" fontname="Arial" fontsize="16">
+    <message-field alignment="left" height="18" vertical-alignment="top" width="100%" x="0%" y="0">${reportfooter}</message-field>
+  </reportfooter>
+  <pageheader color="black" fontname="Arial" fontsize="8">
+    <message-field alignment="left" height="18" vertical-alignment="middle" width="50%" x="0%" y="0">${pageheader}</message-field>
+    <message-field alignment="right" height="18" width="50%" x="50%" y="0">$(report.date, date, MMMM dd, yyyy @ hh:mm )</message-field>
+    <line color="black" height="3" weight="1" width="100%" x1="0%" x2="100%" y1="18" y2="18"/>
+  </pageheader>
+  <pagefooter color="black" fontname="Arial" fontsize="8">
+    <line color="black" height="3" weight="1" width="100%" x1="0%" x2="100%" y1="18" y2="18"/>
+    <message-field alignment="left" height="18" width="50%" x="0" y="0">${pagefooter}</message-field>
+    <message-field alignment="right" height="18" width="50%" x="50%" y="0">Page $(PageofPages)</message-field>
+  </pagefooter>
+  <functions>
+    <property-ref name="report.date"/>
+    <function class="org.jfree.report.function.PageOfPagesFunction" name="PageofPages"/>
+    <function name="backgroundTrigger" class="org.jfree.report.function.ElementVisibilitySwitchFunction">
+      <properties>
+        <property name="element">rowBandingElement</property>
+        <property name="numberOfElements">1</property>
+        <property name="initialState">true</property>
+      </properties>
+    </function>
+    <expression class="org.jfree.report.function.HideElementIfDataAvailableExpression" name="noDataLabelElementHideIfNullTrigger">
+      <properties>
+        <property name="element">noDataLabelElement</property>
+      </properties>
+    </expression>
+    <expression class="org.jfree.report.function.ShowElementIfDataAvailableExpression" name="dummyGroupFooterHideIfNullTrigger">
+      <properties>
+        <property name="element">dummyGroupFooter</property>
+      </properties>
+    </expression>
+    <expression class="org.jfree.report.function.ItemSumFunction" name="Summary_BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_UNDISPLAYED_IMPRESSIONSExpression">
+      <properties>
+        <property name="field">BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_UNDISPLAYED_IMPRESSIONS</property>
+      </properties>
+    </expression>
+    <expression class="org.jfree.report.function.ShowElementIfDataAvailableExpression" name="BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_FULL_DATEGroupHeaderHideIfNullTrigger">
+      <properties>
+        <property name="element">BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_FULL_DATEGroupHeader</property>
+      </properties>
+    </expression>
+    <expression class="org.jfree.report.function.ShowElementIfDataAvailableExpression" name="BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_FULL_DATEGroupFooterHideIfNullTrigger">
+      <properties>
+        <property name="element">BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_FULL_DATEGroupFooter</property>
+      </properties>
+    </expression>
+    <expression class="org.jfree.report.function.ItemSumFunction" name="BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_FULL_DATEBC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_UNDISPLAYED_IMPRESSIONSExpression">
+      <properties>
+        <property name="field">BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_UNDISPLAYED_IMPRESSIONS</property>
+        <property name="group">BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_FULL_DATE</property>
+      </properties>
+    </expression>
+  </functions>
+  <configuration>
+    <property name="org.pentaho.reporting.engine.classic.core.modules.output.table.html.AssumeOverflowX">false</property>
+    <property name="org.pentaho.reporting.engine.classic.core.modules.output.table.html.AssumeOverflowY">true</property>
+  </configuration>
+  <items color="#000000" fontname="Arial" fontsize="8" fontstyle="plain">
+    <rectangle name="rowBandingElement" color="#e7e7e7" draw="false" fill="true" height="12" x="0%" width="100%" y="0"/>
+    <string-field name="BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_PUBLISHER_NAMEElement" nullstring="-" fieldname="BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_PUBLISHER_NAME" vertical-alignment="middle" alignment="left" width="33.0%" x="0.0%" y="0" height="12" color="#000000" fontname="Arial" fontsize="10" fontstyle="plain"/>
+    <number-field name="BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_UNDISPLAYED_IMPRESSIONSElement" nullstring="-" fieldname="BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_UNDISPLAYED_IMPRESSIONS" format="#,###;-#,###" vertical-alignment="middle" alignment="right" width="33.0%" x="33.0%" y="0" height="12" color="#000000" fontname="Arial" fontsize="8" fontstyle="plain"/>
+  </items>
+  <groups>
+    <group name="dummy">
+      <groupheader name="dummyGroupHeader" color="black" fontname="Arial" fontsize="12" fontstyle="bold" repeat="false">
+        <label name="noDataLabelElement" height="12" vertical-alignment="middle" alignment="left" width="100%" x="0%" y="0" visible="false">No Data Available</label>
+      </groupheader>
+      <groupfooter name="dummyGroupFooter" color="black" fontname="Arial" fontsize="12" fontstyle="bold">
+        <rectangle color="#000000" draw="false" fill="true" height="17" width="100%" y="1" x="0%"/>
+        <number-field fieldname="Summary_BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_UNDISPLAYED_IMPRESSIONSExpression" height="16" vertical-alignment="middle" alignment="right" width="33.0%" x="33.0%" y="2" format="#,###;-#,###"/>
+        <message-field height="16" x="0%" width="33.0%" y="2" alignment="left" vertical-alignment="middle">Grand Total</message-field>
+      </groupfooter>
+    </group>
+    <group name="BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_FULL_DATE">
+      <fields>
+        <field>BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_FULL_DATE</field>
+      </fields>
+      <groupheader name="BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_FULL_DATEGroupHeader" repeat="false" pagebreak-before-print="false" pagebreak-after-print="false" color="black" fontname="Arial" fontsize="12" fontstyle="bold" height="38">
+        <rectangle color="#FFFFFF" draw="false" fill="false" height="17" width="100%" x="0%" y="0"/>
+        <message-field height="17" vertical-alignment="top" alignment="left" width="100%" x="0%" y="0" nullstring="-">Full date: $(BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_FULL_DATE)</message-field>
+        <rectangle color="#000000" draw="false" fill="true" height="18" width="100%" x="0%" y="19"/>
+        <rectangle draw="false" fill="false" height="2" width="100%" x="0%" y="17"/>
+        <label color="#ffffff" fontname="Arial" fontsize="10" fontstyle="plain" height="18" vertical-alignment="middle" alignment="left" width="33.0%" x="0.0%" y="19">Publisher name</label>
+        <label color="#ffffff" fontname="Arial" fontsize="10" fontstyle="plain" height="18" vertical-alignment="middle" alignment="right" width="33.0%" x="33.0%" y="19">Undisplayed impressions</label>
+      </groupheader>
+      <groupfooter name="BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_FULL_DATEGroupFooter" color="black" fontname="Arial" fontsize="12" fontstyle="bold" pagebreak-before-print="false" pagebreak-after-print="false">
+        <rectangle color="#c0d0e0" draw="false" fill="true" height="17" width="100%" y="1" x="0%"/>
+        <number-field fieldname="BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_FULL_DATEBC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_UNDISPLAYED_IMPRESSIONSExpression" height="16" vertical-alignment="middle" alignment="right" width="33.0%" x="33.0%" y="2" format="#,###;-#,###"/>
+        <message-field height="16" x="0%" width="33.0%" y="2" alignment="left" vertical-alignment="middle">Total $(BC_DAILY_AGG_DELIVERY_PUBLISHER_PROPERTY_BETA_FULL_DATE)</message-field>
+      </groupfooter>
+    </group>
+  </groups>
+</report>
