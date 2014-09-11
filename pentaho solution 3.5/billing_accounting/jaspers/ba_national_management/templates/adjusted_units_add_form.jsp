@@ -40,7 +40,10 @@
 </form>  
 
 <script>
-
+	// Set default value for comment to the current month
+	var now=new Date();
+	$('#comment').val("Billing for "+now.format('yyyy-mmm'));
+	
 	//////////////////////////////
 	// Load list of combined ids
 	/////////////////////////////

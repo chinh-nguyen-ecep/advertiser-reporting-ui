@@ -289,7 +289,7 @@
 				p_io_line_items: p_io_line_items,
 				obj_table: $('#detailTable'),
 				success: function(){
-					
+					autoShowGroupOrderFromURL();
 				}
 			});
 			
@@ -457,9 +457,11 @@
 	function loadInfomationAddForm(row){
 		var io_orders_id    = dataTableDetail[row].io_orders_id;
 		var displayed_name  = dataTableDetail[row].io_orders_id + ' | ' + dataTableDetail[row].campaign_name;
+		var calendar_year_month=dataTableDetail[row].calendar_year_month;
 		
 		$('#addInformationForm input[name=p_io_orders_id]').val(io_orders_id);
 		$('#addInformationForm input[name=selectbox_io_orders_id]').val(displayed_name);
+		$('#addInformationForm input[name=comment]').val('Billing for '+calendar_year_month);
 	}
 	
 	/////////////////////////////////////
@@ -540,7 +542,7 @@
 		$('#addAdjustedUnitDialog input[name=p_month_sk]').val(month_since_2005);	
 		$('#addAdjustedUnitDialog input[name=adjusted_units]').val('');	
 		$('#addAdjustedUnitDialog input[name=selectbox-combined_ids]').val(combined_ids+" | "+io_line_item_name);
-		$('#addAdjustedUnitDialog input[name=comment]').val('');		
+		$('#addAdjustedUnitDialog input[name=comment]').val('Billing for '+calendar_year_month);		
 	}
 	
 	/////////////////////////////////////
@@ -598,7 +600,7 @@
 		$('#updateAdjustedUnitForm input[name=p_month_sk]').val(month_since_2005);	
 		$('#updateAdjustedUnitForm input[name=adjusted_units]').val(p_adjusted_units);	
 		$('#updateAdjustedUnitForm input[name=selectbox-combined_ids]').val(combined_ids+" | "+io_line_item_name);
-		$('#updateAdjustedUnitForm input[name=comment]').val('');		
+		$('#updateAdjustedUnitForm input[name=comment]').val('Billing for '+calendar_year_month);		
 	}
 	
 	/////////////////////////////////////
@@ -698,11 +700,33 @@
 		}
 	}
 	
+	function autoShowGroupOrderFromURL(){
+		//show group orders selected
+		var gro=urlMaster.getParam('sh_order');
+		console.log(gro);
+		urlMaster.replaceParam('sh_order','|');
+		var res = gro.split("|");
+		$.each(res,function(index,item){
+			console.log(item);
+			if(item!=''){
+				showDetailGroupOrder(item);
+				showDetail(item);
+			}
+		});
+	}
+	
 	function showDetail(io_order_id){
 		if ($('tr.class' + io_order_id).first().css('display') == 'none') {
 			$('tr.class' + io_order_id).show();
+			// Add selected order to url
+			var gro=urlMaster.getParam('sh_order');
+			gro+='|'+io_order_id;
+			urlMaster.replaceParam('sh_order',gro);
 		} else {
 			$('tr.class' + io_order_id).hide();
+			var gro=urlMaster.getParam('sh_order');
+			gro=gro.replace(io_order_id,'');
+			urlMaster.replaceParam('sh_order',gro);
 		}
 	}
 </script>
