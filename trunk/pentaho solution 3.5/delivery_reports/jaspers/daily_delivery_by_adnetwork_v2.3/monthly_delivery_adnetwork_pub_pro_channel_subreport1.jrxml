@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_delivery_adnetwork_pub_prop_channel_subreport1" language="groovy" pageWidth="2830" pageHeight="802" columnWidth="2830" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="1.0000000000000033"/>
-	<property name="ireport.x" value="756"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="p_adnetwork_id_list" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new String("0")]]></defaultValueExpression>
@@ -32,18 +32,18 @@
 	property_name,
 	channel_id,
 	channel_name,
-	adcel_requests as adcel_requests,
-	SUM(fullfilled_code_count) as adcel_response,
-	SUM(bannerclick_events) as bannerclick_events,
-	SUM(filled_requests)-SUM(verve_impressions) as undisplayed_impressions,
-	SUM(verve_impressions) as verve_impressions,
-	SUM(reported_impressions) as reported_impressions,
+	adcel_requests::bigint as adcel_requests,
+	SUM(fullfilled_code_count)::bigint as adcel_response,
+	SUM(bannerclick_events)::bigint as bannerclick_events,
+	SUM(filled_requests)::bigint-SUM(verve_impressions)::bigint as undisplayed_impressions,
+	SUM(verve_impressions)::bigint as verve_impressions,
+	SUM(reported_impressions)::bigint as reported_impressions,
 	(CASE WHEN adcel_requests>0 THEN SUM(fullfilled_code_count)::float/adcel_requests ELSE 0 END)
 	as response_percentage,
 	(CASE WHEN adcel_requests>0 THEN SUM(verve_impressions)::float/adcel_requests ELSE 0 END) as pub_fill_percentage,
 	(CASE WHEN SUM(filled_requests)>0 THEN SUM(undisplayed_impressions)::float/SUM(filled_requests) ELSE 0 END) as undisplayed_percentage,
 	(CASE WHEN SUM(verve_impressions)>0 THEN SUM(reported_impressions)::float/SUM(verve_impressions) ELSE 0 END) as impressions_discrepancy_percentage,
-	SUM(clicks) as clicks,
+	SUM(clicks)::bigint as clicks,
 	(CASE WHEN SUM(verve_impressions)> 0 THEN SUM(clicks)::float/SUM(verve_impressions) ELSE 0 END) as ctr,
 	(CASE WHEN SUM(verve_impressions)>0 THEN SUM(total_revenue)::float*1000/SUM(verve_impressions) ELSE 0 END) as cpm,
 	SUM(unreported_revenue) as unreported_revenuem,
@@ -54,9 +54,9 @@
 	SUM(pub_revenue) as pub_revenue,
 	(CASE WHEN SUM(verve_impressions)>0 THEN SUM(pub_revenue)::float*1000/SUM(verve_impressions) ELSE 0 END) as pub_rpm,
 	(CASE WHEN $P{report_total_reported_revenue}>0 THEN SUM(total_revenue)::float/$P{report_total_reported_revenue} ELSE 0 END) as daily_rev_percentage,
-ui_count as ui_count,
-SUM(filled_requests) AS filled_requests,
-unfilled_requests AS unfilled_requests
+ui_count::bigint as ui_count,
+SUM(filled_requests)::bigint AS filled_requests,
+unfilled_requests::bigint AS unfilled_requests
 FROM adsops.monthly_agg_delivery_adnetwork_publisher_v3
 WHERE is_active=true
 AND month_since_2005::int = $P{month_since_2005}::int
@@ -108,7 +108,7 @@ ORDER BY calendar_year_month,undisplayed_impressions desc,ctr desc;]]>
 	<field name="pub_revenue" class="java.lang.Double"/>
 	<field name="pub_rpm" class="java.lang.Double"/>
 	<field name="daily_rev_percentage" class="java.lang.Double"/>
-	<field name="ui_count" class="java.lang.Integer"/>
+	<field name="ui_count" class="java.lang.Long"/>
 	<field name="filled_requests" class="java.lang.Long"/>
 	<field name="unfilled_requests" class="java.lang.Long"/>
 	<variable name="adcel_requests_1" class="java.lang.Long" calculation="Sum">

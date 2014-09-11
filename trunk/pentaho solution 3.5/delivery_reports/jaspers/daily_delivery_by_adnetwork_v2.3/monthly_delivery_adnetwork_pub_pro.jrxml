@@ -26,22 +26,22 @@
 	a.calendar_year_month
 	,a.month_since_2005
 	,max((a.dt_lastchange::timestamp with time zone AT TIME ZONE 'America/Los_Angeles'))::timestamp with time zone AT TIME ZONE 'America/New_York'as dt_lastchange
-	,SUM(a.fullfilled_code_count) as adcel_response
-	,SUM(a.filled_requests) AS filled_requests
-	,a.unfilled_requests AS unfilled_requests
-	,SUM(a.verve_impressions) as verve_impressions
-	,SUM(a.reported_impressions) as reported_impressions
-	,SUM(a.filled_requests)-SUM(verve_impressions) as undisplayed_impressions
-	,SUM(a.clicks) as clicks
+	,SUM(a.fullfilled_code_count)::bigint as adcel_response
+	,SUM(a.filled_requests)::bigint AS filled_requests
+	,a.unfilled_requests::bigint AS unfilled_requests
+	,SUM(a.verve_impressions)::bigint as verve_impressions
+	,SUM(a.reported_impressions)::bigint as reported_impressions
+	,SUM(a.filled_requests)::bigint-SUM(verve_impressions)::bigint as undisplayed_impressions
+	,SUM(a.clicks)::bigint as clicks
 	,SUM(a.unreported_revenue) as unreported_revenue
 	,SUM(a.reported_revenue) as reported_revenue
 	,SUM(a.unreported_revenue)+ SUM(reported_revenue) as total_revenue
 	,SUM(a.total_revenue) as total_revenue
 	,SUM(a.verve_revenue) as verve_revenue
 	,SUM(a.pub_revenue) as pub_revenue
-	,SUM(bannerclick_events) as bannerclick_events
-	,a.adcel_requests as adcel_requests
-	,a.ui_count as ui_count
+	,SUM(bannerclick_events)::bigint as bannerclick_events
+	,a.adcel_requests::bigint as adcel_requests
+	,a.ui_count::bigint as ui_count
 	FROM adsops.monthly_agg_delivery_adnetwork_publisher_v3 a
 	WHERE a.is_active = true
 	AND a.month_since_2005 BETWEEN $P{p_start_month_since_2005}::int AND $P{p_end_month_since_2005}::int
