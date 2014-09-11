@@ -346,6 +346,7 @@ sub transferExportFileToClient{
 		
 		if($data_file_config_id==0){
 			note("Can not transfer aggregate data to $server. Check import module config....");
+			sendMail("chinh.nguyen\@ecepvn.org","Can not transfer aggregate data to $server","Export host: $exportHostName<br/>File name: $export_file_name<br/>File size: $file_size<p/>");
 		}else{
 			#load config file on client
 			my $import_dir="";
