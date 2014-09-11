@@ -42,6 +42,10 @@
 </form>
 
 <script>
+	// Set default value for comment to the current month
+	var now=new Date();
+	$('#comment').val("Billing for "+now.format('yyyy-mmm'));
+	
 	$('#selectbox-io_order_id').select2({
 		minimumInputLength: 0,
 		ajax: {

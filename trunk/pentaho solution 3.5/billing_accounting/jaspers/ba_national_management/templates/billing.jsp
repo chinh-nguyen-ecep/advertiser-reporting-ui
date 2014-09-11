@@ -300,7 +300,7 @@
 					p_io_line_items: p_io_line_items,
 					obj_table: $('#detailTable'),
 					success: function(){
-						
+						autoShowGroupOrderFromURL();
 					}
 				});
 			}else{
@@ -312,7 +312,7 @@
 					p_io_line_items: p_io_line_items,
 					obj_table: $('#detailTable'),
 					success: function(){
-						
+						autoShowGroupOrderFromURL();
 					}
 				});
 			}
@@ -537,9 +537,10 @@
 	function loadInfomationAddForm(row){
 		var io_orders_id    = dataTableDetail[row].io_orders_id;
 		var displayed_name  = dataTableDetail[row].io_orders_id + ' | ' + dataTableDetail[row].campaign_name;
-		
+		var calendar_year_month=dataTableDetail[row].calendar_year_month;
 		$('#addInformationForm input[name=p_io_orders_id]').val(io_orders_id);
 		$('#addInformationForm input[name=selectbox_io_orders_id]').val(displayed_name);
+		$('#addInformationForm input[name=comment]').val("Billing for "+ calendar_year_month);		
 	}
 	
 	/////////////////////////////////////
@@ -569,7 +570,8 @@
 			p_campaign_id: $('#editInformationForm input[name=campaign_id]').val(),
 			p_billing_contact: $('#editInformationForm input[name=billing_contact]').val(),
 			p_comment: $('#editInformationForm input[name=comment]').val(),
-			success: function(data){				
+			success: function(data){	
+				updateScrollingLocate();
 				loadBillingDetailFromUrl();
 			}
 		});
@@ -594,7 +596,8 @@
 				p_campaign_id: $('#addInformationForm input[name=campaign_id]').val(),
 				p_billing_contact: $('#addInformationForm input[name=billing_contact]').val(),
 				p_comment: $('#addInformationForm input[name=comment]').val(),
-				success: function(data){				
+				success: function(data){
+					updateScrollingLocate();
 					loadBillingDetailFromUrl();
 				}
 			});
@@ -620,7 +623,7 @@
 		$('#addAdjustedUnitDialog input[name=p_month_sk]').val(month_since_2005);	
 		$('#addAdjustedUnitDialog input[name=adjusted_units]').val('');	
 		$('#addAdjustedUnitDialog input[name=selectbox-combined_ids]').val(combined_ids+" | "+io_line_item_name);
-		$('#addAdjustedUnitDialog input[name=comment]').val('');		
+		$('#addAdjustedUnitDialog input[name=comment]').val('Billing for '+calendar_year_month);		
 	}
 	
 	/////////////////////////////////////
@@ -649,7 +652,8 @@
 			p_adjusted_units: $('#addAdjustedUnitForm input[name=adjusted_units]').val(),
 			p_month_sk: $('#addAdjustedUnitForm input[name=p_month_sk]').val(),
 			p_comment: $('#addAdjustedUnitForm input[name=comment]').val(),
-			success: function(data){				
+			success: function(data){	
+				updateScrollingLocate();
 				loadBillingDetailFromUrl();
 			}
 		});
@@ -678,7 +682,7 @@
 		$('#updateAdjustedUnitForm input[name=p_month_sk]').val(month_since_2005);	
 		$('#updateAdjustedUnitForm input[name=adjusted_units]').val(p_adjusted_units);	
 		$('#updateAdjustedUnitForm input[name=selectbox-combined_ids]').val(combined_ids+" | "+io_line_item_name);
-		$('#updateAdjustedUnitForm input[name=comment]').val('');		
+		$('#updateAdjustedUnitForm input[name=comment]').val('Billing for '+calendar_year_month);		
 	}
 	
 	/////////////////////////////////////
@@ -712,6 +716,7 @@
 			p_month_sk: $('#updateAdjustedUnitForm input[name=p_month_sk]').val(),
 			p_comment: $('#updateAdjustedUnitForm input[name=comment]').val(),
 			success: function(data){
+				updateScrollingLocate();
 				loadBillingDetailFromUrl();
 			}		
 		});
@@ -762,10 +767,18 @@
 	function showDetailGroupOrder(io_order_id){
 		if ($('tr.group_month_' + io_order_id).first().css('display') == 'none') {
 			$('tr.group_month_' + io_order_id).show();
+			// Add selected order to url
+			var gro=urlMaster.getParam('sh_order');
+			gro+='|'+io_order_id;
+			urlMaster.replaceParam('sh_order',gro);
 		} else {
 			$('tr.group_month_' + io_order_id).hide();
 			$('tr[class^=row_' + io_order_id+']').hide();
 			$('tr[class^=row_head_title_' + io_order_id+']').hide();
+			// Remove selected order from url
+			var gro=urlMaster.getParam('sh_order');
+			gro=gro.replace(io_order_id,'');
+			urlMaster.replaceParam('sh_order',gro);
 		}
 	}
 	
@@ -773,17 +786,75 @@
 		if ($('tr.row_' + key).first().css('display') == 'none') {
 			$('tr.row_' + key).show();
 			$('tr.row_head_title_' + key).show();
+			// Add key to url
+			var sh_m=urlMaster.getParam('sh_m');
+			sh_m+='|'+key;
+			urlMaster.replaceParam('sh_m',sh_m);
 		} else {
 			$('tr.row_' + key).hide();
 			$('tr.row_head_title_' + key).hide();
+			// remove key from url
+			var sh_m=urlMaster.getParam('sh_m');
+			sh_m=sh_m.replace(key,'');
+			urlMaster.replaceParam('sh_m',sh_m);
 		}
 	}
 	
 	function showDetail(io_order_id){
 		if ($('tr.class' + io_order_id).first().css('display') == 'none') {
 			$('tr.class' + io_order_id).show();
+			// Add selected order to url
+			var gro=urlMaster.getParam('sh_order');
+			gro+='|'+io_order_id;
+			urlMaster.replaceParam('sh_order',gro);
 		} else {
 			$('tr.class' + io_order_id).hide();
+			var gro=urlMaster.getParam('sh_order');
+			gro=gro.replace(io_order_id,'');
+			urlMaster.replaceParam('sh_order',gro);
 		}
 	}
+	
+	function updateScrollingLocate(){
+		// get scroll locate
+		var doc = document.documentElement;
+		var left = (window.pageXOffset || doc.scrollLeft) - (doc.clientLeft || 0);
+		var top = (window.pageYOffset || doc.scrollTop)  - (doc.clientTop || 0);
+		console.log(left+' '+top);	
+		urlMaster.replaceParam('sc_t',top);
+	}
+	function clearScrollingLocate(){
+		urlMaster.replaceParam('sc_t',"0");
+	}
+	function autoShowGroupOrderFromURL(){
+		//show group orders selected
+		var gro=urlMaster.getParam('sh_order');
+		console.log(gro);
+		urlMaster.replaceParam('sh_order','|');
+		var res = gro.split("|");
+		$.each(res,function(index,item){
+			console.log(item);
+			if(item!=''){
+				showDetailGroupOrder(item);
+				showDetail(item);
+			}
+		});
+		
+		var sh_m=urlMaster.getParam('sh_m');
+		console.log(sh_m);
+		urlMaster.replaceParam('sh_m','|');
+		res = sh_m.split("|");
+		$.each(res,function(index,item){
+			console.log(item);
+			if(item!=''){
+				showDetailGroupMonth(item);
+			}
+		});
+		
+		var sc_top=urlMaster.getParam('sc_t');
+		if(sc_top>0){
+			window.scrollTo(0,sc_top);
+			clearScrollingLocate();
+		}
+	}	
 </script>
