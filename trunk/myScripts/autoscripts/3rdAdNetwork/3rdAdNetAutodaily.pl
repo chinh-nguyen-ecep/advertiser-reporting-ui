@@ -96,6 +96,9 @@ sub main{
 		checkParam(29,2);
 		promote(29);
 		
+		#Insert subscription process to transfer to Dw12 AWS
+		transferToAWS();
+		
 		$time=getTime();
 		sendMail("Dear all,<p />$time# Daily 3rd AdNetwork report promoted. The process are completed with no error.<p />Thanks,<br />send by auto mail.",$mailTile);
 		writelog("Main Process finished");	
@@ -238,6 +241,34 @@ sub checkEstimateTableToTransfer{
 	}else{
 		print "$tableName has been have data today...\n";
 	}
+}
+
+sub transferToAWS{
+	my $subscription_key=0;
+	my $subscription_name=0;
+	%h_report_date2=dw3_getDate(-2);
+	%h_report_date7=dw3_getDate(-7);
+	$report_date2=$h_report_date2{'year'}.'-'.$h_report_date2{'month'}.'-'.$h_report_date2{'day'};	#the report date 2012-02-02
+	$report_date7=$h_report_date7{'year'}.'-'.$h_report_date7{'month'}.'-'.$h_report_date7{'day'};	#the report date 2012-02-02		
+	
+	print "* Transfer to AWS $process_date $report_date7...\n";	
+	my $dbh = getConnectionDw10();	  
+	my $query="SELECT subscription_key,subscription_name FROM control.spctl_pub_customer_subscription WHERE subscription_name IN ('Daily Backup AIS To AWS','Daily Backup AIS To AWS 7days')";
+	my $query_handle = $dbh->prepare($query);
+	$query_handle->execute();	
+	$query_handle->bind_columns(undef, \$subscription_key, \$subscription_name);
+	while($query_handle->fetch()) {	
+		my $query2="";
+		if($subscription_name eq 'Daily Backup AIS To AWS'){
+			$query2="SELECT * FROM CONTROL.fn_spctl_insert_subscription_to_process($subscription_key, 'start_date=$report_date2&end_date=$process_date', true)";
+		}
+		if($subscription_name eq 'Daily Backup AIS To AWS 7days'){
+			$query2="SELECT * FROM CONTROL.fn_spctl_insert_subscription_to_process($subscription_key, 'start_date=$report_date7&end_date=$process_date', true)";
+		}
+		my $query_handle2 = $dbh->prepare($query2);
+		$query_handle2->execute();	
+	}
+	my $rv = $dbh->disconnect;
 }
 
 
