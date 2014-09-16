@@ -30,8 +30,8 @@ sub checkParam{
 		#Create connection
 		$dbh = getConnection();
 		#Cretae String query
-		$query="SELECT process_id,process_status  FROM control.process
-		  WHERE process_status <> 'SU' AND process_config_id =$process_id_config";
+		$query="SELECT process_id,process_status  FROM control.processs
+		  WHERE dt_process_queued::date=now()::date-1 AND process_config_id =$process_id_config";
 		$query_handle = $dbh->prepare($query);
 		$query_handle->execute();
 		$query_handle->bind_columns(undef, \$process_id,\$process_status);		
@@ -67,7 +67,7 @@ sub checkParam{
 		}elsif($PS==0){
 			printTime("No process...");
 			#runParam($process_id_config);
-			$finish=true;
+			#$finish=true;
 		}
 		#disconnect database	
 		my $rv = $dbh->disconnect;
