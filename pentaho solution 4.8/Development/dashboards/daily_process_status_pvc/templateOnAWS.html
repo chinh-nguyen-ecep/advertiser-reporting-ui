@@ -154,28 +154,6 @@
 		</div>
 		<div class="box_content" style="min-height: 250px;width: 100%">	
 			<br/>
-			<!--
-			<h2>Network Revenue</h2>
-			<div class="etl_box" id="3rd_etl_status">
-				<img src="/verve-lib/images/loading.gif" />
-			</div>
-			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('14,15,16,17,18,19,20,21,22,25,26,27','3rd Adnetwork log files',dateBefore,defaultServer);" title="3rd Adnetwork log files" class="view_log_detail">Log files detail</a>
-				<table class="table1">
-					<thead>
-						<th width="300">Process</th>
-						<th width="50">Param</th>
-						<th width="70">Status</th>
-						<th>Start time</th>
-						<th title="Expected Start time">Exp St_time</th>
-						<th>Completion time</th>
-						<th title="Expected Completion time">Exp Co_time</th>
-						<th>Status note</th>
-					</thead>
-					<tbody id="3rdAdnetwork">
-						<tr><td colspan="8" style="text-align: left"><img src="/verve-lib/images/loading.gif" /></td></tr>
-					</tbody>
-				</table>
-				-->
 			<h2>Adcel</h2>
 			<div class="etl_box" id="adcel_etl_status">
 				<img src="/verve-lib/images/loading.gif" />
@@ -216,33 +194,11 @@
 						<tr><td colspan="8" style="text-align: left"><img src="/verve-lib/images/loading.gif" /></td></tr>
 					</tbody>
 				</table>
-				<!--
-			<h2>ADM & DFP 2.0</h2>			
-			<div class="etl_box" id="adm_20_etl_status">
-				<img src="/verve-lib/images/loading.gif" />
-			</div>
-			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('23','ADM & DFP 2.0 log files',process_date,defaultServer);" title="ADM & DFP 2.0 log files" class="view_log_detail">Log files detail</a>
-				<table class="table1">
-					<thead>
-						<th width="300">Process</th>
-						<th width="50">Param</th>
-						<th width="70">Status</th>
-						<th>Start time</th>
-						<th title="Expected Start time">Exp St_time</th>
-						<th>Completion time</th>
-						<th title="Expected Completion time">Exp Co_time</th>
-						<th>Status note</th>
-					</thead>
-					<tbody id="adm20">
-						<tr><td colspan="8" style="text-align: left"><img src="/verve-lib/images/loading.gif" /></td></tr>
-					</tbody>
-				</table>
-				-->
 		</div>	
 	</div>
 	<div class="mybox" style="width: 100%">
 		<div class="title">
-			Daily ETL/Data Process Status On pentaho-backup
+			Daily ETL/Data Process Status On dw11
 		</div>
 		<div class="box_content" style="min-height: 250px;width: 100%">	
 			<br/>
@@ -250,7 +206,7 @@
 			<div class="etl_box" id="event_etl_status_backup">
 				<img src="/verve-lib/images/loading.gif" />
 			</div>			
-			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('5,6,7,8,9','Event Tracker log files',dateBefore,'pentaho-backup');" title="Event Tracker log files" class="view_log_detail">Event log files detail</a>
+			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('5,6,7,8,9','Event Tracker log files',dateBefore,'dw11');" title="Event Tracker log files" class="view_log_detail">Event log files detail</a>
 				<table class="table1">
 					<thead>
 						<th width="300">Process</th>
@@ -268,6 +224,122 @@
 				</table>
 		</div>	
 	</div>	
+		<div class="mybox" style="width: 100%">
+		<div class="title">
+			Daily ETL/Data Process Status On pentaho-backup
+			<img src="/verve_style/images/arrow_refresh.png" id="bt_daily_process_status_refresh" class="bt" alt="refresh" title="refresh"/>
+		</div>
+		<div class="box_content" style="min-height: 1200px;width: 100%">	
+			<br/>
+			<h2>3rd Adnetwork</h2>
+			<div class="etl_box" id="3rd_etl_status">
+				<img src="/verve_style/images/loading.gif" />
+			</div>
+			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('39,40,41,43,44,49,50,47,48,52,53,103,104,126,170','3rd Adnetwork log files',dateBefore,defaultServer);" title="3rd Adnetwork log files" class="view_log_detail">Log files detail</a>
+				<table class="table1">
+					<thead>
+						<th width="300">Process</th>
+						<th width="50">Param</th>
+						<th width="70">Status</th>
+						<th>Start time</th>
+						<th title="Expected Start time">Exp St_time</th>
+						<th>Completion time</th>
+						<th title="Expected Completion time">Exp Co_time</th>
+						<th>Status note</th>
+					</thead>
+					<tbody id="3rdAdnetwork">
+						<tr><td colspan="8" style="text-align: left"><img src="/verve_style/images/loading.gif" /></td></tr>
+					</tbody>
+				</table>
+			<h2>Special Dims</h2>
+			<div class="etl_box" id="dbclk_etl_status">
+				<img src="/verve_style/images/loading.gif" />
+			</div>
+			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('23,26,30,31,32,33,34,35,42,54,63,76,71,78,125,165,174,91','ADM Data mart log files',process_date,defaultServer);" title="ADM Data mart log files" class="view_log_detail">Log files detail</a>
+				<table  class="table1">
+					<thead>
+						<th width="300">Process</th>
+						<th width="50">Param</th>
+						<th width="70">Status</th>
+						<th>Start time</th>
+						<th title="Expected Start time">Exp St_time</th>
+						<th>Completion time</th>
+						<th title="Expected Completion time">Exp Co_time</th>
+						<th>Status note</th>
+					</thead>
+					<tbody id="doubleClick">
+						<tr><td colspan="8" style="text-align: left"><img src="/verve_style/images/loading.gif" /></td></tr>
+					</tbody>
+				</table>
+			<h2>ADM & DFP 2.0</h2>
+			
+			<div class="etl_box" id="adm_20_etl_status">
+				<img src="/verve_style/images/loading.gif" />
+			</div>
+			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151','ADM & DFP 2.0 log files',process_date,defaultServer);" title="ADM & DFP 2.0 log files" class="view_log_detail">Log files detail</a><br/>
+			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('152','ADM & DFP 2.0 log files',dateBefore,defaultServer);" title="ADM & DFP 2.0 log files" class="view_log_detail">Fact logs detail</a>
+				<table class="table1">
+					<thead>
+						<th width="300">Process</th>
+						<th width="50">Param</th>
+						<th width="70">Status</th>
+						<th>Start time</th>
+						<th title="Expected Start time">Exp St_time</th>
+						<th>Completion time</th>
+						<th title="Expected Completion time">Exp Co_time</th>
+						<th>Status note</th>
+					</thead>
+					<tbody id="adm20">
+						<tr><td colspan="8" style="text-align: left"><img src="/verve_style/images/loading.gif" /></td></tr>
+					</tbody>
+				</table>
+				
+			<h2>VLMO</h2>
+			
+			<div class="etl_box" id="vlmo_etl_status">
+				<img src="/verve_style/images/loading.gif" />
+			</div>
+			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('200,201,202,203,181,182,183,184,185,186,187,198,199','VLMO Dim log files',process_date,defaultServer);" title="VLMO Dim log files" class="view_log_detail">VLMO Dim log files</a><br/>
+			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('188','VLMO Fact log files',dateBefore,defaultServer);" title="VLMO Fact log files" class="view_log_detail">VLMO Fact log files</a>
+				<table class="table1">
+					<thead>
+						<th width="300">Process</th>
+						<th width="50">Param</th>
+						<th width="70">Status</th>
+						<th>Start time</th>
+						<th title="Expected Start time">Exp St_time</th>
+						<th>Completion time</th>
+						<th title="Expected Completion time">Exp Co_time</th>
+						<th>Status note</th>
+					</thead>
+					<tbody id="vlmo">
+						<tr><td colspan="8" style="text-align: left"><img src="/verve_style/images/loading.gif" /></td></tr>
+					</tbody>
+				</table>
+
+			<h2>RTB</h2>
+			
+			<div class="etl_box" id="rtb_etl_status">
+				<img src="/verve_style/images/loading.gif" />
+			</div>
+			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('152, 206, 209, 210, 211','RTB Fact log files',dateBefore,defaultServer);" title="RTB Fact log files" class="view_log_detail">RTB Fact log files</a>
+				<table class="table1">
+					<thead>
+						<th width="300">Process</th>
+						<th width="50">Param</th>
+						<th width="70">Status</th>
+						<th>Start time</th>
+						<th title="Expected Start time">Exp St_time</th>
+						<th>Completion time</th>
+						<th title="Expected Completion time">Exp Co_time</th>
+						<th>Status note</th>
+					</thead>
+					<tbody id="rtb">
+						<tr><td colspan="8" style="text-align: left"><img src="/verve_style/images/loading.gif" /></td></tr>
+					</tbody>
+				</table>
+		</div>	
+	</div>
 	<div id="list_log_files_dl">
 			<table cellpadding="0" cellspacing="0" border="0" class="display" id="list_log_files_tb" style="width: 100%">
 				<thead>
@@ -388,25 +460,33 @@
 
 			  },
 			  success: function(json){
-				if(host==defaultServer){
-					$('#3rdAdnetwork').empty();					
-					$('#adm20').empty();
+				if(host==defaultServer){					
 					$('#adcel').empty();
 					$('#eventTracker').empty();					
-				}else if(host=='pentaho-backup'){
+				}else if(host=='dw11'){
 					$('#eventTracker_backup').empty();
+				}else if(host=='pentaho-backup'){
+					$('#3rdAdnetwork').empty();					
+					$('#adm20').empty();
+					$('#vlmo').empty();
+					$('#rtb').empty();
+					$('#doubleClick').empty();
 				}
 
 				var dataArray=json.adata;
 				if(dataArray.length==0){
 					var noData='<tr><td colspan="8" style="text-align: left">No Process has run today...</td></tr>';
-					if(host==defaultServer){
-						$('#3rdAdnetwork').append(noData);						
-						$('#adm20').append(noData);
+					if(host==defaultServer){						
 						$('#adcel').append(noData);
 						$('#eventTracker').append(noData);						
-					}else if(host=='pentaho-backup'){
+					}else if(host=='dw11'){
 						$('#eventTracker_backup').append(noData);
+					}else if(host=='pentaho-backup'){
+						$('#3rdAdnetwork').append(noData);						
+						$('#adm20').append(noData);
+						$('#vlmo').append(noData);
+						$('#rtb').append(noData);
+						$('#doubleClick').append(noData);
 					}
 
 				}
@@ -452,15 +532,21 @@
 					+'<td>'+note_status+'</td>'
 					+'</tr>';
 					
-					if(group_process_name=='3rdAdnetwork' && host == defaultServer){
+					if(group_process_name=='3rdAdnetwork' && host == 'pentaho-backup'){
 						$('#3rdAdnetwork').append(node);
-					}else if (group_process_name=='ADM-DFP' && host == defaultServer){
+					}else if (group_process_name=='Double Click' && host == 'pentaho-backup'){
+						$('#doubleClick').append(node);
+					}else if (group_process_name=='VLMO' && host == 'pentaho-backup'){
+						$('#vlmo').append(node);
+					}else if (group_process_name=='RTB' && host == 'pentaho-backup'){
+						$('#rtb').append(node);
+					}else if (group_process_name=='ADM-DFP' && host == 'pentaho-backup'){
 						$('#adm20').append(node);
 					}else if (group_process_name=='AdCel' && host == defaultServer){
 						$('#adcel').append(node);
 					}else if (group_process_name=='Event Tracker' && host == defaultServer){
 						$('#eventTracker').append(node);
-					}else if (group_process_name=='Event Tracker' && host == 'pentaho-backup'){
+					}else if (group_process_name=='Event Tracker' && host == 'dw11'){
 						$('#eventTracker_backup').append(node);
 					}
 				}
@@ -564,23 +650,27 @@
 			},60000);
 		},
 		refresh: function(){
-			MetaLayer.loadProcessStatusData(defaultServer);
-			MetaLayer.loadProcessStatusData('pentaho-backup');
+			MetaLayer.loadProcessStatusData(defaultServer);					
 			setTimeout(function(){
+				MetaLayer.loadProcessStatusData('dw11');				
 				MetaLayer.loadETLStatus($('#adcel_etl_status'),'AdCel',dateBefore,defaultServer);
-			},1000);
-			setTimeout(function(){
-				MetaLayer.loadETLStatus($('#3rd_etl_status'),'3rdAdnetwork',dateBefore,defaultServer);
-			},1000);
-			setTimeout(function(){
-				MetaLayer.loadETLStatus($('#adm_20_etl_status'),'ADM2.0',dateBefore,defaultServer);
-			},2000);
-			setTimeout(function(){
 				MetaLayer.loadETLStatus($('#event_etl_status'),'Event Tracker',dateBefore,defaultServer);
-			},3000);
+			},1000);
 			setTimeout(function(){
-				MetaLayer.loadETLStatus($('#event_etl_status_backup'),'Event Tracker',dateBefore,'pentaho-backup');
+				MetaLayer.loadProcessStatusData('pentaho-backup');
+				MetaLayer.loadETLStatus($('#3rd_etl_status'),'3rdAdnetwork',dateBefore,'pentaho-backup');				
+			},2000);
+			setTimeout(function(){			
+				MetaLayer.loadETLStatus($('#adm_20_etl_status'),'ADM2.0',process_date,'pentaho-backup');
+				MetaLayer.loadETLStatus($('#vlmo_etl_status'),'other',dateBefore,'pentaho-backup','188');				
 			},3000);
+			setTimeout(function(){			
+				MetaLayer.loadETLStatus($('#event_etl_status_backup'),'Event Tracker',dateBefore,'dw11');
+				MetaLayer.loadETLStatus($('#dbclk_etl_status'),'Double Click',process_date,'pentaho-backup');				
+			},4000);
+			setTimeout(function(){				
+				MetaLayer.loadETLStatus($('#rtb_etl_status'),'other',dateBefore,'pentaho-backup','152, 206, 209, 210, 211');
+			},5000);
 		}
 	};
 
