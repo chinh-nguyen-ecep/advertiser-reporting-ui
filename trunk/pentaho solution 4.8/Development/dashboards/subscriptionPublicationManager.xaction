@@ -172,6 +172,22 @@
 				</table>
 			</div>				
 		</div>
+	</div
+	<div title="<span id ='process_running_span' class='tt-inner' ><img src='https://cdn4.iconfinder.com/data/icons/pretty_office_3/24/Process-Warning.png'/><br>Processing running(0)</span>" style="padding:10px">
+		<p>This page display all running processes.</p>
+
+		<div  id="runningProcessingLayout" class="easyui-layout" data-options="fit:true">		
+			<div data-options="region:'south',split:true" style="height:250px;">
+				<table id="rp_process_trans" class="easyui-datagrid" data-options="singleSelect:true,fit:true">
+					
+				</table>
+			</div>	
+			<div data-options="region:'center'" >
+				<table id="rp_processes" class="easyui-datagrid" data-options="fit:true">
+					
+				</table>
+			</div>				
+		</div>
 	</div>
 	<div  title="<span class='tt-inner'><img src='https://cdn1.iconfinder.com/data/icons/snowish/24x24/apps/file-manager.png'/><br>Subscription Manager</span>" style="padding:10px">
 		<div class="metrouicss" id="manager_win8_button" style="display:none;height: 48px">	
@@ -276,7 +292,8 @@
 		console.log( "ready!" );
 		console.log("jQuery verion: "+jQuery.fn.jquery);
 		initProcessingPage();
-		initFailedPage();		
+		initFailedPage();
+		initRunningPage();		
 	});
 	
 	//*******************************
@@ -464,7 +481,56 @@
 			}
 			loadListFailedProcess();			
 		}
-
+		//************************************
+		// Script code on Process Running page
+		//************************************
+		var initRunningPage=function(){
+			var loadListRunningProcess=function(){
+				console.log("Load list Running process");
+				$('#rp_processes').datagrid({
+					url:rootPath+'&actions=listRunningProcess',
+					columns:[[
+						{field:'publication_process_id',title:'ID',width:60},
+						{field:'create_date',title:'Start time',width:80,align:'center'},
+						{field:'subscription_name',title:'Subscription Name',width:200},
+						{field:'subscription_key',title:'Subscription key',width:70,align:'right'},
+						{field:'process_actribute',title:'Process actribute',width:200},
+						{field:'process_status',title:'Status',width:60,align:'center',formatter: function(value,row,index){
+									if(value.trim()=='SU'){
+										return '<span class="font-green">'+value+'</span>';
+									}else if(value.trim()=='EF' || value.trim()=='TF'){
+										return '<span class="font-red">'+value+'</span>';
+									}else{
+										return '<span class="font-blue">'+value+'</span>';
+									}
+								}					
+						},
+						{field:'dt_lastchange',title:'Last change',align:'center'}
+					]],
+					rownumbers:true,
+					singleSelect:true,
+					collapsible:true,
+					fitColumns:true,
+					onSelect: function(rowIndex, rowData){
+						var process_id=rowData.publication_process_id;
+						loadProcessTransByProcessId($('#rp_process_trans'),process_id);
+					},
+					onLoadSuccess:function(rowData){	
+						console.log('Running Process: '+rowData.rows.length);
+						var number_of_failed_process=rowData.rows.length;
+						if(number_of_failed_process>0){
+							console.log('Set tab tile');
+							$('#process_running_span').html('<img src=\'https://cdn4.iconfinder.com/data/icons/pretty_office_3/24/Process-Warning.png\'/><br>Processing failed(<font color="red">'+number_of_failed_process+'!</font>)');						
+						}else{
+							$('#process_running_span').html('<img src=\'https://cdn4.iconfinder.com/data/icons/pretty_office_3/24/Process-Warning.png\'/><br>Processing failed(0)');
+						}
+						setTimeout(function(){loadListRunningProcess()},60000);
+					}
+				});
+				
+			}
+			loadListRunningProcess();			
+		}
 		//***************************
 		//   Script code on Manager page
 		//***************************
@@ -497,7 +563,7 @@
 		}
  </script>
 </body>
-</html>]]></template> 
+</html>]]></template>
         </component-definition> 
       </action-definition>
  
@@ -606,6 +672,28 @@ ORDER BY a.publication_process_id]]></query>
  
     </actions>
   
+    <actions>
+      <condition><![CDATA[actions=='listRunningProcess']]></condition>
+      <action-definition>
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs>
+          <jndi type="string" mapping="connectionName"/>
+        </action-inputs>
+        <action-outputs>
+          <query-result type="result-set" mapping="query_result"/>
+        </action-outputs>
+        <component-definition>
+          <query><![CDATA[SELECT a.publication_process_id,to_char(a.create_date,'HH24:MI:SS') as create_date,to_char(a.dt_lastchange,'HH24:MI:SS') as dt_lastchange,a.process_status,a.process_actribute,b.subscription_name,b.subscription_key FROM control.spctl_subscription_publication_process a,control.spctl_pub_customer_subscription b
+WHERE a.subscription_key=b.subscription_key
+AND (a.process_status = 'PS' OR a.process_status='PST' OR a.process_status='WT')
+ORDER BY a.publication_process_id]]></query>
+          <live><![CDATA[true]]></live>
+        </component-definition>
+      </action-definition>
+
+    </actions>
+
     <action-definition> 
       <component-name>JavascriptRule</component-name>
       <action-type>Process data grid</action-type>

@@ -288,36 +288,36 @@ GROUP BY year_week,start_date_sk,end_date_sk,b.full_date ORDER BY start_date_sk 
   
     <actions> 
       <condition><![CDATA[p_emailMode=='true']]></condition>  
-      <action-definition>
+      <action-definition> 
         <component-name>SQLLookupRule</component-name>
         <action-type>Get subcription id</action-type>
-        <action-inputs>
-          <jndi type="string" mapping="connectionName"/>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/> 
         </action-inputs>
-        <action-outputs>
-          <query-result type="result-set" mapping="query_result"/>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
         </action-outputs>
-        <component-definition>
-          <query><![CDATA[SELECT now()::date as report_date,subscription_key FROM control.spctl_pub_customer_subscription WHERE subscription_name LIKE 'Weekly Publisher Performance Report v2']]></query>
-          <live><![CDATA[true]]></live>
-        </component-definition>
+        <component-definition> 
+          <query><![CDATA[SELECT now()::date as report_date,subscription_key FROM control.spctl_pub_customer_subscription WHERE subscription_name LIKE 'Weekly Publisher Performance Report v2']]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
       </action-definition>
-
+  
       <action-definition> 
         <component-name>JavascriptRule</component-name>
         <action-type>Process input</action-type>
         <action-inputs> 
           <query_result_list_weekls type="result-set"/>  
-          <query_result type="result-set"/>
+          <query_result type="result-set"/> 
         </action-inputs>
         <action-outputs> 
-          <p_full_date type="string"/>  
-          <sub_key type="string"/>
+          <p_end_date type="string"/>  
+          <sub_key type="string"/> 
         </action-outputs>
         <component-definition> 
-          <script><![CDATA[var p_full_date;
-p_full_date=query_result_list_weekls.getValueAt(0,3);
-var sub_key=query_result.getValueAt(0,1);]]></script> 
+          <script><![CDATA[var p_end_date;
+p_end_date=query_result_list_weekls.getValueAt(0,3);
+var sub_key=query_result.getValueAt(0,1);]]></script>
         </component-definition> 
       </action-definition>
   
@@ -326,15 +326,15 @@ var sub_key=query_result.getValueAt(0,1);]]></script>
         <action-type>Insert subscription process</action-type>
         <action-inputs> 
           <jndi type="string" mapping="connectionName"/>  
-          <p_full_date type="string"/>  
           <sub_key type="string"/>
+          <p_end_date type="string"/>
         </action-inputs>
         <action-outputs> 
           <query-result type="result-set" mapping="query_result"/> 
         </action-outputs>
         <component-definition> 
-          <query><![CDATA[SELECT * FROM control.fn_spctl_insert_subscription_to_process({sub_key},'date={p_full_date}',true);]]></query>  
-          <live><![CDATA[true]]></live> 
+          <live><![CDATA[true]]></live>  
+          <query><![CDATA[SELECT * FROM control.fn_spctl_insert_subscription_to_process({sub_key},'date={p_end_date}',true);]]></query>
         </component-definition> 
       </action-definition>
  
