@@ -89,7 +89,13 @@
         <value type="string"/>  
         <name type="string"/> 
       </columns> 
-    </List_report_types> 
+    </List_report_types>  
+    <connection_name_subscription type="string">
+      <sources>
+        <request>connection_name_subscription</request>
+      </sources>
+      <default-value><![CDATA[verveReportConnection]]></default-value>
+    </connection_name_subscription>
   </inputs>
 
   <outputs/>
@@ -212,18 +218,52 @@
       <condition><![CDATA[p_emailMode == 'true']]></condition>  
       <action-definition>
         <component-name>SQLLookupRule</component-name>
-        <action-type>Send email via Subscription</action-type>
-        <action-inputs/>
+        <action-type>Get subcription id</action-type>
+        <action-inputs>
+          <jndi type="string" mapping="connection_name_subscription"/>
+        </action-inputs>
         <action-outputs>
           <query-result type="result-set" mapping="query_result"/>
         </action-outputs>
         <component-definition>
-          <query><![CDATA[SELECT * FROM control.fn_spctl_insert_subscription_to_process(28,'',true);]]></query>
           <live><![CDATA[true]]></live>
-          <jndi><![CDATA[verveReportConnection]]></jndi>
+          <query><![CDATA[SELECT now()::date as report_date,subscription_key FROM control.spctl_pub_customer_subscription WHERE subscription_name LIKE 'Daily Adops Exception Report']]></query>
         </component-definition>
       </action-definition>
 
+      <action-definition>
+        <component-name>JavascriptRule</component-name>
+        <action-type>JavaScript</action-type>
+        <action-inputs>
+          <query_result type="result-set"/>
+        </action-inputs>
+        <action-outputs>
+          <date type="string"/>
+          <sub_key type="string"/>
+        </action-outputs>
+        <component-definition>
+          <script><![CDATA[var date=query_result.getValueAt(0,0);
+var sub_key=query_result.getValueAt(0,1);]]></script>
+        </component-definition>
+      </action-definition>
+
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Send email via Subscription</action-type>
+        <action-inputs>
+          <sub_key type="string"/>
+          <date type="string"/>
+          <jndi type="string" mapping="connection_name_subscription"/>
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
+        </action-outputs>
+        <component-definition> 
+          <live><![CDATA[true]]></live>  
+          <query><![CDATA[SELECT * FROM control.fn_spctl_insert_subscription_to_process({sub_key},'date={date}',true);]]></query>
+        </component-definition> 
+      </action-definition>
+ 
     </actions>
  
   </actions> 
