@@ -28,6 +28,7 @@ sub main{
 	register_process($process_date,$group_process_name,73,'05:00:00','06:00:00');
 	register_process($process_date,$group_process_name,74,'05:00:00','06:00:00');
 	register_process($process_date,$group_process_name,75,'05:00:00','06:00:00');
+	register_process($process_date,$group_process_name,80,'05:00:00','06:00:00');
 	#Check file logs
 	my $error=checkSU();
 	if($error == 0){
@@ -37,7 +38,7 @@ sub main{
 		runParam(73);		
 		dw3_writelog($logFile,"Run function param 73");		
 		#check param 73
-		checkParam(73,4);	
+		checkParam(73,5);	
 		#promote adm data feed		
 		promote(73);
 		
@@ -49,7 +50,10 @@ sub main{
 		runParam(75);
 		dw3_writelog($logFile,"transfer daily VLMO to production environment");
 				
-			
+		#transfer daily VLMO to QA environment
+		runParam(80);
+		dw3_writelog($logFile,"transfer daily VLMO to QA environment");
+		
 		#transfer all data of adm and double click to dw0
 		transferAllData();
 		

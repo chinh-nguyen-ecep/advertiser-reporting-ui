@@ -251,7 +251,7 @@ sub transferToAWS{
 	$report_date2=$h_report_date2{'year'}.'-'.$h_report_date2{'month'}.'-'.$h_report_date2{'day'};	#the report date 2012-02-02
 	$report_date7=$h_report_date7{'year'}.'-'.$h_report_date7{'month'}.'-'.$h_report_date7{'day'};	#the report date 2012-02-02		
 	
-	print "* Transfer to AWS $process_date $report_date7...\n";	
+	print "* Transfer to AWS $report_date7 $process_date...\n";	
 	my $dbh = getConnectionDw10();	  
 	my $query="SELECT subscription_key,subscription_name FROM control.spctl_pub_customer_subscription WHERE subscription_name IN ('Daily Backup AIS To AWS','Daily Backup AIS To AWS 7days')";
 	my $query_handle = $dbh->prepare($query);
