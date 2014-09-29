@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_operational_debugging_detail" language="groovy" pageWidth="1110" pageHeight="802" columnWidth="1110" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="78"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="p_exchange_list" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("0")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_full_date" class="java.util.Date">
+		<defaultValueExpression><![CDATA[new Date("31/12/9999")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_rtb_flight_id_list" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("0")]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT a.full_date
+     , a.exchange
+     , a.rtbm_adm_flight_id
+     , a.rtb_flight_id
+     , a.filled_requests - a.displayed_impressions AS undisplayed_impressions
+     , a.displayed_impressions
+     , (CASE WHEN a.filled_requests > 0 THEN (a.filled_requests - a.displayed_impressions)::float / a.filled_requests ELSE 0 END) AS undisplayed_percentage
+     , (CASE WHEN a.total_requests > 0 THEN a.displayed_impressions::float / a.total_requests ELSE 0 END) AS displayed_percentage
+     , a.total_requests
+     , a.filled_requests
+     , a.unfilled_requests
+     , a.wins_cnt
+FROM rtb.daily_agg_delivery_rtb_flight a
+WHERE a.is_active = true AND full_date = $P{p_full_date}
+AND (a.exchange IN (select unnest(string_to_array($P{p_exchange_list}, ';'))::text) OR '0' = $P{p_exchange_list})
+AND (a.rtb_flight_id IN (select unnest(string_to_array($P{p_rtb_flight_id_list}, ';'))::int) OR '0' = $P{p_rtb_flight_id_list})
+ORDER BY a.full_date, a.exchange, undisplayed_impressions desc, a.rtb_flight_id;]]>
+	</queryString>
+	<field name="full_date" class="java.sql.Date"/>
+	<field name="exchange" class="java.lang.String"/>
+	<field name="rtbm_adm_flight_id" class="java.lang.Integer"/>
+	<field name="rtb_flight_id" class="java.lang.Integer"/>
+	<field name="undisplayed_impressions" class="java.lang.Integer"/>
+	<field name="displayed_impressions" class="java.lang.Integer"/>
+	<field name="undisplayed_percentage" class="java.lang.Double"/>
+	<field name="displayed_percentage" class="java.lang.Double"/>
+	<field name="total_requests" class="java.lang.Integer"/>
+	<field name="filled_requests" class="java.lang.Integer"/>
+	<field name="unfilled_requests" class="java.lang.Integer"/>
+	<field name="wins_cnt" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="20">
+			<textField pattern="yyyy-MM-dd">
+				<reportElement x="0" y="0" width="70" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{full_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{exchange}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="710" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{total_requests}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="310" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{undisplayed_impressions}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="410" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{displayed_impressions}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="510" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{displayed_percentage}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="610" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{undisplayed_percentage}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="810" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{filled_requests}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="910" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{unfilled_requests}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="170" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{rtbm_adm_flight_id}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="240" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{rtb_flight_id}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="1010" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{wins_cnt}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
