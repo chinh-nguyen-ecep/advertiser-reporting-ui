@@ -2,7 +2,7 @@
    <head>
 	<!-- do not include a <meta> tag -->
     <link rel="stylesheet" type="text/css" href="/pentaho-style/active/default.css"></link>
-    <title>RTB Wins vs ADCEL by Flights V1.00</title>
+    <title>RTB Wins and ADCEL by Flights V1.0</title>
     <script language="javascript" src="/pentaho/js/pentaho-ajax.js"></script>
     <script src="js/parameters.js" type="text/javascript"></script>
     <script src="/verve_style/scripts/doform.js" type="text/javascript"></script>
@@ -293,18 +293,18 @@
         };
 
             
-			function addActionWhenSelectExchange(){
-				var array=$('exchange_select').getElements('input');
-				array.each(function(item, index, object){
-					if(index>=0){
-						item.addEvent('click',function(){
-							delay_timeout(1000,function(){
-								reloadRTBFlightIDs();
-							});	
-						});
-					}
-				});
-			};
+        function addActionWhenSelectExchange(){
+            var array=$('exchange_select').getElements('input');
+            array.each(function(item, index, object){
+                if(index>=0){
+                    item.addEvent('click',function(){
+                        delay_timeout(1000,function(){
+                            reloadRTBFlightIDs();
+                        });	
+                    });
+                }
+            });
+        };
         </script>
    </body>
      
