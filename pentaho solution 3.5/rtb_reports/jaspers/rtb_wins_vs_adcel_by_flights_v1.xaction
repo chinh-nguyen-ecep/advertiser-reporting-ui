@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <action-sequence> 
-  <title>RTB Wins vs ADCEL by Flights V1.0</title>
+  <title>RTB Wins and ADCEL by Flights V1.0</title>
   <version>1</version>
   <logging-level>ERROR</logging-level>
   <documentation> 
