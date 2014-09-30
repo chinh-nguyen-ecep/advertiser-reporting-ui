@@ -1,4 +1,4 @@
-package vlmoui.api;
+package vlmoui.api.lookup;
 
 
 import java.text.DateFormat;
@@ -8,12 +8,13 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 
 import vlmoui.bean.ApiResponseResultSetInfo;
+import vlmoui.core.MainApiLookup;
 import vlmoui.utils.Configure;
 
 
-public class LookupNetworks extends MainApiLookup{
+public class Networks extends MainApiLookup{
 
-	public LookupNetworks() {
+	public Networks() {
 		super();
 		// TODO Auto-generated constructor stub
 		this.setDataSourceTableName("vlmo_dw.vw_vlmo_dim_networks");
@@ -23,10 +24,7 @@ public class LookupNetworks extends MainApiLookup{
 	@Override
 	public ApiResponseResultSetInfo getInfo(HttpServletRequest request) {
 		ApiResponseResultSetInfo info = new ApiResponseResultSetInfo();
-		String hosting=Configure.getConfig("hosting");
-		String appName=Configure.getConfig("appName");
-		String apiUrl = Configure.getConfig("lookupNetworksUrl");
-		String rootUrl=hosting+"/"+appName+apiUrl;
+		String rootUrl=request.getRequestURL().toString().split("\\?")[0];
 		info.setRootUrl("Get " + rootUrl);
 		// get date example
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

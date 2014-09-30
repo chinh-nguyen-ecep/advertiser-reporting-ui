@@ -1,4 +1,4 @@
-package vlmoui.api;
+package vlmoui.api.v1;
 
 
 import java.text.DateFormat;
@@ -8,6 +8,7 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 
 import vlmoui.bean.ApiResponseResultSetInfo;
+import vlmoui.core.MainApi;
 import vlmoui.utils.Configure;
 
 
@@ -24,10 +25,7 @@ public class RunningRevenueOverview extends MainApi{
 	@Override
 	public ApiResponseResultSetInfo getInfo(HttpServletRequest request) {
 		ApiResponseResultSetInfo info = new ApiResponseResultSetInfo();
-		String hosting=Configure.getConfig("hosting");
-		String appName=Configure.getConfig("appName");
-		String apiUrl = Configure.getConfig("runningRevenueOverviewUrl");
-		String rootUrl=hosting+"/"+appName+apiUrl;
+		String rootUrl=request.getRequestURL().toString().split("\\?")[0];
 		info.setRootUrl("Get " + rootUrl);
 		// get date example
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

@@ -60,14 +60,6 @@
   <listener>
     <listener-class>org.jasig.cas.client.session.SingleSignOutHttpSessionListener</listener-class>
   </listener>
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-  </welcome-file-list>
   <servlet>
     <description></description>
     <display-name>GenerateJasperReport</display-name>
@@ -110,62 +102,34 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>ApiOffersOverview</display-name>
-    <servlet-name>ApiOffersOverview</servlet-name>
-    <servlet-class>vlmoui.servlets.ApiOffersOverview</servlet-class>
+    <display-name>ApiV1</display-name>
+    <servlet-name>ApiV1</servlet-name>
+    <servlet-class>vlmoui.servlets.ApiV1</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ApiOffersOverview</servlet-name>
-    <url-pattern>/api/v1/offersOverview</url-pattern>
+    <servlet-name>ApiV1</servlet-name>
+    <url-pattern>/api/v1/*</url-pattern>
   </servlet-mapping>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/404.jsp</location>
+  </error-page>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
   <servlet>
     <description></description>
-    <display-name>ApiRunningRevenueOverview</display-name>
-    <servlet-name>ApiRunningRevenueOverview</servlet-name>
-    <servlet-class>vlmoui.servlets.ApiRunningRevenueOverview</servlet-class>
+    <display-name>ApiLookup</display-name>
+    <servlet-name>ApiLookup</servlet-name>
+    <servlet-class>vlmoui.servlets.ApiLookup</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ApiRunningRevenueOverview</servlet-name>
-    <url-pattern>/api/v1/runningRevenueOverview</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>ApiAgenciesRunningRevenue</display-name>
-    <servlet-name>ApiAgenciesRunningRevenue</servlet-name>
-    <servlet-class>vlmoui.servlets.ApiAgenciesRunningRevenue</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ApiAgenciesRunningRevenue</servlet-name>
-    <url-pattern>/api/v1/agenciesRunningRevenue</url-pattern>
-  </servlet-mapping>
-    <servlet>
-    <description></description>
-    <display-name>ApiLookupNetworks</display-name>
-    <servlet-name>ApiLookupNetworks</servlet-name>
-    <servlet-class>vlmoui.servlets.ApiLookupNetworks</servlet-class>
-  </servlet>
-   <servlet>
-    <description></description>
-    <display-name>ApiOfferEventOverview</display-name>
-    <servlet-name>ApiOfferEventOverview</servlet-name>
-    <servlet-class>vlmoui.servlets.ApiOffersEventOverview</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ApiOfferEventOverview</servlet-name>
-    <url-pattern>/api/v1/offersEventOverview</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>ApiLookupNetworks</servlet-name>
-    <url-pattern>/api/v1/LookupNetworks</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>ApiLookupAgencyTierRate</display-name>
-    <servlet-name>ApiLookupAgencyTierRate</servlet-name>
-    <servlet-class>vlmoui.servlets.ApiLookupAgencyTierRate</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ApiLookupAgencyTierRate</servlet-name>
-    <url-pattern>/api/v1/LookupAgencyTierRate</url-pattern>
+    <servlet-name>ApiLookup</servlet-name>
+    <url-pattern>/api/lookup/*</url-pattern>
   </servlet-mapping>
 </web-app>
