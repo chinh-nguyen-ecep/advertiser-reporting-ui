@@ -298,6 +298,7 @@
 			return results[1];
 		}
 		var api=gup("api");
+		var apiType=gup("type");
 		var apiInfoObject="";
 		//this function process api infomation
 		var processApiInfo=function(apiInfoObject){
@@ -406,14 +407,9 @@
 		$( document ).ready(function() {
 			//load api info object
 			var url="";
-			if(api=='advertiserByDate'){
-				url+="AdvertiserByDate?info";
-			}else if(api=='revenueByHour'){
-				url+="revenueByHour?info";
-			}else if(api=='lookup_orders'){
-				url+="LookupOrders?info";
-			}else{
-				url+=api+"?info";				
+			url+=api+"?info";	
+			if(apiType=='lookup'){
+				url='../lookup/'+api+"?info";
 			}
 			$.ajax({
 			  dataType: "json",

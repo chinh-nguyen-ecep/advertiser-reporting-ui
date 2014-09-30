@@ -12,6 +12,7 @@ var rollBackSevenDay=new Date(new Date().setDate(new Date().getDate()-7));
 var thirtyDayBefore=new Date(new Date().setDate(new Date().getDate()-30));
 //var apiRootUrl=window.location.protocol+'//'+window.location.hostname+':'+window.location.port +'/vlmoApi';
 var apiRootUrl=window.location.protocol+'//'+window.location.hostname+':'+window.location.port +'/vlmo/api/v1';
+var apiLookupRootUrl=window.location.protocol+'//'+window.location.hostname+':'+window.location.port +'/vlmo/api/lookup';
 var rootUrl=window.location.protocol+'//'+window.location.hostname+':'+window.location.port +'/vlmo';
 function setTabActive(tab_title){
 		$('#page-tab ul li').removeClass('active');

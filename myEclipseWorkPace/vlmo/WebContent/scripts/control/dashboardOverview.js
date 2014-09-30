@@ -65,7 +65,7 @@ function generateDateBox(){
 // load agency filter
 ////////////////////////////
 function generateAngencyFilter(){
-	var url=apiRootUrl+'/LookupNetworks?select=network_id|title&limit=1000';
+	var url=apiLookupRootUrl+'/Networks?select=network_id|title&limit=1000';
 	$.ajax({
 		dataType : "json",
 		url : url,

@@ -2,7 +2,7 @@ setTabActive("Running Revenue");
 
 var runningRevenueApiUrl=apiRootUrl+'/runningRevenueOverview';
 var runningRevenueAgencyApiUrl=apiRootUrl+'/agenciesRunningRevenue';
-var runningTierRateApiUrl=apiRootUrl+'/LookupAgencyTierRate';
+var runningTierRateApiUrl=apiLookupRootUrl+'/AgencyTierRate';
 var runningDate;
 
 

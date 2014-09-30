@@ -1,4 +1,4 @@
-package vlmoui.api;
+package vlmoui.core;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -13,27 +13,27 @@ import javax.servlet.http.HttpServletRequest;
 
 import vlmoui.bean.ApiResponseResultSet;
 import vlmoui.bean.ApiResponseResultSetInfo;
-import vlmoui.core.ConnectionUtils;
-import vlmoui.core.RequestProcessing;
 import vlmoui.utils.AddableHttpRequest;
 import vlmoui.utils.Configure;
 import database.JNDIConnection;
 
-public class MainApiLookup implements QueryApi{
+public class MainApi implements QueryApi{
 
 	private String dataSourceTableName;
 	private String dataSourceJNDIConn;
 	private	String[] defaultDimensions;
+	private String[] defaultMeasures;
 	private String defaultUnitsPerPage="10";
 	private String defaultPage="1";
 	public String getDataSourceTableName() {
 		return dataSourceTableName;
 	}
 
-	public MainApiLookup() {
+	public MainApi() {
 		super();
 		this.dataSourceTableName = null;
 		this.defaultDimensions=null;
+		this.defaultMeasures=null;
 		this.dataSourceJNDIConn=null;
 	}
 
@@ -52,6 +52,15 @@ public class MainApiLookup implements QueryApi{
 	public void setDefaultDimensions(String[] defaultDimensions) {
 		this.defaultDimensions = defaultDimensions;
 	}
+
+	public String[] getDefaultMeasures() {
+		return defaultMeasures;
+	}
+
+	public void setDefaultMeasures(String[] defaultMeasures) {
+		this.defaultMeasures = defaultMeasures;
+	}
+
 
 	public String getDefaultUnitsPerPage() {
 		return defaultUnitsPerPage;
@@ -73,6 +82,7 @@ public class MainApiLookup implements QueryApi{
 		this.dataSourceTableName = dataSourceTableName;
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public ApiResponseResultSet processApiRequest(HttpServletRequest request) {
 		// TODO Auto-generated method stub
@@ -82,6 +92,7 @@ public class MainApiLookup implements QueryApi{
 		String exceptionMessage = "";
 
 		String dimensions = RequestProcessing.processDimensionsInput(request);// a,b
+		String measures = RequestProcessing.processMeasuresInput(request);// SUM(c) as c,SUM(d) as d
 		String orders = RequestProcessing.processOrderInput(request); // ORDER BY a desc,b asc
 		String wheres = RequestProcessing.processWhereInput(request);// WHERE a='abc' AND b BETWEEN '2013-06-07' AND '2013-06-02'
 		String unitsPerPage = request.getParameter("limit");// 100
@@ -91,6 +102,11 @@ public class MainApiLookup implements QueryApi{
 		if(dimensions.equals("")&&this.defaultDimensions!=null){
 			myRequest.addParameter("select", this.defaultDimensions);
 			dimensions = RequestProcessing.processDimensionsInput(myRequest);
+		}
+		//Set default value measures
+		if(measures.equals("")&&this.defaultMeasures!=null){
+			myRequest.addParameter("by", this.defaultMeasures);
+			measures = RequestProcessing.processMeasuresInput(myRequest);
 		}
 		//Set default value unitsPerPage
 		if(unitsPerPage==null){
@@ -110,13 +126,13 @@ public class MainApiLookup implements QueryApi{
 			 
 			int totalPageNumber = 0;
 			if (Integer.parseInt(page) == 1) {
-				//totalPageNumber = ConnectionUtils.getTotalPageNumber(connectionDB, dataSourceTableName, dimensions,	measures, wheres, orders,Integer.parseInt(unitsPerPage));
+				totalPageNumber = ConnectionUtils.getTotalPageNumber(connectionDB, dataSourceTableName, dimensions,	measures, wheres, orders,Integer.parseInt(unitsPerPage));
 			} else {
 				totalPageNumber = -1;
 			}
 
-			ResultSet resultSet = ConnectionUtils.queryDimTable(connectionDB,dataSourceTableName, dimensions, wheres, orders,Integer.parseInt(unitsPerPage), Integer.parseInt(page));
-			String query=ConnectionUtils.getQueryDim(dataSourceTableName, dimensions, wheres, orders,Integer.parseInt(unitsPerPage), Integer.parseInt(page));
+			ResultSet resultSet = ConnectionUtils.queryTable(connectionDB,dataSourceTableName, dimensions, measures, wheres, orders,Integer.parseInt(unitsPerPage), Integer.parseInt(page));
+			String query=ConnectionUtils.getQuery(dataSourceTableName, dimensions, measures, wheres, orders,Integer.parseInt(unitsPerPage), Integer.parseInt(page));
 			ArrayList<String> columnNameArray = new ArrayList<String>();
 			ArrayList<String> columnTypeArray = new ArrayList<String>();
 			ArrayList<String[]> data = new ArrayList<String[]>();
@@ -144,11 +160,13 @@ public class MainApiLookup implements QueryApi{
 			apiResult.setErrorMessage("");
 			apiResult.setResponseStatus("OK");
 			apiResult.setTotalPage(totalPageNumber);
+			System.out.println(totalPageNumber);
 			apiResult.setUnitsPerPage(Integer.parseInt(unitsPerPage));
 			apiResult.setPage(Integer.parseInt(page));
 			if(getQuery!=null){
 				apiResult.setQuery(query);
 			}
+			
 			resultSet.close();
 			connectionDB.close();
 		} catch (SQLException e) {

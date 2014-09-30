@@ -1,4 +1,4 @@
-package vlmoui.api;
+package vlmoui.core;
 
 import javax.servlet.http.HttpServletRequest;
 
