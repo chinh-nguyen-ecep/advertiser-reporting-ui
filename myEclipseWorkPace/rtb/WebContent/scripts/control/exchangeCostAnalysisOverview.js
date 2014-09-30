@@ -54,7 +54,7 @@
  		if($('#exchange_filter').val()!='All Exchanges'){
  			where_value="&where[exchange]="+$('#exchange_filter').val(); 			
  		}
- 		var url=apiRootUrl+'/dailyExchangeCostAnalysis?select=full_date&limit=99999&'+dateRange_value+"&by=wins|paid_amount|ave_won_price.avg|ave_bid_price.avg|adcel_filled_imps|event_imps|event_clicks|bids"+where_value;
+ 		var url=apiRootUrl+'/dailyExchangeCostAnalysis?select=full_date&limit=99999&'+dateRange_value+"&by=wins|paid_amount|ave_won_price.avg|ave_bid_price.avg|adcel_filled_imps|event_adimpinternals|event_clicks|bids"+where_value;
  		console.log('Url: '+url);
 		if(myAjaxStore.isLoading(url)){
 			console.log('Your request is loading...');
@@ -131,7 +131,7 @@
 			  	console.log(table_data);
 			  	myTable=new drawTableFromArray({
 			  		table_id: 'dashboard-overview-dataTable',
-			  		table_columns: ['Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;','Wins','Paid Amount','Ave. Won Price','Ave. Bid Price','Bids','Winrate %','AdCel - Filled Imps','(AdCel - Filled Imps/ Wins) %','Event - Imps','Event - Clicks','Event - CTR'],
+			  		table_columns: ['Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;','Wins','Paid Amount','Ave. Won Price','Ave. Bid Price','Bids','Winrate %','AdCel - Filled Imps','(AdCel - Filled Imps/ Wins) %','Event - Adimpinternals','Event - Clicks','Event - CTR'],
 			  		columns_format:['date','number','money','money','money','number','%','number','%','number','number','%'],
 			  		table_data: table_data,
 			  		page_items: 31,
