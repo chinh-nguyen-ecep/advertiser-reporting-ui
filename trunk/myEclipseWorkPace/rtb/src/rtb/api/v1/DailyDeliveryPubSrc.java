@@ -50,6 +50,8 @@ public class DailyDeliveryPubSrc extends MainApi{
 		info.addDimension(new String[] { "pub_id", "", "string" });
 		info.addDimension(new String[] { "src_id", "", "string" });
 		info.addDimension(new String[] { "src_name", "", "string" });
+		info.addDimension(new String[] { "bid_price", "", "double" });
+		info.addDimension(new String[] { "won_price", "", "double" });
 		
 		// add measures
 		info.addMeasures(new String[] { "total_requests", "", "integer" });
@@ -58,12 +60,6 @@ public class DailyDeliveryPubSrc extends MainApi{
 		info.addMeasures(new String[] { "event_imp", "", "integer" });
 		info.addMeasures(new String[] { "event_adimpinternal", "", "integer" });
 		info.addMeasures(new String[] { "event_click", "", "integer" });
-		info.addMeasures(new String[] { "dfp_imps", "", "integer" });
-		info.addMeasures(new String[] { "event_imps", "", "integer" });
-		info.addMeasures(new String[] { "event_adimpinternals", "", "integer" });
-		info.addMeasures(new String[] { "event_clicks", "", "integer" });
-		info.addMeasures(new String[] { "bid_price", "", "double" });
-		info.addMeasures(new String[] { "won_price", "", "double" });
 		info.addMeasures(new String[] { "bid_amount", "", "double" });
 		info.addMeasures(new String[] { "paid_amount", "", "double" });
 		
@@ -81,17 +77,17 @@ public class DailyDeliveryPubSrc extends MainApi{
 		// add by example
 		info.addByExample("GET " + rootUrl + "?by=event_imp");
 		info.addByExample("GET " + rootUrl + "?by=paid_amount");
-		info.addByExample("GET " + rootUrl + "?by=won_price");
-		info.addByExample("GET " + rootUrl + "?by=event_imp|won_price|bid_price");
-		info.addByExample("GET " + rootUrl + "?select=full_date|partner_name&by=won_price");
+		info.addByExample("GET " + rootUrl + "?by=bid_amount");
+		info.addByExample("GET " + rootUrl + "?by=event_imp|bid_amount|paid_amount");
+		info.addByExample("GET " + rootUrl + "?select=full_date|partner_name&by=bid_amount");
 		// add where example
 		info.addWhereExample("GET " + rootUrl + "?where[full_date]="+ currentDateExample);
 		info.addWhereExample("GET " + rootUrl + "?where[full_date.between]="+ reportDateExample + ".." + currentDateExample);
 		info.addWhereExample("GET " + rootUrl + "?where[full_date]="	+ currentDateExample + "&where[partner_name.in]=NexageRTB,MopubRTB,PubmaticRTB");
-		info.addWhereExample("GET " + rootUrl + "?select=full_date&by=won_price&where[full_date]="	+ currentDateExample);
+		info.addWhereExample("GET " + rootUrl + "?select=full_date&by=bid_amount&where[full_date]="	+ currentDateExample);
 		// add order example
 		info.addOrderExample("GET " + rootUrl + "?order=full_date.desc");
-		info.addOrderExample("GET " + rootUrl + "?select=full_date&by=won_price&where[full_date]="	+ currentDateExample + "&order=full_date.desc");
+		info.addOrderExample("GET " + rootUrl + "?select=full_date&by=bid_amount&where[full_date]="	+ currentDateExample + "&order=full_date.desc");
 		return info;
 	}
 	@Override
