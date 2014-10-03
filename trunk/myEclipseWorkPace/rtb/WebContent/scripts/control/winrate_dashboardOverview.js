@@ -62,7 +62,15 @@ $(document).ready(
 					loadChart();
 				}
 			});
-			loadChart();
+			generateSelectListOfExchange({
+				domSelectId:'exchange_filter',
+				success: function(){
+					loadChart();
+				},
+				change: function(){
+					loadChart();
+				}
+			});
 		});
 
 function loadChart() {

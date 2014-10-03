@@ -47,7 +47,15 @@ $(document).ready(function(){
 			loadChart();
 		}
 	});
-	loadChart();
+	generateSelectListOfExchange({
+			domSelectId:'exchange_filter',
+			success: function(){
+				loadChart();
+			},
+			change: function(){
+				loadChart();
+			}
+		});
 });
 
 	//function load chart
@@ -406,15 +414,6 @@ $(document).ready(function(){
 		var loadingUrl=rootUrl+'/GenerateJasperReport'+'?export_type='+exportType+'&jrxml=daily_exchange_payout_by_hour&p_end_date='+selectEndDate.format('yyyy-mm-dd')+'&p_start_date='+selectStartDate.format('yyyy-mm-dd')+'&path=exchangePayout'+"&p_exchange="+exchanger;
 		window.open(loadingUrl);
 	}
-	
-	//echanger filter 
-	$("#exchange_filter").select2({
-	    placeholder: "Select Exchange",
-	    allowClear: true
-	});
-	$("#exchange_filter").change(function(){
-		loadChart();		
-	});
 	
 	////////////////////////////////
 	// Combine values

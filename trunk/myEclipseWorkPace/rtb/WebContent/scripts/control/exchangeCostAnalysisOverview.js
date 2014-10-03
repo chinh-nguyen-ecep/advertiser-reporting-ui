@@ -40,8 +40,17 @@
  			}
  		});
  		setTabActive("overview");
- 		loadChart();
+ 		generateSelectListOfExchange({
+ 			domSelectId:'exchange_filter',
+ 			success: function(){
+ 				loadChart();
+ 			},
+ 			change: function(){
+ 				loadChart();
+ 			}
+ 		});
  	});
+
  	//
  	//function loadChart
  	//
@@ -430,12 +439,5 @@
 		window.open(loadingUrl);
 	}
 	
-	//echanger filter 
-	$("#exchange_filter").select2({
-	    placeholder: "Select Exchange",
-	    allowClear: true
-	});
-	$("#exchange_filter").change(function(){
-		loadChart();		
-	});
+	
 	
