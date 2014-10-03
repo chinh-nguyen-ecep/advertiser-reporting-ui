@@ -72,7 +72,65 @@ function generateDateRange(settings){
  			return $('#'+settings.stargetId+' input').val();
  		}
 }
-
+//
+// function generate list of exchange
+//
+function generateSelectListOfExchange(settings){
+	settings=$.extend({},{	
+		domSelectId: '',
+		placeholder: 'Select Exchange',
+		success: function(){
+			
+		},
+		change: function(){
+			
+		}
+	},settings);
+	$.ajax({
+		dataType: "json",
+		url: apiRootUrl+"/DailyExchangeCostAnalysis?select=exchange&order=exchange&limit=100",
+		timeout: 10000,
+		xhrFields: {
+			withCredentials: true
+		},
+		success: function(json){
+			generate(json);
+			
+			settings.success();
+		},
+		error: function(xhr,status,error){
+			alert("Error loading list of exchange! "+status+" "+error);
+		},
+		complete: function(){
+			
+		}
+		  
+		});	
+	function generate(json){
+		var dom=$("#"+settings.domSelectId);
+		if(dom!=null){
+			dom.html("");
+			var data=json.data;
+			var rows=[];
+			var row='<option value="All Exchanges">All Exchanges</option>';
+			rows.push(row);
+			$.each(data,function(index,item){
+				row='<option value="'+item[0]+'">'+item[0]+"</option>";
+				console.log(item[0]);
+				rows.push(row);
+			});
+			dom.html(rows.join(''));
+			//echanger filter 
+			dom.select2({
+			    placeholder: settings.placeholder,
+			    allowClear: true
+			});
+			dom.change(function(){
+				settings.change();		
+			});
+		}
+	}
+}
 function drawTableFromArray(settings){
 	settings=$.extend({},{
 		paging: false,

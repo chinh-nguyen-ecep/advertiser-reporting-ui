@@ -39,10 +39,7 @@
 			    <form class="navbar-form navbar-right" role="export">
 					    <div class="form-group">
 						    <select style="width:150px" id="exchange_filter" >
-			    				<option value="All Exchanges">All exchanges</option>
-						        <option value="mopub">mopub</option>
-						        <option value="nexage">nexage</option>
-						        <option value="pubmatic">pubmatic</option>						        
+			    									        
 						    </select>
 					    </div>
      			  	  <div class="form-group">			    	
