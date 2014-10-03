@@ -142,7 +142,8 @@ sub runAgg{
 	runPostgresComand("select billing.fn_build_ba_monthly_io_line_item_v2($p_date_sk_start,$p_date_sk_end,$month_sk,'PS')");
 	runPostgresComand("update billing.ba_monthly_io_line_item_v2 set is_active=true where month_since_2005=$month_sk");
 	
-
+	# RTB Monthly Exchanger Cost Analysis v1
+	runPostgresComand("select rtb.fn_build_monthly_agg_exchanger_cost_analysis_v1($month_sk,$process_id,'PS')");
 }
 
 sub transferFinalData{
@@ -160,5 +161,6 @@ sub runPostgresComand{
 	sqlRunQuery($dbh,$query);
 	sqlDisconnect($dbh);
 }
+
 
 
