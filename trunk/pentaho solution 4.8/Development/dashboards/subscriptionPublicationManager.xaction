@@ -52,7 +52,7 @@
       <sources> 
         <request>p_publication_process_id</request> 
       </sources>  
-      <default-value><![CDATA[1137]]></default-value> 
+      <default-value><![CDATA[0]]></default-value> 
     </p_publication_process_id> 
   </inputs>
 
@@ -64,7 +64,14 @@
     </returnResult> 
   </outputs>
 
-  <resources/>
+  <resources>
+    <template>
+      <solution-file>
+        <location>subscriptionManager/index.html</location>
+        <mime-type>text/plain</mime-type>
+      </solution-file>
+    </template>
+  </resources>
   
   <actions> 
     <actions> 
@@ -72,499 +79,13 @@
       <action-definition> 
         <component-name>TemplateComponent</component-name>
         <action-type>Message Template</action-type>
-        <action-resources/>
+        <action-resources>
+          <template type="resource"/>
+        </action-resources>
         <action-outputs> 
           <output-message type="string" mapping="returnResult"/> 
         </action-outputs>
-        <component-definition> 
-          <template><![CDATA[<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Pentaho log manager</title>
-	<link rel="stylesheet" type="text/css" href="/verve-lib/scripts/metroui.org.ua.095-a/css/modern.css">
-    <link rel="stylesheet" type="text/css" href="/verve-lib/scripts/jquery-easyui-1.3.4/themes/bootstrap/easyui.css">
-    <link rel="stylesheet" type="text/css" href="/verve-lib/scripts/jquery-easyui-1.3.4/themes/icon.css">
-    <script type="text/javascript" src="/verve-lib/scripts/jquery-easyui-1.3.4/jquery.min.js"></script>
-    <script type="text/javascript" src="/verve-lib/scripts/jquery-easyui-1.3.4/jquery.easyui.min.js"></script>
-    <script type="text/javascript" src="/verve-lib/scripts/jquery-easyui-1.3.4/utils.js"></script>
-	
-	<!--Metro ui-->
-	
-	<script type="text/javascript" src="/verve-lib/scripts/metroui.org.ua.095-a/js/jquery.mousewheel.min.js"></script>
-    <script type="text/javascript" src="/verve-lib/scripts/metroui.org.ua.095-a/js/moment.js"></script>
-    <script type="text/javascript" src="/verve-lib/scripts/metroui.org.ua.095-a/js/moment_langs.js"></script>
-
-    <script type="text/javascript" src="/verve-lib/scripts/metroui.org.ua.095-a/js/dropdown.js"></script>
-    <script type="text/javascript" src="/verve-lib/scripts/metroui.org.ua.095-a/js/accordion.js"></script>
-    <script type="text/javascript" src="/verve-lib/scripts/metroui.org.ua.095-a/js/buttonset.js"></script>
-    <script type="text/javascript" src="/verve-lib/scripts/metroui.org.ua.095-a/js/carousel.js"></script>
-    <script type="text/javascript" src="/verve-lib/scripts/metroui.org.ua.095-a/js/input-control.js"></script>
-    <script type="text/javascript" src="/verve-lib/scripts/metroui.org.ua.095-a/js/pagecontrol.js"></script>
-    <script type="text/javascript" src="/verve-lib/scripts/metroui.org.ua.095-a/js/rating.js"></script>
-    <script type="text/javascript" src="/verve-lib/scripts/metroui.org.ua.095-a/js/slider.js"></script>
-    <script type="text/javascript" src="/verve-lib/scripts/metroui.org.ua.095-a/js/tile-slider.js"></script>
-    <script type="text/javascript" src="/verve-lib/scripts/metroui.org.ua.095-a/js/tile-drag.js"></script>
-    <!--script type="text/javascript" src="/verve-lib/scripts/metroui.org.ua.095-a/js/calendar.js"></script-->
-
-	<style>
-		body{
-			font-family:Helvetica,"Times New Roman", Times, serif;
-		}
-		.tt-inner{
-            display:inline-block;
-            line-height:12px;
-            padding-top:5px;
-        }
-        .tt-inner img{
-            border:0;
-        }
-		.font-green{
-			color: #009900;
-		}
-		.font-blue{
-			color: #00CCFF;
-		}
-		.font-red{
-			color: #FF0000;
-		}
-		.text-normal{
-			font-stretch: normal;
-			color: gray;
-			text-decoration:none;
-		}
-	</style>
-</head>
-<body >
-<div id="mainTab" class="easyui-tabs" data-options="fit:true,tabHeight:50,tabWidth:212">
-	<div title="<span class='tt-inner' ><img src='https://cdn4.iconfinder.com/data/icons/pretty_office_3/24/Process-Accept.png'/><br>Publication processing</span>" style="padding:10px">
-		<p>This page display processes are running.</p>
-		<div  id="processingLayout" class="easyui-layout" data-options="fit:true">
-			<div data-options="region:'south'" title="Process trans" style="height:230px;">
-				<table id="pp_process_trans" class="easyui-datagrid" data-options="singleSelect:true,fit:true">
-					
-				</table>
-			</div>
-			<div data-options="region:'west',split:true" title="Customers" style="width:200px;">
-				<table id="pp_customers" class="easyui-datagrid" data-options="singleSelect:true,fit:true">
-					
-				</table>
-			</div>
-			<div data-options="region:'center',title:'Publication processes'">
-				<table id="pp_process" class="easyui-datagrid" data-options="singleSelect:true,fit:true">
-					
-				</table>
-			</div>			
-		</div>
-	</div>
-	<div title="<span id ='process_failed_span' class='tt-inner' ><img src='https://cdn4.iconfinder.com/data/icons/pretty_office_3/24/Process-Warning.png'/><br>Processing failed(0)</span>" style="padding:10px">
-		<p>This page display all failed processes.</p>
-
-		<div  id="failedProcessingLayout" class="easyui-layout" data-options="fit:true">		
-			<div data-options="region:'south',split:true" style="height:250px;">
-				<table id="fp_process_trans" class="easyui-datagrid" data-options="singleSelect:true,fit:true">
-					
-				</table>
-			</div>	
-			<div data-options="region:'center'" >
-				<table id="fp_processes" class="easyui-datagrid" data-options="fit:true">
-					
-				</table>
-			</div>				
-		</div>
-	</div
-	<div title="<span id ='process_running_span' class='tt-inner' ><img src='https://cdn4.iconfinder.com/data/icons/pretty_office_3/24/Process-Warning.png'/><br>Processing running(0)</span>" style="padding:10px">
-		<p>This page display all running processes.</p>
-
-		<div  id="runningProcessingLayout" class="easyui-layout" data-options="fit:true">		
-			<div data-options="region:'south',split:true" style="height:250px;">
-				<table id="rp_process_trans" class="easyui-datagrid" data-options="singleSelect:true,fit:true">
-					
-				</table>
-			</div>	
-			<div data-options="region:'center'" >
-				<table id="rp_processes" class="easyui-datagrid" data-options="fit:true">
-					
-				</table>
-			</div>				
-		</div>
-	</div>
-	<div  title="<span class='tt-inner'><img src='https://cdn1.iconfinder.com/data/icons/snowish/24x24/apps/file-manager.png'/><br>Subscription Manager</span>" style="padding:10px">
-		<div class="metrouicss" id="manager_win8_button" style="display:none;height: 48px">	
-					<a onClick="backToMainMangerPage();" href="#" class="back-button page-back" style="float: left"></a>
-					<h2 style="float: left"><small>Back</small></h2>						
-					<h2 id="manager_page_item_title" style="float: right">Item page</h2>						
-				
-		</div>	
-
-		<div class="metrouicss" id="manager_main_menu" >
-		<p></p>
-			<ul class="listview fluid">
-				<li onclick="openManagerItemPgane('manager_page_customer_manager');">
-					<div class="icon">
-						<img src="/verve-lib/scripts/metroui.org.ua.095-a/img/light/appbar.group.png">
-					</div>
-					<div class="data">
-						<h4 >Customers manager</h4>
-						<p>Add, edit customers, contacts...</p>
-					</div>
-				</li>
-
-				<li onclick="openManagerItemPgane('manager_page_subscription_manager');">
-					<div class="icon">
-						<img src="https://cdn1.iconfinder.com/data/icons/ecommerce-and-business-icon-set/256/file-cabinet.png">
-					</div>
-
-					<div class="data">
-						<h4>Subscription manager</h4>					
-						<p>Create, edit, schedule subscription</p>
-					</div>
-				</li>
-
-				<li onclick="openManagerItemPgane('manager_page_data_sources');">
-					<div class="icon">
-						<img src="/verve-lib/scripts/metroui.org.ua.095-a/img/DataAndReport-48x48.png">
-					</div>
-
-					<div class="data">
-						<h4>Data sources</h4>
-						<p>Configure data to export</p>
-					</div>
-				</li>
-
-				<li onclick="openManagerItemPgane('manager_page_data_source_table');">
-					<div class="icon">
-						<img src="http://www.educloud.net.au/cloud/wp-content/uploads/2011/10/tables.png">
-					</div>
-
-					<div class="data">
-						<h4>Data source tables</h4>
-						<div class="progress-bar">
-							<div class="bar" style="width: 75%"></div>
-						</div>
-						<p>Daily, monthly, dim tables manager</p>
-					</div>
-				</li>
-			</ul>
-		
-		</div>		
-	
-	</div>
-</div>
- <script>
-	//this function paser param from url
-	function gup( name ){
-	  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
-	  var regexS = "[\\?&]"+name+"=([^&#]*)";
-	  var regex = new RegExp( regexS );
-	  var results = regex.exec( window.location.href );
-	  if( results == null )
-		return "";
-	  else
-		return results[1];
-	}
-	//This function paser date from date object
-	function formatDate(date){
-		var result='';
-		var months = new Array('01','02','03','04','05','06','07','08','09','10','11','12');
-		var tdate=date.getDate();
-		if(tdate<10) tdate='0'+tdate;
-		result=date.getFullYear()+'-'+months[date.getMonth()]+'-'+tdate;
-		return result;
-	}
-	
-	var solution=gup('solution');
-	var path=gup('path');
-	var rootPath='ViewAction?solution='+solution+'&path='+path+'&action=subscriptionPublicationManager.xaction';
-	var rootSubPath='ViewAction?solution='+solution+'&path='+path+'/subscriptionManager';
-	// Local variable declaration
-	var select_date_current='';	
-	var customer_key_current=0;
-	// process default start date and end date
-	var myDate=new Date();
-	var date = myDate;
-	date.setDate(date.getDate()-0);
-	current_date=date;
-	select_date_current=formatDate(date);	
-	
-	// end process start date , end date 
-	$( document ).ready(function() {
-		console.log( "ready!" );
-		console.log("jQuery verion: "+jQuery.fn.jquery);
-		initProcessingPage();
-		initFailedPage();
-		initRunningPage();		
-	});
-	
-	//*******************************
-	// Script code on Processing page
-	//*******************************
-	var initProcessingPage=function(){
-		console.log("Init processing page");
-		//Set date display on Process pannel
-		$('#processingLayout').layout('panel','center').panel('setTitle','Publication processes '+select_date_current);
-		//add choose date icon
-		$('#processingLayout').layout('panel','center').panel({
-			 tools:[{
-					iconCls:'icon-calendar',
-					handler:function(){
-						createDateDialog({
-							title: 'Select date',
-							current: current_date,
-							onSelect: function(date){
-								current_date=date;
-								var selectDate=formatDate(date);
-								select_date_current=selectDate;								
-								$('#processingLayout').layout('panel','center').panel('setTitle','Publication processes '+select_date_current);
-								loadProcessByCustomer(customer_key_current); 
-								//delete all tran grid
-								console.log("Clear process tran content");
-								clearDataGrid($('#pp_process_trans'));								
-							}
-						});
-					
-					}
-				}]
-		});	
-		//show customer
-		$('#pp_customers').datagrid({
-			url:rootPath+'&actions=listCustomers',
-			columns:[[
-				{field:'customer_name',title:'Name',width:205},
-				{field:'customer_key',title:'ID',width:60}
-			]],
-			rownumbers:true,
-			singleSelect:true,
-			collapsible:true,
-			fitColumns:true,
-			onSelect: function(rowIndex, rowData){
-				loadProcessByCustomer(rowData.customer_key);
-				//delete all tran grid
-				console.log("Clear process tran content");
-				clearDataGrid($('#pp_process_trans'));	
-			}
-		});
-		//function load publication process by customer key
-		var loadProcessByCustomer=function(customer_key){
-			customer_key_current=customer_key;
-			$('#pp_process').datagrid({
-				url:rootPath+'&actions=listProcessByCustomer&p_customer_key='+customer_key+'&p_date='+select_date_current,
-				columns:[[
-					{field:'publication_process_id',title:'ID',width:60},
-					{field:'create_date',title:'Start time',width:80,align:'center'},
-					{field:'subscription_name',title:'Subscription Name',width:200},
-					{field:'subscription_key',title:'Subscription key',width:70,align:'right'},
-					{field:'process_actribute',title:'Process actribute',width:200},
-					{field:'process_status',title:'Status',width:60,align:'center',formatter: function(value,row,index){
-								var result='';
-								if(value.trim()=='SU'){									
-									result= '<span class="font-green">SU</span>';
-								}else if(value.trim()=='EF'){
-									result='<span class="font-red">Export Failed</span>';
-								}else if(value.trim()=='TF'){
-									result= '<span class="font-red">Transfer Failed</span>';
-								}else{
-									result ='<span class="font-blue">'+value+'</span>';
-								}								
-								return result;
-							}					
-					},
-					{field:'dt_lastchange',title:'Last change',align:'center'}
-				]],
-				rownumbers:true,
-				singleSelect:true,
-				collapsible:true,
-				fitColumns:true,
-				onSelect: function(rowIndex, rowData){
-					var process_id=rowData.publication_process_id;
-					loadProcessTransByProcessId($('#pp_process_trans'),process_id);
-				}
-			});
-		}
-	};
-		var loadProcessTransByProcessId=function(table_dom,process_id){
-			table_dom.datagrid({
-						url:rootPath+'&actions=listProcessTrans&p_publication_process_id='+process_id,
-						columns:[[
-							{field:'df_config_name',title:'Source name',width:150},
-							{field:'table_name',title:'Table',width:150},							
-							{field:'export_file_name',title:'Export file name',width:300,formatter:function(value,row,index){
-								var shortValue=value;
-								if(value.length>70){
-									shortValue=value.substring(0,70)+'...';
-									return '<a href="#" title="'+value+'" class="easyui-tooltip text-normal">'+shortValue+'</a>';
-								}else if(value=='null'){
-									return '...';
-								}else{
-									return value;
-								}
-								
-							}},
-							{field:'file_size',title:'Size(KB)',width:60,align:'right'},
-							{field:'status',title:'Status',width:60,align:'center',formatter: function(value,row,index){
-								if(value.trim()=='SU'){
-									return '<span class="font-green">'+value+'</span>';
-								}else if(value.trim()=='EF' || value.trim()=='TF'){
-									return '<span class="font-red">'+value+'</span>';
-								}else{
-									return '<span class="font-blue">'+value+'</span>';
-								}
-							}
-							},
-							{field:'start_time',title:'Start time',align:'center'},
-							{field:'last_change',title:'Last change',align:'center'}
-						]],
-						rownumbers:true,
-						singleSelect:true,
-						collapsible:true,
-						fitColumns:true,
-						onLoadSuccess: function(){
-							$('a.easyui-tooltip').tooltip({
-								 position: 'top',
-								 onShow: function(){
-									$(this).tooltip('tip').css({
-										backgroundColor: '#C0C0C0 ',
-										borderColor: '#707070 '
-									});
-								}
-							});
-						}
-					});
-		}
-		//************************************
-		// Script code on Process Failed page
-		//************************************
-		var initFailedPage=function(){
-			var loadListFailedProcess=function(){
-				console.log("Load list Failed process");
-				$('#fp_processes').datagrid({
-					url:rootPath+'&actions=listFailedProcess',
-					columns:[[
-						{field:'publication_process_id',title:'ID',width:60},
-						{field:'create_date',title:'Start time',width:80,align:'center'},
-						{field:'subscription_name',title:'Subscription Name',width:200},
-						{field:'subscription_key',title:'Subscription key',width:70,align:'right'},
-						{field:'process_actribute',title:'Process actribute',width:200},
-						{field:'process_status',title:'Status',width:60,align:'center',formatter: function(value,row,index){
-									if(value.trim()=='SU'){
-										return '<span class="font-green">'+value+'</span>';
-									}else if(value.trim()=='EF' || value.trim()=='TF'){
-										return '<span class="font-red">'+value+'</span>';
-									}else{
-										return '<span class="font-blue">'+value+'</span>';
-									}
-								}					
-						},
-						{field:'dt_lastchange',title:'Last change',align:'center'}
-					]],
-					rownumbers:true,
-					singleSelect:true,
-					collapsible:true,
-					fitColumns:true,
-					onSelect: function(rowIndex, rowData){
-						var process_id=rowData.publication_process_id;
-						loadProcessTransByProcessId($('#fp_process_trans'),process_id);
-					},
-					onLoadSuccess:function(rowData){	
-						console.log('Failed Process: '+rowData.rows.length);
-						var number_of_failed_process=rowData.rows.length;
-						if(number_of_failed_process>0){
-							console.log('Set tab tile');
-							$('#process_failed_span').html('<img src=\'https://cdn4.iconfinder.com/data/icons/pretty_office_3/24/Process-Warning.png\'/><br>Processing failed(<font color="red">'+number_of_failed_process+'!</font>)');						
-						}else{
-							$('#process_failed_span').html('<img src=\'https://cdn4.iconfinder.com/data/icons/pretty_office_3/24/Process-Warning.png\'/><br>Processing failed(0)');
-						}
-						setTimeout(function(){loadListFailedProcess()},60000);
-					}
-				});
-				
-			}
-			loadListFailedProcess();			
-		}
-		//************************************
-		// Script code on Process Running page
-		//************************************
-		var initRunningPage=function(){
-			var loadListRunningProcess=function(){
-				console.log("Load list Running process");
-				$('#rp_processes').datagrid({
-					url:rootPath+'&actions=listRunningProcess',
-					columns:[[
-						{field:'publication_process_id',title:'ID',width:60},
-						{field:'create_date',title:'Start time',width:80,align:'center'},
-						{field:'subscription_name',title:'Subscription Name',width:200},
-						{field:'subscription_key',title:'Subscription key',width:70,align:'right'},
-						{field:'process_actribute',title:'Process actribute',width:200},
-						{field:'process_status',title:'Status',width:60,align:'center',formatter: function(value,row,index){
-									if(value.trim()=='SU'){
-										return '<span class="font-green">'+value+'</span>';
-									}else if(value.trim()=='EF' || value.trim()=='TF'){
-										return '<span class="font-red">'+value+'</span>';
-									}else{
-										return '<span class="font-blue">'+value+'</span>';
-									}
-								}					
-						},
-						{field:'dt_lastchange',title:'Last change',align:'center'}
-					]],
-					rownumbers:true,
-					singleSelect:true,
-					collapsible:true,
-					fitColumns:true,
-					onSelect: function(rowIndex, rowData){
-						var process_id=rowData.publication_process_id;
-						loadProcessTransByProcessId($('#rp_process_trans'),process_id);
-					},
-					onLoadSuccess:function(rowData){	
-						console.log('Running Process: '+rowData.rows.length);
-						var number_of_failed_process=rowData.rows.length;
-						if(number_of_failed_process>0){
-							console.log('Set tab tile');
-							$('#process_running_span').html('<img src=\'https://cdn4.iconfinder.com/data/icons/pretty_office_3/24/Process-Warning.png\'/><br>Processing failed(<font color="red">'+number_of_failed_process+'!</font>)');						
-						}else{
-							$('#process_running_span').html('<img src=\'https://cdn4.iconfinder.com/data/icons/pretty_office_3/24/Process-Warning.png\'/><br>Processing failed(0)');
-						}
-						setTimeout(function(){loadListRunningProcess()},60000);
-					}
-				});
-				
-			}
-			loadListRunningProcess();			
-		}
-		//***************************
-		//   Script code on Manager page
-		//***************************
-		var openManagerItemPgane=function(page_item){
-			var mainMagerPage=$('#manager_main_menu');
-			var homeButton=$('#manager_win8_button');
-			mainMagerPage.fadeOut(500,function(){
-				homeButton.fadeIn(1,function(){});
-				console.log('Create new item playout');
-				var dom=$('<div id="manager_page_item"><div>');
-					homeButton.after(dom);
-					dom.layout({
-						fit:true
-					});
-					dom.layout('add',{
-						 region: 'center',	
-						border: false,						 
-						 fit: true,
-						 href: rootSubPath+'&action='+page_item+'.xaction'
-					});
-					
-			});	
-		}
-		var backToMainMangerPage=function(){
-			var mainMagerPage=$('#manager_main_menu');
-			var homeButton=$('#manager_win8_button');
-			homeButton.hide();			
-			$('#manager_page_item').remove();
-			mainMagerPage.fadeIn(1);
-		}
- </script>
-</body>
-</html>]]></template>
-        </component-definition> 
+        <component-definition/> 
       </action-definition>
  
     </actions>
@@ -684,11 +205,54 @@ ORDER BY a.publication_process_id]]></query>
           <query-result type="result-set" mapping="query_result"/>
         </action-outputs>
         <component-definition>
-          <query><![CDATA[SELECT a.publication_process_id,to_char(a.create_date,'HH24:MI:SS') as create_date,to_char(a.dt_lastchange,'HH24:MI:SS') as dt_lastchange,a.process_status,a.process_actribute,b.subscription_name,b.subscription_key FROM control.spctl_subscription_publication_process a,control.spctl_pub_customer_subscription b
+          <query><![CDATA[SELECT a.publication_process_id,to_char(a.create_date,'yyyy-MM-dd HH24:MI:SS') as create_date,to_char(a.dt_lastchange,'yyyy-MM-dd HH24:MI:SS') as dt_lastchange,a.process_status,a.process_actribute,b.subscription_name,b.subscription_key FROM control.spctl_subscription_publication_process a,control.spctl_pub_customer_subscription b
 WHERE a.subscription_key=b.subscription_key
-AND (a.process_status = 'PS' OR a.process_status='PST' OR a.process_status='WT')
+AND (a.process_status = 'PS' OR a.process_status='PST' OR a.process_status='WT' OR a.process_status='TR')
 ORDER BY a.publication_process_id]]></query>
           <live><![CDATA[true]]></live>
+        </component-definition>
+      </action-definition>
+
+    </actions>
+
+    <actions>
+      <condition><![CDATA[actions=='restartProcessStatus']]></condition>
+      <action-definition>
+        <component-name>SQLExecute</component-name>
+        <action-type>SQL Commands</action-type>
+        <action-inputs>
+          <jndi type="string" mapping="connectionName"/>
+          <p_publication_process_id type="string"/>
+        </action-inputs>
+        <action-outputs/>
+        <component-definition>
+          <query><![CDATA[UPDATE CONTROL.spctl_subscription_publication_process
+SET process_status = 'WT'
+WHERE publication_process_id = {p_publication_process_id};
+UPDATE CONTROL.spctl_subscription_publication_process_concurrent_trans
+SET STATUS = 'ER'
+WHERE publication_process_id = {p_publication_process_id};]]></query>
+        </component-definition>
+      </action-definition>
+
+    </actions>
+
+    <actions>
+      <condition><![CDATA[actions=='updateProcessStatusToSU']]></condition>
+      <action-definition>
+        <component-name>SQLExecute</component-name>
+        <action-type>SQL Commands</action-type>
+        <action-inputs>
+          <p_publication_process_id type="string"/>
+          <jndi type="string" mapping="connectionName"/>
+        </action-inputs>
+        <component-definition>
+          <query><![CDATA[UPDATE CONTROL.spctl_subscription_publication_process
+SET process_status = 'SU'
+WHERE publication_process_id = {p_publication_process_id};
+UPDATE CONTROL.spctl_subscription_publication_process_concurrent_trans
+SET STATUS = 'SU'
+WHERE publication_process_id = {p_publication_process_id};]]></query>
         </component-definition>
       </action-definition>
 

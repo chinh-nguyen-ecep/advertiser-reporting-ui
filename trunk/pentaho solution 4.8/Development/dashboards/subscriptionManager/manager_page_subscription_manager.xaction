@@ -58,7 +58,14 @@
     </returnResult> 
   </outputs>
 
-  <resources/>
+  <resources>
+    <template>
+      <solution-file>
+        <location>manager_page_subscription_manager.html</location>
+        <mime-type>text/plain</mime-type>
+      </solution-file>
+    </template>
+  </resources>
   
   <actions> 
     <actions> 
@@ -66,173 +73,13 @@
       <action-definition> 
         <component-name>TemplateComponent</component-name>
         <action-type>Message Template</action-type>
+        <action-resources>
+          <template type="resource"/>
+        </action-resources>
         <action-outputs> 
           <output-message type="string" mapping="returnResult"/> 
         </action-outputs>
-        <component-definition> 
-          <template><![CDATA[<div  id="sm_layout2" class="easyui-layout" style="" data-options="fit:true" >
-        <div data-options="region:'south',split:true,title:'Data sources',collapsible:false" style="height:250px;padding:1px">
-			<table id="sm_dataSources"></table>
-		</div>
-        <div  data-options="region:'west',split:true,title:'Customer',collapsible:false" style="width:250px;padding:0px">
-			<table id="sm_customer"></table>
-        </div>
-        <div data-options="region:'center',title:'Subscriptions',collapsible:false" style="padding:1px">
-			<table id="sm_subscriptions"></table>
-        </div>
-    </div>
-
-<script>
-//Set title of sub page
-$('#manager_page_item_title').html('Subscription Manager');
-
-//Load customer
-var cutomersDataGrid=$('#sm_customer');
-cutomersDataGrid.datagrid({
-			url:rootPath+'&actions=listCustomers',
-			fit: true,
-			columns:[[
-				{field:'customer_key',title:'ID'},
-				{field:'customer_name',title:'Name'}
-				
-			]],
-			//rownumbers:true,
-			singleSelect:true,
-			collapsible:true,
-			fitColumns:true,
-			border: false,
-			fitColumns: true,
-			onSelect: function(rowIndex, rowData){
-				subscriptionLoader(rowData.customer_key);
-			}
-		});
-		
-//function load subscriptions
-var subscriptionLoader=function(customerID){
-	var subDataGrid=$('#sm_subscriptions');
-	subDataGrid.datagrid({
-			url:rootSubPath+'&action=manager_page_subscription_manager.xaction&actions=listSubscriptionsByCustomerID&p_customer_key='+customerID,
-			fit:true,
-			columns:[[
-				{field:'ck',checkbox:true},
-				{field:'subscription_key',title:'Key'},
-				{field:'subscription_name',title:'Name'},
-				{field:'subscription_status',title:'Status'},
-				{field:'frequence',title:'Frequence'},
-				{field:'zip_before_transfer',title:'Zip'},
-				{field:'auto_public',title:'Auto public'}
-			]],
-			//rownumbers:true,
-			singleSelect:true,
-			collapsible:true,
-			fitColumns:true,
-			onSelect: function(rowIndex, rowData){
-				dataSourceLoader(rowData.subscription_key);
-			}
-		});
-}
-
-//add subscription button
-console.log('sdfsdfsf');
-$('#sm_layout2').layout();
-var a=$('#sm_layout2').layout('panel','center');
-a.panel({
-	tools:[
-		{
-			iconCls:'icon-play',
-			handler:function(){
-				publicSubscriptions();
-			}
-		},
-		{
-			iconCls:'icon-add',
-			handler:function(){alert('add')}
-		},{
-			iconCls:'icon-edit',
-			handler:function(){alert('edit')}
-		}
-	]
-});
-
-//function public selected subacription
-var publicSubscriptions=function(){
-	var subDataGrid=$('#sm_subscriptions');
-	var rowsSelected=subDataGrid.datagrid('getChecked');
-	if(rowsSelected.length==0){
-		$.messager.alert('Public subscription to customer','Please select a subscription!',function(r){
-			if (r){
-					alert('ok');
-				}
-			}
-		);
-	}else{		
-		var subscriptionKey=rowsSelected[0].subscription_key;
-		var subscriptionName=rowsSelected[0].subscription_name;
-		var customerName=$('#sm_customer').datagrid('getSelected').customer_name;
-
-            $.ajax({
-                    url: rootSubPath+'&action=manager_page_subscription_manager.xaction&actions=publicSubscription&p_sub_key='+subscriptionKey,
-                    dataType: 'json',
-                    success: function(result){
-                        var value=result[0].fn_spctl_insert_subscription_to_process;
-						if(value>0){
-							$.messager.show({
-								title:'Public subscription',
-								msg:'Publication process ID: '+value,
-								timeout:5000,
-								showType:'fade'			
-							});		
-						}else{
-							$.messager.alert('Public subscription','Has another process has registed or run!');		
-						}	
-                    },
-					error: function( jqXHR, textStatus, errorThrown ){
-						$.messager.progress('close');
-						$.messager.alert('Public subscription','Request error!');				
-					},
-					beforeSend: function(){						
-						$.messager.progress({
-							title: 'Public subscription',
-							msg: 'Public subscription "'+subscriptionName+'" to "'+customerName+'"',
-							interval: 150
-						});						
-					},
-					complete: function(){
-						$.messager.progress('close');
-					}
-                });		
-		
-	}
-}
-//function load data source
-var dataSourceLoader=function(subKey){
-	var dataSourceDataGrid=$('#sm_dataSources');
-	dataSourceDataGrid.datagrid({
-			url:rootSubPath+'&action=manager_page_subscription_manager.xaction&actions=listDataSourceBySubKey&p_sub_key='+subKey,
-			fit:true,
-			columns:[[
-				{field:'customer_article_key',title:'Article Key'},
-				{field:'df_config_id',title:'Data Source Key'},
-				{field:'df_config_name',title:'Name'},
-				{field:'dt_desc',title:'Description',width: 100},	
-				{field:'df_config_format',title:'Format'},
-				{field:'df_source_file',title:'Data source file',width:100},
-				{field:'table_name',title:'Data source table'},
-				{field:'articel_status',title:'Article Status'},
-				{field:'df_status',title:'Data source status'}
-				
-			]],
-			//rownumbers:true,
-			singleSelect:true,
-			collapsible:true,
-			fitColumns:true,
-			onSelect: function(rowIndex, rowData){
-				
-			}
-		});
-}
-</script>]]></template>
-        </component-definition> 
+        <component-definition/> 
       </action-definition>
  
     </actions>

@@ -65,7 +65,25 @@
         <request>query_result_total_rows</request> 
       </sources>  
       <default-value/> 
-    </query_result_total_rows> 
+    </query_result_total_rows>  
+    <p_table_type type="string">
+      <sources>
+        <request>p_table_type</request>
+      </sources>
+      <default-value/>
+    </p_table_type>
+    <p_table_name type="string">
+      <sources>
+        <request>p_table_name</request>
+      </sources>
+      <default-value/>
+    </p_table_name>
+    <p_table_schema type="string">
+      <sources>
+        <request>p_table_schema</request>
+      </sources>
+      <default-value/>
+    </p_table_schema>
   </inputs>
 
   <outputs> 
@@ -76,7 +94,14 @@
     </returnResult> 
   </outputs>
 
-  <resources/>
+  <resources>
+    <template>
+      <solution-file>
+        <location>manager_page_data_source_table.html</location>
+        <mime-type>text/plain</mime-type>
+      </solution-file>
+    </template>
+  </resources>
   
   <actions> 
     <action-definition> 
@@ -113,80 +138,13 @@ if(sort==''){
         <component-name>TemplateComponent</component-name>
         <action-type>Message Template</action-type>
         <action-inputs/>
+        <action-resources>
+          <template type="resource"/>
+        </action-resources>
         <action-outputs> 
           <output-message type="string" mapping="returnResult"/> 
         </action-outputs>
-        <component-definition> 
-          <template><![CDATA[<table id="manager_data_sources_tables_table"></table>
-
-<script>
-var xactionUrl='ViewAction?solution='+solution+'&path='+path+'/subscriptionManager&action=manager_page_data_source_table.xaction';
-$('#manager_page_item_title').html('Data Source Tables');
-var initDataSoureTable=function(){
-			
-			$('#manager_data_sources_tables_table').datagrid({
-				//title: 'Data source tables',
-				url:xactionUrl+'&actions=listDataSourceTables',
-				fit: true,
-				columns:[[
-					{field:'data_source_table_id',title:'ID',width: 10},
-					{field:'table_type',title:'Type',sortable: 'true',width: 15,
-						formatter: function(value,row,index){
-							if(value=='MLA'){
-								return 'Monthly Aggregate';
-							}else if(value=='DLA'){
-								return 'Daily Aggregate';
-							}else return value;
-						}					
-					},
-					{field:'table_name',title:'Name',sortable: 'true',width: 50},
-					{field:'date_up_to_date',title:'Date Up to Date',sortable: 'true',
-						formatter: function(value,row,index){
-							if(value=='null'){
-								return '';
-							}else return value;
-						}
-					},
-					{field:'week_up_to_date',title:'Week Up to Date',sortable: 'true',
-						formatter: function(value,row,index){
-							if(value=='null'){
-								return '';
-							}else return value;
-						}
-					},					
-					{field:'month_up_to_date',title:'Month Up to Date',sortable: 'true',
-						formatter: function(value,row,index){
-							if(value=='null'){
-								return '';
-							}else return value;
-						}					
-					}
-				]],
-				sortName: 'table_type,date_up_to_date',
-				sortOrder: 'asc,desc',
-				pagination: true,
-				rownumbers:true,
-				singleSelect:true,
-				collapsible:true,
-				fitColumns:true,
-				showFooter: true,
-				pagePosition: 'top',
-				pageSize: 40,
-				multiSort: true,
-				toolbar:[{
-					text:'Add',
-					iconCls: 'icon-add',
-					handler: function(){alert('add')}
-				},{
-					text:'Edit',
-					iconCls: 'icon-edit',
-					handler: function(){alert('edit')}
-				}]
-			});
-		}
-initDataSoureTable();
-</script>]]></template> 
-        </component-definition> 
+        <component-definition/> 
       </action-definition>
  
     </actions>
@@ -233,6 +191,73 @@ OFFSET ({page}-1)*{rows};]]></query>
  
     </actions>
   
+    <actions>
+      <condition><![CDATA[actions=='listTableSchema']]></condition>
+      <action-definition>
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs>
+          <jndi type="string" mapping="connection_name"/>
+        </action-inputs>
+        <action-outputs>
+          <query-result type="result-set" mapping="query_result"/>
+        </action-outputs>
+        <component-definition>
+          <query><![CDATA[SELECT table_schema as "id" FROM information_schema.tables 
+WHERE table_schema NOT IN ('control','refer','public','information_schema','pg_catalog','staging','verveloc')
+GROUP BY table_schema ORDER BY table_schema]]></query>
+          <live><![CDATA[true]]></live>
+        </component-definition>
+      </action-definition>
+
+    </actions>
+
+    <actions>
+      <condition><![CDATA[actions=='listTableFromSchema']]></condition>
+      <action-definition>
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs>
+          <jndi type="string" mapping="connection_name"/>
+          <p_table_schema type="string"/>
+        </action-inputs>
+        <action-outputs>
+          <query-result type="result-set" mapping="query_result"/>
+        </action-outputs>
+        <component-definition>
+          <live><![CDATA[true]]></live>
+          <query><![CDATA[SELECT table_name as "id" FROM information_schema.tables WHERE table_schema ='{p_table_schema}'
+AND table_schema||'.'||table_name NOT IN(SELECT table_name FROM control.spctl_data_source_tables WHERE table_name LIKE '{p_table_schema}.%')
+AND (table_name LIKE 'daily%' OR table_name LIKE 'weekly%' OR table_name LIKE 'monthly%')
+ORDER BY table_name
+;]]></query>
+        </component-definition>
+      </action-definition>
+
+    </actions>
+
+    <actions>
+      <condition><![CDATA[actions=='addNewTable']]></condition>
+      <action-definition>
+        <component-name>SQLExecute</component-name>
+        <action-type>SQL Commands</action-type>
+        <action-inputs>
+          <jndi type="string" mapping="connection_name"/>
+          <p_table_type type="string"/>
+          <p_table_name type="string"/>
+        </action-inputs>
+        <action-outputs>
+          <query-result type="result-set" mapping="query_result"/>
+        </action-outputs>
+        <component-definition>
+          <query><![CDATA[INSERT INTO CONTROL.spctl_data_source_tables (table_type,table_name) 
+VALUES ('{p_table_type}','{p_table_name}')]]></query>
+          <force_single_statement><![CDATA[true]]></force_single_statement>
+        </component-definition>
+      </action-definition>
+
+    </actions>
+
     <action-definition> 
       <component-name>JavascriptRule</component-name>
       <action-type>Process data grid</action-type>
@@ -260,7 +285,7 @@ var total_rows=0;
 
 if(actions=='template'){
 	returnResult=returnResult;
-}else{
+}else if(actions=='listDataSourceTables'){
 	total_rows=result_set_total_rows.getValueAt(0,0);
 	returnResult='{"total":"'+total_rows+'","rows":[';
 	//process data item
@@ -285,6 +310,30 @@ if(actions=='template'){
 	//end
 
 	returnResult+='],"sort":"'+p_sort+'"}';
+}else{
+	returnResult='[';
+	//process data item
+	for(var i=0;i<result_set.getRowCount();i++){
+		var item='';
+		if(i>0){
+			item+=',';
+		}
+		item+='{';
+			for(var j=0;j<result_set.getColumnCount();j++){ 		
+				var value=result_set.getValueAt(i,j);
+				var columnValue=colHeaders[0][j];
+				if(j>0){
+					item+=',';
+				}
+				item+='"'+columnValue+'":"'+value+'"';
+			}
+		item+='}';	
+
+	returnResult+=item;
+	}
+	//end
+
+	returnResult+=']';
 }]]></script> 
       </component-definition> 
     </action-definition>
