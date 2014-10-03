@@ -1,0 +1,206 @@
+<div  id="main">
+<table id="manager_data_sources_tables_table" data-options="singleSelect:true,fit:true,fitColumns:true,nowrap: false"></table>
+</div>
+<div id="addTableForm">
+	<form id="ff" method="post" onsubmit="return addFormSubmit();" class="myform">
+		<div>
+			<label for="table_type">Table type:</label>
+			<select name="table_type" class="easyui-combobox" style="width:150px;">
+				<option value="DLA">Daily Aggregate</option>
+				<option value="WLA">Weekly Aggregate</option>
+				<option value="MLA">Monthly Aggregate</option>
+			</select>
+		</div>
+		<div>
+			<label for="table_schema">Schema:</label>
+			<input id="c1" name="table_schema" value="" style="width:150px;"/>
+		</div>
+		<div>
+			<label for="table_name">Table name:</label>
+			<input id="c2" name="table_name" class="easyui-combobox" value="" style="width:300px;" data-options="valueField:'id',textField:'id'"/>
+		</div>
+	</form>
+</div>
+
+<script>
+var xactionUrl='ViewAction?solution='+solution+'&path='+path+'/subscriptionManager&action=manager_page_data_source_table.xaction';
+$('#manager_page_item_title').html('Data Source Tables');
+//
+$('#main').panel({
+	title: 'List Of Table Sources',
+	fit: true
+});
+//
+var initDataSoureTable=function(){
+			
+			$('#manager_data_sources_tables_table').datagrid({
+				//title: 'Data source tables',
+				url:xactionUrl+'&actions=listDataSourceTables',
+				fit: true,
+				columns:[[
+					{field:'data_source_table_id',title:'ID',width: 10},
+					{field:'table_type',title:'Type',sortable: 'true',width: 15,
+						formatter: function(value,row,index){
+							if(value=='MLA'){
+								return 'Monthly Aggregate';
+							}else if(value=='DLA'){
+								return 'Daily Aggregate';
+							}else return value;
+						}					
+					},
+					{field:'table_name',title:'Name',sortable: 'true',width: 50},
+					{field:'date_up_to_date',title:'Date Up to Date',sortable: 'true',
+						formatter: function(value,row,index){
+							if(value=='null'){
+								return '';
+							}else return value;
+						}
+					},
+					{field:'week_up_to_date',title:'Week Up to Date',sortable: 'true',
+						formatter: function(value,row,index){
+							if(value=='null'){
+								return '';
+							}else return value;
+						}
+					},					
+					{field:'month_up_to_date',title:'Month Up to Date',sortable: 'true',
+						formatter: function(value,row,index){
+							if(value=='null'){
+								return '';
+							}else return value;
+						}					
+					}
+				]],
+				sortName: 'table_type,date_up_to_date',
+				sortOrder: 'asc,desc',
+				pagination: true,
+				rownumbers:true,				
+				showFooter: true,
+				pagePosition: 'top',
+				pageSize: 40,
+				multiSort: true,
+				toolbar:[{
+					text:'Add',
+					iconCls: 'icon-add',
+					handler: function(){
+						$('#addTableForm').dialog("open");
+					}
+				}]
+			});
+		}
+initDataSoureTable();
+
+//////////////////////////
+// init add table form dialog
+//////////////////////////
+$('#addTableForm').dialog({
+    title: 'Add table source',
+	width: 500,
+    height: 180,
+    closed: true,
+    cache: false,
+    modal: true,
+	buttons: [{
+					text:'Add',
+					iconCls:'icon-add',
+					handler:function(){
+						$('#ff').submit();
+					}
+				},{
+					text:'Cancel',
+					handler:function(){
+						$('#addTableForm').dialog("close");
+					}
+				}]
+});
+// list schema
+$('#ff select[name=table_type]').combobox();
+$('#c2').combobox({
+	onBeforeLoad: function(param){
+		$('#c2').combobox('disable');
+		$('#c2').combobox('clear');		
+	},
+	onLoadSuccess: function(){
+		$('#c2').combobox('enable');
+	},
+	onLoadError: function(){
+		alert("Reload list table of schema error!");
+	}
+});
+$('#c1').combobox({
+    url: xactionUrl+'&actions=listTableSchema',
+    method:'get',
+	valueField:'id',
+	textField:'id',
+	panelHeight:'auto',
+	onSelect: function(rec){
+            var url = xactionUrl+'&actions=listTableFromSchema'+"&p_table_schema="+rec.id;
+			console.log(url);
+            $('#c2').combobox('reload',url);
+    }
+});
+
+/////////////////////////////////////////////
+// function when call add new table to server
+//////////////////////////////////////////////
+function addFormSubmit(){
+	var p_table_type=$('#ff input[name=table_type]').val();
+	var p_table_schema=$("#ff input[name=table_schema]").val();
+	var p_table_name=$("#ff input[name=table_name]").val();
+	var table_name=p_table_schema+"."+p_table_name;
+	// validate table name input
+	if(p_table_name == ''){
+		alert("Table name is not null!");
+		return false;
+	}		
+	//verify table type
+	var isTrueTableSelected=true;
+	if(p_table_type=='DLA'){
+		if(p_table_name.indexOf('daily')==-1){
+			isTrueTableSelected=false;
+		}
+	}else if(p_table_type=='WLA'){
+		if(p_table_name.indexOf('weekly')==-1){
+			isTrueTableSelected=false;
+		}
+	}else if(p_table_type=='MLA'){
+		if(p_table_name.indexOf('monthly')==-1){
+			isTrueTableSelected=false;
+		}
+	}
+	var submit=function(){
+		$('#c2').combobox('reload');
+		$('#addTableForm').dialog('close');
+		$.ajax({
+			url: rootSubPath,
+			data:{
+				action: 'manager_page_data_source_table.xaction',
+				actions: 'addNewTable',
+				p_table_type: p_table_type,
+				p_table_name: table_name
+			},
+			data_type: 'json',
+			success: function(data){
+				$('#manager_data_sources_tables_table').datagrid('reload');
+			},
+			error: function(jqXHR, textStatus){
+				alert( "Add Contact Request failed: " + textStatus );
+			}
+		});
+	}
+	if(isTrueTableSelected){
+		submit();
+	}else{
+		$.messager.confirm('Confirm','Table you choosed may be not in table type you choose!',function(r){
+			if (r){
+				submit();
+			}
+		});
+	}
+	
+	
+	
+	
+	return false;
+}
+</script>

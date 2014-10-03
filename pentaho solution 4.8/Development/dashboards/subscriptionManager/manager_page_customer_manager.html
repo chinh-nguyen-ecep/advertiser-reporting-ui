@@ -1,0 +1,256 @@
+<div class="easyui-layout" style="" data-options="fit:true" >
+	<div  data-options="region:'center',title:'Customers'" style="padding:1px">
+		<table id="cm_customer" data-options="singleSelect:true,fit:true,fitColumns:true,nowrap: false"></table>
+	</div>
+	<div data-options="region:'south',split:true,collapsible:false,title:'Customer contacts'" style="height:250px;padding:1px">
+		<table id="cm_contact" data-options="singleSelect:false,fit:true,fitColumns:true,nowrap: false"></table>
+	</div>
+</div>
+<div id="dd">
+	<form id="ff" method="post" onsubmit="return addFormSubmit();" class="myform">
+	<input name="p_customer_key" type="hidden" style="width:250px" />
+		<div>
+			<label for="p_email">Email:</label>
+			<input name="p_email" style="width:250px" />
+		</div>
+		<div>
+			<label for="p_phone_number">Phone number:</label>
+			<input name="p_phone_number" style="width:250px" />
+		</div>
+	</form>
+</div>
+
+
+
+<script>
+//Set title of sub page
+$('#manager_page_item_title').html('Customers Manager');
+
+//Load customer
+var cutomersDataGrid=$('#cm_customer');
+cutomersDataGrid.datagrid({
+			url:rootSubPath+'&action=manager_page_customer_manager.xaction&actions=listCustomerDetail',
+			columns:[[
+				{field:'customer_key',title:'ID',resizable:false},
+				{field:'customer_name',title:'Name',width: 200},	
+				//{field:'customer_type',title:'Type',resizable:false},	
+				{field:'customer_host_name',title:'Host name',width: 50,resizable:false},	
+				{field:'customer_destination_folder',title:'Destination',width: 80},	
+				//{field:'customer_desc',title:'Description'},		
+				{field:'customer_status',title:'Status',resizable:false},	
+				{field:'transfer_script_name',title:'Transfer script'}
+				//{field:'folder_content_transfer_script',title:'Folder content transfer script',width: 150}
+			]],
+			onSelect: function(rowIndex, rowData){
+				contactLoader(rowData.customer_key);
+			}
+		});
+/////////////////////////////////////////
+//function load contact
+///////////////////////////////////////
+var contactLoader=function(customer_key){
+	$("#ff input[name=p_customer_key]").val(customer_key);
+	var contactDataGrid=$('#cm_contact');
+	contactDataGrid.datagrid({
+			url:rootSubPath+'&action=manager_page_customer_manager.xaction&actions=listContactByCustomerKey&p_customer_key='+customer_key,
+			columns:[[
+				{field:'customer_contact_id',title:'Key',resizable:false},
+				{field:'customer_email',title:'Email',width: 200},
+				{field:'customer_phone_number',title:'Phone number',width: 100,resizable:false},
+				{field:'customer_contact_status',title:'Status',resizable:false}
+			]],
+			onSelect: function(rowIndex, rowData){
+				
+			},
+			toolbar:[{
+					text:'Add',
+					iconCls: 'icon-add',
+					handler: function(){
+						$('#dd').dialog("open");
+					}
+				},{
+					text:'Delete',
+					iconCls: 'icon-cancel',
+					handler: function(){					
+						delContact();
+					}
+				},{
+					text: 'Active',
+					iconCls: 'icon-ok',
+					handler: function(){					
+						activeContact();
+					}
+				},{
+					text: 'InActive',
+					iconCls: 'icon-no',
+					handler: function(){					
+						inActiveContact();
+					}
+				}
+				]
+		});
+}
+///////////////////////////////
+// Open add form
+//////////////////////////////
+$('#dd').dialog({
+    title: 'Add email',
+    width: 400,
+    height: 200,
+    closed: true,
+    cache: false,
+    modal: true,
+	buttons: [{
+					text:'Ok',
+					iconCls:'icon-ok',
+					handler:function(){
+						$('#ff').submit();
+					}
+				},{
+					text:'Cancel',
+					handler:function(){
+						$('#dd').dialog("close");
+					}
+				}]
+});
+
+function addFormSubmit(){
+	var email=$('#ff input[name=p_email]').val();
+	var customer_key=$("#ff input[name=p_customer_key]").val();
+	var p_phone_number=$('#ff input[name=p_phone_number]').val();
+	// validate email input
+	if(!isValidEmailAddress(email)){
+		alert("Invalid email address!");
+		return false;
+	}	
+	// check email input existed
+	var contactDataGrid=$('#cm_contact');
+	var gridData=contactDataGrid.datagrid('getData').rows;
+	for(var i=0;i<gridData.length;i++){
+		var p_email=gridData[i].customer_email;
+		if(p_email==email){
+			alert('Your email input existed!');
+			return false;
+		}
+	}
+	
+	
+	$('#dd').dialog("close");
+	$.ajax({
+		url: rootSubPath,
+		data:{
+			action: 'manager_page_customer_manager.xaction',
+			actions: 'addContact',
+			p_customer_key: customer_key,
+			p_email: email,
+			p_phone_number: p_phone_number
+		},
+		data_type: 'json',
+		success: function(data){
+			$('#cm_contact').datagrid('reload');
+		},
+		error: function(jqXHR, textStatus){
+			alert( "Add Contact Request failed: " + textStatus );
+		}
+	});
+	
+	return false;
+}
+
+///////////////////////////
+// Del contact
+///////////////////////////
+function delContact(){
+	var customer_contact_ids=$('#cm_contact').datagrid('getSelections');
+	var rows=[];
+	for(var i=0;i<customer_contact_ids.length;i++){
+		var customer_contact_id=customer_contact_ids[i].customer_contact_id;
+		rows.push(customer_contact_id);
+	}
+	
+	if(rows.length>0){
+		var r = confirm("Delete!");
+		if (r == true) {
+			$.ajax({
+				url: rootSubPath,
+				data:{
+					action: 'manager_page_customer_manager.xaction',
+					actions: 'delContact',
+					p_contact_ids: rows.join(",")
+				},
+				data_type: 'json',
+				success: function(data){
+					$('#cm_contact').datagrid('reload');
+				},
+				error: function(jqXHR, textStatus){
+					alert( "Del Contact Request failed: " + textStatus );
+				}
+			});
+		} 	
+	}
+}
+///////////////////////////
+// Active contact
+///////////////////////////
+function activeContact(){
+	var customer_contact_ids=$('#cm_contact').datagrid('getSelections');
+	var rows=[];
+	for(var i=0;i<customer_contact_ids.length;i++){
+		var customer_contact_id=customer_contact_ids[i].customer_contact_id;
+		rows.push(customer_contact_id);
+	}
+	
+	if(rows.length>0){
+		var r = confirm("Active!");
+		if (r == true) {
+			$.ajax({
+				url: rootSubPath,
+				data:{
+					action: 'manager_page_customer_manager.xaction',
+					actions: 'activeContact',
+					p_contact_ids: rows.join(",")
+				},
+				data_type: 'json',
+				success: function(data){
+					$('#cm_contact').datagrid('reload');
+				},
+				error: function(jqXHR, textStatus){
+					alert( "Active Contact Request failed: " + textStatus );
+				}
+			});
+		} 	
+	}
+}
+///////////////////////////
+// InActive contact
+///////////////////////////
+function inActiveContact(){
+	var customer_contact_ids=$('#cm_contact').datagrid('getSelections');
+	var rows=[];
+	for(var i=0;i<customer_contact_ids.length;i++){
+		var customer_contact_id=customer_contact_ids[i].customer_contact_id;
+		rows.push(customer_contact_id);
+	}
+	
+	if(rows.length>0){
+		var r = confirm("InActive!");
+		if (r == true) {
+			$.ajax({
+				url: rootSubPath,
+				data:{
+					action: 'manager_page_customer_manager.xaction',
+					actions: 'inActiveContact',
+					p_contact_ids: rows.join(",")
+				},
+				data_type: 'json',
+				success: function(data){
+					$('#cm_contact').datagrid('reload');
+				},
+				error: function(jqXHR, textStatus){
+					alert( "InActive Contact Request failed: " + textStatus );
+				}
+			});
+		} 	
+	}
+}
+</script>

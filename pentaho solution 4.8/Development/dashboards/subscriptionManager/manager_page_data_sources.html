@@ -1,0 +1,52 @@
+<div class="easyui-layout" style="" data-options="fit:true" >
+        <div data-options="region:'north',split:true,collapsible:false,title:'Data subjects'" style="height:200px;padding:0px">
+			<table id="dts_subject" data-options="singleSelect:true,fit:true,fitColumns:true,nowrap: false"></table>
+        </div>
+        <div  data-options="region:'center',title:'Data file configuration'" style="padding:0px">
+			<table id="dts_data_file_cf" data-options="singleSelect:true,fit:true,fitColumns:false,nowrap: false"></table>
+        </div>
+    </div>
+	
+<script>
+//Set title of sub page
+$('#manager_page_item_title').html('Data Sources');
+
+//Load data subject
+var DataSubjectDataGrid=$('#dts_subject');
+DataSubjectDataGrid.datagrid({
+			url:rootSubPath+'&action=manager_page_data_sources.xaction&actions=listDataSubject',
+			columns:[[
+				{field:'data_subject_id',title:'Key',resizable:false},
+				{field:'data_subject_name',title:'Name',width: 200},	
+				{field:'data_subject_desc',title:'Description',width: 350,resizable:false},		
+				{field:'data_subject_status',title:'Status',resizable:false}
+			]],
+			onSelect: function(rowIndex, rowData){
+				dt_file_config_loader(rowData.data_subject_id);
+			}
+		});
+//function load data file config from data subject key
+var dt_file_config_loader=function(data_subject_id){
+	var dataFileConfigDataGrid=$('#dts_data_file_cf');
+	dataFileConfigDataGrid.datagrid({
+			url:rootSubPath+'&action=manager_page_data_sources.xaction&actions=listDataFileConfig&p_data_subject_id='+data_subject_id,
+			columns:[[
+				{field:'df_config_format',title:'Format',resizable:false},		
+				{field:'df_status',title:'Status',resizable:false},
+				{field:'df_source_file',title:'Source file',width: 300,resizable:false},
+				{field:'table_name',title:'Source table',width: 300,resizable:false},
+				//{field:'dt_column_list',title:'Column list',resizable:false},
+				{field:'df_attribute',title:'Attribute',width: 200,resizable:false},
+				//{field:'module_desc',title:'Export module',resizable:false},
+				{field:'script_name',title:'Export script',width: 150,resizable:false}		
+			]],
+			frozenColumns:[[
+				{field:'df_config_id',title:'Key',resizable:false},
+				{field:'df_config_name',title:'Name',width: 300,resizable:false},	
+			]],
+			onSelect: function(rowIndex, rowData){
+				
+			}
+		});	
+}
+</script>
