@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RTB Daily Exchange Cost Analysis" pageWidth="1810" pageHeight="1684" columnWidth="1770" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="85"/>
+	<property name="ireport.y" value="32"/>
 	<style name="boder">
 		<box leftPadding="5" rightPadding="5">
 			<pen lineWidth="0.5"/>
@@ -34,13 +34,13 @@
      , auction_cnt as "Auction Cnt"
      , CASE auction_cnt WHEN 0 THEN 0 ELSE imp_cnt::float / auction_cnt END as "RTB Winrate %"
      , filled_cnt as "AdCel - Filled Imps"
-     , filled_cnt::float / imp_cnt as "Adcel - Fill Rate %"
+     , CASE imp_cnt WHEN 0 THEN 0 ELSE filled_cnt::float / imp_cnt END as "Adcel - Fill Rate %"
      , dfp_imp_cnt as "DFP Imps"
-     , dfp_imp_cnt::float / imp_cnt as "DFP - Fill Rate %"
+     , CASE imp_cnt WHEN 0 THEN 0 ELSE dfp_imp_cnt::float / imp_cnt END as "DFP - Fill Rate %"
      , event_imp_cnt as "Evt - Imp"
      , event_adimpinternal_cnt as "Evt - Adimpinternal"
      , event_click_cnt as "Evt - Click"
-     , event_click_cnt::float / event_imp_cnt as "Event - CTR %"
+     , CASE event_imp_cnt WHEN 0 THEN 0 ELSE event_click_cnt::float / event_imp_cnt END as "Event - CTR %"
      , max(dt_lastchange) as dt_lastchange
 FROM rtb.daily_agg_exchanger_cost_analysis_v1
 WHERE is_active = true
