@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RTB Daily Exchange Cost Analysis" pageWidth="1810" pageHeight="1684" columnWidth="1770" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="32"/>
+	<property name="ireport.x" value="920"/>
+	<property name="ireport.y" value="0"/>
 	<style name="boder">
 		<box leftPadding="5" rightPadding="5">
 			<pen lineWidth="0.5"/>
@@ -40,7 +40,7 @@
      , event_imp_cnt as "Evt - Imp"
      , event_adimpinternal_cnt as "Evt - Adimpinternal"
      , event_click_cnt as "Evt - Click"
-     , CASE event_imp_cnt WHEN 0 THEN 0 ELSE event_click_cnt::float / event_imp_cnt END as "Event - CTR %"
+     , CASE event_adimpinternal_cnt WHEN 0 THEN 0 ELSE event_click_cnt::float / event_adimpinternal_cnt END as "Event - CTR %"
      , max(dt_lastchange) as dt_lastchange
 FROM rtb.daily_agg_exchanger_cost_analysis_v1
 WHERE is_active = true
@@ -126,7 +126,7 @@ ORDER BY  full_date, exchanger;]]>
 - Event - Imps: This is count from Event Tracker log and AdCel Attributed Request log with rtb.ex is not NULL and status = 'Y' and e=&imp. Group by date, exchange.
 - Event - Adimpinternals: This is count from Event Tracker log and AdCel Attributed Request log with rtb.ex is not NULL and status = 'Y' and e=&adimpinternal. Group by date, exchange.
 - Event - Clicks: This is count from Event Tracker log and AdCel Attributed Request log with rtb.ex is not NULL and status = 'Y' and e=&click. Group by date, exchange.
-- Event - CTR %: (Event - Clicks / Event - Imps) %.]]></text>
+- Event - CTR %: (Event - Clicks / Event - Adimpinternals) %.]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -684,7 +684,7 @@ ORDER BY  full_date, exchanger;]]>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Double"><![CDATA[($V{Evt - Imp_1} == 0 ? 0 : ($V{Evt - Click_1} * 1.0) / $V{Evt - Imp_1})]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[($V{Evt - Adimpinternal_1}== 0 ? 0 : ($V{Evt - Click_1} * 1.0) / $V{Evt - Adimpinternal_1})]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>
