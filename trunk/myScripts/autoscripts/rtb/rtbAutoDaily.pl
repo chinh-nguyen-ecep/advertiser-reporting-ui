@@ -30,7 +30,7 @@ sub main{
 		runParam(78);		
 		dw3_writelog($logFile,"Run function param 78");		
 		#check param 78
-		checkParam(78,4);	
+		checkParam(78,5);	
 		#promote 
 		promote(78);
 		
@@ -174,4 +174,5 @@ sub promote{
 sub transferAllData{
 	system("cd /opt/temp/autoscripts/transformer && perl main.pl daily $master_host $master_report_host rtb.daily_agg_exchanger_cost_analysis_v1 $report_date rtbAutoDaily.pl");	
 	system("cd /opt/temp/autoscripts/transformer && perl main.pl daily $master_host $master_report_host rtb.daily_agg_delivery_publisher_property_flight $report_date rtbAutoDaily.pl");	
+	system("cd /opt/temp/autoscripts/transformer && perl main.pl daily $master_host $master_report_host rtb.daily_agg_delivery_rtb_flight $report_date rtbAutoDaily.pl");	
 }
