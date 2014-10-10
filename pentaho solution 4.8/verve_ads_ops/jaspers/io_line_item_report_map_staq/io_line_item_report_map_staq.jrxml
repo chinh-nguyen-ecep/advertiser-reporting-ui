@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="I.O. Line Item Report -Map-STAQ" pageWidth="1800" pageHeight="842" columnWidth="1760" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="I.O. Line Item Report -Map-STAQ" pageWidth="1930" pageHeight="842" columnWidth="1890" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.3660269107301466"/>
-	<property name="ireport.x" value="1668"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Crosstab Data Text" mode="Transparent" hAlign="Center" fontName="Calibri">
 		<box leftPadding="5" rightPadding="5"/>
@@ -56,6 +56,7 @@
 	<queryString>
 		<![CDATA[SELECT
 dt_lastchange
+,sfdc_opportunity_id
 ,io_orders_id
 ,contract_name as contract_name
 ,adm_order_ids as ADM_Order_ids
@@ -71,6 +72,7 @@ order by io_line_item_id desc
 ;]]>
 	</queryString>
 	<field name="dt_lastchange" class="java.sql.Timestamp"/>
+	<field name="sfdc_opportunity_id" class="java.lang.String"/>
 	<field name="io_orders_id" class="java.lang.Integer"/>
 	<field name="contract_name" class="java.lang.String"/>
 	<field name="adm_order_ids" class="java.lang.Integer"/>
@@ -91,14 +93,14 @@ order by io_line_item_id desc
 				<imageExpression class="java.lang.String"><![CDATA["http://s3.amazonaws.com/uploads.uservoice.com/logo/design_setting/24549/original/pub_adops_logo.png?1348177717"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="100" y="0" width="1660" height="37"/>
+				<reportElement x="100" y="0" width="1790" height="37"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="20" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ I.O. Line Item Report - Map - STAQ]]></text>
 			</staticText>
 			<textField pattern="yyyy-MM-dd hh:mm aaa">
-				<reportElement x="0" y="37" width="1760" height="20"/>
+				<reportElement x="0" y="37" width="1890" height="20"/>
 				<textElement verticalAlignment="Top"/>
 				<textFieldExpression class="java.lang.String"><![CDATA["Last change: "+new SimpleDateFormat("yyyy-MM-dd hh:mm aaa").format($F{dt_lastchange})]]></textFieldExpression>
 			</textField>
@@ -107,7 +109,7 @@ order by io_line_item_id desc
 	<columnHeader>
 		<band height="25">
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="0" width="100" height="25" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="130" y="0" width="100" height="25" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -121,7 +123,7 @@ order by io_line_item_id desc
 				<text><![CDATA[IO Orders ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="100" y="0" width="300" height="25" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="230" y="0" width="300" height="25" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -135,7 +137,7 @@ order by io_line_item_id desc
 				<text><![CDATA[Contract Name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="400" y="0" width="100" height="25" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="530" y="0" width="100" height="25" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -149,7 +151,7 @@ order by io_line_item_id desc
 				<text><![CDATA[Adm Order IDs]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="500" y="0" width="250" height="25" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="630" y="0" width="250" height="25" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -163,7 +165,7 @@ order by io_line_item_id desc
 				<text><![CDATA[Adm Order Name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="750" y="0" width="96" height="25" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="880" y="0" width="96" height="25" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -177,7 +179,7 @@ order by io_line_item_id desc
 				<text><![CDATA[IO Line Item ID	]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="846" y="0" width="442" height="25" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="976" y="0" width="442" height="25" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -191,7 +193,7 @@ order by io_line_item_id desc
 				<text><![CDATA[IO Line Item Name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="1288" y="0" width="121" height="25" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="1418" y="0" width="121" height="25" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -205,7 +207,7 @@ order by io_line_item_id desc
 				<text><![CDATA[IO Line Items Quantity]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="1409" y="0" width="126" height="25" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="1539" y="0" width="126" height="25" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -219,7 +221,7 @@ order by io_line_item_id desc
 				<text><![CDATA[IO Line Items Metric]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="1535" y="0" width="100" height="25" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="1665" y="0" width="100" height="25" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -233,7 +235,7 @@ order by io_line_item_id desc
 				<text><![CDATA[IO Line Items Rate]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="1635" y="0" width="125" height="25" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="1765" y="0" width="125" height="25" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -246,12 +248,26 @@ order by io_line_item_id desc
 				</textElement>
 				<text><![CDATA[Adm Flight IDs]]></text>
 			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="130" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[SFDC Opportunity ID]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="35">
 			<textField>
-				<reportElement x="0" y="0" width="100" height="35"/>
+				<reportElement x="130" y="0" width="100" height="35"/>
 				<box topPadding="5" leftPadding="5" bottomPadding="0" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
@@ -265,7 +281,7 @@ order by io_line_item_id desc
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{io_orders_id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="100" y="0" width="300" height="35"/>
+				<reportElement x="230" y="0" width="300" height="35"/>
 				<box topPadding="5" leftPadding="5" bottomPadding="0" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
@@ -279,7 +295,7 @@ order by io_line_item_id desc
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{contract_name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="400" y="0" width="100" height="35"/>
+				<reportElement x="530" y="0" width="100" height="35"/>
 				<box topPadding="5" leftPadding="5" bottomPadding="0" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
@@ -293,7 +309,7 @@ order by io_line_item_id desc
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{adm_order_ids}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="500" y="0" width="250" height="35"/>
+				<reportElement x="630" y="0" width="250" height="35"/>
 				<box topPadding="5" leftPadding="5" bottomPadding="0" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
@@ -307,7 +323,7 @@ order by io_line_item_id desc
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{adm_order_name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="750" y="0" width="96" height="35"/>
+				<reportElement x="880" y="0" width="96" height="35"/>
 				<box topPadding="5" leftPadding="5" bottomPadding="0" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
@@ -321,7 +337,7 @@ order by io_line_item_id desc
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{io_line_item_id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="846" y="0" width="442" height="35"/>
+				<reportElement x="976" y="0" width="442" height="35"/>
 				<box topPadding="5" leftPadding="5" bottomPadding="0" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
@@ -335,7 +351,7 @@ order by io_line_item_id desc
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{io_lineitem_name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1288" y="0" width="121" height="35"/>
+				<reportElement x="1418" y="0" width="121" height="35"/>
 				<box topPadding="5" leftPadding="5" bottomPadding="0" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
@@ -349,7 +365,7 @@ order by io_line_item_id desc
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{io_line_items_quantity}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1409" y="0" width="126" height="35"/>
+				<reportElement x="1539" y="0" width="126" height="35"/>
 				<box topPadding="5" leftPadding="5" bottomPadding="0" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
@@ -363,7 +379,7 @@ order by io_line_item_id desc
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{io_line_items_metric}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1535" y="0" width="100" height="35"/>
+				<reportElement x="1665" y="0" width="100" height="35"/>
 				<box topPadding="5" leftPadding="5" bottomPadding="0" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
@@ -377,7 +393,7 @@ order by io_line_item_id desc
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{io_line_items_rate}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1635" y="0" width="125" height="35"/>
+				<reportElement x="1765" y="0" width="125" height="35"/>
 				<box topPadding="5" leftPadding="5" bottomPadding="0" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
@@ -389,6 +405,20 @@ order by io_line_item_id desc
 					<font fontName="SansSerif"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{adm_flight_ids}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="0" y="0" width="130" height="35" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box topPadding="5" leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{sfdc_opportunity_id}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
