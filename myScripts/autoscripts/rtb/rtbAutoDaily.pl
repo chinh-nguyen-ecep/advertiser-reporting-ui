@@ -68,7 +68,8 @@ sub checkSU{
 		my $dbh = getConnection();		   
 		
 		#get total file
-		while($totalFiles<1){
+		my $totalFileTrue=5; 
+		while($totalFiles<$totalFileTrue){
 			
 			#Cretae String query		
 			my $query=" select count (*) AS Total_Files from control.data_file WHERE data_file_config_id IN (152, 206, 209, 210, 211) AND file_timestamp::date=?;";
@@ -83,7 +84,7 @@ sub checkSU{
 			if($totalFiles==0){
 				printTime("No file!");
 			}
-			if($totalFiles<1){
+			if($totalFiles<$totalFileTrue){
 				sleep(300);
 			}
 		}		
