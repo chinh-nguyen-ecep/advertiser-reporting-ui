@@ -1,0 +1,238 @@
+<html xmlns:xf="http://www.w3.org/2002/xforms">
+   <head>
+	<!-- do not include a <meta> tag -->
+	<title></title>
+      <link rel="stylesheet" type="text/css" href="/verve-lib/css/jasperReportCommonScript.css"></link>
+	  <script src="/verve-lib/scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+	  <script src="/verve-lib/scripts/verve-script-jquery.js" type="text/javascript"></script>
+      <script src="/verve-lib/scripts/jasperReportCommonScript.js" type="text/javascript"></script>
+	  <script src="/verve_style/scripts2/utils.js"></script>
+	  {xform-header}
+
+   </head>
+   <body style="background-color: #fff">
+      <div name="dialog-form" title="Control Panel" style="width: 460px;height: 520px;">
+        <form name="parameter-form" id="parameter-form" method="GET">
+            <table class="tableForm">
+                <tbody>	         
+                    <tr>
+                        <th>Date mode:</th>
+                        <td><div style="float: left;">{p_date_mode}</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Range from:</th>
+                        <td>
+                            <div id="datemode" style="float: left;">
+                                <label style="margin-left: 0px;"></label> {p_start_date}
+                                <label style="margin-left: 0px;">To:</label> {p_end_date}
+                            </div>
+                            <div id="monthmode" style="display: none;float: left;">
+                                <label style="margin-left: 0px;"></label> {p_start_month_since_2005}
+                                <label style="margin-left: 0px;">To:</label> {p_end_month_since_2005}
+                            </div>	             
+                        </td>
+                    </tr>
+                        <tr>
+                            <th>Exchange Filter:</th>
+                            <td>
+                                <input id="exchange_filter" type="text" style="width: 300px;"/>
+                                <div id="exchange_select" style="width: 299px;border: 1px solid gray;overflow: auto;height: 100px;">
+                                    Loading....
+                                </div>
+                            </td>
+                        </tr>	
+                        <tr>
+                            <th>RTB Flight Filter:</th>
+                            <td>
+                                <input id="rtb_flight_filter" type="text" style="width: 300px;"/>
+                                <div id="rtb_flight_select" style="width: 299px;border: 1px solid gray;overflow: auto;height: 100px;">
+                                    Please select exchange...
+                                </div>
+                            </td>
+                        </tr>					
+                </tbody>
+            </table>
+		 <div id="hide_in_form" style="display:none">
+			{v_max_date}
+			{v_min_date} 
+			{solution}
+			{action}
+			{path}
+		 </div> 
+        </form>		
+    </div>    
+<script> <![CDATA[	
+			$(document).ready(function(){
+				initJasperPageTemplate({
+					controlPanle_width: 460,
+					//controlPanle_height: 530,
+					generateFormContent: generateFormContent,
+					formValidation:formValidation,
+					reportName:'RTB Wins & AdCel by Flight v1',
+					//miniMode: true,
+					iframeMode:true
+				});
+			});
+			var generateFormContent=function(domContentForm,completedFn){
+				$('option[value=]').remove();
+				var firstRun=true;
+				var form=domContentForm.children('form');
+				var max_date=form.find('select[name=v_max_date] option:first-child').attr('value');
+				var min_date=form.find('select[name=v_min_date] option:first-child').attr('value');
+				var arrayDate=max_date.split('-');
+				var myDate=new Date(arrayDate[0],(arrayDate[1]/1)-1,arrayDate[2]/1);
+				var date = myDate;
+				date.setDate(date.getDate()-6);
+				var previous_date=parseDate(date);				
+				//Get date dom
+				var input_start_date=form.find('input[name=p_start_date]');
+				input_start_date.removeAttr('id');
+				//var new_ID=domContentForm.attr('name')+'_'+input_start_date.attr('id');
+				//input_start_date.attr('id',new_ID);
+				var input_end_date=form.find('input[name=p_end_date]');
+				input_end_date.removeAttr('id');
+				//var new_ID=domContentForm.attr('name')+'_'+input_end_date.attr('id');
+				//input_end_date.attr('id',new_ID);
+				
+				//create calendar
+				input_start_date.attr('value',previous_date);
+				input_start_date.datepicker({
+					defaultDate: previous_date,
+					dateFormat: 'yy-mm-dd',
+					regional: ["en-GB"],
+					maxDate: max_date,
+					minDate: min_date,
+					onSelect: function(dateText, inst) { 
+						input_end_date.datepicker( "option", "minDate", dateText );
+					}
+				});
+				//create calendar end date
+				input_end_date.attr('value',max_date);
+				input_end_date.datepicker({
+					defaultDate: max_date,
+					dateFormat: 'yy-mm-dd',
+					regional: ["en-GB"],
+					maxDate: max_date,
+					minDate: min_date,
+					onSelect: function(dateText, inst) { 
+						input_start_date.datepicker( "option", "maxDate", dateText );
+					}
+				});	
+				//Month select
+				$('input[name=p_date_mode]').change(function(){
+					var isChecked=$(this).is(':checked');
+					if(isChecked){
+						var dateMode=$(this).val();
+						$('#datemode').hide();
+						$('#monthmode').hide();
+						if(dateMode=='date'){
+							$('#datemode').show();					
+						}else{
+							//$('#monthmode').show();
+							$(this).val('date');
+						}				
+					}
+				});				
+				//Load Exchange
+				var loadExchange=new generateSelect2({
+					inputID: 'exchange_filter',
+					divID: 'exchange_select',
+					name: 'p_exchanges',
+					multi: true,
+					ajaxUrl: '/pentaho/ViewAction',
+					selectAll: true,
+					data: function(term,page){
+						return {
+							solution: solution,
+							path: path+'/rtb_wins_vs_adcel_by_flights_v1',
+							mode: 'loadDimensions',
+							action: 'loadDimension.xaction',
+							term: term, //search term
+							limit: 10, // page size
+							page: page, // page number
+							mode: 'exchanger'
+						};
+					},
+					result: function(data, page){
+						var results=data.data;
+						var more=false;
+						if(results.length==data.limit){
+							more=true
+						}
+						return {results: results,more: more}
+					},
+					success: function(){
+						//loadFlight.action();
+					},
+					clickEvent: function(id){
+						if($('div[id=exchange_select] input:checked').length>0){
+							loadFlight.action();	
+						}else{
+							$('div[id=rtb_flight_select]').html('Please select exchange...');
+						}
+							
+					}
+				});	
+				loadExchange.action();					
+				//load Flight				
+				var loadFlight=new generateSelect2({
+					inputID: 'rtb_flight_filter',
+					divID: 'rtb_flight_select',
+					name: 'p_rtb_flight_ids',
+					multi: true,
+					ajaxUrl: '/pentaho/ViewAction',
+					selectAll: true,
+					data: function(term,page){
+						return {
+							solution: solution,
+							path: path+'/rtb_wins_vs_adcel_by_flights_v1',
+							mode: 'loadDimensions',
+							action: 'loadDimension.xaction',
+							term: term, //search term
+							limit: 10, // page size
+							page: page, // page number
+							mode: 'flight',
+							exchange_ids: loadExchange.getID().join(',')
+						};
+					},
+					result: function(data, page){
+						var results=data.data;
+						var more=false;
+						if(results.length==data.limit){
+							more=true
+						}
+						return {results: results,more: more}
+					},
+					success: function(){
+						
+					},
+					clickEvent: function(id){
+							
+					}
+				});			
+			}
+			
+			var formValidation=function(domContentForm,divResult){
+				var form=domContentForm.children('form');
+				var validate=true;
+				//check select Publisher
+				var dimesion=form.find('div[id=exchange_select] input:checked');
+				if(dimesion.length==0){
+					alertText('Please select Exchange!');
+					return false;
+				}			
+				//check select Property
+				var dimesion=form.find('div[id=rtb_flight_select] input:checked');
+				if(dimesion.length==0){
+					alertText('Please select Flights!');
+					return false;
+				}
+				return true;
+			}
+
+	]]>
+	</script>   
+   </body>
+     
+</html>
