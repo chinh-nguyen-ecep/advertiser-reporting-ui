@@ -64,7 +64,13 @@
         <request>parameter_string</request> 
       </sources>  
       <default-value/> 
-    </parameter_string> 
+    </parameter_string>  
+    <p_output1 type="string">
+      <sources>
+        <request>p_output1</request>
+      </sources>
+      <default-value><![CDATA[html]]></default-value>
+    </p_output1>
   </inputs>
 
   <outputs/>
@@ -114,17 +120,17 @@
         <component-name>SecureFilterComponent</component-name>
         <action-type>Prompt/Secure Filter</action-type>
         <action-inputs> 
-          <p_output type="string"/>  
-          <List_output type="string-list"/> 
+          <p_output1 type="string"/>
+          <List_output type="string-list"/>
         </action-inputs>
         <action-resources> 
           <pageTemplate type="resource"/> 
         </action-resources>
         <component-definition> 
           <selections> 
-            <p_output style="select"> 
-              <filter>List_output</filter> 
-            </p_output> 
+            <p_output1 style="select">
+              <filter>List_output</filter>
+            </p_output1>
           </selections>  
           <xsl><![CDATA[pageTemplate]]></xsl> 
         </component-definition> 
