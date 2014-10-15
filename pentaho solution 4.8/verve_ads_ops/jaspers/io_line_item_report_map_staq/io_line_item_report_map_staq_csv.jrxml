@@ -100,7 +100,7 @@ order by io_line_item_id desc
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[IO Orders ID]]></text>
+				<text><![CDATA[io_orders_id]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="230" y="0" width="300" height="25" backcolor="#FFFFFF"/>
@@ -114,7 +114,7 @@ order by io_line_item_id desc
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Contract Name]]></text>
+				<text><![CDATA[contract_name]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="530" y="0" width="100" height="25" backcolor="#FFFFFF"/>
@@ -128,7 +128,7 @@ order by io_line_item_id desc
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Adm Order IDs]]></text>
+				<text><![CDATA[adm_order_ids]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="630" y="0" width="250" height="25" backcolor="#FFFFFF"/>
@@ -142,7 +142,7 @@ order by io_line_item_id desc
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Adm Order Name]]></text>
+				<text><![CDATA[adm_order_name]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="880" y="0" width="96" height="25" backcolor="#FFFFFF"/>
@@ -156,7 +156,7 @@ order by io_line_item_id desc
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[IO Line Item ID	]]></text>
+				<text><![CDATA[io_line_item_id]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="976" y="0" width="442" height="25" backcolor="#FFFFFF"/>
@@ -170,7 +170,7 @@ order by io_line_item_id desc
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[IO Line Item Name]]></text>
+				<text><![CDATA[io_lineitem_name]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="1418" y="0" width="121" height="25" backcolor="#FFFFFF"/>
@@ -184,7 +184,7 @@ order by io_line_item_id desc
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[IO Line Items Quantity]]></text>
+				<text><![CDATA[io_line_items_quantity]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="1539" y="0" width="126" height="25" backcolor="#FFFFFF"/>
@@ -198,7 +198,7 @@ order by io_line_item_id desc
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[IO Line Items Metric]]></text>
+				<text><![CDATA[io_line_items_metric]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="1665" y="0" width="100" height="25" backcolor="#FFFFFF"/>
@@ -212,7 +212,7 @@ order by io_line_item_id desc
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[IO Line Items Rate]]></text>
+				<text><![CDATA[io_line_items_rate]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="1765" y="0" width="125" height="25" backcolor="#FFFFFF"/>
@@ -226,7 +226,7 @@ order by io_line_item_id desc
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Adm Flight IDs]]></text>
+				<text><![CDATA[adm_flight_ids]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="0" y="0" width="130" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
@@ -240,7 +240,7 @@ order by io_line_item_id desc
 				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[SFDC Opportunity ID]]></text>
+				<text><![CDATA[sfdc_0pportunity_id]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
