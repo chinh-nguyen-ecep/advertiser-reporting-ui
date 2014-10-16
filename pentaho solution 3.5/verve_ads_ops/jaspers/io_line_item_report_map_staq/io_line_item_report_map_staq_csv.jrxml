@@ -240,7 +240,7 @@ order by io_line_item_id desc
 				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[sfdc_0pportunity_id]]></text>
+				<text><![CDATA[sfdc_opportunity_id]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
