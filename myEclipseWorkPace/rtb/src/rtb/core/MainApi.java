@@ -24,6 +24,7 @@ public class MainApi implements QueryApi{
 	private	String[] defaultDimensions;
 	private String[] defaultMeasures;
 	private String defaultUnitsPerPage="10";
+	private int maximumUnitsPerPage=100;
 	private String defaultPage="1";
 	public String getDataSourceTableName() {
 		return dataSourceTableName;
@@ -111,7 +112,18 @@ public class MainApi implements QueryApi{
 		//Set default value unitsPerPage
 		if(unitsPerPage==null){
 			unitsPerPage=this.defaultUnitsPerPage;
+		}else{
+			try {
+				//check maximum unit/page
+				if(Integer.parseInt(unitsPerPage)>maximumUnitsPerPage){
+					unitsPerPage=""+maximumUnitsPerPage;
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+				unitsPerPage=this.defaultUnitsPerPage;
+			}
 		}
+		
 		//Set default value page
 		if(page==null){
 			page=this.defaultPage;
