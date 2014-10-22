@@ -47,8 +47,13 @@
 					    <i class="icon-calendar icon-large"></i>
 					    <span></span> <b class="caret"></b>
 						<input type="hidden" value="" />
-						</div>
+						</div>						
 		      		</div>
+		      		<div class="form-group">
+						    <select style="width:150px" id="timeZone" >
+			    									        
+						    </select>
+					    </div>
 			    </form>
 		</div>
 	</nav>

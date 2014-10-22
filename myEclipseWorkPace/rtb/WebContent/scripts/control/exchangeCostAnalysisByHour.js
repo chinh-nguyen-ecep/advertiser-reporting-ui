@@ -20,6 +20,9 @@
 //var selectEndDate=new Date('2013-10-07');
 var chart;// chart object
 var subtitle; // subtitle of chart
+var timeZone="UTC";
+var utcStartDate_epoch=0;
+var utcEndDate_epoch=0;
 var title; // titile of chart
 var categories=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23];	 //hour category of chart
 var p_dma_ids=[];// array content list of dma ids user selected
@@ -47,6 +50,14 @@ $(document).ready(function(){
 			loadChart();
 		}
 	});
+	generateSelectListOfTimezone({
+		domSelectId:'timeZone',
+		timeZode_df: timeZone, 
+		change: function(){
+			timeZone=$('#timeZone').val();
+			loadChart();
+		}
+	});
 	generateSelectListOfExchange({
 			domSelectId:'exchange_filter',
 			success: function(){
@@ -61,17 +72,25 @@ $(document).ready(function(){
 	//function load chart
 	function loadChart(){
 		myDateRangeInput.disable();
+		//convert time zone
+		var startDate=selectStartDate.format('yyyy-mm-dd');
+		var endDate=selectEndDate.format('yyyy-mm-dd');
+		utcStartDate_epoch=moment.tz(startDate+" 00:00:00", timeZone).tz("UTC").unix();
+		utcEndDate_epoch=moment.tz(endDate+" 23:00:00", timeZone).tz("UTC").unix();
+		// end convert time zone
+		
 		series_1=[];
 		series_2=[];
 		series_3=[];
 		series_4=[];
-		var dateRange_value='where[full_date.between]='+urlMaster.getParam('where[full_date.between]');
+		var dateRange_value='where[epoch_hour.between]='+utcStartDate_epoch+'..'+utcEndDate_epoch;
 		var where_value='';
 		if($('#exchange_filter').val()!='All Exchanges'){
  			where_value="&where[exchange]="+$('#exchange_filter').val(); 			
  		}
 		
-		var url=apiRootUrl+'/dailyExchangeCostAnalysisByHour?select=full_date|hour24_of_day&limit=9999&'+dateRange_value+"&by=wins|paid_amount|ave_won_price.avg|ave_bid_price.avg&order=full_date|hour24_of_day"+where_value;
+//		var url=apiRootUrl+'/dailyExchangeCostAnalysisByHour?select=full_date|hour24_of_day&limit=9999&'+dateRange_value+"&by=wins|paid_amount|ave_won_price.avg|ave_bid_price.avg&order=full_date|hour24_of_day"+where_value;
+		var url=apiRootUrl+'/dailyExchangeCostAnalysisByHour?select=full_date|epoch_hour&limit=9999&'+dateRange_value+"&by=wins|paid_amount|ave_won_price.avg|ave_bid_price.avg&order=epoch_hour"+where_value;
 		if(myAjaxStore.isLoading(url)){
 			console.log('Your request is loading...');
 			console.log('Callback after '+loadingCallback+'s...');
@@ -95,8 +114,22 @@ $(document).ready(function(){
 					      withCredentials: true
 		   		},
 				success: function(json){
-					  myAjaxStore.add(url,json);
-					  loadChart();
+						//Convert data to current timezone
+				  		var tempData=[];
+				  		$.each(json.data,function(index,row){
+				  			console.log(row);
+				  			var epoch_hour=row[1];
+				  			var day = moment.unix(epoch_hour).tz(timeZone);
+				  			var date=day.format('YYYY-MM-DD');
+				  			var hour=day.format('H');
+				  			row[0]=date;
+				  			row[1]=hour;
+				  			tempData.push(row);
+				  		});
+				  		json.data=tempData;
+				  		
+				  		myAjaxStore.add(url,json);
+				  		loadChart();
 				},
 				error: function(xhr,status,error){
 					myAjaxStore.remove(url);
@@ -116,7 +149,7 @@ $(document).ready(function(){
 					
 				}
 				});			
-		}else{
+		}else{			
 			processData(ajaxData);
 			if(ajaxData.data.length==0){
 				var mydialog=new contentDialog();
@@ -363,7 +396,7 @@ $(document).ready(function(){
 			_categories=categories;
 			title+=" by Hour";
 		}
-		
+		title+=" ("+timeZone+")";
 		
 		drawChart(_categories,series,title,subtitle,_format);
 		myTable.refresh();
@@ -371,13 +404,13 @@ $(document).ready(function(){
 	
 	function reviewExportData(){
 		var mydialog=new contentDialog();
-		mydialog.setTitle('Exchange by Hour From '+selectStartDate.format('yyyy-mm-dd')+' To '+selectEndDate.format('yyyy-mm-dd'));
+		mydialog.setTitle('Exchange by Hour From '+selectStartDate.format('yyyy-mm-dd')+' To '+selectEndDate.format('yyyy-mm-dd')+" ("+timeZone+")");
 		var randomID=new Date().valueOf();
 		mydialog.setContent('<div title="'+randomID+'" class="loadingDots" style=""></div>');
 		mydialog.setWidth(700);
 		mydialog.open();
 		var exchanger=$('#exchange_filter').val();
-		var loadingUrl=rootUrl+'/GenerateJasperReport'+'?export_type=html&jrxml=daily_exchange_payout_by_hour&p_end_date='+selectEndDate.format('yyyy-mm-dd')+'&p_start_date='+selectStartDate.format('yyyy-mm-dd')+'&path=exchangePayout'+"&p_exchange="+exchanger;
+		var loadingUrl=rootUrl+'/GenerateJasperReport'+'?export_type=html&jrxml=daily_exchange_payout_by_hour&p_timeZone='+timeZone+'&p_start_epoch='+utcStartDate_epoch+'&p_end_epoch='+utcEndDate_epoch+'&path=exchangePayout'+"&p_exchange="+exchanger;
 		var htmlResult;
 		
 		if(myAjaxStore.isLoading(loadingUrl)){
@@ -411,7 +444,7 @@ $(document).ready(function(){
 	
 	function exportReport(exportType){
 		var exchanger=$('#exchange_filter').val();
-		var loadingUrl=rootUrl+'/GenerateJasperReport'+'?export_type='+exportType+'&jrxml=daily_exchange_payout_by_hour&p_end_date='+selectEndDate.format('yyyy-mm-dd')+'&p_start_date='+selectStartDate.format('yyyy-mm-dd')+'&path=exchangePayout'+"&p_exchange="+exchanger;
+		var loadingUrl=rootUrl+'/GenerateJasperReport'+'?export_type='+exportType+'&jrxml=daily_exchange_payout_by_hour&p_timeZone='+timeZone+'&p_start_epoch='+utcStartDate_epoch+'&p_end_epoch='+utcEndDate_epoch+'&path=exchangePayout'+"&p_exchange="+exchanger;
 		window.open(loadingUrl);
 	}
 	
@@ -472,7 +505,7 @@ $(document).ready(function(){
 	 	//function generate chart 
 	 	function rawChart(){
 	 		
-	 		var chart_title="Combined Exchange Cost";
+	 		var chart_title="Combined Exchange Cost ("+timeZone+")";
 	 		var exchange=$('#exchange_filter').val();
 	 		if(exchange !="All Exchanges"){
 	 			chart_title+=" by "+capitalise(exchange);
