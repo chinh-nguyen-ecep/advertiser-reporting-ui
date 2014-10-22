@@ -190,7 +190,15 @@ public class RequestProcessing {
 					values[0]="9999-12-31";
 					values[1]="9999-12-31";
 				}
-				result+=dimension+" BETWEEN '"+values[0]+"' AND '"+values[1]+"' ";
+				try {
+					float a=Float.parseFloat(values[0]);
+					float b=Float.parseFloat(values[1]);
+					result+=dimension+" BETWEEN "+values[0]+" AND "+values[1]+" ";
+				} catch (Exception e) {
+					// TODO: handle exception
+					result+=dimension+" BETWEEN '"+values[0]+"' AND '"+values[1]+"' ";
+				}
+				
 			}
 		}
 		

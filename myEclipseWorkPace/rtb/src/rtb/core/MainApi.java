@@ -24,7 +24,7 @@ public class MainApi implements QueryApi{
 	private	String[] defaultDimensions;
 	private String[] defaultMeasures;
 	private String defaultUnitsPerPage="10";
-	private int maximumUnitsPerPage=100;
+	private int maximumUnitsPerPage=50000;
 	private String defaultPage="1";
 	public String getDataSourceTableName() {
 		return dataSourceTableName;
