@@ -31,14 +31,15 @@
 <!-- Date range picker -->
 <link rel="stylesheet" type="text/css" media="all"
 	href="scripts/bootstrap-daterangepicker-master/daterangepicker-bs3.css" />
-<script type="text/javascript"
-	src="scripts/bootstrap-daterangepicker-master/moment.js"></script>
-<script type="text/javascript"
-	src="scripts/bootstrap-daterangepicker-master/daterangepicker.js"></script>
+<script type="text/javascript"	src="scripts/bootstrap-daterangepicker-master/moment.js"></script>
+<script type="text/javascript"	src="scripts/bootstrap-daterangepicker-master/daterangepicker.js"></script>
+
 <!-- Date format date.format.js -->
 <script type="text/javascript" src="scripts/date.format.js"></script>
 <!-- Number format -->
 <script type="text/javascript" src="scripts/accounting.min.js"></script>
+<!-- Moment time zone -->
+<script type="text/javascript" src="scripts/moment-timezone-with-data.js"></script>
 <!-- font-awesome	-->
 <link href="css/font-awesome.min.css" rel="stylesheet">
 <!--  control scripts -->
@@ -58,6 +59,7 @@
 	<script src="scripts/bootstrap-3.0.0/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
+			moment().tz("UTC").format();
 			verifyApiPageConnection();
 		});
 		function verifyApiPageConnection() {
