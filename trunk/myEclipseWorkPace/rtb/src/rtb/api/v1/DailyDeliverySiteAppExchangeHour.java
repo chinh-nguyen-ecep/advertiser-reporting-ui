@@ -38,16 +38,11 @@ public class DailyDeliverySiteAppExchangeHour extends MainApi{
 		// add dimensions
 		info.addDimension(new String[] { "date", "", "date" });
 		info.addDimension(new String[] { "hour", "", "integer" });
+		info.addDimension(new String[] { "epoch_hour", "", "integer" });
 		info.addDimension(new String[] { "exchange", "", "string" });
 		info.addDimension(new String[] { "rtbm_adm_flight_id", "", "integer" });
 		info.addDimension(new String[] { "rtb_flight_id", "", "integer" });
 		info.addDimension(new String[] { "src_id", "", "string" });
-		info.addDimension(new String[] { "adcel_exchange", "", "string" });
-		info.addDimension(new String[] { "adcel_rtb_flight_id", "", "interger" });
-		info.addDimension(new String[] { "adcel_src_id", "", "string" });
-		info.addDimension(new String[] { "winnotice_exchange", "", "string" });
-		info.addDimension(new String[] { "winnotice_rtb_flight_id", "", "interger" });
-		info.addDimension(new String[] { "winnotice_src_id", "", "string" });
 		// add measures
 		info.addMeasures(new String[] { "adcel_total_requests", "", "integer" });
 		info.addMeasures(new String[] { "adcel_filled_requests", "", "integer" });
