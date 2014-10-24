@@ -58,7 +58,7 @@ function loadRunningSummary(){
 		cache: false,
 		data : {
 			select: 'full_date|network_id|network_title|publisher_id|billable_rate',
-			by: 'billable_imps|pub_net_revenue|profit_margin',
+			by: 'delivered_imps|pub_net_revenue|profit_margin',
 			'where[full_date]': runningDate,
 			order: 'publisher_id'
 		},
@@ -77,14 +77,14 @@ function loadRunningSummary(){
 			var network_title=data[i][2];
 			var account_id=data[i][3];
 			var billable_rate=data[i][4];
-			var billable_imps=data[i][5];
-			var gross_revenue=(parseFloat(billable_imps)/1000)*parseFloat(billable_rate);
+			var delivered_imps=data[i][5];
+			var gross_revenue=(parseFloat(delivered_imps)/1000)*parseFloat(billable_rate);
 			var pub_net_revenue=data[i][6];
 			var profit_margin=data[i][7];
 			var row='<tr>'
 					+	'<td><a href="#" onclick="urlMaster.replaceParam(\'rate\','+billable_rate+');urlMaster.replaceParam(\'network_id\','+network_id+');urlMaster.replaceParam(\'account_id\','+account_id+');urlMaster.replaceParam(\'page\','+1+');loadRunningDetail()"><b>'+network_title+'</b></a></td>'
 					+	'<td>'+account_id+'</td>'
-					+	'<td align="right">'+accounting.formatNumber(billable_imps)+'</td>'
+					+	'<td align="right">'+accounting.formatNumber(delivered_imps)+'</td>'
 					+	'<td align="right">'+accounting.formatMoney(billable_rate)+'</td>'
 					+	'<td align="right">'+accounting.formatMoney(gross_revenue)+'</td>'
 					+	'<td align="right">'+accounting.formatMoney(pub_net_revenue)+'</td>'
@@ -193,16 +193,16 @@ function loadRunningDetail(){
 			var campaign_title=data[i][4];
 			var billable_rate=data[i][5];
 			var booked_imps=data[i][6];
-			var imps=data[i][7];
+			var delivered_imps=data[i][7];
 			var clicks=data[i][8];
 			var billable_imps=data[i][9];
-			var gross_revenue=(parseFloat(billable_imps)/1000)*parseFloat(billable_rate);
+			var gross_revenue=(parseFloat(delivered_imps)/1000)*parseFloat(billable_rate);
 			
 			var row='<tr>'
 				+	'<td>'+merchant_name+'<br/><i style="color: gray;">#'+merchant_id+'</i></td>'
 				+	'<td>'+campaign_title+'<br><i style="color: gray;">#'+campaign_id+'</i></td>'
 				+	'<td align="right">'+accounting.formatNumber(booked_imps)+'</td>'
-				+	'<td align="right">'+accounting.formatNumber(imps)+'</td>'
+				+	'<td align="right">'+accounting.formatNumber(delivered_imps)+'</td>'
 				+	'<td align="right">'+accounting.formatNumber(billable_imps)+'</td>'
 				+	'<td align="right">'+accounting.formatNumber(clicks)+'</td>'
 				+	'<td align="right">'+accounting.formatMoney(billable_rate)+'</td>'

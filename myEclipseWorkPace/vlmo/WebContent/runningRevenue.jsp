@@ -22,7 +22,7 @@
 		<tr>
 			<th class="col-md-3">VLMO Agency</th>
 			<th class="col-md-1">ADM Account ID</th>
-			<th class="col-md-1">Billable Imps</th>
+			<th class="col-md-1">Delivered Imps</th>
 			<th class="col-md-1">Billable Rate</th>
 			<th class="col-md-2">Gross Revenue</th>
 			<th class="col-md-2">Pub Net Revenue</th>
