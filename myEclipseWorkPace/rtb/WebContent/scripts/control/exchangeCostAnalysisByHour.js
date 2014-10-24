@@ -20,7 +20,7 @@
 //var selectEndDate=new Date('2013-10-07');
 var chart;// chart object
 var subtitle; // subtitle of chart
-var timeZone="UTC";
+var timeZone="America/New_York";
 var utcStartDate_epoch=0;
 var utcEndDate_epoch=0;
 var title; // titile of chart
