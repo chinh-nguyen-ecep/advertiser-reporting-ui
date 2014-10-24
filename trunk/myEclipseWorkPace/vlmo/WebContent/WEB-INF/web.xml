@@ -10,7 +10,7 @@
     </init-param>
     <init-param>
       <param-name>serverName</param-name>
-      <param-value>localhost:8081</param-value>
+      <param-value>reporting.vervemobile.com</param-value>
     </init-param>
     <init-param>
       <param-name>renew</param-name>
@@ -30,7 +30,7 @@
     </init-param>
     <init-param>
       <param-name>serverName</param-name>
-      <param-value>localhost:8081</param-value>
+      <param-value>reporting.vervemobile.com</param-value>
     </init-param>
   </filter>
   <filter>
@@ -64,7 +64,7 @@
     <description></description>
     <display-name>GenerateJasperReport</display-name>
     <servlet-name>GenerateJasperReport</servlet-name>
-    <servlet-class>vlmoui.servlets.GenerateJasperReport</servlet-class>
+    <servlet-class>vlmo.servlets.GenerateJasperReport</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>GenerateJasperReport</servlet-name>
@@ -104,7 +104,7 @@
     <description></description>
     <display-name>ApiV1</display-name>
     <servlet-name>ApiV1</servlet-name>
-    <servlet-class>vlmoui.servlets.ApiV1</servlet-class>
+    <servlet-class>vlmo.servlets.ApiV1</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ApiV1</servlet-name>
@@ -126,7 +126,7 @@
     <description></description>
     <display-name>ApiLookup</display-name>
     <servlet-name>ApiLookup</servlet-name>
-    <servlet-class>vlmoui.servlets.ApiLookup</servlet-class>
+    <servlet-class>vlmo.servlets.ApiLookup</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ApiLookup</servlet-name>

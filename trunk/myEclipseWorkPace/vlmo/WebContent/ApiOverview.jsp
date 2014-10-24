@@ -1,4 +1,4 @@
-<%@page import="vlmoui.utils.ClassesfromPackage"%>
+<%@page import="vlmo.utils.ClassesfromPackage"%>
 <%@page import="java.util.List"%>
 <%@page import="java.io.IOException"%>
 <%
