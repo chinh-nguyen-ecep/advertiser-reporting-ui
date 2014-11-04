@@ -30,7 +30,7 @@ sub main{
 		runParam(78);		
 		dw3_writelog($logFile,"Run function param 78");		
 		#check param 78
-		checkParam(78,5);	
+		checkParam(78,6);	
 		#promote 
 		promote(78);
 		
