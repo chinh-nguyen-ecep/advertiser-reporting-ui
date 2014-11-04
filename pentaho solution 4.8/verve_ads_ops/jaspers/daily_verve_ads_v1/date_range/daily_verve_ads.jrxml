@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Daily verve Ads" language="groovy" pageWidth="1900" pageHeight="1190" orientation="Landscape" columnWidth="1860" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="0.7500000000000008"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="276"/>
 	<property name="ireport.y" value="0"/>
 	<style name="redColor" mode="Opaque">
 		<conditionalStyle>
@@ -37,8 +37,8 @@ full_date as "Date"
 ,adnetwork_reports_gross
 ,(adnetwork_reports_gross-adnetwork_reports_gross_yesterday) as "Daily Delta Gross"
 ,(CASE WHEN adnetwork_reports_clicks>0 THEN adnetwork_reports_gross::float/adnetwork_reports_clicks ELSE null END) as "CPC"
-,(CASE WHEN adnetwork_reports_ads_filled>0 THEN adnetwork_reports_clicks::float/verve_reports_ads_filled ELSE null END) as "CTR"
-,(CASE WHEN adnetwork_reports_ads_filled>0 THEN adnetwork_reports_gross::float/(verve_reports_ads_filled::float/1000) ELSE null END) as "CPM"
+,(CASE WHEN verve_reports_ads_filled>0 THEN adnetwork_reports_clicks::float/verve_reports_ads_filled ELSE null END) as "CTR"
+,(CASE WHEN verve_reports_ads_filled>0 THEN adnetwork_reports_gross::float/(verve_reports_ads_filled::float/1000) ELSE null END) as "CPM"
 FROM adsops.daily_agg_verve_ads_by_remnant
 WHERE is_active=true
 AND full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
