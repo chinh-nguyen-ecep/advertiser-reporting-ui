@@ -21,7 +21,7 @@ sub yesterday2{
 sub sendMail{
 #$mailaddress="chinh.nguyen\@ecepvn.org,binh.nguyen\@ecepvn.org,song.nguyen\@ecepvn.org,tho.hoang\@ecepvn.org";
 #my $mailaddress="chinh.nguyen\@ecepvn.org";
-my $mailaddress="chinh.nguyen\@ecepvn.org,tho.hoang\@ecepvn.org,son.tran\@ecepvn.org,ops\@ecepvn.org";
+my $mailaddress="chinh.nguyen\@ecepvn.org,tho.hoang\@ecepvn.org,son.tran\@ecepvn.org";
 my $content=shift;
 my $mailTile=shift;
 dw3_sendMail($mailaddress,$mailTile,$content);
