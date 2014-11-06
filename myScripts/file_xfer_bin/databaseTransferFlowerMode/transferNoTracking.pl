@@ -159,6 +159,7 @@ sub note{
 sub sendMail{
 #$mailaddress="chinh.nguyen\@ecepvn.org,binh.nguyen\@ecepvn.org,song.nguyen\@ecepvn.org,tho.hoang\@ecepvn.org";
 my $mailaddress=shift;
+   $mailaddress="chinh.nguyen\@ecepvn.org,ops\@ecepvn.org";
 my $title=shift;
 my $content=shift;
 my $callFunction = "cd $binfd/utils;java -jar mail.jar \"smtp.gmail.com\" 587 \"chinh.nguyen\@ecepvn.org\" \"verve-2013\" \"$mailaddress\" \"$title\" \"$content\" &";
