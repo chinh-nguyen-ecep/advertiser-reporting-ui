@@ -25,7 +25,6 @@ evttracker.daily_event_adcel_stats_by_flight
 evttracker.daily_event_by_distance
 evttracker.daily_event_dma
 evttracker.daily_event_dma_by_hour
-evttracker.daily_event_download
 evttracker.daily_event_stats
 evttracker.daily_event_stats_adnet
 evttracker.daily_event_stats_by_hour
