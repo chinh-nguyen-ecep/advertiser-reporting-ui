@@ -125,7 +125,7 @@ sub getConnection{
 			PrintError => 0,
 			ReconnectTimeout => 60,
 			ReconnectFailure => sub { warn "oops $host_name $port $database!" },
-			ReconnectMaxTries => 100
+			ReconnectMaxTries => 10
 	   },
 	);
 
@@ -271,7 +271,12 @@ sub export{
 				die @error;
 			}else{
 				note("\tExported file:\t$export_file_name");
-				$export_file_name=$export_file_name_final;	
+				$export_file_name=$export_file_name_final;
+				#Get file size before unzip
+				%resultCMD=runShellComand("ssh $exportHostName du -k $export_dir_temp/$export_file_name");
+				@cmd=@{$resultCMD{'stout'}};
+				@values=split('\t',$cmd[0]);
+				$file_size_unzip=$values[0];
 				#Zip export file
 				note("\tZipping export file ...");
 				%resultCMD=runShellComand("ssh $exportHostName 'cd $export_dir_temp && zip -r $export_file_name_final.zip $export_file_name_final'");
@@ -282,6 +287,7 @@ sub export{
 				@cmd=@{$resultCMD{'stout'}};
 				@error=@{$resultCMD{'erout'}};	
 				
+				#Get file size after zip
 				$export_file_name=$export_file_name_final.".zip";	
 				%resultCMD=runShellComand("ssh $exportHostName du -k $export_dir_temp/$export_file_name");
 				@cmd=@{$resultCMD{'stout'}};
@@ -289,10 +295,12 @@ sub export{
 				@values=split('\t',$cmd[0]);
 				$file_size=$values[0];
 				note("\tExport file:\t$export_file_name");
-				note("\tExported file size:\t$file_size K");	
-				$export_file_size=$file_size;
-				if($export_file_size<5){
-						sendMail("chinh.nguyen\@ecepvn.org","Export file is zero","Export host: $exportHostName<br/>File name: $export_file_name<br/>File size: $file_size<p/>perl main.pl daily dw10:analyticsdb dw10 $export_table_name $report_date missData<br/>perl main.pl daily dw10:analyticsdb dw3 $export_table_name $report_date missData");
+				note("\tExported file size(unzip):\t$file_size_unzip K");
+				note("\tExported file size(zip):\t$file_size K");	
+				$export_file_size=$file_size_unzip;
+				if($export_file_size==0){
+					#Check file content 
+						sendMail("chinh.nguyen\@ecepvn.org","Export file is zero","Export host: $exportHostName<br/>File name: $export_file_name<br/>File size: $export_file_size K<p/>perl main.pl daily dw10:analyticsdb dw10 $export_table_name $report_date missData<br/>perl main.pl daily dw10:analyticsdb dw3 $export_table_name $report_date missData");
 				}
 			}
 		}else{
