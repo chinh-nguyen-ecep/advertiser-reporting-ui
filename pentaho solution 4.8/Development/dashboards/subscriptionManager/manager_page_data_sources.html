@@ -1,12 +1,84 @@
 <div class="easyui-layout" style="" data-options="fit:true" >
-        <div data-options="region:'north',split:true,collapsible:false,title:'Data subjects'" style="height:200px;padding:0px">
-			<table id="dts_subject" data-options="singleSelect:true,fit:true,fitColumns:true,nowrap: false"></table>
-        </div>
-        <div  data-options="region:'center',title:'Data file configuration'" style="padding:0px">
-			<table id="dts_data_file_cf" data-options="singleSelect:true,fit:true,fitColumns:false,nowrap: false"></table>
-        </div>
+    <div data-options="region:'north',split:true,collapsible:false,title:'Data subjects'" style="height:200px;padding:0px">
+		<table id="dts_subject" data-options="singleSelect:true,fit:true,fitColumns:true,nowrap: false"></table>
     </div>
-	
+    <div  data-options="region:'center',title:'Data file configuration'" style="padding:0px">
+		<table id="dts_data_file_cf" data-options="singleSelect:true,fit:true,fitColumns:true,nowrap: false"></table>
+    </div>
+</div>
+<!-- From add data subject -->
+<div id="addDataSubjectForm">
+	<form id="ff1" method="post" onsubmit="return addDataSubjectSubmit();" class="myform">
+		<div>
+			<label for="name">Subject name:</label>
+			<input name="name" value="" style="width:200px;"/>
+		</div>
+		<div>
+			<label for="description">Description:</label>
+			<textarea name="description" value="" style="width:200px;"/>
+		</div>
+	</form>
+</div>
+<!-- End form -->
+<!-- From update data subject -->
+<div id="updateDataSubjectForm">
+	<form id="ff2" method="post" onsubmit="return updateDataSubjectSubmit();" class="myform">
+		<input name="id" type="hidden" value="" />
+		<div>
+			<label for="name">Subject name:</label>
+			<input name="name" value="" style="width:200px;"/>
+		</div>
+		<div>
+			<label for="description">Description:</label>
+			<textarea name="description" value="" style="width:200px;"/>
+		</div>
+	</form>
+</div>
+<!-- End form -->
+<!-- From add data file config -->
+<div id="addDataFileConfigForm">
+	<form id="ff3" method="post" class="myform">
+		<input name="p_df_config_id" type="hidden" value="-1" />
+		<input name="sub_action" type="hidden" value="add" />
+		<div>
+			<label for="name">Name*:</label>
+			<input name="p_df_config_name" class="easyui-textbox" data-options="required:true" style="width:350px;"/>
+		</div>
+		<div>
+			<label for="p_data_subject_id">Subject:</label>
+			<input name="p_data_subject_id" class="easyui-combobox" data-options="required:true" style="width:200px;"/>
+		</div>
+		<div>
+			<label for="p_df_source_file">Source file:</label>
+			<input type="text" name="p_df_source_file" class="easyui-textbox" style="width:350px;"/>
+		</div>
+		<div>
+			<label for="p_data_source_table_id">Source table*:</label>
+			<input type="text" name="p_data_source_table_id" class="easyui-combobox" data-options="required:true" style="width:350px;"/>
+		</div>
+		<div>
+			<label for="p_df_attribute">Attribute:</label>
+			<input type="text" name="p_df_attribute" class="easyui-textbox" style="width:350px;"/>
+		</div>	
+		<div>
+			<label for="p_export_module_id">Export module:</label>
+			<input type="text" name="p_export_module_id" class="easyui-combobox" data-options="required:true" style="width:200px;"/>
+		</div>
+		<div>
+			<label for="p_df_config_format">Output format:</label>
+			<select class="easyui-combobox" name="p_df_config_format" style="width:50px;">
+			    <option value="csv">CSV</option>
+			    <option value="pdf">PDF</option>
+			    <option value="xls">XLS</option>
+			</select>
+		</div>
+		<div>
+			<label for="p_df_desc">Description:</label>
+			<textarea name="p_df_desc" value="" style="width:200px;"/>
+		</div>
+	</form>
+</div>
+<!-- End form -->
 <script>
 //Set title of sub page
 $('#manager_page_item_title').html('Data Sources');
@@ -21,6 +93,20 @@ DataSubjectDataGrid.datagrid({
 				{field:'data_subject_desc',title:'Description',width: 350,resizable:false},		
 				{field:'data_subject_status',title:'Status',resizable:false}
 			]],
+			toolbar:[{
+					text:'Add',
+					iconCls: 'icon-add',
+					handler: function(){
+						$('#addDataSubjectForm').dialog("open");
+					}
+				},{
+					text:'Edit',
+					iconCls: 'icon-edit',
+					handler: function(){
+						$('#updateDataSubjectForm').dialog("open");
+					}
+				}
+				],
 			onSelect: function(rowIndex, rowData){
 				dt_file_config_loader(rowData.data_subject_id);
 			}
@@ -33,10 +119,10 @@ var dt_file_config_loader=function(data_subject_id){
 			columns:[[
 				{field:'df_config_format',title:'Format',resizable:false},		
 				{field:'df_status',title:'Status',resizable:false},
-				{field:'df_source_file',title:'Source file',width: 300,resizable:false},
-				{field:'table_name',title:'Source table',width: 300,resizable:false},
+				{field:'df_source_file',title:'Source file'},
+				{field:'table_name',title:'Source table',width: 300,fix: true},
 				//{field:'dt_column_list',title:'Column list',resizable:false},
-				{field:'df_attribute',title:'Attribute',width: 200,resizable:false},
+				{field:'df_attribute',title:'Attribute',width: 200},
 				//{field:'module_desc',title:'Export module',resizable:false},
 				{field:'script_name',title:'Export script',width: 150,resizable:false}		
 			]],
@@ -44,9 +130,279 @@ var dt_file_config_loader=function(data_subject_id){
 				{field:'df_config_id',title:'Key',resizable:false},
 				{field:'df_config_name',title:'Name',width: 300,resizable:false},	
 			]],
+			toolbar:[{
+					text:'Add',
+					iconCls: 'icon-add',
+					handler: function(){
+						$('#addDataFileConfigForm').dialog("options").title="New Data Configuration";
+						$('#addDataFileConfigForm').dialog("setTitle","New Data Configuration");
+						$('#addDataFileConfigForm').dialog("open");
+					}
+				},{
+					text:'Edit',
+					iconCls: 'icon-edit',
+					handler: function(){
+						$('#addDataFileConfigForm').dialog("options").title="Edit Data Configuration";
+						$('#addDataFileConfigForm').dialog("setTitle","Edit Data Configuration");
+						$('#addDataFileConfigForm').dialog("open");
+					}
+				}
+				],
 			onSelect: function(rowIndex, rowData){
 				
 			}
 		});	
+}
+//////////////////////////////////////
+// init add data subject form dialog
+/////////////////////////////////////
+$('#addDataSubjectForm').dialog({
+    title: 'Add Data Subject',
+	width: 400,
+    height: 180,
+    closed: true,
+    cache: false,
+    modal: true,
+	buttons: [{
+					text:'Add',
+					iconCls:'icon-add',
+					handler:function(){
+						$('#ff1').submit();
+					}
+				},{
+					text:'Cancel',
+					handler:function(){
+						$('#addDataSubjectForm').dialog("close");
+					}
+				}]
+});
+function addDataSubjectSubmit(){
+	var p_name=$('#ff1 input[name=name]').val();
+	var p_desc=$("#ff1 textarea[name=description]").val();
+	var submit=function(){
+		$('#addDataSubjectForm').dialog('close');
+		$.ajax({
+			url: rootSubPath,
+			data:{
+				action: 'manager_page_data_sources.xaction',
+				actions: 'addDataSubject',
+				p_subject_name: p_name,
+				p_subject_desc: p_desc
+			},
+			data_type: 'json',
+			success: function(data){
+				DataSubjectDataGrid.datagrid('reload');
+				//clearn form
+				$('#ff1 input[name=name]').val('');
+				$("#ff1 textarea[name=description]").val('');
+			},
+			error: function(jqXHR, textStatus){
+				alert( "Add Request failed: " + textStatus );
+			}
+		});
+	}
+	if(p_name==''){
+		$.messager.alert('Add data subject','Data subject name is empty!');		
+	}else{
+		submit();
+	}
+	return false;
+}
+//////////////////////////////////////
+// init update data subject form dialog
+/////////////////////////////////////
+$('#updateDataSubjectForm').dialog({
+    title: 'Edit Data Subject',
+	width: 400,
+    height: 180,
+    closed: true,
+    cache: false,
+    modal: true,
+    onBeforeOpen: function(){
+    	var data_subject_id=DataSubjectDataGrid.datagrid('getSelected').data_subject_id;
+    	var	data_subject_name=DataSubjectDataGrid.datagrid('getSelected').data_subject_name;
+    	var data_subject_desc=DataSubjectDataGrid.datagrid('getSelected').data_subject_desc;
+    	if(data_subject_id>0){
+    		$('#ff2 input[name=id]').val(data_subject_id);
+    		$('#ff2 input[name=name]').val(data_subject_name);
+			$("#ff2 textarea[name=description]").val(data_subject_desc);
+    	}else{
+    		
+    	}
+    },
+	buttons: [{
+					text:'Update',
+					iconCls:'icon-edit',
+					handler:function(){
+						$('#ff2').submit();
+					}
+				},{
+					text:'Cancel',
+					handler:function(){
+						$('#updateDataSubjectForm').dialog("close");
+					}
+				}]
+});
+function updateDataSubjectSubmit(){
+	var data_subject_id=$('#ff2 input[name=id]').val();
+	var data_subject_name=$('#ff2 input[name=name]').val();
+	var data_subject_desc=$("#ff2 textarea[name=description]").val();
+	var submit=function(){
+		$('#updateDataSubjectForm').dialog('close');
+		$.ajax({
+			url: rootSubPath,
+			data:{
+				action: 'manager_page_data_sources.xaction',
+				actions: 'updateDataSubject',
+				p_subject_name: data_subject_name,
+				p_subject_desc: data_subject_desc,
+				p_subject_id: data_subject_id
+			},
+			data_type: 'json',
+			success: function(data){
+				DataSubjectDataGrid.datagrid('reload');
+			},
+			error: function(jqXHR, textStatus){
+				alert( "Update Request failed: " + textStatus );
+			}
+		});
+	}
+	if(data_subject_name==''){
+		$.messager.alert('Data subject','Data subject name must be non empty!');		
+	}else{
+		submit();
+	}
+
+	return false;
+}
+///////////////////////////////////////////
+// init form add data file configuration //
+///////////////////////////////////////////
+
+$('#addDataFileConfigForm').dialog({
+	title: 'New Data Configuration',
+	width: 500,
+   // height: 180,
+    closed: true,
+    cache: false,
+    modal: true,
+    onBeforeOpen: function(){    
+    	var currentSubject=DataSubjectDataGrid.datagrid('getSelected').data_subject_id;  
+    	var dialogTitle=$(this).dialog('options').title;
+    	if(dialogTitle=='Edit Data Configuration'){
+    		var currentSelectedDataFileConfig=$('#dts_data_file_cf').datagrid('getSelected'); 
+    		if(!currentSelectedDataFileConfig){
+    			return false;
+    		}   		
+    		$('#ff3').form('load',{
+				p_data_subject_id: currentSubject,
+				sub_action: 'edit',
+				p_df_source_file: currentSelectedDataFileConfig.df_source_file,
+				p_df_config_id: currentSelectedDataFileConfig.df_config_id,
+				p_df_config_name: currentSelectedDataFileConfig.df_config_name,
+				p_data_source_table_id: currentSelectedDataFileConfig.data_source_table_id,
+				p_df_attribute: currentSelectedDataFileConfig.df_attribute,
+				p_export_module_id: currentSelectedDataFileConfig.export_module_id,
+				p_df_config_format: currentSelectedDataFileConfig.df_config_format,
+				p_dt_desc: currentSelectedDataFileConfig.dt_desc
+			});
+    	} 	
+		
+    },
+	buttons: [{
+				text:'Apply',
+				handler:function(){
+					if($('#ff3').form('validate')){
+						$.messager.confirm('Confirm', 'Are you sure to submit this form?', function(r){
+							if(r){
+								$('#ff3').submit();
+							}
+						});						
+					}
+					
+				}
+			},{
+				text:'Cancel',
+				handler:function(){
+					resetAddDataFileConfigForm();
+					$('#addDataFileConfigForm').dialog("close");
+				}
+			}]
+});
+$('#ff3 input[class=easyui-textbox]').textbox();
+$('#ff3 input[name=p_data_subject_id]').combobox({
+    url:rootSubPath+'&action=manager_page_data_sources.xaction&actions=listDataSubject',
+    valueField:'data_subject_id',
+    textField:'data_subject_name'
+});
+$('#ff3 input[name=p_data_source_table_id]').combobox({
+    url:rootSubPath+'&action=manager_page_data_sources.xaction&actions=listDataSourceTables',
+    valueField:'id',
+    textField:'value',
+    groupField: 'group'
+});
+$('#ff3 input[name=p_df_config_format]').combobox('reset');
+$('#ff3 input[name=p_export_module_id]').combobox({
+    url:rootSubPath+'&action=manager_page_data_sources.xaction&actions=listExportModules',
+    valueField:'export_module_id',
+    textField:'script_name',
+    formatter: function(row){
+    	var s = '<span style="font-weight:bold">' + row.script_name + '</span><br/>' +
+                    '<span style="color:#888">' + row.desc + '</span>';
+            return s;
+    }	
+});
+$('#ff3').form({
+	url: rootSubPath+'&action=manager_page_data_sources.xaction&actions=dataFileSubmit',
+	onSubmit: function(){
+        // do some check
+        // return false to prevent submit; 
+        $('#addDataFileConfigForm').dialog('close');
+    },
+	success: function(data){
+		console.log(data[0]);
+		
+		if($.parseJSON(data)){
+			data=$.parseJSON(data);
+			var action=data[0].action;
+			var df_config_id=data[0].df_config_id;
+			var mess="";
+			if(action=='Add'){
+				mess="Add new data file config successful. Data file config id "+df_config_id;
+			}else{
+				mess="Update data file config successful. Data file config id "+df_config_id;
+			}
+			//reset form
+			resetAddDataFileConfigForm();
+
+			$.messager.show({
+                title:'Messager',
+                msg:mess,
+                timeout:5000,
+                showType:'fade'
+            });
+            $('#dts_data_file_cf').datagrid('reload');
+
+		}else{
+			mess="Request Error!";
+			$.messager.alert('Error',mess,'error');
+		}
+		
+        
+    }
+});
+function resetAddDataFileConfigForm(){
+	$('#ff3').form('load',{
+		p_data_subject_id: DataSubjectDataGrid.datagrid('getSelected').data_subject_id,
+		sub_action: 'add',
+		p_df_config_id: -1,
+		p_df_source_file: '',
+		p_df_config_name: '',
+		p_data_source_table_id: '',
+		p_df_attribute: '',
+		p_export_module_id: '',
+		p_df_config_format: 'csv',
+		p_dt_desc: ''
+	});	
 }
 </script>

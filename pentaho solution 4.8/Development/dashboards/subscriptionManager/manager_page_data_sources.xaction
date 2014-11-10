@@ -41,7 +41,85 @@
         <request>p_data_subject_id</request> 
       </sources>  
       <default-value><![CDATA[0]]></default-value> 
-    </p_data_subject_id> 
+    </p_data_subject_id>  
+    <p_subject_name type="string"> 
+      <sources> 
+        <request>p_subject_name</request> 
+      </sources>  
+      <default-value/> 
+    </p_subject_name>  
+    <p_subject_desc type="string"> 
+      <sources> 
+        <request>p_subject_desc</request> 
+      </sources>  
+      <default-value/> 
+    </p_subject_desc>  
+    <p_subject_id type="string"> 
+      <sources> 
+        <request>p_subject_id</request> 
+      </sources>  
+      <default-value/> 
+    </p_subject_id>  
+    <p_df_config_id type="string">
+      <sources>
+        <request>p_df_config_id</request>
+      </sources>
+      <default-value/>
+    </p_df_config_id>
+    <sub_action type="string">
+      <sources>
+        <request>sub_action</request>
+      </sources>
+      <default-value/>
+    </sub_action>
+    <p_df_config_name type="string">
+      <sources>
+        <request>p_df_config_name</request>
+      </sources>
+      <default-value/>
+    </p_df_config_name>
+    <p_data_subject_id type="string">
+      <sources>
+        <request>p_data_subject_id</request>
+      </sources>
+      <default-value/>
+    </p_data_subject_id>
+    <p_df_source_file type="string">
+      <sources>
+        <request>p_df_source_file</request>
+      </sources>
+      <default-value/>
+    </p_df_source_file>
+    <p_data_source_table_id type="string">
+      <sources>
+        <request>p_data_source_table_id</request>
+      </sources>
+      <default-value/>
+    </p_data_source_table_id>
+    <p_df_attribute type="string">
+      <sources>
+        <request>p_df_attribute</request>
+      </sources>
+      <default-value/>
+    </p_df_attribute>
+    <p_export_module_id type="string">
+      <sources>
+        <request>p_export_module_id</request>
+      </sources>
+      <default-value/>
+    </p_export_module_id>
+    <p_df_config_format type="string">
+      <sources>
+        <request>p_df_config_format</request>
+      </sources>
+      <default-value/>
+    </p_df_config_format>
+    <p_df_desc type="string">
+      <sources>
+        <request>p_df_desc</request>
+      </sources>
+      <default-value/>
+    </p_df_desc>
   </inputs>
 
   <outputs> 
@@ -52,13 +130,13 @@
     </returnResult> 
   </outputs>
 
-  <resources>
-    <template>
-      <solution-file>
-        <location>manager_page_data_sources.html</location>
-        <mime-type>text/plain</mime-type>
-      </solution-file>
-    </template>
+  <resources> 
+    <template> 
+      <solution-file> 
+        <location>manager_page_data_sources.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </template> 
   </resources>
   
   <actions> 
@@ -67,8 +145,8 @@
       <action-definition> 
         <component-name>TemplateComponent</component-name>
         <action-type>Message Template</action-type>
-        <action-resources>
-          <template type="resource"/>
+        <action-resources> 
+          <template type="resource"/> 
         </action-resources>
         <action-outputs> 
           <output-message type="string" mapping="returnResult"/> 
@@ -112,10 +190,185 @@
         </action-outputs>
         <component-definition> 
           <live><![CDATA[false]]></live>  
-          <query><![CDATA[SELECT df_config_id,df_config_name,df_config_format,dt_desc,df_status,df_source_file,dt_column_list,df_attribute,c.export_module_id,c.module_desc,c.bin_dir,c.script_name,c.export_dir,c.export_file_name_format,b.table_name
+          <query><![CDATA[SELECT df_config_id,df_config_name,df_config_format,dt_desc,df_status,df_source_file,dt_column_list,df_attribute,c.export_module_id,c.module_desc,c.bin_dir,c.script_name,c.export_dir,c.export_file_name_format,b.table_name,b.data_source_table_id
 FROM control.spctl_data_file_config a,control.spctl_data_source_tables b,control.spctl_export_module c
 WHERE a.data_subject_id={p_data_subject_id} AND a.data_source_table_id=b.data_source_table_id AND a.export_module_id=c.export_module_id
 ORDER BY df_config_id]]></query> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='listDataSourceTables']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connection_name"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
+        </action-outputs>
+        <component-definition> 
+          <query><![CDATA[SELECT data_source_table_id as id,table_type as group,table_name as value
+FROM control.spctl_data_source_tables 
+WHERE table_type<>'DIM'
+ORDER BY table_type,table_name]]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='listExportModules']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connection_name"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
+        </action-outputs>
+        <component-definition> 
+          <query><![CDATA[SELECT export_module_id,module_desc as desc,bin_dir,script_name,export_dir,export_file_name_format
+FROM control.spctl_export_module
+ORDER BY export_module_id]]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='addDataSubject']]></condition>  
+      <action-definition> 
+        <component-name>SQLExecute</component-name>
+        <action-type>SQL Commands</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connection_name"/>  
+          <p_subject_name type="string"/>  
+          <p_subject_desc type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
+        </action-outputs>
+        <component-definition> 
+          <force_single_statement><![CDATA[true]]></force_single_statement>  
+          <query><![CDATA[INSERT INTO control.spctl_data_subject(data_subject_name, data_subject_desc)
+    VALUES ('{p_subject_name}','{p_subject_desc}');]]></query> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions>
+      <condition><![CDATA[actions=='dataFileSubmit']]></condition>
+      <actions>
+        <condition><![CDATA[sub_action=='add']]></condition>
+        <action-definition>
+          <component-name>SQLLookupRule</component-name>
+          <action-type>Relational</action-type>
+          <action-inputs>
+            <jndi type="string" mapping="connection_name"/>
+            <p_df_config_name type="string"/>
+            <p_df_config_format type="string"/>
+            <p_df_desc type="string"/>
+            <p_df_source_file type="string"/>
+            <p_data_subject_id type="string"/>
+            <p_export_module_id type="string"/>
+            <p_data_source_table_id type="string"/>
+            <p_df_attribute type="string"/>
+          </action-inputs>
+          <action-outputs>
+            <query-result type="result-set" mapping="query_result"/>
+          </action-outputs>
+          <component-definition>
+            <query><![CDATA[INSERT INTO CONTROL.spctl_data_file_config (
+	df_config_name
+	,df_config_format
+	,dt_desc
+	,df_source_file
+	,data_subject_id
+	,export_module_id
+	,data_source_table_id
+	,df_attribute
+	)
+VALUES (
+	'{p_df_config_name}'
+	,'{p_df_config_format}'
+	,'{p_df_desc}'
+	,'{p_df_source_file}'
+	,{p_data_subject_id}
+	,{p_export_module_id}
+	,{p_data_source_table_id}
+	,'{p_df_attribute}'
+	) RETURNING df_config_id,'Add' as action;]]></query>
+            <live><![CDATA[true]]></live>
+          </component-definition>
+        </action-definition>
+
+      </actions>
+
+      <actions>
+        <condition><![CDATA[sub_action=='edit']]></condition>
+        <action-definition>
+          <component-name>SQLLookupRule</component-name>
+          <action-type>Relational</action-type>
+          <action-inputs>
+            <jndi type="string" mapping="connection_name"/>
+            <p_df_config_name type="string"/>
+            <p_data_subject_id type="string"/>
+            <p_df_config_format type="string"/>
+            <p_df_desc type="string"/>
+            <p_df_source_file type="string"/>
+            <p_export_module_id type="string"/>
+            <p_data_source_table_id type="string"/>
+            <p_df_attribute type="string"/>
+            <p_df_config_id type="string"/>
+          </action-inputs>
+          <action-outputs>
+            <query-result type="result-set" mapping="query_result"/>
+          </action-outputs>
+          <component-definition>
+            <query><![CDATA[UPDATE CONTROL.spctl_data_file_config
+SET df_config_name='{p_df_config_name}'
+, data_subject_id={p_data_subject_id}
+, df_config_format='{p_df_config_format}'
+, dt_desc='{p_df_desc}'
+, df_source_file='{p_df_source_file}'
+, export_module_id={p_export_module_id}
+, data_source_table_id={p_data_source_table_id}
+, df_attribute='{p_df_attribute}'
+WHERE df_config_id={p_df_config_id} RETURNING df_config_id,'edit' as action;]]></query>
+            <live><![CDATA[true]]></live>
+          </component-definition>
+        </action-definition>
+
+      </actions>
+
+    </actions>
+
+    <actions> 
+      <condition><![CDATA[actions=='updateDataSubject']]></condition>  
+      <action-definition> 
+        <component-name>SQLExecute</component-name>
+        <action-type>SQL Commands</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connection_name"/>  
+          <p_subject_id type="string"/>  
+          <p_subject_name type="string"/>  
+          <p_subject_desc type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
+        </action-outputs>
+        <component-definition> 
+          <force_single_statement><![CDATA[true]]></force_single_statement>  
+          <query><![CDATA[UPDATE control.spctl_data_subject SET data_subject_name='{p_subject_name}', data_subject_desc='{p_subject_desc}'
+WHERE data_subject_id={p_subject_id}]]></query> 
         </component-definition> 
       </action-definition>
  
