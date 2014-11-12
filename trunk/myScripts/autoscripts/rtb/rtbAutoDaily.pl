@@ -12,7 +12,7 @@ $locatefd="/opt/temp/autoscripts/rtb";	#the location content this script
 $logFile="$locatefd/logs/$report_date.txt";	#the location cotent log file
 my $emailErrorTitle="[Error!][Daily RTB report][$report_date]";	#the email title used when send a mail error 
 my $emailAvailableTitle="[Notification!][Daily RTB report][$report_date]";	#the email title used when send a mail
-my $mailto="tho.hoang\@ecepvn.org,ops\@ecepvn.org";	#List mail addresses
+my $mailto="ops\@ecepvn.org";	#List mail addresses
 my @aggTableDw3=();
 
 main();
@@ -21,6 +21,7 @@ main();
 sub main{
 	#register sub process to control.daily_process_status table.
 	register_process($process_date,$group_process_name,78,'05:00:00','06:00:00');
+	register_process($process_date,$group_process_name,81,'05:00:00','06:00:00');
 	#Check file logs
 	my $error=checkSU();
 	if($error == 0){
@@ -34,6 +35,8 @@ sub main{
 		#promote 
 		promote(78);
 		
+		#run param 81;
+		runParam(81);		
 	
 			
 		#transfer all data of adm and double click to dw0
