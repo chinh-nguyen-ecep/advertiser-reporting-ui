@@ -128,7 +128,8 @@ sub rollBackTransfer_table{
 	my $report_date7=shift;
 	my $report_date1=shift;
 	print "Transfer $table_name\t$report_date7\t$report_date1\n";
-	system("cd /opt/temp/autoscripts/transformer/ && perl main.pl daily_range $main_host $transfer_to_host $table_name $report_date7 $report_date1 utils_3rdAdNetwork");
+	# system("cd /opt/temp/autoscripts/transformer/ && perl main.pl daily_range $main_host $transfer_to_host $table_name $report_date7 $report_date1 utils_3rdAdNetwork");
+	system("cd /home/file_xfer/bin/databaseTransferFlowerMode/ && perl transferNoTracking.pl date_range $main_host $transfer_to_host_new $table_name $report_date7 $report_date1");
 }
 
 sub rollBackTransfer_7day{
