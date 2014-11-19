@@ -68,7 +68,7 @@ sub main{
 		runParam(48);
 		writelog("Run param 47");	
 		runParam(47);
-		checkParam(47,4);
+		checkParam(47,2);
 		promote(47);
 		
 		#run param 49
@@ -205,7 +205,7 @@ sub rollBackTransferPublisherProperty{
 
 		rollBackTransfer_table('adsops.daily_agg_verve_ads_by_remnant',$report_date7,$report_date1);
 		rollBackTransfer_table('adm.daily_agg_api_revenue_by_partner_v4',$report_date7,$report_date1);
-		rollBackTransfer_table('adsops.daily_agg_delivery_advertiser_beta',$report_date7,$report_date1);
+		##rollBackTransfer_table('adsops.daily_agg_delivery_advertiser_beta',$report_date7,$report_date1);
 		##rollBackTransfer_table('adm.daily_agg_revenue_statistics',$report_date7,$report_date1);
 		rollBackTransfer_table('adm.ba_daily_flight',$report_date7,$report_date1);
 		rollBackTransfer_table('adm.ba_daily_flight_min',$report_date7,$report_date1);

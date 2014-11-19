@@ -36,7 +36,7 @@ sub main{
 		runParam(69);		
 		dw3_writelog($logFile,"Run function param 69");		
 		#check param 69
-		checkParam(69,5);	
+		checkParam(69,6);	
 		#promote adm data feed		
 		promote(69);
 		#run param 33
@@ -45,7 +45,7 @@ sub main{
 		runParam(70);		
 		dw3_writelog($logFile,"Run function param 70");		
 		#check param 70
-		checkParam(70,4);	
+		checkParam(70,5);	
 		#promote adm data feed		
 		promote(70);
 		
@@ -279,17 +279,30 @@ sub promote{
 		#@aggTableDw3=();
 		#push(@aggTableDw3,"adsops.daily_agg_delivery_advertiser");
 		#copyAggDataToDw0($report_date,@aggTableDw3);
-		
 	}elsif($param==70){
 		runPGFuntion('staging.fn_promote_daily_adm_dfp_network_revenue');
 		dw3_writelog($logFile,"Promoted daily adm dfp network revenue");
-		#tranfer data to dw10
-		system("cd /opt/temp/autoscripts/transformer && perl main.pl daily $master_host $master_report_host adsops.daily_agg_low_rate $report_date admDfpAutodaily.pl");
-		system("cd /opt/temp/autoscripts/transformer && perl main.pl daily $master_host $master_report_host adsops.daily_agg_local_zero_delivered_v1 $report_date admDfpAutodaily.pl");
-		system("cd /opt/temp/autoscripts/transformer && perl main.pl table $master_host $master_report_host adsops.daily_agg_io_line_item_report_map_stag admDfpAutodaily.pl");
+		transferAdsopsAggregate();
 	}
 }
 
+sub transferAdsopsAggregate{
+	#
+	%h_report_date1=dw3_yesterday();
+	%h_report_date7=dw3_getDate(-7);
+	$report_date1=$h_report_date1{'year'}.'-'.$h_report_date1{'month'}.'-'.$h_report_date1{'day'};	#the report date 2012-02-02
+	$report_date7=$h_report_date7{'year'}.'-'.$h_report_date7{'month'}.'-'.$h_report_date7{'day'};	#the report date 2012-02-02		
+	#tranfer data to dw10
+	system("cd /opt/temp/autoscripts/transformer && perl main.pl table $master_host $master_report_host adsops.daily_agg_io_line_item_report_map_stag admDfpAutodaily.pl");
+	system("cd /opt/temp/autoscripts/transformer && perl main.pl table $master_host $master_report_host adsops.daily_agg_national_delivery_watch admDfpAutodaily.pl");
+
+	# system("cd /opt/temp/autoscripts/transformer && perl main.pl daily $master_host $master_report_host adsops.daily_agg_low_rate $report_date admDfpAutodaily.pl");
+	system("cd /home/file_xfer/bin/databaseTransferFlowerMode/ && perl transferNoTracking.pl daily $main_host dw0,dw10,dw6 adsops.daily_agg_low_rate $report_date");
+	# system("cd /opt/temp/autoscripts/transformer && perl main.pl daily $master_host $master_report_host adsops.daily_agg_local_zero_delivered_v1 $report_date admDfpAutodaily.pl");
+	system("cd /home/file_xfer/bin/databaseTransferFlowerMode/ && perl transferNoTracking.pl daily $main_host dw0,dw10,dw6 adsops.daily_agg_local_zero_delivered_v1 $report_date");
+	# system("cd /opt/temp/autoscripts/transformer && perl main.pl daily_range $master_host $master_report_host adsops.daily_agg_delivery_advertiser_beta $report_date7 $report_date admDfpAutodaily.pl");
+	system("cd /home/file_xfer/bin/databaseTransferFlowerMode/ && perl transferNoTracking.pl date_range $main_host dw0,dw10,dw6 adsops.daily_agg_delivery_advertiser_beta $report_date7 $report_date1");	
+}
 sub transferAllData{
 	#@aggTableDw3=();
 	#push(@aggTableDw3,"adm.daily_network_fct_request");
