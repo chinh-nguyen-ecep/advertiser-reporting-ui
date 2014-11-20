@@ -54,7 +54,7 @@ sub main{
 		promote(28);
 		
 		# Check param 70 from admDFP before continue
-		checkParam(70,4);	
+		checkParam(70,5);	
 
 		#run param 34 transfer data to network data mark
 		##writelog("Run param 34");	
@@ -102,7 +102,6 @@ sub main{
 		$time=getTime();
 		sendMail("Dear all,<p />$time# Daily 3rd AdNetwork report promoted. The process are completed with no error.<p />Thanks,<br />send by auto mail.",$mailTile);
 		writelog("Main Process finished");	
-		
 		
 	}else{
 		printTime("Stop with error");
