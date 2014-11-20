@@ -292,103 +292,20 @@ ORDER BY month_since_2005 desc]]></query>
     <actions> 
       <condition><![CDATA[p_emailMode=='true']]></condition>  
       <action-definition> 
-        <component-name>JavascriptRule</component-name>
-        <action-type>Process report input</action-type>
-        <action-inputs> 
-          <p_emailExportFileType type="string"/>  
-          <parameter_string type="string"/>  
-          <q_max_min_date type="result-set"/>  
-          <p_start_date type="string"/>  
-          <p_end_date type="string"/> 
-        </action-inputs>
-        <action-outputs> 
-          <reportName type="string"/>  
-          <p_start_date type="string"/>  
-          <reportNameCsv type="string"/>  
-          <p_mailTextMessage type="string"/>  
-          <p_mailTitle type="string"/>  
-          <reportNamePdf type="string"/>  
-          <p_end_date type="string"/> 
-        </action-outputs>
-        <component-definition> 
-          <script><![CDATA[var reportName='';
-p_start_date=q_max_min_date.getValueAt(0,2);
-p_end_date=q_max_min_date.getValueAt(0,1);
-reportName='Daily_Verve_Ads'+'_'+p_end_date;
-reportNameCsv=reportName+'.csv';
-var reportNamePdf=reportName+'.pdf';
-var p_mailTextMessage='Attached is Daily Verve Ads from first day of the month' +' to '+p_end_date;
-var p_mailTitle='Daily Verve Ads Report V1- '+p_end_date;]]></script> 
-        </component-definition> 
-      </action-definition>
-  
-      <action-definition> 
-        <component-name>JasperReportsComponent</component-name>
-        <action-type>Jasper CSV</action-type>
-        <action-inputs> 
-          <jndi type="string" mapping="connectionName"/> 
-        </action-inputs>
-        <action-resources> 
-          <report-definition mapping="report-definition3"/> 
-        </action-resources>
-        <action-outputs> 
-          <report-output type="content" mapping="report_ou_csv"/> 
-        </action-outputs>
-        <component-definition> 
-          <output-type><![CDATA[csv]]></output-type> 
-        </component-definition> 
-      </action-definition>
-  
-      <action-definition> 
-        <component-name>JasperReportsComponent</component-name>
-        <action-type>Jasper PDF</action-type>
-        <action-inputs> 
-          <jndi type="string" mapping="connectionName"/> 
-        </action-inputs>
-        <action-resources> 
-          <report-definition type="resource" mapping="report-definition1"/> 
-        </action-resources>
-        <action-outputs> 
-          <report-output type="content" mapping="report_ou_pdf"/> 
-        </action-outputs>
-        <component-definition> 
-          <output-type><![CDATA[pdf]]></output-type> 
-        </component-definition> 
-      </action-definition>
-  
-      <action-definition> 
-        <component-name>EmailComponent</component-name>
-        <action-type>E-Mail</action-type>
-        <action-inputs> 
-          <to type="string" mapping="p_mailTo"/>  
-          <subject type="string" mapping="p_mailTitle"/>  
-          <message-plain type="string" mapping="p_mailTextMessage"/>  
-          <report_ou_csv type="content"/>  
-          <attach_name_2 type="string" mapping="reportNameCsv"/>  
-          <report_ou_pdf type="content"/>  
-          <attach_name_3 type="string" mapping="reportNamePdf"/> 
-        </action-inputs>
-        <component-definition> 
-          <attachment-ref name-param="attach_name_2" input-param="report_ou_csv"/>  
-          <attachment-ref name-param="attach_name_3" input-param="report_ou_pdf"/> 
-        </component-definition> 
-      </action-definition>
-  
-      <action-definition>
         <component-name>SQLLookupRule</component-name>
         <action-type>Send email via Subscription</action-type>
-        <action-inputs>
-          <jndi type="string" mapping="connectionName"/>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/> 
         </action-inputs>
-        <action-outputs>
-          <query-result type="result-set" mapping="query_result"/>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
         </action-outputs>
-        <component-definition>
-          <query><![CDATA[SELECT * FROM control.fn_spctl_insert_subscription_to_process(27,'',true);]]></query>
-          <live><![CDATA[true]]></live>
-        </component-definition>
+        <component-definition> 
+          <query><![CDATA[SELECT * FROM control.fn_spctl_insert_subscription_to_process(27,'',true);]]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
       </action-definition>
-
+ 
     </actions>
  
   </actions> 
