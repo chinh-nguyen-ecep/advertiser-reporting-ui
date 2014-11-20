@@ -53,7 +53,19 @@
         <request>p_publication_process_id</request> 
       </sources>  
       <default-value><![CDATA[0]]></default-value> 
-    </p_publication_process_id> 
+    </p_publication_process_id>  
+    <p_trans_process_status type="string">
+      <sources>
+        <request>p_trans_process_status</request>
+      </sources>
+      <default-value><![CDATA[WT]]></default-value>
+    </p_trans_process_status>
+    <p_customer_article_key type="string">
+      <sources>
+        <request>p_customer_article_key</request>
+      </sources>
+      <default-value><![CDATA[0]]></default-value>
+    </p_customer_article_key>
   </inputs>
 
   <outputs> 
@@ -64,13 +76,13 @@
     </returnResult> 
   </outputs>
 
-  <resources>
-    <template>
-      <solution-file>
-        <location>subscriptionManager/index.html</location>
-        <mime-type>text/plain</mime-type>
-      </solution-file>
-    </template>
+  <resources> 
+    <template> 
+      <solution-file> 
+        <location>subscriptionManager/index.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </template> 
   </resources>
   
   <actions> 
@@ -79,8 +91,8 @@
       <action-definition> 
         <component-name>TemplateComponent</component-name>
         <action-type>Message Template</action-type>
-        <action-resources>
-          <template type="resource"/>
+        <action-resources> 
+          <template type="resource"/> 
         </action-resources>
         <action-outputs> 
           <output-message type="string" mapping="returnResult"/> 
@@ -102,8 +114,10 @@
           <query-result type="result-set" mapping="query_result"/> 
         </action-outputs>
         <component-definition> 
-          <query><![CDATA[SELECT customer_name,customer_key,customer_host_name,customer_desc,customer_status FROM  control.spctl_pub_customer
- ORDER BY customer_name;]]></query>  
+          <query><![CDATA[SELECT customer_name,customer_key,customer_host_name,customer_desc,customer_status 
+FROM control.spctl_pub_customer
+WHERE customer_status='ACTIVE'
+ORDER BY customer_name;]]></query>  
           <live><![CDATA[false]]></live> 
         </component-definition> 
       </action-definition>
@@ -157,6 +171,8 @@ ORDER BY a.publication_process_id]]></query>
 ,a.status
 ,to_char(a.dt_starttime,'HH24:MI:SS') as start_time
 ,to_char(a.dt_lastchange,'HH24:MI:SS') as last_change
+,a.customer_article_key
+,a.publication_process_id
 FROM control.spctl_subscription_publication_process_concurrent_trans a
 ,control.spctl_pub_customer_article b
 ,control.spctl_data_file_config c
@@ -193,66 +209,92 @@ ORDER BY a.publication_process_id]]></query>
  
     </actions>
   
-    <actions>
-      <condition><![CDATA[actions=='listRunningProcess']]></condition>
-      <action-definition>
+    <actions> 
+      <condition><![CDATA[actions=='listRunningProcess']]></condition>  
+      <action-definition> 
         <component-name>SQLLookupRule</component-name>
         <action-type>Relational</action-type>
-        <action-inputs>
-          <jndi type="string" mapping="connectionName"/>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/> 
         </action-inputs>
-        <action-outputs>
-          <query-result type="result-set" mapping="query_result"/>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
         </action-outputs>
-        <component-definition>
+        <component-definition> 
           <query><![CDATA[SELECT a.publication_process_id,to_char(a.create_date,'yyyy-MM-dd HH24:MI:SS') as create_date,to_char(a.dt_lastchange,'yyyy-MM-dd HH24:MI:SS') as dt_lastchange,a.process_status,a.process_actribute,b.subscription_name,b.subscription_key FROM control.spctl_subscription_publication_process a,control.spctl_pub_customer_subscription b
 WHERE a.subscription_key=b.subscription_key
 AND (a.process_status = 'PS' OR a.process_status='PST' OR a.process_status='WT' OR a.process_status='TR')
-ORDER BY a.publication_process_id]]></query>
-          <live><![CDATA[true]]></live>
-        </component-definition>
+ORDER BY a.publication_process_id]]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
       </action-definition>
-
+ 
     </actions>
-
-    <actions>
-      <condition><![CDATA[actions=='restartProcessStatus']]></condition>
-      <action-definition>
+  
+    <actions> 
+      <condition><![CDATA[actions=='restartProcessStatus']]></condition>  
+      <action-definition> 
         <component-name>SQLExecute</component-name>
         <action-type>SQL Commands</action-type>
-        <action-inputs>
-          <jndi type="string" mapping="connectionName"/>
-          <p_publication_process_id type="string"/>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <p_publication_process_id type="string"/> 
         </action-inputs>
         <action-outputs/>
-        <component-definition>
+        <component-definition> 
           <query><![CDATA[UPDATE CONTROL.spctl_subscription_publication_process
 SET process_status = 'WT'
 WHERE publication_process_id = {p_publication_process_id};
 UPDATE CONTROL.spctl_subscription_publication_process_concurrent_trans
 SET STATUS = 'ER'
-WHERE publication_process_id = {p_publication_process_id};]]></query>
-        </component-definition>
+WHERE publication_process_id = {p_publication_process_id};]]></query> 
+        </component-definition> 
       </action-definition>
-
+ 
     </actions>
-
-    <actions>
-      <condition><![CDATA[actions=='updateProcessStatusToSU']]></condition>
-      <action-definition>
+  
+    <actions> 
+      <condition><![CDATA[actions=='updateProcessStatusToSU']]></condition>  
+      <action-definition> 
         <component-name>SQLExecute</component-name>
         <action-type>SQL Commands</action-type>
-        <action-inputs>
-          <p_publication_process_id type="string"/>
-          <jndi type="string" mapping="connectionName"/>
+        <action-inputs> 
+          <p_publication_process_id type="string"/>  
+          <jndi type="string" mapping="connectionName"/> 
         </action-inputs>
-        <component-definition>
+        <component-definition> 
           <query><![CDATA[UPDATE CONTROL.spctl_subscription_publication_process
 SET process_status = 'SU'
 WHERE publication_process_id = {p_publication_process_id};
 UPDATE CONTROL.spctl_subscription_publication_process_concurrent_trans
 SET STATUS = 'SU'
-WHERE publication_process_id = {p_publication_process_id};]]></query>
+WHERE publication_process_id = {p_publication_process_id};]]></query> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions>
+      <condition><![CDATA[actions='updateTransProcessStatus']]></condition>
+      <action-definition>
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs>
+          <jndi type="string" mapping="connectionName"/>
+          <p_trans_process_status type="string"/>
+          <p_publication_process_id type="string"/>
+          <p_customer_article_key type="string"/>
+        </action-inputs>
+        <action-outputs>
+          <query-result type="result-set" mapping="query_result"/>
+        </action-outputs>
+        <component-definition>
+          <query><![CDATA[UPDATE control.spctl_subscription_publication_process_concurrent_trans
+SET status='{p_trans_process_status}'
+WHERE publication_process_id={p_publication_process_id}
+AND customer_article_key={p_customer_article_key}
+RETURNING publication_process_id,customer_article_key,'success' as result;]]></query>
+          <live><![CDATA[true]]></live>
         </component-definition>
       </action-definition>
 

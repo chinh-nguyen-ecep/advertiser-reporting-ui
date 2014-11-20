@@ -1,15 +1,81 @@
 <div  id="sm_layout2" class="easyui-layout" style="" data-options="fit:true" >
-        <div data-options="region:'south',split:true,title:'Data sources',collapsible:false" style="height:250px;padding:1px">
-			<table id="sm_dataSources" data-options="singleSelect:true,fit:true,fitColumns:true,nowrap: false"></table>
-		</div>
-        <div  data-options="region:'west',split:true,title:'Customer',collapsible:false" style="width:250px;padding:0px">
-			<table id="sm_customer" data-options="singleSelect:true,fit:true,fitColumns:true,nowrap: false"></table>
-        </div>
-        <div data-options="region:'center',title:'Subscriptions',collapsible:false" style="padding:1px">
-			<table id="sm_subscriptions" data-options="singleSelect:true,fit:true,fitColumns:true,nowrap: false"></table>
-        </div>
+    <div data-options="region:'south',split:true,title:'Data sources',collapsible:false" style="height:250px;padding:1px">
+		<table id="sm_dataSources" data-options="singleSelect:true,fit:true,fitColumns:true,nowrap: false"></table>
+	</div>
+    <div  data-options="region:'west',split:true,title:'Customer',collapsible:false" style="width:250px;padding:0px">
+		<table id="sm_customer" data-options="singleSelect:true,fit:true,fitColumns:true,nowrap: false"></table>
     </div>
+    <div data-options="region:'center',title:'Subscriptions',collapsible:false" style="padding:1px">
+		<table id="sm_subscriptions" data-options="singleSelect:true,fit:true,fitColumns:true,nowrap: false"></table>
+    </div>
+</div>
+<!-- Form add subscription -->
+<div id="addSubscriptionForm">
+	<form id="sm_ff1" method="post" class="myform">
+		<input name="p_subscription_key" type="hidden" value="-1" />
+		<input name="sub_action" type="hidden" value="add" />
+		<div>
+			<label for="name">Name*:</label>
+			<input name="p_subscription_name" class="easyui-textbox" data-options="required:true" style="width:350px;"/>
+		</div>
+		<div>
+			<label for="p_customer_key">Customer*:</label>
+			<input name="p_customer_key" class="easyui-combobox" data-options="required:true" style="width:350px;"/>
+		</div>
+		<div>
+			<label for="p_frequence">Frequence*:</label>
+			<select name="p_frequence" class="easyui-combobox" style="width:80px;">
+				<option value="DAILY">DAILY</option>
+				<option value="WEEKLY">WEEKLY</option>
+				<option value="MONTHLY">MONTHLY</option>
+				<option value="OTHER">OTHER</option>
+			</select>
+		</div>
+		<div>
+			<label for="name">Zip*:</label>
+			<select name="p_zip_before_transfer" class="easyui-combobox" style="width:80px;">
+				<option value="true">True</option>
+				<option value="false">False</option>
+			</select>
+		</div>	
+		<div>
+			<label for="p_df_desc">Description:</label>
+			<textarea name="p_subscription_desc" value="" style="width:350px;"/>
+		</div>
+	</form>
+</div>
+<!-- End form -->
 
+<!-- Form add data source to subscription -->
+<div id="addDataSourceForm">
+	<form id="sm_ff2" method="post" class="myform">
+		<input name="p_subscription_key" type="hidden" value="-1" />
+		<div>
+			<label for="p_data_subject_id">Data Subject:</label>
+			<input name="p_data_subject_id" class="easyui-combobox" data-options="required:true" style="width:350px;"/>
+		</div>
+		<div>
+			<label for="p_df_config_id">Data Source:</label>
+			<input id='c1' name="p_df_config_id" class="easyui-combobox" data-options="required:true" style="width:350px;"/>
+		</div>
+		<div><b>Data source desription</b>><div>
+		<div id="dataSourceDesc" style="width: 350px; height: 200px;">
+		</div>
+	</form>
+</div>
+<!-- End form -->
+
+<!-- Form input process attribute -->
+<div id="inputProcessForm">
+	<form id="sm_ff3" method="post" class="myform" onsubmit="return false;">
+		<input name="p_subscription_key" type="hidden" value="-1" />
+		<div>
+			<label for="p_process_attr">Attribute:</label>
+			<input name="p_process_attr" class="easyui-textbox" style="width:350px;"/>
+		</div>
+	</form>
+</div>
+<!-- End form -->
 <script>
 //Set title of sub page
 $('#manager_page_item_title').html('Subscription Manager');
@@ -49,23 +115,30 @@ var subscriptionLoader=function(customerID){
 }
 
 //add subscription button
-console.log('sdfsdfsf');
 $('#sm_layout2').layout();
 var a=$('#sm_layout2').layout('panel','center');
 a.panel({
 	tools:[
 		{
-			iconCls:'icon-play',
+			iconCls:'icon-run',
 			handler:function(){
-				publicSubscriptions();
+				$('#inputProcessForm').dialog('open');
 			}
 		},
 		{
 			iconCls:'icon-add',
-			handler:function(){alert('add')}
+			handler:function(){
+				$('#addSubscriptionForm').dialog("options").title="New Subscription";
+				$('#addSubscriptionForm').dialog("setTitle","New Subscription");
+				$('#addSubscriptionForm').dialog("open");
+			}
 		},{
 			iconCls:'icon-edit',
-			handler:function(){alert('edit')}
+			handler:function(){
+				$('#addSubscriptionForm').dialog("options").title="Edit Subscription";
+				$('#addSubscriptionForm').dialog("setTitle","Edit Subscription");
+				$('#addSubscriptionForm').dialog("open");	
+			}
 		}
 	]
 });
@@ -87,7 +160,13 @@ var publicSubscriptions=function(){
 		var customerName=$('#sm_customer').datagrid('getSelected').customer_name;
 
             $.ajax({
-                    url: rootSubPath+'&action=manager_page_subscription_manager.xaction&actions=publicSubscription&p_sub_key='+subscriptionKey,
+                    url: rootSubPath,
+                    data: {
+                    	action: 'manager_page_subscription_manager.xaction',
+                    	actions: 'publicSubscription',
+                    	p_sub_key: subscriptionKey,
+                    	p_process_attr: $('#sm_ff3 input[name=p_process_attr]').val()
+                    },
                     dataType: 'json',
                     success: function(result){
                         var value=result[0].fn_spctl_insert_subscription_to_process;
@@ -120,7 +199,9 @@ var publicSubscriptions=function(){
 		
 	}
 }
+////////////////////////////
 //function load data source
+///////////////////////////
 var dataSourceLoader=function(subKey){
 	var dataSourceDataGrid=$('#sm_dataSources');
 	dataSourceDataGrid.datagrid({
@@ -137,9 +218,319 @@ var dataSourceLoader=function(subKey){
 				{field:'df_status',title:'Data source status',resizable:false}
 				
 			]],
+			singleSelect: false,
+			toolbar:[{
+					text:'Add',
+					iconCls: 'icon-add',
+					handler: function(){
+						$('#addDataSourceForm').dialog("open");
+					}
+				},{
+					text:'Active',
+					iconCls: 'icon-ok',
+					handler: function(){
+						activeDataSource_fn('active');
+					}
+				},{
+					text:'InActive',
+					iconCls: 'icon-cancel',
+					handler: function(){
+						activeDataSource_fn('inActive');
+					}
+				}
+				],
 			onSelect: function(rowIndex, rowData){
+				
+			},
+			onLoadSuccess: function(data){
 				
 			}
 		});
+}
+
+
+//////////////////////////////////////////
+// Init form add new subscription       //
+//////////////////////////////////////////
+
+$('#addSubscriptionForm').dialog({
+	title: 'New Subscription',
+	width: 500,
+   // height: 180,
+    closed: true,
+    cache: false,
+    modal: true,
+    onBeforeOpen: function(){    
+		var selectedCustomer=$('#sm_customer').datagrid('getSelected').customer_key; 
+		if(!selectedCustomer){
+			return false;
+		} 
+		// Set customer key to form    	
+    	$('#sm_ff1').form('load',{				
+				p_customer_key: selectedCustomer,				
+		});
+    	// Get dialog title to set value for form. If is edit, set info of subscription is selected 
+    	var dialogTitle=$(this).dialog('options').title;
+    	if(dialogTitle=='Edit Subscription'){
+    		var currentSelectedSubscription=$('#sm_subscriptions').datagrid('getSelected'); 
+    		console.log(currentSelectedSubscription);
+    		if(!currentSelectedSubscription){
+    			return false;
+    		}   		
+    		$('#sm_ff1').form('load',{
+				p_subscription_name: currentSelectedSubscription.subscription_name,
+				p_subscription_key: currentSelectedSubscription.subscription_key,
+				p_customer_key: selectedCustomer,
+				p_frequence: currentSelectedSubscription.frequence,
+				p_zip_before_transfer: currentSelectedSubscription.zip_before_transfer,
+				p_subscription_desc: currentSelectedSubscription.subscription_desc,
+				sub_action: 'update'
+			});
+    	}
+    },
+	buttons: [{
+				text:'Apply',
+				handler:function(){
+					if($('#sm_ff1').form('validate')){
+						$.messager.confirm('Confirm', 'Are you sure to submit this form?', function(r){
+							if(r){
+								$('#sm_ff1').submit();
+							}
+						});						
+					}
+					
+				}
+			},{
+				text:'Cancel',
+				handler:function(){
+					resetAddSubscriptionForm();
+					$('#addSubscriptionForm').dialog("close");
+				}
+			}]
+});
+$('#sm_ff1 input[class=easyui-textbox]').textbox();
+$('#sm_ff1 select[class=easyui-combobox]').combobox();
+$('#sm_ff1 input[name=p_customer_key]').combobox({
+	url:rootPath+'&actions=listCustomers',
+	valueField:'customer_key',
+    textField:'customer_name'
+});
+$('#sm_ff1').form({
+	url: rootSubPath+'&action=manager_page_subscription_manager.xaction&actions=addAndEditSubscription',
+	onSubmit: function(){
+        // do some check
+        // return false to prevent submit; 
+        $('#addSubscriptionForm').dialog('close');
+    },
+	success: function(data){
+		if($.parseJSON(data)){
+			data=$.parseJSON(data);
+			var action=data[0].action;
+			var subscription_key=data[0].subscription_key;
+			var mess="";
+			if(action=='Add'){
+				mess="Add new data file config successful. Data file config id "+subscription_key;
+			}else{
+				mess="Update data file config successful. Data file config id "+subscription_key;
+			}
+			//reset form
+			resetAddSubscriptionForm();
+
+			$.messager.show({
+                title:'Messager',
+                msg:mess,
+                timeout:5000,
+                showType:'fade'
+            });
+            $('#sm_subscriptions').datagrid('reload');
+
+		}else{
+			mess="Request Error!";
+			$.messager.alert('Error',mess,'error');
+		}
+		
+        
+    }
+});
+function resetAddSubscriptionForm(){
+	$('#sm_ff3').form('load',{
+		p_subscription_name: '',
+		p_subscription_key: -1,
+		p_customer_key: $('#sm_customer').datagrid('getSelected').customer_key,
+		p_frequence: 'DAILY',
+		p_zip_before_transfer: 'true',
+		p_subscription_desc: '',
+		sub_action: 'add'
+	});	
+}
+//////////////////////////////////////////////
+//
+//////////////////////////////////////////////
+$('#addDataSourceForm').dialog({
+	title: 'Add Data Source',
+	width: 500,
+   // height: 180,
+    closed: true,
+    cache: false,
+    modal: true,
+    onBeforeOpen: function(){  
+    	 	$('#sm_ff2').form('load',{
+    	 		p_subscription_key: $('#sm_subscriptions').datagrid('getSelected').subscription_key
+    	 	});
+    },
+	buttons: [{
+				text:'Add',
+				handler:function(){
+					if($('#sm_ff2').form('validate')){
+						$.messager.confirm('Confirm', 'Are you sure to submit this form?', function(r){
+							if(r){
+								$('#sm_ff2').submit();
+							}
+						});						
+					}
+					
+				}
+			},{
+				text:'Cancel',
+				handler:function(){
+					$('#addDataSourceForm').dialog("close");
+				}
+			}]
+});
+$('#c1').combobox({  	
+    		valueField:'df_config_id',
+    		textField:'df_config_name',
+    		data:[],
+    		onSelect: function(rc){
+    			var html="";
+    			html+="<b>Output:</b> "+rc.df_config_format+"<br>";
+    			html+="<b>Desciption:</b> "+rc.dt_desc+"<br>";
+    			html+="<b>Source file:</b> "+rc.df_source_file+"<br>";
+    			html+="<b>Source Attribute:</b> "+rc.df_attribute+"<br>";
+    			html+="<b>Source table:</b> "+rc.table_name+"<br>";
+    			html+="<b>Script export:</b> "+rc.script_name+"<br>";
+    			html+="<b>Script export desc:</b> "+rc.module_desc+"<br>";
+    			html+="<b>Source status:</b> "+rc.df_status+"<br>";
+    			$('#dataSourceDesc').html(html);
+    		}
+
+    	});
+
+$('#sm_ff2 input[name=p_data_subject_id]').combobox({
+    url:rootSubPath+'&action=manager_page_data_sources.xaction&actions=listDataSubject',
+    valueField:'data_subject_id',
+    textField:'data_subject_name',
+    onSelect: function(record){    	
+    	var data_subject_id=record.data_subject_id;
+    	var url=rootSubPath+'&action=manager_page_data_sources.xaction&actions=listDataFileConfig&p_data_subject_id='+data_subject_id;
+    	console.log(url);
+    	console.log($('#c1'));
+    	$('#c1').combobox('clear');   
+    	$('#c1').combobox('reload',url);    	
+    }
+});
+$('#sm_ff2').form({
+	url: rootSubPath+'&action=manager_page_subscription_manager.xaction&actions=addDataSourceToSubscrition',
+	onSubmit: function(){
+        // do some check
+        // return false to prevent submit; 
+        $('#addSubscriptionForm').dialog('close');
+    },
+	success: function(data){		
+		if($.parseJSON(data)){
+			data=$.parseJSON(data);
+			var action=data[0].action;
+			var customer_article_key=data[0].customer_article_key;
+			var mess="";
+			if(action=='Add'){
+				mess="Add new data source successful. Article key "+customer_article_key;
+			}else{
+				mess="............ ";
+			}
+			$.messager.show({
+                title:'Messager',
+                msg:mess,
+                timeout:5000,
+                showType:'fade'
+            });
+            $('#sm_dataSources').datagrid('reload');
+
+		}else{
+			mess="Request Error!";
+			$.messager.alert('Error',mess,'error');
+		}
+		
+        
+    }
+});
+//////////////////////////////////////////////
+//
+/////////////////////////////////////////////
+$('#inputProcessForm').dialog({
+	title: 'Input Process Attribute',
+	width: 500,
+    closed: true,
+    cache: false,
+    modal: true,
+    onBeforeOpen: function(){  
+    	 	$('#sm_ff3').form('load',{
+    	 		p_subscription_key: $('#sm_subscriptions').datagrid('getSelected').subscription_key,
+    	 		p_process_attr: ''
+    	 	});
+    },
+	buttons: [{
+				text:'Execute',
+				handler:function(){
+					if($('#sm_ff3').form('validate')){
+						$.messager.confirm('Confirm', 'Are you sure to submit this form?', function(r){
+							if(r){
+								publicSubscriptions();
+								$('#inputProcessForm').dialog("close");
+							}
+						});						
+					}
+					
+				}
+			},{
+				text:'Cancel',
+				handler:function(){
+					$('#inputProcessForm').dialog("close");
+				}
+			}]	
+});
+////////////////////////////////////
+//
+/////////////////////////////////////
+var activeDataSource_fn=function(action){
+	var listSelectedDataSource=$('#sm_dataSources').datagrid('getSelections');
+	if(listSelectedDataSource.length==0){
+		return;
+	}
+	var listKey=[];
+	$.each(listSelectedDataSource,function(index,item){
+		listKey.push(item.customer_article_key);
+	});
+	var p_customer_article_keys=listKey.join(',');
+	$.messager.confirm('Confirm', 'Are you sure to submit this action?', function(r){
+			if(r){
+				$.ajax({
+                    url: rootSubPath,
+                    data: {
+                    	action: 'manager_page_subscription_manager.xaction',
+                    	actions: 'activeDataSources',
+                    	p_customer_article_keys: p_customer_article_keys,
+                    	sub_action: action
+                    },
+                    dataType: 'json',
+                    success: function(result){
+                        $('#sm_dataSources').datagrid('reload');
+                    },
+					error: function( jqXHR, textStatus, errorThrown ){
+						$.messager.progress('close');
+						$.messager.alert('Alert','Request error!');				
+					}
+				});
+			}
+	});
 }
 </script>

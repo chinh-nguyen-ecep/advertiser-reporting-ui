@@ -59,7 +59,61 @@
         <request>p_contact_ids</request> 
       </sources>  
       <default-value><![CDATA[0]]></default-value> 
-    </p_contact_ids> 
+    </p_contact_ids>  
+    <sub_action type="string"> 
+      <sources> 
+        <request>sub_action</request> 
+      </sources>  
+      <default-value/> 
+    </sub_action>  
+    <p_customer_name type="string"> 
+      <sources> 
+        <request>p_customer_name</request> 
+      </sources>  
+      <default-value/> 
+    </p_customer_name>  
+    <p_customer_type type="string"> 
+      <sources> 
+        <request>p_customer_type</request> 
+      </sources>  
+      <default-value/> 
+    </p_customer_type>  
+    <p_customer_host_name type="string"> 
+      <sources> 
+        <request>p_customer_host_name</request> 
+      </sources>  
+      <default-value/> 
+    </p_customer_host_name>  
+    <p_customer_destination_folder type="string"> 
+      <sources> 
+        <request>p_customer_destination_folder</request> 
+      </sources>  
+      <default-value/> 
+    </p_customer_destination_folder>  
+    <p_customer_desc type="string"> 
+      <sources> 
+        <request>p_customer_desc</request> 
+      </sources>  
+      <default-value/> 
+    </p_customer_desc>  
+    <p_transfer_script_name type="string"> 
+      <sources> 
+        <request>p_transfer_script_name</request> 
+      </sources>  
+      <default-value/> 
+    </p_transfer_script_name>  
+    <p_folder_content_transfer_script type="string"> 
+      <sources> 
+        <request>p_folder_content_transfer_script</request> 
+      </sources>  
+      <default-value/> 
+    </p_folder_content_transfer_script>  
+    <p_customer_status type="string">
+      <sources>
+        <request>p_customer_status</request>
+      </sources>
+      <default-value><![CDATA[ALL]]></default-value>
+    </p_customer_status>
   </inputs>
 
   <outputs> 
@@ -102,7 +156,8 @@
         <component-name>SQLLookupRule</component-name>
         <action-type>Relational</action-type>
         <action-inputs> 
-          <jndi type="string" mapping="connection_name"/> 
+          <jndi type="string" mapping="connection_name"/>  
+          <p_customer_status type="string"/>
         </action-inputs>
         <action-outputs> 
           <query-result type="result-set" mapping="query_result"/> 
@@ -112,7 +167,8 @@
        customer_destination_folder, customer_desc, customer_status, 
        transfer_script_name, folder_content_transfer_script
 FROM control.spctl_pub_customer
-ORDER BY customer_name]]></query>  
+WHERE (customer_status='{p_customer_status}' OR 'ALL'='{p_customer_status}')
+ORDER BY customer_status,customer_name]]></query>  
           <live><![CDATA[false]]></live> 
         </component-definition> 
       </action-definition>
@@ -135,10 +191,61 @@ ORDER BY customer_name]]></query>
           <query><![CDATA[SELECT customer_contact_id, customer_email, customer_phone_number, 
        customer_contact_status
 FROM control.spctl_customer_contact
-WHERE customer_key={p_customer_key}]]></query>  
+WHERE customer_key={p_customer_key}
+ORDER BY customer_contact_status,customer_email]]></query>  
           <live><![CDATA[false]]></live> 
         </component-definition> 
       </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='activeCustomer']]></condition>  
+      <actions> 
+        <condition><![CDATA[sub_action=='ACTIVE']]></condition>  
+        <action-definition> 
+          <component-name>SQLLookupRule</component-name>
+          <action-type>Relational</action-type>
+          <action-inputs> 
+            <jndi type="string" mapping="connection_name"/>  
+            <p_customer_key type="string"/> 
+          </action-inputs>
+          <action-outputs> 
+            <query-result type="result-set" mapping="query_result"/> 
+          </action-outputs>
+          <component-definition> 
+            <query><![CDATA[UPDATE control.spctl_pub_customer
+SET customer_status='ACTIVE'
+WHERE customer_key={p_customer_key}
+RETURNING customer_key,'Update' as action;]]></query>  
+            <live><![CDATA[true]]></live> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+  
+      <actions> 
+        <condition><![CDATA[sub_action=='INACTIVE']]></condition>  
+        <action-definition> 
+          <component-name>SQLLookupRule</component-name>
+          <action-type>Relational</action-type>
+          <action-inputs> 
+            <jndi type="string" mapping="connection_name"/>  
+            <p_customer_key type="string"/> 
+          </action-inputs>
+          <action-outputs> 
+            <query-result type="result-set" mapping="query_result"/> 
+          </action-outputs>
+          <component-definition> 
+            <query><![CDATA[UPDATE control.spctl_pub_customer
+SET customer_status='INACTIVE'
+WHERE customer_key={p_customer_key}
+RETURNING customer_key,'Update' as action;]]></query>  
+            <live><![CDATA[true]]></live> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
  
     </actions>
   
@@ -185,44 +292,130 @@ VALUES({p_customer_key},'{p_email}','{p_phone_number}') RETURNING customer_conta
  
     </actions>
   
-    <actions>
-      <condition><![CDATA[actions=='activeContact']]></condition>
-      <action-definition>
+    <actions> 
+      <condition><![CDATA[actions=='activeContact']]></condition>  
+      <action-definition> 
         <component-name>SQLExecute</component-name>
         <action-type>SQL Commands</action-type>
-        <action-inputs>
-          <jndi type="string" mapping="connection_name"/>
-          <p_contact_ids type="string"/>
+        <action-inputs> 
+          <jndi type="string" mapping="connection_name"/>  
+          <p_contact_ids type="string"/> 
         </action-inputs>
-        <action-outputs>
-          <query-result type="result-set" mapping="query_result"/>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
         </action-outputs>
-        <component-definition>
-          <query><![CDATA[UPDATE control.spctl_customer_contact SET customer_contact_status='ACTIVE' WHERE customer_contact_id IN ({p_contact_ids})]]></query>
-          <force_single_statement><![CDATA[true]]></force_single_statement>
-        </component-definition>
+        <component-definition> 
+          <query><![CDATA[UPDATE control.spctl_customer_contact SET customer_contact_status='ACTIVE' WHERE customer_contact_id IN ({p_contact_ids})]]></query>  
+          <force_single_statement><![CDATA[true]]></force_single_statement> 
+        </component-definition> 
       </action-definition>
-
+ 
     </actions>
-<actions>
-      <condition><![CDATA[actions=='inActiveContact']]></condition>
-      <action-definition>
+  
+    <actions> 
+      <condition><![CDATA[actions=='inActiveContact']]></condition>  
+      <action-definition> 
         <component-name>SQLExecute</component-name>
         <action-type>SQL Commands</action-type>
-        <action-inputs>
-          <jndi type="string" mapping="connection_name"/>
-          <p_contact_ids type="string"/>
+        <action-inputs> 
+          <jndi type="string" mapping="connection_name"/>  
+          <p_contact_ids type="string"/> 
         </action-inputs>
-        <action-outputs>
-          <query-result type="result-set" mapping="query_result"/>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
         </action-outputs>
-        <component-definition>
-          <query><![CDATA[UPDATE control.spctl_customer_contact SET customer_contact_status='INACTIVE' WHERE customer_contact_id IN ({p_contact_ids})]]></query>
-          <force_single_statement><![CDATA[true]]></force_single_statement>
-        </component-definition>
+        <component-definition> 
+          <query><![CDATA[UPDATE control.spctl_customer_contact SET customer_contact_status='INACTIVE' WHERE customer_contact_id IN ({p_contact_ids})]]></query>  
+          <force_single_statement><![CDATA[true]]></force_single_statement> 
+        </component-definition> 
       </action-definition>
-
+ 
     </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='addAndUpdateCustomerInfo']]></condition>  
+      <actions> 
+        <condition><![CDATA[sub_action=='add']]></condition>  
+        <action-definition> 
+          <component-name>SQLLookupRule</component-name>
+          <action-type>Relational</action-type>
+          <action-inputs> 
+            <jndi type="string" mapping="connection_name"/>  
+            <p_customer_name type="string"/>  
+            <p_customer_type type="string"/>  
+            <p_customer_host_name type="string"/>  
+            <p_customer_destination_folder type="string"/>  
+            <p_customer_desc type="string"/>  
+            <p_transfer_script_name type="string"/>  
+            <p_folder_content_transfer_script type="string"/> 
+          </action-inputs>
+          <action-outputs> 
+            <query-result type="result-set" mapping="query_result"/> 
+          </action-outputs>
+          <component-definition> 
+            <query><![CDATA[INSERT INTO CONTROL.spctl_pub_customer (
+	customer_name
+	,customer_type
+	,customer_host_name
+	,customer_destination_folder
+	,customer_desc
+	,transfer_script_name
+	,folder_content_transfer_script
+	)
+VALUES (
+	'{p_customer_name}'
+	,'{p_customer_type}'
+	,'{p_customer_host_name}'
+	,'{p_customer_destination_folder}'
+	,'{p_customer_desc}'
+	,'{p_transfer_script_name}'
+	,'{p_folder_content_transfer_script}'
+	) RETURNING customer_key,'Add' as action;]]></query>  
+            <live><![CDATA[true]]></live> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+  
+      <actions> 
+        <condition><![CDATA[sub_action=='update']]></condition>  
+        <action-definition> 
+          <component-name>SQLLookupRule</component-name>
+          <action-type>Relational</action-type>
+          <action-inputs> 
+            <jndi type="string" mapping="connection_name"/>  
+            <p_customer_name type="string"/>  
+            <p_customer_host_name type="string"/>  
+            <p_customer_destination_folder type="string"/>  
+            <p_customer_desc type="string"/>  
+            <p_transfer_script_name type="string"/>  
+            <p_folder_content_transfer_script type="string"/>  
+            <p_customer_key type="string"/> 
+          </action-inputs>
+          <action-outputs> 
+            <query-result type="result-set" mapping="query_result"/> 
+          </action-outputs>
+          <component-definition> 
+            <query><![CDATA[UPDATE control.spctl_pub_customer
+SET 
+	customer_name='{p_customer_name}'
+	,customer_type='p_customer_type'
+	,customer_host_name='{p_customer_host_name}'
+	,customer_destination_folder='{p_customer_destination_folder}'
+	,customer_desc='{p_customer_desc}'
+	,transfer_script_name='{p_transfer_script_name}'
+	,folder_content_transfer_script='{p_folder_content_transfer_script}'
+WHERE
+	customer_key={p_customer_key}
+RETURNING customer_key,'Update' as action]]></query>  
+            <live><![CDATA[true]]></live> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+ 
+    </actions>
+  
     <action-definition> 
       <component-name>JavascriptRule</component-name>
       <action-type>Process data grid</action-type>

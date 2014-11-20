@@ -8,7 +8,7 @@
 </div>
 <!-- From add data subject -->
 <div id="addDataSubjectForm">
-	<form id="ff1" method="post" onsubmit="return addDataSubjectSubmit();" class="myform">
+	<form id="ds_ff1" method="post" onsubmit="return addDataSubjectSubmit();" class="myform">
 		<div>
 			<label for="name">Subject name:</label>
 			<input name="name" value="" style="width:200px;"/>
@@ -22,7 +22,7 @@
 <!-- End form -->
 <!-- From update data subject -->
 <div id="updateDataSubjectForm">
-	<form id="ff2" method="post" onsubmit="return updateDataSubjectSubmit();" class="myform">
+	<form id="ds_ff2" method="post" onsubmit="return updateDataSubjectSubmit();" class="myform">
 		<input name="id" type="hidden" value="" />
 		<div>
 			<label for="name">Subject name:</label>
@@ -37,7 +37,7 @@
 <!-- End form -->
 <!-- From add data file config -->
 <div id="addDataFileConfigForm">
-	<form id="ff3" method="post" class="myform">
+	<form id="ds_ff3" method="post" class="myform">
 		<input name="p_df_config_id" type="hidden" value="-1" />
 		<input name="sub_action" type="hidden" value="add" />
 		<div>
@@ -46,7 +46,7 @@
 		</div>
 		<div>
 			<label for="p_data_subject_id">Subject:</label>
-			<input name="p_data_subject_id" class="easyui-combobox" data-options="required:true" style="width:200px;"/>
+			<input id='ds_c1'  name="p_data_subject_id" class="easyui-combobox" data-options="required:true" style="width:200px;"/>
 		</div>
 		<div>
 			<label for="p_df_source_file">Source file:</label>
@@ -54,7 +54,7 @@
 		</div>
 		<div>
 			<label for="p_data_source_table_id">Source table*:</label>
-			<input type="text" name="p_data_source_table_id" class="easyui-combobox" data-options="required:true" style="width:350px;"/>
+			<input id='ds_c2' type="text" name="p_data_source_table_id" class="easyui-combobox" data-options="required:true" style="width:350px;"/>
 		</div>
 		<div>
 			<label for="p_df_attribute">Attribute:</label>
@@ -167,7 +167,7 @@ $('#addDataSubjectForm').dialog({
 					text:'Add',
 					iconCls:'icon-add',
 					handler:function(){
-						$('#ff1').submit();
+						$('#ds_ff1').submit();
 					}
 				},{
 					text:'Cancel',
@@ -177,8 +177,8 @@ $('#addDataSubjectForm').dialog({
 				}]
 });
 function addDataSubjectSubmit(){
-	var p_name=$('#ff1 input[name=name]').val();
-	var p_desc=$("#ff1 textarea[name=description]").val();
+	var p_name=$('#ds_ff1 input[name=name]').val();
+	var p_desc=$("#ds_ff1 textarea[name=description]").val();
 	var submit=function(){
 		$('#addDataSubjectForm').dialog('close');
 		$.ajax({
@@ -193,8 +193,8 @@ function addDataSubjectSubmit(){
 			success: function(data){
 				DataSubjectDataGrid.datagrid('reload');
 				//clearn form
-				$('#ff1 input[name=name]').val('');
-				$("#ff1 textarea[name=description]").val('');
+				$('#ds_ff1 input[name=name]').val('');
+				$("#ds_ff1 textarea[name=description]").val('');
 			},
 			error: function(jqXHR, textStatus){
 				alert( "Add Request failed: " + textStatus );
@@ -223,9 +223,9 @@ $('#updateDataSubjectForm').dialog({
     	var	data_subject_name=DataSubjectDataGrid.datagrid('getSelected').data_subject_name;
     	var data_subject_desc=DataSubjectDataGrid.datagrid('getSelected').data_subject_desc;
     	if(data_subject_id>0){
-    		$('#ff2 input[name=id]').val(data_subject_id);
-    		$('#ff2 input[name=name]').val(data_subject_name);
-			$("#ff2 textarea[name=description]").val(data_subject_desc);
+    		$('#ds_ff2 input[name=id]').val(data_subject_id);
+    		$('#ds_ff2 input[name=name]').val(data_subject_name);
+			$("#ds_ff2 textarea[name=description]").val(data_subject_desc);
     	}else{
     		
     	}
@@ -234,7 +234,7 @@ $('#updateDataSubjectForm').dialog({
 					text:'Update',
 					iconCls:'icon-edit',
 					handler:function(){
-						$('#ff2').submit();
+						$('#ds_ff2').submit();
 					}
 				},{
 					text:'Cancel',
@@ -244,9 +244,9 @@ $('#updateDataSubjectForm').dialog({
 				}]
 });
 function updateDataSubjectSubmit(){
-	var data_subject_id=$('#ff2 input[name=id]').val();
-	var data_subject_name=$('#ff2 input[name=name]').val();
-	var data_subject_desc=$("#ff2 textarea[name=description]").val();
+	var data_subject_id=$('#ds_ff2 input[name=id]').val();
+	var data_subject_name=$('#ds_ff2 input[name=name]').val();
+	var data_subject_desc=$("#ds_ff2 textarea[name=description]").val();
 	var submit=function(){
 		$('#updateDataSubjectForm').dialog('close');
 		$.ajax({
@@ -294,7 +294,7 @@ $('#addDataFileConfigForm').dialog({
     		if(!currentSelectedDataFileConfig){
     			return false;
     		}   		
-    		$('#ff3').form('load',{
+    		$('#ds_ff3').form('load',{
 				p_data_subject_id: currentSubject,
 				sub_action: 'edit',
 				p_df_source_file: currentSelectedDataFileConfig.df_source_file,
@@ -312,10 +312,10 @@ $('#addDataFileConfigForm').dialog({
 	buttons: [{
 				text:'Apply',
 				handler:function(){
-					if($('#ff3').form('validate')){
+					if($('#ds_ff3').form('validate')){
 						$.messager.confirm('Confirm', 'Are you sure to submit this form?', function(r){
 							if(r){
-								$('#ff3').submit();
+								$('#ds_ff3').submit();
 							}
 						});						
 					}
@@ -329,20 +329,20 @@ $('#addDataFileConfigForm').dialog({
 				}
 			}]
 });
-$('#ff3 input[class=easyui-textbox]').textbox();
-$('#ff3 input[name=p_data_subject_id]').combobox({
+$('#ds_ff3 input[class=easyui-textbox]').textbox();
+$('#ds_c1').combobox({
     url:rootSubPath+'&action=manager_page_data_sources.xaction&actions=listDataSubject',
     valueField:'data_subject_id',
     textField:'data_subject_name'
 });
-$('#ff3 input[name=p_data_source_table_id]').combobox({
+$('#ds_c2').combobox({
     url:rootSubPath+'&action=manager_page_data_sources.xaction&actions=listDataSourceTables',
     valueField:'id',
     textField:'value',
     groupField: 'group'
 });
-$('#ff3 input[name=p_df_config_format]').combobox('reset');
-$('#ff3 input[name=p_export_module_id]').combobox({
+$('#ds_ff3 input[name=p_df_config_format]').combobox('reset');
+$('#ds_ff3 input[name=p_export_module_id]').combobox({
     url:rootSubPath+'&action=manager_page_data_sources.xaction&actions=listExportModules',
     valueField:'export_module_id',
     textField:'script_name',
@@ -352,7 +352,7 @@ $('#ff3 input[name=p_export_module_id]').combobox({
             return s;
     }	
 });
-$('#ff3').form({
+$('#ds_ff3').form({
 	url: rootSubPath+'&action=manager_page_data_sources.xaction&actions=dataFileSubmit',
 	onSubmit: function(){
         // do some check
@@ -392,7 +392,7 @@ $('#ff3').form({
     }
 });
 function resetAddDataFileConfigForm(){
-	$('#ff3').form('load',{
+	$('#ds_ff3').form('load',{
 		p_data_subject_id: DataSubjectDataGrid.datagrid('getSelected').data_subject_id,
 		sub_action: 'add',
 		p_df_config_id: -1,
