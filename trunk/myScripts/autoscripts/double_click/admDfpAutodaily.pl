@@ -22,7 +22,6 @@ register_process($process_date,$group_process_name,70,'07:10:00','09:15:00');
 
 main();
 
-
 sub main{
 
 	#Check file logs
@@ -48,9 +47,6 @@ sub main{
 		checkParam(70,5);	
 		#promote adm data feed		
 		promote(70);
-		
-		#transfer all data of adm and ADM-DFP to dw0
-		transferAllData();
 		
 		dw3_sendMail($mailto,$emailAvailableTitle,"Dear all,<p />Daily ADM-DFP $report_date has finished with no error.<p />Process detail:<p/>$log<p />Thanks,<br />\-\-\-send by auto mail.");
 		dw3_writelog($logFile,"Process finished");
@@ -292,20 +288,14 @@ sub transferAdsopsAggregate{
 	%h_report_date7=dw3_getDate(-7);
 	$report_date1=$h_report_date1{'year'}.'-'.$h_report_date1{'month'}.'-'.$h_report_date1{'day'};	#the report date 2012-02-02
 	$report_date7=$h_report_date7{'year'}.'-'.$h_report_date7{'month'}.'-'.$h_report_date7{'day'};	#the report date 2012-02-02		
+
 	#tranfer data to dw10
+	system("cd /home/file_xfer/bin/databaseTransferFlowerMode/ && perl transferNoTracking.pl daily $master_host dw0,dw10,dw6 adsops.daily_agg_low_rate $report_date1");
+	system("cd /home/file_xfer/bin/databaseTransferFlowerMode/ && perl transferNoTracking.pl daily $master_host dw0,dw10,dw6 adsops.daily_agg_local_zero_delivered_v1 $report_date1");
+	system("cd /home/file_xfer/bin/databaseTransferFlowerMode/ && perl transferNoTracking.pl date_range $master_host dw0,dw10,dw6 adsops.daily_agg_delivery_advertiser_beta $report_date7 $report_date1");	
+
 	system("cd /opt/temp/autoscripts/transformer && perl main.pl table $master_host $master_report_host adsops.daily_agg_io_line_item_report_map_stag admDfpAutodaily.pl");
 	system("cd /opt/temp/autoscripts/transformer && perl main.pl table $master_host $master_report_host adsops.daily_agg_national_delivery_watch admDfpAutodaily.pl");
+}
 
-	# system("cd /opt/temp/autoscripts/transformer && perl main.pl daily $master_host $master_report_host adsops.daily_agg_low_rate $report_date admDfpAutodaily.pl");
-	system("cd /home/file_xfer/bin/databaseTransferFlowerMode/ && perl transferNoTracking.pl daily $main_host dw0,dw10,dw6 adsops.daily_agg_low_rate $report_date");
-	# system("cd /opt/temp/autoscripts/transformer && perl main.pl daily $master_host $master_report_host adsops.daily_agg_local_zero_delivered_v1 $report_date admDfpAutodaily.pl");
-	system("cd /home/file_xfer/bin/databaseTransferFlowerMode/ && perl transferNoTracking.pl daily $main_host dw0,dw10,dw6 adsops.daily_agg_local_zero_delivered_v1 $report_date");
-	# system("cd /opt/temp/autoscripts/transformer && perl main.pl daily_range $master_host $master_report_host adsops.daily_agg_delivery_advertiser_beta $report_date7 $report_date admDfpAutodaily.pl");
-	system("cd /home/file_xfer/bin/databaseTransferFlowerMode/ && perl transferNoTracking.pl date_range $main_host dw0,dw10,dw6 adsops.daily_agg_delivery_advertiser_beta $report_date7 $report_date1");	
-}
-sub transferAllData{
-	#@aggTableDw3=();
-	#push(@aggTableDw3,"adm.daily_network_fct_request");
-	#copyAggDataToDw0($report_date,@aggTableDw3);
-}
 
