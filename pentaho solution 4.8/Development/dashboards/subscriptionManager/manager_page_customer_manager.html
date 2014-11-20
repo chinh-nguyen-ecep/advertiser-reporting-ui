@@ -7,20 +7,55 @@
 	</div>
 </div>
 <div id="dd">
-	<form id="ff" method="post" onsubmit="return addFormSubmit();" class="myform">
+	<form id="cm_ff" method="post" onsubmit="return addFormSubmit();" class="myform">
 	<input name="p_customer_key" type="hidden" style="width:250px" />
 		<div>
 			<label for="p_email">Email:</label>
-			<input name="p_email" style="width:250px" />
+			<input name="p_email" class="easyui-textbox" style="width:250px" />
 		</div>
 		<div>
 			<label for="p_phone_number">Phone number:</label>
-			<input name="p_phone_number" style="width:250px" />
+			<input name="p_phone_number" class="easyui-textbox" style="width:250px" />
 		</div>
 	</form>
 </div>
 
-
+<!-- Form add customers -->
+<div id="addCustomerForm">
+	<form id="cm_ff1" method="post" class="myform">
+		<input name="p_customer_key" type="hidden" value="-1" />
+		<input name="sub_action" type="hidden" value="add" />
+		<div>
+			<label for="p_customer_name">Name:</label>
+			<input name="p_customer_name" class="easyui-textbox" data-options="required:true" style="width:350px;"/>
+		</div>
+		<div>
+			<label for="p_customer_type">Type:</label>
+			<input id="cm_c1" name="p_customer_type" class="easyui-combobox" data-options="required:true" style="width:350px;"/>
+		</div>
+		<div>
+			<label for="p_customer_host_name">Host name:</label>
+			<input name="p_customer_host_name" class="easyui-textbox" data-options="required:false" style="width:350px;"/>
+		</div>
+		<div>
+			<label for="p_customer_destination_folder">Destination folder:</label>
+			<input name="p_customer_destination_folder" class="easyui-textbox" data-options="required:false" style="width:350px;"/>
+		</div>
+		<div>
+			<label for="p_customer_desc">Description:</label>
+			<input name="p_customer_desc" class="easyui-textbox" data-options="required:false" style="width:350px;"/>
+		</div>
+		<div>
+			<label for="p_transfer_script_name">Transfer script:</label>
+			<input name="p_transfer_script_name" class="easyui-textbox" data-options="required:true" style="width:350px;"/>
+		</div>
+		<div>
+			<label for="p_folder_content_transfer_script">Transfer script location:</label>
+			<input name="p_folder_content_transfer_script" class="easyui-textbox" data-options="required:true" style="width:350px;" />
+		</div>
+	</form>
+</div>
+<!-- End form -->
 
 <script>
 //Set title of sub page
@@ -33,7 +68,6 @@ cutomersDataGrid.datagrid({
 			columns:[[
 				{field:'customer_key',title:'ID',resizable:false},
 				{field:'customer_name',title:'Name',width: 200},	
-				//{field:'customer_type',title:'Type',resizable:false},	
 				{field:'customer_host_name',title:'Host name',width: 50,resizable:false},	
 				{field:'customer_destination_folder',title:'Destination',width: 80},	
 				//{field:'customer_desc',title:'Description'},		
@@ -41,15 +75,71 @@ cutomersDataGrid.datagrid({
 				{field:'transfer_script_name',title:'Transfer script'}
 				//{field:'folder_content_transfer_script',title:'Folder content transfer script',width: 150}
 			]],
+			toolbar:[{
+					text:'Add',
+					iconCls: 'icon-add',
+					handler: function(){
+						$('#addCustomerForm').dialog("options").title="New Customer";
+						$('#addCustomerForm').dialog("setTitle","New Customer");
+						$('#addCustomerForm').dialog("open");
+					}
+				},
+				{
+					text:'Edit',
+					iconCls: 'icon-edit',
+					handler: function(){
+						$('#addCustomerForm').dialog("options").title="Update Customer";
+						$('#addCustomerForm').dialog("setTitle","Update Customer");
+						$('#addCustomerForm').dialog("open");
+					}
+				},
+				{
+					text: 'Active',
+					iconCls: 'icon-ok',
+					handler: function(){					
+						activeCustomer('ACTIVE');
+					}
+				},
+				{
+					text: 'InActive',
+					iconCls: 'icon-no',
+					handler: function(){					
+						activeCustomer('INACTIVE');
+					}
+				}
+				],
 			onSelect: function(rowIndex, rowData){
 				contactLoader(rowData.customer_key);
 			}
 		});
+//////////////////////////////////
+// Function active customer
+// input: ACTIVE or INACTIVE
+//////////////////////////////////
+function activeCustomer(value){
+	$.ajax({
+		url: rootSubPath,
+		data: {
+			action: 'manager_page_customer_manager.xaction',
+			actions: 'activeCustomer',
+			sub_action: value,
+			p_customer_key: $('#cm_customer').datagrid('getSelected').customer_key
+		},
+		data_type: 'json',
+		success: function(data){
+			$('#cm_customer').datagrid('reload');
+		},
+		error: function(jqXHR, textStatus){
+			alert( "Active Contact Request failed: " + textStatus );
+		}
+	});
+}
+
 /////////////////////////////////////////
 //function load contact
 ///////////////////////////////////////
 var contactLoader=function(customer_key){
-	$("#ff input[name=p_customer_key]").val(customer_key);
+	$("#cm_ff input[name=p_customer_key]").val(customer_key);
 	var contactDataGrid=$('#cm_contact');
 	contactDataGrid.datagrid({
 			url:rootSubPath+'&action=manager_page_customer_manager.xaction&actions=listContactByCustomerKey&p_customer_key='+customer_key,
@@ -91,7 +181,7 @@ var contactLoader=function(customer_key){
 		});
 }
 ///////////////////////////////
-// Open add form
+// Open add contact form
 //////////////////////////////
 $('#dd').dialog({
     title: 'Add email',
@@ -100,11 +190,17 @@ $('#dd').dialog({
     closed: true,
     cache: false,
     modal: true,
+    onBeforeOpen: function(){ 
+    	$('#cm_ff').form('load',{
+    		p_phone_number: '',
+    		p_email: ''
+    	});
+    },
 	buttons: [{
 					text:'Ok',
 					iconCls:'icon-ok',
 					handler:function(){
-						$('#ff').submit();
+						$('#cm_ff').submit();
 					}
 				},{
 					text:'Cancel',
@@ -115,9 +211,9 @@ $('#dd').dialog({
 });
 
 function addFormSubmit(){
-	var email=$('#ff input[name=p_email]').val();
-	var customer_key=$("#ff input[name=p_customer_key]").val();
-	var p_phone_number=$('#ff input[name=p_phone_number]').val();
+	var email=$('#cm_ff input[name=p_email]').val();
+	var customer_key=$("#cm_ff input[name=p_customer_key]").val();
+	var p_phone_number=$('#cm_ff input[name=p_phone_number]').val();
 	// validate email input
 	if(!isValidEmailAddress(email)){
 		alert("Invalid email address!");
@@ -156,6 +252,8 @@ function addFormSubmit(){
 	
 	return false;
 }
+
+$('input[class=easyui-textbox]').textbox();
 
 ///////////////////////////
 // Del contact
@@ -253,4 +351,110 @@ function inActiveContact(){
 		} 	
 	}
 }
+//////////////////////////////////
+//
+///////////////////////////////////
+$('#addCustomerForm').dialog({
+	title: 'New Customer',
+	width: 500,
+    closed: true,
+    cache: false,
+    modal: true,
+    onBeforeOpen: function(){ 
+    		// Get title of dialog
+    		var dialog_title=$('#addCustomerForm').dialog('options').title;
+    		if(dialog_title=='New Customer'){
+    			$('#cm_ff1').form('load',{
+    				sub_action: 'add',
+    				p_customer_key: -1,
+    				p_customer_name: '',
+    				p_customer_type: 'INTERNAL',
+	    	 		p_customer_host_name: '',
+	    	 		p_customer_destination_folder: '',
+	    	 		p_customer_desc: '',
+	    	 		p_transfer_script_name: 'publicToEmail.pl',
+	    	 		p_folder_content_transfer_script: '/home/postgres/bin/subscription_publication'
+    	 		});
+    		}else if(dialog_title=='Update Customer'){
+    			var currentSelectedCustomer=$('#cm_customer').datagrid('getSelected'); 
+    			if(!currentSelectedCustomer){
+    				return false;
+    			}else{
+    				$('#cm_ff1').form('load',{
+	    	 		sub_action: 'update',
+	    	 		p_customer_key: currentSelectedCustomer.customer_key,
+	    	 		p_customer_name: currentSelectedCustomer.customer_name,
+	    	 		p_customer_type: currentSelectedCustomer.customer_type,
+	    	 		p_customer_host_name: currentSelectedCustomer.customer_host_name,
+	    	 		p_customer_destination_folder: currentSelectedCustomer.customer_destination_folder,
+	    	 		p_customer_desc: currentSelectedCustomer.customer_desc,
+	    	 		p_transfer_script_name: currentSelectedCustomer.transfer_script_name,
+	    	 		p_folder_content_transfer_script: currentSelectedCustomer.folder_content_transfer_script
+    	 		});
+    			}    			
+    		}     	 	
+    },
+	buttons: [{
+				text:'Execute',
+				handler:function(){
+					if($('#cm_ff1').form('validate')){
+						$.messager.confirm('Confirm', 'Are you sure to submit this form?', function(r){
+							if(r){
+								$('#addCustomerForm').dialog("close");
+								$('#cm_ff1').submit();
+							}
+						});						
+					}
+					
+				}
+			},{
+				text:'Cancel',
+				handler:function(){
+					$('#addCustomerForm').dialog("close");
+				}
+			}]		
+});
+$('#cm_ff1 input[class=easyui-textbox]').textbox();
+$('#cm_c1').combobox({
+	valueField:'id',
+    textField:'text',
+    data: [
+    	{id:'INTERNAL',text:'INTERNAL'},
+    	{id:'EXTERNAL',text:'EXTERNAL'}
+    ]
+});
+$('#cm_ff1').form({
+	url: rootSubPath+'&action=manager_page_customer_manager.xaction&actions=addAndUpdateCustomerInfo',
+	onSubmit: function(){
+        // do some check
+        // return false to prevent submit; 
+        $('#addSubscriptionForm').dialog('close');
+    },
+	success: function(data){		
+		if($.parseJSON(data)){
+			data=$.parseJSON(data);
+			var action=data[0].action;
+			var customer_key=data[0].customer_key;
+			var mess="";
+			if(action=='Add'){
+				mess="Add new customer successful. Customer key "+customer_key;
+			}else{
+				mess="............ ";
+			}
+			$.messager.show({
+                title:'Messager',
+                msg:mess,
+                timeout:5000,
+                showType:'fade'
+            });
+            $('#cm_customer').datagrid('reload');
+            $('#cm_contact').datagrid('clear');
+		}else{
+			mess="Request Error!";
+			$.messager.alert('Error',mess,'error');
+		}
+		
+        
+    }
+});
 </script>

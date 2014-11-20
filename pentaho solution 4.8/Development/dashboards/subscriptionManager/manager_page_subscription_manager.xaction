@@ -47,7 +47,61 @@
         <request>p_sub_key</request> 
       </sources>  
       <default-value><![CDATA[0]]></default-value> 
-    </p_sub_key> 
+    </p_sub_key>  
+    <sub_action type="string"> 
+      <sources> 
+        <request>sub_action</request> 
+      </sources>  
+      <default-value><![CDATA[add]]></default-value> 
+    </sub_action>  
+    <p_subscription_key type="string"> 
+      <sources> 
+        <request>p_subscription_key</request> 
+      </sources>  
+      <default-value/> 
+    </p_subscription_key>  
+    <p_subscription_name type="string"> 
+      <sources> 
+        <request>p_subscription_name</request> 
+      </sources>  
+      <default-value/> 
+    </p_subscription_name>  
+    <p_frequence type="string"> 
+      <sources> 
+        <request>p_frequence</request> 
+      </sources>  
+      <default-value/> 
+    </p_frequence>  
+    <p_zip_before_transfer type="string"> 
+      <sources> 
+        <request>p_zip_before_transfer</request> 
+      </sources>  
+      <default-value><![CDATA[true]]></default-value> 
+    </p_zip_before_transfer>  
+    <p_subscription_desc type="string"> 
+      <sources> 
+        <request>p_subscription_desc</request> 
+      </sources>  
+      <default-value/> 
+    </p_subscription_desc>  
+    <p_df_config_id type="string"> 
+      <sources> 
+        <request>p_df_config_id</request> 
+      </sources>  
+      <default-value/> 
+    </p_df_config_id>  
+    <p_process_attr type="string"> 
+      <sources> 
+        <request>p_process_attr</request> 
+      </sources>  
+      <default-value/> 
+    </p_process_attr>  
+    <p_customer_article_keys type="string"> 
+      <sources> 
+        <request>p_customer_article_keys</request> 
+      </sources>  
+      <default-value/> 
+    </p_customer_article_keys> 
   </inputs>
 
   <outputs> 
@@ -58,13 +112,13 @@
     </returnResult> 
   </outputs>
 
-  <resources>
-    <template>
-      <solution-file>
-        <location>manager_page_subscription_manager.html</location>
-        <mime-type>text/plain</mime-type>
-      </solution-file>
-    </template>
+  <resources> 
+    <template> 
+      <solution-file> 
+        <location>manager_page_subscription_manager.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </template> 
   </resources>
   
   <actions> 
@@ -73,8 +127,8 @@
       <action-definition> 
         <component-name>TemplateComponent</component-name>
         <action-type>Message Template</action-type>
-        <action-resources>
-          <template type="resource"/>
+        <action-resources> 
+          <template type="resource"/> 
         </action-resources>
         <action-outputs> 
           <output-message type="string" mapping="returnResult"/> 
@@ -149,16 +203,167 @@ AND d.data_source_table_id=a.data_source_table_id]]></query>
         <action-type>Relational</action-type>
         <action-inputs> 
           <jndi type="string" mapping="connection_name"/>  
-          <p_sub_key type="string"/> 
+          <p_sub_key type="string"/>  
+          <p_process_attr type="string"/> 
         </action-inputs>
         <action-outputs> 
           <query-result type="result-set" mapping="query_result"/> 
         </action-outputs>
         <component-definition> 
-          <query><![CDATA[SELECT * FROM control.fn_spctl_insert_subscription_to_process({p_sub_key},'',true);]]></query>  
+          <query><![CDATA[SELECT * FROM control.fn_spctl_insert_subscription_to_process({p_sub_key},'{p_process_attr}',true);]]></query>  
           <live><![CDATA[false]]></live> 
         </component-definition> 
       </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='addAndEditSubscription']]></condition>  
+      <actions> 
+        <condition><![CDATA[sub_action=='add']]></condition>  
+        <action-definition> 
+          <component-name>SQLLookupRule</component-name>
+          <action-type>Relational</action-type>
+          <action-inputs> 
+            <jndi type="string" mapping="connection_name"/>  
+            <p_subscription_name type="string"/>  
+            <p_subscription_desc type="string"/>  
+            <p_frequence type="string"/>  
+            <p_zip_before_transfer type="string"/>  
+            <p_customer_key type="string"/> 
+          </action-inputs>
+          <action-outputs> 
+            <query-result type="result-set" mapping="query_result"/> 
+          </action-outputs>
+          <component-definition> 
+            <query><![CDATA[INSERT INTO CONTROL.spctl_pub_customer_subscription (
+	subscription_name
+	,subscription_desc
+	,frequence
+	,zip_before_transfer
+	,customer_key
+	)
+VALUES (
+	'{p_subscription_name}'
+	,'{p_subscription_desc}'
+	,'{p_frequence}'
+	,{p_zip_before_transfer}
+	,{p_customer_key}
+	) RETURNING subscription_key,'Add' as action;]]></query>  
+            <live><![CDATA[true]]></live> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+  
+      <actions> 
+        <condition><![CDATA[sub_action=='update']]></condition>  
+        <action-definition> 
+          <component-name>SQLLookupRule</component-name>
+          <action-type>Relational</action-type>
+          <action-inputs> 
+            <jndi type="string" mapping="connection_name"/>  
+            <p_frequence type="string"/>  
+            <p_subscription_name type="string"/>  
+            <p_zip_before_transfer type="string"/>  
+            <p_subscription_desc type="string"/>  
+            <p_subscription_key type="string"/>
+            <p_customer_key type="string"/>
+          </action-inputs>
+          <action-outputs> 
+            <query-result type="result-set" mapping="query_result"/> 
+          </action-outputs>
+          <component-definition> 
+            <query><![CDATA[UPDATE control.spctl_pub_customer_subscription
+SET subscription_name='{p_subscription_name}',
+subscription_desc='{p_subscription_desc}',
+frequence='{p_frequence}',
+zip_before_transfer={p_zip_before_transfer},
+customer_key={p_customer_key}
+WHERE 
+subscription_key={p_subscription_key}
+RETURNING subscription_key,'Update' as action;]]></query>  
+            <live><![CDATA[true]]></live> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='addDataSourceToSubscrition']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connection_name"/>  
+          <p_subscription_key type="string"/>  
+          <p_df_config_id type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
+        </action-outputs>
+        <component-definition> 
+          <query><![CDATA[INSERT INTO CONTROL.spctl_pub_customer_article (
+	subscription_key
+	,df_config_id
+	)
+VALUES (
+	{p_subscription_key}
+	,{p_df_config_id}
+	) RETURNING customer_article_key,'Add' as action;]]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='activeDataSources']]></condition>  
+      <actions> 
+        <condition><![CDATA[sub_action=='active']]></condition>  
+        <action-definition> 
+          <component-name>SQLLookupRule</component-name>
+          <action-type>Relational</action-type>
+          <action-inputs> 
+            <jndi type="string" mapping="connection_name"/>  
+            <p_customer_article_keys type="string"/> 
+          </action-inputs>
+          <action-outputs> 
+            <query-result type="result-set" mapping="query_result"/> 
+          </action-outputs>
+          <component-definition> 
+            <query><![CDATA[UPDATE control.spctl_pub_customer_article
+SET articel_status='ACTIVE'
+WHERE customer_article_key IN ({p_customer_article_keys}) RETURNING 'OK' as result;]]></query>  
+            <live><![CDATA[true]]></live> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+  
+      <actions> 
+        <condition><![CDATA[sub_action=='inActive']]></condition>  
+        <action-definition> 
+          <component-name>SQLLookupRule</component-name>
+          <action-type>Relational</action-type>
+          <action-inputs> 
+            <jndi type="string" mapping="connection_name"/>  
+            <p_customer_article_keys type="string"/> 
+          </action-inputs>
+          <action-outputs> 
+            <query-result type="result-set" mapping="query_result"/> 
+          </action-outputs>
+          <component-definition> 
+            <query><![CDATA[UPDATE control.spctl_pub_customer_article
+SET articel_status='INACTIVE'
+WHERE customer_article_key IN ({p_customer_article_keys}) RETURNING 'OK' as result;]]></query>  
+            <live><![CDATA[true]]></live> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
  
     </actions>
   

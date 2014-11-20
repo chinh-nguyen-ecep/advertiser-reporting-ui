@@ -76,7 +76,7 @@
 		<p>This page display processes are running.</p>
 		<div  id="processingLayout" class="easyui-layout" data-options="fit:true">
 			<div data-options="region:'south'" title="Process trans" style="height:230px;">
-				<table id="pp_process_trans" class="easyui-datagrid" data-options="singleSelect:true,fit:true">
+				<table id="pp_process_trans" class="easyui-datagrid" data-options="singleSelect:true,fit:true,fitColumns:true,nowrap: false">
 					
 				</table>
 			</div>
@@ -317,6 +317,11 @@
 			});
 		}
 	};
+
+	//////////////////////////////////
+	// Function load trans process
+	////////////////////////////////////
+
 		var loadProcessTransByProcessId=function(table_dom,process_id){
 			table_dom.datagrid({
 						url:rootPath+'&actions=listProcessTrans&p_publication_process_id='+process_id,
@@ -349,10 +354,18 @@
 							{field:'start_time',title:'Start time',align:'center'},
 							{field:'last_change',title:'Last change',align:'center'}
 						]],
-						rownumbers:true,
-						singleSelect:true,
-						collapsible:true,
-						fitColumns:true,
+						toolbar:[
+							{
+								iconCls:'icon-refresh',
+								text: 'ReExport',
+								handler: function(){
+									var currentSelectedProcessID=$('#pp_process').datagrid('getSelected').publication_process_id;
+									var currentSelectedArticleID=$('#pp_process_trans').datagrid('getSelected').customer_article_key;
+									setTransProcessStatus(currentSelectedProcessID,currentSelectedArticleID,'RESET');
+								}
+							}
+
+						],
 						onLoadSuccess: function(){
 							$('a.easyui-tooltip').tooltip({
 								 position: 'top',
@@ -366,6 +379,37 @@
 						}
 					});
 		}
+		////////////////////////////////////////////////////////////
+		// Function set trans process status: action = RESET
+		////////////////////////////////////////////////////////////
+		function setTransProcessStatus(processID,article_key,action){
+			var p_trans_process_status='';
+			if(action=='RESET'){
+				p_trans_process_status='ER';
+			}
+			alert(article_key);
+			$.messager.confirm('Confirm', 'Are you sure '+action+' this tran?', function(r){
+								if(r){
+									$.ajax({
+										url: rootPath,
+										data: {
+											actions: 'updateTransProcessStatus',
+											p_publication_process_id: processID,
+											p_customer_article_key: article_key,
+											p_trans_process_status: p_trans_process_status
+										},
+										data_type: 'json',
+										success: function(data){
+											$('#pp_process_trans').datagrid('reload');
+										},
+										error: function(jqXHR, textStatus){
+											alert( action+" trans failed: " + textStatus );
+										}
+									});
+								}
+							});	
+		}
+
 		//************************************
 		// Script code on Process Failed page
 		//************************************

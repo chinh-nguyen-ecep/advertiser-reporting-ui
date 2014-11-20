@@ -2,7 +2,7 @@
 <table id="manager_data_sources_tables_table" data-options="singleSelect:true,fit:true,fitColumns:true,nowrap: false"></table>
 </div>
 <div id="addTableForm">
-	<form id="ff" method="post" onsubmit="return addFormSubmit();" class="myform">
+	<form id="dst_ff" method="post" onsubmit="return addFormSubmit();" class="myform">
 		<div>
 			<label for="table_type">Table type:</label>
 			<select name="table_type" class="easyui-combobox" style="width:150px;">
@@ -13,11 +13,11 @@
 		</div>
 		<div>
 			<label for="table_schema">Schema:</label>
-			<input id="c1" name="table_schema" value="" style="width:150px;"/>
+			<input id="dst_c1" name="table_schema" value="" style="width:150px;"/>
 		</div>
 		<div>
 			<label for="table_name">Table name:</label>
-			<input id="c2" name="table_name" class="easyui-combobox" value="" style="width:300px;" data-options="valueField:'id',textField:'id'"/>
+			<input id="dst_c2" name="table_name" class="easyui-combobox" value="" style="width:300px;" data-options="valueField:'id',textField:'id'"/>
 		</div>
 	</form>
 </div>
@@ -104,7 +104,7 @@ $('#addTableForm').dialog({
 					text:'Add',
 					iconCls:'icon-add',
 					handler:function(){
-						$('#ff').submit();
+						$('#dst_ff').submit();
 					}
 				},{
 					text:'Cancel',
@@ -114,20 +114,20 @@ $('#addTableForm').dialog({
 				}]
 });
 // list schema
-$('#ff select[name=table_type]').combobox();
-$('#c2').combobox({
+$('#dst_ff select[name=table_type]').combobox();
+$('#dst_c2').combobox({
 	onBeforeLoad: function(param){
-		$('#c2').combobox('disable');
-		$('#c2').combobox('clear');		
+		$('#dst_c2').combobox('disable');
+		$('#dst_c2').combobox('clear');		
 	},
 	onLoadSuccess: function(){
-		$('#c2').combobox('enable');
+		$('#dst_c2').combobox('enable');
 	},
 	onLoadError: function(){
 		alert("Reload list table of schema error!");
 	}
 });
-$('#c1').combobox({
+$('#dst_c1').combobox({
     url: xactionUrl+'&actions=listTableSchema',
     method:'get',
 	valueField:'id',
@@ -136,7 +136,7 @@ $('#c1').combobox({
 	onSelect: function(rec){
             var url = xactionUrl+'&actions=listTableFromSchema'+"&p_table_schema="+rec.id;
 			console.log(url);
-            $('#c2').combobox('reload',url);
+            $('#dst_c2').combobox('reload',url);
     }
 });
 
@@ -144,9 +144,9 @@ $('#c1').combobox({
 // function when call add new table to server
 //////////////////////////////////////////////
 function addFormSubmit(){
-	var p_table_type=$('#ff input[name=table_type]').val();
-	var p_table_schema=$("#ff input[name=table_schema]").val();
-	var p_table_name=$("#ff input[name=table_name]").val();
+	var p_table_type=$('#dst_ff input[name=table_type]').val();
+	var p_table_schema=$("#dst_ff input[name=table_schema]").val();
+	var p_table_name=$("#dst_ff input[name=table_name]").val();
 	var table_name=p_table_schema+"."+p_table_name;
 	// validate table name input
 	if(p_table_name == ''){
@@ -169,7 +169,7 @@ function addFormSubmit(){
 		}
 	}
 	var submit=function(){
-		$('#c2').combobox('reload');
+		$('#dst_c2').combobox('reload');
 		$('#addTableForm').dialog('close');
 		$.ajax({
 			url: rootSubPath,
