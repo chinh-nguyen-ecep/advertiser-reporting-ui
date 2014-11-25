@@ -113,19 +113,19 @@
   <resources> 
     <pageTemplate1> 
       <solution-file> 
-        <location>daily_delivery_by_adnetwork_V2.4/tp_adnetwork_pub.html</location>  
+        <location>daily_delivery_by_adnetwork_v2.4/tp_adnetwork_pub.html</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </pageTemplate1>  
     <report-definition> 
       <solution-file> 
-        <location>daily_delivery_by_adnetwork_V2.4/daily_delivery_adnetwork_pub.jasper</location>  
+        <location>daily_delivery_by_adnetwork_v2.4/daily_delivery_adnetwork_pub.jasper</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </report-definition>  
     <report-definition1> 
       <solution-file> 
-        <location>daily_delivery_by_adnetwork_V2.4/monthly_delivery_adnetwork_pub.jasper</location>  
+        <location>daily_delivery_by_adnetwork_v2.4/monthly_delivery_adnetwork_pub.jasper</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </report-definition1> 

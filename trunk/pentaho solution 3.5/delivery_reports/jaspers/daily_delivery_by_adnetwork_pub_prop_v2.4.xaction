@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <action-sequence> 
-  <title>Daily Delivery by Adnetwork Publisher Property V2.4</title>
+  <title>Daily Delivery by AdNetwork Publisher Property V2.4</title>
   <version>1</version>
   <logging-level>ERROR</logging-level>
   <documentation> 
@@ -119,19 +119,19 @@
   <resources> 
     <pageTemplate1> 
       <solution-file> 
-        <location>daily_delivery_by_adnetwork_V2.4/tp_ad_pub_prop.html</location>  
+        <location>daily_delivery_by_adnetwork_v2.4/tp_ad_pub_prop.html</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </pageTemplate1>  
     <report-definition> 
       <solution-file> 
-        <location>daily_delivery_by_adnetwork_V2.4/daily_delivery_adnetwork_pub_prop.jasper</location>  
+        <location>daily_delivery_by_adnetwork_v2.4/daily_delivery_adnetwork_pub_prop.jasper</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </report-definition>  
     <report-definition1> 
       <solution-file> 
-        <location>daily_delivery_by_adnetwork_V2.4/monthly_delivery_adnetwork_pub_pro.jasper</location>  
+        <location>daily_delivery_by_adnetwork_v2.4/monthly_delivery_adnetwork_pub_pro.jasper</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </report-definition1> 

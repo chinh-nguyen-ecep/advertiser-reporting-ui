@@ -101,19 +101,19 @@
   <resources> 
     <pageTemplate1> 
       <solution-file> 
-        <location>daily_delivery_by_publisher_V2.5/tp_pub_pro_V2.5.html</location>  
+        <location>daily_delivery_by_publisher_v2.5/tp_pub_pro.html</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </pageTemplate1>  
     <report-definition> 
       <solution-file> 
-        <location>daily_delivery_by_publisher_V2.5/daily_delivery_pub_pro.jasper</location>  
+        <location>daily_delivery_by_publisher_v2.5/daily_delivery_pub_pro.jasper</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </report-definition>  
     <report-definition1> 
       <solution-file> 
-        <location>daily_delivery_by_publisher_V2.5/monthly_delivery_pub_pro.jasper</location>  
+        <location>daily_delivery_by_publisher_v2.5/monthly_delivery_pub_pro.jasper</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </report-definition1> 
