@@ -228,7 +228,7 @@
 					
 				$('dimesion').set('html','loading...');
 					var theInnerHTML='';
-					theInnerHTML = pentahoAction( solution, path+"/daily_delivery_by_adnetwork_v2.3", "load_list_publishers.xaction",param);
+					theInnerHTML = pentahoAction( solution, path+"/daily_delivery_by_adnetwork_v2.4", "load_list_publishers.xaction",param);
 					$('dimesion').set('html',theInnerHTML);
 					new Fillter('dimesion_fillter','dimesion','title','muti not all check');
 			};
@@ -236,7 +236,7 @@
 					
 				$('dimesion2').set('html','loading...');
 					var theInnerHTML='';
-					theInnerHTML = pentahoAction( solution, path+"/daily_delivery_by_adnetwork_v2.3", "load_list_adnetworks.xaction");
+					theInnerHTML = pentahoAction( solution, path+"/daily_delivery_by_adnetwork_v2.4", "load_list_adnetworks.xaction");
 					$('dimesion2').set('html',theInnerHTML);
 					new Fillter('dimesion_fillter2','dimesion2','title','muti not all check');
 			};
