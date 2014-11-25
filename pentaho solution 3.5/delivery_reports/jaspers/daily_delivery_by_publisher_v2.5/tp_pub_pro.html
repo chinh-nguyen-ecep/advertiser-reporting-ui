@@ -251,7 +251,7 @@
 					
 				$('dimesion').set('html','loading...');
 					var theInnerHTML='';
-					theInnerHTML = pentahoAction( solution, path+"/daily_delivery_by_publisher_v2.4", "load_list_publishers.xaction",param);
+					theInnerHTML = pentahoAction( solution, path+"/daily_delivery_by_publisher_v2.5", "load_list_publishers.xaction",param);
 					$('dimesion').set('html',theInnerHTML);
 					new Fillter('dimesion_fillter','dimesion','title','muti not all check');
 					addActionWhenSelectPublisher();
@@ -276,7 +276,7 @@
 					
 				$('dimesion3').set('html','loading...');
 					var theInnerHTML='';
-					theInnerHTML = pentahoAction( solution, path+"/daily_delivery_by_publisher_v2.4", "load_list_properties.xaction",param);
+					theInnerHTML = pentahoAction( solution, path+"/daily_delivery_by_publisher_v2.5", "load_list_properties.xaction",param);
 					$('dimesion3').set('html',theInnerHTML);
 					new Fillter('dimesion_fillter3','dimesion3','title','muti not all check');
 					addActionWhenSelectProperty();
