@@ -50,6 +50,8 @@ public class RunningRevenueOverview extends MainApi{
 		info.addDimension(new String[] { "offer_title", "", "string" });
 		info.addDimension(new String[] { "campaign_id", "", "integer" });
 		info.addDimension(new String[] { "campaign_title", "", "string" });
+		info.addDimension(new String[] { "subscription_id", "", "integer" });
+		info.addDimension(new String[] { "subscription_title", "", "string" });
 		
 		// add measures
 		info.addMeasures(new String[] { "adimpinternals", "", "integer"});
