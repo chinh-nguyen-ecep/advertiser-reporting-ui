@@ -42,12 +42,13 @@ public class OffersEventOverview extends MainApi {
 		info.addDimension(new String[] { "account_id", "", "integer" });
 		info.addDimension(new String[] { "merchant_id", "", "integer" });
 		info.addDimension(new String[] { "merchant_name", "", "string" });
+		info.addDimension(new String[] { "event_name", "", "string" });
 		info.addDimension(new String[] { "campaign_id", "", "integer" });
 		info.addDimension(new String[] { "campaign_title", "", "string" });
 		info.addDimension(new String[] { "offer_id", "", "integer" });
 		info.addDimension(new String[] { "offer_title", "", "string" });
-		info.addDimension(new String[] { "event_name", "", "string" });
-		
+		info.addDimension(new String[] { "subscription_id", "", "integer" });
+		info.addDimension(new String[] { "subscription_title", "", "string" });		
 		// add measures
 		info.addMeasures(new String[] { "raw_count", "", "integer"});
 		info.addMeasures(new String[] { "unique_count", "", "integer" });

@@ -40,7 +40,6 @@ public class AgenciesRunningRevenue extends MainApi{
 		info.addDimension(new String[] { "full_date", "", "date" });
 		info.addDimension(new String[] { "network_id", "", "integer" });
 		info.addDimension(new String[] { "network_title", "", "string" });
-		info.addDimension(new String[] { "network_id", "", "integer" });
 		info.addDimension(new String[] { "publisher_id", "", "integer" });
 		
 		// add measures
