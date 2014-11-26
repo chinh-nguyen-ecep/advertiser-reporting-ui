@@ -36,6 +36,7 @@
 <ul class="nav nav-tabs" style="margin-bottom: 10px;" id="subTab">
   <li title="Campaign" class="active"><a href="#" onclick="urlMaster.replaceParam('detail','campaign');urlMaster.replaceParam('page',1);loadRunningDetail();">Merchant -> Campaign</a></li>
   <li title="Offer" ><a href="#" onclick="urlMaster.replaceParam('detail','offer');urlMaster.replaceParam('page',1);loadRunningDetail();">Merchant -> Offer</a></li>
+  <li title="Subscription" ><a href="#" onclick="urlMaster.replaceParam('detail','subscription');urlMaster.replaceParam('page',1);loadRunningDetail();">Merchant -> Subscription</a></li>
   <li title="Tiers and rate" ><a href="#" onclick="urlMaster.replaceParam('detail','tierRate');urlMaster.replaceParam('page',1);loadAgencyTierRate();">Tiers & Rate Details</a></li>
 </ul>
 

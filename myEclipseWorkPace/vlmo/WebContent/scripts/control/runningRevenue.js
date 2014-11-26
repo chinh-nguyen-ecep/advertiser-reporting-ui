@@ -115,17 +115,20 @@ function loadRunningDetail(){
 	var page=urlMaster.getParam("page");
 	var search=$('#search_input').val();
 	var is_campaign;
+	var is_subscription;
 	var selectStament='merchant_id|merchant_name|publisher_id|campaign_id|campaign_title|billable_rate';
+	
 	//check network id
 	if(network_id==''){
 		return;
 	}
-	//set default page
+	
+	//set default page = 1
 	if(page==''){
 		page=1;
 		urlMaster.replaceParam("page",page);
 	}
-	//set default detail
+	//set default detail = campaign
 	if(detailBy==''){
 		detailBy='campaign';
 		urlMaster.replaceParam("detail",'campaign');
@@ -133,17 +136,28 @@ function loadRunningDetail(){
 	
 	// remove all active in sub tab
 	$('#subTab li').removeClass('active');
+	
+	//Active tab
 	if(detailBy=='campaign'){
 		is_campaign='true';
+		is_subscription='false';
 		//active tab campaign
 		$('#subTab li[title="Campaign"]').addClass('active');
 		$('#detailTable th[name=detailType]').html('Campaign');
 	}else if(detailBy=='offer'){
 		is_campaign='false';
+		is_subscription='false';
 		selectStament='merchant_id|merchant_name|publisher_id|offer_id|offer_title|billable_rate';
 		//active tab offer
 		$('#subTab li[title="Offer"]').addClass('active');
 		$('#detailTable th[name=detailType]').html('Offer');
+	}else if(detailBy=='subscription'){
+		is_campaign='false';
+		is_subscription='true';
+		selectStament='merchant_id|merchant_name|publisher_id|subscription_id|subscription_title|billable_rate';
+		//active tab offer
+		$('#subTab li[title="Subscription"]').addClass('active');
+		$('#detailTable th[name=detailType]').html('Subscription');
 	}else if(detailBy=='tierRate'){
 		loadAgencyTierRate();
 		return;
@@ -170,6 +184,7 @@ function loadRunningDetail(){
 			'where[full_date]': runningDate,
 			'where[network_id]': network_id,
 			'where[is_campaign]': is_campaign,
+			'where[is_subscription]': is_subscription,
 			'where[merchant_name.like]':search,
 			order: 'publisher_id',
 			limit: 10,
