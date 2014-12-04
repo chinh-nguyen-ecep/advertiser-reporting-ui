@@ -66,24 +66,24 @@
       </sources>  
       <default-value/> 
     </query_result_total_rows>  
-    <p_table_type type="string">
-      <sources>
-        <request>p_table_type</request>
-      </sources>
-      <default-value/>
-    </p_table_type>
-    <p_table_name type="string">
-      <sources>
-        <request>p_table_name</request>
-      </sources>
-      <default-value/>
-    </p_table_name>
-    <p_table_schema type="string">
-      <sources>
-        <request>p_table_schema</request>
-      </sources>
-      <default-value/>
-    </p_table_schema>
+    <p_table_type type="string"> 
+      <sources> 
+        <request>p_table_type</request> 
+      </sources>  
+      <default-value/> 
+    </p_table_type>  
+    <p_table_name type="string"> 
+      <sources> 
+        <request>p_table_name</request> 
+      </sources>  
+      <default-value/> 
+    </p_table_name>  
+    <p_table_schema type="string"> 
+      <sources> 
+        <request>p_table_schema</request> 
+      </sources>  
+      <default-value/> 
+    </p_table_schema> 
   </inputs>
 
   <outputs> 
@@ -94,13 +94,13 @@
     </returnResult> 
   </outputs>
 
-  <resources>
-    <template>
-      <solution-file>
-        <location>manager_page_data_source_table.html</location>
-        <mime-type>text/plain</mime-type>
-      </solution-file>
-    </template>
+  <resources> 
+    <template> 
+      <solution-file> 
+        <location>manager_page_data_source_table.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </template> 
   </resources>
   
   <actions> 
@@ -138,8 +138,8 @@ if(sort==''){
         <component-name>TemplateComponent</component-name>
         <action-type>Message Template</action-type>
         <action-inputs/>
-        <action-resources>
-          <template type="resource"/>
+        <action-resources> 
+          <template type="resource"/> 
         </action-resources>
         <action-outputs> 
           <output-message type="string" mapping="returnResult"/> 
@@ -191,73 +191,72 @@ OFFSET ({page}-1)*{rows};]]></query>
  
     </actions>
   
-    <actions>
-      <condition><![CDATA[actions=='listTableSchema']]></condition>
-      <action-definition>
+    <actions> 
+      <condition><![CDATA[actions=='listTableSchema']]></condition>  
+      <action-definition> 
         <component-name>SQLLookupRule</component-name>
         <action-type>Relational</action-type>
-        <action-inputs>
-          <jndi type="string" mapping="connection_name"/>
+        <action-inputs> 
+          <jndi type="string" mapping="connection_name"/> 
         </action-inputs>
-        <action-outputs>
-          <query-result type="result-set" mapping="query_result"/>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
         </action-outputs>
-        <component-definition>
+        <component-definition> 
           <query><![CDATA[SELECT table_schema as "id" FROM information_schema.tables 
 WHERE table_schema NOT IN ('control','refer','public','information_schema','pg_catalog','staging','verveloc')
-GROUP BY table_schema ORDER BY table_schema]]></query>
-          <live><![CDATA[true]]></live>
-        </component-definition>
+GROUP BY table_schema ORDER BY table_schema]]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
       </action-definition>
-
+ 
     </actions>
-
-    <actions>
-      <condition><![CDATA[actions=='listTableFromSchema']]></condition>
-      <action-definition>
+  
+    <actions> 
+      <condition><![CDATA[actions=='listTableFromSchema']]></condition>  
+      <action-definition> 
         <component-name>SQLLookupRule</component-name>
         <action-type>Relational</action-type>
-        <action-inputs>
-          <jndi type="string" mapping="connection_name"/>
-          <p_table_schema type="string"/>
+        <action-inputs> 
+          <jndi type="string" mapping="connection_name"/> 
         </action-inputs>
-        <action-outputs>
-          <query-result type="result-set" mapping="query_result"/>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
         </action-outputs>
-        <component-definition>
-          <live><![CDATA[true]]></live>
-          <query><![CDATA[SELECT table_name as "id" FROM information_schema.tables WHERE table_schema ='{p_table_schema}'
-AND table_schema||'.'||table_name NOT IN(SELECT table_name FROM control.spctl_data_source_tables WHERE table_name LIKE '{p_table_schema}.%')
-AND (table_name LIKE 'daily%' OR table_name LIKE 'weekly%' OR table_name LIKE 'monthly%')
+        <component-definition> 
+          <live><![CDATA[true]]></live>  
+          <query><![CDATA[SELECT table_name as "id" FROM information_schema.tables WHERE table_schema ='billing'
+AND table_schema||'.'||table_name NOT IN(SELECT table_name FROM control.spctl_data_source_tables WHERE table_name LIKE 'billing.%')
+AND (table_name LIKE '%daily%' OR table_name LIKE '%weekly%' OR table_name LIKE '%monthly%')
 ORDER BY table_name
-;]]></query>
-        </component-definition>
+;]]></query> 
+        </component-definition> 
       </action-definition>
-
+ 
     </actions>
-
-    <actions>
-      <condition><![CDATA[actions=='addNewTable']]></condition>
-      <action-definition>
+  
+    <actions> 
+      <condition><![CDATA[actions=='addNewTable']]></condition>  
+      <action-definition> 
         <component-name>SQLExecute</component-name>
         <action-type>SQL Commands</action-type>
-        <action-inputs>
-          <jndi type="string" mapping="connection_name"/>
-          <p_table_type type="string"/>
-          <p_table_name type="string"/>
+        <action-inputs> 
+          <jndi type="string" mapping="connection_name"/>  
+          <p_table_type type="string"/>  
+          <p_table_name type="string"/> 
         </action-inputs>
-        <action-outputs>
-          <query-result type="result-set" mapping="query_result"/>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
         </action-outputs>
-        <component-definition>
+        <component-definition> 
           <query><![CDATA[INSERT INTO CONTROL.spctl_data_source_tables (table_type,table_name) 
-VALUES ('{p_table_type}','{p_table_name}')]]></query>
-          <force_single_statement><![CDATA[true]]></force_single_statement>
-        </component-definition>
+VALUES ('{p_table_type}','{p_table_name}')]]></query>  
+          <force_single_statement><![CDATA[true]]></force_single_statement> 
+        </component-definition> 
       </action-definition>
-
+ 
     </actions>
-
+  
     <action-definition> 
       <component-name>JavascriptRule</component-name>
       <action-type>Process data grid</action-type>
