@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dail_ad_network_summary_subreport1" language="groovy" pageWidth="826" pageHeight="842" columnWidth="826" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="3.0"/>
-	<property name="ireport.x" value="1611"/>
+	<property name="ireport.x" value="1252"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="calendar_year_month" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new String("")]]></defaultValueExpression>
@@ -15,7 +15,7 @@ publisher_id
 ,SUM(delivered_units) as impressions
 ,SUM(billable_revenue) as billable_revenue
 ,SUM(adjusted_billable_revenue) as adjusted_billable_revenue
-FROM billing.ba_monthly_publisher_revenue_v5
+FROM billing.ba_monthly_publisher_revenue_v6
 WHERE is_active=true AND calendar_year_month=$P{calendar_year_month} AND partner_revenue_share>0 AND round(partner_revenue_share::numeric, 2)<1
 GROUP BY publisher_id
 ,publisher_name
