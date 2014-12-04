@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ba_monthly_publisher_revenue_detail_by_publisher" language="groovy" pageWidth="1226" pageHeight="842" orientation="Landscape" columnWidth="1226" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="3.0"/>
-	<property name="ireport.x" value="2709"/>
+	<property name="ireport.x" value="2452"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="calendar_year_month" class="java.lang.String">
 		<defaultValueExpression><![CDATA[new String("")]]></defaultValueExpression>
@@ -13,14 +13,14 @@ publisher_id
 ,partner_id
 ,partner_name
 ,network_id
-,(CASE WHEN network_id=2 THEN 'National' WHEN network_id=4 THEN 'VLM' WHEN network_id=3 THEN 'Remnant' ELSE 'N/A' END) as network_name
+,(CASE WHEN network_id=2 THEN 'National' WHEN network_id=4 THEN 'VLM' WHEN network_id=3 THEN 'Remnant' WHEN network_id=6 THEN 'VPC' ELSE 'N/A' END) as network_name
 ,partner_revenue_share as publisher_revenue_share
 ,SUM(gross_revenue) as gross_revenue
 ,SUM(api_revenue) as net_revenue
 ,SUM(delivered_units) as impressions
 ,SUM(billable_revenue) as billable_revenue
 ,SUM(adjusted_billable_revenue) as adjusted_billable_revenue
-FROM billing.ba_monthly_publisher_revenue_v5
+FROM billing.ba_monthly_publisher_revenue_v6
 WHERE is_active=true AND calendar_year_month=$P{calendar_year_month} AND partner_revenue_share>0 AND round(partner_revenue_share::numeric, 2)<1
 GROUP BY publisher_id
 ,publisher_name

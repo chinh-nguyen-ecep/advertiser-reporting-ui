@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <action-sequence> 
-  <title>Billing - Monthly Publisher Revenue Detail V5.1</title>
+  <title>Billing - Monthly Publisher Revenue Detail V6</title>
   <version>1</version>
   <logging-level>ERROR</logging-level>
   <documentation> 
-    <author>Chinh nguyen</author>  
+    <author>Tho Hoang</author>  
     <description>Empty blank action sequence document</description>  
     <help/>  
     <result-type/>  
@@ -70,13 +70,13 @@
   <resources> 
     <pageTemplate> 
       <solution-file> 
-        <location>ba_monthly_publisher_revenue_detail_v5.1/parameter_template.html</location>  
+        <location>ba_monthly_publisher_revenue_detail_v6/parameter_template.html</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </pageTemplate>  
     <report-definition10> 
       <solution-file> 
-        <location>ba_monthly_publisher_revenue_detail_v5.1/ba_monthly_publisher_revenue_detail.jasper</location>  
+        <location>ba_monthly_publisher_revenue_detail_v6/ba_monthly_publisher_revenue_detail.jasper</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </report-definition10> 
@@ -97,7 +97,7 @@
       <component-definition> 
         <live><![CDATA[false]]></live>  
         <query><![CDATA[SELECT DISTINCT calendar_year_month, month_since_2005
-FROM billing.ba_monthly_publisher_revenue_v5
+FROM billing.ba_monthly_publisher_revenue_v6
 WHERE is_active = true
 ORDER BY month_since_2005 desc]]></query> 
       </component-definition> 
