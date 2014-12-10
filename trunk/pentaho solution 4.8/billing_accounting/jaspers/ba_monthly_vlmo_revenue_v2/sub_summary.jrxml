@@ -18,7 +18,7 @@
      , SUM(billable_imps)::bigint AS "Billable Imps"
      , billable_rate::float AS "Billable Rate"
      , (SUM(billable_imps)::double precision / 1000) * billable_rate AS "Gross Revenue"
-FROM billing.ba_monthly_vlmo_revenue
+FROM billing.ba_monthly_vlmo_revenue_v2
 WHERE calendar_year_month = $P{calendar_year_month}::text
 GROUP BY calendar_year_month
        , network_id

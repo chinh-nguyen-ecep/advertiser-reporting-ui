@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <action-sequence> 
-  <title>Billing - Monthly VLMO Revenue</title>
+  <title>Billing - Monthly VLMO Publisher Share V2</title>
   <version>1</version>
   <logging-level>ERROR</logging-level>
   <documentation> 
@@ -18,12 +18,12 @@
       </sources>  
       <default-value/> 
     </calendar_year_month>  
-    <p_output type="string"> 
+    <output type="string"> 
       <sources> 
-        <request>p_output</request> 
+        <request>output</request> 
       </sources>  
       <default-value><![CDATA[html]]></default-value> 
-    </p_output>  
+    </output>  
     <List_networks type="string-list"> 
       <sources> 
         <request>List_networks</request> 
@@ -70,13 +70,13 @@
   <resources> 
     <pageTemplate> 
       <solution-file> 
-        <location>ba_monthly_vlmo_revenue/parameter_template.html</location>  
+        <location>ba_monthly_vlmo_publisher_share_v2/parameter_template.html</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </pageTemplate>  
     <report-definition10> 
       <solution-file> 
-        <location>ba_monthly_vlmo_revenue/ba_monthly_vlmo_revenue.jasper</location>  
+        <location>ba_monthly_vlmo_publisher_share_v2/ba_monthly_vlmo_publisher_share.jasper</location>  
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </report-definition10> 
@@ -97,7 +97,7 @@
       <component-definition> 
         <live><![CDATA[false]]></live>  
         <query><![CDATA[SELECT DISTINCT calendar_year_month, month_since_2005
-FROM billing.ba_monthly_vlmo_revenue
+FROM billing.ba_monthly_vlmo_publisher_share_v2
 WHERE is_active = true
 ORDER BY month_since_2005 desc]]></query> 
       </component-definition> 
@@ -129,7 +129,7 @@ ORDER BY month_since_2005 desc]]></query>
       <action-type>Jasper</action-type>
       <action-inputs> 
         <calendar_year_month type="string"/>  
-        <output-type type="string" mapping="p_output"/>  
+        <output-type type="string" mapping="output"/>  
         <jndi type="string" mapping="connection_name"/> 
       </action-inputs>
       <action-resources> 
