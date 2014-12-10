@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="summary" language="groovy" pageWidth="2080" pageHeight="842" orientation="Landscape" columnWidth="2080" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="summary" language="groovy" pageWidth="1580" pageHeight="842" orientation="Landscape" columnWidth="1580" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -9,8 +9,6 @@
 	<queryString>
 		<![CDATA[SELECT calendar_year_month AS "Month"
      , network_title AS "VLMO Agency Name"
-     , merchant_id AS "Merchant ID"
-     , merchant_name AS "Merchant Name"
      , parent1_id AS "Group ID"
      , parent1_name AS "Group Name"
      , partner_id AS "Partner ID"
@@ -21,12 +19,10 @@
      , partner_share AS "Pub Share %"
      , billable_rate * (SUM(imps)::float / 1000) AS "Gross Revenue"
      , (billable_rate *(SUM(imps)::float / 1000)) * (partner_share::double precision / 100) AS "Pub Net Revenue"
-FROM billing.ba_monthly_vlmo_publisher_share
+FROM billing.ba_monthly_vlmo_publisher_share_v2
 WHERE calendar_year_month = $P{calendar_year_month}::text
 GROUP BY calendar_year_month
        , network_title
-       , merchant_id
-       , merchant_name
        , parent1_id
        , parent1_name
        , partner_id
@@ -34,12 +30,10 @@ GROUP BY calendar_year_month
        , partner_keyword
        , billable_rate
        , partner_share
-ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, partner_id]]>
+ORDER BY network_title, parent1_name, partner_name, partner_id]]>
 	</queryString>
 	<field name="Month" class="java.lang.String"/>
 	<field name="VLMO Agency Name" class="java.lang.String"/>
-	<field name="Merchant ID" class="java.lang.Integer"/>
-	<field name="Merchant Name" class="java.lang.String"/>
 	<field name="Group ID" class="java.lang.Integer"/>
 	<field name="Group Name" class="java.lang.String"/>
 	<field name="Partner ID" class="java.lang.Integer"/>
@@ -90,21 +84,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<text><![CDATA[VLMO Agency Name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="280" y="0" width="100" height="20" backcolor="#FFFF00"/>
-				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Merchant ID]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="1550" y="0" width="100" height="20" backcolor="#FFFF00"/>
+				<reportElement mode="Opaque" x="1050" y="0" width="100" height="20" backcolor="#FFFF00"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -118,7 +98,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<text><![CDATA[Impressions]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="1650" y="0" width="100" height="20" backcolor="#FFFF00"/>
+				<reportElement mode="Opaque" x="1150" y="0" width="100" height="20" backcolor="#FFFF00"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -132,7 +112,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<text><![CDATA[Billable_Rate]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="1850" y="0" width="100" height="20" backcolor="#FFFF00"/>
+				<reportElement mode="Opaque" x="1350" y="0" width="100" height="20" backcolor="#FFFF00"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -146,21 +126,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<text><![CDATA[Gross_Revenue]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="380" y="0" width="400" height="20" backcolor="#FFFF00"/>
-				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Merchant Name]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Opaque" x="780" y="0" width="100" height="20" backcolor="#FFFF00"/>
+				<reportElement mode="Opaque" x="280" y="0" width="100" height="20" backcolor="#FFFF00"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -174,7 +140,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<text><![CDATA[Group_ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="880" y="0" width="200" height="20" backcolor="#FFFF00"/>
+				<reportElement mode="Opaque" x="380" y="0" width="200" height="20" backcolor="#FFFF00"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -188,7 +154,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<text><![CDATA[ Publisher]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="1180" y="0" width="250" height="20" backcolor="#FFFF00"/>
+				<reportElement mode="Opaque" x="680" y="0" width="250" height="20" backcolor="#FFFF00"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -202,7 +168,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<text><![CDATA[Site]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="1080" y="0" width="100" height="20" backcolor="#FFFF00"/>
+				<reportElement mode="Opaque" x="580" y="0" width="100" height="20" backcolor="#FFFF00"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -216,7 +182,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<text><![CDATA[Partner_ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="1430" y="0" width="120" height="20" backcolor="#FFFF00"/>
+				<reportElement mode="Opaque" x="930" y="0" width="120" height="20" backcolor="#FFFF00"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -230,7 +196,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<text><![CDATA[Keyname]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="1750" y="0" width="100" height="20" backcolor="#FFFF00"/>
+				<reportElement mode="Opaque" x="1250" y="0" width="100" height="20" backcolor="#FFFF00"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -244,7 +210,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<text><![CDATA[Publisher_Share]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="1950" y="0" width="130" height="20" backcolor="#FFFF00"/>
+				<reportElement mode="Opaque" x="1450" y="0" width="130" height="20" backcolor="#FFFF00"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -285,20 +251,8 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{VLMO Agency Name}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="280" y="0" width="100" height="20"/>
-				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Right"/>
-				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{Merchant ID}]]></textFieldExpression>
-			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="1550" y="0" width="100" height="20"/>
+				<reportElement x="1050" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -310,7 +264,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{Delivered Imps}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00">
-				<reportElement x="1650" y="0" width="100" height="20"/>
+				<reportElement x="1150" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -322,7 +276,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Billable Rate}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00">
-				<reportElement x="1850" y="0" width="100" height="20"/>
+				<reportElement x="1350" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -334,19 +288,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Gross Revenue}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="380" y="0" width="400" height="20"/>
-				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{Merchant Name}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="780" y="0" width="100" height="20"/>
+				<reportElement x="280" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -358,7 +300,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{Group ID}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="880" y="0" width="200" height="20"/>
+				<reportElement x="380" y="0" width="200" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -370,7 +312,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{Group Name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1080" y="0" width="100" height="20"/>
+				<reportElement x="580" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -382,7 +324,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{Partner ID}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1180" y="0" width="250" height="20"/>
+				<reportElement x="680" y="0" width="250" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -394,7 +336,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{Partner Name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1430" y="0" width="120" height="20"/>
+				<reportElement x="930" y="0" width="120" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -406,7 +348,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{Partner Keyword}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="1750" y="0" width="100" height="20"/>
+				<reportElement x="1250" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -418,7 +360,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{Pub Share %}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00">
-				<reportElement x="1950" y="0" width="130" height="20"/>
+				<reportElement x="1450" y="0" width="130" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -434,7 +376,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 	<summary>
 		<band height="40">
 			<textField pattern="$ #,##0.00">
-				<reportElement x="1850" y="0" width="100" height="20"/>
+				<reportElement x="1350" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -448,7 +390,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{Gross Revenue_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="1550" y="0" width="100" height="20"/>
+				<reportElement x="1050" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -490,6 +432,20 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<text><![CDATA[Total]]></text>
 			</staticText>
 			<staticText>
+				<reportElement x="1150" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
 				<reportElement x="280" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
@@ -504,7 +460,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<text><![CDATA[Total]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1650" y="0" width="100" height="20"/>
+				<reportElement x="380" y="0" width="200" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -518,7 +474,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<text><![CDATA[Total]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="380" y="0" width="400" height="20"/>
+				<reportElement x="680" y="0" width="250" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -532,7 +488,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<text><![CDATA[Total]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="780" y="0" width="100" height="20"/>
+				<reportElement x="580" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -546,7 +502,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<text><![CDATA[Total]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="880" y="0" width="200" height="20"/>
+				<reportElement x="930" y="0" width="120" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -560,49 +516,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<text><![CDATA[Total]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1180" y="0" width="250" height="20"/>
-				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Total]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="1080" y="0" width="100" height="20"/>
-				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Total]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="1430" y="0" width="120" height="20"/>
-				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Total]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="1750" y="0" width="100" height="20"/>
+				<reportElement x="1250" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -616,7 +530,7 @@ ORDER BY network_title, merchant_name, merchant_id, parent1_name, partner_name, 
 				<text><![CDATA[Total]]></text>
 			</staticText>
 			<textField pattern="$ #,##0.00">
-				<reportElement x="1950" y="0" width="130" height="20"/>
+				<reportElement x="1450" y="0" width="130" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
