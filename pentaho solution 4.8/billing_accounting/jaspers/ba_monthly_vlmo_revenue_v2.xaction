@@ -18,12 +18,12 @@
       </sources>  
       <default-value/> 
     </calendar_year_month>  
-    <output type="string"> 
+    <p_output type="string"> 
       <sources> 
-        <request>output</request> 
+        <request>p_output</request> 
       </sources>  
       <default-value><![CDATA[html]]></default-value> 
-    </output>  
+    </p_output>  
     <List_networks type="string-list"> 
       <sources> 
         <request>List_networks</request> 
@@ -129,7 +129,7 @@ ORDER BY month_since_2005 desc]]></query>
       <action-type>Jasper</action-type>
       <action-inputs> 
         <calendar_year_month type="string"/>  
-        <output-type type="string" mapping="output"/>  
+        <output-type type="string" mapping="p_output"/>  
         <jndi type="string" mapping="connection_name"/> 
       </action-inputs>
       <action-resources> 
