@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Daily VLMO Network Overview</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>Chinh nguyen</author>  
+    <description>Empty blank action sequence document</description>  
+    <help/>  
+    <result-type/>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <eastern_date_sk type="string"> 
+      <sources> 
+        <request>eastern_date_sk</request> 
+      </sources>  
+      <default-value/> 
+    </eastern_date_sk>  
+    <output type="string"> 
+      <sources> 
+        <request>output</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </output>  
+    <p_mailTo type="string"> 
+      <sources> 
+        <request>p_mailTo</request> 
+      </sources>  
+      <default-value><![CDATA[duychinhnguyenvn@gmail.com]]></default-value> 
+    </p_mailTo>  
+    <p_emailMode type="string"> 
+      <sources> 
+        <request>p_emailMode</request> 
+      </sources>  
+      <default-value><![CDATA[false]]></default-value> 
+    </p_emailMode>  
+    <p_emailExportFileType type="string"> 
+      <sources> 
+        <request>p_emailExportFileType</request> 
+      </sources>  
+      <default-value><![CDATA[pdf]]></default-value> 
+    </p_emailExportFileType>  
+    <parameter_string type="string"> 
+      <sources> 
+        <request>parameter_string</request> 
+      </sources>  
+      <default-value/> 
+    </parameter_string>  
+    <p_mailTitle type="string"> 
+      <sources> 
+        <request>p_mailTitle</request> 
+      </sources>  
+      <default-value><![CDATA[Report email]]></default-value> 
+    </p_mailTitle>  
+    <p_mailTextMessage type="string"> 
+      <sources> 
+        <request>p_mailTextMessage</request> 
+      </sources>  
+      <default-value><![CDATA[This email was sent from Pentaho system by scheduler.]]></default-value> 
+    </p_mailTextMessage>  
+    <connectionName type="string">
+      <sources>
+        <request>connectionName</request>
+      </sources>
+      <default-value><![CDATA[verveReportConnection]]></default-value>
+    </connectionName>
+  </inputs>
+
+  <outputs/>
+
+  <resources> 
+    <pageTemplate> 
+      <solution-file> 
+        <location>daily_vlmo_network_overview/parameter_template.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </pageTemplate>  
+    <report-definition1>
+      <solution-file>
+        <location>daily_vlmo_network_overview/daily_vlmo_network_overview.jasper</location>
+        <mime-type>text/plain</mime-type>
+      </solution-file>
+    </report-definition1>
+    <report-definition>
+      <solution-file>
+        <location>daily_vlmo_network_overview/daily_vlmo_network_overview_csv.jasper</location>
+        <mime-type>text/plain</mime-type>
+      </solution-file>
+    </report-definition>
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>get date list</action-type>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result"/>  
+        <eastern_date_sk type="integer"/>  
+        <full_date type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <query><![CDATA[SELECT distinct eastern_date_sk, full_date 
+FROM vlmo_dw.daily_agg_network_overview
+WHERE is_active = true
+ORDER BY eastern_date_sk desc]]></query>  
+        <live><![CDATA[false]]></live>  
+        <jndi><![CDATA[verveReportConnection]]></jndi> 
+      </component-definition> 
+    </action-definition>
+  
+    <actions> 
+      <condition><![CDATA[p_emailMode == 'false']]></condition>  
+      <action-definition> 
+        <component-name>SecureFilterComponent</component-name>
+        <action-type>Prompt/Secure Filter</action-type>
+        <action-inputs> 
+          <eastern_date_sk type="string"/>  
+          <query_result type="result-set"/> 
+        </action-inputs>
+        <action-resources> 
+          <pageTemplate type="resource"/> 
+        </action-resources>
+        <component-definition> 
+          <selections> 
+            <eastern_date_sk style="select"> 
+              <filter value-col-name="eastern_date_sk" display-col-name="full_date">query_result</filter>  
+              <title>Date</title> 
+            </eastern_date_sk> 
+          </selections>  
+          <xsl><![CDATA[pageTemplate]]></xsl> 
+        </component-definition> 
+      </action-definition>
+
+      <actions>
+        <condition><![CDATA[output=='csv']]></condition>
+        <action-definition>
+          <component-name>JasperReportsComponent</component-name>
+          <action-type>Jasper</action-type>
+          <action-inputs>
+            <output-type type="string" mapping="output"/>
+            <jndi type="string" mapping="connectionName"/>
+            <eastern_date_sk type="string"/>
+          </action-inputs>
+          <action-resources>
+            <report-definition type="resource"/>
+          </action-resources>
+          <component-definition/>
+        </action-definition>
+
+      </actions>
+  
+      <actions>
+        <condition><![CDATA[output!='csv']]></condition>
+        <action-definition> 
+          <component-name>JasperReportsComponent</component-name>
+          <action-type>Jasper</action-type>
+          <action-inputs> 
+            <eastern_date_sk type="string"/>  
+            <output-type type="string" mapping="output"/>  
+            <jndi type="string" mapping="connectionName"/>
+          </action-inputs>
+          <action-resources>
+            <report-definition mapping="report-definition1"/>
+          </action-resources>
+          <component-definition/> 
+        </action-definition>
+
+      </actions>
+
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_emailMode == 'true']]></condition> 
+    </actions>
+ 
+  </actions> 
+</action-sequence>
