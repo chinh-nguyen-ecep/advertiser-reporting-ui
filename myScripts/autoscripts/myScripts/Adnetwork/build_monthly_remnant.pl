@@ -123,8 +123,13 @@ sub runAgg{
 	runPostgresComand("update billing.ba_monthly_adnetwork_summary_v1 set is_active=true where month_since_2005=$month_sk");	
 	
 	#ba_monthly_publisher_revenue_v51
-	runPostgresComand("select billing.fn_build_ba_monthly_publisher_revenue_v51($month_sk,$process_id,'PS')");
-	runPostgresComand("update billing.ba_monthly_publisher_revenue_v5 set is_active=true where month_since_2005=$month_sk");
+	##runPostgresComand("select billing.fn_build_ba_monthly_publisher_revenue_v51($month_sk,$process_id,'PS')");
+	##runPostgresComand("update billing.ba_monthly_publisher_revenue_v5 set is_active=true where month_since_2005=$month_sk");
+
+	# Version 6
+	runPostgresComand("select billing.fn_build_ba_monthly_publisher_revenue_v6($month_sk,$process_id,'PS')");
+	runPostgresComand("update billing.ba_monthly_publisher_revenue_v6 set is_active=true where month_since_2005=$month_sk");
+
 	#Billing Monthly VLM Revenue Summary
 	
 	runPostgresComand("select billing.fn_build_ba_monthly_vlm_revenue_v51($month_sk,$process_id,'PS')");

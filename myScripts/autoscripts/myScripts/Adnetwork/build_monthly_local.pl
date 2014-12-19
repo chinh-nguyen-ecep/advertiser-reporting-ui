@@ -67,7 +67,9 @@ sub runAgg{
                 #version 5
         runPostgresComand("select billing.fn_build_ba_monthly_local_revenue_v51($month_sk,$month_sk,'PS')");
         runPostgresComand("update billing.ba_monthly_local_revenue_v5 set is_active=true where month_since_2005=$month_sk");
+       
         #build monthly national revenue summary
+       
         ##runPostgresComand("select staging.fn_build_ba_monthly_national_revenue($p_date_sk_start,$p_date_sk_end,$month_sk,'PS')");
         ##runPostgresComand("update adm.ba_monthly_national_revenue set is_active=true where month_since_2005=$month_sk");
 
@@ -79,9 +81,12 @@ sub runAgg{
 
         ##runPostgresComand("select staging.fn_build_ba_monthly_national_revenue_v4($month_sk,$month_sk,'PS')");
         ##runPostgresComand("update adm.ba_monthly_national_revenue_v4 set is_active=true where month_since_2005=$month_sk");
+       
         #version 5
         runPostgresComand("select billing.fn_build_ba_monthly_national_revenue_v5($month_sk,$month_sk,'PS')");
         runPostgresComand("update billing.ba_monthly_national_revenue_v5 set is_active=true where month_since_2005=$month_sk");
+
+        # Delivery reports
 
         ##runPostgresComand("SELECT staging.fn_build_monthly_agg_delivery_adnetwork_publisher_beta($month_sk,$month_sk,'PS')");
         ##runPostgresComand("UPDATE adsops.monthly_agg_delivery_adnetwork_publisher_beta SET is_active=true WHERE month_since_2005=$month_sk");
@@ -89,10 +94,10 @@ sub runAgg{
         ##runPostgresComand("SELECT staging.fn_build_monthly_agg_delivery_publisher_property_beta($month_sk,$month_sk,'PS')");
         ##runPostgresComand("UPDATE adsops.monthly_agg_delivery_publisher_property_beta SET is_active=true WHERE month_since_2005=$month_sk");
 
-        runPostgresComand("SELECT staging.fn_build_monthly_agg_delivery_adnetwork_publisher_v3($month_sk,$month_sk,'PS')");
+        runPostgresComand("SELECT adsops.fn_build_monthly_agg_delivery_adnetwork_publisher_v3($month_sk,$month_sk,'PS')");
         runPostgresComand("UPDATE adsops.monthly_agg_delivery_adnetwork_publisher_v3 SET is_active=true WHERE month_since_2005=$month_sk");
 
-        runPostgresComand("SELECT staging.fn_build_monthly_agg_delivery_publisher_property_v3($month_sk,$month_sk,'PS')");
+        runPostgresComand("SELECT adsops.fn_build_monthly_agg_delivery_publisher_property_v3($month_sk,$month_sk,'PS')");
         runPostgresComand("UPDATE adsops.monthly_agg_delivery_publisher_property_v3 SET is_active=true WHERE month_since_2005=$month_sk");
 		
 	#VLM V6
@@ -100,11 +105,21 @@ sub runAgg{
 	runPostgresComand("UPDATE billing.ba_monthly_vlm_revenue_v6 SET is_active=true WHERE month_since_2005=$month_sk");
 
 	#VLMO 
-	runPostgresComand("SELECT billing.fn_build_ba_monthly_vlmo_revenue($month_sk,$month_sk,'PS')");
-	runPostgresComand("UPDATE billing.ba_monthly_vlmo_revenue SET is_active=true WHERE month_since_2005=$month_sk");
+	##runPostgresComand("SELECT billing.fn_build_ba_monthly_vlmo_revenue($month_sk,$month_sk,'PS')");
+	##runPostgresComand("UPDATE billing.ba_monthly_vlmo_revenue SET is_active=true WHERE month_since_2005=$month_sk");
 
-	runPostgresComand("SELECT billing.fn_build_ba_monthly_vlmo_publisher_share($month_sk,$month_sk,'PS')");
-	runPostgresComand("UPDATE billing.ba_monthly_vlmo_publisher_share SET is_active=true WHERE month_since_2005=$month_sk");
+	##runPostgresComand("SELECT billing.fn_build_ba_monthly_vlmo_publisher_share($month_sk,$month_sk,'PS')");
+	##runPostgresComand("UPDATE billing.ba_monthly_vlmo_publisher_share SET is_active=true WHERE month_since_2005=$month_sk");
+   
+        # Version 2
+        runPostgresComand("SELECT billing.fn_build_ba_monthly_vlmo_revenue_v2($month_sk,$month_sk,'PS')");
+        runPostgresComand("UPDATE billing.ba_monthly_vlmo_revenue_v2 SET is_active=true WHERE month_since_2005=$month_sk");
+
+        runPostgresComand("SELECT billing.fn_build_ba_monthly_vlmo_publisher_share_v2($month_sk,$month_sk,'PS')");
+        runPostgresComand("UPDATE billing.ba_monthly_vlmo_publisher_share_v2 SET is_active=true WHERE month_since_2005=$month_sk");
+
+
+
 }
 
 sub transferFinalData{

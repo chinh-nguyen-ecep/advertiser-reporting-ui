@@ -38,7 +38,7 @@ sub main{
 		runParam(73);		
 		dw3_writelog($logFile,"Run function param 73");		
 		#check param 73
-		checkParam(73,5);	
+		checkParam(73,6);	
 		#promote adm data feed		
 		promote(73);
 		
@@ -192,6 +192,6 @@ sub promote{
 sub transferAllData{
 	system("cd /opt/temp/autoscripts/transformer && perl main.pl daily $master_host $master_report_host vlmo_dw.daily_agg_demand_by_metro $report_date vlmoAutoDaily.pl");	
 	system("cd /opt/temp/autoscripts/transformer && perl main.pl daily $master_host $master_report_host vlmo_dw.daily_agg_demand_by_offer $report_date vlmoAutoDaily.pl");	
-
-
+	system("cd /opt/temp/autoscripts/transformer && perl main.pl daily $master_host $master_report_host vlmo_dw.daily_agg_operational $report_date vlmoAutoDaily.pl");	
+	system("cd /opt/temp/autoscripts/transformer && perl main.pl daily $master_host $master_report_host vlmo_dw.daily_agg_network_overview $report_date vlmoAutoDaily.pl");	
 }
