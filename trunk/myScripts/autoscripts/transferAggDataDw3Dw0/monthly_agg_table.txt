@@ -80,3 +80,6 @@ billing.ba_monthly_am_performance
 adnetwork.monthly_am_performance
 adnetwork.monthly_am_performance_by_date
 rtb.monthly_agg_exchanger_cost_analysis_v1
+billing.ba_monthly_vlmo_publisher_share_v2
+billing.ba_monthly_vlmo_revenue_v2
+billing.ba_monthly_vlm_revenue_v6
