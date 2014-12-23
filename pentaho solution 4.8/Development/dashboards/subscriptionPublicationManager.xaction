@@ -54,18 +54,18 @@
       </sources>  
       <default-value><![CDATA[0]]></default-value> 
     </p_publication_process_id>  
-    <p_trans_process_status type="string">
-      <sources>
-        <request>p_trans_process_status</request>
-      </sources>
-      <default-value><![CDATA[WT]]></default-value>
-    </p_trans_process_status>
-    <p_customer_article_key type="string">
-      <sources>
-        <request>p_customer_article_key</request>
-      </sources>
-      <default-value><![CDATA[0]]></default-value>
-    </p_customer_article_key>
+    <p_trans_process_status type="string"> 
+      <sources> 
+        <request>p_trans_process_status</request> 
+      </sources>  
+      <default-value><![CDATA[WT]]></default-value> 
+    </p_trans_process_status>  
+    <p_customer_article_key type="string"> 
+      <sources> 
+        <request>p_customer_article_key</request> 
+      </sources>  
+      <default-value><![CDATA[0]]></default-value> 
+    </p_customer_article_key> 
   </inputs>
 
   <outputs> 
@@ -274,32 +274,32 @@ WHERE publication_process_id = {p_publication_process_id};]]></query>
  
     </actions>
   
-    <actions>
-      <condition><![CDATA[actions='updateTransProcessStatus']]></condition>
-      <action-definition>
+    <actions> 
+      <condition><![CDATA[actions=='updateTransProcessStatus']]></condition>  
+      <action-definition> 
         <component-name>SQLLookupRule</component-name>
         <action-type>Relational</action-type>
-        <action-inputs>
-          <jndi type="string" mapping="connectionName"/>
-          <p_trans_process_status type="string"/>
-          <p_publication_process_id type="string"/>
-          <p_customer_article_key type="string"/>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/>  
+          <p_trans_process_status type="string"/>  
+          <p_publication_process_id type="string"/>  
+          <p_customer_article_key type="string"/> 
         </action-inputs>
-        <action-outputs>
-          <query-result type="result-set" mapping="query_result"/>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
         </action-outputs>
-        <component-definition>
+        <component-definition> 
           <query><![CDATA[UPDATE control.spctl_subscription_publication_process_concurrent_trans
 SET status='{p_trans_process_status}'
 WHERE publication_process_id={p_publication_process_id}
 AND customer_article_key={p_customer_article_key}
-RETURNING publication_process_id,customer_article_key,'success' as result;]]></query>
-          <live><![CDATA[true]]></live>
-        </component-definition>
+RETURNING publication_process_id,customer_article_key,'success' as result;]]></query>  
+          <live><![CDATA[true]]></live> 
+        </component-definition> 
       </action-definition>
-
+ 
     </actions>
-
+  
     <action-definition> 
       <component-name>JavascriptRule</component-name>
       <action-type>Process data grid</action-type>
