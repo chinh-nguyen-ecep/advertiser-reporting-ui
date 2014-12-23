@@ -27,7 +27,7 @@ sub main{
 		writelog("Daily Superpages process promoted.");	
 		#transfer data to dw0
 		rollBackTransfer_7day('adnetwork.daily_sp_blue_performance','');
-		rollBackTransfer_7day('adnetwork.daily_sp_performance','');
+		##rollBackTransfer_7day('adnetwork.daily_sp_performance','');
 		$time=getTime();
 		sendMail("Dear all,<p />$time# Daily Superpages 3rd AdNetwork report promoted. The process are completed with no error.<p />Thanks,<br />send by auto mail.",$mailTile);
 		writelog("Daily Superpages Process finished");	

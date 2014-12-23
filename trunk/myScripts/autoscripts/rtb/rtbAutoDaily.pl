@@ -22,6 +22,7 @@ sub main{
 	#register sub process to control.daily_process_status table.
 	register_process($process_date,$group_process_name,78,'05:00:00','06:00:00');
 	register_process($process_date,$group_process_name,81,'05:00:00','06:00:00');
+	register_process($process_date,$group_process_name,82,'05:00:00','06:00:00');
 	#Check file logs
 	my $error=checkSU();
 	if($error == 0){
@@ -36,8 +37,12 @@ sub main{
 		promote(78);
 		
 		#run param 81;
-		runParam(81);		
-	
+		runParam(81);	
+
+		#run param 82;
+		runParam(82);
+		checkParam(82,3);	
+		promote(82);
 			
 		#transfer all data of adm and double click to dw0
 		transferAllData();
@@ -173,10 +178,18 @@ sub promote{
 		runPGFuntion("staging.fn_promote_daily_rtb_report");
 		dw3_writelog($logFile,"Promoted daily rtb report");
 	}
+	if($param==82){
+		#promote daily alert reports
+		runPGFuntion("staging.fn_promote_daily_rtb_alert_report");
+		dw3_writelog($logFile,"Promoted daily rtb alert reports");
+	}
 }
 
 sub transferAllData{
 	system("cd /opt/temp/autoscripts/transformer && perl main.pl daily $master_host $master_report_host rtb.daily_agg_exchanger_cost_analysis_v1 $report_date rtbAutoDaily.pl");	
 	system("cd /opt/temp/autoscripts/transformer && perl main.pl daily $master_host $master_report_host rtb.daily_agg_delivery_publisher_property_flight $report_date rtbAutoDaily.pl");	
-	system("cd /opt/temp/autoscripts/transformer && perl main.pl daily $master_host $master_report_host rtb.daily_agg_delivery_rtb_flight $report_date rtbAutoDaily.pl");	
+	system("cd /opt/temp/autoscripts/transformer && perl main.pl daily $master_host $master_report_host rtb.daily_agg_delivery_rtb_flight $report_date rtbAutoDaily.pl");
+	system("cd /opt/temp/autoscripts/transformer && perl main.pl daily $master_host $master_report_host rtb.daily_agg_alert_flights_hight_descrepancies $report_date rtbAutoDaily.pl");	
+	system("cd /opt/temp/autoscripts/transformer && perl main.pl daily $master_host $master_report_host rtb.daily_agg_alert_sources_high_discrepancy_rates $report_date rtbAutoDaily.pl");	
+	system("cd /opt/temp/autoscripts/transformer && perl main.pl daily $master_host $master_report_host rtb.daily_agg_alert_sources_low_ctr $report_date rtbAutoDaily.pl");		
 }
