@@ -29,6 +29,7 @@ sub main{
 	register_process($process_date,$group_process_name,74,'05:00:00','06:00:00');
 	register_process($process_date,$group_process_name,75,'05:00:00','06:00:00');
 	register_process($process_date,$group_process_name,80,'05:00:00','06:00:00');
+	register_process($process_date,$group_process_name,83,'05:00:00','06:00:00');
 	#Check file logs
 	my $error=checkSU();
 	if($error == 0){
@@ -41,6 +42,11 @@ sub main{
 		checkParam(73,6);	
 		#promote adm data feed		
 		promote(73);
+
+		#process 83
+		runParam(83);	
+		checkParam(83,5);
+		promote(83);
 		
 		#transfer daily VLMO to staging environment
 		runParam(74);
@@ -186,6 +192,11 @@ sub promote{
 		#promote daily cumulative
 		runPGFuntion("staging.fn_promote_daily_vlmo_report");
 		dw3_writelog($logFile,"Promoted daily vlmo report");
+	}
+	if($param==83){
+		#promote daily vlmo revenue
+		runPGFuntion("staging.fn_promote_daily_vlmo_revenue_report");
+		dw3_writelog($logFile,"Promoted daily vlmo revenue reports");
 	}
 }
 
