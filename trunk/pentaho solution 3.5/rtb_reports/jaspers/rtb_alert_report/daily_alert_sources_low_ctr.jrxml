@@ -31,20 +31,13 @@ ORDER BY full_date,exchange,src_id]]>
 		<band/>
 	</background>
 	<title>
-		<band height="52">
+		<band height="20">
 			<textField>
 				<reportElement x="0" y="0" width="290" height="20"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA["Date: "+new SimpleDateFormat("yyyy-MM-dd").format($F{Date})]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="0" y="20" width="822" height="20"/>
-				<textElement textAlignment="Right">
-					<font isItalic="true"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["Refresh: "+new SimpleDateFormat("yyyy-MM-dd h:mm a").format($F{dt_lastchange})]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="290" y="0" width="532" height="20"/>
@@ -167,16 +160,4 @@ ORDER BY full_date,exchange,src_id]]>
 			</textField>
 		</band>
 	</detail>
-	<pageFooter>
-		<band height="20">
-			<textField pattern="yyyy-MM-dd h:mm a">
-				<reportElement x="0" y="0" width="290" height="20"/>
-				<box topPadding="2" leftPadding="5" rightPadding="5"/>
-				<textElement>
-					<font isItalic="true"/>
-				</textElement>
-				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
-		</band>
-	</pageFooter>
 </jasperReport>
