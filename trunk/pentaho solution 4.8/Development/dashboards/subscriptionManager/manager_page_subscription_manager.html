@@ -40,7 +40,7 @@
 		</div>	
 		<div>
 			<label for="p_df_desc">Description:</label>
-			<textarea name="p_subscription_desc" value="" style="width:350px;"/>
+			<textarea id="txt_subscription_desc" name="p_subscription_desc" value="" style="width:350px;" class="ckeditor"/>
 		</div>
 	</form>
 </div>
@@ -317,9 +317,12 @@ $('#sm_ff1 input[name=p_customer_key]').combobox({
 });
 $('#sm_ff1').form({
 	url: rootSubPath+'&action=manager_page_subscription_manager.xaction&actions=addAndEditSubscription',
-	onSubmit: function(){
+	onLoadSuccess:function(data){
+    },
+	onSubmit: function(param){
         // do some check
         // return false to prevent submit; 
+        $('#txt_subscription_desc').val($('#txt_subscription_desc').val().replace(/\n/g, "<br />"));
         $('#addSubscriptionForm').dialog('close');
     },
 	success: function(data){
