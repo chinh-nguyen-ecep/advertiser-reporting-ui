@@ -107,7 +107,13 @@
         <request>p_calendar_year_month</request> 
       </sources>  
       <default-value/> 
-    </p_calendar_year_month> 
+    </p_calendar_year_month>  
+    <is_monthly type="string"> 
+      <sources> 
+        <request>is_monthly</request> 
+      </sources>  
+      <default-value><![CDATA[true]]></default-value> 
+    </is_monthly> 
   </inputs>
 
   <outputs> 
@@ -290,23 +296,23 @@ ORDER BY io_orders_id;]]></query>
   
     <actions> 
       <condition><![CDATA[actions=='loadListIoLineItems']]></condition>  
-      <actions>
-        <condition><![CDATA[p_month_since_2005=='-1']]></condition>
-        <action-definition>
+      <actions> 
+        <condition><![CDATA[p_month_since_2005=='-1']]></condition>  
+        <action-definition> 
           <component-name>SQLLookupRule</component-name>
           <action-type>Relational</action-type>
-          <action-inputs>
-            <limit type="string"/>
-            <page type="string"/>
-            <term type="string"/>
-            <p_io_orders type="string"/>
-            <p_month_since_2005 type="string"/>
-            <jndi type="string" mapping="connectionName"/>
+          <action-inputs> 
+            <limit type="string"/>  
+            <page type="string"/>  
+            <term type="string"/>  
+            <p_io_orders type="string"/>  
+            <p_month_since_2005 type="string"/>  
+            <jndi type="string" mapping="connectionName"/> 
           </action-inputs>
-          <action-outputs>
-            <query-result type="result-set" mapping="query_result"/>
+          <action-outputs> 
+            <query-result type="result-set" mapping="query_result"/> 
           </action-outputs>
-          <component-definition>
+          <component-definition> 
             <query><![CDATA[select io_line_item_id, io_line_item_name 
 from billing.ba_monthly_national_worksheet 
 where is_active = true 
@@ -316,15 +322,15 @@ AND (UPPER(io_line_item_id||' | '||io_line_item_name) LIKE UPPER('%{term}%') OR 
 AND is_monthly = false
 group by io_line_item_id, io_line_item_name 
 order by io_line_item_id
-OFFSET ({page}-1)*{limit} LIMIT {limit};]]></query>
-            <live><![CDATA[true]]></live>
-          </component-definition>
+OFFSET ({page}-1)*{limit} LIMIT {limit};]]></query>  
+            <live><![CDATA[true]]></live> 
+          </component-definition> 
         </action-definition>
-
+ 
       </actions>
-
-      <actions>
-        <condition><![CDATA[p_month_since_2005!='-1']]></condition>
+  
+      <actions> 
+        <condition><![CDATA[p_month_since_2005!='-1']]></condition>  
         <action-definition> 
           <component-name>SQLLookupRule</component-name>
           <action-type>Relational</action-type>
@@ -353,7 +359,7 @@ OFFSET ({page}-1)*{limit} LIMIT {limit};]]></query>
             <live><![CDATA[true]]></live> 
           </component-definition> 
         </action-definition>
-
+ 
       </actions>
  
     </actions>
@@ -364,7 +370,8 @@ OFFSET ({page}-1)*{limit} LIMIT {limit};]]></query>
         <component-name>SQLLookupRule</component-name>
         <action-type>Relational</action-type>
         <action-inputs> 
-          <jndi type="string" mapping="connectionName"/> 
+          <jndi type="string" mapping="connectionName"/>  
+          <is_monthly type="string"/> 
         </action-inputs>
         <action-outputs> 
           <query-result type="result-set" mapping="query_result"/> 
@@ -373,7 +380,7 @@ OFFSET ({page}-1)*{limit} LIMIT {limit};]]></query>
           <query><![CDATA[select month_since_2005, calendar_year_month 
 from billing.ba_monthly_national_worksheet 
 where is_active = true
-AND is_monthly = true
+AND is_monthly = {is_monthly}
 group by month_since_2005, calendar_year_month
 order by month_since_2005 DESC
 ;]]></query>  
@@ -458,7 +465,8 @@ order by advertiser, io_orders_id, month_since_2005 desc, io_line_item_id;]]></q
             <jndi type="string" mapping="connectionName"/>  
             <p_io_orders type="string"/>  
             <p_month_since_2005 type="string"/>  
-            <p_io_line_items type="string"/> 
+            <p_io_line_items type="string"/>  
+            <is_monthly type="string"/> 
           </action-inputs>
           <action-outputs> 
             <query-result type="result-set" mapping="query_result"/> 
@@ -508,7 +516,7 @@ where (month_since_2005 IN( {p_month_since_2005}) OR '0'='{p_month_since_2005}')
 AND (a.io_orders_id IN ({p_io_orders}) OR '0'='{p_io_orders}')
 AND (a.io_line_item_id IN ({p_io_line_items}) OR '0'='{p_io_line_items}')
 AND a.is_active=true
-AND a.is_monthly = true
+AND a.is_monthly = {is_monthly}
 order by advertiser, io_orders_id, month_since_2005 desc, io_line_item_id;]]></query> 
           </component-definition> 
         </action-definition>
@@ -762,7 +770,8 @@ if(adjusted_units==null){
         <component-name>SQLLookupRule</component-name>
         <action-type>Relational</action-type>
         <action-inputs> 
-          <jndi type="string" mapping="connectionName"/> 
+          <jndi type="string" mapping="connectionName"/>  
+          <p_month_since_2005 type="string"/>
         </action-inputs>
         <action-outputs> 
           <query-result type="result-set" mapping="query_result"/> 
@@ -771,6 +780,8 @@ if(adjusted_units==null){
           <query><![CDATA[SELECT calendar_year_month,end_full_date::date
 FROM billing.ba_monthly_national_worksheet
 WHERE is_monthly = false
+AND (month_since_2005 IN( {p_month_since_2005}) OR '0'='{p_month_since_2005}')
+ORDER BY month_since_2005 desc
 LIMIT 1]]></query>  
           <live><![CDATA[true]]></live> 
         </component-definition> 

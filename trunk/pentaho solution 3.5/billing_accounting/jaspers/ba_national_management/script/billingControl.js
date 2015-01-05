@@ -105,6 +105,7 @@ function loadBillingDetailTable(input){
 		p_io_orders: '',
 		p_io_line_items: '',
 		obj_table: '',
+		is_monthly: 'true',
 		success : function() {
 		}
 	}, input);
@@ -118,7 +119,8 @@ function loadBillingDetailTable(input){
 			data: 'json',
 			p_month_since_2005: input.p_month_since_2005,
 			p_io_orders: input.p_io_orders,
-			p_io_line_items: input.p_io_line_items
+			p_io_line_items: input.p_io_line_items,
+			is_monthly: input.is_monthly
 		},
 		success : function(json) {
 			dataTableDetail = json;
@@ -606,7 +608,8 @@ function exportNationalBillingReport(input){
 // Get data refresh date in Billing MonthToDate aggregate
 /////////////////////////////////////////////////////////////
 function getRefreshDate(input){
-	input = $.extend({}, {		
+	input = $.extend({}, {	
+		p_month_since_2005:'0',	
 		success : function(refreshDate) {
 		
 		}
@@ -616,7 +619,8 @@ function getRefreshDate(input){
 			dataType : 'json',
 			data : {
 				actions: 'getRefreshDateInBillingMonthToDate',
-				data: 'json'				
+				data: 'json',
+				p_month_since_2005: input.p_month_since_2005				
 			},
 			success : function(data) {
 				var refreshDate=data[0].end_full_date;
