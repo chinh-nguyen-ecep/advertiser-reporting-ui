@@ -41,7 +41,12 @@
 				<h4 class="modal-title" id="myModalLabel">Control panel</h4>
 			</div>
 			<div class="modal-body">
-				<form role="form">					
+				<form role="form">		
+					<div class="form-group">
+						<label for="exampleInputEmail1">Months</label>
+						<input id="month_list_input" type="text" class="form-control" style="display: none;"/>
+						<div id="month_list" class="form-group checkList" style="height: 100px;"></div>
+					</div>			
 					<div class="form-group">
 						<label for="io_order_list">IO Orders</label>
 						<input id="io_order_search_input" type="text" class="form-control"/>
@@ -267,8 +272,7 @@
 	//////////////////////////
 	// First load billing page
 	/////////////////////////
-	$( document ).ready(function(){
-		loadBillingDetailFromUrl();
+	$( document ).ready(function(){		
 		getRefreshDate({
 			success: function(refreshDate){
 				$('#page_header').html('Billing MonthToDate Worksheet - ' + verveDateConvert(refreshDate).format('mmm dd'));
@@ -282,20 +286,82 @@
 	function loadBillingDetailFromUrl(){
 		var p_io_orders=urlMaster.getParam('io_orders');
 		var p_io_line_items=urlMaster.getParam('io_line_items');
+		var p_month_since_2005 = loadMonthList.getID().join(",");
+		if(p_month_since_2005==''){
+			p_month_since_2005=0;
+		}
 		if(p_io_orders!=''&&p_io_line_items!=''){
 		loadBillingDetailTable({
-				p_month_since_2005 : -1,
+				p_month_since_2005 : p_month_since_2005,
 				p_io_orders: p_io_orders,
+				is_monthly: 'false',
 				p_io_line_items: p_io_line_items,
 				obj_table: $('#detailTable'),
 				success: function(){
 					autoShowGroupOrderFromURL();
+					getRefreshDate({
+						p_month_since_2005 : p_month_since_2005,
+						success: function(refreshDate){
+							$('#page_header').html('Billing MonthToDate Worksheet - ' + verveDateConvert(refreshDate).format('mmm dd'));
+						}
+					});
 				}
 			});
 			
 		}	
 	}
-
+	/////////////////////////
+	// Load list of month
+	/////////////////////////
+	
+	var loadMonthList=new generateSelect2({
+		inputID: 'month_list_input',
+		divID: 'month_list',
+		name: 'month_since_2005',
+		multi: true,
+		//selectAll: true,
+		ajaxUrl: '/pentaho/ViewAction',
+		data: function(term,page){
+			return {
+				solution: solution,
+				path: path+'/ba_national_management',
+				data: 'json',
+				action: 'billing_management.xaction',
+				term: term, //search term
+				limit: 20, // page size
+				page: page, // page number
+				actions: 'loadListMonths',
+				is_monthly: 'false'
+				//p_month_since_2005: $('#selectbox-month_sk').val().join(",")
+			};
+		},
+		result: function(data, page){
+			var results=[];
+			for(var i=0;i<data.length;i++){
+				var row=data[i];
+				var id=row.month_since_2005;
+				var name=row.calendar_year_month ;
+				var dataRow=[id,name];
+				results.push(dataRow);
+			}
+			data.data;
+			var more=false;
+			if(results.length==20){
+				more=true
+			}
+			return {results: results,more: more}
+		},
+		success: function(){
+			//mySearch2.action();
+			loadIoOrders.action();
+			loadBillingDetailFromUrl();
+		},
+		clickEvent: function(id){
+			//mySearch2.action();
+		}
+	});
+	
+	loadMonthList.action();
 	
 	//////////////////////////////
 	//Load list order
@@ -348,7 +414,7 @@
 			
 		}
 	});
-	loadIoOrders.action();
+	//loadIoOrders.action();
 	//////////////////////////////
 	//Load Io Line Items
 	/////////////////////////////	
