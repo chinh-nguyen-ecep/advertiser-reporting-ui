@@ -101,7 +101,19 @@
         <request>p_schedule_type</request> 
       </sources>  
       <default-value><![CDATA[daily]]></default-value> 
-    </p_schedule_type> 
+    </p_schedule_type>  
+    <p_subscription_id type="string"> 
+      <sources> 
+        <request>p_subscription_id</request> 
+      </sources>  
+      <default-value><![CDATA[-1]]></default-value> 
+    </p_subscription_id>  
+    <p_subscription_actribute type="string"> 
+      <sources> 
+        <request>p_subscription_actribute</request> 
+      </sources>  
+      <default-value/> 
+    </p_subscription_actribute> 
   </inputs>
 
   <outputs> 
@@ -120,6 +132,16 @@
       <action-definition> 
         <component-name>TemplateComponent</component-name>
         <action-type>Message Template</action-type>
+        <action-inputs> 
+          <this_week type="string"/>  
+          <this_month type="string"/>  
+          <last_week_mon type="string"/>  
+          <this_week_mon type="string"/>  
+          <yesterday type="string"/>  
+          <today type="string"/>  
+          <last_month type="string"/>  
+          <last_week type="string"/> 
+        </action-inputs>
         <action-outputs> 
           <output-message type="string" mapping="returnResult"/> 
         </action-outputs>
@@ -160,7 +182,7 @@
 			
 		}
 		div.detail label{
-			width: 110px;
+			width: 150px;
 			float: left;				
 			margin-right: 5px;
 			text-align: right;
@@ -172,6 +194,14 @@
 		span.name{
 			font-weight:bold;
 			font-size:12px;
+		}
+		div.example{
+			float: left;
+			width: 350px;
+			margin-left: 100px;
+			padding: 5px;
+			font-size: 8pt;
+			color: gray;
 		}
 	</style>
 </head>
@@ -200,8 +230,14 @@
 			<input value="" name="p_report_name" class="easyui-validatebox" data-options="required:true," style="width:250px"/>
 		</div>
 		<div>
+			<label for="name">Source type:</label>
+			<input type="radio" checked="true" name="source_type" value="xaction">Direct Xaction</input>
+			<input type="radio" name="source_type" value="subscription">Subscription</input>
+		</div>
+		<div class="source_type_xaction">
 			<label for="name">Solution:</label>
 			<select name="p_solution" class="easyui-combobox" panelHeight="auto" >
+				<option value="">-</option>
                 <option value="ad_serving">Revenue Reporting</option>
 				<option value="Adcel reports">Adcel reports</option>
 				<option value="billing_accounting">Billing Accounting</option>
@@ -212,14 +248,28 @@
 				<option value="verve_ads_ops">Verve Ads Ops</option>
             </select>
 		</div>	
-		<div>
+		<div class="source_type_xaction">
 			<label for="name">Path:</label>
-			<input name="p_path" value="jaspers" class="easyui-validatebox" data-options="required:true" style="width:350px"/>
+			<input name="p_path" value="jaspers" class="easyui-validatebox" data-options="required:false" style="width:350px"/>
 		</div>	
-		<div>
+		<div class="source_type_xaction">
 			<label for="name">Xaction file:</label>
-			<input value="" name="p_xaction_file" class="easyui-validatebox" data-options="required:true" style="width:300px"/>
+			<input value="" name="p_xaction_file" class="easyui-validatebox" data-options="required:false" style="width:300px"/>
 		</div>	
+		<div class="source_type_subscription" style="display:none">
+			<label for="name">Subscription:</label>
+			<input class="easyui-combobox" name="p_subscription_id" style="width:350px"/>
+		</div>	
+		<div class="source_type_subscription" style="display:none">
+			<label for="name">Actribute:</label>
+			<input name="p_subscription_actribute" value="" class="easyui-validatebox" data-options="required:false" style="width:350px"/>
+			<div class="example">
+			<b>Blank or with syntax</b><p/>
+			date={..}<br/>roll_back_date=7&end_date={..}<br/>week={..}<br/>month={..}<p/>
+			With <b>{..}</b> can be: <p/>{today}|{yesterday}<br/>{this_week}|{last_week}|{this_week_mon}|{last_week_mon}<br/>{this_month}|{last_month}<br/>
+			 
+			</div>
+		</div>
 		<div>
 			<label for="name">Table source:</label>
 			<input name="p_table_source" value="refer.date_dim" class="easyui-validatebox" data-options="required:true" style="width:300px"/>
@@ -232,9 +282,9 @@
 			<label for="name">Fire Time:</label>
 			<input name="p_fire_time" value="09:00" class="easyui-timespinner" data-options="required:true" style="width:150px"/>
 		</div>
-		<div>
+		<div class="source_type_xaction">
 			<label for="name">Email to:</label>
-			<textarea rows="8" cols="60" class="easyui-validatebox" data-options="required:true" name="p_email_to" >chinh.nguyen@ecepvn.org,tho.hoang@ecepvn.org</textarea>
+			<textarea rows="8" cols="60" class="easyui-validatebox" data-options="required:false" name="p_email_to" >chinh.nguyen@ecepvn.org,tho.hoang@ecepvn.org</textarea>
 		</div>		
 	</form>
 </div>
@@ -246,8 +296,27 @@
 			<input value="" name="p_report_name" class="easyui-validatebox" data-options="required:true," style="width:350px"/>
 		</div>
 		<div>
+			<label for="name">Source type:</label>
+			<input type="radio" checked="true" name="source_type" value="xaction">Direct Xaction</input>
+			<input type="radio" name="source_type" value="subscription">Subscription</input>
+		</div>
+		<div class="source_type_subscription" style="display:none">
+			<label for="name">Subscription:</label>
+			<input class="easyui-combobox" name="p_subscription_id" style="width:350px"/>
+		</div>	
+		<div class="source_type_subscription" style="display:none">
+			<label for="name">Actribute:</label>
+			<input name="p_subscription_actribute" value="" class="easyui-validatebox" data-options="required:false" style="width:350px"/>
+			<div class="example">
+			<b>Blank or with syntax</b><p/>
+			date={..}<br/>roll_back_date=7&end_date={..}<br/>week={..}<br/>month={..}<p/>
+			With <b>{..}</b> can be: <p/>{today}|{yesterday}<br/>{this_week}|{last_week}|{this_week_mon}|{last_week_mon}<br/>{this_month}|{last_month}<br/>
+			 
+			</div>
+		</div>
+		<div class="source_type_xaction">
 			<label for="name">Solution:</label>
-			<select name="p_solution" class="easyui-combobox" panelHeight="auto" data-options="required:true">
+			<select name="p_solution" class="easyui-combobox" panelHeight="auto" data-options="required:false">
                 <option value="ad_serving">Revenue Reporting</option>
 				<option value="Adcel reports">Adcel reports</option>
 				<option value="billing_accounting">Billing Accounting</option>
@@ -258,9 +327,13 @@
 				<option value="verve_ads_ops">Verve Ads Ops</option>
             </select>
 		</div>	
-		<div>
+		<div class="source_type_xaction">
 			<label for="name">Path:</label>
 			<input name="p_path" value="jaspers" class="easyui-validatebox" data-options="required:true" style="width:250px"/>
+		</div>	
+		<div class="source_type_xaction">
+			<label for="name">Xaction file:</label>
+			<input value="" name="p_xaction_file" class="easyui-validatebox" data-options="required:false" style="width:300px"/>
 		</div>	
 		<div>
 			<label for="name">Table source:</label>
@@ -274,7 +347,7 @@
 			<label for="name">Fire Time:</label>
 			<input name="p_fire_time" value="09:00" class="easyui-timespinner" data-options="required:true" style="width:150px"/>
 		</div>
-		<div>
+		<div class="source_type_xaction">
 			<label for="name">Email to:</label>
 			<textarea rows="8" cols="65" class="easyui-validatebox" data-options="required:true" name="p_email_to" ></textarea>
 		</div>		
@@ -361,6 +434,7 @@
 			columns:[[
 				{field:'schedule_id',title:'ID',fixed:true},
 				{field:'report_name',title:'Report name',width:300},
+				{field:'subscription_id',title:'Subscription ID',fix:true},
 				{field:'next_fire_time',title:'Next time',fixed:true},
 				{field:'is_active',title:'Active',formatter:formatActive,fixed:true}				
 			]],
@@ -591,10 +665,18 @@ var openEditSchedule=function(){
 		p_solution:checkedRows[0].solution,
 		p_email_to:checkedRows[0].email_to,
 		p_path:checkedRows[0].path,
+		p_xaction_file: checkedRows[0].xaction_file,
 		p_table_source:checkedRows[0].report_agg_table,
 		p_fire_date: checkedRows[0].next_fire_date,
 		p_fire_time: checkedRows[0].next_fire_hour,
+		p_subscription_id: checkedRows[0].subscription_id,
+		p_subscription_actribute: checkedRows[0].subscription_process_actribute
 	});
+	if(checkedRows[0].subscription_id>0){
+		$('input[value=subscription]').trigger('click');
+	}else{
+		$('input[value=xaction]').trigger('click');
+	}
 	//Set value for form
 	$('#edit_form').form('validate');	
 }
@@ -650,10 +732,17 @@ var viewDetail=function(){
 	myCode+='<div><label>Type :</label>'+rowData.schedule_type+'</div>';
 	myCode+='<div><label>Report name :</label><span class="name">'+rowData.report_name+'</span></div>';
 	myCode+='<div><label>Data source :</label>'+rowData.report_agg_table+'</div>';
-	myCode+='<div><label>Email to :</label><span class="email">'+rowData.email_to+'</span></div>';
-	myCode+='<div><label>Solution :</label>'+rowData.solution+'</div>';
-	myCode+='<div><label>Path :</label>'+rowData.path+'</div>';
-	myCode+='<div><label>Xaction file :</label>'+rowData.xaction_file+'</div>';
+	if(rowData.subscription_id>0){
+		myCode+='<div><label>Subscription name :</label>'+rowData.subscription_name+'</div>';
+		myCode+='<div><label>Subscription ID :</label>'+rowData.subscription_id+'</div>';
+		myCode+='<div><label>Actribute :</label>'+rowData.subscription_process_actribute+'</div>';
+		myCode+='<div><label>Customer :</label>'+rowData.customer_name+'</div>';
+	}else{
+		myCode+='<div><label>Email to :</label><span class="email">'+rowData.email_to+'</span></div>';
+		myCode+='<div><label>Solution :</label>'+rowData.solution+'</div>';
+		myCode+='<div><label>Path :</label>'+rowData.path+'</div>';
+		myCode+='<div><label>Xaction file :</label>'+rowData.xaction_file+'</div>';	
+	}
 	myCode+='<div><label>Next Fire Time :</label>'+rowData.next_fire_time+'</div>';
 	myCode+='<div><label>Last Fire Time :</label>'+rowData.last_fire_time+'</div>';
 	myCode+="</div>";
@@ -661,9 +750,29 @@ var viewDetail=function(){
 		content: myCode
 	});
 }
+//Source type select
+$('input[name=source_type]').change(function(){
+	var selectValue=$(this).val();
+	if(selectValue=='xaction'){
+		$('div[class=source_type_xaction]').show();
+		$('div[class=source_type_subscription]').hide();
+	}else{
+		$('div[class=source_type_xaction]').hide();
+		$('div[class=source_type_subscription]').show();
+	}
+});
+//load list of subscription
+$('input[name=p_subscription_id]').combobox({
+    url:rootPath+'&actions=listSubscription',
+    valueField: 'id',
+	value: -1,
+    textField: 'value',
+	groupField: 'group'
+});
+
  </script>
 </body>
-</html>]]></template>
+</html>]]></template> 
         </component-definition> 
       </action-definition>
  
@@ -685,9 +794,40 @@ var viewDetail=function(){
           <query><![CDATA[SELECT schedule_id, schedule_type, email_to, report_file_type, report_name, 
        solution, path, xaction_file, parameter_string, next_fire_time, 
        last_fire_time, report_agg_table, report_group, parameter_string_example, 
-       is_active,next_fire_time::date as next_fire_date, EXTRACT(HOUR FROM next_fire_time)||':'||EXTRACT(MINUTE FROM next_fire_time) as next_fire_hour
-  FROM control.emaill_reports_schedule 
-  ORDER BY is_active desc,report_name;]]></query>
+       is_active,next_fire_time::date as next_fire_date, EXTRACT(HOUR FROM next_fire_time)||':'||EXTRACT(MINUTE FROM next_fire_time) as next_fire_hour,
+subscription_id,
+subscription_process_actribute,
+b.subscription_name,
+c.customer_name
+  FROM control.emaill_reports_schedule a
+  LEFT JOIN control.spctl_pub_customer_subscription b ON a.subscription_id=b.subscription_key 
+  LEFT JOIN control.spctl_pub_customer c ON b.customer_key=c.customer_key  
+  ORDER BY is_active desc,report_name;]]></query> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[actions=='listSubscription']]></condition>  
+      <action-definition> 
+        <component-name>SQLLookupRule</component-name>
+        <action-type>Relational</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connectionName"/> 
+        </action-inputs>
+        <action-outputs> 
+          <query-result type="result-set" mapping="query_result"/> 
+        </action-outputs>
+        <component-definition> 
+          <live><![CDATA[true]]></live>  
+          <query><![CDATA[SELECT 'N/A' as group,-1 as id,'-' as value
+UNION ALL 
+(SELECT a.customer_name as group,b.subscription_key as id,b.subscription_name as value 
+FROM control.spctl_pub_customer a,control.spctl_pub_customer_subscription b
+WHERE a.customer_key=b.customer_key
+AND a.transfer_script_name LIKE '%Email%' 
+ORDER BY a.customer_name,b.subscription_name)]]></query> 
         </component-definition> 
       </action-definition>
  
@@ -708,7 +848,9 @@ var viewDetail=function(){
           <p_email_to type="string"/>  
           <p_path type="string"/>  
           <p_fire_date type="string"/>  
-          <p_schedule_type type="string"/> 
+          <p_schedule_type type="string"/>  
+          <p_subscription_id type="string"/>  
+          <p_subscription_actribute type="string"/> 
         </action-inputs>
         <action-outputs> 
           <query-result type="result-set" mapping="query_result"/> 
@@ -717,7 +859,7 @@ var viewDetail=function(){
           <query><![CDATA[INSERT INTO control.emaill_reports_schedule(
             schedule_type, email_to, report_file_type, report_name, 
             solution, path, xaction_file, parameter_string, next_fire_time, 
-            last_fire_time, report_agg_table)
+            last_fire_time, report_agg_table,subscription_id,subscription_process_actribute)
     VALUES ('{p_schedule_type}'
 	,'{p_email_to}'
 	,'pdf'
@@ -728,7 +870,9 @@ var viewDetail=function(){
 	,''
 	,'{p_fire_date}'::date + time '{p_fire_time}'
 	,'{p_fire_date}'::date - 1 + time '{p_fire_time}'
-	,'{p_table_source}') RETURNING schedule_id;]]></query>  
+	,'{p_table_source}'
+	,{p_subscription_id}
+	,'{p_subscription_actribute}') RETURNING schedule_id;]]></query>  
           <live><![CDATA[false]]></live> 
         </component-definition> 
       </action-definition>
@@ -792,8 +936,11 @@ SET is_active={p_is_active}
           <p_path type="string"/>  
           <p_email_to type="string"/>  
           <p_table_source type="string"/>  
-          <p_fire_date type="string"/>
-          <p_fire_time type="string"/>
+          <p_fire_date type="string"/>  
+          <p_fire_time type="string"/>  
+          <p_xaction_file type="string"/>  
+          <p_subscription_actribute type="string"/>  
+          <p_subscription_id type="string"/> 
         </action-inputs>
         <action-outputs> 
           <query-result type="result-set" mapping="query_result"/> 
@@ -806,6 +953,9 @@ SET report_name='{p_report_name}'
 ,path='{p_path}'
 ,report_agg_table='{p_table_source}'
 ,next_fire_time='{p_fire_date} {p_fire_time}:00'
+,xaction_file='{p_xaction_file}'
+,subscription_id={p_subscription_id}
+,subscription_process_actribute='{p_subscription_actribute}'
  WHERE schedule_id={p_schedule_id};]]></query>  
           <live><![CDATA[false]]></live> 
         </component-definition> 
