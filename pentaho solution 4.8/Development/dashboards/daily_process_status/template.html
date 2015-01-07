@@ -1,32 +1,38 @@
-		<link rel="shortcut icon" type="image/ico" href="http://a3.twimg.com/profile_images/558415661/pentaho_twitter3.png" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<link rel="shortcut icon" type="image/ico" href="http://a3.twimg.com/profile_images/558415661/pentaho_twitter3.png" />
 
 		<style type="text/css" title="currentStyle">
-			@import "/verve_style/scripts/jquery_ui/css/smoothness/jquery-ui-1.8.17.custom.css";
-			@import "/verve_style/scripts/jquery_clock/css/digital.css";
-			@import "/verve_style/scripts/bumpbox/bumpbox.css";
+			@import "/verve-lib/scripts/jquery-ui-1.8.24.custom/css/smoothness/jquery-ui-1.8.24.custom.css";
+			@import "/verve-lib/css/verve-old-dashboard.css";
+			@import "/verve-lib/scripts/jquery_clock/css/digital.css";
+			@import "/verve-lib/scripts/bumpbox/bumpbox.css";
+
 			a{
-			text-decoration:none;
-			color:#678197;
-			font:"Tahoma",Verdana,Arial,Helvetica,sans-serif;
-			font-size: 10pt;
+				text-decoration:none;
+				color:#678197;
+				font:"Tahoma",Verdana,Arial,Helvetica,sans-serif;
+				font-size: 10pt;
 			}
-			a.view_log_detail{
-			font:bold 8pt "Tahoma","Trebuchet MS",Arial,Helvetica,sans-serif;
-			color:#66a3d3;
-			margin-left: 5px;
+				a.view_log_detail{
+				font:bold 8pt "Tahoma","Trebuchet MS",Arial,Helvetica,sans-serif;
+				color:#66a3d3;
+				margin-left: 5px;
 			}
 			div.etl_box{
-			overflow: auto;
-			font:"Tahoma","Trebuchet MS",Arial,Helvetica,sans-serif;
-			font-size: 10pt;
-			padding: 5px;
-			color: gray;
+				overflow: auto;
+				font:"Tahoma","Trebuchet MS",Arial,Helvetica,sans-serif;
+				font-size: 10pt;
+				padding: 5px;
+				color: gray;
 			}
 			div.etl_box ul{
-				list-style-type: none;
-				width: 100%;
-				margin: 0;
-				padding: 0;
+					list-style-type: none;
+					width: 100%;
+					margin: 0;
+					padding: 0;
 			}
 			div.etl_box ul li{
 				float: left;
@@ -82,26 +88,27 @@
 				listStyleType: decimal-leading-zero;
 			}
 		</style>
-
-		<script type="text/javascript" language="javascript" src="/verve_style/scripts/DataTables/media/js/jquery.js"></script>
-		<script type="text/javascript" language="javascript" src="/verve_style/scripts/DataTables/media/js/jquery.dataTables.js"></script>
-		<script type="text/javascript" language="javascript" src="/verve_style/scripts/jquery.form.js"></script>
-		<script type="text/javascript" language="javascript" src="/verve_style/scripts/jquery_ui/jquery-ui-1.8.17.custom.min.js"></script>
-		<script type="text/javascript" language="javascript" src="/verve_style/scripts/jquery_clock/js/jquery.clock.js"></script>
+		<script type="text/javascript" language="javascript" src="/verve-lib/scripts/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" language="javascript" src="/verve-lib/scripts/DataTables/media/js/jquery.js"></script>
+		<script type="text/javascript" language="javascript" src="/verve-lib/scripts/DataTables/media/js/jquery.js"></script>
+		<script type="text/javascript" language="javascript" src="/verve-lib/scripts/DataTables/media/js/jquery.dataTables.js"></script>
+		<script type="text/javascript" language="javascript" src="/verve-lib/scripts/jquery.form.js"></script>
+		<script type="text/javascript" language="javascript" src="/verve-lib/scripts/jquery-ui-1.8.24.custom/js/jquery-ui-1.8.24.custom.min.js"></script>
+		<script type="text/javascript" language="javascript" src="/verve-lib/scripts/jquery_clock/js/jquery.clock.js"></script>
 		
-		<script type="text/javascript" language="javascript" src="/verve_style/scripts/bumpbox/tools.js"></script>
-		<script type="text/javascript" language="javascript" src="/verve_style/scripts/bumpbox/flowplayer-3.js"></script>
-		<script type="text/javascript" language="javascript" src="/verve_style/scripts/bumpbox/bumpbox.js"></script>
-		
-		<script language="javascript" src="/pentaho/js/pentaho-ajax.js"></script>
-		<script type="text/javascript" src="GetCDFResource?resource=/Development/dashboards/daily_process_status/MetaLayer.js"></script>
-		<script type="text/javascript" charset="utf-8">
-		$(document).ready(function() {
-			MetaLayer.init();
-		});
-		</script>
-
-
+		<script type="text/javascript" language="javascript" src="/verve-lib/scripts/bumpbox/tools.js"></script>
+		<script type="text/javascript" language="javascript" src="/verve-lib/scripts/bumpbox/flowplayer-3.js"></script>
+		<script type="text/javascript" language="javascript" src="/verve-lib/scripts/bumpbox/bumpbox.js"></script>
+  </head><body>
+    <!-- Clean content-->    
+	<div id="mainboxcontent" style="">
+		<div class="head">
+			<div>
+				<div>
+				</div>
+			</div>
+		</div>
+		<div class="content">
 	<h1 class="dashboardName" id="dashboardTitle">Daily process status</h1>
 	<input id="datepicker" type="text" > 
 	<div style="float: right;" class="clock">
@@ -143,15 +150,15 @@
 	<div class="mybox" style="width: 100%">
 		<div class="title">
 			Daily ETL/Data Process Status On dw3
-			<img src="/verve_style/images/arrow_refresh.png" id="bt_daily_process_status_refresh" class="bt" alt="refresh" title="refresh"/>
+			<img src="/verve-lib/images/arrow_refresh.png" id="bt_daily_process_status_refresh" class="bt" alt="refresh" title="refresh"/>
 		</div>
-		<div class="box_content" style="min-height: 1200px;width: 100%">	
+		<div class="box_content" style="min-height: 250px;width: 100%">	
 			<br/>
 			<h2>Adcel</h2>
 			<div class="etl_box" id="adcel_etl_status">
-				<img src="/verve_style/images/loading.gif" />
+				<img src="/verve-lib/images/loading.gif" />
 			</div>
-			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('16,17,18,19,20, 27, 28,29,81,82,83,84,85,86,87,88,89,90,106,107,108,109','Adcel log files',dateBefore,defaultServer);" title="Adcel log files" rev="16,17,18,19,20, 27, 28,29,81,82,83,84,85,86,87,88,89,90,106,107,108,109" class="view_log_detail">Log files detail</a>
+			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('16,17,18,19,20, 27, 28,29,81,82,83,84,85,86,87,88,89,90,106,107,108,109','Adcel log files',dateBefore,defaultServer);" title="Adcel log files" rev="1,11,12,13" class="view_log_detail">Log files detail</a>
 				<table  class="table1">
 					<thead>
 						<th width="300">Process</th>
@@ -164,7 +171,7 @@
 						<th>Status note</th>
 					</thead>
 					<tbody id="adcel">
-						<tr><td colspan="8" style="text-align: left"><img src="/verve_style/images/loading.gif" /></td></tr>
+						<tr><td colspan="8" style="text-align: left"><img src="/verve-lib/images/loading.gif" /></td></tr>
 					</tbody>
 				</table>
 			<h2>3rd Adnetwork</h2>
@@ -187,11 +194,11 @@
 						<tr><td colspan="8" style="text-align: left"><img src="/verve_style/images/loading.gif" /></td></tr>
 					</tbody>
 				</table>
-			<h2>ADM Data mart</h2>
+			<h2>Special Dims</h2>
 			<div class="etl_box" id="dbclk_etl_status">
 				<img src="/verve_style/images/loading.gif" />
 			</div>
-			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('23,26,30,31,32,33,34,35,42,54,63,76,71,78,125,165','ADM Data mart log files',process_date,defaultServer);" title="ADM Data mart log files" class="view_log_detail">Log files detail</a>
+			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('23,26,30,31,32,33,34,35,42,54,63,76,71,78,125,165,174,91','ADM Data mart log files',process_date,defaultServer);" title="ADM Data mart log files" class="view_log_detail">Log files detail</a>
 				<table  class="table1">
 					<thead>
 						<th width="300">Process</th>
@@ -212,7 +219,8 @@
 			<div class="etl_box" id="adm_20_etl_status">
 				<img src="/verve_style/images/loading.gif" />
 			</div>
-			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151','ADM & DFP 2.0 log files',process_date,defaultServer);" title="ADM & DFP 2.0 log files" class="view_log_detail">Log files detail</a>
+			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151','ADM & DFP 2.0 log files',process_date,defaultServer);" title="ADM & DFP 2.0 log files" class="view_log_detail">Log files detail</a><br/>
+			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('152','ADM & DFP 2.0 log files',dateBefore,defaultServer);" title="ADM & DFP 2.0 log files" class="view_log_detail">Fact logs detail</a>
 				<table class="table1">
 					<thead>
 						<th width="300">Process</th>
@@ -228,75 +236,14 @@
 						<tr><td colspan="8" style="text-align: left"><img src="/verve_style/images/loading.gif" /></td></tr>
 					</tbody>
 				</table>
-
-		</div>	
-	</div>
-	<div class="mybox" style="width: 100%">
-		<div class="title">Daily ETL/Data Process Status On dw4</div>
-		<div class="box_content" style="min-height: 300px;width: 100%">	
-			<br/>
-			<h2>Adcel</h2>
-			<div class="etl_box" id="adcel_etl_status_dw4">
-				<img src="/verve_style/images/loading.gif" />
-			</div>
-			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('16,17,18,19,20, 27, 28,29,81,82,83,84,85,86,87,88,89,90,106,107,108,109,127,128,129,130,131,132,153,154,155,156,157,158,159,160,166,167','Adcel log files',dateBefore,'dw4');" title="Adcel log files" class="view_log_detail">Log files detail</a>
-				<table  class="table1">
-					<thead>
-						<th width="300">Process</th>
-						<th width="50">Param</th>
-						<th width="70">Status</th>
-						<th>Start time</th>
-						<th title="Expected Start time">Exp St_time</th>
-						<th>Completion time</th>
-						<th title="Expected Completion time">Exp Co_time</th>
-						<th>Status note</th>
-					</thead>
-					<tbody id="adcel_dw4">
-						<tr><td colspan="8" style="text-align: left"><img src="/verve_style/images/loading.gif" /></td></tr>
-					</tbody>
-				</table>
-		</div>
-	</div>
-	<div class="mybox" style="width: 100%">
-		<div class="title">Daily ETL/Data Process Status On dw5</div>
-		<div class="box_content" style="min-height: 300px;width: 100%">	
-			<br/>
-			<h2>Adcel</h2>
-			<div class="etl_box" id="adcel_etl_status_dw5">
-				<img src="/verve_style/images/loading.gif" />
-			</div>
-			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('16,17,18,19,20, 27, 28,29,81,82,83,84,85,86,87,88,89,90,106,107,108,109,127,128,129,130,131,132,153,154,155,156,157,158,159,160,166,167','Adcel log files',dateBefore,'dw5');" title="Adcel log files" class="view_log_detail">Log files detail</a>
-				<table  class="table1">
-					<thead>
-						<th width="300">Process</th>
-						<th width="50">Param</th>
-						<th width="70">Status</th>
-						<th>Start time</th>
-						<th title="Expected Start time">Exp St_time</th>
-						<th>Completion time</th>
-						<th title="Expected Completion time">Exp Co_time</th>
-						<th>Status note</th>
-					</thead>
-					<tbody id="adcel_dw5">
-						<tr><td colspan="8" style="text-align: left"><img src="/verve_style/images/loading.gif" /></td></tr>
-					</tbody>
-				</table>
-		</div>
-	</div>
-	<div class="mybox" style="width: 100%">
-		<div class="title">Daily ETL/Data Process Status On dw6</div>
-		<div class="box_content" style="min-height: 300px;width: 100%">
-		<br/>		
-		<h2>Event Tracker</h2>
-			<div class="etl_box" id="adcel_etl_status_dw6">
-				<img src="/verve_style/images/loading.gif" />
-			</div>
-			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('16,17,18,19,20, 27, 28,29,81,82,83,84,85,86,87,88,89,90,106,107,108,109,127,128,129,130,131,132,153,154,155,156,157,158,159,160,166,167','Adcel log files',dateBefore,'dw6');" title="Adcel log files" class="view_log_detail">Adcel log files detail</a>
-			<div class="etl_box" id="event_etl_status_dw6">
-				<img src="/verve_style/images/loading.gif" />
-			</div>
+				
+			<h2>VLMO</h2>
 			
-			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('92,93,94,95,96,97,98,99,100,110,111,133,134,135,161,162,163,164,168','Event Tracker log files',dateBefore,'dw6');" title="Event Tracker log files" class="view_log_detail">Event log files detail</a>
+			<div class="etl_box" id="vlmo_etl_status">
+				<img src="/verve_style/images/loading.gif" />
+			</div>
+			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('200,201,202,203,181,182,183,184,185,186,187,198,199','VLMO Dim log files',process_date,defaultServer);" title="VLMO Dim log files" class="view_log_detail">VLMO Dim log files</a><br/>
+			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('188','VLMO Fact log files',dateBefore,defaultServer);" title="VLMO Fact log files" class="view_log_detail">VLMO Fact log files</a>
 				<table class="table1">
 					<thead>
 						<th width="300">Process</th>
@@ -308,13 +255,34 @@
 						<th title="Expected Completion time">Exp Co_time</th>
 						<th>Status note</th>
 					</thead>
-					<tbody id="eventTracker_dw6">
+					<tbody id="vlmo">
 						<tr><td colspan="8" style="text-align: left"><img src="/verve_style/images/loading.gif" /></td></tr>
 					</tbody>
 				</table>
-		</div>
-	</div>
-	
+
+			<h2>RTB</h2>
+			
+			<div class="etl_box" id="rtb_etl_status">
+				<img src="/verve_style/images/loading.gif" />
+			</div>
+			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('152, 206, 209, 210, 211','RTB Fact log files',dateBefore,defaultServer);" title="RTB Fact log files" class="view_log_detail">RTB Fact log files</a>
+				<table class="table1">
+					<thead>
+						<th width="300">Process</th>
+						<th width="50">Param</th>
+						<th width="70">Status</th>
+						<th>Start time</th>
+						<th title="Expected Start time">Exp St_time</th>
+						<th>Completion time</th>
+						<th title="Expected Completion time">Exp Co_time</th>
+						<th>Status note</th>
+					</thead>
+					<tbody id="rtb">
+						<tr><td colspan="8" style="text-align: left"><img src="/verve_style/images/loading.gif" /></td></tr>
+					</tbody>
+				</table>
+		</div>	
+	</div>	
 	<div id="list_log_files_dl">
 			<table cellpadding="0" cellspacing="0" border="0" class="display" id="list_log_files_tb" style="width: 100%">
 				<thead>
@@ -346,5 +314,404 @@
 					</tr>
 				</tbody>
 			</table>
-	</div>
+	</div>	
+	<script>
+	var rootLocate="Development";
+	var locate="dashboards/daily_process_status";
+	var process_date="";
+	var maxDate="";
+	var dateBefore="";
+	var minDate="";
+	var defaultServer='dw3dw3'; //it is the JNDI for connect to the host
+	var dataURL = pentahoActionURL( rootLocate, locate, "GetListLogFiles.xaction");
+	//var jasperReportURL=pentahoActionURL( rootLocate, locate, "JasperReport.xaction");
+	var processStatusDataURL=pentahoActionURL( rootLocate, locate, "ProcessStatus.xaction");
+	var getFirstDataURL=pentahoActionURL( rootLocate, locate, "GetFirstData.xaction");
+	var process_concurrent_transURL=pentahoActionURL( rootLocate, locate, "process_concurrent_trans.xaction");
+	var oTable;
+	var MetaLayer ={
+		/*startDate: MetaLayer.getLastMonthDate(), // Default start date
+		endDate: MetaLayer.getCurrentDate(), // Default end date
+		startMonth: MetaLayer.getMonth(), // Default month date*/
+	};
 
+	MetaLayer = {
+		init: function(){
+			//load the init data
+			$.ajax({
+			  url: getFirstDataURL,
+			  dataType: 'json',
+			  data: {
+			  	p_server: defaultServer
+			  },
+			  success: function(data){
+				maxDate=data.processCurrentDate;
+				minDate=data.minDate;//2012-03-02
+				dateBefore=data.dateBefore;//2012-03-01
+				process_date=data.processCurrentDate;
+
+				MetaLayer.initToolbar();
+				MetaLayer.eventButon();
+				MetaLayer.autoRefresh();
+			  }
+			 });
+		},
+		initToolbar: function(){
+			$( "#datepicker" ).attr('value',process_date);
+			$( "#datepicker" ).datepicker({
+				defaultDate: process_date,
+				dateFormat: 'yy-mm-dd',
+				//maxDate: +0,
+				minDate: minDate,
+				onSelect: function(dateText, inst) { 
+					process_date=dateText;
+					var arrayDate=process_date.split('-');
+					var myDate=new Date(arrayDate[0],(arrayDate[1]/1)-1,arrayDate[2]/1);
+					var date = myDate;
+					date.setDate(date.getDate()-1);
+					dateBefore=parseDate(date);
+					MetaLayer.refresh();
+				 }
+			});
+			
+			//install digital clock
+			$('#digital-clock').clock({offset: '-7', type: 'digital'});
+			$('#digital-clock-newyork').clock({offset: '-4', type: 'digital'});
+			$('#digital-clock-SaiGon').clock({offset: '+7', type: 'digital'});
+			$('#digital-clock-UTC').clock({offset: '+0', type: 'digital'});
+		},
+		loadProcessStatusData: function(dom,process_date,host,process_group_name){
+			$.ajax({
+				url: processStatusDataURL,
+				dataType: 'json',
+				data: {'full_date':process_date,'p_server':host,'p_process_group_name':process_group_name},
+				beforeSend: function(){
+
+				},
+				success: function(json){
+					dom.empty();
+					var dataArray=json.adata;
+					if(dataArray.length==0){
+						var noData='<tr><td colspan="8" style="text-align: left">No Process has run today...</td></tr>';
+						dom.append(noData);		
+					}
+					for(var i=0;i<dataArray.length;i++){
+						var temp=dataArray[i];
+						var process_config_id=temp[0];
+						var group_process_name=temp[1];
+						var process_description=temp[2];
+						var process_status=temp[3];
+						var start_date=temp[4];
+						var end_date=temp[5];
+						var id_process_checking=temp[6];
+						var e_star_time=temp[7];
+						var e_completion_time=temp[8];
+						var note_status=temp[9];
+						
+						if(start_date=='null') start_date='';
+						if(end_date=='null') end_date='';
+						
+						if(process_status=='Waiting') process_status='<font color="red">'+process_status+'</font>';
+						if(process_status=='Processing') process_status='<font color="blue">'+process_status+'</font>';
+						if(process_status=='Completed') process_status='<font color="green">'+process_status+'</font>';
+						
+						if(note_status=='Started late!') note_status='<font color="red">'+note_status+'</font>';
+						if(note_status=='Completed late!') note_status='<font color="red">'+note_status+'</font>';
+						//note_status='';
+						var node='';
+						if(i%2==0){
+							node+='<tr class="tr1">';
+						}else{
+							node+='<tr>';
+						}
+						
+						//alert(group_process_name);
+						node+='<th><a href="'+process_concurrent_transURL+'&process_id='+id_process_checking+'&p_server='+host+'" title="'+process_description+'-'+id_process_checking+'" rel="1020-300" class="bumpbox">'+process_description+'</a></th>'
+						+'<td style="text-align: center">'+process_config_id+'</td>'
+						+'<td style="text-align: center">'+process_status+'</td>'
+						+'<td>'+start_date+'</td>'
+						+'<td>'+e_star_time+'</td>'
+						+'<td>'+end_date+'</td>'
+						+'<td>'+e_completion_time+'</td>'
+						+'<td>'+note_status+'</td>'
+						+'</tr>';
+						dom.append(node);
+					}
+					bumpboxInstall();
+				}
+
+			});
+		},
+		loadETLStatus: function(dom,full_date,host,data_file_ids){
+		var ajaxURL=pentahoActionURL( rootLocate, locate, "CheckLogFileStatus.xaction");
+			//adcel
+				var a=$.ajax({
+				  url: ajaxURL,
+				  dataType: 'html',
+				  data: {'full_date':full_date,'p_server':host,'data_file_ids': data_file_ids},
+				  beforeSend: function(){
+					//dom.empty();
+					//var loadingNote='<tr><td colspan="8" style="text-align: left"><img src="/verve_style/images/loading.gif" /></td></tr>';
+					//dom.append(loadingNote);
+				  },
+				  success: function(html){
+					dom.empty();
+					dom.append(html);
+				  }
+				 });			
+		},
+		loadLogFilesDetail: function(data_file_config_id,log_title,full_date,host){
+					$( "#list_log_files_dl" ).dialog( "destroy" );
+					var tempTable=$('#list_log_files_tb').clone();
+					oTable = $('#list_log_files_tb').dataTable({
+					"bSort" : true,
+					"bJQueryUI": true,
+					"iDisplayLength": 10,
+					//"sPaginationType": "full_numbers",
+					"bProcessing": true,
+					"bServerSide": true,
+					"aaSorting": [[ 2, "asc" ]],
+					"sAjaxSource": dataURL,
+					"fnServerData": fnDataTablesPipeline,
+					"fnServerParams": function ( aoData ) {
+					aoData.push( { "name": "full_date", "value": full_date } );
+					aoData.push( { "name": "table", "value": 'control.data_file' } );
+					aoData.push( { "name": "dimensions", "value": 'data_file_id,file_name,file_timestamp,dt_process_loaded,file_status,staging_load_count,fact_table_load_count' } );
+					aoData.push( { "name": "measures", "value": '' } );
+					aoData.push( { "name": "search_by", "value": 'file_name' } );
+					aoData.push( { "name": "p_server", "value": host } );
+					aoData.push( { "name": "data_file_config_id", "value": data_file_config_id } );
+					},
+					"oLanguage": {
+						 "sLengthMenu": 'Display <select><option value="8">8</option><option value="10">10</option><option value="30">30</option><option value="40">40</option><option value="50">50</option><option value="10000">All</option></select> records'
+					}
+				});
+				
+				$( "#list_log_files_dl" ).dialog({
+					height: 'auto',
+					width: '95%',
+					position: ['center',20],
+					draggable: true,
+					show: "fade",
+					title: log_title,
+					modal: true,
+					resizable: false,
+					buttons: {
+						Ok: function() {
+							$( this ).dialog( "close" );
+						}
+					},
+					close: function(event, ui) {oTable.fnDestroy(true);
+					$('#list_log_files_dl').append(tempTable);
+					}
+				});
+
+		},
+		eventButon: function(){
+			//daily process status refersh button
+			$('#bt_daily_process_status_refresh').click(function(){
+				MetaLayer.refresh();
+			});	
+			
+			//install dialog for view detail log files
+			$( "#list_log_files_dl" ).dialog({
+				autoOpen: false
+			});
+			
+			//init view log files a tag
+			
+			$('.view_log_detail').click(function(event) {
+			  event.preventDefault();
+			  var title=$(this).attr('title');
+			  var date=dateBefore;
+			  if(title == 'ADM Data mart log files'){
+				date=process_date;
+			  }
+			  var data_file_config_id=$(this).attr('rev');
+			  //MetaLayer.loadLogFilesDetail(data_file_config_id,title,date);
+			});
+		},
+		autoRefresh: function(){
+			MetaLayer.refresh();
+			setTimeout(function(){
+				MetaLayer.autoRefresh();
+			},60000);
+		},
+		refresh: function(){
+			MetaLayer.loadProcessStatusData($('#adcel'),process_date,defaultServer,'AdCel');	
+			MetaLayer.loadProcessStatusData($('#3rdAdnetwork'),process_date,defaultServer,'3rdAdnetwork');	
+			MetaLayer.loadProcessStatusData($('#doubleClick'),process_date,defaultServer,'Double Click');	
+			setTimeout(function(){			
+				MetaLayer.loadETLStatus($('#adcel_etl_status'),dateBefore,defaultServer,'1, 11, 12, 13');
+			},1000);
+			setTimeout(function(){
+				MetaLayer.loadETLStatus($('#3rd_etl_status'),dateBefore,defaultServer,'39,40,41,43,44,49,50,47,48,52,53,103,104,126,170');				
+			},2000);
+			setTimeout(function(){			
+				MetaLayer.loadProcessStatusData($('#vlmo'),process_date,defaultServer,'VLMO');
+				MetaLayer.loadProcessStatusData($('#adm20'),process_date,defaultServer,'ADM-DFP');	
+				MetaLayer.loadETLStatus($('#adm_20_etl_status'),process_date,defaultServer,'136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151');
+				MetaLayer.loadETLStatus($('#vlmo_etl_status'),dateBefore,defaultServer,'188');				
+			},3000);
+			setTimeout(function(){			
+				MetaLayer.loadETLStatus($('#dbclk_etl_status'),process_date,defaultServer,'23,26,30,31,32,33,34,35,42,54,63,76,71,78,125,165,174,91');				
+			},4000);
+			setTimeout(function(){	
+				MetaLayer.loadProcessStatusData($('#rtb'),process_date,defaultServer,'RTB');			
+				MetaLayer.loadETLStatus($('#rtb_etl_status'),dateBefore,defaultServer,'152, 206, 209, 210, 211');
+			},5000);
+		}
+	};
+
+	function parseDate(date){
+		var result='';
+		var months = new Array('01','02','03','04','05','06','07','08','09','10','11','12');
+		var tdate=date.getDate();
+		if(tdate<10) tdate='0'+tdate;
+		result=date.getFullYear()+'-'+months[date.getMonth()]+'-'+tdate;
+		return result;
+	}
+
+	/* When using server-side processing with DataTables, 
+	it can be quite intensive on your server having an Ajax call every time the user performs some kind of interaction - 
+	you can effectively DDOS your server with your own application!*/
+
+	var oCache = {
+		iCacheLower: -1
+	};
+	 
+	function fnSetKey( aoData, sKey, mValue )
+	{
+		for ( var i=0, iLen=aoData.length ; i<iLen ; i++ )
+		{
+			if ( aoData[i].name == sKey )
+			{
+				aoData[i].value = mValue;
+			}
+		}
+	}
+	 
+	function fnGetKey( aoData, sKey )
+	{
+		for ( var i=0, iLen=aoData.length ; i<iLen ; i++ )
+		{
+			if ( aoData[i].name == sKey )
+			{
+				return aoData[i].value;
+			}
+		}
+		return null;
+	}
+	 
+	function fnDataTablesPipeline ( sSource, aoData, fnCallback ) {
+		var iPipe = 5; /* Ajust the pipe size */
+		 
+		var bNeedServer = false;
+		var sEcho = fnGetKey(aoData, "sEcho");
+		var iRequestStart = fnGetKey(aoData, "iDisplayStart");
+		var iRequestLength = fnGetKey(aoData, "iDisplayLength");
+		var iRequestEnd = iRequestStart + iRequestLength;
+		oCache.iDisplayStart = iRequestStart;
+		 
+		/* outside pipeline? */
+		if ( oCache.iCacheLower < 0 || iRequestStart < oCache.iCacheLower || iRequestEnd > oCache.iCacheUpper )
+		{
+			bNeedServer = true;
+		}
+		 
+		/* sorting etc changed? */
+		if ( oCache.lastRequest && !bNeedServer )
+		{
+			for( var i=0, iLen=aoData.length ; i<iLen ; i++ )
+			{
+				if ( aoData[i].name != "iDisplayStart" && aoData[i].name != "iDisplayLength" && aoData[i].name != "sEcho" )
+				{
+					if ( aoData[i].value != oCache.lastRequest[i].value )
+					{
+						bNeedServer = true;
+						break;
+					}
+				}
+			}
+		}
+		 
+		/* Store the request for checking next time around */
+		oCache.lastRequest = aoData.slice();
+		 
+		if ( bNeedServer )
+		{
+			if ( iRequestStart < oCache.iCacheLower )
+			{
+				iRequestStart = iRequestStart - (iRequestLength*(iPipe-1));
+				if ( iRequestStart < 0 )
+				{
+					iRequestStart = 0;
+				}
+			}
+			 
+			oCache.iCacheLower = iRequestStart;
+			oCache.iCacheUpper = iRequestStart + (iRequestLength * iPipe);
+			oCache.iDisplayLength = fnGetKey( aoData, "iDisplayLength" );
+			fnSetKey( aoData, "iDisplayStart", iRequestStart );
+			fnSetKey( aoData, "iDisplayLength", iRequestLength*iPipe );
+			 
+			$.getJSON( sSource, aoData, function (json) { 
+				/* Callback processing */
+				oCache.lastJson = jQuery.extend(true, {}, json);
+				 
+				if ( oCache.iCacheLower != oCache.iDisplayStart )
+				{
+					json.aaData.splice( 0, oCache.iDisplayStart-oCache.iCacheLower );
+				}
+				json.aaData.splice( oCache.iDisplayLength, json.aaData.length );
+				 
+				fnCallback(json)
+			} );
+		}
+		else
+		{
+			json = jQuery.extend(true, {}, oCache.lastJson);
+			json.sEcho = sEcho; /* Update the echo for each response */
+			json.aaData.splice( 0, iRequestStart-oCache.iCacheLower );
+			json.aaData.splice( iRequestLength, json.aaData.length );
+			fnCallback(json);
+			return;
+		}
+	}
+
+	function pentahoActionURL( solution, path, action, params) {
+		// execute an Action Sequence on the server
+
+		var url = "/pentaho/ViewAction";
+		
+		// create the URL we need
+		var query = "wrapper=false&solution="+solution+"&path="+path+"&action="+action;
+		// add any parameters provided
+		if( params ) {
+			var idx;
+			for( idx=0; idx<params.length; idx++ ) {
+				query += "&" +encodeURIComponent( params[idx][0] ) + "=" + encodeURIComponent( params[idx][1] );
+			}
+		}
+		// submit this as a post
+		return url+'?'+query;
+	} 
+	</script>
+
+		<script type="text/javascript" charset="utf-8">
+		$(document).ready(function() {
+			MetaLayer.init();
+		});
+		</script>
+		</div>
+		<div class="footer">
+			<div>				
+				<div>
+						<img src="/verve-lib/v_images/dashboard(2).png" class="logo"/><span>Pentaho Dashboard.</span>
+				</div>
+			</div>
+		</div>
+	</div>
+					
+  </body>
+</html>
