@@ -22,8 +22,14 @@
       <sources> 
         <request>p_server</request> 
       </sources>  
-      <default-value><![CDATA[dw3dw3]]></default-value> 
-    </p_server> 
+      <default-value><![CDATA[verveReportConnection]]></default-value> 
+    </p_server>  
+    <p_process_group_name type="string">
+      <sources>
+        <request>p_process_group_name</request>
+      </sources>
+      <default-value/>
+    </p_process_group_name>
   </inputs>
 
   <outputs> 
@@ -53,30 +59,40 @@
       <component-name>TemplateComponent</component-name>
       <action-type>query</action-type>
       <action-inputs> 
-        <full_date type="string"/> 
+        <full_date type="string"/>  
+        <p_process_group_name type="string"/>
       </action-inputs>
       <action-outputs> 
         <output-message type="string" mapping="query"/> 
       </action-outputs>
       <component-definition> 
-        <template><![CDATA[SELECT 
-a.process_id
-, a.full_date, a.group_process_name, a.process_config_id, b.process_config_description,
-       (case when c.dt_process_completed is not null then 'Completed' when c.dt_process_queued is not null then 'Processing'   ELSE 'Waiting' end) as process_status
-      -- a.process_status
-       ,a.register_time
-	,c.dt_process_queued::time as start_date
-	, c.dt_process_completed::time as end_Date
-	,(CASE WHEN c.process_id IS NULL THEN 0 ELSE c.process_id END) as process_id_checking
-	,a.e_star_time
-	,a.e_completion_time
-	,(CASE WHEN c.dt_process_completed::time IS NOT NULL AND c.dt_process_completed::time>a.e_completion_time THEN 'Completed late!'
-		WHEN c.dt_process_queued::time IS NOT NULL AND c.dt_process_queued::time>a.e_star_time THEN 'Started late!' ELSE '' END
-	) as note_status
-  FROM control.daily_process_status a
-  LEFT JOIN control.process_configuration b ON a.process_config_id=b.process_config_id
-  LEFT JOIN control.process c ON c.process_config_id=a.process_config_id AND c.dt_process_queued::date=a.full_date
-  WHERE a.full_date='{full_date}' ORDER BY a.group_process_name,a.process_id;]]></template> 
+        <template><![CDATA[SELECT a.process_id
+     , a.full_date
+     , a.group_process_name
+     , a.process_config_id
+     , b.process_config_description
+     , (CASE
+            WHEN c.dt_process_completed IS NOT NULL THEN 'Completed'
+            WHEN c.dt_process_queued IS NOT NULL THEN 'Processing'
+            ELSE 'Waiting' 
+        END) AS process_status
+     , a.register_time
+     , (c.dt_process_queued::time) AS start_date
+     , (c.dt_process_completed::time) AS end_date
+     , (CASE WHEN c.process_id IS NULL THEN 0 ELSE c.process_id END) AS process_id_checking
+     , a.e_star_time
+     , a.e_completion_time
+     , (CASE
+            WHEN c.dt_process_completed::time IS NOT NULL AND c.dt_process_completed::time > a.e_completion_time THEN 'Completed late!'
+            WHEN c.dt_process_queued::time IS NOT NULL AND c.dt_process_queued::time > a.e_star_time THEN 'Started late!' 
+            ELSE ''
+        END) as note_status
+FROM control.daily_process_status a
+LEFT JOIN control.process_configuration b ON a.process_config_id = b.process_config_id
+LEFT JOIN control.process c ON c.process_config_id = a.process_config_id AND c.dt_process_queued::date = a.full_date
+WHERE a.full_date = '{full_date}' 
+AND a.group_process_name='{p_process_group_name}'
+ORDER BY a.group_process_name, a.process_id;]]></template> 
       </component-definition> 
     </action-definition>
   

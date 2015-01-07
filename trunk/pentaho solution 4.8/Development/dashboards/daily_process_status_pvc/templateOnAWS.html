@@ -178,7 +178,7 @@
 			<div class="etl_box" id="event_etl_status">
 				<img src="/verve-lib/images/loading.gif" />
 			</div>			
-			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('5,6,7,8,9','Event Tracker log files',dateBefore,defaultServer);" title="Event Tracker log files" class="view_log_detail">Event log files detail</a>
+			<a href="#" onclick="event.preventDefault();MetaLayer.loadLogFilesDetail('5,6,7,8,9,76','Event Tracker log files',dateBefore,defaultServer);" title="Event Tracker log files" class="view_log_detail">Event log files detail</a>
 				<table class="table1">
 					<thead>
 						<th width="300">Process</th>
@@ -554,13 +554,13 @@
 			  }
 			});
 		},
-		loadETLStatus: function(dom,group_process,full_date,host){
+		loadETLStatus: function(dom,full_date,host,data_file_ids){
 		var ajaxURL=pentahoActionURL( rootLocate, locate, "CheckLogFileStatus.xaction");
 			//adcel
 				var a=$.ajax({
 				  url: ajaxURL,
 				  dataType: 'html',
-				  data: {'full_date':full_date,'group_process':group_process,'p_server':host},
+				  data: {'full_date':full_date,'p_server':host,'data_file_ids': data_file_ids},
 				  beforeSend: function(){
 					//dom.empty();
 					//var loadingNote='<tr><td colspan="8" style="text-align: left"><img src="/verve_style/images/loading.gif" /></td></tr>';
@@ -653,28 +653,26 @@
 			MetaLayer.loadProcessStatusData(defaultServer);					
 			setTimeout(function(){
 				MetaLayer.loadProcessStatusData('dw11');				
-				MetaLayer.loadETLStatus($('#adcel_etl_status'),'AdCel',dateBefore,defaultServer);
-				MetaLayer.loadETLStatus($('#event_etl_status'),'Event Tracker',dateBefore,defaultServer);
+				MetaLayer.loadETLStatus($('#adcel_etl_status'),dateBefore,defaultServer,'1, 11, 12, 13');
+				MetaLayer.loadETLStatus($('#event_etl_status'),dateBefore,defaultServer,'5, 6, 7, 8, 9, 76');
 			},1000);
 			setTimeout(function(){
 				MetaLayer.loadProcessStatusData('pentaho-backup');
-				MetaLayer.loadETLStatus($('#3rd_etl_status'),'3rdAdnetwork',dateBefore,'pentaho-backup');				
+				MetaLayer.loadETLStatus($('#3rd_etl_status'),dateBefore,'pentaho-backup','39,40,41,43,44,49,50,47,48,52,53,103,104,126,170');				
 			},2000);
 			setTimeout(function(){			
-				MetaLayer.loadETLStatus($('#adm_20_etl_status'),'ADM2.0',process_date,'pentaho-backup');
-				MetaLayer.loadETLStatus($('#vlmo_etl_status'),'other',dateBefore,'pentaho-backup','188');				
+				MetaLayer.loadETLStatus($('#adm_20_etl_status'),process_date,'pentaho-backup','136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151');
+				MetaLayer.loadETLStatus($('#vlmo_etl_status'),dateBefore,'pentaho-backup','188');				
 			},3000);
 			setTimeout(function(){			
-				MetaLayer.loadETLStatus($('#event_etl_status_backup'),'Event Tracker',dateBefore,'dw11');
-				MetaLayer.loadETLStatus($('#dbclk_etl_status'),'Double Click',process_date,'pentaho-backup');				
+				MetaLayer.loadETLStatus($('#event_etl_status_backup'),dateBefore,'dw11','5,6,7,8,9');
+				MetaLayer.loadETLStatus($('#dbclk_etl_status'),process_date,'pentaho-backup','23,26,30,31,32,33,34,35,42,54,63,76,71,78,125,165,174,91');				
 			},4000);
 			setTimeout(function(){				
-				MetaLayer.loadETLStatus($('#rtb_etl_status'),'other',dateBefore,'pentaho-backup','152, 206, 209, 210, 211');
+				MetaLayer.loadETLStatus($('#rtb_etl_status'),dateBefore,'pentaho-backup','152, 206, 209, 210, 211');
 			},5000);
 		}
 	};
-
-
 
 	function parseDate(date){
 		var result='';

@@ -96,12 +96,12 @@
       </sources>  
       <default-value/> 
     </data_file_config_id>  
-    <p_server type="string">
-      <sources>
-        <request>p_server</request>
-      </sources>
-      <default-value><![CDATA[dw3dw3]]></default-value>
-    </p_server>
+    <p_server type="string"> 
+      <sources> 
+        <request>p_server</request> 
+      </sources>  
+      <default-value><![CDATA[verveReportConnection]]></default-value> 
+    </p_server> 
   </inputs>
 
   <outputs> 
@@ -118,8 +118,8 @@
     <action-definition> 
       <component-name>SQLLookupRule</component-name>
       <action-type>Relational Connection</action-type>
-      <action-inputs>
-        <jndi type="string" mapping="p_server"/>
+      <action-inputs> 
+        <jndi type="string" mapping="p_server"/> 
       </action-inputs>
       <action-outputs> 
         <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 

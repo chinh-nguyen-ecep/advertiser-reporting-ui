@@ -1,4 +1,0 @@
-INSERT INTO control.daily_process_status(full_date, group_process_name, process_config_id,process_status,e_star_time, e_completion_time)VALUES ('2012-08-10', 'Adcel', 31,'Waiting', '08:00:00','09:00:00');
-INSERT INTO control.daily_process_status(full_date, group_process_name, process_config_id,process_status,e_star_time, e_completion_time)VALUES ('2012-08-10', 'Adcel', 32,'Waiting', '08:00:00','09:00:00');
-INSERT INTO control.daily_process_status(full_date, group_process_name, process_config_id,process_status,e_star_time, e_completion_time)VALUES ('2012-08-10', 'Adcel', 50,'Waiting', '08:00:00','09:00:00');
-INSERT INTO control.daily_process_status(full_date, group_process_name, process_config_id,process_status,e_star_time, e_completion_time)VALUES ('2012-08-10', 'Adcel', 13,'Waiting', '08:00:00','09:00:00');	
