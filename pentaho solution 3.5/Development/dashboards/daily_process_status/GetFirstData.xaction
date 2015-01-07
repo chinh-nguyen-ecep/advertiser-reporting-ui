@@ -11,13 +11,13 @@
     <icon/> 
   </documentation>
 
-  <inputs>
-    <p_server type="string">
-      <sources>
-        <request>p_server</request>
-      </sources>
-      <default-value><![CDATA[dw3dw3]]></default-value>
-    </p_server>
+  <inputs> 
+    <p_server type="string"> 
+      <sources> 
+        <request>p_server</request> 
+      </sources>  
+      <default-value><![CDATA[verveReportConnection]]></default-value> 
+    </p_server> 
   </inputs>
 
   <outputs> 
@@ -31,23 +31,23 @@
   <resources/>
   
   <actions> 
-    <action-definition>
+    <action-definition> 
       <component-name>SQLLookupRule</component-name>
       <action-type>Relational Connection</action-type>
-      <action-inputs>
-        <jndi type="string" mapping="p_server"/>
+      <action-inputs> 
+        <jndi type="string" mapping="p_server"/> 
       </action-inputs>
-      <action-outputs>
-        <prepared_component type="sql-connection" mapping="shared_sql_connection"/>
+      <action-outputs> 
+        <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
       </action-outputs>
-      <component-definition/>
+      <component-definition/> 
     </action-definition>
-
+  
     <action-definition> 
       <component-name>SQLLookupRule</component-name>
       <action-type>Relational</action-type>
-      <action-inputs>
-        <prepared_component type="sql-connection" mapping="shared_sql_connection"/>
+      <action-inputs> 
+        <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
       </action-inputs>
       <action-outputs> 
         <query-result type="result-set" mapping="query_result_max_date"/> 

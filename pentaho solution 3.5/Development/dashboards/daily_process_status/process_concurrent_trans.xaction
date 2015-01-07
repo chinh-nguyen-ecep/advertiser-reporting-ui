@@ -18,12 +18,12 @@
       </sources>  
       <default-value/> 
     </process_id>  
-    <p_server type="string">
-      <sources>
-        <request>p_server</request>
-      </sources>
-      <default-value><![CDATA[dw3dw3]]></default-value>
-    </p_server>
+    <p_server type="string"> 
+      <sources> 
+        <request>p_server</request> 
+      </sources>  
+      <default-value><![CDATA[verveReportConnection]]></default-value> 
+    </p_server> 
   </inputs>
 
   <outputs> 
@@ -37,18 +37,18 @@
   <resources/>
   
   <actions> 
-    <action-definition>
+    <action-definition> 
       <component-name>SQLLookupRule</component-name>
       <action-type>Relational Connection</action-type>
-      <action-inputs>
-        <jndi type="string" mapping="p_server"/>
+      <action-inputs> 
+        <jndi type="string" mapping="p_server"/> 
       </action-inputs>
-      <action-outputs>
-        <prepared_component type="sql-connection" mapping="shared_sql_connection"/>
+      <action-outputs> 
+        <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
       </action-outputs>
-      <component-definition/>
+      <component-definition/> 
     </action-definition>
-
+  
     <action-definition> 
       <component-name>TemplateComponent</component-name>
       <action-type>query</action-type>
@@ -70,7 +70,7 @@ WHERE process_id = {process_id} ORDER BY concurrent_trans_name]]></template>
       <action-type>Relational</action-type>
       <action-inputs> 
         <query type="string"/>  
-        <prepared_component type="sql-connection" mapping="shared_sql_connection"/>
+        <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
       </action-inputs>
       <action-outputs> 
         <query-result type="result-set" mapping="query_result"/> 
@@ -91,7 +91,7 @@ WHERE process_id = {process_id} ORDER BY concurrent_trans_name]]></template>
       </action-outputs>
       <component-definition> 
         <script><![CDATA[var HTML;
-HTML='<style type="text/css" title="currentStyle">@import "/verve_style/css/mytable1.css";</style><table class="table1"><thead><th>Concurrent Trans Name</th><th>Is Complete</th><th>Date Last Change</th></thead><tbody>';
+HTML='<style type="text/css" title="currentStyle">@import "/verve-lib/css/mytable1.css";</style><table class="table1"><thead><th>Concurrent Trans Name</th><th>Is Complete</th><th>Date Last Change</th></thead><tbody>';
 for(var i=0;i<query_result.getRowCount();i++){
 	var process_id=query_result.getValueAt(i,0);
 	var concurrent_trans_name=query_result.getValueAt(i,1);
