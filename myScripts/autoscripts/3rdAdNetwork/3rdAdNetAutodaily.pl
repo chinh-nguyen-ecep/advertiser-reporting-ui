@@ -24,7 +24,7 @@ sub main{
 	#register sub process to control.daily_process_status table.
 	register_process($process_date,$group_process_name,22,'07:10:00','07:40:00');
 	register_process($process_date,$group_process_name,28,'07:50:00','09:00:00');
-	##register_process($process_date,$group_process_name,34,'11:00:00','09:15:00');
+	register_process($process_date,$group_process_name,84,'11:00:00','09:15:00');
 	register_process($process_date,$group_process_name,53,'11:00:00','09:15:00');
 	register_process($process_date,$group_process_name,54,'11:00:00','09:15:00');
 	register_process($process_date,$group_process_name,48,'11:30:00','09:20:00');
@@ -52,10 +52,15 @@ sub main{
 		runParam(28);
 		checkParam(28,4);				
 		promote(28);
-		
+
 		# Check param 70 from admDFP before continue
 		checkParam(70,5);	
 
+		#run param 84
+		writelog("Run param 84");
+		runParam(84);
+		checkParam(84,3);				
+		promote(84);
 		#run param 34 transfer data to network data mark
 		##writelog("Run param 34");	
 		##runParam(34);
@@ -144,7 +149,10 @@ sub promote{
 	  case 68 {		
 		runPGFuntion('staging.fn_promote_daily_delivery_report');
 		rollBackTransferDelivery();
-	  break;}
+	  	break;}
+	  case 84 {		
+		runPGFuntion('staging.fn_promote_daily_fct_network_revenue');
+	  	break;}
 	};
 	
 }
