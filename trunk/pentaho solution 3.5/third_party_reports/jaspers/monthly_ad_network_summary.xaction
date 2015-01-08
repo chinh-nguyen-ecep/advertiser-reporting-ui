@@ -47,7 +47,13 @@
         <request>p_network</request> 
       </sources>  
       <default-value><![CDATA[Jumptap]]></default-value> 
-    </p_network> 
+    </p_network>  
+    <connection_name type="string">
+      <sources>
+        <request>connection_name</request>
+      </sources>
+      <default-value><![CDATA[verveReportConnection]]></default-value>
+    </connection_name>
   </inputs>
 
   <outputs/>
@@ -137,18 +143,20 @@
     <action-definition> 
       <component-name>SQLLookupRule</component-name>
       <action-type>Get calendar year month</action-type>
+      <action-inputs>
+        <jndi type="string" mapping="connection_name"/>
+      </action-inputs>
       <action-outputs> 
         <query-result type="result-set" mapping="query_result"/>  
         <calendar_year_month type="string"/>  
         <month_since_2005 type="integer"/> 
       </action-outputs>
       <component-definition> 
-        <jndi><![CDATA[dw3]]></jndi>  
         <live><![CDATA[true]]></live>  
         <query><![CDATA[SELECT DISTINCT calendar_year_month, month_since_2005
 FROM adnetwork.monthly_adnetwork_summary
 WHERE is_active = true
-ORDER BY month_since_2005 desc]]></query> 
+ORDER BY month_since_2005 desc]]></query>
       </component-definition> 
     </action-definition>
   
@@ -178,14 +186,13 @@ ORDER BY month_since_2005 desc]]></query>
       <action-type>Jasper</action-type>
       <action-inputs> 
         <calendar_year_month type="string"/>  
-        <output-type type="string" mapping="output"/> 
+        <output-type type="string" mapping="output"/>  
+        <jndi type="string" mapping="connection_name"/>
       </action-inputs>
       <action-resources> 
         <report-definition mapping="report-definition10"/> 
       </action-resources>
-      <component-definition> 
-        <jndi><![CDATA[dw3]]></jndi> 
-      </component-definition> 
+      <component-definition/> 
     </action-definition>
  
   </actions> 

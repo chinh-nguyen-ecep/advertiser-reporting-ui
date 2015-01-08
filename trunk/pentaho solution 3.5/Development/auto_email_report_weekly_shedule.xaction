@@ -73,18 +73,19 @@
         <query-result type="result-set" mapping="query_result_schedule_list"/> 
       </action-outputs>
       <component-definition> 
+        <live><![CDATA[false]]></live>  
         <query><![CDATA[SELECT 
 schedule_id, email_to, report_file_type, report_name, 
 solution, path, xaction_file, parameter_string
-,report_agg_table,next_fire_time
+,report_agg_table,next_fire_time,subscription_id,subscription_process_actribute,b.year_week_sunday,b.year_week_monday,now()::date,now()::date-1
 FROM 
-control.emaill_reports_schedule
+control.emaill_reports_schedule a
+LEFT JOIN refer.date_dim b ON b.full_date=now()::date
 WHERE 
 next_fire_time::date<=now()::date
 AND schedule_type='weekly'
 AND is_active=true
-ORDER BY schedule_id]]></query>  
-        <live><![CDATA[false]]></live> 
+ORDER BY schedule_id]]></query>
       </component-definition> 
     </action-definition>
   
@@ -106,7 +107,13 @@ ORDER BY schedule_id]]></query>
           <xaction_file type="string"/>  
           <parameter_string type="string"/>  
           <report_agg_table type="string"/>  
-          <next_fire_time type="string"/> 
+          <next_fire_time type="string"/>  
+          <subscription_id type="string"/>
+          <subscription_process_actribute type="string"/>
+          <this_week_rp type="string"/>
+          <this_week_mon_rp type="string"/>
+          <today_rp type="string"/>
+          <yesterday_rp type="string"/>
         </action-outputs>
         <component-definition> 
           <script><![CDATA[var schedule_id=query_result_schedule_list.getValueAt(v_loop,0);
@@ -118,7 +125,13 @@ var path=query_result_schedule_list.getValueAt(v_loop,5);
 var xaction_file=query_result_schedule_list.getValueAt(v_loop,6);
 var parameter_string=query_result_schedule_list.getValueAt(v_loop,7);
 var report_agg_table=query_result_schedule_list.getValueAt(v_loop,8);
-var next_fire_time=query_result_schedule_list.getValueAt(v_loop,9);]]></script> 
+var next_fire_time=query_result_schedule_list.getValueAt(v_loop,9);
+var subscription_id=query_result_schedule_list.getValueAt(v_loop,10);
+var subscription_process_actribute=query_result_schedule_list.getValueAt(v_loop,11);
+var this_week_rp=query_result_schedule_list.getValueAt(v_loop,12);
+var this_week_mon_rp=query_result_schedule_list.getValueAt(v_loop,13);
+var today_rp=query_result_schedule_list.getValueAt(v_loop,14);
+var yesterday_rp=query_result_schedule_list.getValueAt(v_loop,15);]]></script> 
         </component-definition> 
       </action-definition>
   
@@ -180,29 +193,85 @@ v_loop++]]></script>
   
       <actions> 
         <condition><![CDATA[data_vailable=='vailable']]></condition>  
-        <action-definition> 
-          <component-name>JavascriptRule</component-name>
-          <action-type>Process Job input</action-type>
-          <action-inputs> 
-            <report_name type="string"/>  
-            <schedule_id type="integer"/>  
-            <p_mailTo type="string"/>  
-            <p_emailExportFileType type="string"/>  
-            <email_to type="string"/>  
-            <report_file_type type="string"/>  
-            <report_date type="string"/> 
-          </action-inputs>
-          <action-outputs> 
-            <job_name type="string"/>  
-            <p_mailTo type="string"/>  
-            <p_emailExportFileType type="string"/>  
-            <p_emailMode type="string"/>  
-            <trigger_name type="string"/>  
-            <p_mailTitle type="string"/>  
-            <p_mailTextMessage type="string"/> 
-          </action-outputs>
-          <component-definition> 
-            <script><![CDATA[var job_name='';
+        <actions>
+          <condition><![CDATA[subscription_id>0]]></condition>
+          <action-definition>
+            <component-name>JavascriptRule</component-name>
+            <action-type>JavaScript</action-type>
+            <action-inputs>
+              <subscription_process_actribute type="string"/>
+              <this_week_rp type="string"/>
+              <this_week_mon_rp type="string"/>
+              <today_rp type="string"/>
+              <yesterday_rp type="string"/>
+              <today type="string"/>
+              <yesterday type="string"/>
+            </action-inputs>
+            <action-outputs>
+              <subscription_process_actribute type="string"/>
+            </action-outputs>
+            <component-definition>
+              <script><![CDATA[var weekValue=this_week_rp.split("W")[1];
+var weekMonValue=this_week_mon_rp.split("W")[1];
+var lastWeekValue=weekValue-1;
+var lastWeekMonValue=weekMonValue-1;
+
+var lastWeek=this_week_rp.split("W")[0]+'W'+lastWeekValue;
+var lastWeekMon=this_week_mon_rp.split("W")[0]+'W'+lastWeekMonValue;
+
+subscription_process_actribute=subscription_process_actribute.replace("{this_week}",this_week_rp);
+subscription_process_actribute=subscription_process_actribute.replace("{last_week}",lastWeek);
+subscription_process_actribute=subscription_process_actribute.replace("{this_week_mon}",this_week_mon_rp);
+subscription_process_actribute=subscription_process_actribute.replace("{last_week_mon}",lastWeekMon);
+subscription_process_actribute=subscription_process_actribute.replace("{today}",today_rp);
+subscription_process_actribute=subscription_process_actribute.replace("{yesterday}",yesterday_rp);]]></script>
+            </component-definition>
+          </action-definition>
+
+          <action-definition>
+            <component-name>SQLLookupRule</component-name>
+            <action-type>Relational</action-type>
+            <action-inputs>
+              <prepared_component type="sql-connection" mapping="shared_sql_connection"/>
+              <subscription_id type="string"/>
+              <subscription_process_actribute type="string"/>
+            </action-inputs>
+            <action-outputs>
+              <query-result type="result-set" mapping="query_result"/>
+            </action-outputs>
+            <component-definition>
+              <query><![CDATA[SELECT * FROM control.fn_spctl_insert_subscription_to_process({subscription_id},'{subscription_process_actribute}',true);]]></query>
+              <live><![CDATA[true]]></live>
+            </component-definition>
+          </action-definition>
+
+        </actions>
+
+        <actions>
+          <condition><![CDATA[subscription_id<=0]]></condition>
+          <action-definition> 
+            <component-name>JavascriptRule</component-name>
+            <action-type>Process Job input</action-type>
+            <action-inputs> 
+              <report_name type="string"/>  
+              <schedule_id type="integer"/>  
+              <p_mailTo type="string"/>  
+              <p_emailExportFileType type="string"/>  
+              <email_to type="string"/>  
+              <report_file_type type="string"/>  
+              <report_date type="string"/> 
+            </action-inputs>
+            <action-outputs> 
+              <job_name type="string"/>  
+              <p_mailTo type="string"/>  
+              <p_emailExportFileType type="string"/>  
+              <p_emailMode type="string"/>  
+              <trigger_name type="string"/>  
+              <p_mailTitle type="string"/>  
+              <p_mailTextMessage type="string"/> 
+            </action-outputs>
+            <component-definition> 
+              <script><![CDATA[var job_name='';
 var p_emailMode='true';
 var trigger_name='trigger-'+report_name+'-'+schedule_id;
 var p_mailTitle=report_name;
@@ -210,32 +279,34 @@ var p_mailTextMessage='Attached is the'+report_name;
 job_name=report_name+'-'+schedule_id;
 p_mailTo=email_to;
 p_emailExportFileType=report_file_type;]]></script> 
-          </component-definition> 
-        </action-definition>
-  
-        <action-definition> 
-          <component-name>JobSchedulerComponent</component-name>
-          <action-type>Add Job</action-type>
-          <action-inputs> 
-            <jobName type="string" mapping="job_name"/>  
-            <solution type="string"/>  
-            <path type="string"/>  
-            <action type="string" mapping="xaction_file"/>  
-            <parameter_string type="string"/>  
-            <p_emailMode type="string"/>  
-            <p_mailTo type="string"/>  
-            <p_emailExportFileType type="string"/>  
-            <triggerName type="string" mapping="job_name"/>  
-            <p_mailTitle type="string"/>  
-            <p_mailTextMessage type="string"/> 
-          </action-inputs>
-          <component-definition> 
-            <jobAction>startJob</jobAction>  
-            <repeatCount><![CDATA[0]]></repeatCount>  
-            <triggerType><![CDATA[simple]]></triggerType>  
-            <repeatInterval><![CDATA[60]]></repeatInterval> 
-          </component-definition> 
-        </action-definition>
+            </component-definition> 
+          </action-definition>
+
+          <action-definition> 
+            <component-name>JobSchedulerComponent</component-name>
+            <action-type>Add Job</action-type>
+            <action-inputs> 
+              <jobName type="string" mapping="job_name"/>  
+              <solution type="string"/>  
+              <path type="string"/>  
+              <action type="string" mapping="xaction_file"/>  
+              <parameter_string type="string"/>  
+              <p_emailMode type="string"/>  
+              <p_mailTo type="string"/>  
+              <p_emailExportFileType type="string"/>  
+              <triggerName type="string" mapping="job_name"/>  
+              <p_mailTitle type="string"/>  
+              <p_mailTextMessage type="string"/> 
+            </action-inputs>
+            <component-definition> 
+              <jobAction>startJob</jobAction>  
+              <repeatCount><![CDATA[0]]></repeatCount>  
+              <triggerType><![CDATA[simple]]></triggerType>  
+              <repeatInterval><![CDATA[60]]></repeatInterval> 
+            </component-definition> 
+          </action-definition>
+
+        </actions>
   
         <action-definition> 
           <component-name>SQLExecute</component-name>

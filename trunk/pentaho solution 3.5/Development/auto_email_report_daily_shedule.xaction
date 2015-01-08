@@ -76,7 +76,7 @@
         <query><![CDATA[SELECT 
 schedule_id, email_to, report_file_type, report_name, 
 solution, path, xaction_file, parameter_string
-,report_agg_table,next_fire_time
+,report_agg_table,next_fire_time,subscription_id,subscription_process_actribute,now()::date,now()::date-1
 FROM 
 control.emaill_reports_schedule
 WHERE 
@@ -106,7 +106,11 @@ ORDER BY schedule_id]]></query>
           <xaction_file type="string"/>  
           <parameter_string type="string"/>  
           <report_agg_table type="string"/>  
-          <next_fire_time type="string"/> 
+          <next_fire_time type="string"/>  
+          <subscription_id type="string"/>
+          <subscription_process_actribute type="string"/>
+          <today_rp type="string"/>
+          <yesterday_rp type="string"/>
         </action-outputs>
         <component-definition> 
           <script><![CDATA[var schedule_id=query_result_schedule_list.getValueAt(v_loop,0);
@@ -118,7 +122,11 @@ var path=query_result_schedule_list.getValueAt(v_loop,5);
 var xaction_file=query_result_schedule_list.getValueAt(v_loop,6);
 var parameter_string=query_result_schedule_list.getValueAt(v_loop,7);
 var report_agg_table=query_result_schedule_list.getValueAt(v_loop,8);
-var next_fire_time=query_result_schedule_list.getValueAt(v_loop,9);]]></script> 
+var next_fire_time=query_result_schedule_list.getValueAt(v_loop,9);
+var subscription_id=query_result_schedule_list.getValueAt(v_loop,10);
+var subscription_process_actribute=query_result_schedule_list.getValueAt(v_loop,11);
+var today_rp=query_result_schedule_list.getValueAt(v_loop,12);
+var yesterday_rp=query_result_schedule_list.getValueAt(v_loop,13);]]></script> 
         </component-definition> 
       </action-definition>
   
@@ -180,29 +188,86 @@ v_loop++]]></script>
   
       <actions> 
         <condition><![CDATA[data_vailable=='vailable']]></condition>  
-        <action-definition> 
-          <component-name>JavascriptRule</component-name>
-          <action-type>Process Job input</action-type>
-          <action-inputs> 
-            <report_name type="string"/>  
-            <schedule_id type="integer"/>  
-            <p_mailTo type="string"/>  
-            <p_emailExportFileType type="string"/>  
-            <email_to type="string"/>  
-            <report_file_type type="string"/>  
-            <report_date type="string"/> 
-          </action-inputs>
-          <action-outputs> 
-            <job_name type="string"/>  
-            <p_mailTo type="string"/>  
-            <p_emailExportFileType type="string"/>  
-            <p_emailMode type="string"/>  
-            <trigger_name type="string"/>  
-            <p_mailTitle type="string"/>  
-            <p_mailTextMessage type="string"/> 
-          </action-outputs>
-          <component-definition> 
-            <script><![CDATA[var job_name='';
+        <actions>
+          <condition><![CDATA[subscription_id>0]]></condition>
+          <action-definition>
+            <component-name>JavascriptRule</component-name>
+            <action-type>JavaScript</action-type>
+            <action-inputs>
+              <subscription_process_actribute type="string"/>
+              <today_rp type="string"/>
+              <yesterday_rp type="string"/>
+              <yesterday type="string"/>
+              <today type="string"/>
+            </action-inputs>
+            <action-outputs>
+              <subscription_process_actribute type="string"/>
+            </action-outputs>
+            <component-definition>
+              <script><![CDATA[subscription_process_actribute=subscription_process_actribute.replace("{today}", today_rp);
+subscription_process_actribute=subscription_process_actribute.replace("{yesterday}", yesterday_rp);]]></script>
+            </component-definition>
+          </action-definition>
+
+          <action-definition>
+            <component-name>SQLLookupRule</component-name>
+            <action-type>Subscription</action-type>
+            <action-inputs>
+              <prepared_component type="sql-connection" mapping="shared_sql_connection"/>
+              <subscription_id type="string"/>
+              <subscription_process_actribute type="string"/>
+            </action-inputs>
+            <action-outputs>
+              <query-result type="result-set" mapping="query_result"/>
+            </action-outputs>
+            <component-definition>
+              <query><![CDATA[SELECT * FROM control.fn_spctl_insert_subscription_to_process({subscription_id},'{subscription_process_actribute}',true);]]></query>
+              <live><![CDATA[true]]></live>
+            </component-definition>
+          </action-definition>
+
+          <action-definition>
+            <component-name>SQLExecute</component-name>
+            <action-type>Update schedule status</action-type>
+            <action-inputs>
+              <schedule_id type="string"/>
+              <jndi type="string" mapping="v_jndi_name"/>
+            </action-inputs>
+            <component-definition>
+              <query><![CDATA[UPDATE control.emaill_reports_schedule
+SET last_fire_time=now(),next_fire_time=now() + interval '24 hour'
+WHERE schedule_id={schedule_id};]]></query>
+              <force_single_statement><![CDATA[true]]></force_single_statement>
+            </component-definition>
+          </action-definition>
+
+        </actions>
+
+        <actions>
+          <condition><![CDATA[subscription_id<=0]]></condition>
+          <action-definition> 
+            <component-name>JavascriptRule</component-name>
+            <action-type>Process Job input</action-type>
+            <action-inputs> 
+              <report_name type="string"/>  
+              <schedule_id type="integer"/>  
+              <p_mailTo type="string"/>  
+              <p_emailExportFileType type="string"/>  
+              <email_to type="string"/>  
+              <report_file_type type="string"/>  
+              <report_date type="string"/> 
+            </action-inputs>
+            <action-outputs> 
+              <job_name type="string"/>  
+              <p_mailTo type="string"/>  
+              <p_emailExportFileType type="string"/>  
+              <p_emailMode type="string"/>  
+              <trigger_name type="string"/>  
+              <p_mailTitle type="string"/>  
+              <p_mailTextMessage type="string"/> 
+            </action-outputs>
+            <component-definition> 
+              <script><![CDATA[var job_name='';
 var p_emailMode='true';
 var trigger_name='trigger-'+report_name+'-'+schedule_id;
 var p_mailTitle='Pentaho Report System';
@@ -210,108 +275,108 @@ var p_mailTextMessage=report_name+' '+report_date;
 job_name=report_name+'-'+schedule_id;
 p_mailTo=email_to;
 p_emailExportFileType=report_file_type;]]></script> 
-          </component-definition> 
-        </action-definition>
-  
-        <action-definition> 
-          <component-name>JobSchedulerComponent</component-name>
-          <action-type>Add Job</action-type>
-          <action-inputs> 
-            <jobName type="string" mapping="job_name"/>  
-            <solution type="string"/>  
-            <path type="string"/>  
-            <action type="string" mapping="xaction_file"/>  
-            <parameter_string type="string"/>  
-            <p_emailMode type="string"/>  
-            <p_mailTo type="string"/>  
-            <p_emailExportFileType type="string"/>  
-            <triggerName type="string" mapping="job_name"/>  
-            <p_mailTitle type="string"/>  
-            <p_mailTextMessage type="string"/> 
-          </action-inputs>
-          <component-definition> 
-            <jobAction>startJob</jobAction>  
-            <repeatCount><![CDATA[0]]></repeatCount>  
-            <triggerType><![CDATA[simple]]></triggerType>  
-            <repeatInterval><![CDATA[60]]></repeatInterval> 
-          </component-definition> 
-        </action-definition>
-  
-        <action-definition> 
-          <component-name>SQLExecute</component-name>
-          <action-type>Update schedule status</action-type>
-          <action-inputs> 
-            <schedule_id type="string"/>  
-            <jndi type="string" mapping="v_jndi_name"/> 
-          </action-inputs>
-          <component-definition> 
-            <query><![CDATA[UPDATE control.emaill_reports_schedule
+            </component-definition> 
+          </action-definition>
+
+          <action-definition> 
+            <component-name>JobSchedulerComponent</component-name>
+            <action-type>Add Job</action-type>
+            <action-inputs> 
+              <jobName type="string" mapping="job_name"/>  
+              <solution type="string"/>  
+              <path type="string"/>  
+              <action type="string" mapping="xaction_file"/>  
+              <parameter_string type="string"/>  
+              <p_emailMode type="string"/>  
+              <p_mailTo type="string"/>  
+              <p_emailExportFileType type="string"/>  
+              <triggerName type="string" mapping="job_name"/>  
+              <p_mailTitle type="string"/>  
+              <p_mailTextMessage type="string"/> 
+            </action-inputs>
+            <component-definition> 
+              <jobAction>startJob</jobAction>  
+              <repeatCount><![CDATA[0]]></repeatCount>  
+              <triggerType><![CDATA[simple]]></triggerType>  
+              <repeatInterval><![CDATA[60]]></repeatInterval> 
+            </component-definition> 
+          </action-definition>
+
+          <action-definition> 
+            <component-name>SQLExecute</component-name>
+            <action-type>Update schedule status</action-type>
+            <action-inputs> 
+              <schedule_id type="string"/>  
+              <jndi type="string" mapping="v_jndi_name"/> 
+            </action-inputs>
+            <component-definition> 
+              <query><![CDATA[UPDATE control.emaill_reports_schedule
 SET last_fire_time=now(),next_fire_time=now() + interval '24 hour'
 WHERE schedule_id={schedule_id};]]></query>  
-            <force_single_statement><![CDATA[true]]></force_single_statement> 
-          </component-definition> 
-        </action-definition>
-  
-        <actions> 
-          <condition><![CDATA[schedule_id==16]]></condition>  
-          <action-definition> 
-            <component-name>SQLLookupRule</component-name>
-            <action-type>Load event type count</action-type>
-            <action-inputs> 
-              <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
-            </action-inputs>
-            <action-outputs> 
-              <query-result type="result-set" mapping="query_result_event_type"/> 
-            </action-outputs>
-            <component-definition> 
-              <query><![CDATA[SELECT EXTRACT(HOUR FROM now()::TIMESTAMP),SUM(day_1) FROM adsops.daily_infobright_counts  WHERE full_date=now()::date-1 AND group_type='event_type']]></query>  
-              <live><![CDATA[false]]></live> 
+              <force_single_statement><![CDATA[true]]></force_single_statement> 
             </component-definition> 
           </action-definition>
+
+          <actions> 
+            <condition><![CDATA[schedule_id==16]]></condition>  
+            <action-definition> 
+              <component-name>SQLLookupRule</component-name>
+              <action-type>Load event type count</action-type>
+              <action-inputs> 
+                <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
+              </action-inputs>
+              <action-outputs> 
+                <query-result type="result-set" mapping="query_result_event_type"/> 
+              </action-outputs>
+              <component-definition> 
+                <query><![CDATA[SELECT EXTRACT(HOUR FROM now()::TIMESTAMP),SUM(day_1) FROM adsops.daily_infobright_counts  WHERE full_date=now()::date-1 AND group_type='event_type']]></query>  
+                <live><![CDATA[false]]></live> 
+              </component-definition> 
+            </action-definition>
   
-          <action-definition> 
-            <component-name>SQLLookupRule</component-name>
-            <action-type>Load group type count</action-type>
-            <action-inputs> 
-              <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
-            </action-inputs>
-            <action-outputs> 
-              <query-result type="result-set" mapping="query_result_group_type"/> 
-            </action-outputs>
-            <component-definition> 
-              <query><![CDATA[SELECT SUM(day_1) FROM adsops.daily_infobright_counts  WHERE full_date=now()::date-1 AND group_type='group_type']]></query>  
-              <live><![CDATA[false]]></live> 
-            </component-definition> 
-          </action-definition>
+            <action-definition> 
+              <component-name>SQLLookupRule</component-name>
+              <action-type>Load group type count</action-type>
+              <action-inputs> 
+                <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
+              </action-inputs>
+              <action-outputs> 
+                <query-result type="result-set" mapping="query_result_group_type"/> 
+              </action-outputs>
+              <component-definition> 
+                <query><![CDATA[SELECT SUM(day_1) FROM adsops.daily_infobright_counts  WHERE full_date=now()::date-1 AND group_type='group_type']]></query>  
+                <live><![CDATA[false]]></live> 
+              </component-definition> 
+            </action-definition>
   
-          <action-definition> 
-            <component-name>SQLLookupRule</component-name>
-            <action-type>Load hour type count</action-type>
-            <action-inputs> 
-              <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
-            </action-inputs>
-            <action-outputs> 
-              <query-result type="result-set" mapping="query_result_hour_type"/> 
-            </action-outputs>
-            <component-definition> 
-              <query><![CDATA[SELECT SUM(day_1) FROM adsops.daily_infobright_counts  WHERE full_date=now()::date-1 AND group_type='hour']]></query>  
-              <live><![CDATA[false]]></live> 
-            </component-definition> 
-          </action-definition>
+            <action-definition> 
+              <component-name>SQLLookupRule</component-name>
+              <action-type>Load hour type count</action-type>
+              <action-inputs> 
+                <prepared_component type="sql-connection" mapping="shared_sql_connection"/> 
+              </action-inputs>
+              <action-outputs> 
+                <query-result type="result-set" mapping="query_result_hour_type"/> 
+              </action-outputs>
+              <component-definition> 
+                <query><![CDATA[SELECT SUM(day_1) FROM adsops.daily_infobright_counts  WHERE full_date=now()::date-1 AND group_type='hour']]></query>  
+                <live><![CDATA[false]]></live> 
+              </component-definition> 
+            </action-definition>
   
-          <action-definition> 
-            <component-name>JavascriptRule</component-name>
-            <action-type>Process Loading data</action-type>
-            <action-inputs> 
-              <query_result_event_type type="result-set"/>  
-              <query_result_group_type type="result-set"/>  
-              <query_result_hour_type type="result-set"/> 
-            </action-inputs>
-            <action-outputs> 
-              <resend type="string"/> 
-            </action-outputs>
-            <component-definition> 
-              <script><![CDATA[var resend='';
+            <action-definition> 
+              <component-name>JavascriptRule</component-name>
+              <action-type>Process Loading data</action-type>
+              <action-inputs> 
+                <query_result_event_type type="result-set"/>  
+                <query_result_group_type type="result-set"/>  
+                <query_result_hour_type type="result-set"/> 
+              </action-inputs>
+              <action-outputs> 
+                <resend type="string"/> 
+              </action-outputs>
+              <component-definition> 
+                <script><![CDATA[var resend='';
 resend='false';
 var now_hour=query_result_event_type.getValueAt(0,0);
 var eventCount=query_result_event_type.getValueAt(0,1);
@@ -322,47 +387,49 @@ if(now_hour>9){
 }else if(eventCount==0 || groupCount==0 || hourCount==0){
 	resend='true'
 }]]></script> 
-            </component-definition> 
-          </action-definition>
+              </component-definition> 
+            </action-definition>
   
-          <actions> 
-            <condition><![CDATA[resend=='true']]></condition>  
-            <action-definition> 
-              <component-name>SQLExecute</component-name>
-              <action-type>Update schedule status</action-type>
-              <action-inputs> 
-                <jndi type="string" mapping="v_jndi_name"/>  
-                <schedule_id type="string"/> 
-              </action-inputs>
-              <component-definition> 
-                <query><![CDATA[UPDATE control.emaill_reports_schedule
+            <actions> 
+              <condition><![CDATA[resend=='true']]></condition>  
+              <action-definition> 
+                <component-name>SQLExecute</component-name>
+                <action-type>Update schedule status</action-type>
+                <action-inputs> 
+                  <jndi type="string" mapping="v_jndi_name"/>  
+                  <schedule_id type="string"/> 
+                </action-inputs>
+                <component-definition> 
+                  <query><![CDATA[UPDATE control.emaill_reports_schedule
 SET next_fire_time=now() + interval '1 hour'
 WHERE schedule_id={schedule_id};]]></query>  
-                <force_single_statement><![CDATA[true]]></force_single_statement> 
-              </component-definition> 
-            </action-definition>
+                  <force_single_statement><![CDATA[true]]></force_single_statement> 
+                </component-definition> 
+              </action-definition>
  
-          </actions>
+            </actions>
   
-          <actions> 
-            <condition><![CDATA[resend=='false']]></condition>  
-            <action-definition> 
-              <component-name>SQLExecute</component-name>
-              <action-type>Update schedule next time fire</action-type>
-              <action-inputs> 
-                <schedule_id type="string"/>  
-                <jndi type="string" mapping="v_jndi_name"/> 
-              </action-inputs>
-              <component-definition> 
-                <query><![CDATA[UPDATE control.emaill_reports_schedule
+            <actions> 
+              <condition><![CDATA[resend=='false']]></condition>  
+              <action-definition> 
+                <component-name>SQLExecute</component-name>
+                <action-type>Update schedule next time fire</action-type>
+                <action-inputs> 
+                  <schedule_id type="string"/>  
+                  <jndi type="string" mapping="v_jndi_name"/> 
+                </action-inputs>
+                <component-definition> 
+                  <query><![CDATA[UPDATE control.emaill_reports_schedule
 SET next_fire_time=now()::date + interval '1 day' + time '07:30'
 WHERE schedule_id={schedule_id};]]></query>  
-                <force_single_statement><![CDATA[true]]></force_single_statement> 
-              </component-definition> 
-            </action-definition>
+                  <force_single_statement><![CDATA[true]]></force_single_statement> 
+                </component-definition> 
+              </action-definition>
+ 
+            </actions>
  
           </actions>
- 
+
         </actions>
  
       </actions>

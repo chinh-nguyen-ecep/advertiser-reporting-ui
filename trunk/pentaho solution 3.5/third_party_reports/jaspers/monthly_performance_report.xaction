@@ -28,21 +28,21 @@
       <sources> 
         <request>List_networks</request> 
       </sources>  
-      <default-value type="string-list">
-        <list-item>AdSense DBCLK Channel(-1)</list-item>
-        <list-item>AT&amp;T (Yellowpages)(27)</list-item>
-        <list-item>AT&amp;T No Logo (Yellowpages)(33)</list-item>
-        <list-item>AT&amp;T Static Banner (Yellowpages)(32)</list-item>
-        <list-item>City Grid/City Grid Proxy(20,29)</list-item>
-        <list-item>City Grid Mobile(38)</list-item>
-        <list-item>iTunes(-1)</list-item>
-        <list-item>JumpTap(11)</list-item>
-        <list-item>Marchex/Marchex Proxy(21,28)</list-item>
-        <list-item>Millennial Media(4)</list-item>
-        <list-item>Superpages Proxy/Blue(30,26)</list-item>
-        <list-item>Where/Where HTML(23,25)</list-item>
-        <list-item>KlickThru(35)</list-item>
-        <list-item>AdMarvel(50)</list-item>
+      <default-value type="string-list"> 
+        <list-item>AdSense DBCLK Channel(-1)</list-item>  
+        <list-item>AT&amp;T (Yellowpages)(27)</list-item>  
+        <list-item>AT&amp;T No Logo (Yellowpages)(33)</list-item>  
+        <list-item>AT&amp;T Static Banner (Yellowpages)(32)</list-item>  
+        <list-item>City Grid/City Grid Proxy(20,29)</list-item>  
+        <list-item>City Grid Mobile(38)</list-item>  
+        <list-item>iTunes(-1)</list-item>  
+        <list-item>JumpTap(11)</list-item>  
+        <list-item>Marchex/Marchex Proxy(21,28)</list-item>  
+        <list-item>Millennial Media(4)</list-item>  
+        <list-item>Superpages Proxy/Blue(30,26)</list-item>  
+        <list-item>Where/Where HTML(23,25)</list-item>  
+        <list-item>KlickThru(35)</list-item>  
+        <list-item>AdMarvel(50)</list-item> 
       </default-value> 
     </List_networks>  
     <p_network type="string"> 
@@ -50,7 +50,13 @@
         <request>p_network</request> 
       </sources>  
       <default-value><![CDATA[Jumptap]]></default-value> 
-    </p_network> 
+    </p_network>  
+    <connection_name type="string">
+      <sources>
+        <request>connection_name</request>
+      </sources>
+      <default-value><![CDATA[verveReportConnection]]></default-value>
+    </connection_name>
   </inputs>
 
   <outputs/>
@@ -146,34 +152,36 @@
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </report-definition13>  
-    <report-definition14>
-      <solution-file>
-        <location>monthly_performance_report/monthly_performance_report_klickthru.jasper</location>
-        <mime-type>text/plain</mime-type>
-      </solution-file>
-    </report-definition14>
-    <report-definition15>
-      <solution-file>
-        <location>monthly_performance_report/monthly_performance_report_admarvel.jasper</location>
-        <mime-type>text/plain</mime-type>
-      </solution-file>
-    </report-definition15>
+    <report-definition14> 
+      <solution-file> 
+        <location>monthly_performance_report/monthly_performance_report_klickthru.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition14>  
+    <report-definition15> 
+      <solution-file> 
+        <location>monthly_performance_report/monthly_performance_report_admarvel.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition15> 
   </resources>
   
   <actions> 
     <action-definition> 
       <component-name>SQLLookupRule</component-name>
       <action-type>Get calendar year month</action-type>
+      <action-inputs>
+        <jndi type="string" mapping="connection_name"/>
+      </action-inputs>
       <action-outputs> 
         <query-result type="result-set" mapping="query_result"/>  
         <calendar_year_month type="string"/>  
         <month_since_2005 type="integer"/> 
       </action-outputs>
       <component-definition> 
-        <jndi><![CDATA[dw3]]></jndi>  
         <live><![CDATA[true]]></live>  
         <query><![CDATA[SELECT DISTINCT calendar_year_month, month_since_2005
-FROM adnetwork.monthly_jt_performance_by_date
+FROM adnetwork.monthly_adnetwork_summary
 WHERE is_active = true
 ORDER BY month_since_2005 desc]]></query> 
       </component-definition> 
@@ -212,14 +220,13 @@ ORDER BY month_since_2005 desc]]></query>
         <action-type>Jasper</action-type>
         <action-inputs> 
           <calendar_year_month type="string"/>  
-          <output-type type="string" mapping="output"/> 
+          <output-type type="string" mapping="output"/>  
+          <jndi type="string" mapping="connection_name"/>
         </action-inputs>
         <action-resources> 
           <report-definition type="resource"/> 
         </action-resources>
-        <component-definition> 
-          <jndi><![CDATA[dw3]]></jndi> 
-        </component-definition> 
+        <component-definition/> 
       </action-definition>
  
     </actions>
@@ -231,14 +238,13 @@ ORDER BY month_since_2005 desc]]></query>
         <action-type>Jasper</action-type>
         <action-inputs> 
           <calendar_year_month type="string"/>  
-          <output-type type="string" mapping="output"/> 
+          <output-type type="string" mapping="output"/>  
+          <jndi type="string" mapping="connection_name"/>
         </action-inputs>
         <action-resources> 
           <report-definition mapping="report-definition1"/> 
         </action-resources>
-        <component-definition> 
-          <jndi><![CDATA[dw3]]></jndi> 
-        </component-definition> 
+        <component-definition/> 
       </action-definition>
  
     </actions>
@@ -250,14 +256,13 @@ ORDER BY month_since_2005 desc]]></query>
         <action-type>Jasper</action-type>
         <action-inputs> 
           <calendar_year_month type="string"/>  
-          <output-type type="string" mapping="output"/> 
+          <output-type type="string" mapping="output"/>  
+          <jndi type="string" mapping="connection_name"/>
         </action-inputs>
         <action-resources> 
           <report-definition mapping="report-definition2"/> 
         </action-resources>
-        <component-definition> 
-          <jndi><![CDATA[dw3]]></jndi> 
-        </component-definition> 
+        <component-definition/> 
       </action-definition>
  
     </actions>
@@ -269,14 +274,13 @@ ORDER BY month_since_2005 desc]]></query>
         <action-type>Jasper</action-type>
         <action-inputs> 
           <calendar_year_month type="string"/>  
-          <output-type type="string" mapping="output"/> 
+          <output-type type="string" mapping="output"/>  
+          <jndi type="string" mapping="connection_name"/>
         </action-inputs>
         <action-resources> 
           <report-definition mapping="report-definition3"/> 
         </action-resources>
-        <component-definition> 
-          <jndi><![CDATA[dw3]]></jndi> 
-        </component-definition> 
+        <component-definition/> 
       </action-definition>
  
     </actions>
@@ -288,14 +292,13 @@ ORDER BY month_since_2005 desc]]></query>
         <action-type>Jasper</action-type>
         <action-inputs> 
           <calendar_year_month type="string"/>  
-          <output-type type="string" mapping="output"/> 
+          <output-type type="string" mapping="output"/>  
+          <jndi type="string" mapping="connection_name"/>
         </action-inputs>
         <action-resources> 
           <report-definition mapping="report-definition4"/> 
         </action-resources>
-        <component-definition> 
-          <jndi><![CDATA[dw3]]></jndi> 
-        </component-definition> 
+        <component-definition/> 
       </action-definition>
  
     </actions>
@@ -307,14 +310,13 @@ ORDER BY month_since_2005 desc]]></query>
         <action-type>Jasper</action-type>
         <action-inputs> 
           <calendar_year_month type="string"/>  
-          <output-type type="string" mapping="output"/> 
+          <output-type type="string" mapping="output"/>  
+          <jndi type="string" mapping="connection_name"/>
         </action-inputs>
         <action-resources> 
           <report-definition mapping="report-definition5"/> 
         </action-resources>
-        <component-definition> 
-          <jndi><![CDATA[dw3]]></jndi> 
-        </component-definition> 
+        <component-definition/> 
       </action-definition>
  
     </actions>
@@ -326,14 +328,13 @@ ORDER BY month_since_2005 desc]]></query>
         <action-type>Jasper</action-type>
         <action-inputs> 
           <calendar_year_month type="string"/>  
-          <output-type type="string" mapping="output"/> 
+          <output-type type="string" mapping="output"/>  
+          <jndi type="string" mapping="connection_name"/>
         </action-inputs>
         <action-resources> 
           <report-definition mapping="report-definition6"/> 
         </action-resources>
-        <component-definition> 
-          <jndi><![CDATA[dw3]]></jndi> 
-        </component-definition> 
+        <component-definition/> 
       </action-definition>
  
     </actions>
@@ -345,14 +346,13 @@ ORDER BY month_since_2005 desc]]></query>
         <action-type>Jasper</action-type>
         <action-inputs> 
           <calendar_year_month type="string"/>  
-          <output-type type="string" mapping="output"/> 
+          <output-type type="string" mapping="output"/>  
+          <jndi type="string" mapping="connection_name"/>
         </action-inputs>
         <action-resources> 
           <report-definition mapping="report-definition7"/> 
         </action-resources>
-        <component-definition> 
-          <jndi><![CDATA[dw3]]></jndi> 
-        </component-definition> 
+        <component-definition/> 
       </action-definition>
  
     </actions>
@@ -364,14 +364,13 @@ ORDER BY month_since_2005 desc]]></query>
         <action-type>Jasper</action-type>
         <action-inputs> 
           <calendar_year_month type="string"/>  
-          <output-type type="string" mapping="output"/> 
+          <output-type type="string" mapping="output"/>  
+          <jndi type="string" mapping="connection_name"/>
         </action-inputs>
         <action-resources> 
           <report-definition mapping="report-definition8"/> 
         </action-resources>
-        <component-definition> 
-          <jndi><![CDATA[dw3]]></jndi> 
-        </component-definition> 
+        <component-definition/> 
       </action-definition>
  
     </actions>
@@ -383,14 +382,13 @@ ORDER BY month_since_2005 desc]]></query>
         <action-type>Jasper</action-type>
         <action-inputs> 
           <calendar_year_month type="string"/>  
-          <output-type type="string" mapping="output"/> 
+          <output-type type="string" mapping="output"/>  
+          <jndi type="string" mapping="connection_name"/>
         </action-inputs>
         <action-resources> 
           <report-definition mapping="report-definition9"/> 
         </action-resources>
-        <component-definition> 
-          <jndi><![CDATA[dw3]]></jndi> 
-        </component-definition> 
+        <component-definition/> 
       </action-definition>
  
     </actions>
@@ -402,14 +400,13 @@ ORDER BY month_since_2005 desc]]></query>
         <action-type>Jasper</action-type>
         <action-inputs> 
           <calendar_year_month type="string"/>  
-          <output-type type="string" mapping="output"/> 
+          <output-type type="string" mapping="output"/>  
+          <jndi type="string" mapping="connection_name"/>
         </action-inputs>
         <action-resources> 
           <report-definition mapping="report-definition10"/> 
         </action-resources>
-        <component-definition> 
-          <jndi><![CDATA[dw3]]></jndi> 
-        </component-definition> 
+        <component-definition/> 
       </action-definition>
  
     </actions>
@@ -421,14 +418,13 @@ ORDER BY month_since_2005 desc]]></query>
         <action-type>Jasper</action-type>
         <action-inputs> 
           <calendar_year_month type="string"/>  
-          <output-type type="string" mapping="output"/> 
+          <output-type type="string" mapping="output"/>  
+          <jndi type="string" mapping="connection_name"/>
         </action-inputs>
         <action-resources> 
           <report-definition mapping="report-definition11"/> 
         </action-resources>
-        <component-definition> 
-          <jndi><![CDATA[dw3]]></jndi> 
-        </component-definition> 
+        <component-definition/> 
       </action-definition>
  
     </actions>
@@ -440,14 +436,13 @@ ORDER BY month_since_2005 desc]]></query>
         <action-type>Jasper</action-type>
         <action-inputs> 
           <calendar_year_month type="string"/>  
-          <output-type type="string" mapping="output"/> 
+          <output-type type="string" mapping="output"/>  
+          <jndi type="string" mapping="connection_name"/>
         </action-inputs>
         <action-resources> 
           <report-definition mapping="report-definition12"/> 
         </action-resources>
-        <component-definition> 
-          <jndi><![CDATA[dw3]]></jndi> 
-        </component-definition> 
+        <component-definition/> 
       </action-definition>
  
     </actions>
@@ -459,55 +454,52 @@ ORDER BY month_since_2005 desc]]></query>
         <action-type>Jasper</action-type>
         <action-inputs> 
           <calendar_year_month type="string"/>  
-          <output-type type="string" mapping="output"/> 
+          <output-type type="string" mapping="output"/>  
+          <jndi type="string" mapping="connection_name"/>
         </action-inputs>
         <action-resources> 
           <report-definition mapping="report-definition13"/> 
         </action-resources>
-        <component-definition> 
-          <jndi><![CDATA[dw3]]></jndi> 
-        </component-definition> 
+        <component-definition/> 
       </action-definition>
  
     </actions>
   
-    <actions>
-      <condition><![CDATA[p_network=='KlickThru(35)']]></condition>
-      <action-definition>
+    <actions> 
+      <condition><![CDATA[p_network=='KlickThru(35)']]></condition>  
+      <action-definition> 
         <component-name>JasperReportsComponent</component-name>
         <action-type>Jasper</action-type>
-        <action-inputs>
-          <calendar_year_month type="string"/>
-          <output-type type="string" mapping="output"/>
+        <action-inputs> 
+          <calendar_year_month type="string"/>  
+          <output-type type="string" mapping="output"/>  
+          <jndi type="string" mapping="connection_name"/>
         </action-inputs>
-        <action-resources>
-          <report-definition mapping="report-definition14"/>
+        <action-resources> 
+          <report-definition mapping="report-definition14"/> 
         </action-resources>
-        <component-definition>
-          <jndi><![CDATA[dw3]]></jndi>
-        </component-definition>
+        <component-definition/> 
       </action-definition>
-
+ 
     </actions>
   
-    <actions>
-      <condition><![CDATA[p_network=='AdMarvel(50)']]></condition>
-      <action-definition>
+    <actions> 
+      <condition><![CDATA[p_network=='AdMarvel(50)']]></condition>  
+      <action-definition> 
         <component-name>JasperReportsComponent</component-name>
         <action-type>Jasper</action-type>
-        <action-inputs>
-          <calendar_year_month type="string"/>
-          <output-type type="string" mapping="output"/>
+        <action-inputs> 
+          <calendar_year_month type="string"/>  
+          <output-type type="string" mapping="output"/>  
+          <jndi type="string" mapping="connection_name"/>
         </action-inputs>
-        <action-resources>
-          <report-definition mapping="report-definition15"/>
+        <action-resources> 
+          <report-definition mapping="report-definition15"/> 
         </action-resources>
-        <component-definition>
-          <jndi><![CDATA[dw3]]></jndi>
-        </component-definition>
+        <component-definition/> 
       </action-definition>
-
+ 
     </actions>
-
+ 
   </actions> 
 </action-sequence>
