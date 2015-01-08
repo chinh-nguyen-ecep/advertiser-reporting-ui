@@ -38,7 +38,6 @@ sub promote{
 		promoteParam("staging.fn_promote_daily_copy_event_tracker()");		
 		break;}	  
 		};
-	#check is promote
 	my $isPromote=isPromoted($param,$host);
 	if($isPromote==0){
 		note("Can not promote parameter: $param . Romote again after 10s!");
@@ -53,7 +52,7 @@ sub checkToRunCopy{
 	note("*Check to call Copy script...");
 	my $count=0;
 	my $dbh=getConnection($host);
-	my $query="SELECT count(1) FROM control.process_checkpoint WHERE process_config_id IN (9,10,11,12,13) and last_key = ?";
+	my $query="SELECT count(1) FROM control.process_checkpoint WHERE process_config_id IN (11,12) and last_key = ?";
 	my $query_handle = $dbh->prepare($query);
 	$query_handle->execute($report_date_sk);
 	$query_handle->bind_columns(undef, \$count);
