@@ -28,21 +28,21 @@
       <sources> 
         <request>List_networks</request> 
       </sources>  
-      <default-value type="string-list">
-        <list-item>AdSense DBCLK Channel</list-item>
-        <list-item>AT&amp;T (Yellowpages)</list-item>
-        <list-item>AT&amp;T No Logo (Yellowpages)</list-item>
-        <list-item>AT&amp;T Static Banner (Yellowpages)</list-item>
-        <list-item>City Grid/City Grid Proxy</list-item>
-        <list-item>City Grid Mobile</list-item>
-        <list-item>iTunes</list-item>
-        <list-item>JumpTap</list-item>
-        <list-item>Marchex/Marchex Proxy</list-item>
-        <list-item>Millennial Media</list-item>
-        <list-item>Superpages Proxy/Blue</list-item>
-        <list-item>Where/Where HTML</list-item>
-        <list-item>KlickThru</list-item>
-        <list-item>AdMarvel</list-item>
+      <default-value type="string-list"> 
+        <list-item>AdSense DBCLK Channel</list-item>  
+        <list-item>AT&amp;T (Yellowpages)</list-item>  
+        <list-item>AT&amp;T No Logo (Yellowpages)</list-item>  
+        <list-item>AT&amp;T Static Banner (Yellowpages)</list-item>  
+        <list-item>City Grid/City Grid Proxy</list-item>  
+        <list-item>City Grid Mobile</list-item>  
+        <list-item>iTunes</list-item>  
+        <list-item>JumpTap</list-item>  
+        <list-item>Marchex/Marchex Proxy</list-item>  
+        <list-item>Millennial Media</list-item>  
+        <list-item>Superpages Proxy/Blue</list-item>  
+        <list-item>Where/Where HTML</list-item>  
+        <list-item>KlickThru</list-item>  
+        <list-item>AdMarvel</list-item> 
       </default-value> 
     </List_networks>  
     <p_network type="string"> 
@@ -50,7 +50,13 @@
         <request>p_network</request> 
       </sources>  
       <default-value><![CDATA[Jumptap]]></default-value> 
-    </p_network> 
+    </p_network>  
+    <connection_name type="string"> 
+      <sources> 
+        <request>connection_name</request> 
+      </sources>  
+      <default-value><![CDATA[verveReportConnection]]></default-value> 
+    </connection_name> 
   </inputs>
 
   <outputs/>
@@ -152,18 +158,21 @@
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </report-definition14>  
-    <report-definition15>
-      <solution-file>
-        <location>daily_performance_report/daily_performance_report_admarvel.jasper</location>
-        <mime-type>text/plain</mime-type>
-      </solution-file>
-    </report-definition15>
+    <report-definition15> 
+      <solution-file> 
+        <location>daily_performance_report/daily_performance_report_admarvel.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition15> 
   </resources>
   
   <actions> 
     <action-definition> 
       <component-name>SQLLookupRule</component-name>
       <action-type>Get Date list</action-type>
+      <action-inputs> 
+        <jndi type="string" mapping="connection_name"/> 
+      </action-inputs>
       <action-outputs> 
         <query-result type="result-set" mapping="query_result"/>  
         <eastern_date_sk type="integer"/>  
@@ -171,7 +180,6 @@
         <distinct type="string"/> 
       </action-outputs>
       <component-definition> 
-        <jndi><![CDATA[dw3]]></jndi>  
         <live><![CDATA[true]]></live>  
         <query><![CDATA[select a.date_sk as eastern_date_sk, a.full_date 
 from refer.date_dim a,
@@ -240,14 +248,13 @@ order by a.date_sk desc;]]></query>
         <action-type>Jasper</action-type>
         <action-inputs> 
           <eastern_date_sk type="string"/>  
-          <output-type type="string" mapping="output"/> 
+          <output-type type="string" mapping="output"/>  
+          <jndi type="string" mapping="connection_name"/> 
         </action-inputs>
         <action-resources> 
           <report-definition type="resource"/> 
         </action-resources>
-        <component-definition> 
-          <jndi><![CDATA[dw3]]></jndi> 
-        </component-definition> 
+        <component-definition/> 
       </action-definition>
  
     </actions>
@@ -259,14 +266,13 @@ order by a.date_sk desc;]]></query>
         <action-type>Jasper</action-type>
         <action-inputs> 
           <output-type type="string" mapping="output"/>  
-          <eastern_date_sk type="string"/> 
+          <eastern_date_sk type="string"/>  
+          <jndi type="string" mapping="connection_name"/>
         </action-inputs>
         <action-resources> 
           <report-definition mapping="report-definition1"/> 
         </action-resources>
-        <component-definition> 
-          <jndi><![CDATA[dw3]]></jndi> 
-        </component-definition> 
+        <component-definition/> 
       </action-definition>
  
     </actions>
@@ -278,14 +284,13 @@ order by a.date_sk desc;]]></query>
         <action-type>Jasper</action-type>
         <action-inputs> 
           <output-type type="string" mapping="output"/>  
-          <eastern_date_sk type="string"/> 
+          <eastern_date_sk type="string"/>  
+          <jndi type="string" mapping="connection_name"/>
         </action-inputs>
         <action-resources> 
           <report-definition mapping="report-definition2"/> 
         </action-resources>
-        <component-definition> 
-          <jndi><![CDATA[dw3]]></jndi> 
-        </component-definition> 
+        <component-definition/> 
       </action-definition>
  
     </actions>
@@ -297,14 +302,13 @@ order by a.date_sk desc;]]></query>
         <action-type>Jasper</action-type>
         <action-inputs> 
           <eastern_date_sk type="string"/>  
-          <output-type type="string" mapping="output"/> 
+          <output-type type="string" mapping="output"/>  
+          <jndi type="string" mapping="connection_name"/>
         </action-inputs>
         <action-resources> 
           <report-definition mapping="report-definition3"/> 
         </action-resources>
-        <component-definition> 
-          <jndi><![CDATA[dw3]]></jndi> 
-        </component-definition> 
+        <component-definition/> 
       </action-definition>
  
     </actions>
@@ -316,14 +320,13 @@ order by a.date_sk desc;]]></query>
         <action-type>Jasper</action-type>
         <action-inputs> 
           <eastern_date_sk type="string"/>  
-          <output-type type="string" mapping="output"/> 
+          <output-type type="string" mapping="output"/>  
+          <jndi type="string" mapping="connection_name"/>
         </action-inputs>
         <action-resources> 
           <report-definition mapping="report-definition4"/> 
         </action-resources>
-        <component-definition> 
-          <jndi><![CDATA[dw3]]></jndi> 
-        </component-definition> 
+        <component-definition/> 
       </action-definition>
  
     </actions>
@@ -335,14 +338,13 @@ order by a.date_sk desc;]]></query>
         <action-type>Jasper</action-type>
         <action-inputs> 
           <eastern_date_sk type="string"/>  
-          <output-type type="string" mapping="output"/> 
+          <output-type type="string" mapping="output"/>  
+          <jndi type="string" mapping="connection_name"/>
         </action-inputs>
         <action-resources> 
           <report-definition mapping="report-definition5"/> 
         </action-resources>
-        <component-definition> 
-          <jndi><![CDATA[dw3]]></jndi> 
-        </component-definition> 
+        <component-definition/> 
       </action-definition>
  
     </actions>
@@ -354,14 +356,13 @@ order by a.date_sk desc;]]></query>
         <action-type>Jasper</action-type>
         <action-inputs> 
           <eastern_date_sk type="string"/>  
-          <output-type type="string" mapping="output"/> 
+          <output-type type="string" mapping="output"/>  
+          <jndi type="string" mapping="connection_name"/>
         </action-inputs>
         <action-resources> 
           <report-definition mapping="report-definition6"/> 
         </action-resources>
-        <component-definition> 
-          <jndi><![CDATA[dw3]]></jndi> 
-        </component-definition> 
+        <component-definition/> 
       </action-definition>
  
     </actions>
@@ -373,14 +374,13 @@ order by a.date_sk desc;]]></query>
         <action-type>Jasper</action-type>
         <action-inputs> 
           <eastern_date_sk type="string"/>  
-          <output-type type="string" mapping="output"/> 
+          <output-type type="string" mapping="output"/>  
+          <jndi type="string" mapping="connection_name"/>
         </action-inputs>
         <action-resources> 
           <report-definition mapping="report-definition7"/> 
         </action-resources>
-        <component-definition> 
-          <jndi><![CDATA[dw3]]></jndi> 
-        </component-definition> 
+        <component-definition/> 
       </action-definition>
  
     </actions>
@@ -392,14 +392,13 @@ order by a.date_sk desc;]]></query>
         <action-type>Jasper</action-type>
         <action-inputs> 
           <eastern_date_sk type="string"/>  
-          <output-type type="string" mapping="output"/> 
+          <output-type type="string" mapping="output"/>  
+          <jndi type="string" mapping="connection_name"/>
         </action-inputs>
         <action-resources> 
           <report-definition mapping="report-definition8"/> 
         </action-resources>
-        <component-definition> 
-          <jndi><![CDATA[dw3]]></jndi> 
-        </component-definition> 
+        <component-definition/> 
       </action-definition>
  
     </actions>
@@ -411,14 +410,13 @@ order by a.date_sk desc;]]></query>
         <action-type>Jasper</action-type>
         <action-inputs> 
           <eastern_date_sk type="string"/>  
-          <output-type type="string" mapping="output"/> 
+          <output-type type="string" mapping="output"/>  
+          <jndi type="string" mapping="connection_name"/>
         </action-inputs>
         <action-resources> 
           <report-definition mapping="report-definition9"/> 
         </action-resources>
-        <component-definition> 
-          <jndi><![CDATA[dw3]]></jndi> 
-        </component-definition> 
+        <component-definition/> 
       </action-definition>
  
     </actions>
@@ -430,14 +428,13 @@ order by a.date_sk desc;]]></query>
         <action-type>Jasper</action-type>
         <action-inputs> 
           <eastern_date_sk type="string"/>  
-          <output-type type="string" mapping="output"/> 
+          <output-type type="string" mapping="output"/>  
+          <jndi type="string" mapping="connection_name"/>
         </action-inputs>
         <action-resources> 
           <report-definition mapping="report-definition10"/> 
         </action-resources>
-        <component-definition> 
-          <jndi><![CDATA[dw3]]></jndi> 
-        </component-definition> 
+        <component-definition/> 
       </action-definition>
  
     </actions>
@@ -449,14 +446,13 @@ order by a.date_sk desc;]]></query>
         <action-type>Jasper</action-type>
         <action-inputs> 
           <eastern_date_sk type="string"/>  
-          <output-type type="string" mapping="output"/> 
+          <output-type type="string" mapping="output"/>  
+          <jndi type="string" mapping="connection_name"/>
         </action-inputs>
         <action-resources> 
           <report-definition mapping="report-definition11"/> 
         </action-resources>
-        <component-definition> 
-          <jndi><![CDATA[dw3]]></jndi> 
-        </component-definition> 
+        <component-definition/> 
       </action-definition>
  
     </actions>
@@ -468,14 +464,13 @@ order by a.date_sk desc;]]></query>
         <action-type>Jasper</action-type>
         <action-inputs> 
           <eastern_date_sk type="string"/>  
-          <output-type type="string" mapping="output"/> 
+          <output-type type="string" mapping="output"/>  
+          <jndi type="string" mapping="connection_name"/>
         </action-inputs>
         <action-resources> 
           <report-definition mapping="report-definition12"/> 
         </action-resources>
-        <component-definition> 
-          <jndi><![CDATA[dw3]]></jndi> 
-        </component-definition> 
+        <component-definition/> 
       </action-definition>
  
     </actions>
@@ -487,14 +482,13 @@ order by a.date_sk desc;]]></query>
         <action-type>Jasper</action-type>
         <action-inputs> 
           <eastern_date_sk type="string"/>  
-          <output-type type="string" mapping="output"/> 
+          <output-type type="string" mapping="output"/>  
+          <jndi type="string" mapping="connection_name"/>
         </action-inputs>
         <action-resources> 
           <report-definition mapping="report-definition13"/> 
         </action-resources>
-        <component-definition> 
-          <jndi><![CDATA[dw3]]></jndi> 
-        </component-definition> 
+        <component-definition/> 
       </action-definition>
  
     </actions>
@@ -506,36 +500,34 @@ order by a.date_sk desc;]]></query>
         <action-type>Jasper</action-type>
         <action-inputs> 
           <eastern_date_sk type="string"/>  
-          <output-type type="string" mapping="output"/> 
+          <output-type type="string" mapping="output"/>  
+          <jndi type="string" mapping="connection_name"/>
         </action-inputs>
         <action-resources> 
           <report-definition mapping="report-definition14"/> 
         </action-resources>
-        <component-definition> 
-          <jndi><![CDATA[dw3]]></jndi> 
-        </component-definition> 
+        <component-definition/> 
       </action-definition>
  
     </actions>
   
-    <actions>
-      <condition><![CDATA[p_network=='AdMarvel']]></condition>
-      <action-definition>
+    <actions> 
+      <condition><![CDATA[p_network=='AdMarvel']]></condition>  
+      <action-definition> 
         <component-name>JasperReportsComponent</component-name>
         <action-type>Jasper</action-type>
-        <action-inputs>
-          <eastern_date_sk type="string"/>
-          <output-type type="string" mapping="output"/>
+        <action-inputs> 
+          <eastern_date_sk type="string"/>  
+          <output-type type="string" mapping="output"/>  
+          <jndi type="string" mapping="connection_name"/>
         </action-inputs>
-        <action-resources>
-          <report-definition mapping="report-definition15"/>
+        <action-resources> 
+          <report-definition mapping="report-definition15"/> 
         </action-resources>
-        <component-definition>
-          <jndi><![CDATA[dw3]]></jndi>
-        </component-definition>
+        <component-definition/> 
       </action-definition>
-
+ 
     </actions>
-
+ 
   </actions> 
 </action-sequence>
