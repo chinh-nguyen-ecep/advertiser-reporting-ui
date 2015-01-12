@@ -43,7 +43,7 @@ sub main{
 		#run param22;
 		writelog("Run function param 22");
 		runParam(22);
-		checkParam(22,9);
+		checkParam(22,6);
 		promote(22);
 		
 		#run param 28
@@ -92,7 +92,7 @@ sub main{
 		#run param 23
 		writelog("Run param 23");	
 		runParam(23);
-		checkParam(23,9);
+		checkParam(23,6);
 		promote(23);
 		
 		#run param 29
@@ -120,17 +120,17 @@ sub promote{
 	print "promoting $param\n";
 	switch($param) {
 	  case 22 {
-		runParam(-22);
+		runPGFuntion("staging.fn_promote_daily_3rd_network_performance_report");		
 		break;}
 	  case 23 {
-	  	runParam(-23);
+	  	runPGFuntion("staging.fn_promote_monthly_3rd_network_performance_report");	
 		break;}
 	  case 28 {
-	  	runParam(-28);
+	  	runPGFuntion("staging.fn_promote_daily_3rd_network_summary_report");	
 		rollBackTransferRemnant();
 		break;}
 	  case 29 {
-		runParam(-29);
+		runPGFuntion("staging.fn_promote_monthly_3rd_network_summary_report");
 		#transfer 30 day rolling report
 		my $comand="cd /opt/temp/autoscripts/transferAggDataDw3Dw0;perl checkAggDw3_Dw0.pl monthly \"30 day\" &";
 		system($comand);
@@ -169,10 +169,10 @@ sub rollBackTransferRemnant{
 		##rollBackTransfer_table('adnetwork.daily_adnetwork_summary',$report_date7,$report_date1);
 		
 
-		checkEstimateTableToTransfer('adnetwork.daily_cg_performance');
-		checkEstimateTableToTransfer('adnetwork.daily_jt_performance');
+		##checkEstimateTableToTransfer('adnetwork.daily_cg_performance');
+		##checkEstimateTableToTransfer('adnetwork.daily_jt_performance');
 
-		checkEstimateTableToTransfer('adnetwork.daily_mm_performance');
+		##checkEstimateTableToTransfer('adnetwork.daily_mm_performance');
 		checkEstimateTableToTransfer('adnetwork.daily_mx_performance');
 		checkEstimateTableToTransfer('adnetwork.daily_sp_blue_performance');
 
