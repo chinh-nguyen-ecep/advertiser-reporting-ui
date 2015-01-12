@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_delivery_pub_v2.4" pageWidth="5599" pageHeight="1684" orientation="Landscape" columnWidth="5599" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="5075"/>
+	<property name="ireport.x" value="1215"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
@@ -1356,7 +1356,7 @@ Net ECPM]]></text>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Double"><![CDATA[( $V{adcel_requests_1}==0 ? 0 : $V{adcel_response_1}.doubleValue()/$V{adcel_requests_1} )]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $V{adcel_requests_1}==0 ? 0 : $V{filled_requests_1}.doubleValue()/$V{adcel_requests_1} )]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="3079" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
