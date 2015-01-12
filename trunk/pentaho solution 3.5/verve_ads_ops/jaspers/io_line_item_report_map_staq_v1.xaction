@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>I.O. Line Item Report -Map-STAQ V1</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>chinhnguyen</author>  
+    <description>Below is just for RDW-167: - This is daily report. - Set email to send the report out at 8am EST (5am PST) - Email: AdOps-National@vervemobile.com - Subject: I.O. Line Item Report -Map-STAG</description>  
+    <help/>  
+    <result-type>report</result-type>  
+    <icon>chart_1(2).png|chart_1(2).png</icon> 
+  </documentation>
+
+  <inputs> 
+    <p_output type="string"> 
+      <sources> 
+        <request>p_output</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </p_output>  
+    <List_output type="string-list"> 
+      <sources> 
+        <request>List_output</request> 
+      </sources>  
+      <default-value type="string-list"> 
+        <list-item>csv</list-item>  
+        <list-item>html</list-item>  
+        <list-item>pdf</list-item>  
+        <list-item>xls</list-item> 
+      </default-value> 
+    </List_output>  
+    <connection_name type="string"> 
+      <sources> 
+        <request>connection_name</request> 
+      </sources>  
+      <default-value><![CDATA[verveReportConnection]]></default-value> 
+    </connection_name>  
+    <p_eastern_date_sk type="string"> 
+      <sources> 
+        <request>p_eastern_date_sk</request> 
+      </sources>  
+      <default-value><![CDATA[0]]></default-value> 
+    </p_eastern_date_sk> 
+  </inputs>
+
+  <outputs/>
+
+  <resources> 
+    <pageTemplate> 
+      <solution-file> 
+        <location>io_line_item_report_map_staq_v1/io_line_item_report_map_staq.html</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </pageTemplate>  
+    <report-definition2> 
+      <solution-file> 
+        <location>io_line_item_report_map_staq_v1/io_line_item_report_map_staq_csv.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition2>  
+    <report-definition> 
+      <solution-file> 
+        <location>io_line_item_report_map_staq_v1/io_line_item_report_map_staq.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Get max min date data</action-type>
+      <action-inputs> 
+        <jndi type="string" mapping="connection_name"/> 
+      </action-inputs>
+      <action-outputs> 
+        <query-result type="result-set" mapping="q_max_min_date"/>  
+        <max_full_date type="string"/>  
+        <min_full_date type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <query><![CDATA[SELECT min(eastern_date_sk) as min_full_date, max(eastern_date_sk) as max_full_date 
+FROM adsops.daily_agg_io_line_item_report_map_staq_v1
+WHERE is_active=true;]]></query>  
+        <live><![CDATA[false]]></live> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>Get report date sk</action-type>
+      <action-inputs> 
+        <q_max_min_date type="result-set"/>  
+        <p_eastern_date_sk type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <p_eastern_date_sk type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[p_eastern_date_sk=q_max_min_date.getValueAt(0,1)]]></script> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Prompt/Secure Filter</action-type>
+      <action-inputs> 
+        <p_output type="string"/>  
+        <List_output type="string-list"/> 
+      </action-inputs>
+      <action-resources> 
+        <pageTemplate type="resource"/> 
+      </action-resources>
+      <component-definition> 
+        <selections> 
+          <p_output style="select"> 
+            <filter>List_output</filter> 
+          </p_output> 
+        </selections>  
+        <xsl><![CDATA[pageTemplate]]></xsl> 
+      </component-definition> 
+    </action-definition>
+  
+    <actions> 
+      <condition><![CDATA[p_output=='csv']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <jndi type="string" mapping="connection_name"/>  
+          <p_eastern_date_sk type="string"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition mapping="report-definition2"/> 
+        </action-resources>
+        <component-definition> 
+          <output-type><![CDATA[csv]]></output-type> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[p_output!='csv']]></condition>  
+      <action-definition> 
+        <component-name>JasperReportsComponent</component-name>
+        <action-type>Jasper</action-type>
+        <action-inputs> 
+          <output-type type="string" mapping="p_output"/>  
+          <jndi type="string" mapping="connection_name"/>  
+          <p_eastern_date_sk type="string"/> 
+        </action-inputs>
+        <action-resources> 
+          <report-definition type="resource"/> 
+        </action-resources>
+        <component-definition/> 
+      </action-definition>
+ 
+    </actions>
+ 
+  </actions> 
+</action-sequence>
