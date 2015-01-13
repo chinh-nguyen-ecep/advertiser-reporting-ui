@@ -120,17 +120,19 @@ sub promote{
 	print "promoting $param\n";
 	switch($param) {
 	  case 22 {
-		runPGFuntion("staging.fn_promote_daily_3rd_network_performance_report");		
+		runPGFuntion("staging.fn_promote_daily_3rd_network_performance_report");			
 		break;}
 	  case 23 {
 	  	runPGFuntion("staging.fn_promote_monthly_3rd_network_performance_report");	
 		break;}
 	  case 28 {
-	  	runPGFuntion("staging.fn_promote_daily_3rd_network_summary_report");	
+	  	runPGFuntion("staging.fn_promote_daily_3rd_network_summary_report");
+		checkPromoted($param);		
 		rollBackTransferRemnant();
 		break;}
 	  case 29 {
 		runPGFuntion("staging.fn_promote_monthly_3rd_network_summary_report");
+		checkPromoted($param);	
 		#transfer 30 day rolling report
 		my $comand="cd /opt/temp/autoscripts/transferAggDataDw3Dw0;perl checkAggDw3_Dw0.pl monthly \"30 day\" &";
 		system($comand);
@@ -148,12 +150,15 @@ sub promote{
 	  case 49 {		break;}
 	  case 68 {		
 		runPGFuntion('staging.fn_promote_daily_delivery_report');
+		checkPromoted($param);	
 		rollBackTransferDelivery();
 	  	break;}
 	  case 84 {		
 		runPGFuntion('staging.fn_promote_daily_fct_network_revenue');
 	  	break;}
 	};
+	
+	checkPromoted($param);	
 	
 }
 

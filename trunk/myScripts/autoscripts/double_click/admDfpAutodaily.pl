@@ -270,13 +270,12 @@ sub promote{
 	print "promoting $param \n";
 	if($param==69){
 		runPGFuntion('staging.fn_promote_daily_adm_dfp_report');
+		checkPromoted($param);
 		dw3_writelog($logFile,"Promoted daily adm dfp report");
-		#tranfer data to dw0
-		#@aggTableDw3=();
-		#push(@aggTableDw3,"adsops.daily_agg_delivery_advertiser");
-		#copyAggDataToDw0($report_date,@aggTableDw3);
+		
 	}elsif($param==70){
 		runPGFuntion('staging.fn_promote_daily_adm_dfp_network_revenue');
+		checkPromoted($param);
 		dw3_writelog($logFile,"Promoted daily adm dfp network revenue");
 		transferAdsopsAggregate();
 	}
@@ -290,11 +289,11 @@ sub transferAdsopsAggregate{
 	$report_date7=$h_report_date7{'year'}.'-'.$h_report_date7{'month'}.'-'.$h_report_date7{'day'};	#the report date 2012-02-02		
 
 	#tranfer data to dw10
-	system("cd /home/file_xfer/bin/databaseTransferFlowerMode/ && perl transferNoTracking.pl daily $master_host dw0,dw10,dw6 adsops.daily_agg_low_rate $report_date1");
-	system("cd /home/file_xfer/bin/databaseTransferFlowerMode/ && perl transferNoTracking.pl daily $master_host dw0,dw10,dw6 adsops.daily_agg_local_zero_delivered_v1 $report_date1");
-	system("cd /home/file_xfer/bin/databaseTransferFlowerMode/ && perl transferNoTracking.pl date_range $master_host dw0,dw10,dw6 adsops.daily_agg_delivery_advertiser_beta $report_date7 $report_date1");	
+	system("cd /home/file_xfer/bin/databaseTransferFlowerMode/ && perl transferNoTracking.pl daily $master_host $transfer_to_list_hosts adsops.daily_agg_low_rate $report_date1");
+	system("cd /home/file_xfer/bin/databaseTransferFlowerMode/ && perl transferNoTracking.pl daily $master_host $transfer_to_list_hosts adsops.daily_agg_local_zero_delivered_v1 $report_date1");
+	system("cd /home/file_xfer/bin/databaseTransferFlowerMode/ && perl transferNoTracking.pl date_range $master_host $transfer_to_list_hosts adsops.daily_agg_delivery_advertiser_beta $report_date7 $report_date1");	
 
-	system("cd /opt/temp/autoscripts/transformer && perl main.pl table $master_host $master_report_host adsops.daily_agg_io_line_item_report_map_stag admDfpAutodaily.pl");
+	system("cd /home/file_xfer/bin/databaseTransferFlowerMode/ && perl transferNoTracking.pl daily $master_host $transfer_to_list_hosts adsops.daily_agg_io_line_item_report_map_stag_v1 $report_date1");
 	system("cd /opt/temp/autoscripts/transformer && perl main.pl table $master_host $master_report_host adsops.daily_agg_national_delivery_watch admDfpAutodaily.pl");
 }
 

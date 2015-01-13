@@ -3,6 +3,7 @@ use Date::Pcalc qw(:all);
 use DBIx::AutoReconnect;
 $host="dw3";
 $transfer_to_host='dw10';
+$transfer_to_list_hosts='dw10,dw6,dw0';
 $dbname="warehouse";
 $usename="autoscript";
 $pwd="ECEP-2009";
@@ -157,8 +158,8 @@ sub getConnectionDw3{
 	#$conn=DBI->connect("dbi:PgPP:dbname=$dbname;host=$host;$port", $usename, $pwd,{RaiseError => 1}) or die "Unable to connect: $DBI::errstr\n";
 	$conn=DBIx::AutoReconnect-> connect(
            "dbi:PgPP:dbname=warehouse;host=dw3;5432",
-           "autoscript",
-           "ECEP-2009",
+           $usename,
+           $pwd,
            {
                 PrintError => 0,
                 ReconnectTimeout => 60,
@@ -173,8 +174,8 @@ sub getConnectionDw2{
 	#$conn=DBI->connect("dbi:PgPP:dbname=$dbname;host=$host;$port", $usename, $pwd,{RaiseError => 1}) or die "Unable to connect: $DBI::errstr\n";
 	$conn=DBIx::AutoReconnect-> connect(
            "dbi:PgPP:dbname=warehouse;host=dw2;5432",
-           "autoscript",
-           "ECEP-2009",
+           $usename,
+           $pwd,
            {
                 PrintError => 0,
                 ReconnectTimeout => 60,
@@ -190,8 +191,8 @@ sub getConnectionDw4{
 	#$conn=DBI->connect("dbi:PgPP:dbname=$dbname;host=$host;$port", $usename, $pwd,{RaiseError => 1}) or die "Unable to connect: $DBI::errstr\n";
 	$conn=DBIx::AutoReconnect-> connect(
            "dbi:PgPP:dbname=warehouse;host=dw4;5432",
-           "autoscript",
-           "ECEP-2009",
+           $usename,
+           $pwd,
            {
                 PrintError => 0,
                 ReconnectTimeout => 60,
@@ -206,8 +207,8 @@ sub getConnectionDw5{
 	#$conn=DBI->connect("dbi:PgPP:dbname=$dbname;host=$host;$port", $usename, $pwd,{RaiseError => 1}) or die "Unable to connect: $DBI::errstr\n";
 	$conn=DBIx::AutoReconnect-> connect(
            "dbi:PgPP:dbname=warehouse;host=dw5;5432",
-           "autoscript",
-           "ECEP-2009",
+           $usename,
+           $pwd,
            {
                 PrintError => 0,
                 ReconnectTimeout => 60,
@@ -222,8 +223,8 @@ sub getConnectionDw6{
 	#$conn=DBI->connect("dbi:PgPP:dbname=$dbname;host=$host;$port", $usename, $pwd,{RaiseError => 1}) or die "Unable to connect: $DBI::errstr\n";
 	$conn=DBIx::AutoReconnect-> connect(
            "dbi:PgPP:dbname=warehouse;host=dw6;5432",
-           "autoscript",
-           "ECEP-2009",
+           $usename,
+           $pwd,
            {
                 PrintError => 0,
                 ReconnectTimeout => 60,
@@ -238,8 +239,8 @@ sub getConnectionDw10{
 	#$conn=DBI->connect("dbi:PgPP:dbname=$dbname;host=$host;$port", $usename, $pwd,{RaiseError => 1}) or die "Unable to connect: $DBI::errstr\n";
 	$conn=DBIx::AutoReconnect-> connect(
            "dbi:PgPP:dbname=warehouse;host=dw10;5432",
-           "autoscript",
-           "ECEP-2009",
+           $usename,
+           $pwd,
            {
                 PrintError => 0,
                 ReconnectTimeout => 60,
@@ -496,26 +497,19 @@ sub isPromoted{
 	my $dbh='null';
 	if($server eq $host) {
 		$dbh = getConnection();
-	}
-	if($server eq 'dw3') {
+	}elsif($server eq 'dw3') {
 		$dbh = getConnectionDw3();
-	}
-	if($server eq 'dw0') {
+	}elsif($server eq 'dw0') {
 		$dbh = getConnectionDw0();
-	}
-	if($server eq 'dw2') {
+	}elsif($server eq 'dw2') {
 		$dbh = getConnectionDw2();
-	}
-	if($server eq 'dw4') {
+	}elsif($server eq 'dw4') {
 		$dbh = getConnectionDw4();
-	}
-	if($server eq 'dw5') {
+	}elsif($server eq 'dw5') {
 		$dbh = getConnectionDw5();
-	}
-	if($server eq 'dw6') {
+	}elsif($server eq 'dw6') {
 		$dbh = getConnectionDw6();
-	}
-	if($dbh eq 'null') {
+	}elsif($dbh eq 'null') {
 		return 0;
 	}
 	#Cretae String query
@@ -533,6 +527,14 @@ sub isPromoted{
 	#disconnect database	
 	my $rv = $dbh->disconnect;
 	return $result;
+}
+#check param is promoted
+sub checkPromoted{
+	my $param=shift;
+	while(isPromoted($param,$host)==0){
+		printTime("Param $param hasn't been promoted!");
+		sleep(120);
+	}
 }
 
 
