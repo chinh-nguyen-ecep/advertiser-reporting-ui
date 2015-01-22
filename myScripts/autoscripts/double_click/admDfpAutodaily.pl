@@ -19,7 +19,6 @@ register_process($process_date,$group_process_name,69,'07:10:00','09:15:00');
 register_process($process_date,$group_process_name,33,'07:10:00','09:15:00');
 register_process($process_date,$group_process_name,70,'07:10:00','09:15:00');
 
-
 main();
 
 sub main{
@@ -293,7 +292,7 @@ sub transferAdsopsAggregate{
 	system("cd /home/file_xfer/bin/databaseTransferFlowerMode/ && perl transferNoTracking.pl daily $master_host $transfer_to_list_hosts adsops.daily_agg_local_zero_delivered_v1 $report_date1");
 	system("cd /home/file_xfer/bin/databaseTransferFlowerMode/ && perl transferNoTracking.pl date_range $master_host $transfer_to_list_hosts adsops.daily_agg_delivery_advertiser_beta $report_date7 $report_date1");	
 
-	system("cd /home/file_xfer/bin/databaseTransferFlowerMode/ && perl transferNoTracking.pl daily $master_host $transfer_to_list_hosts adsops.daily_agg_io_line_item_report_map_stag_v1 $report_date1");
+	system("cd /home/file_xfer/bin/databaseTransferFlowerMode/ && perl transferNoTracking.pl daily $master_host $transfer_to_list_hosts adsops.daily_agg_io_line_item_report_map_staq_v1 $report_date1");
 	system("cd /opt/temp/autoscripts/transformer && perl main.pl table $master_host $master_report_host adsops.daily_agg_national_delivery_watch admDfpAutodaily.pl");
 }
 

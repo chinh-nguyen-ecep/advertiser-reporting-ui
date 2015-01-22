@@ -176,17 +176,23 @@ sub promote{
 	if($param==78){
 		#promote daily cumulative
 		runPGFuntion("staging.fn_promote_daily_rtb_report");
+		checkPromoted($param);
 		dw3_writelog($logFile,"Promoted daily rtb report");
 	}
 	if($param==82){
 		#promote daily alert reports
 		runPGFuntion("staging.fn_promote_daily_rtb_alert_report");
+		checkPromoted($param);
 		dw3_writelog($logFile,"Promoted daily rtb alert reports");
 	}
 }
 
 sub transferAllData{
-	system("cd /opt/temp/autoscripts/transformer && perl main.pl daily $master_host $master_report_host rtb.daily_agg_exchanger_cost_analysis_v1 $report_date rtbAutoDaily.pl");	
+	%h_report_date1=dw3_yesterday();
+	%h_report_date7=dw3_getDate(-7);
+	$report_date1=$h_report_date1{'year'}.'-'.$h_report_date1{'month'}.'-'.$h_report_date1{'day'};	#the report date 2012-02-02
+	$report_date7=$h_report_date7{'year'}.'-'.$h_report_date7{'month'}.'-'.$h_report_date7{'day'};	#the report date 2012-02-02
+	system("cd /opt/temp/autoscripts/transformer && perl main.pl daily_range $master_host $master_report_host rtb.daily_agg_exchanger_cost_analysis_v1 $report_date7 $report_date rtbAutoDaily.pl");	
 	system("cd /opt/temp/autoscripts/transformer && perl main.pl daily $master_host $master_report_host rtb.daily_agg_delivery_publisher_property_flight $report_date rtbAutoDaily.pl");	
 	system("cd /opt/temp/autoscripts/transformer && perl main.pl daily $master_host $master_report_host rtb.daily_agg_delivery_rtb_flight $report_date rtbAutoDaily.pl");
 	system("cd /opt/temp/autoscripts/transformer && perl main.pl daily $master_host $master_report_host rtb.daily_agg_alert_flights_hight_descrepancies $report_date rtbAutoDaily.pl");	

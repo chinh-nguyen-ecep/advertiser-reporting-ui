@@ -23,7 +23,7 @@ sub checkParam{
 		my $finish=fasle;
 		my $error=0;
 		my $processId=0;
-		
+	
 		my $query2='';
 		my $query_handle2='';
 		my $count=0;
@@ -31,12 +31,12 @@ sub checkParam{
 		#Create connection
 		$dbh = getConnection();
 		#Cretae String query
-		$query="SELECT process_id,process_status  FROM control.processs
-		  WHERE dt_process_queued::date=now()::date-1 AND process_config_id =$process_id_config";
+		$query="SELECT process_id,process_status  FROM control.process
+		  WHERE dt_process_queued::date=now()::date AND process_config_id =$process_id_config";
 		$query_handle = $dbh->prepare($query);
 		$query_handle->execute();
 		$query_handle->bind_columns(undef, \$process_id,\$process_status);		
-		
+	
 		# LOOP THROUGH RESULTS
 		while($query_handle->fetch()) {
 		   print "$process_id\t$process_status\n";
@@ -52,7 +52,7 @@ sub checkParam{
 			$query_handle2 = $dbh->prepare($query2);
 			$query_handle2->execute($processId);
 			$query_handle2->bind_columns(undef, \$process_id,\$concurrent_trans_name,\$is_complete,\$dt_lastchange);
-			
+		
 			# LOOP THROUGH RESULTS
 			while($query_handle2->fetch()) {
 			   print "$process_id\t$concurrent_trans_name\t$is_complete\n";
@@ -96,7 +96,7 @@ sub checkParam2{
 		my $error=0;
 		my $processId=0;
 		my $processStatus='no';
-		
+	
 		my $query2='';
 		my $query_handle2='';
 		my $count=0;
@@ -109,7 +109,7 @@ sub checkParam2{
 		$query_handle = $dbh->prepare($query);
 		$query_handle->execute($process_date);
 		$query_handle->bind_columns(undef, \$process_id,\$process_status);		
-		
+	
 		# LOOP THROUGH RESULTS
 		while($query_handle->fetch()) {
 		   $processId=$process_id;
@@ -141,15 +141,15 @@ sub getConnection{
 	my $conn=null;
 	#$conn=DBI->connect("dbi:PgPP:dbname=$dbname;host=$host;$port", $usename, $pwd,{RaiseError => 1}) or die "Unable to connect: $DBI::errstr\n";
 	$conn=DBIx::AutoReconnect-> connect(
-           "dbi:PgPP:dbname=$dbname;host=$host;$port",
-           $usename,
-           $pwd,
-           {
-                PrintError => 0,
-                ReconnectTimeout => 60,
-                ReconnectFailure => sub { warn "oops $host !" },
+	   "dbi:PgPP:dbname=$dbname;host=$host;$port",
+	   $usename,
+	   $pwd,
+	   {
+	        PrintError => 0,
+	        ReconnectTimeout => 60,
+	        ReconnectFailure => sub { warn "oops $host !" },
 				ReconnectMaxTries => 100
-           },
+	   },
      );
 	return $conn;
 }
@@ -157,15 +157,15 @@ sub getConnectionDw3{
 	my $conn=null;
 	#$conn=DBI->connect("dbi:PgPP:dbname=$dbname;host=$host;$port", $usename, $pwd,{RaiseError => 1}) or die "Unable to connect: $DBI::errstr\n";
 	$conn=DBIx::AutoReconnect-> connect(
-           "dbi:PgPP:dbname=warehouse;host=dw3;5432",
-           $usename,
-           $pwd,
-           {
-                PrintError => 0,
-                ReconnectTimeout => 60,
-                ReconnectFailure => sub { warn "oops dw3 !" },
+	   "dbi:PgPP:dbname=warehouse;host=dw3;5432",
+	   $usename,
+	   $pwd,
+	   {
+	        PrintError => 0,
+	        ReconnectTimeout => 60,
+	        ReconnectFailure => sub { warn "oops dw3 !" },
 				ReconnectMaxTries => 100
-           },
+	   },
      );
 	return $conn;
 }
@@ -173,15 +173,15 @@ sub getConnectionDw2{
 	my $conn=null;
 	#$conn=DBI->connect("dbi:PgPP:dbname=$dbname;host=$host;$port", $usename, $pwd,{RaiseError => 1}) or die "Unable to connect: $DBI::errstr\n";
 	$conn=DBIx::AutoReconnect-> connect(
-           "dbi:PgPP:dbname=warehouse;host=dw2;5432",
-           $usename,
-           $pwd,
-           {
-                PrintError => 0,
-                ReconnectTimeout => 60,
-                ReconnectFailure => sub { warn "oops dw2 !" },
+	   "dbi:PgPP:dbname=warehouse;host=dw2;5432",
+	   $usename,
+	   $pwd,
+	   {
+	        PrintError => 0,
+	        ReconnectTimeout => 60,
+	        ReconnectFailure => sub { warn "oops dw2 !" },
 				ReconnectMaxTries => 100
-           },
+	   },
      );
 	return $conn;
 }
@@ -190,15 +190,15 @@ sub getConnectionDw4{
 	my $conn=null;
 	#$conn=DBI->connect("dbi:PgPP:dbname=$dbname;host=$host;$port", $usename, $pwd,{RaiseError => 1}) or die "Unable to connect: $DBI::errstr\n";
 	$conn=DBIx::AutoReconnect-> connect(
-           "dbi:PgPP:dbname=warehouse;host=dw4;5432",
-           $usename,
-           $pwd,
-           {
-                PrintError => 0,
-                ReconnectTimeout => 60,
-                ReconnectFailure => sub { warn "oops dw4 !" },
+	   "dbi:PgPP:dbname=warehouse;host=dw4;5432",
+	   $usename,
+	   $pwd,
+	   {
+	        PrintError => 0,
+	        ReconnectTimeout => 60,
+	        ReconnectFailure => sub { warn "oops dw4 !" },
 				ReconnectMaxTries => 100
-           },
+	   },
      );
 	return $conn;
 }
@@ -206,15 +206,15 @@ sub getConnectionDw5{
 	my $conn=null;
 	#$conn=DBI->connect("dbi:PgPP:dbname=$dbname;host=$host;$port", $usename, $pwd,{RaiseError => 1}) or die "Unable to connect: $DBI::errstr\n";
 	$conn=DBIx::AutoReconnect-> connect(
-           "dbi:PgPP:dbname=warehouse;host=dw5;5432",
-           $usename,
-           $pwd,
-           {
-                PrintError => 0,
-                ReconnectTimeout => 60,
-                ReconnectFailure => sub { warn "oops dw5 !" },
+	   "dbi:PgPP:dbname=warehouse;host=dw5;5432",
+	   $usename,
+	   $pwd,
+	   {
+	        PrintError => 0,
+	        ReconnectTimeout => 60,
+	        ReconnectFailure => sub { warn "oops dw5 !" },
 				ReconnectMaxTries => 100
-           },
+	   },
      );
 	return $conn;
 }
@@ -222,15 +222,15 @@ sub getConnectionDw6{
 	my $conn=null;
 	#$conn=DBI->connect("dbi:PgPP:dbname=$dbname;host=$host;$port", $usename, $pwd,{RaiseError => 1}) or die "Unable to connect: $DBI::errstr\n";
 	$conn=DBIx::AutoReconnect-> connect(
-           "dbi:PgPP:dbname=warehouse;host=dw6;5432",
-           $usename,
-           $pwd,
-           {
-                PrintError => 0,
-                ReconnectTimeout => 60,
-                ReconnectFailure => sub { warn "oops dw6 !" },
+	   "dbi:PgPP:dbname=warehouse;host=dw6;5432",
+	   $usename,
+	   $pwd,
+	   {
+	        PrintError => 0,
+	        ReconnectTimeout => 60,
+	        ReconnectFailure => sub { warn "oops dw6 !" },
 				ReconnectMaxTries => 100
-           },
+	   },
      );
 	return $conn;
 }
@@ -238,15 +238,15 @@ sub getConnectionDw10{
 	my $conn=null;
 	#$conn=DBI->connect("dbi:PgPP:dbname=$dbname;host=$host;$port", $usename, $pwd,{RaiseError => 1}) or die "Unable to connect: $DBI::errstr\n";
 	$conn=DBIx::AutoReconnect-> connect(
-           "dbi:PgPP:dbname=warehouse;host=dw10;5432",
-           $usename,
-           $pwd,
-           {
-                PrintError => 0,
-                ReconnectTimeout => 60,
-                ReconnectFailure => sub { warn "oops dw10 !" },
+	   "dbi:PgPP:dbname=warehouse;host=dw10;5432",
+	   $usename,
+	   $pwd,
+	   {
+	        PrintError => 0,
+	        ReconnectTimeout => 60,
+	        ReconnectFailure => sub { warn "oops dw10 !" },
 				ReconnectMaxTries => 100
-           },
+	   },
      );
 	return $conn;
 }
@@ -254,15 +254,15 @@ sub getConnectionDw0{
 	my $conn=null;
 	#$conn=DBI->connect("dbi:PgPP:dbname=$dbname;host=$host;$port", $usename, $pwd,{RaiseError => 1}) or die "Unable to connect: $DBI::errstr\n";
 	$conn=DBIx::AutoReconnect-> connect(
-           "dbi:PgPP:dbname=$dbname;host=localhost;$port",
-           "pentaho",
-           $pwd,
-           {
-                PrintError => 0,
-                ReconnectTimeout => 60,
-                ReconnectFailure => sub { warn "oops dw0 !" },
+	   "dbi:PgPP:dbname=$dbname;host=localhost;$port",
+	   "pentaho",
+	   $pwd,
+	   {
+	        PrintError => 0,
+	        ReconnectTimeout => 60,
+	        ReconnectFailure => sub { warn "oops dw0 !" },
 				ReconnectMaxTries => 100
-           },
+	   },
      );
 	return $conn;
 }
@@ -271,15 +271,15 @@ sub getConnectionWIP{
 	my $conn=null;
 	#$conn=DBI->connect("dbi:PgPP:dbname=$dbname;host=$host;$port", $usename, $pwd,{RaiseError => 1}) or die "Unable to connect: $DBI::errstr\n";
 	$conn=DBIx::AutoReconnect-> connect(
-           "dbi:mysql:dbname=network;host=verve.calai8nkmpct.us-east-1.rds.amazonaws.com;3306",
-           "etlrw",
-           "h5X4qnx5",
-           {
-                PrintError => 0,
-                ReconnectTimeout => 60,
-                ReconnectFailure => sub { warn "oops Wip database !" },
+	   "dbi:mysql:dbname=network;host=verve.calai8nkmpct.us-east-1.rds.amazonaws.com;3306",
+	   "etlrw",
+	   "h5X4qnx5",
+	   {
+	        PrintError => 0,
+	        ReconnectTimeout => 60,
+	        ReconnectFailure => sub { warn "oops Wip database !" },
 				ReconnectMaxTries => 100
-           },
+	   },
      );
 	return $conn;
 }
@@ -354,6 +354,7 @@ $yr19+=1900;
 }
 sub runParam{
 	my $param=shift;
+	printTime("Call param $param !");
 	my $callFunction = "cd $binfd;java -jar dw3_runparam.jar $param";
 	system($callFunction);
 	#check to make sure the param is runing
@@ -371,7 +372,7 @@ sub runParam{
 		my $query_handle = $dbh->prepare($query);
 		$query_handle->execute();
 		$query_handle->bind_columns(undef, \$process_id,\$process_status);		
-		
+	
 		# LOOP THROUGH RESULTS
 		while($query_handle->fetch()) {
 			print "Process param $param has been runing with ID $process_id\n";
@@ -431,14 +432,14 @@ sub register_process{
 	my $process_config_id=shift;
 	my $e_start_time=shift;# 00:00:00
 	my $e_completion_time=shift;# 00:00:00
-	
+
 	my $dbh = getConnection();		   
-	
+
 	#del old record
 	my $query="DELETE FROM control.daily_process_status WHERE full_date=? AND process_config_id=?";
 	my $query_handle = $dbh->prepare($query);
 	$query_handle->execute($full_date,$process_config_id);
-	
+
 	$query="INSERT INTO control.daily_process_status(full_date, group_process_name, process_config_id, process_status,e_star_time,e_completion_time) VALUES (?, ?, ?, ?, ?, ?)";
 	$query_handle = $dbh->prepare($query);
 	$query_handle->execute($full_date,$group_process_name,$process_config_id,'Waiting',$e_start_time,$e_completion_time);
@@ -456,7 +457,7 @@ sub copyAggDataToDw0{
 		}else{
 			##my $callFunction ="cd /opt/temp/daily_agg_program/;java -jar DAILY_AGG_DW3_DW0.jar daily $table $date";
 			$callFunction="su - file_xfer -c \"cd /opt/temp/autoscripts/transformer/ && perl main.pl daily $host $transfer_to_host $tableName $date_copy dw3_util\"";
-			
+		
 		}
 		system($callFunction);
 	}
@@ -473,7 +474,7 @@ sub copyAggDataToDw10{
 		}else{
 			##my $callFunction ="cd /opt/temp/daily_agg_program/;java -jar DAILY_AGG_DW3_DW0.jar daily $table $date";
 			$callFunction="su - file_xfer -c \"cd /opt/temp/autoscripts/transformer/ && perl main.pl daily $host dw10 $tableName $date_copy dw3_util \"";
-			
+		
 		}
 		system($callFunction);
 	}
@@ -513,11 +514,11 @@ sub isPromoted{
 		return 0;
 	}
 	#Cretae String query
-	my $query="SELECT COUNT(*) as count FROM control.process WHERE process_status <> 'SU' AND process_config_id =$param";
+	my $query="SELECT COUNT(*) as count FROM (SELECT * FROM control.process WHERE process_status <> 'SU' AND process_config_id =$param LIMIT 1) a";
 	my $query_handle = $dbh->prepare($query);
 	$query_handle->execute();
 	$query_handle->bind_columns(undef, \$count);		
-	
+
 	# LOOP THROUGH RESULTS
 	while($query_handle->fetch()) {
 		if($count == 0){
@@ -531,9 +532,15 @@ sub isPromoted{
 #check param is promoted
 sub checkPromoted{
 	my $param=shift;
-	while(isPromoted($param,$host)==0){
+	printTime("Check promote param $param !");
+	sleep(5);
+	if(isPromoted($param,$host)==0){
 		printTime("Param $param hasn't been promoted!");
-		sleep(120);
+		dw3_sendMail("chinh.nguyen\@ecepvn.org,tho.hoang\@ecepvn.org","Param $param promote fail","Please promote this param $param by hand!");
+		sleep(60);
+		checkPromoted($param)
+	}else{
+		printTime("Param $param has been promoted!");		
 	}
 }
 
