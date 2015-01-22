@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="I.O. Line Item Report -Map-STAQ V1" pageWidth="3552" pageHeight="842" columnWidth="3512" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="I.O. Line Item Report -Map-STAQ V1" pageWidth="4852" pageHeight="842" columnWidth="4812" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.3660269107301466"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="4754"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Crosstab Data Text" mode="Transparent" hAlign="Center" fontName="Calibri">
 		<box leftPadding="5" rightPadding="5"/>
@@ -135,7 +135,7 @@ WHERE is_active=true AND eastern_date_sk=$P{p_eastern_date_sk}::int;]]>
 				<text><![CDATA[IO Orders ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="330" y="0" width="250" height="25" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="330" y="0" width="370" height="25" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -149,7 +149,7 @@ WHERE is_active=true AND eastern_date_sk=$P{p_eastern_date_sk}::int;]]>
 				<text><![CDATA[Contract Name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="580" y="0" width="100" height="25" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="700" y="0" width="100" height="25" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -163,7 +163,7 @@ WHERE is_active=true AND eastern_date_sk=$P{p_eastern_date_sk}::int;]]>
 				<text><![CDATA[ADM Order IDs]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="680" y="0" width="250" height="25" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="800" y="0" width="650" height="25" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -177,7 +177,7 @@ WHERE is_active=true AND eastern_date_sk=$P{p_eastern_date_sk}::int;]]>
 				<text><![CDATA[ADM Order Name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="930" y="0" width="96" height="25" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="1450" y="0" width="96" height="25" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -188,10 +188,10 @@ WHERE is_active=true AND eastern_date_sk=$P{p_eastern_date_sk}::int;]]>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[IO Line Item ID	]]></text>
+				<text><![CDATA[IO Line Item ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="1026" y="0" width="300" height="25" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="1546" y="0" width="510" height="25" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -205,7 +205,7 @@ WHERE is_active=true AND eastern_date_sk=$P{p_eastern_date_sk}::int;]]>
 				<text><![CDATA[IO Line Item Name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="1526" y="0" width="121" height="25" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="2364" y="0" width="159" height="25" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -219,7 +219,7 @@ WHERE is_active=true AND eastern_date_sk=$P{p_eastern_date_sk}::int;]]>
 				<text><![CDATA[IO Line Items Quantity]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="1647" y="0" width="126" height="25" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="2523" y="0" width="126" height="25" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -233,7 +233,7 @@ WHERE is_active=true AND eastern_date_sk=$P{p_eastern_date_sk}::int;]]>
 				<text><![CDATA[IO Line Items Metric]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="1773" y="0" width="100" height="25" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="2649" y="0" width="136" height="25" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -247,7 +247,7 @@ WHERE is_active=true AND eastern_date_sk=$P{p_eastern_date_sk}::int;]]>
 				<text><![CDATA[IO Line Items Rate]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="1873" y="0" width="125" height="25" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="2785" y="0" width="125" height="25" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -289,7 +289,7 @@ WHERE is_active=true AND eastern_date_sk=$P{p_eastern_date_sk}::int;]]>
 				<text><![CDATA[Date]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="1326" y="0" width="100" height="25" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="2056" y="0" width="156" height="25" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -300,11 +300,10 @@ WHERE is_active=true AND eastern_date_sk=$P{p_eastern_date_sk}::int;]]>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[IO Line Items
-Start Date]]></text>
+				<text><![CDATA[IO Line Items Start Date]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="1426" y="0" width="100" height="25" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="2212" y="0" width="152" height="25" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -315,11 +314,10 @@ Start Date]]></text>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[IO Line Items
-End Date]]></text>
+				<text><![CDATA[IO Line Items End Date]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="2098" y="0" width="100" height="25" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="3047" y="0" width="138" height="25" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -330,11 +328,10 @@ End Date]]></text>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[ADM Flight
-End Date]]></text>
+				<text><![CDATA[ADM Flight End Date]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="1998" y="0" width="100" height="25" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="2910" y="0" width="137" height="25" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -345,11 +342,10 @@ End Date]]></text>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[ADM Flight
-Start Date]]></text>
+				<text><![CDATA[ADM Flight Start Date]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="2198" y="0" width="100" height="25" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="3185" y="0" width="116" height="25" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -360,11 +356,10 @@ Start Date]]></text>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[DFP Line Item
-ID]]></text>
+				<text><![CDATA[DFP Line Item ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="2298" y="0" width="150" height="25" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="3301" y="0" width="150" height="25" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -378,7 +373,7 @@ ID]]></text>
 				<text><![CDATA[Vendor Name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="2448" y="0" width="150" height="25" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="3451" y="0" width="150" height="25" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -392,7 +387,7 @@ ID]]></text>
 				<text><![CDATA[Vendor Roles]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="2598" y="0" width="125" height="25" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="3601" y="0" width="125" height="25" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -406,7 +401,7 @@ ID]]></text>
 				<text><![CDATA[DFP Creative ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="2723" y="0" width="125" height="25" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="3726" y="0" width="125" height="25" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -417,10 +412,10 @@ ID]]></text>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[ADM Creative ID	]]></text>
+				<text><![CDATA[ADM Creative ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="2848" y="0" width="100" height="25" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="3851" y="0" width="141" height="25" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -431,11 +426,10 @@ ID]]></text>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Creative
-Created At]]></text>
+				<text><![CDATA[Creative Created At]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="2948" y="0" width="100" height="25" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="3992" y="0" width="156" height="25" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -446,11 +440,10 @@ Created At]]></text>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Creative
-Updated At]]></text>
+				<text><![CDATA[Creative Updated At]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="3048" y="0" width="250" height="25" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="4148" y="0" width="450" height="25" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -464,7 +457,7 @@ Updated At]]></text>
 				<text><![CDATA[ADM Creative Name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="3298" y="0" width="114" height="25" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="4598" y="0" width="114" height="25" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -478,7 +471,7 @@ Updated At]]></text>
 				<text><![CDATA[DFP Impressions]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="3412" y="0" width="100" height="25" backcolor="#FFFFFF"/>
+				<reportElement mode="Opaque" x="4712" y="0" width="100" height="25" backcolor="#FFFFFF"/>
 				<box leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -494,9 +487,9 @@ Updated At]]></text>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="35">
+		<band height="25">
 			<textField>
-				<reportElement x="230" y="0" width="100" height="35"/>
+				<reportElement x="230" y="0" width="100" height="25"/>
 				<box topPadding="5" leftPadding="5" bottomPadding="0" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
@@ -510,7 +503,7 @@ Updated At]]></text>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{io_orders_id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="330" y="0" width="250" height="35"/>
+				<reportElement x="330" y="0" width="370" height="25"/>
 				<box topPadding="5" leftPadding="5" bottomPadding="0" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
@@ -524,7 +517,7 @@ Updated At]]></text>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{contract_name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="580" y="0" width="100" height="35"/>
+				<reportElement x="700" y="0" width="100" height="25"/>
 				<box topPadding="5" leftPadding="5" bottomPadding="0" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
@@ -538,7 +531,7 @@ Updated At]]></text>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{adm_order_ids}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="680" y="0" width="250" height="35"/>
+				<reportElement x="800" y="0" width="650" height="25"/>
 				<box topPadding="5" leftPadding="5" bottomPadding="0" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
@@ -552,7 +545,7 @@ Updated At]]></text>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{adm_order_name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="930" y="0" width="96" height="35"/>
+				<reportElement x="1450" y="0" width="96" height="25"/>
 				<box topPadding="5" leftPadding="5" bottomPadding="0" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
@@ -566,7 +559,7 @@ Updated At]]></text>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{io_line_item_id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1026" y="0" width="300" height="35"/>
+				<reportElement x="1546" y="0" width="510" height="25"/>
 				<box topPadding="5" leftPadding="5" bottomPadding="0" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
@@ -580,7 +573,7 @@ Updated At]]></text>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{io_lineitem_name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1526" y="0" width="121" height="35"/>
+				<reportElement x="2364" y="0" width="159" height="25"/>
 				<box topPadding="5" leftPadding="5" bottomPadding="0" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
@@ -594,7 +587,7 @@ Updated At]]></text>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{io_line_items_quantity}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1647" y="0" width="126" height="35"/>
+				<reportElement x="2523" y="0" width="126" height="25"/>
 				<box topPadding="5" leftPadding="5" bottomPadding="0" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
@@ -608,7 +601,7 @@ Updated At]]></text>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{io_line_items_metric}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1773" y="0" width="100" height="35"/>
+				<reportElement x="2649" y="0" width="136" height="25"/>
 				<box topPadding="5" leftPadding="5" bottomPadding="0" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
@@ -622,7 +615,7 @@ Updated At]]></text>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{io_line_items_rate}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1873" y="0" width="125" height="35"/>
+				<reportElement x="2785" y="0" width="125" height="25"/>
 				<box topPadding="5" leftPadding="5" bottomPadding="0" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
@@ -636,7 +629,7 @@ Updated At]]></text>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{adm_flight_ids}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="100" y="0" width="130" height="35" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="100" y="0" width="130" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="5" leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -650,7 +643,7 @@ Updated At]]></text>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{sfdc_opportunity_id}]]></textFieldExpression>
 			</textField>
 			<textField pattern="yyyy-MM-dd" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="0" y="0" width="100" height="35" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="0" y="0" width="100" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="5" leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -664,7 +657,7 @@ Updated At]]></text>
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{Date}]]></textFieldExpression>
 			</textField>
 			<textField pattern="yyyy-MM-dd" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="1326" y="0" width="100" height="35" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="2056" y="0" width="156" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="5" leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -678,7 +671,7 @@ Updated At]]></text>
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{io_line_item_start_date}]]></textFieldExpression>
 			</textField>
 			<textField pattern="yyyy-MM-dd" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="1426" y="0" width="100" height="35" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="2212" y="0" width="152" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="5" leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -692,7 +685,7 @@ Updated At]]></text>
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{io_line_item_end_date}]]></textFieldExpression>
 			</textField>
 			<textField pattern="yyyy-MM-dd" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="2098" y="0" width="100" height="35" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="3047" y="0" width="138" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="5" leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -706,7 +699,7 @@ Updated At]]></text>
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{adm_flight_end_date}]]></textFieldExpression>
 			</textField>
 			<textField pattern="yyyy-MM-dd" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="1998" y="0" width="100" height="35" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="2910" y="0" width="137" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="5" leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -720,7 +713,7 @@ Updated At]]></text>
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{adm_flight_start_date}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="2198" y="0" width="100" height="35" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="3185" y="0" width="116" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="5" leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -734,7 +727,7 @@ Updated At]]></text>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{dfp_line_item_id}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="2298" y="0" width="150" height="35"/>
+				<reportElement x="3301" y="0" width="150" height="25"/>
 				<box topPadding="5" leftPadding="5" bottomPadding="0" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
@@ -748,7 +741,7 @@ Updated At]]></text>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{vendor_names}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="2448" y="0" width="150" height="35"/>
+				<reportElement x="3451" y="0" width="150" height="25"/>
 				<box topPadding="5" leftPadding="5" bottomPadding="0" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
@@ -762,7 +755,7 @@ Updated At]]></text>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{vendor_roles}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="2598" y="0" width="125" height="35"/>
+				<reportElement x="3601" y="0" width="125" height="25"/>
 				<box topPadding="5" leftPadding="5" bottomPadding="0" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
@@ -776,7 +769,7 @@ Updated At]]></text>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{dfp_creative_id}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="2723" y="0" width="125" height="35"/>
+				<reportElement x="3726" y="0" width="125" height="25"/>
 				<box topPadding="5" leftPadding="5" bottomPadding="0" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
@@ -790,7 +783,7 @@ Updated At]]></text>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{adm_creative_id}]]></textFieldExpression>
 			</textField>
 			<textField pattern="yyyy-MM-dd" isBlankWhenNull="true">
-				<reportElement mode="Transparent" x="2848" y="0" width="100" height="35" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="3851" y="0" width="141" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="5" leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -804,7 +797,7 @@ Updated At]]></text>
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{creative_created_at}]]></textFieldExpression>
 			</textField>
 			<textField pattern="yyyy-MM-dd" isBlankWhenNull="true">
-				<reportElement mode="Transparent" x="2948" y="0" width="100" height="35" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="3992" y="0" width="156" height="25" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="5" leftPadding="5" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -818,7 +811,7 @@ Updated At]]></text>
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{creative_updated_at}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="3048" y="0" width="250" height="35"/>
+				<reportElement x="4148" y="0" width="450" height="25"/>
 				<box topPadding="5" leftPadding="5" bottomPadding="0" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
@@ -832,7 +825,7 @@ Updated At]]></text>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{adm_creative_name}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="3298" y="0" width="114" height="35"/>
+				<reportElement x="4598" y="0" width="114" height="25"/>
 				<box topPadding="5" leftPadding="5" bottomPadding="0" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
@@ -846,7 +839,7 @@ Updated At]]></text>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{dfp_impressions}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="3412" y="0" width="100" height="35"/>
+				<reportElement x="4712" y="0" width="100" height="25"/>
 				<box topPadding="5" leftPadding="5" bottomPadding="0" rightPadding="5">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
