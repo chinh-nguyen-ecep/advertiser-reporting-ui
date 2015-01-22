@@ -8,15 +8,6 @@ $date=yesterday();
 $date2=yesterday2();
 $log="";
 $mailTile="[Daily report][3rd AdNetwork][$date] ";
-##rollBackTransferRemnant();
-##rollBackTransferDelivery();
-##rollBackTransferPublisherProperty();
-##my $comand="cd /opt/temp/autoscripts/transferAggDataDw3Dw0;perl checkAggDw3_Dw0.pl monthly \"30 day\" &";
-##system($comand);
-##@aggTableDw3=();
-##push(@aggTableDw3,"adm.daily_network_fct_request");
-##push(@aggTableDw3,"adm.daily_network_fct_channel");
-##copyAggDataToDw0($date,@aggTableDw3);
 
 main();
 
@@ -61,16 +52,20 @@ sub main{
 		runParam(84);
 		checkParam(84,3);				
 		promote(84);
-		#run param 34 transfer data to network data mark
-		##writelog("Run param 34");	
-		##runParam(34);
+		
+		#run param 53
 		writelog("Run param 53");	
 		runParam(53);
+
+		#run param 54
 		writelog("Run param 54");	
 		runParam(54);
+
 		#run param 48 
 		writelog("Run param 48");	
 		runParam(48);
+
+		#run param 47 
 		writelog("Run param 47");	
 		runParam(47);
 		checkParam(47,3);
@@ -120,10 +115,12 @@ sub promote{
 	print "promoting $param\n";
 	switch($param) {
 	  case 22 {
-		runPGFuntion("staging.fn_promote_daily_3rd_network_performance_report");			
+		runPGFuntion("staging.fn_promote_daily_3rd_network_performance_report");
+		checkPromoted($param);				
 		break;}
 	  case 23 {
-	  	runPGFuntion("staging.fn_promote_monthly_3rd_network_performance_report");	
+	  	runPGFuntion("staging.fn_promote_monthly_3rd_network_performance_report");
+		checkPromoted($param);		
 		break;}
 	  case 28 {
 	  	runPGFuntion("staging.fn_promote_daily_3rd_network_summary_report");
@@ -137,14 +134,9 @@ sub promote{
 		my $comand="cd /opt/temp/autoscripts/transferAggDataDw3Dw0;perl checkAggDw3_Dw0.pl monthly \"30 day\" &";
 		system($comand);
 		break;}
-	  case 34 {
-	  	@aggTableDw3=();
-		push(@aggTableDw3,"adm.daily_network_fct_request");
-		push(@aggTableDw3,"adm.daily_network_fct_channel");
-		copyAggDataToDw0($date,@aggTableDw3);
-		break;}
 	  case 47 {
-	  	runPGFuntion("staging.fn_promote_daily_3rd_network_requests_report");		
+	  	runPGFuntion("staging.fn_promote_daily_3rd_network_requests_report");	
+		checkPromoted($param);		
 		break;}
 	  case 48 {		break;}
 	  case 49 {		break;}
@@ -155,11 +147,9 @@ sub promote{
 	  	break;}
 	  case 84 {		
 		runPGFuntion('staging.fn_promote_daily_fct_network_revenue');
+		checkPromoted($param);	
 	  	break;}
 	};
-	
-	checkPromoted($param);	
-	
 }
 
 

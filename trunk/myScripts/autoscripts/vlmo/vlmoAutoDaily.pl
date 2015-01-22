@@ -15,13 +15,7 @@ my $emailAvailableTitle="[Notification!][Daily VLMO report][$report_date]";	#the
 my $mailto="tho.hoang\@ecepvn.org,ops\@ecepvn.org";	#List mail addresses
 my @aggTableDw3=();
 
-
-#system("cd /opt/temp/autoscripts/transformer && perl main.pl daily $master_host $master_report_host adsops.daily_agg_delivery_advertiser $report_date vlmoAutoDaily.pl");	
-#transferAllData();	
-
-#checkSU();
 main();
-
 
 sub main{
 	#register sub process to control.daily_process_status table.
@@ -191,11 +185,13 @@ sub promote{
 	if($param==73){
 		#promote daily cumulative
 		runPGFuntion("staging.fn_promote_daily_vlmo_report");
+		checkPromoted($param);
 		dw3_writelog($logFile,"Promoted daily vlmo report");
 	}
 	if($param==83){
 		#promote daily vlmo revenue
 		runPGFuntion("staging.fn_promote_daily_vlmo_revenue_report");
+		checkPromoted($param);
 		dw3_writelog($logFile,"Promoted daily vlmo revenue reports");
 	}
 }
