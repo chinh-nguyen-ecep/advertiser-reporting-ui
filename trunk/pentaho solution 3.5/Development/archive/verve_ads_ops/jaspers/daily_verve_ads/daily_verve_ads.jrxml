@@ -1,0 +1,877 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Daily verve Ads" pageWidth="1802" pageHeight="1190" orientation="Landscape" columnWidth="1762" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="2.1398375295825027"/>
+	<property name="ireport.x" value="2781"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="p_start_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("2014-01-01")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_end_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("2014-01-01")]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+full_date as "Date"
+,adnetwork_id
+,adnetwork_name as "Ad Network"
+,adnetwork_reports_ad_calls as "Ad requests"
+,adnetwork_reports_ads_filled
+,(CASE WHEN adnetwork_reports_ad_calls>0 THEN adnetwork_reports_ads_filled::float/adnetwork_reports_ad_calls ELSE null END) as "Ad Fill Rate"
+,((CASE WHEN adnetwork_reports_ad_calls>0 THEN adnetwork_reports_ads_filled::float/adnetwork_reports_ad_calls ELSE null END)-(CASE WHEN adnetwork_reports_ad_calls_yesterday>0 THEN adnetwork_reports_ads_filled_yesterday::float/adnetwork_reports_ad_calls_yesterday ELSE null END)) AS "Ad Delta"
+,verve_reports_ad_calls as "Verve Ad Requests"
+,verve_reports_ads_filled
+,(CASE WHEN verve_reports_ad_calls>0 THEN verve_reports_ads_filled::float/verve_reports_ad_calls ELSE null END) as "Verve Fill Rate"
+,(adnetwork_reports_ad_calls-verve_reports_ad_calls) as "Discrepancy Ad Requests"
+,(adnetwork_reports_ads_filled-verve_reports_ads_filled) as "Discrepancy Ad Filled"
+,(CASE WHEN verve_reports_ads_filled>0 THEN 1-(adnetwork_reports_ads_filled::float/verve_reports_ads_filled) ELSE null END) as "Filled Impressions Discrepancy"
+,adnetwork_reports_clicks
+,adnetwork_reports_gross
+,(adnetwork_reports_gross-adnetwork_reports_gross_yesterday) as "Daily Delta Gross"
+,(CASE WHEN adnetwork_reports_clicks>0 THEN adnetwork_reports_gross::float/adnetwork_reports_clicks ELSE null END) as "CPC"
+,(CASE WHEN adnetwork_reports_ads_filled>0 THEN adnetwork_reports_clicks::float/verve_reports_ads_filled ELSE null END) as "CTR"
+,(CASE WHEN adnetwork_reports_ads_filled>0 THEN adnetwork_reports_gross::float/(verve_reports_ads_filled::float/1000) ELSE null END) as "CPM"
+FROM adsops.daily_agg_verve_ads_by_remnant
+WHERE is_active=true
+AND full_date BETWEEN $P{p_start_date}::date AND $P{p_end_date}::date
+ORDER BY full_date,adnetwork_name]]>
+	</queryString>
+	<field name="Date" class="java.sql.Date"/>
+	<field name="adnetwork_id" class="java.lang.Integer"/>
+	<field name="Ad Network" class="java.lang.String"/>
+	<field name="Ad requests" class="java.lang.Integer"/>
+	<field name="adnetwork_reports_ads_filled" class="java.lang.Integer"/>
+	<field name="Ad Fill Rate" class="java.lang.Double"/>
+	<field name="Ad Delta" class="java.lang.Double"/>
+	<field name="Verve Ad Requests" class="java.lang.Integer"/>
+	<field name="verve_reports_ads_filled" class="java.lang.Integer"/>
+	<field name="Verve Fill Rate" class="java.lang.Double"/>
+	<field name="Discrepancy Ad Requests" class="java.lang.Integer"/>
+	<field name="Discrepancy Ad Filled" class="java.lang.Integer"/>
+	<field name="Filled Impressions Discrepancy" class="java.lang.Double"/>
+	<field name="adnetwork_reports_clicks" class="java.lang.Integer"/>
+	<field name="adnetwork_reports_gross" class="java.lang.Double"/>
+	<field name="Daily Delta Gross" class="java.lang.Double"/>
+	<field name="CPC" class="java.lang.Double"/>
+	<field name="CTR" class="java.lang.Double"/>
+	<field name="CPM" class="java.lang.Double"/>
+	<variable name="Ad requests" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{Ad requests}.longValue()]]></variableExpression>
+	</variable>
+	<variable name="adnetwork_reports_ads_filled" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{adnetwork_reports_ads_filled}]]></variableExpression>
+	</variable>
+	<variable name="Ad Fill Rate" class="java.lang.Double">
+		<variableExpression><![CDATA[( $V{Ad requests}==0 ? null : $V{adnetwork_reports_ads_filled}.doubleValue()/$V{Ad requests} )]]></variableExpression>
+	</variable>
+	<variable name="Verve Ad Requests" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{Verve Ad Requests}.longValue()]]></variableExpression>
+	</variable>
+	<variable name="verve_reports_ads_filled" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{verve_reports_ads_filled}]]></variableExpression>
+	</variable>
+	<variable name="Verve Fill Rate" class="java.lang.Double">
+		<variableExpression><![CDATA[( $V{Verve Ad Requests}==0 ? null : $V{verve_reports_ads_filled}.doubleValue()/$V{Verve Ad Requests} )]]></variableExpression>
+	</variable>
+	<variable name="Discrepancy Ad Requests" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{Discrepancy Ad Requests}.longValue()]]></variableExpression>
+	</variable>
+	<variable name="Discrepancy Ad Filled" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{Discrepancy Ad Filled}]]></variableExpression>
+	</variable>
+	<variable name="Filled Impressions Discrepancy" class="java.lang.Double">
+		<variableExpression><![CDATA[( $V{verve_reports_ads_filled}==0 ? null : 1-($V{adnetwork_reports_ads_filled}.doubleValue()/$V{verve_reports_ads_filled}) )]]></variableExpression>
+	</variable>
+	<variable name="adnetwork_reports_clicks" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{adnetwork_reports_clicks}.longValue()]]></variableExpression>
+	</variable>
+	<variable name="adnetwork_reports_gross" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{adnetwork_reports_gross}]]></variableExpression>
+	</variable>
+	<variable name="Daily Delta Gross" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{Daily Delta Gross}]]></variableExpression>
+	</variable>
+	<variable name="CPC" class="java.lang.Double">
+		<variableExpression><![CDATA[( $V{adnetwork_reports_clicks}==0 ? null : $V{adnetwork_reports_gross}/$V{adnetwork_reports_clicks} )]]></variableExpression>
+	</variable>
+	<variable name="CTR" class="java.lang.Double">
+		<variableExpression><![CDATA[( $V{verve_reports_ads_filled}==0 ? null : $V{adnetwork_reports_clicks}.doubleValue()/$V{verve_reports_ads_filled} )]]></variableExpression>
+	</variable>
+	<variable name="CPM" class="java.lang.Double">
+		<variableExpression><![CDATA[( $V{verve_reports_ads_filled}==0 ? null : $V{adnetwork_reports_gross}/($V{verve_reports_ads_filled}/1000) )]]></variableExpression>
+	</variable>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="320">
+			<staticText>
+				<reportElement x="0" y="154" width="241" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Summary:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="279" width="241" height="41"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Detail:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="1762" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Notes:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="1762" height="134"/>
+				<textElement/>
+				<text><![CDATA[- N/A = Data is not exposed by 3rd party (e.g. Marchex ) or not go through adcel ( e.g Itune)
+- Data Unavailable = Data not currently available from 3rd party at the time Dw download
+- Fill Rate = ads filled/ ad requests
+- Discrepancy:
++ Ad Requests = Ad Network Reported Requests - AdCel Reported Ad Requests
++ Ads Filled = Ad Network Reported Ads Filled - AdCel Reported Ads Filled
++ Filled Impressions Discrepancy = 1 - (Ad Network Reported Ads Filled / AdCel Reported Ads Filled)
+- Clicks = Using banner clicks for network that does not have clicks reported.
+- Gross =  based on latest 3rd party revenue calculation rules
+- Daily Delta Gross = gross $ Day N - Gross $ for Day N-1]]></text>
+			</staticText>
+			<subreport>
+				<reportElement mode="Transparent" x="0" y="187" width="1235" height="75"/>
+				<subreportParameter name="p_start_date">
+					<subreportParameterExpression><![CDATA[$P{p_start_date}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_end_date">
+					<subreportParameterExpression><![CDATA[$P{p_end_date}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_verve_ads_subreport_summary.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="40">
+			<staticText>
+				<reportElement x="0" y="20" width="91" height="20" backcolor="#006600"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="91" y="20" width="150" height="20" backcolor="#006600"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ad Network]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="241" y="20" width="111" height="20" backcolor="#006600"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ad Requests]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="352" y="20" width="109" height="20" backcolor="#006600"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ads Filled]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="461" y="20" width="91" height="20" backcolor="#006600"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fill Rate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="552" y="20" width="111" height="20" backcolor="#006600"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ad Requests]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="663" y="20" width="111" height="20" backcolor="#006600"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ads Filled]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="774" y="20" width="91" height="20" backcolor="#006600"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fill Rate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="865" y="20" width="91" height="20" backcolor="#006600"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ad Requests]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="956" y="20" width="91" height="20" backcolor="#006600"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ads Filled]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1047" y="20" width="188" height="20" backcolor="#009900"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Filled Impressions Discrepancy]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1235" y="20" width="111" height="20" backcolor="#006600"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Clicks/Requests]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1346" y="20" width="111" height="20" backcolor="#006600"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gross $]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1457" y="20" width="113" height="20" backcolor="#006600"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Daily Delta Gross $]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1570" y="20" width="64" height="20" backcolor="#006600"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CPC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1634" y="20" width="64" height="20" backcolor="#006600"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CTR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1698" y="20" width="64" height="20" backcolor="#006600"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CPM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="241" y="0" width="311" height="20" backcolor="#006600"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ad Network Report]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="552" y="0" width="313" height="20" backcolor="#006600"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Verve Report]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="865" y="0" width="370" height="20" backcolor="#006600"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Discrepancy]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1235" y="0" width="527" height="20" backcolor="#006600"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Daily Revenue]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="91" height="20" backcolor="#006600"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="91" y="0" width="150" height="20" backcolor="#006600"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<textField pattern="yyyy-MM-dd">
+				<reportElement x="0" y="0" width="91" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{Date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="91" y="0" width="150" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Ad Network}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="241" y="0" width="111" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Ad requests}==null ? ($F{adnetwork_reports_ads_filled}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($F{Ad requests}) )]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="352" y="0" width="109" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $F{adnetwork_reports_ads_filled}==null ? ($F{Ad requests}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($F{adnetwork_reports_ads_filled}) )]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="461" y="0" width="91" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Ad Fill Rate}==null ? "N/A" : new DecimalFormat("###,##0.00 %").format($F{Ad Fill Rate}) )]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="552" y="0" width="111" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Verve Ad Requests}==null ? ($F{verve_reports_ads_filled}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($F{Verve Ad Requests}) )]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="663" y="0" width="111" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $F{verve_reports_ads_filled}==null ? ($F{verve_reports_ads_filled}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($F{verve_reports_ads_filled}) )]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="774" y="0" width="91" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Verve Fill Rate}==null ? "N/A" : new DecimalFormat("###,##0.00 %").format($F{Verve Fill Rate}) )]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="865" y="0" width="91" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Discrepancy Ad Requests}==null ? "N/A" : new DecimalFormat("###,##0").format($F{Discrepancy Ad Requests}) )]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="956" y="0" width="91" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Discrepancy Ad Filled}==null ? "N/A" : new DecimalFormat("###,##0").format($F{Discrepancy Ad Filled}) )]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="1047" y="0" width="188" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $F{Filled Impressions Discrepancy}==null ? "N/A" : new DecimalFormat("###,##0.00 %").format($F{Filled Impressions Discrepancy}) )]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="1235" y="0" width="111" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $F{adnetwork_reports_clicks}==null ? ($F{adnetwork_reports_ads_filled}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($F{adnetwork_reports_clicks}) )]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="1346" y="0" width="111" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{adnetwork_reports_gross}==null ? ($F{adnetwork_reports_ads_filled}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("$ ###,##0.00").format($F{adnetwork_reports_gross}) )]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="1457" y="0" width="113" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{Daily Delta Gross}==null ? "N/A" : new DecimalFormat("$ #,##0.00;$ -#,##0.00").format($F{Daily Delta Gross}) )]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="1570" y="0" width="64" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{CPC}==null ? "N/A" : new DecimalFormat("$ ###,##0.00").format($F{CPC}) )]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="1634" y="0" width="64" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $F{CTR}==null ? "N/A" : new DecimalFormat("###,##0.00 %").format($F{CTR}) )]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="1698" y="0" width="64" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{CPM}==null ? "N/A" : new DecimalFormat("$ ###,##0.00").format($F{CPM}) )]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="50">
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="241" y="0" width="111" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $V{Ad requests}==null ? ($V{adnetwork_reports_ads_filled}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($V{Ad requests}) )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="352" y="0" width="109" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $V{adnetwork_reports_ads_filled}==null ? ($V{Ad requests}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($V{adnetwork_reports_ads_filled}) )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="552" y="0" width="111" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $V{Verve Ad Requests}==null ? ($V{verve_reports_ads_filled}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($V{Verve Ad Requests}) )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="663" y="0" width="111" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $V{verve_reports_ads_filled}==null ?($V{Verve Ad Requests}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($V{verve_reports_ads_filled}) )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="91" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="91" y="0" width="150" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="1235" y="0" width="111" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $V{adnetwork_reports_clicks}==null ? ($V{adnetwork_reports_ads_filled}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("###,##0").format($V{adnetwork_reports_clicks}) )]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="1346" y="0" width="111" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($V{adnetwork_reports_gross}==null ? ($V{adnetwork_reports_ads_filled}==null ? "Data Unavailable" : "N/A") : new DecimalFormat("$ ###,##0.00").format($V{adnetwork_reports_gross}) )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="461" y="0" width="91" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="774" y="0" width="91" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1047" y="0" width="188" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1457" y="0" width="113" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1570" y="0" width="64" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1634" y="0" width="64" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1698" y="0" width="64" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="865" y="0" width="91" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="956" y="0" width="91" height="20"/>
+				<box leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>
