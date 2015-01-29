@@ -1,0 +1,872 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_verve_delivery_subreport_mtd_top_20" language="groovy" pageWidth="2746" pageHeight="572" orientation="Landscape" columnWidth="2746" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="p_date_sk" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("0")]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+full_date AS "Date"
+,calendar_year_month
+,ROW_NUMBER() OVER (ORDER BY national_impressions DESC) AS RN
+,platform
+,publisher_id
+,publisher_name
+,national_impressions
+,vlm_impressions
+,vlmo_impressions
+,remnant_impressions AS "Verve Ads imps"
+,vpc_impressions AS "VPC imp"
+,national_revenue
+,vlm_revenue
+,vpc_revenue
+,vlmo_revenue
+,remnant_revenue
+,total_revenue
+,total_net_revenue
+,total_clicks
+,CASE WHEN total_impressions>0 then total_clicks::float/total_impressions  ELSE 0 END CTR_rate
+,total_impressions
+,total_requests
+,CASE WHEN total_requests>0 THEN total_impressions::float/total_requests ELSE 0 END AS Filled_rate
+,CASE WHEN total_impressions>0 then total_revenue/(total_impressions::float/1000) ELSE 0 END Gross_eCPM
+,CASE WHEN total_impressions>0 then total_net_revenue/(total_impressions::float/1000) ELSE 0 END Pub_net_eCPM
+,CASE WHEN total_revenue>0 then ((total_revenue-total_net_revenue)::float/total_revenue) ELSE 0 END Verve_margin
+,total_revenue-total_net_revenue AS Verve_profit
+,displayed_impressions
+,undisplayed_impressions
+,CASE WHEN displayed_impressions>0 then undisplayed_impressions::float/displayed_impressions ELSE 0 END undisplayed_rate
+FROM adsops.daily_agg_verve_delivery_mtd
+WHERE eastern_date_sk = $P{p_date_sk}::int---Remember to pass parameter here
+ORDER BY national_impressions DESC NULLS LAST
+LIMIT 20 ---get the top 20]]>
+	</queryString>
+	<field name="Date" class="java.sql.Date"/>
+	<field name="calendar_year_month" class="java.lang.String"/>
+	<field name="rn" class="java.lang.Long"/>
+	<field name="platform" class="java.lang.String"/>
+	<field name="publisher_id" class="java.lang.Integer"/>
+	<field name="publisher_name" class="java.lang.String"/>
+	<field name="national_impressions" class="java.lang.Integer"/>
+	<field name="vlm_impressions" class="java.lang.Integer"/>
+	<field name="vlmo_impressions" class="java.lang.Integer"/>
+	<field name="Verve Ads imps" class="java.lang.Integer"/>
+	<field name="VPC imp" class="java.lang.Integer"/>
+	<field name="national_revenue" class="java.lang.Double"/>
+	<field name="vlm_revenue" class="java.lang.Double"/>
+	<field name="vpc_revenue" class="java.lang.Double"/>
+	<field name="vlmo_revenue" class="java.lang.Double"/>
+	<field name="remnant_revenue" class="java.lang.Double"/>
+	<field name="total_revenue" class="java.lang.Double"/>
+	<field name="total_net_revenue" class="java.lang.Double"/>
+	<field name="total_clicks" class="java.lang.Long"/>
+	<field name="ctr_rate" class="java.lang.Double"/>
+	<field name="total_impressions" class="java.lang.Long"/>
+	<field name="total_requests" class="java.lang.Long"/>
+	<field name="filled_rate" class="java.lang.Double"/>
+	<field name="gross_ecpm" class="java.lang.Double"/>
+	<field name="pub_net_ecpm" class="java.lang.Double"/>
+	<field name="verve_margin" class="java.lang.Double"/>
+	<field name="verve_profit" class="java.lang.Double"/>
+	<field name="displayed_impressions" class="java.lang.Long"/>
+	<field name="undisplayed_impressions" class="java.lang.Long"/>
+	<field name="undisplayed_rate" class="java.lang.Double"/>
+	<variable name="national_impressions_1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{national_impressions}]]></variableExpression>
+	</variable>
+	<variable name="vlm_impressions_1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{vlm_impressions}]]></variableExpression>
+	</variable>
+	<variable name="vlmo_impressions_1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{vlmo_impressions}]]></variableExpression>
+	</variable>
+	<variable name="Verve Ads imps_1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{Verve Ads imps}]]></variableExpression>
+	</variable>
+	<variable name="VPC imp_1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{VPC imp}]]></variableExpression>
+	</variable>
+	<variable name="national_revenue_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{national_revenue}]]></variableExpression>
+	</variable>
+	<variable name="vlm_revenue_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{vlm_revenue}]]></variableExpression>
+	</variable>
+	<variable name="vpc_revenue_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{vpc_revenue}]]></variableExpression>
+	</variable>
+	<variable name="vlmo_revenue_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{vlmo_revenue}]]></variableExpression>
+	</variable>
+	<variable name="remnant_revenue_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{remnant_revenue}]]></variableExpression>
+	</variable>
+	<variable name="total_revenue_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{total_revenue}]]></variableExpression>
+	</variable>
+	<variable name="total_net_revenue_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{total_net_revenue}]]></variableExpression>
+	</variable>
+	<variable name="total_clicks_1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{total_clicks}]]></variableExpression>
+	</variable>
+	<variable name="total_impressions_1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{total_impressions}]]></variableExpression>
+	</variable>
+	<variable name="total_requests_1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{total_requests}]]></variableExpression>
+	</variable>
+	<variable name="undisplayed_impressions_1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{undisplayed_impressions}]]></variableExpression>
+	</variable>
+	<variable name="displayed_impressions_1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{displayed_impressions}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="184" y="0" width="86" height="20" forecolor="#FFFFFF" backcolor="#28B8ED"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.0" lineColor="#000000"/>
+					<topPen lineWidth="0.5" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Platform]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="270" y="0" width="258" height="20" forecolor="#FFFFFF" backcolor="#28B8ED"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.0" lineColor="#000000"/>
+					<topPen lineWidth="0.5" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Publisher Group]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="528" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#28B8ED"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.0" lineColor="#000000"/>
+					<topPen lineWidth="0.5" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[National Imp]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="628" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#28B8ED"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.0" lineColor="#000000"/>
+					<topPen lineWidth="0.5" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[VLM imp]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="728" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#28B8ED"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.0" lineColor="#000000"/>
+					<topPen lineWidth="0.5" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[VLMO imp]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="828" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#28B8ED"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.0" lineColor="#000000"/>
+					<topPen lineWidth="0.5" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Verve Ads imps]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1028" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#28B8ED"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.0" lineColor="#000000"/>
+					<topPen lineWidth="0.5" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[National Rev]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1128" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#28B8ED"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.0" lineColor="#000000"/>
+					<topPen lineWidth="0.5" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[VLM rev]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1228" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#28B8ED"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.0" lineColor="#000000"/>
+					<topPen lineWidth="0.5" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[VPC rev]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1328" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#28B8ED"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.0" lineColor="#000000"/>
+					<topPen lineWidth="0.5" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[VLMO rev*]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1428" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#28B8ED"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.0" lineColor="#000000"/>
+					<topPen lineWidth="0.5" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Verve Ads Rev]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1528" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#28B8ED"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.0" lineColor="#000000"/>
+					<topPen lineWidth="0.5" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Revenue]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1628" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#28B8ED"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.0" lineColor="#000000"/>
+					<topPen lineWidth="0.5" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Net Payout]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1728" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#28B8ED"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.0" lineColor="#000000"/>
+					<topPen lineWidth="0.5" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Clicks]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1828" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#28B8ED"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.0" lineColor="#000000"/>
+					<topPen lineWidth="0.5" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CTR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1928" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#28B8ED"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.0" lineColor="#000000"/>
+					<topPen lineWidth="0.5" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Filled req]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="2028" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#28B8ED"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.0" lineColor="#000000"/>
+					<topPen lineWidth="0.5" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total req]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="2128" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#28B8ED"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.0" lineColor="#000000"/>
+					<topPen lineWidth="0.5" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fill rate %]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="2228" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#28B8ED"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.0" lineColor="#000000"/>
+					<topPen lineWidth="0.5" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gross eCPM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="2328" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#28B8ED"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.0" lineColor="#000000"/>
+					<topPen lineWidth="0.5" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pub net eCPM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="2428" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#28B8ED"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.0" lineColor="#000000"/>
+					<topPen lineWidth="0.5" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Verve Margin]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="2528" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#28B8ED"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.0" lineColor="#000000"/>
+					<topPen lineWidth="0.5" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Verve Profit]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="2628" y="0" width="118" height="20" forecolor="#FFFFFF" backcolor="#28B8ED"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.0" lineColor="#000000"/>
+					<topPen lineWidth="0.5" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Undisplayed rate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="928" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#28B8ED"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.0" lineColor="#000000"/>
+					<topPen lineWidth="0.5" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[VPC imp]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="184" height="20" forecolor="#FFFFFF" backcolor="#28B8ED"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<pen lineWidth="0.0" lineColor="#000000"/>
+					<topPen lineWidth="0.5" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Rank 1 Month, "+$F{calendar_year_month}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="184" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{rn}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="184" y="0" width="86" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{platform}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="0" width="258" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{publisher_name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="528" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{national_impressions}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="628" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{vlm_impressions}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="728" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{vlmo_impressions}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="828" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{Verve Ads imps}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="1028" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{national_revenue}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="1128" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{vlm_revenue}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="1228" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{vpc_revenue}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="1328" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{vlmo_revenue}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="1428" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{remnant_revenue}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="1528" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{total_revenue}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="1628" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{total_net_revenue}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="1728" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{total_clicks}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="1828" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{ctr_rate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="1928" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{total_impressions}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="2028" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{total_requests}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="2128" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{filled_rate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="2228" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{gross_ecpm}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="2328" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{pub_net_ecpm}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="2428" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{verve_margin}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="2528" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{verve_profit}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="2628" y="0" width="118" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{undisplayed_rate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="928" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{VPC imp}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="528" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Grand Total Top 20]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement x="528" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{national_impressions_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="628" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{vlm_impressions_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="728" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{vlmo_impressions_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="828" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{Verve Ads imps_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="928" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{VPC imp_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="1028" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{national_revenue_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="1128" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{vlm_revenue_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="1228" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{vpc_revenue_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="1328" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{vlmo_revenue_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="1428" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{remnant_revenue_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="1528" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total_revenue_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="1628" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total_net_revenue_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="1728" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{total_clicks_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="1828" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total_clicks_1}.floatValue()/$V{total_impressions_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="1928" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{total_impressions_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="2028" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{total_requests_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="2128" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total_impressions_1}.floatValue()/$V{total_requests_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="2228" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total_revenue_1}.floatValue()/($V{total_impressions_1}/1000)]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="2328" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total_net_revenue_1}.floatValue()/($V{total_impressions_1}/1000)]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="2428" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[($V{total_revenue_1}-$V{total_net_revenue_1})/$V{total_revenue_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="2528" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total_revenue_1}-$V{total_net_revenue_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="2628" y="0" width="118" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{undisplayed_impressions_1}/($V{undisplayed_impressions_1}+$V{displayed_impressions_1})]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
