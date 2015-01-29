@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_verve_delivery_subreport_summary_7days" language="groovy" pageWidth="2746" pageHeight="572" orientation="Landscape" columnWidth="2746" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="p_date_sk" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("0")]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+SUM(COALESCE(national_impressions, 0)) AS total_national_impressions
+,SUM(COALESCE(vlm_impressions, 0)) AS total_vlm_impressions
+,SUM(COALESCE(vpc_impressions, 0)) AS total_vpc_impressions
+,SUM(COALESCE(vlmo_impressions, 0)) AS total_vlmo_impressions
+,SUM(COALESCE(remnant_impressions, 0)) AS total_remnant_impressions
+,SUM(COALESCE(national_revenue, 0)) AS total_national_revenue
+,SUM(COALESCE(vlm_revenue, 0)) AS total_vlm_revenue
+,SUM(COALESCE(vpc_revenue, 0)) AS total_vpc_revenue
+,SUM(COALESCE(vlmo_revenue, 0)) AS total_vlmo_revenue
+,SUM(COALESCE(remnant_revenue, 0)) AS total_remnant_revenue
+,SUM(COALESCE(total_revenue, 0)) AS total_revenue
+,SUM(COALESCE(total_net_revenue, 0)) AS total_net_revenue
+,SUM(COALESCE(Total_clicks, 0)) AS total_clicks
+,(SUM(COALESCE(Total_clicks, 0))::float/SUM(COALESCE(total_impressions, 0)))  AS CTR_rate
+,SUM(COALESCE(total_impressions, 0)) AS total_total_impressions
+,SUM(COALESCE(total_requests, 0)) AS total_requests
+,(SUM(COALESCE(total_impressions, 0))::float/SUM(COALESCE(total_requests, 0))) AS Filled_rate
+,SUM(COALESCE(total_revenue, 0))/(SUM(COALESCE(total_impressions, 0))::float/1000)AS Gross_eCPM
+,SUM(COALESCE(total_net_revenue, 0))/(SUM(COALESCE(total_impressions, 0))::float/1000) AS Pub_net_eCPM
+, ((SUM(COALESCE(total_revenue, 0))- SUM(COALESCE(total_net_revenue, 0)))::float/SUM(COALESCE(total_revenue, 0))) AS Verve_margin
+,SUM(COALESCE(total_revenue, 0)) - SUM(COALESCE(total_net_revenue, 0)) AS Verve_profit
+,SUM(COALESCE(undisplayed_impressions,0))::float/(SUM(COALESCE(undisplayed_impressions,0))+SUM(COALESCE(displayed_impressions,0))) AS undisplayed_rate
+FROM adsops.daily_agg_verve_delivery_7days
+WHERE eastern_date_sk =$P{p_date_sk}::int AND is_active=true]]>
+	</queryString>
+	<field name="total_national_impressions" class="java.lang.Long"/>
+	<field name="total_vlm_impressions" class="java.lang.Long"/>
+	<field name="total_vpc_impressions" class="java.lang.Long"/>
+	<field name="total_vlmo_impressions" class="java.lang.Long"/>
+	<field name="total_remnant_impressions" class="java.lang.Long"/>
+	<field name="total_national_revenue" class="java.lang.Double"/>
+	<field name="total_vlm_revenue" class="java.lang.Double"/>
+	<field name="total_vpc_revenue" class="java.lang.Double"/>
+	<field name="total_vlmo_revenue" class="java.lang.Double"/>
+	<field name="total_remnant_revenue" class="java.lang.Double"/>
+	<field name="total_revenue" class="java.lang.Double"/>
+	<field name="total_net_revenue" class="java.lang.Double"/>
+	<field name="total_clicks" class="java.math.BigDecimal"/>
+	<field name="ctr_rate" class="java.lang.Double"/>
+	<field name="total_total_impressions" class="java.math.BigDecimal"/>
+	<field name="total_requests" class="java.math.BigDecimal"/>
+	<field name="filled_rate" class="java.lang.Double"/>
+	<field name="gross_ecpm" class="java.lang.Double"/>
+	<field name="pub_net_ecpm" class="java.lang.Double"/>
+	<field name="verve_margin" class="java.lang.Double"/>
+	<field name="verve_profit" class="java.lang.Double"/>
+	<field name="undisplayed_rate" class="java.lang.Double"/>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField pattern="#,##0">
+				<reportElement x="528" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{total_national_impressions}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="628" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{total_vlm_impressions}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="928" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{total_vpc_impressions}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="728" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{total_vlmo_impressions}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="828" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{total_remnant_impressions}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="1028" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{total_national_revenue}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="1128" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{total_vlm_revenue}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="1228" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{total_vpc_revenue}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="1328" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{total_vlmo_revenue}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="1428" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{total_remnant_revenue}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="1528" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{total_revenue}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="1628" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{total_net_revenue}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="1728" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{total_clicks}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="1828" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{ctr_rate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="1928" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{total_total_impressions}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="2028" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{total_requests}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="2128" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{filled_rate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="2228" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{gross_ecpm}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="2328" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{pub_net_ecpm}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="2428" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{verve_margin}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="2528" y="0" width="100" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{verve_profit}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="528" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Grand Total All]]></text>
+			</staticText>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="2628" y="0" width="118" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{undisplayed_rate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
