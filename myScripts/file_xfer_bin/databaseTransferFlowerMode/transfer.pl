@@ -12,7 +12,7 @@ $df_dbname="warehouse";
 $df_usename="import_export_script";
 $df_pwd="verve-2013";
 $df_port="5432";
-
+$re_transfer=0;
 $export_file_name='';
 @trackingServer=();
 ### Input processing ############
@@ -91,6 +91,7 @@ sub runShellComand{
 	);
 	return %result;
 }
+
 main();
 
 ### Utils #######################
@@ -222,11 +223,22 @@ sub main{
 	printTime("Processing Transfer Aggregate Data ...");
 	note("Transfer mode: $transferMode \nFrom: $transferFrom \nDatabase: $database\nTo: $transferTo\nTable: $transferTable\nDate: $report_date\nDate range: $start_date - $end_date\nMonth: $calendar_year_month\nWeek: $year_week\n-------------------------------");
 	export();
-	updateProcessStatus('TR');
-	transferExportFileToCenter();
-	transferExportFileToClient();
-	trackingImportProcess();
-	updateStopProcess();
+	if($re_transfer>0){
+		updateProcessStatus('TF');
+		note("Restranfer after 5s. Ctrl+C to exit!");
+		sleep(5);
+		my $input_params=join(' ', @ARGV);
+		my $excute_comand="cd $binfd && perl transfer.pl $input_params";
+		print "Excute command: \n$excute_comand\n";
+		exec($excute_comand);
+	}else{
+		updateProcessStatus('TR');
+		transferExportFileToCenter();
+		transferExportFileToClient();
+		trackingImportProcess();
+		updateStopProcess();
+	}
+
 }
 ### Export code #########################################
 sub export{	
@@ -235,17 +247,22 @@ sub export{
 	my $export_file_name_final=$export_file_name;
 	my $export_table_name=$transferTable;
 	my $exportQuery="";
+	my $countQuery="";
 	if($transferMode eq 'daily'){
 		$exportQuery="COPY (SELECT * FROM $export_table_name WHERE full_date='$report_date' AND is_active=true) TO '$export_dir_temp/$export_file_name' WITH DELIMITER '|'";
+		$countQuery="SELECT COUNT(1) FROM(SELECT * FROM $export_table_name WHERE full_date='$report_date' AND is_active=true LIMIT 1)a";
 		$export_file_name_final=~ s/export_date/$report_date/g; 		
 	}elsif($transferMode eq 'date_range'){
 		$exportQuery="COPY (SELECT * FROM $export_table_name WHERE full_date BETWEEN '$start_date' AND '$end_date' AND is_active=true) TO '$export_dir_temp/$export_file_name' WITH DELIMITER '|'";
+		$countQuery="SELECT COUNT(1) FROM(SELECT * FROM $export_table_name WHERE full_date BETWEEN '$start_date' AND '$end_date' AND is_active=true LIMIT 1)a";		
 		$export_file_name_final=~ s/export_date/$start_date\.$end_date/g; 	
 	}elsif($transferMode eq 'monthly'){
 		$exportQuery="COPY (SELECT * FROM $export_table_name WHERE calendar_year_month='$calendar_year_month' AND is_active=true) TO '$export_dir_temp/$export_file_name' WITH DELIMITER '|'";
+		$countQuery="SELECT COUNT(1) FROM(SELECT * FROM $export_table_name WHERE calendar_year_month='$calendar_year_month' AND is_active=true LIMIT 1)a";	
 		$export_file_name_final=~ s/export_date/$calendar_year_month/g; 	
 	}elsif($transferMode eq 'weekly'){
 		$exportQuery="COPY (SELECT * FROM $export_table_name WHERE year_week='$year_week' AND is_active=true) TO '$export_dir_temp/$export_file_name' WITH DELIMITER '|'";
+		$countQuery="SELECT COUNT(1) FROM(SELECT * FROM $export_table_name WHERE year_week='$year_week' AND is_active=true LIMIT 1)a";	
 		$export_file_name_final=~ s/export_date/$year_week/g; 	
 	}
 	my $dbh = getConnection($transferFrom);
@@ -270,7 +287,12 @@ sub export{
 				die @error;
 			}else{
 				note("\tExported file:\t$export_file_name");
-				$export_file_name=$export_file_name_final;	
+				$export_file_name=$export_file_name_final;
+				#Get file size before unzip
+				%resultCMD=runShellComand("ssh $exportHostName du -k $export_dir_temp/$export_file_name");
+				@cmd=@{$resultCMD{'stout'}};
+				@values=split('\t',$cmd[0]);
+				$file_size_unzip=$values[0];
 				#Zip export file
 				note("\tZipping export file ...");
 				%resultCMD=runShellComand("ssh $exportHostName 'cd $export_dir_temp && zip -r $export_file_name_final.zip $export_file_name_final'");
@@ -281,6 +303,7 @@ sub export{
 				@cmd=@{$resultCMD{'stout'}};
 				@error=@{$resultCMD{'erout'}};	
 				
+				#Get file size after zip
 				$export_file_name=$export_file_name_final.".zip";	
 				%resultCMD=runShellComand("ssh $exportHostName du -k $export_dir_temp/$export_file_name");
 				@cmd=@{$resultCMD{'stout'}};
@@ -288,10 +311,30 @@ sub export{
 				@values=split('\t',$cmd[0]);
 				$file_size=$values[0];
 				note("\tExport file:\t$export_file_name");
-				note("\tExported file size:\t$file_size K");	
-				$export_file_size=$file_size;
-				if($export_file_size<5){
-					sendMail("chinh.nguyen\@ecepvn.org","Export file is zero","Export host: $exportHostName<br/>File name: $export_file_name<br/>File size: $file_size<p/>perl main.pl daily dw10:analyticsdb dw10 $export_table_name $report_date missData<br/>perl main.pl daily dw10:analyticsdb dw3 $export_table_name $report_date missData");
+				note("\tExported file size(unzip):\t$file_size_unzip K");
+				note("\tExported file size(zip):\t$file_size K");	
+				$export_file_size=$file_size_unzip;
+				if($export_file_size==0){
+					#Verify export file size. Count from table source
+					note("Verify row count from data source");
+					my $source_row_count=0;
+					my $dbh = getConnection($transferFrom);
+					my $query_handle = $dbh->prepare($countQuery);
+					$query_handle->execute();
+					$query_handle->bind_columns(undef, \$source_row_count);
+					$query_handle->fetch();
+					sqlDisconnect($dbh);
+					note("Row count: $source_row_count");
+					if($source_row_count>0){
+						note("Send notification message then retransfer!");
+						#Send notification message to ecep temp
+						my $email_message="Export host: $exportHostName<br/>
+									File name: $export_file_name<br/>
+									File size: $export_file_size K<p/>";
+						#sendMail("chinh.nguyen\@ecepvn.org,ops\@ecepvn.org","Export file is zero","$email_message");
+						sendMail("chinh.nguyen\@ecepvn.org","Export file is zero","$email_message");	
+						$re_transfer=1;					
+					}					
 				}
 			}
 		}else{

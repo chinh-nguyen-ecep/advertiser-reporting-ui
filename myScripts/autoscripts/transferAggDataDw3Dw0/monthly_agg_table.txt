@@ -83,3 +83,4 @@ rtb.monthly_agg_exchanger_cost_analysis_v1
 billing.ba_monthly_vlmo_publisher_share_v2
 billing.ba_monthly_vlmo_revenue_v2
 billing.ba_monthly_vlm_revenue_v6
+billing.ba_monthly_publisher_revenue_v6
