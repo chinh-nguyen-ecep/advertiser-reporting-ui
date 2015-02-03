@@ -12,7 +12,7 @@ $df_dbname="warehouse";
 $df_usename="import_export_script";
 $df_pwd="verve-2013";
 $df_port="5432";
-
+$re_transfer=0;
 $export_file_name='';
 @trackingServer=();
 ### Input processing ############
@@ -91,6 +91,7 @@ sub runShellComand{
 	);
 	return %result;
 }
+
 main();
 
 ### Utils #######################
@@ -125,7 +126,7 @@ sub getConnection{
 			PrintError => 0,
 			ReconnectTimeout => 60,
 			ReconnectFailure => sub { warn "oops $host_name $port $database!" },
-			ReconnectMaxTries => 10
+			ReconnectMaxTries => 100
 	   },
 	);
 
@@ -159,7 +160,6 @@ sub note{
 sub sendMail{
 #$mailaddress="chinh.nguyen\@ecepvn.org,binh.nguyen\@ecepvn.org,song.nguyen\@ecepvn.org,tho.hoang\@ecepvn.org";
 my $mailaddress=shift;
-   $mailaddress="chinh.nguyen\@ecepvn.org,ops\@ecepvn.org";
 my $title=shift;
 my $content=shift;
 my $callFunction = "cd $binfd/utils;java -jar mail.jar \"smtp.gmail.com\" 587 \"chinh.nguyen\@ecepvn.org\" \"verve-2013\" \"$mailaddress\" \"$title\" \"$content\" &";
@@ -223,11 +223,22 @@ sub main{
 	printTime("Processing Transfer Aggregate Data ...");
 	note("Transfer mode: $transferMode \nFrom: $transferFrom \nDatabase: $database\nTo: $transferTo\nTable: $transferTable\nDate: $report_date\nDate range: $start_date - $end_date\nMonth: $calendar_year_month\nWeek: $year_week\n-------------------------------");
 	export();
-	updateProcessStatus('TR');
-	transferExportFileToCenter();
-	transferExportFileToClient();
-	##trackingImportProcess();
-	updateStopProcess();
+	if($re_transfer>0){
+		updateProcessStatus('TF');
+		note("Restransfer after 300s");
+		sleep(300);
+		my $input_params=join(' ', @ARGV);
+		my $excute_comand="cd $binfd && perl transferNoTracking.pl $input_params";
+		print "Excute command: \n$excute_comand\n";
+		exec($excute_comand);
+	}else{
+		updateProcessStatus('TR');
+		transferExportFileToCenter();
+		transferExportFileToClient();
+		##trackingImportProcess();
+		updateStopProcess();
+	}
+
 }
 ### Export code #########################################
 sub export{	
@@ -236,17 +247,22 @@ sub export{
 	my $export_file_name_final=$export_file_name;
 	my $export_table_name=$transferTable;
 	my $exportQuery="";
+	my $countQuery="";
 	if($transferMode eq 'daily'){
 		$exportQuery="COPY (SELECT * FROM $export_table_name WHERE full_date='$report_date' AND is_active=true) TO '$export_dir_temp/$export_file_name' WITH DELIMITER '|'";
+		$countQuery="SELECT COUNT(1) FROM(SELECT * FROM $export_table_name WHERE full_date='$report_date' AND is_active=true LIMIT 1)a";
 		$export_file_name_final=~ s/export_date/$report_date/g; 		
 	}elsif($transferMode eq 'date_range'){
 		$exportQuery="COPY (SELECT * FROM $export_table_name WHERE full_date BETWEEN '$start_date' AND '$end_date' AND is_active=true) TO '$export_dir_temp/$export_file_name' WITH DELIMITER '|'";
+		$countQuery="SELECT COUNT(1) FROM(SELECT * FROM $export_table_name WHERE full_date BETWEEN '$start_date' AND '$end_date' AND is_active=true LIMIT 1)a";		
 		$export_file_name_final=~ s/export_date/$start_date\.$end_date/g; 	
 	}elsif($transferMode eq 'monthly'){
 		$exportQuery="COPY (SELECT * FROM $export_table_name WHERE calendar_year_month='$calendar_year_month' AND is_active=true) TO '$export_dir_temp/$export_file_name' WITH DELIMITER '|'";
+		$countQuery="SELECT COUNT(1) FROM(SELECT * FROM $export_table_name WHERE calendar_year_month='$calendar_year_month' AND is_active=true LIMIT 1)a";	
 		$export_file_name_final=~ s/export_date/$calendar_year_month/g; 	
 	}elsif($transferMode eq 'weekly'){
 		$exportQuery="COPY (SELECT * FROM $export_table_name WHERE year_week='$year_week' AND is_active=true) TO '$export_dir_temp/$export_file_name' WITH DELIMITER '|'";
+		$countQuery="SELECT COUNT(1) FROM(SELECT * FROM $export_table_name WHERE year_week='$year_week' AND is_active=true LIMIT 1)a";	
 		$export_file_name_final=~ s/export_date/$year_week/g; 	
 	}
 	my $dbh = getConnection($transferFrom);
@@ -299,8 +315,29 @@ sub export{
 				note("\tExported file size(zip):\t$file_size K");	
 				$export_file_size=$file_size_unzip;
 				if($export_file_size==0){
-					#Check file content 
-						sendMail("chinh.nguyen\@ecepvn.org","Export file is zero","Export host: $exportHostName<br/>File name: $export_file_name<br/>File size: $export_file_size K<p/>perl main.pl daily dw10:analyticsdb dw10 $export_table_name $report_date missData<br/>perl main.pl daily dw10:analyticsdb dw3 $export_table_name $report_date missData");
+					#Verify export file size. Count from table source
+					note("Verify row count from data source");
+					my $source_row_count=0;
+					my $dbh = getConnection($transferFrom);
+					my $query_handle = $dbh->prepare($countQuery);
+					$query_handle->execute();
+					$query_handle->bind_columns(undef, \$source_row_count);
+					$query_handle->fetch();
+					sqlDisconnect($dbh);
+					note("Row count: $source_row_count");
+					if($source_row_count>0){
+						note("Send notification message then retransfer!");
+						#Send notification message to ecep temp
+						my $email_message="Export host: $exportHostName<br/>
+									File name: $export_file_name<br/>
+									File size: $export_file_size K<p/>
+									<b>Process will auto retransfer this resource after 300s</b><p>
+									perl main.pl daily dw10:analyticsdb dw10 $export_table_name $report_date missData<br/>
+									perl main.pl daily dw10:analyticsdb dw3 $export_table_name $report_date missData";
+						sendMail("chinh.nguyen\@ecepvn.org,ops\@ecepvn.org","Export file is zero","$email_message");
+						#sendMail("chinh.nguyen\@ecepvn.org","Export file is zero","$email_message");	
+						$re_transfer=1;					
+					}					
 				}
 			}
 		}else{
