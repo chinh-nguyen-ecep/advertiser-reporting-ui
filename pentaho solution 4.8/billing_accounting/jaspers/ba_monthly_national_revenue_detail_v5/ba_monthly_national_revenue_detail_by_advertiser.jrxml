@@ -43,7 +43,7 @@ AND is_active=true
 GROUP BY dfp_advertiser_id,dfp_advertiser_name,adm_order_id,flight_id,flight_metric,network_id,booked_rate,billable_rate,booked_units
 ORDER BY dfp_advertiser_name,adm_order_id,network_id,flight_id]]>
 	</queryString>
-	<field name="advertiser_id" class="java.lang.Integer"/>
+	<field name="advertiser_id" class="java.lang.Long"/>
 	<field name="advertiser_name" class="java.lang.String"/>
 	<field name="adm_order_id" class="java.lang.Integer"/>
 	<field name="flight_id" class="java.lang.Integer"/>
