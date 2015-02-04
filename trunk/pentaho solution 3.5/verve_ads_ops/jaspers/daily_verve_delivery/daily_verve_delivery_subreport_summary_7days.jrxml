@@ -3,8 +3,8 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<parameter name="p_date_sk" class="java.lang.String">
-		<defaultValueExpression><![CDATA[new String("0")]]></defaultValueExpression>
+	<parameter name="p_date_sk" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[SELECT
@@ -31,7 +31,7 @@ SUM(COALESCE(national_impressions, 0)) AS total_national_impressions
 ,SUM(COALESCE(total_revenue, 0)) - SUM(COALESCE(total_net_revenue, 0)) AS Verve_profit
 ,SUM(COALESCE(undisplayed_impressions,0))::float/(SUM(COALESCE(undisplayed_impressions,0))+SUM(COALESCE(displayed_impressions,0))) AS undisplayed_rate
 FROM adsops.daily_agg_verve_delivery_7days
-WHERE eastern_date_sk =$P{p_date_sk}::int AND is_active=true]]>
+WHERE eastern_date_sk =$P{p_date_sk} AND is_active=true]]>
 	</queryString>
 	<field name="total_national_impressions" class="java.lang.Long"/>
 	<field name="total_vlm_impressions" class="java.lang.Long"/>
@@ -64,7 +64,7 @@ WHERE eastern_date_sk =$P{p_date_sk}::int AND is_active=true]]>
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right">
-					<font isBold="true"/>
+					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{total_national_impressions}]]></textFieldExpression>
 			</textField>
@@ -75,7 +75,7 @@ WHERE eastern_date_sk =$P{p_date_sk}::int AND is_active=true]]>
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right">
-					<font isBold="true"/>
+					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{total_vlm_impressions}]]></textFieldExpression>
 			</textField>
@@ -86,7 +86,7 @@ WHERE eastern_date_sk =$P{p_date_sk}::int AND is_active=true]]>
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right">
-					<font isBold="true"/>
+					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{total_vpc_impressions}]]></textFieldExpression>
 			</textField>
@@ -97,7 +97,7 @@ WHERE eastern_date_sk =$P{p_date_sk}::int AND is_active=true]]>
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right">
-					<font isBold="true"/>
+					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{total_vlmo_impressions}]]></textFieldExpression>
 			</textField>
@@ -108,84 +108,84 @@ WHERE eastern_date_sk =$P{p_date_sk}::int AND is_active=true]]>
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right">
-					<font isBold="true"/>
+					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{total_remnant_impressions}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="$ #,##0.00">
 				<reportElement x="1028" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right">
-					<font isBold="true"/>
+					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{total_national_revenue}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="$ #,##0.00">
 				<reportElement x="1128" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right">
-					<font isBold="true"/>
+					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{total_vlm_revenue}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="$ #,##0.00">
 				<reportElement x="1228" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right">
-					<font isBold="true"/>
+					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{total_vpc_revenue}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="$ #,##0.00">
 				<reportElement x="1328" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right">
-					<font isBold="true"/>
+					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{total_vlmo_revenue}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="$ #,##0.00">
 				<reportElement x="1428" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right">
-					<font isBold="true"/>
+					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{total_remnant_revenue}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="$ #,##0.00">
 				<reportElement x="1528" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right">
-					<font isBold="true"/>
+					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{total_revenue}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="$ #,##0.00">
 				<reportElement x="1628" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right">
-					<font isBold="true"/>
+					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{total_net_revenue}]]></textFieldExpression>
 			</textField>
@@ -196,7 +196,7 @@ WHERE eastern_date_sk =$P{p_date_sk}::int AND is_active=true]]>
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right">
-					<font isBold="true"/>
+					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{total_clicks}]]></textFieldExpression>
 			</textField>
@@ -207,7 +207,7 @@ WHERE eastern_date_sk =$P{p_date_sk}::int AND is_active=true]]>
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right">
-					<font isBold="true"/>
+					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{ctr_rate}]]></textFieldExpression>
 			</textField>
@@ -218,7 +218,7 @@ WHERE eastern_date_sk =$P{p_date_sk}::int AND is_active=true]]>
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right">
-					<font isBold="true"/>
+					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{total_total_impressions}]]></textFieldExpression>
 			</textField>
@@ -229,7 +229,7 @@ WHERE eastern_date_sk =$P{p_date_sk}::int AND is_active=true]]>
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right">
-					<font isBold="true"/>
+					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{total_requests}]]></textFieldExpression>
 			</textField>
@@ -240,29 +240,29 @@ WHERE eastern_date_sk =$P{p_date_sk}::int AND is_active=true]]>
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right">
-					<font isBold="true"/>
+					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{filled_rate}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="$ #,##0.00">
 				<reportElement x="2228" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right">
-					<font isBold="true"/>
+					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{gross_ecpm}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="$ #,##0.00">
 				<reportElement x="2328" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right">
-					<font isBold="true"/>
+					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{pub_net_ecpm}]]></textFieldExpression>
 			</textField>
@@ -273,18 +273,18 @@ WHERE eastern_date_sk =$P{p_date_sk}::int AND is_active=true]]>
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right">
-					<font isBold="true"/>
+					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{verve_margin}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="$ #,##0.00">
 				<reportElement x="2528" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right">
-					<font isBold="true"/>
+					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{verve_profit}]]></textFieldExpression>
 			</textField>
@@ -295,7 +295,7 @@ WHERE eastern_date_sk =$P{p_date_sk}::int AND is_active=true]]>
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement>
-					<font isBold="true"/>
+					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Grand Total All]]></text>
 			</staticText>
@@ -306,7 +306,7 @@ WHERE eastern_date_sk =$P{p_date_sk}::int AND is_active=true]]>
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Right">
-					<font isBold="true"/>
+					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{undisplayed_rate}]]></textFieldExpression>
 			</textField>

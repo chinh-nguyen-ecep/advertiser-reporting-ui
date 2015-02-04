@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="infobright_daily_row_count_summary" pageWidth="2786" pageHeight="2380" orientation="Landscape" columnWidth="2746" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Verve daily delivery" pageWidth="2786" pageHeight="2380" orientation="Landscape" columnWidth="2746" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.3660269107301466"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
-	<parameter name="p_date_sk" class="java.lang.String">
-		<defaultValueExpression><![CDATA[new String("0")]]></defaultValueExpression>
+	<parameter name="p_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("2015-01-01")]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT max(full_date) as full_date,max(dt_lastchange) as dt_lastchange FROM adsops.daily_infobright_counts;]]>
+		<![CDATA[SELECT max(eastern_date_sk) as date_sk,max(dt_lastchange) as dt_lastchange FROM adsops.daily_agg_verve_delivery WHERE full_date=$P{p_date}::date;]]>
 	</queryString>
-	<field name="full_date" class="java.sql.Date"/>
+	<field name="date_sk" class="java.lang.Integer"/>
 	<field name="dt_lastchange" class="java.sql.Timestamp"/>
 	<background>
 		<band/>
@@ -25,7 +25,7 @@
 					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="p_date_sk">
-					<subreportParameterExpression><![CDATA[$P{p_date_sk}]]></subreportParameterExpression>
+					<subreportParameterExpression><![CDATA[$F{date_sk}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_verve_delivery_subreport_daily_top_20.jasper"]]></subreportExpression>
@@ -36,13 +36,13 @@
 					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="p_date_sk">
-					<subreportParameterExpression><![CDATA[$P{p_date_sk}]]></subreportParameterExpression>
+					<subreportParameterExpression><![CDATA[$F{date_sk}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_verve_delivery_subreport_summary_daily.jasper"]]></subreportExpression>
 			</subreport>
 			<staticText>
-				<reportElement x="0" y="60" width="2746" height="20"/>
+				<reportElement positionType="Float" x="0" y="60" width="2746" height="20"/>
 				<textElement/>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -52,7 +52,7 @@
 					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="p_date_sk">
-					<subreportParameterExpression><![CDATA[$P{p_date_sk}]]></subreportParameterExpression>
+					<subreportParameterExpression><![CDATA[$F{date_sk}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_verve_delivery_subreport_7days_top_20.jasper"]]></subreportExpression>
@@ -63,7 +63,7 @@
 					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="p_date_sk">
-					<subreportParameterExpression><![CDATA[$P{p_date_sk}]]></subreportParameterExpression>
+					<subreportParameterExpression><![CDATA[$F{date_sk}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_verve_delivery_subreport_summary_7days.jasper"]]></subreportExpression>
@@ -74,7 +74,7 @@
 					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="p_date_sk">
-					<subreportParameterExpression><![CDATA[$P{p_date_sk}]]></subreportParameterExpression>
+					<subreportParameterExpression><![CDATA[$F{date_sk}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_verve_delivery_subreport_summary_mtd.jasper"]]></subreportExpression>
@@ -85,13 +85,13 @@
 					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="p_date_sk">
-					<subreportParameterExpression><![CDATA[$P{p_date_sk}]]></subreportParameterExpression>
+					<subreportParameterExpression><![CDATA[$F{date_sk}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_verve_delivery_subreport_mtd_top_20.jasper"]]></subreportExpression>
 			</subreport>
 			<staticText>
-				<reportElement x="0" y="140" width="2746" height="20"/>
+				<reportElement positionType="Float" x="0" y="140" width="2746" height="20"/>
 				<textElement/>
 				<text><![CDATA[]]></text>
 			</staticText>
