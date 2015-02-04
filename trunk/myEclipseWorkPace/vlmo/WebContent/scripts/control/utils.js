@@ -469,11 +469,12 @@ function urlMaster(){
 		}
 	}
 }
-
+//This function convert a string. Example hello -> Hello
 function capitalise(string) {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
 
+//This function convert 2014-12-02 to date object in javascript 
 function verveDateConvert(full_date){
 	var value = full_date;
 	var array=value.split("-");
@@ -484,6 +485,111 @@ function verveDateConvert(full_date){
 	return date;
 }
 
+//This function will generate paging button 
+//domName is the name of id of div dom element
+//reloadFnName is the function will be call when click on page button
+function processPaging(totalPage,currentPage,domName,reloadFnName){
+	if(currentPage==null){
+		currentPage=1;
+	}
+	var start=currentPage-4;
+	var end=currentPage+4;
+	
+	while(start<=0){
+		start++;
+	}
+	while(end>totalPage){
+		end--;
+	}
+	
+	$('#'+domName).empty();
+	
+	if(start>3){
+		var row='<li><a href="#" onclick="urlMaster.replaceParam(\'page\', '+1+');'+reloadFnName+'();">'+1+'</a></li>';
+		row+='<li><a href="#">...</a></li>';
+		$('#'+domName).html(row);
+	}
+	
+	for(var i=start;i<=end;i++){
+		var row='<li><a href="#" onclick="urlMaster.replaceParam(\'page\', '+i+');'+reloadFnName+'();">'+i+'</a></li>';
+		if(i==currentPage){
+			row='<li class="active"><a href="#" onclick="urlMaster.replaceParam(\'page\', '+i+');'+reloadFnName+'();">'+i+'</a></li>';
+		}
+		
+		$('#'+domName).append($(row));
+	}
+	
+	if(end<totalPage-1){
+		var row='<li><a href="#">...</a></li>';
+		$('#'+domName).append($(row));
+	}
+	
+	//add lastpage
+	if(end<totalPage){
+		var row='<li><a href="#" onclick="urlMaster.replaceParam(\'page\', '+totalPage+');'+reloadFnName+'();">'+totalPage+'</a></li>';
+		$('#'+domName).append($(row));
+	}
+	
+	//
+	$('a').click(function(event){
+		console.log();
+		if($(this).attr('href')=='#'){
+			event.preventDefault();
+		}
+	});
+	
+}
+
+//////////////////////////////////////
+//Review export data
+//////////////////////////////////////
+function reviewExportData(title,path,jrxml,params,width) {
+	var url=rootUrl+"/GenerateJasperReport?export_type=html&path="+path+"&jrxml="+jrxml+"&"+$.param(params);
+	var mydialog = new contentDialog();
+	mydialog.setTitle(title);
+	var randomID = new Date().valueOf();
+	mydialog.setContent('<div title="' + randomID
+			+ '" class="loadingDots" style=""></div>');
+	mydialog.setWidth(width);
+	mydialog.open();
+	var loadingUrl = url;
+	var htmlResult;
+
+	if (myAjaxStore.isLoading(loadingUrl)) {
+		mydialog.setContent('Your request is being processed. Please come back later 30s!');
+	} else {
+		htmlResult = myAjaxStore.get(loadingUrl);
+		if (htmlResult == null) {
+			myAjaxStore.registe(loadingUrl);
+			$.ajax({
+				url : loadingUrl,
+				dataType : 'html',
+				success : function(data) {
+					myAjaxStore.add(loadingUrl, data);
+					mydialog.setContent(data);
+				},
+				error : function(xhr, status, error) {
+					myAjaxStore.remove(loadingUrl);
+					console.log('Generate report fail! ');
+					console.log('Url: ' + loadingUrl);
+				},
+				complete : function(jqXHR, textStatus) {
+
+				}
+			});
+		} else {
+			console.log('Set content for div id title=' + randomID);
+			mydialog.setContent(htmlResult);
+		}
+	}
+}
+///////////////////////////////////
+//export data to pdf,csv,xls
+///////////////////////////////////
+function exportReport(path,jrxml,params,exportType) {
+	var loadingUrl = rootUrl + '/GenerateJasperReport' + '?export_type='+exportType + '&jrxml='+jrxml+'&path='+path+'&'+$.param(params);
+	window.open(loadingUrl);
+}
 
 /**
  * Sand-Signika theme for Highcharts JS

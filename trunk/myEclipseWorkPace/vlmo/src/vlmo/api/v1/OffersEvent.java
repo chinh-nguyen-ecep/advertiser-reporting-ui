@@ -6,9 +6,10 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
+import vlmo.bean.ApiInfo;
+
 import vlmo.bean.ApiResponseResultSetInfo;
 import vlmo.core.MainApi;
-import vlmo.utils.Configure;
 
 public class OffersEvent extends MainApi {
 	public OffersEvent() {
@@ -112,6 +113,14 @@ public class OffersEvent extends MainApi {
 		info.addOrderExample("GET " + rootUrl + "?order=full_date.desc");
 		info.addOrderExample("GET " + rootUrl + "?select=full_date&by=click_cnt&where[full_date]="	+ currentDateExample + "&order=full_date.desc");
 		return info;
+	}
+	@Override
+	public ApiInfo getApiInfo() {
+		// TODO Auto-generated method stub
+		ApiInfo apiInfo=new ApiInfo();
+		apiInfo.group="Demand Sites";
+		apiInfo.isActive=true;
+		return apiInfo;
 	}
 
 }

@@ -22,11 +22,11 @@
 		<tr>
 			<th class="col-md-3">VLMO Agency</th>
 			<th class="col-md-1">ADM Account ID</th>
-			<th class="col-md-1">Delivered Imps</th>
-			<th class="col-md-1">Billable Rate</th>
-			<th class="col-md-2">Gross Revenue</th>
-			<th class="col-md-2">Pub Net Revenue</th>
-			<th class="col-md-2">Profit Margin</th>
+			<th class="col-md-1 right">Delivered Imps</th>
+			<th class="col-md-1 right">Billable Rate</th>
+			<th class="col-md-2 right">Gross Revenue</th>
+			<th class="col-md-2 right">Pub Net Revenue</th>
+			<th class="col-md-2 right">Profit Margin</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -61,12 +61,12 @@
 		<tr>
 			<th class="col-md-2">Merchant</th>
 			<th class="col-md-4" name="detailType">Campaign</th>
-			<th class="col-md-1">Booked Imps</th>
-			<th class="col-md-1">Delivered Imps</th>
-			<th class="col-md-1">Billable Imps</th>
-			<th class="col-md-1">Clicks</th>
-			<th class="col-md-1">Billable Rate</th>
-			<th class="col-md-1">Gross Revenue</th>
+			<th class="col-md-1 right">Booked Imps</th>
+			<th class="col-md-1 right">Delivered Imps</th>
+			<th class="col-md-1 right">Billable Imps</th>
+			<th class="col-md-1 right">Clicks</th>
+			<th class="col-md-1 right">Billable Rate</th>
+			<th class="col-md-1 right">Gross Revenue</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -87,8 +87,8 @@
 		</tr>
 		<tr>
 			<th class="col-md-8">VLMO Agency</th>
-			<th class="col-md-2">Impressions</th>
-			<th class="col-md-2">Billable Rate</th>
+			<th class="col-md-2 right">Impressions</th>
+			<th class="col-md-2 right">Billable Rate</th>
 		</tr>
 	</thead>
 	<tbody>

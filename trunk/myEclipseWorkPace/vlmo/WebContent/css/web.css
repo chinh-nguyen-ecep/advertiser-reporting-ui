@@ -39,7 +39,12 @@ div.container {
 	text-align: right;
 }
 
-
+th.right{
+	text-align: right;
+}
+table.table-condensed  tbody tr td{
+	padding: 8px;
+}
 
 .loading{
 	background-image:url('../images/loading_bar.gif');

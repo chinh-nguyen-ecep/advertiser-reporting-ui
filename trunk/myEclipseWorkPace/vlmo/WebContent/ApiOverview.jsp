@@ -1,3 +1,5 @@
+<%@page import="vlmo.bean.ApiInfo"%>
+<%@page import="vlmo.core.QueryApi"%>
 <%@page import="vlmo.utils.ClassesfromPackage"%>
 <%@page import="java.util.List"%>
 <%@page import="java.io.IOException"%>
@@ -31,34 +33,63 @@
 			<tr>
 				<th colspan='2'>Demand Sites</th>
 			</tr>
-			<tr>
-				<td><a href="apiDetail?api=offersOverview">Offers
-						Overview</a></td>
-				<td>offer</td>
-			</tr>
-			<tr>
-				<td><a href="apiDetail?api=offersEventOverview">Offers Event
-						Overview</a></td>
-				<td>offer</td>
-			</tr>
-			<tr>
-				<td><a href="apiDetail?api=offersEvent">Offers Event</a></td>
-				<td>offer</td>
-			</tr>
+		<%
+			cs = new ClassesfromPackage();
+			packageName ="vlmo.api.v1";
+			try {
+				List<Class> iterable=(List<Class>) cs.getClasses(packageName);
+				for(int i=0;i<iterable.size();i++){
+					Class class1=iterable.get(i);
+					String name=class1.getSimpleName();
+					QueryApi a=(QueryApi)class1.newInstance();
+					ApiInfo apiInfo=a.getApiInfo();
+					if(apiInfo.isActive==true && apiInfo.group.equals("Demand Sites")){
+					%>
+					<tr>
+						<td><a href="apiDetail?api=<%=name%>"><%=name%></a></td>
+						<td></td>
+					</tr>
+					<%
+					}
+				}
+			} catch (ClassNotFoundException e) {
+			    // TODO Auto-generated catch block
+			    e.printStackTrace();
+			} catch (IOException e) {
+			    // TODO Auto-generated catch block
+			    e.printStackTrace();
+			}
+		%>
 			<tr>
 				<th colspan='2'>Supply Sites</th>
 			</tr>
-			<tr>
-				<td><a href="apiDetail?api=agenciesRunningRevenue">Agencies
-						Running Revenue</a></td>
-				<td>agency</td>
-			</tr>
-			<tr>
-				<td><a href="apiDetail?api=runningRevenueOverview">Running
-						Revenue Overview</a></td>
-				<td>overview</td>
-			</tr>
-
+		<%
+			cs = new ClassesfromPackage();
+			packageName ="vlmo.api.v1";
+			try {
+				List<Class> iterable=(List<Class>) cs.getClasses(packageName);
+				for(int i=0;i<iterable.size();i++){
+					Class class1=iterable.get(i);
+					String name=class1.getSimpleName();
+					QueryApi a=(QueryApi)class1.newInstance();
+					ApiInfo apiInfo=a.getApiInfo();
+					if(apiInfo.isActive==true && apiInfo.group.equals("Supply Sites")){
+					%>
+					<tr>
+						<td><a href="apiDetail?api=<%=name%>"><%=name%></a></td>
+						<td></td>
+					</tr>
+					<%
+					}
+				}
+			} catch (ClassNotFoundException e) {
+			    // TODO Auto-generated catch block
+			    e.printStackTrace();
+			} catch (IOException e) {
+			    // TODO Auto-generated catch block
+			    e.printStackTrace();
+			}
+		%>	
 		</table>
 		<nav>
 			<ul class='breadcrumb'>
