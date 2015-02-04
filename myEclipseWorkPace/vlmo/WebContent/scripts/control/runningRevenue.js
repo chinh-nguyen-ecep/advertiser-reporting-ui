@@ -195,7 +195,7 @@ function loadRunningDetail(){
 			if(json.page==1){
 				totalPageDetail=json.totalPage;
 			}
-			processPaging(totalPageDetail,json.page);
+			processPaging(totalPageDetail,json.page,'detailPaging','loadRunningDetail');
 		}
 	});
 	function processData(data){
@@ -226,57 +226,6 @@ function loadRunningDetail(){
 		rows.push(row);
 		}
 		$('#detailTable tbody').html(rows.join(""));
-	}
-	function processPaging(totalPage,currentPage){
-		if(currentPage==null){
-			currentPage=1;
-		}
-		var start=currentPage-4;
-		var end=currentPage+4;
-		
-		while(start<=0){
-			start++;
-		}
-		while(end>totalPage){
-			end--;
-		}
-		
-		$('#detailPaging').empty();
-		
-		if(start>3){
-			var row='<li><a href="#" onclick="urlMaster.replaceParam(\'page\', '+1+');loadRunningDetail();">'+1+'</a></li>';
-			row+='<li><a href="#">...</a></li>';
-			$('#detailPaging').html(row);
-		}
-		
-		for(var i=start;i<=end;i++){
-			var row='<li><a href="#" onclick="urlMaster.replaceParam(\'page\', '+i+');loadRunningDetail();">'+i+'</a></li>';
-			if(i==currentPage){
-				row='<li class="active"><a href="#" onclick="urlMaster.replaceParam(\'page\', '+i+');loadRunningDetail();">'+i+'</a></li>';
-			}
-			
-			$('#detailPaging').append($(row));
-		}
-		
-		if(end<totalPage-1){
-			var row='<li><a href="#">...</a></li>';
-			$('#detailPaging').append($(row));
-		}
-		
-		//add lastpage
-		if(end<totalPage){
-			var row='<li><a href="#" onclick="urlMaster.replaceParam(\'page\', '+totalPage+');loadRunningDetail();">'+totalPage+'</a></li>';
-			$('#detailPaging').append($(row));
-		}
-		
-		//
-		$('a').click(function(event){
-			console.log();
-			if($(this).attr('href')=='#'){
-				event.preventDefault();
-			}
-		});
-		
 	}
 
 }

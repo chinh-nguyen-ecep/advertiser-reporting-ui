@@ -88,11 +88,10 @@
 
 <div class="container theme-showcase" id="page-tab"
 	style="padding-top: 110px;">
-       	<ul class="nav nav-tabs">
-       	
+       	<ul class="nav nav-tabs">       	
 		  <li title="overview"><a href="#" onclick="changePage('overview')">Dashboard Overview</a></li>
 		  <li title="Running Revenue"><a href="#" onclick="changePage('runningRevenue')">Running Revenue</a></li>
-		  
+		  <li title="Network Overview"><a href="#" onclick="changePage('networkOverview')">Network Overview</a></li>
 		</ul>   
 </div>
 <script>

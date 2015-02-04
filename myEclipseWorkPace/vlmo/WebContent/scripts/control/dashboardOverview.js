@@ -521,72 +521,23 @@ function loadDataForByHour() {
 	} else {
 	}
 }
-//////////////////////////////////////
-// Review export data
-//////////////////////////////////////
-function reviewExportData() {
+/*
+ * export report
+ * 
+ */
+$('a.export_bt').click(function(){
 	var network_id = $('#selectbox_agency').val();
 	var title= $('#selectbox_agency option:selected').text();
-	var mydialog = new contentDialog();
-	mydialog.setTitle('Daily VLMO by Date From '
-			+ selectStartDate.format('yyyy-mm-dd') + ' To '
-			+ selectEndDate.format('yyyy-mm-dd'));
-	var randomID = new Date().valueOf();
-	mydialog.setContent('<div title="' + randomID
-			+ '" class="loadingDots" style=""></div>');
-	mydialog.setWidth(830);
-	mydialog.open();
-
-	mydialog.setTitle('Daily VLMO by Date From '
-			+ selectStartDate.format('yyyy-mm-dd') + ' To '
-			+ selectEndDate.format('yyyy-mm-dd'));
-	var exchanger = $('#exchange_filter').val();
-	var loadingUrl = rootUrl + '/GenerateJasperReport'
-			+ '?export_type=html&jrxml=daily_vlmo&p_end_date='
-			+ selectEndDate.format('yyyy-mm-dd') + '&p_start_date='
-			+ selectStartDate.format('yyyy-mm-dd') + '&path=vlmo'
-			+ "&p_network_id=" + network_id+"&p_title="+title;
-	var htmlResult;
-
-	if (myAjaxStore.isLoading(loadingUrl)) {
-		mydialog
-				.setContent('Your request is being processed. Please come back later 30s!');
-	} else {
-		htmlResult = myAjaxStore.get(loadingUrl);
-		if (htmlResult == null) {
-			myAjaxStore.registe(loadingUrl);
-			$.ajax({
-				url : loadingUrl,
-				dataType : 'html',
-				success : function(data) {
-					myAjaxStore.add(loadingUrl, data);
-					mydialog.setContent(data);
-				},
-				error : function(xhr, status, error) {
-					myAjaxStore.remove(loadingUrl);
-					console.log('Generate report fail! ');
-					console.log('Url: ' + loadingUrl);
-				},
-				complete : function(jqXHR, textStatus) {
-
-				}
-			});
-		} else {
-			console.log('Set content for div id title=' + randomID);
-			mydialog.setContent(htmlResult);
-		}
+	var p_start_date=selectStartDate.format('yyyy-mm-dd');
+	var p_end_date=selectEndDate.format('yyyy-mm-dd');
+	var export_type=$(this).html();
+	if(export_type=='Review'){
+		reviewExportData('Daily VLMO Overview '+p_start_date+'..'+p_end_date, 'vlmo','daily_vlmo_overview',{p_title:title,p_start_date: p_start_date,p_end_date: p_end_date,p_network_id: network_id},830);		
+	}else if(export_type=='csv'){
+		exportReport('vlmo', 'daily_vlmo_overview_csv', {p_start_date:p_start_date,p_end_date:p_end_date,p_network_id: network_id,p_title:title}, 'csv');
+	}else{
+		exportReport('vlmo', 'daily_vlmo_overview', {p_start_date:p_start_date,p_end_date:p_end_date,p_network_id: network_id,p_title:title}, export_type);
 	}
-}
-///////////////////////////////////
-// export data to pdf,csv,xls
-///////////////////////////////////
-function exportReport(exportType) {
-	var network_id = $('#selectbox_agency').val();
-	var title= $('#selectbox_agency option:selected').text();
-	var loadingUrl = rootUrl + '/GenerateJasperReport' + '?export_type='
-			+ exportType + '&jrxml=daily_vlmo&p_end_date='
-			+ selectEndDate.format('yyyy-mm-dd') + '&p_start_date='
-			+ selectStartDate.format('yyyy-mm-dd') + '&path=vlmo'
-			+ "&p_network_id=" + network_id+"&p_title="+title;
-	window.open(loadingUrl);
-}
+
+
+});

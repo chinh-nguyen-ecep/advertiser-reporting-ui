@@ -11,6 +11,7 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
+import vlmo.bean.ApiInfo;
 import vlmo.bean.ApiResponseResultSet;
 import vlmo.bean.ApiResponseResultSetInfo;
 import vlmo.database.JNDIConnection;
@@ -234,6 +235,12 @@ public class MainApiLookup implements QueryApi{
 		info.addOrderExample("GET " + apiUrl
 				+ "?order=full_date.desc|ad_network_name");
 		return info;
+	}
+
+	@Override
+	public ApiInfo getApiInfo() {
+		// TODO Auto-generated method stub
+		return new ApiInfo();
 	}
 
 }
