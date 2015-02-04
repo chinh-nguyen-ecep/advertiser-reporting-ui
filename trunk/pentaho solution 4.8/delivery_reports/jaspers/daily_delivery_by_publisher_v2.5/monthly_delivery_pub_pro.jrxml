@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_delivery_pub_pro_v2.4" pageWidth="5379" pageHeight="1684" orientation="Landscape" columnWidth="5379" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
-	<property name="ireport.zoom" value="1.693421790161336"/>
-	<property name="ireport.x" value="2472"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_delivery_pub_pro_v2.5" pageWidth="5869" pageHeight="1684" orientation="Landscape" columnWidth="5869" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="7686"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
@@ -57,6 +57,9 @@
 , SUM(b.vpc_impressions)::bigint as api_vpc_impressions
 , SUM(b.vpc_revenue) as api_vpc_revenue
 , SUM(b.vpc_net_revenue) as api_vpc_net_revenue
+, SUM(b.vlmo_impressions)::bigint as api_vlmo_impressions
+, SUM(b.vlmo_revenue) as api_vlmo_revenue
+, SUM(b.vlmo_net_revenue) as api_vlmo_net_revenue
 , SUM(trxids_count)::bigint as geo_trxids_count
 , SUM(filled_count)::float as geo_filled_count
 , SUM(location_quality_0)::float as geo_location_quality_0
@@ -68,30 +71,34 @@
 , SUM(ui_count) as ui_count
 FROM adsops.monthly_agg_delivery_publisher_property_v3 a
 LEFT JOIN (
-    SELECT month_since_2005
-         , partner_id
-         , channel_id
-         , SUM(COALESCE(total_requests,0)) AS total_requests
-         , SUM(COALESCE(local_impressions,0)) + SUM(COALESCE(vlm_impressions,0)) + SUM(COALESCE(national_impressions,0)) + SUM(COALESCE(remnant_impressions,0))+SUM(COALESCE(vpc_impressions,0)) AS total_filled_requests
-         , SUM(COALESCE(local_revenue,0)) + SUM(COALESCE(vlm_revenue,0)) + SUM(COALESCE(national_revenue,0)) + SUM(COALESCE(remnant_revenue,0))+ SUM(COALESCE(vpc_revenue,0)) AS total_revenue
-         , SUM(COALESCE(local_net_revenue,0)) + SUM(COALESCE(vlm_net_revenue,0)) + SUM(COALESCE(national_net_revenue,0)) + SUM(COALESCE(remnant_net_revenue,0))+ SUM(COALESCE(vpc_net_revenue,0)) AS total_net_revenue
-         , SUM(COALESCE(local_impressions,0)) AS local_impressions
-         , SUM(COALESCE(local_revenue,0)) AS local_revenue
-         , SUM(COALESCE(local_net_revenue,0)) AS local_net_revenue
-         , SUM(COALESCE(vlm_impressions,0)) AS vlm_impressions
-         , SUM(COALESCE(vlm_revenue,0)) AS vlm_revenue
-         , SUM(COALESCE(vlm_net_revenue,0)) AS vlm_net_revenue
-         , SUM(COALESCE(national_impressions,0)) AS national_impressions
-         , SUM(COALESCE(national_revenue,0)) AS national_revenue
-         , SUM(COALESCE(national_net_revenue,0)) AS national_net_revenue
-         , SUM(COALESCE(remnant_impressions,0)) AS remnant_impressions
-         , SUM(COALESCE(remnant_revenue,0)) AS remnant_revenue
-         , SUM(COALESCE(remnant_net_revenue,0)) AS remnant_net_revenue
-         , SUM(COALESCE(vpc_impressions,0)) AS vpc_impressions
-         , SUM(COALESCE(vpc_revenue,0)) AS vpc_revenue
-         , SUM(COALESCE(vpc_net_revenue,0)) AS vpc_net_revenue
-    FROM adm.daily_agg_api_revenue_by_partner_v4 a
-    WHERE a.is_active = true AND month_since_2005 BETWEEN $P{p_start_month_since_2005}::int AND $P{p_end_month_since_2005}::int
+    SELECT
+	month_since_2005
+	, partner_id
+	, channel_id
+	, SUM(COALESCE(total_requests,0)) AS total_requests
+	, SUM(COALESCE(local_impressions,0)) + SUM(COALESCE(vlm_impressions,0)) + SUM(COALESCE(national_impressions,0)) + SUM(COALESCE(remnant_impressions,0)) + SUM(COALESCE(vpc_impressions,0)) + SUM(COALESCE(vlmo_impressions,0)) AS total_filled_requests
+	, SUM(COALESCE(local_revenue,0)) + SUM(COALESCE(vlm_revenue,0)) + SUM(COALESCE(national_revenue,0)) + SUM(COALESCE(remnant_revenue,0)) +  SUM(COALESCE(vpc_revenue,0)) + SUM(COALESCE(vlmo_revenue,0)) AS total_revenue
+	, SUM(COALESCE(local_net_revenue,0)) + SUM(COALESCE(vlm_net_revenue,0)) + SUM(COALESCE(national_net_revenue,0)) + SUM(COALESCE(remnant_net_revenue,0)) +  SUM(COALESCE(vpc_net_revenue,0)) + SUM(COALESCE(vlmo_net_revenue,0)) AS total_net_revenue
+	, SUM(COALESCE(local_impressions,0)) AS local_impressions
+	, SUM(COALESCE(local_revenue,0)) AS local_revenue
+	, SUM(COALESCE(local_net_revenue,0)) AS local_net_revenue
+	, SUM(COALESCE(vlm_impressions,0)) AS vlm_impressions
+	, SUM(COALESCE(vlm_revenue,0)) AS vlm_revenue
+	, SUM(COALESCE(vlm_net_revenue,0)) AS vlm_net_revenue
+	, SUM(COALESCE(national_impressions,0)) AS national_impressions
+	, SUM(COALESCE(national_revenue,0)) AS national_revenue
+	, SUM(COALESCE(national_net_revenue,0)) AS national_net_revenue
+	, SUM(COALESCE(vpc_impressions,0)) AS vpc_impressions
+	, SUM(COALESCE(vpc_revenue,0)) AS vpc_revenue
+	, SUM(COALESCE(vpc_net_revenue,0)) AS vpc_net_revenue
+	, SUM(COALESCE(remnant_impressions,0)) AS remnant_impressions
+	, SUM(COALESCE(remnant_revenue,0)) AS remnant_revenue
+	, SUM(COALESCE(remnant_net_revenue,0)) AS remnant_net_revenue
+	, SUM(COALESCE(vlmo_impressions,0)) AS vlmo_impressions
+	, SUM(COALESCE(vlmo_revenue,0)) AS vlmo_revenue
+	, SUM(COALESCE(vlmo_net_revenue,0)) AS vlmo_net_revenue
+    FROM adm.daily_agg_api_revenue_by_partner_v5 a
+    WHERE a.is_active = true AND a.month_since_2005 BETWEEN $P{p_start_month_since_2005}::int AND $P{p_end_month_since_2005}::int
     GROUP BY month_since_2005
          , partner_id
          , channel_id
@@ -159,6 +166,9 @@ ORDER BY a.calendar_year_month]]>
 	<field name="api_vpc_impressions" class="java.lang.Long"/>
 	<field name="api_vpc_revenue" class="java.lang.Double"/>
 	<field name="api_vpc_net_revenue" class="java.lang.Double"/>
+	<field name="api_vlmo_impressions" class="java.lang.Long"/>
+	<field name="api_vlmo_revenue" class="java.lang.Double"/>
+	<field name="api_vlmo_net_revenue" class="java.lang.Double"/>
 	<field name="geo_trxids_count" class="java.lang.Long"/>
 	<field name="geo_filled_count" class="java.lang.Double"/>
 	<field name="geo_location_quality_0" class="java.lang.Double"/>
@@ -293,6 +303,15 @@ ORDER BY a.calendar_year_month]]>
 	</variable>
 	<variable name="dfp_clicks_1" class="java.lang.Long" calculation="Sum">
 		<variableExpression><![CDATA[$F{dfp_clicks}]]></variableExpression>
+	</variable>
+	<variable name="api_vlmo_impressions_1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{api_vlmo_impressions}]]></variableExpression>
+	</variable>
+	<variable name="api_vlmo_revenue_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{api_vlmo_revenue}]]></variableExpression>
+	</variable>
+	<variable name="api_vlmo_net_revenue_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{api_vlmo_net_revenue}]]></variableExpression>
 	</variable>
 	<background>
 		<band/>
@@ -465,7 +484,7 @@ Clicks]]></text>
 Net ECPM]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="4609" y="0" width="70" height="30"/>
+				<reportElement x="5029" y="0" width="70" height="30"/>
 				<box bottomPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
@@ -474,7 +493,7 @@ Net ECPM]]></text>
 Fill Rate]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="4189" y="0" width="70" height="30"/>
+				<reportElement x="4609" y="0" width="70" height="30"/>
 				<box bottomPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
@@ -483,7 +502,7 @@ Fill Rate]]></text>
 Impressions]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="4539" y="0" width="70" height="30"/>
+				<reportElement x="4959" y="0" width="70" height="30"/>
 				<box bottomPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
@@ -492,7 +511,7 @@ Impressions]]></text>
 Rev Share %]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="3909" y="0" width="70" height="30"/>
+				<reportElement x="4329" y="0" width="70" height="30"/>
 				<box bottomPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
@@ -501,7 +520,7 @@ Rev Share %]]></text>
 Net Revenue]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="4889" y="0" width="70" height="30"/>
+				<reportElement x="5379" y="0" width="70" height="30"/>
 				<box bottomPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
@@ -519,7 +538,7 @@ Fill Rate]]></text>
 Rev Share %]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="4119" y="0" width="70" height="30"/>
+				<reportElement x="4539" y="0" width="70" height="30"/>
 				<box bottomPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
@@ -528,7 +547,7 @@ Rev Share %]]></text>
 Rev Share %]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="4049" y="0" width="70" height="30"/>
+				<reportElement x="4469" y="0" width="70" height="30"/>
 				<box bottomPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
@@ -546,7 +565,7 @@ Net ECPM]]></text>
 ECPM]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="4469" y="0" width="70" height="30"/>
+				<reportElement x="4889" y="0" width="70" height="30"/>
 				<box bottomPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
@@ -555,7 +574,7 @@ ECPM]]></text>
 Net ECPM]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="4399" y="0" width="70" height="30"/>
+				<reportElement x="4819" y="0" width="70" height="30"/>
 				<box bottomPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
@@ -573,7 +592,7 @@ ECPM]]></text>
 Net ECPM]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="4329" y="0" width="70" height="30"/>
+				<reportElement x="4749" y="0" width="70" height="30"/>
 				<box bottomPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
@@ -618,7 +637,7 @@ Net Revenue]]></text>
 Net Revenue]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="3839" y="0" width="70" height="30"/>
+				<reportElement x="4259" y="0" width="70" height="30"/>
 				<box bottomPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
@@ -636,7 +655,7 @@ Revenue]]></text>
 Net Revenue]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="3979" y="0" width="70" height="30"/>
+				<reportElement x="4399" y="0" width="70" height="30"/>
 				<box bottomPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
@@ -663,7 +682,7 @@ Net ECPM]]></text>
 Impressions]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="3769" y="0" width="70" height="30"/>
+				<reportElement x="4189" y="0" width="70" height="30"/>
 				<box bottomPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
@@ -672,7 +691,7 @@ Impressions]]></text>
 Impressions]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="4259" y="0" width="70" height="30"/>
+				<reportElement x="4679" y="0" width="70" height="30"/>
 				<box bottomPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
@@ -726,7 +745,7 @@ Revenue]]></text>
 ECPM]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="5099" y="0" width="70" height="30"/>
+				<reportElement x="5589" y="0" width="70" height="30"/>
 				<box bottomPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
@@ -735,7 +754,7 @@ ECPM]]></text>
 49_50]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="5029" y="0" width="70" height="30"/>
+				<reportElement x="5519" y="0" width="70" height="30"/>
 				<box bottomPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
@@ -744,7 +763,7 @@ ECPM]]></text>
 1_48]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="4959" y="0" width="70" height="30"/>
+				<reportElement x="5449" y="0" width="70" height="30"/>
 				<box bottomPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
@@ -754,7 +773,7 @@ No Score
 ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="5169" y="0" width="70" height="30"/>
+				<reportElement x="5659" y="0" width="70" height="30"/>
 				<box bottomPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
@@ -763,7 +782,7 @@ No Score
 51_100]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="5309" y="0" width="70" height="30"/>
+				<reportElement x="5799" y="0" width="70" height="30"/>
 				<box bottomPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Arial" isBold="true"/>
@@ -771,7 +790,7 @@ No Score
 				<text><![CDATA[International]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="5239" y="0" width="70" height="30"/>
+				<reportElement x="5729" y="0" width="70" height="30"/>
 				<box bottomPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Arial" isBold="true"/>
@@ -787,7 +806,7 @@ No Score
 				<text><![CDATA[UI %]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="4679" y="0" width="70" height="30" forecolor="#000000"/>
+				<reportElement x="5099" y="0" width="70" height="30" forecolor="#000000"/>
 				<box bottomPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
@@ -796,7 +815,7 @@ No Score
 Fill Rate]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="4819" y="0" width="70" height="30" forecolor="#000000"/>
+				<reportElement x="5309" y="0" width="70" height="30" forecolor="#000000"/>
 				<box bottomPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
@@ -841,7 +860,7 @@ Unfilled Reqs]]></text>
 Filled Reqs]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="4749" y="0" width="70" height="30" forecolor="#000000"/>
+				<reportElement x="5169" y="0" width="70" height="30" forecolor="#000000"/>
 				<box bottomPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" isBold="true"/>
@@ -921,32 +940,95 @@ Clicks]]></text>
 				<text><![CDATA[Adcel
 Clicks]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="5239" y="0" width="70" height="30" forecolor="#000000"/>
+				<box bottomPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VLMO
+Fill Rate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3839" y="0" width="70" height="30"/>
+				<box bottomPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VLMO
+Revenue]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3979" y="0" width="70" height="30"/>
+				<box bottomPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VLMO
+ECPM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4049" y="0" width="70" height="30"/>
+				<box bottomPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VLMO
+Net ECPM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3909" y="0" width="70" height="30"/>
+				<box bottomPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VLMO
+Net Revenue]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4119" y="0" width="70" height="30"/>
+				<box bottomPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VLMO
+Rev Share %]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3769" y="0" width="70" height="30"/>
+				<box bottomPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VLMO
+Impressions]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="20">
 			<subreport>
-				<reportElement x="0" y="0" width="5379" height="20"/>
+				<reportElement x="0" y="0" width="5869" height="20"/>
 				<subreportParameter name="SUBREPORT_DIR">
 					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="adcel_requests">
 					<subreportParameterExpression><![CDATA[$F{adcel_requests}.intValue()]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="p_month_since_2005">
-					<subreportParameterExpression><![CDATA[$F{month_since_2005}]]></subreportParameterExpression>
+				<subreportParameter name="p_property_id_list">
+					<subreportParameterExpression><![CDATA[$P{p_property_id_list}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="report_total_reported_revenue">
 					<subreportParameterExpression><![CDATA[$F{total_revenue}.doubleValue()]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="p_property_id_list">
-					<subreportParameterExpression><![CDATA[$P{p_property_id_list}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="p_end_month_since_2005">
-					<subreportParameterExpression><![CDATA[$P{p_end_month_since_2005}]]></subreportParameterExpression>
+				<subreportParameter name="p_month_since_2005">
+					<subreportParameterExpression><![CDATA[$F{month_since_2005}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="p_start_month_since_2005">
 					<subreportParameterExpression><![CDATA[$P{p_start_month_since_2005}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_end_month_since_2005">
+					<subreportParameterExpression><![CDATA[$P{p_end_month_since_2005}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="p_publisher_id_list">
 					<subreportParameterExpression><![CDATA[$P{p_publisher_id_list}]]></subreportParameterExpression>
@@ -1162,7 +1244,7 @@ Clicks]]></text>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{api_vlm_net_revenue_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="3769" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="4189" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
@@ -1170,7 +1252,7 @@ Clicks]]></text>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$V{api_national_impressions_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="3909" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="4329" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
@@ -1178,7 +1260,7 @@ Clicks]]></text>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{api_national_net_revenue_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="4189" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="4609" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
@@ -1186,7 +1268,7 @@ Clicks]]></text>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$V{api_remnant_impressions_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="4259" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="4679" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
@@ -1194,7 +1276,7 @@ Clicks]]></text>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{api_remnant_revenue_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="4329" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="4749" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
@@ -1266,7 +1348,7 @@ Clicks]]></text>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{api_vlm_impressions_1} == 0 ? 0 : $V{api_vlm_net_revenue_1} * 1000 / $V{api_vlm_impressions_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="4049" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="4469" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
@@ -1274,7 +1356,7 @@ Clicks]]></text>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{api_national_impressions_1} == 0 ? 0 : $V{api_national_net_revenue_1} * 1000 / $V{api_national_impressions_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %">
-				<reportElement x="4119" y="0" width="70" height="20"/>
+				<reportElement x="4539" y="0" width="70" height="20"/>
 				<box topPadding="5"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
@@ -1282,7 +1364,7 @@ Clicks]]></text>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{api_national_revenue_1} == 0 ? 0 : $V{api_national_net_revenue_1} / $V{api_national_revenue_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="3979" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="4399" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
@@ -1290,7 +1372,7 @@ Clicks]]></text>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{api_national_impressions_1} == 0 ? 0 : $V{api_national_revenue_1} * 1000 / $V{api_national_impressions_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="3839" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="4259" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
@@ -1298,7 +1380,7 @@ Clicks]]></text>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{api_national_revenue_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="4399" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="4819" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
@@ -1306,7 +1388,7 @@ Clicks]]></text>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{api_remnant_impressions_1} == 0 ? 0 : $V{api_remnant_revenue_1} * 1000 / $V{api_remnant_impressions_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %">
-				<reportElement x="4539" y="0" width="70" height="20"/>
+				<reportElement x="4959" y="0" width="70" height="20"/>
 				<box topPadding="5"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
@@ -1314,7 +1396,7 @@ Clicks]]></text>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{api_remnant_revenue_1} == 0 ? 0 : $V{api_remnant_net_revenue_1} / $V{api_remnant_revenue_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %">
-				<reportElement x="4609" y="0" width="70" height="20"/>
+				<reportElement x="5029" y="0" width="70" height="20"/>
 				<box topPadding="5"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
@@ -1322,7 +1404,7 @@ Clicks]]></text>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{api_total_requests_1} == 0 ? 0 : $V{api_local_impressions_1}.doubleValue() / $V{api_total_requests_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="4469" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="4889" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
@@ -1330,7 +1412,7 @@ Clicks]]></text>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{api_remnant_impressions_1} == 0 ? 0 : $V{api_remnant_net_revenue_1} * 1000 / $V{api_remnant_impressions_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %">
-				<reportElement x="4889" y="0" width="70" height="20"/>
+				<reportElement x="5379" y="0" width="70" height="20"/>
 				<box topPadding="5"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
@@ -1338,7 +1420,7 @@ Clicks]]></text>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{api_total_requests_1} == 0 ? 0 : $V{api_total_filled_requests_1}.doubleValue() / $V{api_total_requests_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="4959" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="5449" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
@@ -1346,7 +1428,7 @@ Clicks]]></text>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{geo_trxids_count_1} == 0 ? 0 : $V{geo_location_quality_0_1}/$V{geo_trxids_count_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="5029" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="5519" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
@@ -1354,7 +1436,7 @@ Clicks]]></text>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{geo_trxids_count_1} == 0 ? 0 : $V{geo_location_quality_1_48_1}/$V{geo_trxids_count_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="5099" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="5589" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
@@ -1362,7 +1444,7 @@ Clicks]]></text>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{geo_trxids_count_1} == 0 ? 0 : $V{geo_location_quality_49_50_1}/$V{geo_trxids_count_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="5169" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="5659" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
@@ -1370,7 +1452,7 @@ Clicks]]></text>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{geo_trxids_count_1} == 0 ? 0 : $V{geo_location_quality_51_100_1}/$V{geo_trxids_count_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="5309" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="5799" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
@@ -1378,7 +1460,7 @@ Clicks]]></text>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{geo_filled_count_1} == 0 ? 0 : $V{geo_country_international_1}/$V{geo_filled_count_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="5239" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="5729" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
@@ -1394,7 +1476,7 @@ Clicks]]></text>
 				<textFieldExpression class="java.lang.Double"><![CDATA[( $V{adcel_requests_1}==0 ? 0.00 : $V{ui_count_1}.doubleValue()/$V{adcel_requests_1} )]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %">
-				<reportElement x="4819" y="0" width="70" height="20" forecolor="#000000"/>
+				<reportElement x="5309" y="0" width="70" height="20" forecolor="#000000"/>
 				<box topPadding="5"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
@@ -1402,7 +1484,7 @@ Clicks]]></text>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{api_total_requests_1} == 0 ? 0 : $V{api_national_impressions_1}.doubleValue() / $V{api_total_requests_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %">
-				<reportElement x="4679" y="0" width="70" height="20" forecolor="#000000"/>
+				<reportElement x="5099" y="0" width="70" height="20" forecolor="#000000"/>
 				<box topPadding="5"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
@@ -1498,7 +1580,7 @@ Clicks]]></text>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{api_vpc_impressions_1} == 0 ? 0 : $V{api_vpc_net_revenue_1} * 1000 / $V{api_vpc_impressions_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00 %">
-				<reportElement x="4749" y="0" width="70" height="20" forecolor="#000000"/>
+				<reportElement x="5169" y="0" width="70" height="20" forecolor="#000000"/>
 				<box topPadding="5"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
@@ -1520,6 +1602,62 @@ Clicks]]></text>
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$V{click_events_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="3769" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box topPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{api_vlmo_impressions_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="3839" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box topPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{api_vlmo_revenue_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="3909" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box topPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{api_vlmo_net_revenue_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="4119" y="0" width="70" height="20"/>
+				<box topPadding="5"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{api_vlmo_revenue_1} == 0 ? 0 : $V{api_vlmo_net_revenue_1} / $V{api_vlmo_revenue_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="3979" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box topPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{api_vlmo_impressions_1} == 0 ? 0 : $V{api_vlmo_revenue_1} * 1000 / $V{api_vlmo_impressions_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="4049" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box topPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{api_vlmo_impressions_1} == 0 ? 0 : $V{api_vlmo_net_revenue_1} * 1000 / $V{api_vlmo_impressions_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="5239" y="0" width="70" height="20" forecolor="#000000"/>
+				<box topPadding="5"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{api_total_requests_1} == 0 ? 0 : $V{api_vlmo_impressions_1}.doubleValue() / $V{api_total_requests_1}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>
