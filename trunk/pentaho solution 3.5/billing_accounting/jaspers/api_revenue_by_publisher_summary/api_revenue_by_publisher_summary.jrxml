@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="API Revenue by Publisher Summary" pageWidth="842" pageHeight="1190" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.366026910730141"/>
+	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="96"/>
 	<style name="boder">
 		<box>
 			<topPen lineWidth="0.75" lineStyle="Solid"/>
@@ -52,7 +52,7 @@ ORDER BY parent1_name]]>
 		<band/>
 	</background>
 	<title>
-		<band height="160">
+		<band height="175">
 			<image>
 				<reportElement x="0" y="0" width="128" height="40"/>
 				<imageExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR}+"../vervelogo.jpg"]]></imageExpression>
@@ -79,33 +79,33 @@ ORDER BY parent1_name]]>
 			<staticText>
 				<reportElement x="0" y="80" width="802" height="15" forecolor="#FF0000"/>
 				<textElement/>
-				<text><![CDATA[1.Total_impressions = vlm_impressions + vpc_impressions + national_impressions + remnant_impressions]]></text>
+				<text><![CDATA[1. Total_impressions = vlm_impressions + vpc_impressions + vlmo_impressions + national_impressions + remnant_impressions]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="95" width="802" height="15" forecolor="#FF0000"/>
 				<textElement/>
-				<text><![CDATA[2.Total_revenue = vlm_revenue + vpc_revenue + national_revenue + remnant_revenue]]></text>
+				<text><![CDATA[2. Total_revenue = vlm_revenue + vpc_revenue + vlmo_revenue + national_revenue + remnant_revenue]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="110" width="802" height="15" forecolor="#FF0000"/>
 				<textElement/>
-				<text><![CDATA[3.Total_net_revenue = vlm_net_revenue + vpc_net_revenue + national_net_revenue + remnant_net_revenue]]></text>
+				<text><![CDATA[3. Total_net_revenue = vlm_net_revenue + vpc_net_revenue + vlmo_net_revenue + national_net_revenue + remnant_net_revenue]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="125" width="802" height="15" forecolor="#FF0000"/>
 				<textElement/>
-				<text><![CDATA[4.Exclude LOCAL from the calculation ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="140" width="802" height="20"/>
-				<textElement/>
-				<text><![CDATA[]]></text>
+				<text><![CDATA[4. Exclude LOCAL from the calculation ]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="0" y="40" width="802" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA["Refresh Date (ET): " + new SimpleDateFormat("yyyy-MM-dd").format($F{dt_lastchange})]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="0" y="140" width="802" height="15" forecolor="#FF0000"/>
+				<textElement/>
+				<text><![CDATA[5. VLMO is available since 2015-Jan]]></text>
+			</staticText>
 		</band>
 	</title>
 	<columnHeader>
