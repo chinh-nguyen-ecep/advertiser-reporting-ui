@@ -22,7 +22,7 @@
 	<parameter name="p_network_id" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT a.full_date,
-(CASE WHEN a.network_id=4 THEN 'VLM' ELSE a.network_name END) as network_name,
+(CASE WHEN a.network_id=4 THEN 'VLM' WHEN a.network_id=6 THEN 'VPC' WHEN a.network_id=7 THEN 'VLMO' ELSE a.network_name END) as network_name,
 sum(a.impressions) as impressions,
 sum(a.clicks) as clicks,
 sum(a.revenue)::Decimal as revenue,
