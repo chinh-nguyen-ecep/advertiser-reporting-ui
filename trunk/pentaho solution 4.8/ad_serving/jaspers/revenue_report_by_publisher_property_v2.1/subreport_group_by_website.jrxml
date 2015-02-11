@@ -26,7 +26,7 @@
 		<![CDATA[SELECT property_id as website_id
 ,(case when property_name is null then 'N/A' else property_name end) as website_name
 ,partner_id
-,(CASE WHEN network_id=4 THEN 'VLM' ELSE network_name END) as network_name
+,(CASE WHEN a.network_id=4 THEN 'VLM' WHEN a.network_id=6 THEN 'VPC' WHEN a.network_id=7 THEN 'VLMO' ELSE a.network_name END) as network_name
 ,sum(impressions) as impressions
 ,sum(clicks) as clicks, sum(revenue) as revenue
 ,sum(p_rev_share) as p_rev_share
