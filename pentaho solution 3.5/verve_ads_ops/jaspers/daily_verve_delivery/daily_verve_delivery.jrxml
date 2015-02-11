@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Verve daily delivery" pageWidth="2786" pageHeight="2380" orientation="Landscape" columnWidth="2746" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.8181818181818254"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="384"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
@@ -185,35 +185,35 @@ If the properties under one publisher have different value, it is set either on 
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>
-				<text><![CDATA[Impressions from DFP for national flights  ( flight network_id = 2)]]></text>
+				<text><![CDATA[Impressions from DFP for national flights  (flight network_id = 2)]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="122" width="100" height="15"/>
 				<textElement>
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
-				<text><![CDATA[National imp:]]></text>
+				<text><![CDATA[National Imp:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="152" width="100" height="15"/>
 				<textElement>
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
-				<text><![CDATA[VPC imp:]]></text>
+				<text><![CDATA[VPC Imp:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="100" y="152" width="2646" height="15"/>
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>
-				<text><![CDATA[Impressions from DFP for vpc flights ( flight network_id = 6)]]></text>
+				<text><![CDATA[Impressions from DFP for vpc flights (flight network_id = 6)]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="100" y="137" width="2646" height="15"/>
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>
-				<text><![CDATA[Impressions from DFP for VLM flights  ( flight network_id = 4)]]></text>
+				<text><![CDATA[Impressions from DFP for VLM flights  (flight network_id = 4)]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="137" width="100" height="15"/>
@@ -227,14 +227,14 @@ If the properties under one publisher have different value, it is set either on 
 				<textElement>
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Remnant imp:]]></text>
+				<text><![CDATA[Remnant Imp:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="212" width="100" height="15"/>
 				<textElement>
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
-				<text><![CDATA[VLM rev:]]></text>
+				<text><![CDATA[VLM Rev:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="197" width="100" height="15"/>
@@ -248,7 +248,7 @@ If the properties under one publisher have different value, it is set either on 
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>
-				<text><![CDATA[The same formula with API ( imp/1000)*billable_rate ( $5 or $3 rule)]]></text>
+				<text><![CDATA[The same formula with API (imp/1000)*billable_rate ($5 or $3 rule)]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="100" y="182" width="2646" height="15"/>
@@ -262,7 +262,7 @@ If the properties under one publisher have different value, it is set either on 
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>
-				<text><![CDATA[The same formula with API ( imp/1000)*flight_rate]]></text>
+				<text><![CDATA[The same formula with API (imp/1000)*flight_rate]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="100" y="167" width="2646" height="15"/>
@@ -276,7 +276,7 @@ If the properties under one publisher have different value, it is set either on 
 				<textElement>
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
-				<text><![CDATA[VLMO imp:]]></text>
+				<text><![CDATA[VLMO Imp:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="272" width="100" height="15"/>
@@ -290,7 +290,7 @@ If the properties under one publisher have different value, it is set either on 
 				<textElement>
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
-				<text><![CDATA[VPC rev:]]></text>
+				<text><![CDATA[VPC Rev:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="242" width="100" height="15"/>
@@ -318,7 +318,7 @@ If the properties under one publisher have different value, it is set either on 
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>
-				<text><![CDATA[The same formula with API ( imp/1000)*billable_rate ( $5 or $3 rule)]]></text>
+				<text><![CDATA[The same formula with API (imp/1000)*billable_rate ($5 or $3 rule)]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="100" y="257" width="2646" height="15"/>
@@ -332,7 +332,7 @@ If the properties under one publisher have different value, it is set either on 
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>
-				<text><![CDATA[The same formula with API ( imp/1000)*tier rate ( tier rate is the tier immediately below the last month rate ]]></text>
+				<text><![CDATA[The same formula with API (imp/1000)*tier rate (tier rate is the tier immediately below the last month rate ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="100" y="287" width="2646" height="45"/>
@@ -376,7 +376,7 @@ If the properties under one publisher have different value, it is set either on 
 				<textElement>
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Filled_req:]]></text>
+				<text><![CDATA[Filled Req:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="392" width="100" height="15"/>
@@ -390,14 +390,14 @@ If the properties under one publisher have different value, it is set either on 
 				<textElement>
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
-				<text><![CDATA[filled_rate:]]></text>
+				<text><![CDATA[Filled Rate:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="362" width="100" height="15"/>
 				<textElement>
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Total req:]]></text>
+				<text><![CDATA[Total Req:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="407" width="100" height="15"/>
@@ -418,7 +418,7 @@ If the properties under one publisher have different value, it is set either on 
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>
-				<text><![CDATA[Total adcel request ( per publisher) - local imp]]></text>
+				<text><![CDATA[Total adcel request (per publisher) - local imp]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="100" y="392" width="2646" height="15"/>
@@ -446,7 +446,7 @@ If the properties under one publisher have different value, it is set either on 
 				<textElement>
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Verve margin:]]></text>
+				<text><![CDATA[Verve Margin:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="100" y="422" width="2646" height="15"/>
@@ -467,14 +467,14 @@ If the properties under one publisher have different value, it is set either on 
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>
-				<text><![CDATA[Verve impressions ( adimpinternal)]]></text>
+				<text><![CDATA[Verve impressions (adimpinternal)]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="452" width="100" height="15"/>
 				<textElement>
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Displayed imps:]]></text>
+				<text><![CDATA[Displayed Imps:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="0" y="467" width="2746" height="20"/>

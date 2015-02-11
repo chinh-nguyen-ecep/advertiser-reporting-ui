@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subreport_group_by_order" language="groovy" pageWidth="1210" pageHeight="555" orientation="Landscape" columnWidth="1210" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="1.3310000000000026"/>
-	<property name="ireport.x" value="265"/>
+	<property name="ireport.x" value="306"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="p_publisher_id" class="java.lang.String"/>
 	<parameter name="p_end_date" class="java.lang.String">
@@ -24,7 +24,7 @@
 	</parameter>
 	<queryString>
 		<![CDATA[SELECT order_name,order_id
-,(CASE WHEN network_id=4 THEN 'VLM' ELSE network_name END ) as network_name
+,(CASE WHEN a.network_id=4 THEN 'VLM' WHEN a.network_id=6 THEN 'VPC' WHEN a.network_id=7 THEN 'VLMO' ELSE a.network_name END ) as network_name
 ,sum(impressions) as impressions
 , sum(clicks) as clicks
 , sum(revenue) as revenue

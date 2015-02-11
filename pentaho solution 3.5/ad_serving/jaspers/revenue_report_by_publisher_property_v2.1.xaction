@@ -119,32 +119,40 @@
       <sources> 
         <request>List_network</request> 
       </sources>  
-      <default-value type="result-set"> 
-        <row> 
-          <value>1</value>  
-          <name>Local</name> 
-        </row>  
-        <row> 
-          <value>2</value>  
-          <name>National</name> 
-        </row>  
-        <row> 
-          <value>3</value>  
-          <name>Remant</name> 
-        </row>  
-        <row> 
-          <value>4</value>  
-          <name>Verve Local Marketplace</name> 
-        </row>  
-        <row> 
-          <value>0</value>  
-          <name>All</name> 
-        </row> 
+      <default-value type="result-set">
+        <row>
+          <value>1</value>
+          <name>Local</name>
+        </row>
+        <row>
+          <value>2</value>
+          <name>National</name>
+        </row>
+        <row>
+          <value>3</value>
+          <name>Remant</name>
+        </row>
+        <row>
+          <value>4</value>
+          <name>VLM</name>
+        </row>
+        <row>
+          <value>6</value>
+          <name>VPC</name>
+        </row>
+        <row>
+          <value>7</value>
+          <name>VLMO</name>
+        </row>
+        <row>
+          <value>0</value>
+          <name>All</name>
+        </row>
       </default-value>  
-      <columns> 
-        <value type="string"/>  
-        <name type="string"/> 
-      </columns> 
+      <columns>
+        <value type="string"/>
+        <name type="string"/>
+      </columns>
     </List_network>  
     <show_remnant type="string"> 
       <sources> 
