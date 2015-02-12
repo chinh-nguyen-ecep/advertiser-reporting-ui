@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_verve_delivery_trends_subreport1" language="groovy" pageWidth="810" pageHeight="572" orientation="Landscape" columnWidth="810" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="p_date_sk" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new Integer(1)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_group_type" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("1day")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_network_id" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new Integer(1)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/media/ecep2014/Setup/Ecep/Programs/Pentaho/biserver-ce-3.8.0-stable/biserver-ce/pentaho-solutions/verve_ads_ops/jaspers/daily_verve_delivery/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_sub_title" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+full_date as date
+,SUM(impressions) AS total_impressions
+,SUM(revenue) AS total_revenue
+,SUM(total_revenue) AS total_total_revenue
+,SUM(total_net_revenue) AS total_total_net_revenue
+FROM adsops.daily_agg_verve_trends
+WHERE is_active=true AND eastern_date_sk=$P{p_date_sk} AND group_type=$P{p_group_type} AND network_id=$P{p_network_id}
+GROUP BY full_date]]>
+	</queryString>
+	<field name="date" class="java.sql.Date"/>
+	<field name="total_impressions" class="java.lang.Long"/>
+	<field name="total_revenue" class="java.lang.Double"/>
+	<field name="total_total_revenue" class="java.lang.Double"/>
+	<field name="total_total_net_revenue" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="20">
+			<staticText>
+				<reportElement mode="Opaque" x="180" y="0" width="130" height="20" forecolor="#FEFEFE" backcolor="#2486C9"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[National Impressions]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="180" height="20" forecolor="#FEFEFE" backcolor="#2486C9"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{p_sub_title}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="430" y="0" width="130" height="20" forecolor="#FEFEFE" backcolor="#2486C9"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[National Impressions]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="690" y="0" width="120" height="20" forecolor="#FEFEFE" backcolor="#2486C9"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Verve magin rate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="310" y="0" width="120" height="20" forecolor="#FEFEFE" backcolor="#2486C9"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[National Revenue]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="560" y="0" width="130" height="20" forecolor="#FEFEFE" backcolor="#2486C9"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[National Revenue]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="26">
+			<subreport>
+				<reportElement x="0" y="0" width="810" height="26"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_date_sk">
+					<subreportParameterExpression><![CDATA[$P{p_date_sk}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_total_revenue">
+					<subreportParameterExpression><![CDATA[$F{total_revenue}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_group_type">
+					<subreportParameterExpression><![CDATA[$P{p_group_type}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_network_id">
+					<subreportParameterExpression><![CDATA[$P{p_network_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_total_impressions">
+					<subreportParameterExpression><![CDATA[$F{total_impressions}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_verve_delivery_trends_subreport1_detail.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>
