@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Verve daily delivery trends" pageWidth="850" pageHeight="1190" columnWidth="810" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="0.7710865788590663"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("2015-01-01")]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT max(eastern_date_sk) as date_sk
+,max(full_date) AS date
+,max(full_date)-7 AS date_7
+,max(calendar_year_month) as calendar_year_month
+,max(DATE_PART('days',DATE_TRUNC('month', full_date) + '1 MONTH'::INTERVAL    - DATE_TRUNC('month', full_date)))::int AS days_of_month
+,max(dt_lastchange) as dt_lastchange
+,max(EXTRACT(DAY FROM full_date))::int as current_day
+FROM adsops.daily_agg_verve_delivery
+WHERE full_date=$P{p_date}::date;]]>
+	</queryString>
+	<field name="date_sk" class="java.lang.Integer"/>
+	<field name="date" class="java.sql.Date"/>
+	<field name="date_7" class="java.sql.Date"/>
+	<field name="calendar_year_month" class="java.lang.String"/>
+	<field name="days_of_month" class="java.lang.Integer"/>
+	<field name="dt_lastchange" class="java.sql.Timestamp"/>
+	<field name="current_day" class="java.lang.Integer"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="352">
+			<subreport>
+				<reportElement x="0" y="0" width="810" height="42"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_date_sk">
+					<subreportParameterExpression><![CDATA[$F{date_sk}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_sub_title">
+					<subreportParameterExpression><![CDATA["Source 1 Day, "+new SimpleDateFormat("MM/dd").format($F{date})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_group_type">
+					<subreportParameterExpression><![CDATA["1day"]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_network_id">
+					<subreportParameterExpression><![CDATA[2]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_verve_delivery_trends_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="62" width="810" height="42"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_date_sk">
+					<subreportParameterExpression><![CDATA[$F{date_sk}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_sub_title">
+					<subreportParameterExpression><![CDATA["Source 7 Day, "+new SimpleDateFormat("MM/dd").format($F{date_7})+"-"+new SimpleDateFormat("MM/dd").format($F{date})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_group_type">
+					<subreportParameterExpression><![CDATA["7days"]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_network_id">
+					<subreportParameterExpression><![CDATA[2]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_verve_delivery_trends_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="42" width="810" height="20"/>
+				<textElement/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="104" width="810" height="20"/>
+				<textElement/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="124" width="810" height="42"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_date_sk">
+					<subreportParameterExpression><![CDATA[$F{date_sk}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_sub_title">
+					<subreportParameterExpression><![CDATA["Source 1 Month, "+new SimpleDateFormat("MMMMM").format($F{date})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_group_type">
+					<subreportParameterExpression><![CDATA["mtd"]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_network_id">
+					<subreportParameterExpression><![CDATA[2]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_verve_delivery_trends_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="166" width="810" height="20"/>
+				<textElement/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="186" width="810" height="42"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_date_sk">
+					<subreportParameterExpression><![CDATA[$F{date_sk}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_sub_title">
+					<subreportParameterExpression><![CDATA["VLMO Partner 1 Day, "+new SimpleDateFormat("MM/dd").format($F{date})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_group_type">
+					<subreportParameterExpression><![CDATA["1day"]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_network_id">
+					<subreportParameterExpression><![CDATA[7]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_verve_delivery_trends_subreport2.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="228" width="810" height="20"/>
+				<textElement/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="248" width="810" height="42"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_date_sk">
+					<subreportParameterExpression><![CDATA[$F{date_sk}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_sub_title">
+					<subreportParameterExpression><![CDATA["VLMO Partner 7 Day, "+new SimpleDateFormat("MM/dd").format($F{date_7})+"-"+new SimpleDateFormat("MM/dd").format($F{date})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_group_type">
+					<subreportParameterExpression><![CDATA["7days"]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_network_id">
+					<subreportParameterExpression><![CDATA[7]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_verve_delivery_trends_subreport2.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="310" width="810" height="42"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_date_sk">
+					<subreportParameterExpression><![CDATA[$F{date_sk}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_sub_title">
+					<subreportParameterExpression><![CDATA["VLMO Partner 1 Month, "+new SimpleDateFormat("MMMM").format($F{date})]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_group_type">
+					<subreportParameterExpression><![CDATA["mtd"]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_network_id">
+					<subreportParameterExpression><![CDATA[7]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_verve_delivery_trends_subreport2.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="290" width="810" height="20"/>
+				<textElement/>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</title>
+</jasperReport>

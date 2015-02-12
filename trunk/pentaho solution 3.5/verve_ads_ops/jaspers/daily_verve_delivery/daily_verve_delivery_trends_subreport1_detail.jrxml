@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_verve_delivery_trends_subreport1" language="groovy" pageWidth="810" pageHeight="572" orientation="Landscape" columnWidth="810" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="p_date_sk" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new Integer(1)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_group_type" class="java.lang.String">
+		<defaultValueExpression><![CDATA[new String("1day")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_network_id" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new Integer(1)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_total_impressions" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[new Long(1)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_total_revenue" class="java.lang.Double">
+		<defaultValueExpression><![CDATA[new Double(1)]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+source_name
+,group_type
+,full_date AS date
+,SUM(impressions) AS impressions
+,SUM(revenue) AS revenue
+,SUM(total_net_revenue) AS total_net_revenue_per_sc
+,SUM(total_revenue) AS total_revenue_per_sc
+,CASE WHEN $P{p_total_impressions}>0 THEN SUM(impressions)::float/$P{p_total_impressions} ELSE 0 END AS rate
+,CASE WHEN $P{p_total_revenue}>0 THEN SUM(revenue)::float/$P{p_total_revenue} ELSE 0 END AS revenue_rate
+,CASE WHEN SUM(total_revenue) > 0 THEN (SUM(total_revenue)-SUM(total_net_revenue))::float/SUM(total_revenue) ELSE 0 END AS verve_magin_rate
+FROM adsops.daily_agg_verve_trends
+WHERE is_active=true AND eastern_date_sk=$P{p_date_sk} AND group_type=$P{p_group_type} AND network_id=$P{p_network_id}
+GROUP BY source_name,full_date,group_type]]>
+	</queryString>
+	<field name="source_name" class="java.lang.String"/>
+	<field name="group_type" class="java.lang.String"/>
+	<field name="date" class="java.sql.Date"/>
+	<field name="impressions" class="java.lang.Long"/>
+	<field name="revenue" class="java.lang.Double"/>
+	<field name="total_net_revenue_per_sc" class="java.lang.Double"/>
+	<field name="total_revenue_per_sc" class="java.lang.Double"/>
+	<field name="rate" class="java.lang.Double"/>
+	<field name="revenue_rate" class="java.lang.Double"/>
+	<field name="verve_magin_rate" class="java.lang.Double"/>
+	<variable name="impressions_1" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{impressions}]]></variableExpression>
+	</variable>
+	<variable name="total_net_revenue_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{total_net_revenue_per_sc}]]></variableExpression>
+	</variable>
+	<variable name="total_revenue_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{total_revenue_per_sc}]]></variableExpression>
+	</variable>
+	<variable name="revenue_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{revenue}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="180" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{source_name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="180" y="0" width="130" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{impressions}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="310" y="0" width="120" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{revenue}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="430" y="0" width="130" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{rate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="690" y="0" width="120" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{verve_magin_rate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="560" y="0" width="130" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{revenue_rate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="20">
+			<textField pattern="#,##0">
+				<reportElement x="180" y="0" width="130" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$V{impressions_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="$ #,##0.00">
+				<reportElement x="310" y="0" width="120" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{revenue_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="180" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Grand Total]]></text>
+			</staticText>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="430" y="0" width="130" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $P{p_total_impressions}==0 ? 0 : $V{impressions_1}.doubleValue()/$P{p_total_impressions} )]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="690" y="0" width="120" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $V{total_revenue_1}==0 ? 0 : ($V{total_revenue_1}-$V{total_net_revenue_1}).doubleValue()/$V{total_revenue_1} )]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 %">
+				<reportElement x="560" y="0" width="130" height="20"/>
+				<box topPadding="2" leftPadding="5" rightPadding="5">
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[( $P{p_total_revenue}==0 ? 0 : $V{revenue_1}.doubleValue()/$P{p_total_revenue} )]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

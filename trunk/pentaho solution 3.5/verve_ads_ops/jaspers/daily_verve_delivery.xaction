@@ -56,7 +56,13 @@
         <request>connection_name</request> 
       </sources>  
       <default-value><![CDATA[dw3dw3]]></default-value> 
-    </connection_name> 
+    </connection_name>  
+    <p_report_type type="string"> 
+      <sources> 
+        <request>p_report_type</request> 
+      </sources>  
+      <default-value><![CDATA[1]]></default-value> 
+    </p_report_type> 
   </inputs>
 
   <outputs/>
@@ -74,12 +80,24 @@
         <mime-type>text/plain</mime-type> 
       </solution-file> 
     </report-definition>  
-    <report-definition1>
+    <report-definition1> 
+      <solution-file> 
+        <location>daily_verve_delivery/daily_verve_delivery.jasper</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition1>  
+    <report-definition2>
       <solution-file>
-        <location>daily_verve_delivery/daily_verve_delivery.jasper</location>
+        <location>daily_verve_delivery/daily_verve_delivery_trends.jasper</location>
         <mime-type>text/plain</mime-type>
       </solution-file>
-    </report-definition1>
+    </report-definition2>
+    <report-definition3>
+      <solution-file>
+        <location>daily_verve_delivery/daily_verve_delivery_trends_csv.jasper</location>
+        <mime-type>text/plain</mime-type>
+      </solution-file>
+    </report-definition3>
   </resources>
   
   <actions> 
@@ -134,7 +152,7 @@ SELECT MIN (full_date) as min_full_date, MAX (full_date) as max_full_date FROM a
         <xsl><![CDATA[pageTemplate]]></xsl> 
       </component-definition> 
     </action-definition>
-
+  
     <action-definition> 
       <component-name>JavascriptRule</component-name>
       <action-type>get date</action-type>
@@ -151,40 +169,85 @@ p_date=p_start_date;]]></script>
       </component-definition> 
     </action-definition>
   
-    <actions>
-      <condition><![CDATA[p_output=='csv']]></condition>
-      <action-definition> 
-        <component-name>JasperReportsComponent</component-name>
-        <action-type>Jasper</action-type>
-        <action-inputs> 
-          <p_date type="string"/>  
-          <jndi type="string" mapping="connection_name"/> 
-        </action-inputs>
-        <action-resources> 
-          <report-definition type="resource"/> 
-        </action-resources>
-        <component-definition>
-          <output-type><![CDATA[csv]]></output-type>
-        </component-definition> 
-      </action-definition>
-
+    <actions> 
+      <condition><![CDATA[p_report_type==1]]></condition>  
+      <actions> 
+        <condition><![CDATA[p_output=='csv']]></condition>  
+        <action-definition> 
+          <component-name>JasperReportsComponent</component-name>
+          <action-type>Jasper</action-type>
+          <action-inputs> 
+            <p_date type="string"/>  
+            <jndi type="string" mapping="connection_name"/> 
+          </action-inputs>
+          <action-resources> 
+            <report-definition type="resource"/> 
+          </action-resources>
+          <component-definition> 
+            <output-type><![CDATA[csv]]></output-type> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+  
+      <actions> 
+        <condition><![CDATA[p_output!='csv']]></condition>  
+        <action-definition> 
+          <component-name>JasperReportsComponent</component-name>
+          <action-type>Jasper</action-type>
+          <action-inputs> 
+            <jndi type="string" mapping="connection_name"/>  
+            <p_date type="string"/>  
+            <output-type type="string" mapping="p_output"/> 
+          </action-inputs>
+          <action-resources> 
+            <report-definition mapping="report-definition1"/> 
+          </action-resources>
+          <component-definition/> 
+        </action-definition>
+ 
+      </actions>
+ 
     </actions>
-
+  
     <actions>
-      <condition><![CDATA[p_output!='csv']]></condition>
-      <action-definition>
-        <component-name>JasperReportsComponent</component-name>
-        <action-type>Jasper</action-type>
-        <action-inputs>
-          <jndi type="string" mapping="connection_name"/>
-          <p_date type="string"/>
-          <output-type type="string" mapping="p_output"/>
-        </action-inputs>
-        <action-resources>
-          <report-definition mapping="report-definition1"/>
-        </action-resources>
-        <component-definition/>
-      </action-definition>
+      <condition><![CDATA[p_report_type==2]]></condition>
+      <actions>
+        <condition><![CDATA[p_output=='csv']]></condition>
+        <action-definition>
+          <component-name>JasperReportsComponent</component-name>
+          <action-type>Jasper</action-type>
+          <action-inputs>
+            <p_date type="string"/>
+            <jndi type="string" mapping="connection_name"/>
+          </action-inputs>
+          <action-resources>
+            <report-definition mapping="report-definition3"/>
+          </action-resources>
+          <component-definition>
+            <output-type><![CDATA[csv]]></output-type>
+          </component-definition>
+        </action-definition>
+
+      </actions>
+
+      <actions>
+        <condition><![CDATA[p_output!='csv']]></condition>
+        <action-definition>
+          <component-name>JasperReportsComponent</component-name>
+          <action-type>Jasper</action-type>
+          <action-inputs>
+            <p_date type="string"/>
+            <jndi type="string" mapping="connection_name"/>
+            <output-type type="string" mapping="p_output"/>
+          </action-inputs>
+          <action-resources>
+            <report-definition mapping="report-definition2"/>
+          </action-resources>
+          <component-definition/>
+        </action-definition>
+
+      </actions>
 
     </actions>
 
