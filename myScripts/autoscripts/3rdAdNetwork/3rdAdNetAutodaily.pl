@@ -39,7 +39,7 @@ sub main{
 		
 		#run param 28
 		writelog("Run param 28");
-		system("cd ../notifications_for_late_reports/;perl notifications_for_late_reports.pl remnant > monitor/dailylog.remnant.$process_date.txt 2> errors/dailylog.remnant.$process_date.txt &");		
+		system("cd ../notifications_for_late_reports/;perl notifications_for_late_reports.pl remnant > monitor/dailylog.remnant.$process_date.txt 2> errors/dailylog.remnant.$process_date.txt &");	
 		runParam(28);
 		checkParam(28,4);				
 		promote(28);
@@ -158,21 +158,10 @@ sub rollBackTransferRemnant{
 		%h_report_date7=dw3_getDate(-7);
 		$report_date1=$h_report_date1{'year'}.'-'.$h_report_date1{'month'}.'-'.$h_report_date1{'day'};	#the report date 2012-02-02
 		$report_date7=$h_report_date7{'year'}.'-'.$h_report_date7{'month'}.'-'.$h_report_date7{'day'};	#the report date 2012-02-02
-		##rollBackTransfer_table_wp('adm.daily_agg_network_performance',$report_date7,$report_date1);
-		##rollBackTransfer_table('adm.daily_network_fct_request',$report_date7,$report_date1);
-		##rollBackTransfer_table('adm.daily_network_fct_channel',$report_date7,$report_date1);
-		##rollBackTransfer_table('adnetwork.daily_adnetwork_summary',$report_date7,$report_date1);
 		
-
-		##checkEstimateTableToTransfer('adnetwork.daily_cg_performance');
-		##checkEstimateTableToTransfer('adnetwork.daily_jt_performance');
-
-		##checkEstimateTableToTransfer('adnetwork.daily_mm_performance');
 		checkEstimateTableToTransfer('adnetwork.daily_mx_performance');
 		checkEstimateTableToTransfer('adnetwork.daily_sp_blue_performance');
-
 		checkEstimateTableToTransfer('adnetwork.daily_yp_no_performance');
-
 		checkEstimateTableToTransfer('adnetwork.daily_yp_sb_performance');
 		checkEstimateTableToTransfer('adnetwork.daily_am_performance');
 }
@@ -181,20 +170,17 @@ sub rollBackTransferDelivery{
 		%h_report_date1=dw3_yesterday();
 		%h_report_date7=dw3_getDate(-7);
 		$report_date1=$h_report_date1{'year'}.'-'.$h_report_date1{'month'}.'-'.$h_report_date1{'day'};	#the report date 2012-02-02
-		$report_date7=$h_report_date7{'year'}.'-'.$h_report_date7{'month'}.'-'.$h_report_date7{'day'};	#the report date 2012-02-02
+		$report_date7=$h_report_date7{'year'}.'-'.$h_report_date7{'month'}.'-'.$h_report_date7{'day'};	#the report date 2012-02-02		
 		
-		##rollBackTransfer_table('adsops.daily_agg_delivery_adnetwork_publisher',$report_date7,$report_date1);
-		##rollBackTransfer_table('adsops.daily_agg_delivery_publisher_property',$report_date7,$report_date1);	
-		##rollBackTransfer_table_wp('adsops.daily_agg_delivery_adnetwork_publisher_beta',$report_date7,$report_date1);
-		##rollBackTransfer_table_wp('adsops.daily_agg_delivery_publisher_property_beta',$report_date7,$report_date1);	
 		rollBackTransfer_table('adsops.daily_agg_delivery_adnetwork_publisher_v3',$report_date7,$report_date1);
-		rollBackTransfer_table('adsops.daily_agg_delivery_publisher_property_v3',$report_date7,$report_date1);
-		##rollBackTransfer_table_wp('adm.daily_agg_network_revenue',$report_date7,$report_date1);
+		rollBackTransfer_table('adsops.daily_agg_delivery_publisher_property_v3',$report_date7,$report_date1);		
 		rollBackTransfer_table_wp('adm.daily_agg_network_revenue_by_publisher',$report_date7,$report_date1);	
-		rollBackTransfer_table('adm.daily_agg_network_revenue_min',$report_date7,$report_date1);
+		rollBackTransfer_table('adm.daily_agg_network_revenue_min',$report_date7,$report_date1);	
+		rollBackTransfer_table('adsops.daily_agg_verve_trends',$report_date7,$report_date1);	
+		rollBackTransfer_table('adsops.daily_agg_verve_delivery',$report_date7,$report_date1);	
+		rollBackTransfer_table('adsops.daily_agg_verve_delivery_7days',$report_date7,$report_date1);	
+		rollBackTransfer_table('adsops.daily_agg_verve_delivery_mtd',$report_date7,$report_date1);	
 		
-		##system("cd /opt/temp/autoscripts/transformer/ && perl main.pl daily_range dw3 pentaho.ecepvn.org:analyticsdb adsops.daily_agg_delivery_adnetwork_publisher_beta $report_date7 $report_date1 3rdAdNetAutodaily &");
-		##system("cd /opt/temp/autoscripts/transformer/ && perl main.pl daily_range dw3 pentaho.ecepvn.org:analyticsdb adsops.daily_agg_delivery_publisher_property_beta $report_date7 $report_date1 3rdAdNetAutodaily &");
 }
 
 sub rollBackTransferPublisherProperty{
@@ -204,18 +190,12 @@ sub rollBackTransferPublisherProperty{
 		$report_date7=$h_report_date7{'year'}.'-'.$h_report_date7{'month'}.'-'.$h_report_date7{'day'};	#the report date 2012-02-02
 		
 		rollBackTransfer_table('adm.daily_network_fct_request_beta',$report_date7,$report_date1);
-
 		rollBackTransfer_table('adsops.daily_agg_verve_ads_by_remnant',$report_date7,$report_date1);
 		rollBackTransfer_table('adm.daily_agg_api_revenue_by_partner_v4',$report_date7,$report_date1);
-		rollBackTransfer_table('adm.daily_agg_api_revenue_by_partner_v5',$report_date7,$report_date1);
-		##rollBackTransfer_table('adsops.daily_agg_delivery_advertiser_beta',$report_date7,$report_date1);
-		##rollBackTransfer_table('adm.daily_agg_revenue_statistics',$report_date7,$report_date1);
+		rollBackTransfer_table('adm.daily_agg_api_revenue_by_partner_v5',$report_date7,$report_date1);		
 		rollBackTransfer_table('adm.ba_daily_flight',$report_date7,$report_date1);
 		rollBackTransfer_table('adm.ba_daily_flight_min',$report_date7,$report_date1);
-		rollBackTransfer_table('adm.ba_daily_flight_exception',$report_date7,$report_date1);
-		##rollBackTransfer_table('adm.daily_agg_api_revenue_by_partner_v3',$report_date7,$report_date1);
-		##system("cd /opt/temp/autoscripts/transformer/ && perl main.pl daily_range dw3 pentaho.ecepvn.org:analyticsdb adm.daily_agg_fct_overview_revenue_beta $report_date7 $report_date1 3rdAdNetAutodaily &");
-		##system("cd /opt/temp/autoscripts/transformer/ && perl main.pl daily_range dw3 dw10:analyticsdb adm.daily_agg_fct_overview_revenue_beta $report_date7 $report_date1 3rdAdNetAutodaily &");
+		rollBackTransfer_table('adm.ba_daily_flight_exception',$report_date7,$report_date1);		
 
 }
 
@@ -273,9 +253,3 @@ sub transferToAWS{
 	}
 	my $rv = $dbh->disconnect;
 }
-
-
-
-
-
-
