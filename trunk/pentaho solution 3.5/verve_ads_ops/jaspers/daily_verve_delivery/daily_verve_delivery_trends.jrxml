@@ -12,7 +12,7 @@
 	<queryString>
 		<![CDATA[SELECT max(eastern_date_sk) as date_sk
 ,max(full_date) AS date
-,max(full_date)-7 AS date_7
+,max(full_date)-6 AS date_7
 ,max(calendar_year_month) as calendar_year_month
 ,max(DATE_PART('days',DATE_TRUNC('month', full_date) + '1 MONTH'::INTERVAL    - DATE_TRUNC('month', full_date)))::int AS days_of_month
 ,max(dt_lastchange) as dt_lastchange
