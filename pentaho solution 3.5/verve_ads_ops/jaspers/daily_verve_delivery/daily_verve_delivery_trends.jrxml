@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Verve daily delivery trends" pageWidth="850" pageHeight="1190" columnWidth="810" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Verve daily delivery trends" pageWidth="920" pageHeight="1190" columnWidth="880" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="0.7710865788590663"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -37,19 +37,19 @@ WHERE full_date=$P{p_date}::date;]]>
 				<imageExpression class="java.lang.String"><![CDATA["http://s3.amazonaws.com/uploads.uservoice.com/logo/design_setting/24549/original/pub_adops_logo.png?1348177717"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="200" y="0" width="610" height="37"/>
+				<reportElement x="200" y="0" width="680" height="37"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" size="24" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Daily Verve Delivery]]></text>
 			</staticText>
 			<textField pattern="">
-				<reportElement x="0" y="37" width="810" height="20"/>
+				<reportElement x="0" y="37" width="880" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA["Last update:  "+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss aaa").format($F{dt_lastchange})]]></textFieldExpression>
 			</textField>
 			<subreport>
-				<reportElement x="0" y="57" width="810" height="42"/>
+				<reportElement x="0" y="57" width="880" height="42"/>
 				<subreportParameter name="SUBREPORT_DIR">
 					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -69,7 +69,7 @@ WHERE full_date=$P{p_date}::date;]]>
 				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_verve_delivery_trends_subreport1.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement positionType="Float" x="0" y="119" width="810" height="42"/>
+				<reportElement positionType="Float" x="0" y="119" width="880" height="42"/>
 				<subreportParameter name="SUBREPORT_DIR">
 					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -89,17 +89,17 @@ WHERE full_date=$P{p_date}::date;]]>
 				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_verve_delivery_trends_subreport1.jasper"]]></subreportExpression>
 			</subreport>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="99" width="810" height="20"/>
+				<reportElement positionType="Float" x="0" y="99" width="880" height="20"/>
 				<textElement/>
 				<text><![CDATA[]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="161" width="810" height="20"/>
+				<reportElement positionType="Float" x="0" y="161" width="880" height="20"/>
 				<textElement/>
 				<text><![CDATA[]]></text>
 			</staticText>
 			<subreport>
-				<reportElement positionType="Float" x="0" y="181" width="810" height="42"/>
+				<reportElement positionType="Float" x="0" y="181" width="880" height="42"/>
 				<subreportParameter name="SUBREPORT_DIR">
 					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -119,12 +119,12 @@ WHERE full_date=$P{p_date}::date;]]>
 				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_verve_delivery_trends_subreport1.jasper"]]></subreportExpression>
 			</subreport>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="223" width="810" height="20"/>
+				<reportElement positionType="Float" x="0" y="223" width="880" height="20"/>
 				<textElement/>
 				<text><![CDATA[]]></text>
 			</staticText>
 			<subreport>
-				<reportElement positionType="Float" x="0" y="243" width="810" height="42"/>
+				<reportElement positionType="Float" x="0" y="243" width="880" height="42"/>
 				<subreportParameter name="SUBREPORT_DIR">
 					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -144,12 +144,12 @@ WHERE full_date=$P{p_date}::date;]]>
 				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_verve_delivery_trends_subreport2.jasper"]]></subreportExpression>
 			</subreport>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="285" width="810" height="20"/>
+				<reportElement positionType="Float" x="0" y="285" width="880" height="20"/>
 				<textElement/>
 				<text><![CDATA[]]></text>
 			</staticText>
 			<subreport>
-				<reportElement positionType="Float" x="0" y="305" width="810" height="42"/>
+				<reportElement positionType="Float" x="0" y="305" width="880" height="42"/>
 				<subreportParameter name="SUBREPORT_DIR">
 					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -169,7 +169,7 @@ WHERE full_date=$P{p_date}::date;]]>
 				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_verve_delivery_trends_subreport2.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement positionType="Float" x="0" y="367" width="810" height="42"/>
+				<reportElement positionType="Float" x="0" y="367" width="880" height="42"/>
 				<subreportParameter name="SUBREPORT_DIR">
 					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -189,7 +189,7 @@ WHERE full_date=$P{p_date}::date;]]>
 				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_verve_delivery_trends_subreport2.jasper"]]></subreportExpression>
 			</subreport>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="347" width="810" height="20"/>
+				<reportElement positionType="Float" x="0" y="347" width="880" height="20"/>
 				<textElement/>
 				<text><![CDATA[]]></text>
 			</staticText>

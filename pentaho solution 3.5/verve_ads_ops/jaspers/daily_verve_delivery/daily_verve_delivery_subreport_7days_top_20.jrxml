@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_verve_delivery_subreport_7days_top_20" language="groovy" pageWidth="2746" pageHeight="572" orientation="Landscape" columnWidth="2746" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="943"/>
+	<property name="ireport.x" value="1602"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="p_date_sk" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -539,7 +539,7 @@ LIMIT 20 ---get the top 20]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{Verve Ads imps}]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,##0.00">
+			<textField pattern="$ #,##0">
 				<reportElement x="1028" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Right">
@@ -547,7 +547,7 @@ LIMIT 20 ---get the top 20]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{national_revenue}]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,##0.00">
+			<textField pattern="$ #,##0">
 				<reportElement x="1128" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Right">
@@ -555,7 +555,7 @@ LIMIT 20 ---get the top 20]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{vlm_revenue}]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,##0.00">
+			<textField pattern="$ #,##0">
 				<reportElement x="1228" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Right">
@@ -563,7 +563,7 @@ LIMIT 20 ---get the top 20]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{vpc_revenue}]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,##0.00">
+			<textField pattern="$ #,##0">
 				<reportElement x="1328" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Right">
@@ -571,7 +571,7 @@ LIMIT 20 ---get the top 20]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{vlmo_revenue}]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,##0.00">
+			<textField pattern="$ #,##0">
 				<reportElement x="1428" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Right">
@@ -579,7 +579,7 @@ LIMIT 20 ---get the top 20]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{remnant_revenue}]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,##0.00">
+			<textField pattern="$ #,##0">
 				<reportElement x="1528" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Right">
@@ -587,7 +587,7 @@ LIMIT 20 ---get the top 20]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{total_revenue}]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,##0.00">
+			<textField pattern="$ #,##0">
 				<reportElement x="1628" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Right">
@@ -627,7 +627,7 @@ LIMIT 20 ---get the top 20]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{total_requests}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00 %">
+			<textField pattern="#,##0 %">
 				<reportElement x="2128" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Right">
@@ -651,7 +651,7 @@ LIMIT 20 ---get the top 20]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{pub_net_ecpm}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00 %">
+			<textField pattern="#,##0 %">
 				<reportElement x="2428" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Right">
@@ -659,7 +659,7 @@ LIMIT 20 ---get the top 20]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{verve_margin}]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,##0.00">
+			<textField pattern="$ #,##0">
 				<reportElement x="2528" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Right">
@@ -667,7 +667,7 @@ LIMIT 20 ---get the top 20]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{verve_profit}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00 %">
+			<textField pattern="#,##0 %">
 				<reportElement x="2628" y="0" width="118" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5"/>
 				<textElement textAlignment="Right">
@@ -747,7 +747,7 @@ LIMIT 20 ---get the top 20]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{VPC imp_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,##0.00">
+			<textField pattern="$ #,##0">
 				<reportElement x="1028" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -757,7 +757,7 @@ LIMIT 20 ---get the top 20]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{national_revenue_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,##0.00">
+			<textField pattern="$ #,##0">
 				<reportElement x="1128" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -767,7 +767,7 @@ LIMIT 20 ---get the top 20]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{vlm_revenue_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,##0.00">
+			<textField pattern="$ #,##0">
 				<reportElement x="1228" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -777,7 +777,7 @@ LIMIT 20 ---get the top 20]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{vpc_revenue_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,##0.00">
+			<textField pattern="$ #,##0">
 				<reportElement x="1328" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -787,7 +787,7 @@ LIMIT 20 ---get the top 20]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{vlmo_revenue_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,##0.00">
+			<textField pattern="$ #,##0">
 				<reportElement x="1428" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -797,7 +797,7 @@ LIMIT 20 ---get the top 20]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{remnant_revenue_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,##0.00">
+			<textField pattern="$ #,##0">
 				<reportElement x="1528" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -807,7 +807,7 @@ LIMIT 20 ---get the top 20]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total_revenue_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,##0.00">
+			<textField pattern="$ #,##0">
 				<reportElement x="1628" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -857,7 +857,7 @@ LIMIT 20 ---get the top 20]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$V{total_requests_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00 %">
+			<textField pattern="#,##0 %">
 				<reportElement x="2128" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -887,7 +887,7 @@ LIMIT 20 ---get the top 20]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total_net_revenue_1}.floatValue()/($V{total_impressions_1}/1000)]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00 %">
+			<textField pattern="#,##0 %">
 				<reportElement x="2428" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -897,7 +897,7 @@ LIMIT 20 ---get the top 20]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[($V{total_revenue_1}-$V{total_net_revenue_1})/$V{total_revenue_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,##0.00">
+			<textField pattern="$ #,##0">
 				<reportElement x="2528" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>
@@ -907,7 +907,7 @@ LIMIT 20 ---get the top 20]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total_revenue_1}-$V{total_net_revenue_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00 %">
+			<textField pattern="#,##0 %">
 				<reportElement x="2628" y="0" width="118" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="0.5"/>

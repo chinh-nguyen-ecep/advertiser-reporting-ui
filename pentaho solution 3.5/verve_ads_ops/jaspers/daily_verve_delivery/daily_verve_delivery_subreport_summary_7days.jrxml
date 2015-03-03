@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="daily_verve_delivery_subreport_summary_7days" language="groovy" pageWidth="2746" pageHeight="572" orientation="Landscape" columnWidth="2746" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="1602"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="p_date_sk" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[new Integer(1)]]></defaultValueExpression>
@@ -163,7 +163,7 @@ WHERE eastern_date_sk =$P{p_date_sk} AND is_active=true]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{total_remnant_impressions}]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,##0.00">
+			<textField pattern="$ #,##0">
 				<reportElement x="1028" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="1.0"/>
@@ -174,7 +174,7 @@ WHERE eastern_date_sk =$P{p_date_sk} AND is_active=true]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{total_national_revenue}]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,##0.00">
+			<textField pattern="$ #,##0">
 				<reportElement x="1128" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="1.0"/>
@@ -185,7 +185,7 @@ WHERE eastern_date_sk =$P{p_date_sk} AND is_active=true]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{total_vlm_revenue}]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,##0.00">
+			<textField pattern="$ #,##0">
 				<reportElement x="1228" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="1.0"/>
@@ -196,7 +196,7 @@ WHERE eastern_date_sk =$P{p_date_sk} AND is_active=true]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{total_vpc_revenue}]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,##0.00">
+			<textField pattern="$ #,##0">
 				<reportElement x="1328" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="1.0"/>
@@ -207,7 +207,7 @@ WHERE eastern_date_sk =$P{p_date_sk} AND is_active=true]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{total_vlmo_revenue}]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,##0.00">
+			<textField pattern="$ #,##0">
 				<reportElement x="1428" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="1.0"/>
@@ -218,7 +218,7 @@ WHERE eastern_date_sk =$P{p_date_sk} AND is_active=true]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{total_remnant_revenue}]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,##0.00">
+			<textField pattern="$ #,##0">
 				<reportElement x="1528" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="1.0"/>
@@ -229,7 +229,7 @@ WHERE eastern_date_sk =$P{p_date_sk} AND is_active=true]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{total_revenue}]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,##0.00">
+			<textField pattern="$ #,##0">
 				<reportElement x="1628" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="1.0"/>
@@ -284,7 +284,7 @@ WHERE eastern_date_sk =$P{p_date_sk} AND is_active=true]]>
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{total_requests}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00 %">
+			<textField pattern="#,##0 %">
 				<reportElement x="2128" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="1.0"/>
@@ -317,7 +317,7 @@ WHERE eastern_date_sk =$P{p_date_sk} AND is_active=true]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{pub_net_ecpm}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00 %">
+			<textField pattern="#,##0 %">
 				<reportElement x="2428" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="1.0"/>
@@ -328,7 +328,7 @@ WHERE eastern_date_sk =$P{p_date_sk} AND is_active=true]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{verve_margin}]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,##0.00">
+			<textField pattern="$ #,##0">
 				<reportElement x="2528" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="1.0"/>
@@ -350,7 +350,7 @@ WHERE eastern_date_sk =$P{p_date_sk} AND is_active=true]]>
 				</textElement>
 				<text><![CDATA[Grand Total All]]></text>
 			</staticText>
-			<textField pattern="#,##0.00 %">
+			<textField pattern="#,##0 %">
 				<reportElement x="2628" y="0" width="118" height="20"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="1.0"/>
@@ -420,7 +420,7 @@ WHERE eastern_date_sk =$P{p_date_sk} AND is_active=true]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total_vpc_impressions_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
+			<textField pattern="$ #,##0" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="1028" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="1.0"/>
@@ -431,7 +431,7 @@ WHERE eastern_date_sk =$P{p_date_sk} AND is_active=true]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total_national_revenue_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
+			<textField pattern="$ #,##0" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="1128" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="1.0"/>
@@ -442,7 +442,7 @@ WHERE eastern_date_sk =$P{p_date_sk} AND is_active=true]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total_vlm_revenue_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
+			<textField pattern="$ #,##0" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="1228" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="1.0"/>
@@ -453,7 +453,7 @@ WHERE eastern_date_sk =$P{p_date_sk} AND is_active=true]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total_vpc_revenue_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
+			<textField pattern="$ #,##0" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="1328" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="1.0"/>
@@ -464,7 +464,7 @@ WHERE eastern_date_sk =$P{p_date_sk} AND is_active=true]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total_vlmo_revenue_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
+			<textField pattern="$ #,##0" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="1428" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="1.0"/>
@@ -475,7 +475,7 @@ WHERE eastern_date_sk =$P{p_date_sk} AND is_active=true]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total_remnant_revenue_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
+			<textField pattern="$ #,##0" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="1528" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="1.0"/>
@@ -486,7 +486,7 @@ WHERE eastern_date_sk =$P{p_date_sk} AND is_active=true]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total_revenue_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
+			<textField pattern="$ #,##0" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="1628" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="1.0"/>
@@ -541,7 +541,7 @@ WHERE eastern_date_sk =$P{p_date_sk} AND is_active=true]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total_clicks_1}.doubleValue()/$V{total_total_impressions_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00 %" isBlankWhenNull="false">
+			<textField pattern="#,##0 %" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="2128" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="1.0"/>
@@ -574,7 +574,7 @@ WHERE eastern_date_sk =$P{p_date_sk} AND is_active=true]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total_net_revenue_1}*1000/$V{total_total_impressions_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00 %" isBlankWhenNull="false">
+			<textField pattern="#,##0 %" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="2428" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="1.0"/>
@@ -585,7 +585,7 @@ WHERE eastern_date_sk =$P{p_date_sk} AND is_active=true]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[($F{total_revenue}-$F{total_net_revenue}).floatValue()/$F{total_revenue}]]></textFieldExpression>
 			</textField>
-			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
+			<textField pattern="$ #,##0" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="2528" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="1.0"/>
@@ -596,7 +596,7 @@ WHERE eastern_date_sk =$P{p_date_sk} AND is_active=true]]>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total_revenue_1}-$V{total_net_revenue_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00 %" isBlankWhenNull="false">
+			<textField pattern="#,##0 %" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="2628" y="0" width="118" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="2" leftPadding="5" rightPadding="5">
 					<topPen lineWidth="1.0"/>
