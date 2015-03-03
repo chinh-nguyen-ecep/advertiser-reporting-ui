@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Verve daily delivery" pageWidth="2786" pageHeight="2380" orientation="Landscape" columnWidth="2746" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.3660269107301466"/>
+	<property name="ireport.zoom" value="0.7710865788590663"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
@@ -10,10 +10,19 @@
 		<defaultValueExpression><![CDATA[new String("2015-01-01")]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT max(eastern_date_sk) as date_sk,max(dt_lastchange) as dt_lastchange FROM adsops.daily_agg_verve_delivery WHERE full_date=$P{p_date}::date;]]>
+		<![CDATA[SELECT max(eastern_date_sk) as date_sk
+,max(calendar_year_month) as calendar_year_month
+,max(DATE_PART('days',DATE_TRUNC('month', full_date) + '1 MONTH'::INTERVAL    - DATE_TRUNC('month', full_date)))::int AS days_of_month
+,max(dt_lastchange) as dt_lastchange
+,max(EXTRACT(DAY FROM full_date))::int as current_day
+FROM adsops.daily_agg_verve_delivery
+WHERE full_date=$P{p_date}::date;]]>
 	</queryString>
 	<field name="date_sk" class="java.lang.Integer"/>
+	<field name="calendar_year_month" class="java.lang.String"/>
+	<field name="days_of_month" class="java.lang.Integer"/>
 	<field name="dt_lastchange" class="java.sql.Timestamp"/>
+	<field name="current_day" class="java.lang.Integer"/>
 	<background>
 		<band/>
 	</background>
@@ -37,6 +46,12 @@
 				</subreportParameter>
 				<subreportParameter name="p_date_sk">
 					<subreportParameterExpression><![CDATA[$F{date_sk}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_days_of_month">
+					<subreportParameterExpression><![CDATA[$F{days_of_month}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_calendar_year_month">
+					<subreportParameterExpression><![CDATA[$F{calendar_year_month}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_verve_delivery_subreport_summary_daily.jasper"]]></subreportExpression>
@@ -65,6 +80,15 @@
 				<subreportParameter name="p_date_sk">
 					<subreportParameterExpression><![CDATA[$F{date_sk}]]></subreportParameterExpression>
 				</subreportParameter>
+				<subreportParameter name="p_days_of_month">
+					<subreportParameterExpression><![CDATA[$F{days_of_month}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_calendar_year_month">
+					<subreportParameterExpression><![CDATA[$F{calendar_year_month}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_date">
+					<subreportParameterExpression><![CDATA[$P{p_date}]]></subreportParameterExpression>
+				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_verve_delivery_subreport_summary_7days.jasper"]]></subreportExpression>
 			</subreport>
@@ -73,8 +97,17 @@
 				<subreportParameter name="SUBREPORT_DIR">
 					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
 				</subreportParameter>
+				<subreportParameter name="p_current_day">
+					<subreportParameterExpression><![CDATA[$F{current_day}]]></subreportParameterExpression>
+				</subreportParameter>
 				<subreportParameter name="p_date_sk">
 					<subreportParameterExpression><![CDATA[$F{date_sk}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_days_of_month">
+					<subreportParameterExpression><![CDATA[$F{days_of_month}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="p_calendar_year_month">
+					<subreportParameterExpression><![CDATA[$F{calendar_year_month}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "daily_verve_delivery_subreport_summary_mtd.jasper"]]></subreportExpression>
