@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ba_monthly_vlm_revenue_detail_sub" language="groovy" pageWidth="1620" pageHeight="842" orientation="Landscape" columnWidth="1620" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ba_monthly_vlm_revenue_detail_sub" language="groovy" pageWidth="1900" pageHeight="842" orientation="Landscape" columnWidth="1900" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -10,6 +10,7 @@
 		<![CDATA[SELECT publisher_name
 , dfp_advertiser_name
 , adm_order_id
+, adm_order_name
 , flight_metric
 , flight_id
 , flight_network
@@ -39,6 +40,7 @@ FROM (
 SELECT publisher_name
 , dfp_advertiser_name
 , adm_order_id
+, adm_order_name
 , upper(flight_metric) AS flight_metric
 , flight_id
 , CASE network_id
@@ -63,6 +65,7 @@ AND is_active = true
 GROUP BY publisher_name
 , dfp_advertiser_name
 , adm_order_id
+, adm_order_name
 , flight_metric
 , flight_id
 , network_id
@@ -77,6 +80,7 @@ ORDER BY publisher_name, dfp_advertiser_name, adm_order_id, flight_network]]>
 	<field name="publisher_name" class="java.lang.String"/>
 	<field name="dfp_advertiser_name" class="java.lang.String"/>
 	<field name="adm_order_id" class="java.lang.Integer"/>
+	<field name="adm_order_name" class="java.lang.String"/>
 	<field name="flight_metric" class="java.lang.String"/>
 	<field name="flight_id" class="java.lang.Integer"/>
 	<field name="flight_network" class="java.lang.String"/>
@@ -106,17 +110,17 @@ ORDER BY publisher_name, dfp_advertiser_name, adm_order_id, flight_network]]>
 	<columnHeader>
 		<band height="76" splitType="Stretch">
 			<line>
-				<reportElement x="0" y="68" width="1620" height="1"/>
+				<reportElement x="0" y="68" width="1900" height="1"/>
 			</line>
 			<staticText>
-				<reportElement x="0" y="0" width="1620" height="38"/>
+				<reportElement x="0" y="0" width="1900" height="38"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Performance By Publisher]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="260" y="38" width="250" height="20"/>
+				<reportElement x="260" y="38" width="260" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement>
 					<font fontName="Arial" isBold="true"/>
@@ -124,7 +128,7 @@ ORDER BY publisher_name, dfp_advertiser_name, adm_order_id, flight_network]]>
 				<text><![CDATA[DFP Advertiser Name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="810" y="38" width="80" height="20"/>
+				<reportElement x="1080" y="38" width="80" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
@@ -140,7 +144,7 @@ ORDER BY publisher_name, dfp_advertiser_name, adm_order_id, flight_network]]>
 				<text><![CDATA[Publisher Name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="730" y="38" width="80" height="20"/>
+				<reportElement x="1000" y="38" width="80" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement>
 					<font fontName="Arial" isBold="true"/>
@@ -148,7 +152,7 @@ ORDER BY publisher_name, dfp_advertiser_name, adm_order_id, flight_network]]>
 				<text><![CDATA[Flight Network]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="510" y="38" width="80" height="20"/>
+				<reportElement x="520" y="38" width="80" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement>
 					<font fontName="Arial" isBold="true"/>
@@ -156,7 +160,7 @@ ORDER BY publisher_name, dfp_advertiser_name, adm_order_id, flight_network]]>
 				<text><![CDATA[ADM Order ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="590" y="38" width="60" height="20"/>
+				<reportElement x="860" y="38" width="60" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement>
 					<font fontName="Arial" isBold="true"/>
@@ -164,7 +168,7 @@ ORDER BY publisher_name, dfp_advertiser_name, adm_order_id, flight_network]]>
 				<text><![CDATA[Flight ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1270" y="38" width="100" height="20"/>
+				<reportElement x="1540" y="38" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
@@ -172,7 +176,7 @@ ORDER BY publisher_name, dfp_advertiser_name, adm_order_id, flight_network]]>
 				<text><![CDATA[Billable Revenue]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="890" y="38" width="80" height="20"/>
+				<reportElement x="1160" y="38" width="80" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
@@ -180,7 +184,7 @@ ORDER BY publisher_name, dfp_advertiser_name, adm_order_id, flight_network]]>
 				<text><![CDATA[Billable rate]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="970" y="38" width="100" height="20"/>
+				<reportElement x="1240" y="38" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
@@ -188,7 +192,7 @@ ORDER BY publisher_name, dfp_advertiser_name, adm_order_id, flight_network]]>
 				<text><![CDATA[Delivered Units]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1170" y="38" width="100" height="20"/>
+				<reportElement x="1440" y="38" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
@@ -196,7 +200,7 @@ ORDER BY publisher_name, dfp_advertiser_name, adm_order_id, flight_network]]>
 				<text><![CDATA[Gross Revenue]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="650" y="38" width="80" height="20"/>
+				<reportElement x="920" y="38" width="80" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement>
 					<font fontName="Arial" isBold="true"/>
@@ -204,7 +208,7 @@ ORDER BY publisher_name, dfp_advertiser_name, adm_order_id, flight_network]]>
 				<text><![CDATA[Flight Metric]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1070" y="38" width="100" height="20"/>
+				<reportElement x="1340" y="38" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
@@ -212,12 +216,20 @@ ORDER BY publisher_name, dfp_advertiser_name, adm_order_id, flight_network]]>
 				<text><![CDATA[Billable Units]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1370" y="38" width="250" height="20"/>
+				<reportElement x="1640" y="38" width="260" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement>
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ADM Advertiser Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="600" y="38" width="260" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ADM Order Name]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -232,7 +244,7 @@ ORDER BY publisher_name, dfp_advertiser_name, adm_order_id, flight_network]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{publisher_name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="260" y="0" width="250" height="20"/>
+				<reportElement x="260" y="0" width="260" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement>
 					<font fontName="Arial"/>
@@ -240,7 +252,7 @@ ORDER BY publisher_name, dfp_advertiser_name, adm_order_id, flight_network]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{dfp_advertiser_name}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="1070" y="0" width="100" height="20"/>
+				<reportElement x="1340" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
@@ -248,7 +260,7 @@ ORDER BY publisher_name, dfp_advertiser_name, adm_order_id, flight_network]]>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{billable_units}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="810" y="0" width="80" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="1080" y="0" width="80" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
@@ -256,7 +268,7 @@ ORDER BY publisher_name, dfp_advertiser_name, adm_order_id, flight_network]]>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{booked_rate}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="730" y="0" width="80" height="20"/>
+				<reportElement x="1000" y="0" width="80" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement>
 					<font fontName="Arial"/>
@@ -264,7 +276,7 @@ ORDER BY publisher_name, dfp_advertiser_name, adm_order_id, flight_network]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{flight_network}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="650" y="0" width="80" height="20"/>
+				<reportElement x="920" y="0" width="80" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement>
 					<font fontName="Arial"/>
@@ -272,7 +284,7 @@ ORDER BY publisher_name, dfp_advertiser_name, adm_order_id, flight_network]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{flight_metric}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00">
-				<reportElement x="1270" y="0" width="100" height="20"/>
+				<reportElement x="1540" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
@@ -280,7 +292,7 @@ ORDER BY publisher_name, dfp_advertiser_name, adm_order_id, flight_network]]>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{billable_revenue}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="510" y="0" width="80" height="20"/>
+				<reportElement x="520" y="0" width="80" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement>
 					<font fontName="Arial"/>
@@ -288,7 +300,7 @@ ORDER BY publisher_name, dfp_advertiser_name, adm_order_id, flight_network]]>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{adm_order_id}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="970" y="0" width="100" height="20"/>
+				<reportElement x="1240" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
@@ -296,7 +308,7 @@ ORDER BY publisher_name, dfp_advertiser_name, adm_order_id, flight_network]]>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$F{delivered_units}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00">
-				<reportElement x="890" y="0" width="80" height="20"/>
+				<reportElement x="1160" y="0" width="80" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
@@ -304,7 +316,7 @@ ORDER BY publisher_name, dfp_advertiser_name, adm_order_id, flight_network]]>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{billable_rate}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00">
-				<reportElement x="1170" y="0" width="100" height="20"/>
+				<reportElement x="1440" y="0" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial"/>
@@ -312,7 +324,7 @@ ORDER BY publisher_name, dfp_advertiser_name, adm_order_id, flight_network]]>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{gross_revenue}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="590" y="0" width="60" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="860" y="0" width="60" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
@@ -320,22 +332,30 @@ ORDER BY publisher_name, dfp_advertiser_name, adm_order_id, flight_network]]>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{flight_id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1370" y="0" width="250" height="20"/>
+				<reportElement x="1640" y="0" width="260" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{adm_advertiser_name}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="600" y="0" width="260" height="20"/>
+				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{adm_order_name}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<summary>
 		<band height="21">
 			<line>
-				<reportElement x="0" y="0" width="1620" height="1"/>
+				<reportElement x="0" y="0" width="1900" height="1"/>
 			</line>
 			<textField pattern="$ #,##0.00">
-				<reportElement x="1270" y="1" width="100" height="20"/>
+				<reportElement x="1540" y="1" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
@@ -343,7 +363,7 @@ ORDER BY publisher_name, dfp_advertiser_name, adm_order_id, flight_network]]>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{billable_revenue_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="970" y="1" width="100" height="20"/>
+				<reportElement x="1240" y="1" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
@@ -351,7 +371,7 @@ ORDER BY publisher_name, dfp_advertiser_name, adm_order_id, flight_network]]>
 				<textFieldExpression class="java.lang.Long"><![CDATA[$V{delivered_units_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="$ #,##0.00">
-				<reportElement x="1170" y="1" width="100" height="20"/>
+				<reportElement x="1440" y="1" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
@@ -359,7 +379,7 @@ ORDER BY publisher_name, dfp_advertiser_name, adm_order_id, flight_network]]>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{gross_revenue_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
-				<reportElement x="1070" y="1" width="100" height="20"/>
+				<reportElement x="1340" y="1" width="100" height="20"/>
 				<box topPadding="2" leftPadding="5" bottomPadding="2" rightPadding="5"/>
 				<textElement textAlignment="Right">
 					<font fontName="Arial" isBold="true"/>
